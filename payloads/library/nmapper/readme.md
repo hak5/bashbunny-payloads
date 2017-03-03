@@ -22,3 +22,7 @@ Uncomment ATTACKMODE at the bottom of this payload to enable switching to USB Ma
 | Amber            | Scanning                              |
 | White            | Switching to Mass Storage (optional)  |
 | Green            | Finished                              |
+
+## Discussion
+
+[Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/40224-payload-nmapper/ "Hak5 Forum Thread")
