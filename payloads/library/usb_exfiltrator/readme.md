@@ -16,8 +16,11 @@ By default the staged payload exfiltrates PDF files. Change the xcopy commands f
 ## STATUS
 
 | LED                | Status                                       |
-| --------==-------- | -------------------------------------------- |
+| ------------------ | -------------------------------------------- |
 | Amber              | Installing e.cmd d.cmd and i.vbs to USB Disk |
 | White (blinking)   | Setup Failed. Target didn't obtain IP        |
 | Red                | Attack Setup                                 |
 | Green              | Attack Complete                              |
+
+## Discussion
+[Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/40225-payload-usb_exfiltrator/ "Hak5 Forum Thread")
