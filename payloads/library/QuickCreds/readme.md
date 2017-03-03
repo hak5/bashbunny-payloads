@@ -29,3 +29,6 @@ Run the latest tools_installer payload or manually install
 | Red (blinking)   | Setup Failed. Target didn't obtain IP |
 | Amber            | Responder running, waiting for creds  |
 | Green            | Finished                              |
+
+## Discussion
+[Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/40226-payload-quickcreds/ "Hak5 Forum Thread")
