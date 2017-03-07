@@ -1,0 +1,10 @@
+LED R B
+ATTACKMODE RNDIS_ETHERNET
+source bunny_helpers.sh
+/pentest/impacket/examples/rdp_check.py $TARGET_IP >> /tmp/rdp_check
+if grep Granted /tmp/rdp_check
+then
+LED G
+else
+LED R
+fi
