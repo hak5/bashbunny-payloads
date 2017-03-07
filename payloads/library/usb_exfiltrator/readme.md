@@ -1,7 +1,7 @@
 # Exfiltrator for Bash Bunnys
 
 * Author: Hak5Darren
-* Version: Version 1.0
+* Version: Version 1.1
 * Target: Windows
 
 ## Description
@@ -17,7 +17,6 @@ By default the staged payload exfiltrates PDF files. Change the xcopy commands f
 
 | LED                | Status                                       |
 | ------------------ | -------------------------------------------- |
-| Amber              | Installing e.cmd d.cmd and i.vbs to USB Disk |
 | White (blinking)   | Setup Failed. Target didn't obtain IP        |
 | Red                | Attack Setup                                 |
 | Green              | Attack Complete                              |
