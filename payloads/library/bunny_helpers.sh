@@ -17,3 +17,26 @@ export TARGET_HOSTNAME=$(cat $leasefile | grep hostname | awk '{print $2 }' \
 		| sort | uniq | tail -n1 | sed "s/^[ \t]*//" | sed 's/\"//g' | sed 's/;//')
 export HOST_IP=$(cat /etc/network/interfaces.d/usb0 | grep address | awk {'print $2'})
 
+################################################################################
+# Get switch position
+# Taken from bash_bunny.sh
+################################################################################
+
+check_switch() {
+	switch1=`cat /sys/class/gpio_sw/PA8/data`
+	switch2=`cat /sys/class/gpio_sw/PL4/data`
+	switch3=`cat /sys/class/gpio_sw/PL3/data`
+	echo "--- switch1 = $switch1, switch2 = $switch2, switch3 = $switch3"
+	if [ "x$switch1" = "x0" ] && [ "x$switch2" = "x1" ] && [ "x$switch3" = "x1" ]; then
+		SWITCH_POSITION="switch1"
+	elif [ "x$switch1" = "x1" ] && [ "x$switch2" = "x0" ] && [ "x$switch3" = "x1" ]; then
+		SWITCH_POSITION="switch2"
+	elif [ "x$switch1" = "x1" ] && [ "x$switch2" = "x1" ] && [ "x$switch3" = "x0" ]; then
+		SWITCH_POSITION="switch3"
+	else
+		SWITCH_POSITION="invalid"
+	fi
+}
+
+check_switch
+export SWITCH_POSITION
