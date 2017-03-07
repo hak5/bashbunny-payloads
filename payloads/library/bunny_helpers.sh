@@ -28,15 +28,14 @@ check_switch() {
 	switch3=`cat /sys/class/gpio_sw/PL3/data`
 	echo "--- switch1 = $switch1, switch2 = $switch2, switch3 = $switch3"
 	if [ "x$switch1" = "x0" ] && [ "x$switch2" = "x1" ] && [ "x$switch3" = "x1" ]; then
-		SWITCH_POSITION="switch1"
+		export SWITCH_POSITION="switch1"
 	elif [ "x$switch1" = "x1" ] && [ "x$switch2" = "x0" ] && [ "x$switch3" = "x1" ]; then
-		SWITCH_POSITION="switch2"
+		export SWITCH_POSITION="switch2"
 	elif [ "x$switch1" = "x1" ] && [ "x$switch2" = "x1" ] && [ "x$switch3" = "x0" ]; then
-		SWITCH_POSITION="switch3"
+		export SWITCH_POSITION="switch3"
 	else
-		SWITCH_POSITION="invalid"
+		export SWITCH_POSITION="invalid"
 	fi
 }
 
 check_switch
-export SWITCH_POSITION
