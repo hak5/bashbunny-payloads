@@ -31,4 +31,4 @@ else
     LED R
     echo "Unable to load ducky_script.txt" >> /root/debuglog.txt
         exit 1
-finotepad.exe
+fi
