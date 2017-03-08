@@ -1,0 +1,131 @@
+/* =============================================================================
+   Selecter Plugin
+   Selecter Plugin [Formstone Library]
+   @author Ben Plum
+   @version 1.9.2
+
+   Copyright © 2012 Ben Plum <mr@benplum.com>
+   Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
+================================================================================ */
+
+.selecter-element { 
+	display: none;
+	left: -999999px; 
+	position: absolute;
+}
+
+.selecter { 
+	width: 100%;
+	margin: 0; 
+	position: relative; 
+	z-index: 1; 
+	color: #999;
+}
+
+.selecter .selecter-selected { 
+	display: block; 
+	margin: 0; 
+	padding: 8px 5px;
+	height: 32px;
+	overflow: hidden; 	
+	position: relative; 
+	background: #fff url(../img/select-graphic@1x.png) no-repeat right center; 
+	cursor: pointer; 
+	text-overflow: clip;
+	z-index: 49;
+
+	-webkit-border-radius: .25em;
+	-moz-border-radius: .25em;
+	border-radius: .25em; 
+}
+
+.selecter .selecter-options { 
+	display: none;
+	position: absolute; 
+	top: 100%; 
+	width: 100%; 
+	*width: auto; 
+	z-index: 50; 
+	left: 0; 
+	margin: 0; 
+	overflow: auto; 
+	overflow-x: hidden; 
+	padding: 0; 
+	border-top: 1px solid #ccc;
+	background-color: #fefefe;  
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15); 	
+}
+
+.selecter .selecter-item { 
+	display: block; 
+	width: 100%; 
+	margin: 0; 
+	overflow: hidden; 
+	padding: 8px 5px; 	 
+	background: #fff; 
+	border-bottom: 1px solid #e3e3e3; 
+	color: #666; 
+	cursor: pointer;
+	text-overflow: ellipsis;  
+}
+
+.selecter .selecter-item.selected { background: #F9F9F9; }
+
+.selecter .selecter-item:hover, 
+.selecter .selecter-item.selected:hover { background-color: #f3f3f3; }
+
+.selecter .selecter-item.first { border-radius: 0; } 
+
+.selecter .selecter-item.last { border-bottom: 0; }
+
+/* Open */
+.selecter.open { z-index: 3; }
+
+.selecter.open .selecter-selected { z-index: 51; }
+
+.selecter:hover .selecter-selected,
+.selecter.open .selecter-selected, 
+.selecter.focus .selecter-selected { background-color: #fff; }
+
+/* 'Bottom' Positioning */
+.selecter.bottom .selecter-options { 
+	bottom: auto; 
+	top: 100%; 
+}
+
+.selecter.bottom .selecter-item.last { border: none; }
+
+.selecter.bottom.open .selecter-selected { 	
+	-webkit-border-radius: .25em;
+	-moz-border-radius: .25em;
+	border-radius: .25em;  
+}
+
+.selecter.bottom.open .selecter-options { border-radius: 3px 3px 0 0; }
+
+
+/* 'Disabled' State */
+.selecter.disabled .selecter-selected { 
+	background: #fff; 
+	border-color: #eee; 
+	color: #ccc; 
+	cursor: default; 
+}
+
+.selecter.disabled .selecter-options { 
+	background: #fff; 
+	border-color: #eee; 
+}
+
+.selecter.disabled .selecter-group,
+.selecter.disabled .selecter-item { 
+	border-color: #eee; 
+	color: #ccc; 
+	cursor: default; 
+}
+
+.selecter.disabled .selecter-item:hover { background: #fff; }
+
+.selecter.disabled .selecter-item.selected { background: #fafafa; }
+
+/* End Selecter Plugin */

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0090)http://172.23.11.19/user/guest_login.jsp?cookie=&redirecturl=http%3a%2f%2frefdesk%2ecom%2f -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <!--<meta name="apple-mobile-web-app-capable" content="yes" />-->
+<title>Wireless Access</title>
+<link href="./Wireless Access_files/ruckus_user.css" rel="stylesheet" type="text/css">
+<link media="only screen and (max-width: 420px)" rel="stylesheet" href="./Wireless Access_files/ruckus_user_mobile.css" type="text/css" title="no title">
+
+
+
+<script language="Javascript" type="text/javascript">
+//<![CDATA[
+var onloads = new Array();
+function bodyOnLoad() {
+    for ( var i = 0 ; i < onloads.length ; i++ ) {
+        onloads[i]();
+    }
+}
+
+function getCookie(name) { 
+    var re = new RegExp(name + "=([^;]*)");
+    var match = re.exec(document.cookie);
+    if (match)
+        return unescape(match[1]);
+    else
+        return null;
+}
+function deleteCookie(name) {
+    createCookie(name, '', -1);
+}
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function redirectToPeerZd(peerZd) {
+    if (peerZd != '') {
+        location.href = peerZd;
+    }
+}
+
+//]]>
+</script>
+</head>
+
+<body onload="bodyOnLoad()"><table id="wrapper"><tbody><tr><td valign="middle">
+<div id="dialog">
+<div id="dialog_header">
+    <a id="logo" href="http://172.23.11.19/user/index.jsp"><img src="./Wireless Access_files/guest_logo_1" alt="" title="" width="138px" height="40px"></a>
+    <h1>Please Enter Guest Pass.</h1>
+    
+</div><!-- /dialog_header -->
+<div id="dialog_content">
+
+
+
+
+<form method="post" action="http://172.23.11.19/user/guest_login.jsp">
+    <table class="separatorTbl">
+        <tbody><tr class="gap"><th>&nbsp;</th><td>&nbsp;</td></tr>
+        <tr><th>Guest Pass</th><td><input class="login_input" type="text" name="key" id="key" size="32" autocomplete="OFF"></td></tr>
+        <tr><th><input type="text" id="dummy" style="display:none"></th></tr>
+        <tr><th></th><td align="right">
+            <input type="button" name="ok" value="Log In" onclick="redirectThisPage();">
+            <!-- or <a href="javascript:history.back();">&lt; Back</a> -->
+        </td></tr>
+    </tbody></table>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    function redirectThisPage () {
+        location.href = "guest_login.jsp?cookie=&redirecturl=http://refdesk.com/&ok=ok&key="+document.getElementById('key').value;
+    };
+    
+    this.onloads.push(function() {
+        redirectToPeerZd('');
+        document.getElementById('key').focus();
+    });
+//]]>
+</script>
+
+    </div><!-- /dialog_content -->
+    <div id="dialog_footer"></div>
+
+    <p id="powered"><a href="http://www.ruckuswireless.com/">Powered by Ruckus Wireless</a></p>
+
+<iframe id="IF" name="IF" src="./Wireless Access_files/_.html"></iframe>
+</div><!-- /dialog -->
+</td></tr></tbody></table>
+
+
+
+
+
+
+</body></html>

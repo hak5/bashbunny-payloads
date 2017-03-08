@@ -1,0 +1,1178 @@
+/* =============================================================================
+   Base
+================================================================================ */
+
+/* extends left pane to infinity */
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+
+body {
+    background: #3d434a;
+}
+
+
+/* =============================================================================
+   Button Styles
+================================================================================ */
+
+/* 
+** Base Button Style 
+*/
+
+a.button,
+input[type=button],
+input[type=submit] {
+    display: block;
+    cursor: pointer;
+    padding: 1em 1.75em;
+    margin: 1em 0;
+    max-width: 24em;
+    text-align: center;
+    font-size: 120%;
+    line-height: 1;
+    border: 0;
+    -webkit-border-radius: .25em;
+    -moz-border-radius: .25em;
+    border-radius: .25em;
+    -moz-box-shadow: 0 1px 2px 0 rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,.3);
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.3);
+    -webkit-text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    -moz-text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+}
+
+    a.button:active {
+        -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+        -o-box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+        -moz-box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+    }
+
+/* SMART venue button image */
+.smart_cta {
+    display: block;
+    background: url(/Assets/preroll/img/smart_btn.png) no-repeat;
+    background-position: center top;
+    width: 375px;
+    height: 169px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 9.35em;
+    color: #fff;
+    font-family: 'Avenir LT W01 85 Heavy', 'Avenir','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    font-size: 181%;
+    -webkit-text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    -moz-text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+}
+
+    .smart_cta:hover {
+        background-position: center bottom;
+    }
+
+/*
+hr { 
+	display: block; 
+	height: 1px; 
+	border: 0; 
+	border-top: 1px solid #ccc; 
+	margin: 1em 0; 
+	padding: 0; 
+}
+*/
+
+#venue-specific-site-title {
+    display: none;
+}
+
+
+
+/* =============================================================================
+   Header (Mobile)
+   ========================================================================== */
+
+header {
+    width: 100%;
+    /*position: relative;
+	z-index: 300;*/
+}
+
+#site-title a {
+    height: 40px;
+    margin: .15em 0 .15em .25em;
+}
+
+/* =============================================================================
+   Mobile Menu
+   ========================================================================== */
+
+#topMenu {
+    /* Hide by Default */
+    display: none;
+    float: left;
+    width: 100%;
+    background: #3d434a;
+    font-size: 75%;
+    line-height: 1.1;
+}
+
+    #topMenu a {
+        color: #fff;
+    }
+
+    #topMenu li {
+        position: relative;
+    }
+
+    #topMenu span:first-child {
+        margin-top: .4em;
+        font-size: 170%;
+        /* color: #35c0e2; */
+    }
+
+    #topMenu span:last-child {
+        position: absolute;
+        right: .75em;
+        top: 2.3em;
+        font-size: 110%;
+    }
+
+
+    #topMenu li:first-child {
+        border-top: none;
+    }
+
+#topMenu {
+    -moz-box-shadow: 0 1px 0 rgba(255,255,255,.1);
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.1);
+    box-shadow: 0 1px 0 rgba(255,255,255,.1);
+}
+
+.login-form ul {
+    width: 100%;
+}
+
+/* =============================================================================
+   Language Selector
+   ========================================================================== */
+
+#language_dropdown {
+    display: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.toggler_container {
+    position: relative;
+}
+
+    .toggler_container span {
+        position: absolute;
+        right: 10px;
+        top: 15px;
+        color: #fff;
+        font-size: 8px;
+    }
+
+.language_toggler {
+    border-radius: 0;
+    border: none;
+    width: 100%;
+    font-family: 'Avenir LT W01 85 Heavy','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    padding: 10px 0 10px 25px;
+    color: #35c0e2;
+    background: #50535a no-repeat 5px center;
+    display: block;
+}
+
+    .language_toggler option {
+        border: none;
+        color: #fff;
+    }
+
+    .language_toggler.en {
+        background: #50535a url(/Assets/preroll/img/language_flag/usa_britain.png) no-repeat 15px center;
+    }
+
+    .language_toggler.de {
+        background: #50535a url(/Assets/preroll/img/language_flag/germany.png) no-repeat 15px center;
+    }
+
+    .language_toggler.it {
+        background: #50535a url(/Assets/preroll/img/language_flag/italy.png) no-repeat 15px center;
+    }
+
+    .language_toggler.es {
+        background: #50535a url(/Assets/preroll/img/language_flag/spain.png) no-repeat 15px center;
+    }
+
+    .language_toggler.fr {
+        background: #50535a url(/Assets/preroll/img/language_flag/france.png) no-repeat 15px center;
+    }
+
+    .language_toggler.pt-PT {
+        background: #50535a url(/Assets/preroll/img/language_flag/portugal.png) no-repeat 15px center;
+    }
+
+    .language_toggler.pt-BR {
+        background: #50535a url(/Assets/preroll/img/language_flag/brazil.png) no-repeat 15px center;
+    }
+
+    .language_toggler.th {
+        background: #50535a url(/Assets/preroll/img/language_flag/thailand.png) no-repeat 15px center;
+    }
+
+    .language_toggler.zh-CN {
+        background: #50535a url(/Assets/preroll/img/language_flag/china.png) no-repeat 15px center;
+    }
+
+    .language_toggler.zh-TW {
+        background: #50535a url(/Assets/preroll/img/language_flag/hongkong.png) no-repeat 15px center;
+    }
+
+    .language_toggler.ja {
+        background: #50535a url(/Assets/preroll/img/language_flag/japan.png) no-repeat 15px center;
+    }
+
+    .language_toggler.ar {
+        background: #50535a url(/Assets/preroll/img/language_flag/uae.png) no-repeat 15px center;
+    }
+
+.toggler_container_background.activated {
+    background: #50535a url(/Assets/preroll/img/language_flag/chevron_down.png) no-repeat center center;
+}
+
+.toggler_container_background {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    width: 30px;
+    height: 18px;
+    background: #50535a url(/Assets/preroll/img/language_flag/chevron_up.png) no-repeat center center;
+    pointer-events: none;
+    display: block;
+}
+
+aside[role="complementary"] {
+    position: relative;
+}
+
+.glow {
+    display: none;
+    position: absolute;
+    right: 50%;
+    -moz-transform: translateX(50%);
+    -webkit-transform: translateX(50%);
+    -ms-transform: translateX(50%);
+    -o-transform: translateX(50%);
+    transform: translateX(50%);
+}
+
+
+.login-form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    background: #fff url(/Assets/preroll/img/preroll_sprite@1x.png) no-repeat 129% -73px;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+/* =============================================================================
+   Mobile Navigation
+   ========================================================================== */
+
+.mobile_nav {
+    display: block;
+    float: right;
+    margin: 1.15em .75em 0 0;
+}
+
+    .mobile_nav a,
+    .mobile_nav a span,
+    .mobile_nav a [class^="icon-"]:before,
+    .mobile_nav a [class*=" icon-"]:before {
+        color: #fff;
+        cursor: pointer;
+    }
+
+        .mobile_nav a:hover,
+        .mobile_nav a:hover [class^="icon-"]:before,
+        .mobile_nav a:hover [class*=" icon-"]:before {
+            color: #35c0e2;
+        }
+
+    .mobile_nav li {
+        float: left;
+    }
+
+        .mobile_nav li a span {
+            padding: .75em .9em .65em .9em;
+            margin-left: .5em;
+            font-size: 1em;
+            background: #32363e;
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: .4em;
+        }
+
+
+/* =============================================================================
+   Large-Res Device Navigation
+   ========================================================================== */
+
+.lrg-res_nav {
+    display: none;
+    float: right;
+    margin: 1.4em 1em 0 0;
+    font-size: 120%;
+    color: #fff;
+}
+
+    .lrg-res_nav li {
+        margin-left: .5em;
+    }
+
+    .lrg-res_nav a,
+    .lrg-res_nav [class^="icon-"]:before, .lrg-res_nav [class*=" icon-"]:before {
+        color: #fff;
+    }
+
+        .lrg-res_nav a:hover,
+        .lrg-res_nav a:hover [class^="icon-"]:before, .lrg-res_nav a:hover [class*=" icon-"]:before {
+            color: #35c0e2;
+        }
+
+    .lrg-res_nav span {
+        font-size: 100%;
+        margin-right: .5em;
+    }
+
+/* =============================================================================
+   Log In Form (Mobile)
+   ========================================================================== */
+
+/* General */
+
+.login-form {
+    display: none; /* default hide login menu */
+    padding: 1em .75em .5em;
+    background: #3d434a;
+}
+
+    .login-form input,
+    .login-form select {
+        width: 100%;
+        padding: .25em;
+        height: 29px;
+        border: 1px solid #ccc;
+        -webkit-border-radius: .3em;
+        -moz-border-radius: .3em;
+        border-radius: .3em;
+    }
+
+        .login-form input[type=submit] {
+            border: none;
+        }
+
+
+    /* Specific Form Styles */
+
+    .login-form li {
+        float: left;
+        width: 100%;
+        margin: 0 0 .5em 0;
+    }
+
+.wifiLogin ul:first-child li:first-child {
+    margin-bottom: .5em;
+}
+
+li.pwreset {
+    margin-bottom: 0;
+}
+
+/* Form Components */
+
+/*
+button,
+input,
+select,
+textarea {
+    color: #999;   
+    outline: none;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;  
+}
+*/
+
+/* Specific Form Styles */
+
+#options {
+    width: 70%;
+    float: left;
+}
+
+#login-btn {
+    width: 28%;
+    float: right;
+    height: 32px;
+}
+
+    #login-btn input {
+        margin-top: 0;
+    }
+
+
+/* =============================================================================
+   Password Reset link
+   ========================================================================== */
+
+
+.pwreset a,
+.pwreset a:visited {
+    color: #fff;
+    font-size: 13px;
+}
+
+
+
+    .pwreset a:hover {
+        color: #35c0e2;
+    }
+
+
+
+/* =============================================================================
+   Main Section
+   ========================================================================== */
+
+article[role="main"] .inner_content {
+    font-size: 80%;
+    line-height: 1.2;
+}
+
+
+/* Utility Menu */
+
+.utility_menu {
+    display: none;
+}
+
+    .utility_menu li {
+        position: relative;
+        border-bottom: 2px solid #28292c;
+        box-shadow: 0 1px 0 rgba(255,255,255,.15);
+        -moz-transition: all .15s ease-in-out;
+        -webkit-transition: all .15s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+
+        .utility_menu li:hover {
+            background: #32363e;
+            background: rgba(0,0,0,.2);
+        }
+
+        .utility_menu li a {
+            display: block;
+            padding: 1em 1em 0;
+        }
+
+        .utility_menu li:first-child {
+            border-top: 2px solid #28292c;
+            -moz-box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 -1px 0 rgba(255,255,255,.15);
+            -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 -1px 0 rgba(255,255,255,.15);
+            box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 -1px 0 rgba(255,255,255,.15);
+        }
+
+        .utility_menu li h3 {
+            margin-bottom: .25em;
+        }
+
+        .utility_menu li p {
+            width: 94%;
+        }
+
+    /* Primary Icon */
+    .utility_menu span:first-child {
+        float: left;
+        margin: .25em .5em .5em 0;
+        font-size: 260%;
+    }
+
+    /* Chevron Icon */
+    .utility_menu span:last-child {
+        position: absolute;
+        right: .75em;
+        font-size: 100%;
+    }
+
+
+/* =============================================================================
+   Airport Section
+   ========================================================================== */
+
+aside[role="complementary"] {
+    padding: 1em 0 0;
+    text-align: center;
+}
+
+h2.airport_logo {
+    margin: 0 auto;
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+}
+
+    h2.airport_logo:before {
+        content: "";
+        display: block;
+        width: 0;
+        height: 100%;
+    }
+
+p.welcome {
+    display: inline-block;
+    margin: 1em 1em 0;
+    padding: .5em 0;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
+    font-size: 95%;
+}
+
+p.smart_welcome {
+    display: inline-block;
+    margin: 0em;
+    padding: .5em 4em;
+    border-bottom: 1px solid #3c4048;
+    font-size: 95%;
+    color: #3c4048;
+    text-transform: uppercase;
+}
+
+.smart_speed {
+    position: relative;
+    z-index: 5;
+    top: -12em;
+    left: 2.75em;
+}
+
+
+aside[role="complementary"] p:last-child {
+    margin-bottom: 0;
+}
+
+aside[role="complementary"] a.button {
+    display: inline-block;
+    width: 92%;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0,0,0,.5);
+    -moz-box-shadow: 0 2px 6px 0 rgba(0,0,0,.5);
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,.5);
+}
+
+
+/* Airport Menu */
+
+.airport_menu {
+    margin: 0 auto;
+    padding-bottom: 2em;
+    background: #3d434a;
+    text-align: left;
+    font-size: 80%;
+}
+
+    .airport_menu li {
+        position: relative;
+        border-bottom: 2px solid #28292c;
+        -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.15);
+        -moz-box-shadow: 0 1px 0 rgba(255,255,255,.15);
+        box-shadow: 0 1px 0 rgba(255,255,255,.15);
+    }
+
+        .airport_menu li a {
+            display: block;
+            padding: 1em;
+            -moz-transition: background .25s ease-in-out;
+            -webkit-transition: background .25s ease-in-out;
+            transition: background .25s ease-in-out;
+        }
+
+            .airport_menu li a:hover {
+                background: #32363e;
+                background: rgba(0,0,0,.2);
+            }
+
+        .airport_menu li h3 {
+            line-height: 2;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+li.group a.fr h3 {
+    font-size: 110%;
+}
+
+
+/* Primary Icon */
+.airport_menu span:first-child {
+    float: left;
+    margin: .25em .5em 0 .25em;
+    font-size: 200%;
+}
+
+/* Chevron Icon */
+.airport_menu span:last-child {
+    position: absolute;
+    right: 1em;
+    top: 1.5em;
+    font-size: 110%;
+}
+
+.custom_preroll_content {
+    display: none;
+}
+
+
+/* =============================================================================
+   Footer
+   ========================================================================== */
+
+footer {
+    text-align: center;
+    padding: 0 0 6em;
+    font-size: 75%;
+    color: #fff;
+}
+
+    footer > p {
+        margin: 0;
+        padding: 0 1em .15em;
+        line-height: 1.3;
+    }
+
+    /* Push Non-anchor text to next line to prevent windows in copy */
+    footer span {
+        display: block;
+    }
+
+.mem footer,
+.mem footer a,
+.mem footer a:visited {
+    color: #fff;
+}
+
+
+/* =============================================================================
+   Ad Section 
+   ========================================================================== */
+
+/* Primary Ad */
+article[role="main"] .ad {
+    display: none;
+    width: 300px;
+    height: 250px;
+    margin: 0 auto;
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+}
+
+
+/* 
+*
+* Conditional Fallbacks 
+*
+*/
+
+/* Prevent IE8 From getting tripped up on Conditional Media Query for HiDPI Boingo Logo */
+.no-backgroundsize #site-title a {
+    background: url(../img/preroll_sprite@1x.png) no-repeat;
+}
+
+/* Prevent IE8 From getting tripped up on Conditional Media Query for HiDPI Airport Logo */
+.no-backgroundsize h2.airport_logo {
+    background: url(../img/airport_logo/airport_logo_lrg@1x.png) no-repeat;
+}
+
+
+/* =============================================================================
+   Utility Styles
+================================================================================ */
+
+/* 
+* Global Slat Styling 
+*/
+
+.slat li a,
+.slat li a:hover,
+.slat li a:focus {
+    color: #fff;
+}
+
+
+/* =============================================================================
+  Media Queries
+================================================================================ */
+
+
+/* 
+* Retina Display Media Query to Target HiDPI Devices 
+* For including high-res graphics, but only for screens that can make us of them. "Retina" being "2x":
+* Info: http://css-tricks.com/snippets/css/retina-display-media-query/
+*/
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+
+    /* HiDPI Boingo Logo */
+    #site-title a {
+        background: url(../img/preroll_sprite@2x.png) no-repeat;
+        background-size: 100%;
+        width: 77px;
+        margin-top: .3em;
+    }
+
+    /* HiDPI Airport Logo */
+    h2.airport_logo {
+        background: url(../img/airport_logo/airport_logo_lrg@2x.png) no-repeat;
+        -webkit-background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+        background-size: 100% 100%;
+    }
+
+    /* HiDPI Mobile Ad */
+    footer .ad {
+        -webkit-background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+        background-size: 100% 100%;
+    }
+
+    .selecter .selecter-selected {
+        background: #fff url(../img/select-graphic@2x.png) no-repeat right center;
+        -webkit-background-size: auto 100%;
+        -moz-background-size: auto 100%;
+        background-size: auto 100%;
+    }
+}
+
+
+/*
+ * screen only
+ * width >= 480px
+ */
+
+@media only screen and (min-width: 480px) {
+
+    .login-form select {
+        background-position: 115% -73px;
+    }
+}
+
+/*
+ * screen only
+ * width >= 600px
+ */
+
+@media only screen and (min-width: 600px) {
+
+    .login-form select {
+        background-position: 111% -73px;
+    }
+}
+
+/*
+ * screen only
+ * width >= 768px
+ */
+
+@media only screen and (min-width: 768px) {
+
+    /* General */
+    .no-backgroundsize body {
+        background: #fff;
+    }
+
+
+    /* Header Section */
+    header {
+        position: absolute;
+        z-index: 200;
+        width: 338px; /* Tame Header width */
+        background: transparent;
+        box-shadow: none;
+    }
+
+    /* Reveal Nav for Large Res Devices */
+
+    .login-form {
+        background: transparent;
+        margin-top: 4.25em;
+    }
+
+        .login-form select {
+            background-position: 130% -73px;
+        }
+
+    /* Main Section */
+    article[role="main"] .inner_content {
+        position: absolute;
+        float: left;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 337px;
+        min-height: 840px;
+        background: #41444b;
+        background: rgba(52, 55, 63, .9);
+        z-index: 1; /* keep on top of complementary pane */
+    }
+
+
+    .lrg-res_nav,
+    .login-form,
+    .utility_menu {
+        display: block;
+    }
+
+        /* Chevron Icon */
+        .utility_menu span:last-child {
+            top: 2.6em;
+        }
+
+    /* Language Drop Down */
+    .toggler_container {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    select#language_dropdown {
+        cursor: pointer;
+        background: #50535a no-repeat 10px center;
+        padding-left: 30px;
+    }
+
+        select#language_dropdown option {
+            background: #50535a no-repeat 5px center;
+            padding-left: 25px;
+        }
+
+    .language_toggler {
+        width: 300px;
+    }
+
+    .glow {
+        width: 800px;
+        height: 600px;
+        top: 0;
+        z-index: -1;
+    }
+
+    /* Ads */
+
+    article[role="main"] .ad { /* Display Primary Ad */
+        display: block;
+        margin-top: 1.2em;
+    }
+
+    footer .ad,
+    .mobile_nav {
+        display: none;
+    }
+
+    /* Airport Info Section */
+    aside[role="complementary"] {
+        position: relative;
+        width: 56%;
+        height: 100%;
+        padding-top: 8em;
+        float: right;
+        background: none;
+    }
+
+    p.welcome {
+        border-top: 1px solid #a3a5ac;
+        border-bottom: 1px solid #a3a5ac;
+        font-size: 130%;
+    }
+
+    p.smart_welcome {
+        border-bottom: 1px solid #3c4048;
+        font-size: 130%;
+    }
+
+    p.smart_subhead {
+        font-size: 200%;
+        font-weight: 700;
+        line-height: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    aside[role="complementary"] a.button {
+        display: inline-block;
+        width: auto;
+        padding: 1em 2.5em;
+        font-size: 160%;
+    }
+
+
+    /* Footer Section */
+    .airport_menu {
+        width: 90%;
+        max-width: 680px;
+        background: #60646d;
+        padding-bottom: 0;
+        margin: 10em auto 0;
+        -moz-border-radius: .5em;
+        -webkit-border-radius: .5em;
+        border-radius: .5em;
+        font-size: 70%;
+    }
+
+        .airport_menu li {
+            position: relative;
+            border-bottom: 1px solid #b1b3b7;
+            border-bottom: 1px solid rgba(255,255,255,.3);
+            box-shadow: none;
+        }
+
+            .airport_menu li:last-child {
+                border-bottom: 0;
+                box-shadow: none;
+                display: block;
+            }
+
+        .airport_menu span:last-child {
+            top: 1.25em;
+        }
+
+    footer {
+        width: 56%;
+        float: right;
+        margin: 3em auto 0;
+        background: none;
+        color: #74787e;
+        font-size: 70%;
+    }
+
+    :lang(ar) footer {
+        float: left;
+    }
+}
+
+
+
+/* 
+* Retina Display Media Query to Target HiDPI Devices 
+* For including high-res graphics, but only for screens that can make us of them. "Retina" being "2x":
+* Info: http://css-tricks.com/snippets/css/retina-display-media-query/
+*/
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px), only screen and (min--moz-device-pixel-ratio: 2) and (min-width: 768px), only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: 768px), only screen and (min-device-pixel-ratio: 2) and (min-width: 768px), only screen and (min-resolution: 192dpi) and (min-width: 768px), only screen and (min-resolution: 2dppx) and (min-width: 768px) {
+
+    /* HiDPI Primary Ad */
+    article[role="main"] .ad {
+        -webkit-background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+        background-size: 100% 100%;
+    }
+}
+
+@media only screen and (max-width: 767px ) {
+
+    .toggler_container {
+        width: 100%;
+        height: 39px;
+        display: block;
+    }
+
+
+    .mobile_nav ul li:first-child a {
+        display: block;
+    }
+
+    .logIn {
+        width: 47px;
+    }
+
+    .glow {
+        width: 100%;
+        height: 450px;
+        top: 0;
+    }
+
+    h2.airport_logo,
+    p.welcome,
+    p.smart_welcome,
+    p.aligncenter,
+    .smart_cta {
+        position: relative;
+    }
+}
+
+
+/* Resize wide airport logos for mobile portrait */
+
+@media only screen and (max-width:700px) and (orientation:portrait) {
+    .oak h2.airport_logo,
+    .bil h2.airport_logo,
+    .bna h2.airport_logo,
+    .lgw h2.airport_logo,
+    .sdf h2.airport_logo,
+    .dtw h2.airport_logo,
+    .dsm h2.airport_logo,
+    .smf h2.airport_logo,
+    .gru h2.airport_logo,
+    .orf h2.airport_logo,
+    .bur h2.airport_logo {
+        background-size: 80% !important;
+        background-position: center !important;
+        width: inherit !important;
+    }
+}
+
+
+
+@media only screen and (min-width:768px) and (max-width:1024px) {
+    h2.airport_logo,
+    p.welcome,
+    p.smart_welcome,
+    p.aligncenter,
+    .smart_cta {
+        position: relative;
+    }
+}
+
+@media only screen and (width:768px) and (orientation:portrait) {
+    .glow {
+        width: 100%;
+        height: 500px;
+        z-index: 0;
+    }
+}
+
+@media only screen and (width:1024px) and (orientation:landscape) {
+    .glow {
+        width: 615px;
+        height: 450px;
+    }
+}
+
+
+@media only screen and (min-width: 900px) {
+
+    /* Airport Info Section */
+    aside[role="complementary"] {
+        width: 63%;
+    }
+
+
+    /* Footer  */
+    footer {
+        width: 63%;
+    }
+}
+
+/*
+ * screen only
+ * width >= 1024px
+ */
+
+@media only screen and (min-width: 1024px) {
+
+    /* Airport Info Section */
+    aside[role="complementary"] {
+        width: 67%;
+    }
+
+    .airport_menu {
+        display: inline-block;
+        width: 90%;
+        margin: 0 auto 2em;
+    }
+
+        .airport_menu li {
+            float: left;
+            width: 33.33333%;
+            border-bottom: 0;
+            box-shadow: none;
+            border-right: 1px solid rgba(255,255,255,.3);
+        }
+
+            .airport_menu li a {
+                padding: 1.75em .5em 1.5em;
+            }
+
+            .airport_menu li:last-child {
+                border: 0;
+                box-shadow: none;
+            }
+
+        .airport_menu span:first-child {
+            margin: .1em .25em 0;
+            font-size: 230%;
+        }
+
+        /* Remove the Chevron Icon */
+        .airport_menu span:last-child {
+            display: none;
+        }
+
+
+    /* Footer  */
+    footer {
+        width: 67%;
+    }
+}
+
+
+
+@media only screen and (min-width: 1140px) {
+
+    /* Airport Info Section */
+    aside[role="complementary"] {
+        width: 70%;
+    }
+
+    /* Footer  */
+    footer {
+        width: 70%;
+    }
+
+        footer span,
+        footer p {
+            display: inline; /* Remove breaks in footer copy */
+            padding: 0;
+        }
+
+            footer span:last-child:before {
+                content: "|";
+                display: inline;
+                padding: 0 .3em 0 .15em;
+            }
+}
+
+
+@media only screen and (min-width: 1200px) {
+
+    /* Airport Info Section */
+    aside[role="complementary"] {
+        width: 78%;
+    }
+
+    /* Footer  */
+    footer {
+        width: 78%;
+    }
+}

@@ -1,0 +1,17 @@
+﻿@media only screen and (min-width:768px) {
+        article[role="main"] {
+            background: url('/Assets/preroll/img/PHX_background_laptop.jpg') top center no-repeat;
+            width: 100%;
+            background-size: cover;
+        }
+}
+
+
+@media only screen and (max-width:767px) {
+        article[role="main"] {
+            background: url('/Assets/preroll/img/PHX_background_mobile.jpg') top center no-repeat;
+            width: 100%;
+            background-size: cover;
+            padding-bottom:20px;
+        }
+}

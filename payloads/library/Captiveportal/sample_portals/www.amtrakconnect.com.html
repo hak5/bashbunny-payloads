@@ -1,0 +1,72 @@
+
+<!-- saved from url=(0069)http://www.amtrakconnect.com/?OriginalURL=http%3A%2F%2F192.168.1.1%2F -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<title></title>
+	<link href="./www.amtrakconnect.com_files/style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="./www.amtrakconnect.com_files/jquery-1.11.1.min.js"></script>	
+<script>
+	$.ajax({
+		type: "GET",
+		url: 'getauth.php',
+		dataType: "html",
+		contentType: "application/html",				
+		cache: false,
+		success: function ( data ) {			
+			//console.log(data);
+			if( data == 'TRUE' )
+				window.location.replace("index2.php");
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			//console.log(xhr.status + ' --- ' + thrownError);
+		}
+	});
+</script></head>
+
+
+<body background="./www.amtrakconnect.com_files/05.jpg">
+<div class="page">
+	<header id="header" class="site-header" role="banner">
+		<div class="header-main">
+			<a class="title-back" href="http://www.amtrakconnect.com/index.html">
+				<h1 class="site-title"><i class="fa fa-chevron-left fa-1x"></i>
+				<span><img src="./www.amtrakconnect.com_files/amtrakconnect-logo.png"></span></h1>
+			</a>
+		</div>
+	</header>
+	
+	<div id="main" class="site-main">
+		<div class="agree" style="background-color: #fff; border-radius: 10px; padding: 15px 0;">
+			<p class="center"><img src="./www.amtrakconnect.com_files/logo-amtrakconnect.jpg"></p>
+			<p>Welcome to AmtrakConnect on-board Wi-Fi.</p>
+			<p>We hope that you enjoy this <strong>free</strong> service throughout your journey.</p>
+			<p class="blue-light" style="display: block;">Acela passengers can now enjoy premium digital newspaper access. Look for it in the Entertainment section of this website.</p>			
+			<p>Keep in mind that cellular bandwidth may be limited, and your browsing experience will be affected by the number of users on the network.</p>
+			<p>To optimize available bandwidth, activities such as online video/audio streaming and file downloads are restricted.</p>
+			<p>By using this service, you agree to <a href="http://www.amtrakconnect.com/agree-terms.php" class="link">AmtrakConnect’s Terms and Conditions</a>.</p>
+			<p class="center"><a class="button agree" href="http://www.amtrakconnect.com/index2.php">I Agree </a></p>
+		</div>
+	</div>
+		
+	<!-- SCRIPT ZONE -->
+	<script>
+		$( document ).ready( function(){
+			$.ajax({
+				type: "GET",
+				url: 'getfleet.php',
+				dataType: "html",
+				contentType: "application/html",				
+				cache: false,
+				success: function ( data ) {			
+					if( data != '' ) 
+						$('div.agree p.blue-light').text(data).show();
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					//console.log(xhr.status + ' --- ' + thrownError);
+				}
+			});
+		});
+	</script>
+
+
+
+</div></body></html>

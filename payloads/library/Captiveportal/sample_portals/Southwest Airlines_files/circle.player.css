@@ -1,0 +1,393 @@
+/*
+ * Project: CirclePlayer
+ * http://www.jplayer.org
+ *
+ * Copyright (c) 2012 Happyworm Ltd
+ *
+ * Author: Silvia Benvenuti
+ * Edited by: Mark J Panaghiston
+ * Date: 2nd October 2012
+ * Artwork inspired by: http://forrst.com/posts/Untitled-CJz
+*/
+
+.cp-container {
+	position: relative;
+	width: 46px;
+	height: 46px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	padding: 0;
+}
+
+.cp-container :focus {
+	border:none;
+	outline:0;
+}
+
+.cp-progress-1,
+.cp-progress-2 {
+	position:absolute;
+	top:0;
+	left:0;
+	width:46px;
+	height:46px;
+	clip:rect(0px,23px,46px,0px);
+	-moz-border-radius:23px;
+	-webkit-border-radius:23px;
+	border-radius:23px;
+}
+
+.cp-buffer {
+	position:absolute;
+	top:0;
+	left:0;
+	width:46px;
+	height:46px;
+}
+
+/* FALLBACK for .progress
+ * (24 steps starting from 1hr filled progress, Decrease second value by 46px for next step)
+ * (It needs the container selector to work. Or use div)
+ */
+
+.cp-container .cp-fallback {
+/*	background:url("progress_sprite.jpg") no-repeat; */
+	background-position:0 54px; 
+}
+
+.cp-progress-1 {
+	clip:rect(0px,23px,46px,0px);
+	background:url("/images/music/progress30_46.png") 0 0 no-repeat;
+}
+.cp-progress-2 {
+	clip:rect(0px,23px,46px,0px);
+	background:url("/images/music/progress30_46.png") 0 0 no-repeat;
+}
+
+.cp-buffer-holder,
+.cp-progress-holder,
+.cp-circle-control {
+	position:absolute;
+	width: 46px;
+	height: 46px;
+	top: 50%;
+	margin-top: -23px;
+	left: 50%;
+	margin-left: -23px;
+} 
+
+.cp-circle-control {
+	cursor:pointer;
+}
+
+.cp-progress-holder {
+	clip:rect(0px,46px,46px,23px);
+	display:none;
+}
+
+
+/* This is needed when progress is greater than 50% or for fallback */
+
+#playlist-cp-container .cp-progress-holder.cp-gt50,
+#playlist-cp-container .cp-progress-1.cp-fallback,
+#track-cp-container .cp-progress-holder.cp-gt50,
+#track-cp-container .cp-progress-1.cp-fallback,
+.dropdown-player .cp-progress-holder.cp-gt50,
+.dropdown-player .cp-progress-1.cp-fallback,
+.cp-progress-holder.cp-gt50,
+.cp-progress-1.cp-fallback{
+	clip:rect(auto, auto, auto, auto);
+}
+
+.cp-controls {
+	margin: 0;
+	text-align: center;
+	padding: 0;
+	position: absolute;
+	display: block;
+	text-indent: -9999px;
+	z-index: 10;
+	cursor: pointer;
+	width: 24px;
+	height: 24px;
+	left: 50%;
+	top: 50%;
+	margin-left: -12px;
+	margin-top: -12px;
+	line-height: 24px;
+}
+
+.cp-controls li{
+	list-style-type:none;
+}
+
+.cp-controls li a{
+	
+}
+
+/*.cp-controls .cp-play {*/
+	/* background:url("controls.jpg") 0 0 no-repeat; */
+	/*background:url("beats_play.png") 3px 0 no-repeat;*/
+/*}*/
+
+/*.cp-controls .cp-play:hover {*/
+	/* background:url("controls.jpg") -50px 0 no-repeat; */
+	/*background:url("beats_play.png") 3px 0 no-repeat;*/
+/*}*/
+.cp-controls a, 
+.cp-controls a:hover {
+    text-decoration: none;
+}
+.cp-controls .cp-pause:before, 
+.cp-controls .cp-play:before {
+    font-family: "ap-playback-controls";
+	speak: none;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	color: #fff;
+	text-indent: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	line-height: 24px;
+	text-align: center;
+	width: 100%;
+	font-size: 16px;
+	font-weight: normal;
+	cursor: pointer;
+}
+.cp-controls .cp-play:before {
+    content: "\e003";
+	margin-left: 1px; /* fix to align play character to the center */
+}
+.cp-controls .cp-pause:before {
+    content: "\e002";
+}
+#playlist-cp-container .cp-controls .cp-pause:before, 
+#playlist-cp-container .cp-controls .cp-play:before {
+    color:black;
+}
+.playlist-item-play-pause .cp-container {
+	/* background: url("/images/music/buffer_bright_46.png") repeat scroll 0 0;  */
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -23px;
+	margin-top: -23px;
+	/*display: none;*/
+}
+
+/*.cp-controls .cp-pause {*/
+	/* background:url("controls.jpg") 0 -50px no-repeat; */
+	/*background:url("beats_pause.png") 0 0 no-repeat;*/
+/*}*/
+
+/*.cp-controls .cp-pause:hover {*/
+	/* background:url("controls.jpg") -50px -50px no-repeat; */
+	/*background:url("beats_pause.png") 0 0 no-repeat;*/
+/*}*/
+
+.cp-jplayer {
+	width:0;
+	height:0;
+}
+
+/* TLG */
+
+.dynamic-player-ctrl .cp-container {
+    margin:10px 0 0 10px;
+}
+.dynamic-player-ctrl .next-song-btn {
+    position:absolute;
+    top:22px;
+    left:85px;
+}
+
+/* ------------------- */
+
+.playlist-featured #playlist-cp-container .cp-container,
+#playlist-image-container .cp-container,
+#track-cp-container .cp-container,
+.dropdown-player .cp-container {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	padding: 0;
+}
+
+.playlist-featured #playlist-cp-container .cp-container,
+#playlist-image-container .cp-container,
+#track-cp-container .cp-container {
+    margin-left:4px;
+    margin-top:3px;
+}
+
+.playlist-featured #playlist-cp-container .cp-progress-1,
+.playlist-featured #playlist-cp-container .cp-progress-2,
+#playlist-image-container .cp-progress-1,
+#playlist-image-container .cp-progress-2,
+#track-cp-container .cp-progress-1,
+#track-cp-container .cp-progress-2,
+.dropdown-player .cp-progress-1,
+.dropdown-player .cp-progress-2 {
+	position:absolute;
+	top:0;
+	left:0;
+	width:40px;
+	height:40px;
+	clip:rect(0px,20px,40px,0px);
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+}
+
+.playlist-featured #playlist-cp-container .cp-buffer,
+#playlist-image-container .cp-buffer,
+#track-cp-container .cp-buffer,
+#playlist-cp-container .cp-buffer,
+.dropdown-player .cp-buffer {
+    background: #fff;
+    opacity: .8;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    top:3px;
+    left:3px;
+}
+
+.dropdown-player .cp-buffer.gray {
+    background: #f1f1f1;
+    opacity: 1;
+}
+
+/* FALLBACK for .progress
+ * (24 steps starting from 1hr filled progress, Decrease second value by 46px for next step)
+ * (It needs the container selector to work. Or use div)
+ */
+.playlist-featured #playlist-cp-container .cp-container .cp-fallback,
+#playlist-image-container .cp-container .cp-fallback,
+#track-cp-container .cp-container .cp-fallback,
+.dropdown-player .cp-container .cp-fallback {
+/*	background:url("progress_sprite.jpg") no-repeat; */
+	background-position:0 54px; 
+}
+
+.playlist-featured #playlist-cp-container .cp-progress-1,
+#playlist-image-container .cp-progress-1,
+#track-cp-container .cp-progress-1,
+.dropdown-player .cp-progress-1 {
+	clip:rect(0px,20px,40px,0px);
+	background:url("/images/music/progress30_40.png") 0 0 no-repeat;
+}
+
+.playlist-featured #playlist-cp-container .cp-progress-2,
+#playlist-image-container .cp-progress-2,
+#track-cp-container .cp-progress-2,
+.dropdown-player .cp-progress-2 {
+	clip:rect(0px,20px,40px,0px);
+	background:url("/images/music/progress30_40.png") 0 0 no-repeat;
+}
+
+.playlist-featured #playlist-cp-container .cp-buffer-holder,
+.playlist-featured #playlist-cp-container .cp-progress-holder,
+.playlist-featured #playlist-cp-container .cp-circle-control,
+#playlist-image-container .cp-buffer-holder,
+#playlist-image-container .cp-progress-holder,
+#playlist-image-container .cp-circle-control,
+#track-cp-container .cp-buffer-holder,
+#track-cp-container .cp-progress-holder,
+#track-cp-container .cp-circle-control,
+.dropdown-player .cp-buffer-holder,
+.dropdown-player .cp-progress-holder,
+.dropdown-player .cp-circle-control {
+	position:absolute;
+	width: 40px;
+	height: 40px;
+	top: 50%;
+	margin-top: -20px;
+	left: 50%;
+	margin-left: -20px;
+} 
+
+.playlist-featured #playlist-cp-container .cp-progress-holder,
+#playlist-image-container .cp-progress-holder,
+#track-cp-container .cp-progress-holder,
+.dropdown-player .cp-progress-holder {
+	clip:rect(0px,40px,40px,20px);
+	display:none;
+}
+
+.playlist-featured #playlist-cp-container .cp-controls,
+#playlist-image-container .cp-controls,
+#track-cp-container .cp-controls,
+.dropdown-player .cp-controls {
+	margin: 0;
+	text-align: center;
+	padding: 0;
+	position: absolute;
+	display: block;
+	text-indent: -9999px;
+	z-index: 10;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	left: 50%;
+	top: 50%;
+	margin-left: -10px;
+	margin-top: -10px;
+	line-height: 20px;
+}
+
+.playlist-featured #playlist-cp-container .cp-controls .cp-pause:before,
+.playlist-featured #playlist-cp-container .cp-controls .cp-play:before,
+#playlist-image-container .cp-controls .cp-pause:before, 
+#playlist-image-container .cp-controls .cp-play:before,
+#track-cp-container .cp-controls .cp-pause:before, 
+#track-cp-container .cp-controls .cp-play:before,
+.dropdown-player .cp-controls .cp-pause:before, 
+.dropdown-player .cp-controls .cp-play:before {
+    font-family: "ap-playback-controls";
+	speak: none;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	color: #000;
+    opacity: .9;
+	text-indent: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	line-height: 20px;
+	text-align: center;
+	width: 100%;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.playlist-featured #playlist-cp-container .cp-controls .cp-play:before,
+#playlist-image-container .cp-controls .cp-play:before,
+#track-cp-container .cp-controls .cp-play:before,
+.dropdown-player .cp-controls .cp-play:before {
+    content: "\e003";
+	margin-left: 1px;
+    margin-top:0px;
+}
+
+.playlist-featured #playlist-cp-container .cp-controls .cp-pause:before,
+#playlist-image-container .cp-controls .cp-pause:before,
+#track-cp-container .cp-controls .cp-pause:before,
+.dropdown-player .cp-controls .cp-pause:before {
+    content: "\e002";
+    margin-top:0px;
+}
+
+.playlist-featured #playlist-cp-container .cp-controls .cp-play,
+.playlist-featured #playlist-cp-container .cp-controls .cp-pause,
+#playlist-image-container .cp-controls .cp-play,
+#playlist-image-container .cp-controls .cp-pause,
+#track-cp-container .cp-controls .cp-play,
+#track-cp-container .cp-controls .cp-pause {
+	font-weight: normal;
+}
+

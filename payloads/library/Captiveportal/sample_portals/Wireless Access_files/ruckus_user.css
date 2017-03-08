@@ -1,0 +1,151 @@
+body, html, #wrapper {width: 100%; height: 100%;}
+
+body {
+    background: #fff url(/images/capture_bg.jpg) 50% top no-repeat;
+    font: 10px "Trebuchet MS", "Lucida Sans", Verdana, Geneva, Helvetica, Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+}
+
+body, html, form, h1, h3, ul {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #000;
+}
+
+a img {
+    border: 0;
+}
+
+p {
+    margin: 0 0 1em;
+    font-size: 1.1em;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+.errorhighlight {
+    border: 1px solid red;
+}
+
+.small {
+    font-size: 0.8em;
+}
+
+#dialog {
+    width: 415px;
+    margin: 0 auto;
+    background: url(/images/capture_dialog_top.gif) top left no-repeat;
+    padding-top: 15px;
+    position: relative;
+}
+
+#dialog_header {
+    position: relative;
+    background-color: #fff;
+    padding-bottom: 10px;
+}
+
+#dialog_header a {
+    position: absolute;
+    left: 30px;
+}
+
+#dialog_header h1 {
+    font-size: 1.7em; 
+    padding: 6px 0 15px 170px;
+    text-align: center;
+}
+
+#dialog_content {
+    background: url(/images/capture_dialog_mid.gif) bottom left repeat-y;
+    color: #fff;
+    padding: 0 30px 1px;
+    font-size: 1.1em;
+}
+
+#dialog_content h3 { margin: 0 0 10px; }
+
+#dialog_footer {
+    background: url(/images/capture_dialog_bot.gif) bottom left no-repeat;
+    color: #fff;
+    padding: 17px 30px 15px;
+}
+
+.required, #dialog_content a {
+    color: #ffc726;
+}
+
+#other_login, #powered {
+    margin: 0;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+tr.gap td { padding-top: 15px; font-size: .1em; }
+th { padding: 2px 15px 2px 2px; text-align: right; font-size: 1.2em; }
+.compact th { padding: 2px; }
+td { padding: 2px 2px 2px 15px; }
+.compact td { padding: 2px; }
+
+textarea {
+    font-size: 1.0em;
+}
+
+#separator {
+    width: 1px;
+    padding: 0;
+    background-color: #fff;
+}
+
+#loginfailed {
+    font-size: 1.1em;
+    color: red;
+    text-align: center;
+}
+
+.login_input {
+  width: 200px;
+}
+
+#IF {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    height: 0;
+    width: 0;
+}
+
+.disabled {
+    color: #cccccc;
+    cursor: default;
+}
+
+.separatorTbl th{
+    border-right: 1px solid #fff;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.error_msg {
+    padding-top: 1em;
+    padding-left: 1em;
+}
+
+.custom_button {
+    padding: 15px;
+    vertical-align: middle;
+    font-size: 18px;
+    width: 100%;
+}

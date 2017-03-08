@@ -1,0 +1,392 @@
+.center-me {
+  width: 304px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.fsearchcontainer {
+  margin: 1px;
+  /* background-color: #2f5c9f; */
+  background-color: #05244c;
+  max-width: 1300px;
+}
+.nav-tabs>li>a {
+  color: #fff !important;
+}
+.tab-content {
+  /*background-color: #2f5c9f;*/
+  background-color: #05244c;
+}
+
+/* typeahead custom css for search widget */
+
+.tt-menu {
+  text-align: left;
+}
+.typeahead, .tt-query, .tt-hint {
+  width: 294px;
+  height: 40px;
+  padding: 8px 12px;
+  /*font-size: 18px;*/
+  line-height: 30px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  outline: none;
+}
+.typeahead {
+  background-color: #fff;
+}
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.tt-hint {
+  color: #999
+}
+.tt-menu {
+  width: 294px;
+  margin: 12px 0;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+.tt-suggestion:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #0097cf;
+}
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+}
+.tt-suggestion p {
+  margin: 0;
+}
+#custom-templates .empty-message {
+  padding: 5px 10px;
+  text-align: center;
+}
+#scrollable-dropdown-menu .tt-menu {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+/* profile card for search widget*/
+
+.ProfileCard1 {
+  position: relative;
+  margin-left: 60px;
+}
+.ProfileCard {
+  position: relative;
+  padding: 8px;
+}
+.ProfileCard-avatar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 52px !important;
+  height: 52px !important;
+  border: 2px solid #ccd6dd;
+  border-radius: 5px;
+}
+.ProfileCard:hover .ProfileCard-avatar {
+  border-color: #f5f8fa;
+}
+.ProfileCard-details {
+  min-height: 50px;
+  padding-left: 63px;
+}
+.ProfileCard-realName, .ProfileCard-screenName {
+  display: inline-block;
+}
+.ProfileCard-realName {
+  font-weight: 700;
+}
+.ProfileCard-description {
+  margin-top: 5px;
+  font-size: 14px;
+  line-height: 18px;
+}
+.ProfileCard-stats {
+  float: right;
+  text-align: right;
+}
+.ProfileCard-stat {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+.ProfileCard-stat-label {
+  color: #8899a6;
+  font-weight: 500;
+}
+.ProfileCard-stat + .ProfileCard-stat {
+  margin-left: 5px;
+}
+
+/*#flight-search .tt-menu{
+max-height:450px;
+overflow-y:auto;
+}*/
+
+
+/* no results message for search widget */
+
+.EmptyMessage {
+  position: relative;
+  padding: 10px;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+}
+
+/* tab layout for search widget */
+
+.arvl-tab {
+  color: #FFFFFF;
+  width: 50%;
+  font-size: 1em;
+  font-weight: 900;
+  background-color: #05244c;
+}
+.arvl-tab a:link {
+  font-size: 1em;
+  font-weight: 900;
+  color: #FFFFFF;
+}
+.arvl-tab .active {
+  color: #FFFFFF;
+  font-size: 1em;
+  font-weight: 900;
+  background-color: #2f5c9f !important;
+}
+.dprt-tab .active {
+  color: #FFFFFF;
+  font-size: 1em;
+  font-weight: 900;
+  background-color: #2f5c9f !important;
+}
+.dprt-tab {
+  width: 50%;
+  color: #FFFFFF;
+  font-size: 1em;
+  font-weight: 900;
+  background-color: #05244c;
+}
+.dprt-tab a:link {
+  font-size: 1em;
+  font-weight: 900;
+  color: #FFFFFF;
+}
+.flightSearchWidget ul {
+  background-color: #2f5c9f;
+}
+img.jet-icon {
+  margin: 0px 10px 0px 0px;
+}
+.flightSearchWidget {
+  /*max-width: 304px;*/
+  padding: 2px;
+  color: #05244c;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+  color: #FFFFFF;
+  cursor: default;
+  background-color: #2f5c9f;
+  border: 1px solid #2f5c9f;
+  border-bottom-color: #2f5c9f;
+}
+.nav-tabs>li>a, .nav-tabs>li>a:focus, .nav-tabs>li>a:hover {
+  color: #FFFFFF;
+  cursor: default;
+  background-color: #05244c;
+  border: 1px solid #05244c;
+  border-bottom-color: #05244c;
+}
+.nav-tabs {
+  margin-bottom: 2px;
+  /*width:1300px;
+  margin-left:-500px;*/
+}
+.searchbox {
+  padding: 2px;
+}
+
+/* Absolute Center CSS Spinner */
+
+.loading {
+  position: fixed;
+  z-index: 999;
+  height: 4em;
+  width: 4em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+
+.loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+/* :not(:required) hides these rules from IE9 and below
+.loading:not(:required) {
+   hide "loading..." text
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+*/
+
+.loading:not(:required):after {
+  content: '';
+  display: block;
+  font-size: 30px;
+  width: 0.5em;
+  height: 0.5em;
+  margin-top: -0.5em;
+  -webkit-animation: spinner 1500ms infinite linear;
+  -moz-animation: spinner 1500ms infinite linear;
+  -ms-animation: spinner 1500ms infinite linear;
+  -o-animation: spinner 1500ms infinite linear;
+  animation: spinner 1500ms infinite linear;
+  border-radius: 0.5em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+  box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.search-widget-footer {
+  width: 100%;
+  padding: 15px 16px;
+  margin: 0px;
+  color: #FFF;
+  font-weight: bold;
+  text-align: right;
+  background: #2f5c9f;
+}
+.search-widget-footer a {
+  color: #FFF;
+  padding-right: 12px;
+  background: url(https://s3.amazonaws.com/prod-ws1/search/images/arrow-white.png) no-repeat 100% 62%;
+}
+
+/* CUSTOM */
+
+#search-pointer {
+  cursor: pointer !important;
+  cursor: hand !important;
+  /*cursor:crosshair !important;*/
+}
+a:hover, a:visited, a:link, a:active {
+  text-decoration: none;
+}
+.tomorrowHeader {
+  font-size: 18px;
+  margin-top: 15px;
+  margin-bottom: 2px;
+}
+hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 0;
+  border-top: 1px solid #eee;
+}

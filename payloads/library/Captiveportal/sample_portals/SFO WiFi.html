@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<!-- saved from url=(0191)http://216.9.98.194/guest/sfofreewifi.php?switch_url=http://2.2.2.2/login.html&ap_mac=7c:95:f3:8a:b3:00&client_mac=34:23:87:45:37:59&wlan=%23SFO%20FREE%20WIFI&redirect=refdesk.com/&_browser=1 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--<base href="http://216.9.98.194/guest/sfofreewifi.php">--><base href=".">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+	<title>SFO WiFi</title>
+
+	<link rel="shortcut icon" href="http://216.9.98.194/guest/public/sfo_new/images/favicon.ico">
+	<link href="./SFO WiFi_files/fonts.css" rel="stylesheet">
+	<link href="./SFO WiFi_files/font-awesome.min.css" rel="stylesheet">
+	<link href="./SFO WiFi_files/sfo.css" rel="stylesheet">
+	<script src="./SFO WiFi_files/jquery-1.11.1.min.js"></script>
+	<script src="./SFO WiFi_files/jquery.backstretch.min.js"></script>
+<script type="text/javascript" language="JavaScript">
+try { top.document.domain } catch (e) {
+ var f = function() { document.body.innerHTML = "Access Denied"; }
+ setInterval(f, 1);
+ if (document.body) document.body.onload = f;
+}
+</script></head>
+<!--
+	Change the body class to change the layout
+	d1 - Layout 1
+	d2 - Layout 2
+	d3 - Layout 3
+	-->
+<body class="d1">
+
+
+<script language="JavaScript" type="text/javascript">
+<!--
+function are_cookies_enabled()
+{
+    var cookieEnabled = (navigator.cookieEnabled) ? true : false;
+
+    if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled)
+    {
+        document.cookie="testcookie";
+        cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? true : false;
+    }
+    return (cookieEnabled);
+}
+if (!are_cookies_enabled()) {
+    alert("Your browser does not have cookies enabled.  Certain convenience features on this site require cookies.  Please enable cookies in your browser preferences.");
+}
+// --></script>
+
+
+
+<style type="text/css"><!--
+.nwaErrorBorder {
+    border:2px solid red;
+    padding: 1px;
+}
+--></style>
+<div class="nwaForm">
+<script type="text/javascript" charset="UTF-8" language="JavaScript" src="./SFO WiFi_files/core-30217.js"></script>
+<script language="JavaScript" type="text/javascript"><!--
+var _form_name = "formecf92d15_weblogin";
+
+function Nwa_Number00(num) {
+	var s = num.toString();
+	if (s.length == 1) {
+		s = '0' + s;
+	}
+	return s;
+}
+
+
+function Nwa_FloatFormat(num, f) {
+    f = parseInt(f / 1 || 0);
+    if (f < 0 || f > 20) {
+        alert("The number of fractional digits is out of range");
+    }
+    if (isNaN(num)) {
+        return "NaN";
+    }
+    var s = num < 0 ? "-" : "", x = Math.abs(num);
+    if (x > Math.pow(10, 21)) {
+        return s + x.toString();
+    }
+    var m = Math.round(x * Math.pow(10, f)).toString();
+    if (!f) {
+        return s + m;
+    }
+    while (m.length <= f) {
+        m = "0" + m;
+    }
+    return s + m.substring(0, m.length - f) + "." + m.substring(m.length - f);
+}
+
+function Nwa_AdjustTimeZone(time) {
+	// Copyright 1999, 2000 by Ray Stott
+	// OK to use if this copyright is included
+	// Script available at http://www.crays.com/jsc
+	var TimezoneOffset = -25200
+	var ms = time + (new Date().getTimezoneOffset() * 60000) + TimezoneOffset * 1000
+	return new Date(ms)
+}
+
+
+function Nwa_ParseTimestamp(timestamp) {
+    var t_len = timestamp.length;
+    var year = parseInt(timestamp.substr(0,4), 10);
+    var month = parseInt(timestamp.substr(5,2), 10) - 1;
+    var day = parseInt(timestamp.substr(8,2), 10);
+    var hour = t_len >= 13 ? parseInt(timestamp.substr(11,2), 10) : 0;
+    var min = t_len >= 16 ? parseInt(timestamp.substr(14,2), 10) : 0;
+    var sec = t_len >= 19 ? parseInt(timestamp.substr(17,2), 10) : 0;
+    var d = new Date(year, month, day, hour, min, sec);
+    return d;
+}
+
+
+function Nwa_DateFormat(time, format) {
+	time = parseInt(time);
+	if (isNaN(time)) {
+		return "N\/A";
+	}
+	var t = Nwa_AdjustTimeZone(time * 1000);
+	var s = format;
+
+	s = s.replace("%h", "%b");
+	s = s.replace("%D", "%m/%d/%y");
+	s = s.replace("%r", "%l:%M %p");
+	s = s.replace("%T", "%H:%M:%S");
+	s = s.replace("%R", "%H:%M");
+	s = s.replace("%Y", t.getFullYear());
+	s = s.replace("%y", Nwa_Number00(t.getFullYear() % 100));
+	s = s.replace("%x", t.toLocaleDateString());
+	s = s.replace("%X", t.toLocaleTimeString());
+	s = s.replace("%w", t.getDay()); // 0=sunday
+	s = s.replace("%S", Nwa_Number00(t.getSeconds()));
+	s = s.replace("%m", Nwa_Number00(t.getMonth() + 1));  // 01-12
+	s = s.replace("%M", Nwa_Number00(t.getMinutes())); // 00-59
+	s = s.replace("%H", Nwa_Number00(t.getHours())); // 00-23
+	s = s.replace("%I", Nwa_Number00(t.getHours() == 0 ? 12 : t.getHours() > 12 ? t.getHours() - 12 : t.getHours())); // 01-12
+	s = s.replace("%l", t.getHours() == 0 ? 12 : t.getHours() > 12 ? t.getHours() - 12 : t.getHours()); // 1-12
+	s = s.replace("%a", (typeof(Calendar._SDN) !== 'undefined') ? Calendar._SDN[t.getDay()] : Calendar._DN[t.getDay()].substring(0, typeof(Calendar._SDN_len) === 'undefined' ? 3 : Calendar._SDN_len)); // abbreviated weekday name
+	s = s.replace("%A", Calendar._DN[t.getDay()]); // full weekday name
+	s = s.replace("%b", (typeof(Calendar._SMN) !== 'undefined') ? Calendar._SMN[t.getDay()] : Calendar._MN[t.getDay()].substring(0, typeof(Calendar._SMN_len) === 'undefined' ? 3 : Calendar._SMN_len)); // abbreviated  month name
+	s = s.replace("%B", Calendar._MN[t.getMonth()]); // full month name
+	s = s.replace("%c", t.toLocaleString());
+	s = s.replace("%d", Nwa_Number00(t.getDate())); // 01-31
+	s = s.replace("%e", (t.getDate() < 10 ? ' ' + t.getDate() : t.getDate())); // " 1"-"31"
+	s = s.replace("%p", (t.getHours() >= 12 ? "PM" : "AM"));
+	s = s.replace("%C", Nwa_Number00((t.getFullYear() - t.getFullYear() % 100) / 100));
+	s = s.replace("%u", t.getDay() ? t.getDay() : 7); // 7=sunday, 1=monday
+	s = s.replace("%%", "%");
+	return s;
+}
+
+function Nwa_MinutesToNatural(mins) {
+	var str;
+	mins = parseInt(mins)
+	if (isNaN(mins)) {
+		return "N\/A";
+	} else if (mins > 1440) {
+		var days = Math.round(mins/144)/10
+		if (Math.abs(days - 1) < 1.0e-6) {
+			str = "@DAYS@ day".replace('@DAYS@', days)
+		} else {
+			str = "@DAYS@ days".replace('@DAYS@', days)
+		}
+	} else if (mins >= 120) {
+		var hours = Math.floor(mins/60)
+		if (Math.abs(hours - 1) < 1.0e-6) {
+			str = "@HOURS@ hour".replace('@HOURS@', hours)
+		} else {
+			str = "@HOURS@ hours".replace('@HOURS@', hours)
+		}
+	} else {
+		if (Math.abs(mins - 1) < 1.0e-6) {
+			str = "@MINUTES@ minute".replace('@MINUTES@', mins)
+		} else {
+			str = "@MINUTES@ minutes".replace('@MINUTES@', mins)
+		}
+	}
+	return str
+}
+
+function Nwa_SecondsToNatural(seconds) {
+    if (Math.abs(seconds) < 60) {
+        seconds = parseInt(Math.abs(seconds));
+        if (seconds == 1) {
+            return "1 second";
+        } else {
+            return "@SECONDS@ seconds".replace('@SECONDS@', seconds);
+        }
+    }
+	mins = parseInt(seconds) / 60;
+	return Nwa_MinutesToNatural(mins);
+}
+
+function Nwa_SecondsToRemaining(t) {
+    var exp = '';
+    if (t > 86400) {
+        var d = Math.floor(t / 86400);
+        if (d == 1) {
+            exp += "1 day";
+        } else {
+            exp += "%1 days".replace(/%1/, d);
+        }
+        t -= d * 86400;
+    }
+    if (t > 3600) {
+        if (exp != '') {
+            exp += ' ';
+        }
+        var h = Math.floor(t / 3600);
+        if (h == 1) {
+            exp += "1 hour";
+        } else {
+            exp += "%1 hours".replace(/%1/, h);
+        }
+        t -= h * 3600;
+    }
+    if (t > 60) {
+        if (exp != '') {
+            exp += ' ';
+        }
+        var m = Math.floor(t / 60);
+        if (m == 1) {
+            exp += "1 minute";
+        } else {
+            exp += "%1 minutes".replace(/%1/, m);
+        }
+        t -= m * 60;
+    }
+    if (t > 0) {
+        if (exp != '') {
+            exp += ' ';
+        }
+        var s = t;
+        if (s == 1) {
+            exp += "1 second";
+        } else {
+            exp += "%1 seconds".replace(/%1/, s);
+        }
+        t -= s;
+    }
+	return exp;
+}
+
+
+function Nwa_TimestampToNatural(timestamp, do_neg, base_timestamp) {
+    var now = new Date();
+    if (base_timestamp) {
+        now = Nwa_ParseTimestamp(base_timestamp);
+    }
+    now = now.getTime();
+    timestamp = Nwa_ParseTimestamp(timestamp);
+    timestamp = timestamp.getTime();
+	var mins = (timestamp - now) / 1000 / 60;
+    var negative = do_neg && (mins < 0);
+    if (negative) {
+        mins = mins * -1;
+    }
+	var str = Nwa_MinutesToNatural(mins);;
+    if (negative) {
+        str = '-' + str;
+    }
+	return str
+}
+
+
+function Nwa_TextCounter(field, cntfield, maxlimit) {
+    var o = document.getElementById(cntfield);
+    if (!o) {
+        return;
+    }
+
+    var counter = '';
+    if (maxlimit == 1) {
+
+        counter = "@COUNT@ characters".replace('@COUNT@', field.value.length);
+    } else {
+        var cap = false;
+        if (maxlimit < 0) {
+            cap = true;
+            maxlimit = Math.abs(maxlimit);
+        }
+        var delta = maxlimit - field.value.length;
+        if (delta < 0) {
+            delta = Math.abs(delta);
+            if (cap) {
+                field.value = field.value.substring(0, maxlimit);
+                counter = "0 characters left";
+            } else if (delta == 1) {
+                counter = "1 character over";
+            } else {
+                counter = "@DELTA@ characters over".replace('@DELTA@', delta);
+            }
+        } else if (delta == 1) {
+                counter = "1 character left";
+        } else {
+            counter = "@DELTA@ characters left".replace('@DELTA@', delta);
+        }
+    }
+    o.innerHTML = counter;
+}
+
+
+function Nwa_PrivatePasswordOnFocus(pw_v) {
+    var pw_id = pw_v.id;
+    var flag = document.getElementById('F_' + pw_id);
+    if (!flag) return;
+
+    if (flag.value == '1') {
+        pw_v.value='';
+    } else {
+        var val_field = document.getElementById('V_' + pw_id);
+        if (!val_field) return;
+        pw_v.value=val_field.value;
+    }
+    return false;
+}
+
+
+function Nwa_PrivatePasswordOnChange(pw_v) {
+    var pw_id = pw_v.id;
+    var flag = document.getElementById('F_' + pw_id);
+    if (!flag) return;
+    if (pw_v.value != '' || flag.value == '0') {
+        var val_field = document.getElementById('V_' + pw_id);
+        if (val_field) {
+            val_field.value = pw_v.value;
+        }
+    }
+    
+    return false;
+}
+
+
+function Nwa_PrivatePasswordOnBlur(pw_v) {
+    var pw_id = pw_v.id;
+    var flag = document.getElementById('F_' + pw_id);
+    if (!flag) return;
+    if (pw_v.value == '' && flag.value == '1') {
+        pw_v.value = "\u25cf\u25cf\u25cf\u25cf\u25cf\u25cf\u25cf\u25cf";
+    } else {
+        flag.value = '0';
+    }
+    var val_field = document.getElementById('V_' + pw_id);
+    if (!val_field) return; // Confirm not a secure field, and no cache
+    if (val_field.value != '') {
+        pw_v.value = "\u25cf\u25cf\u25cf\u25cf\u25cf\u25cf\u25cf\u25cf";
+    }
+    
+    return false;
+}
+
+
+
+function Nwa_EnableFormButtons(form_name) {
+	var f = document.getElementById(form_name)
+	if (f) {
+		try {
+			for (var i = 0; i < f.elements.length; ++i) {
+				var e = f.elements[i]
+				if (e.type == 'button' || e.type == 'submit') {
+					e.disabled = false;
+					if (e.value_saved)
+						e.value = e.value_saved;
+				}
+			}
+		} catch (e) {
+
+		}
+	}
+}
+
+function Nwa_DisableFormButtons(form_name, submit_id, do_enable) {
+	var f = document.getElementById(form_name)
+	if (f) {
+		try {
+			for (var i = 0; i < f.elements.length; ++i) {
+				var e = f.elements[i]
+				if (e.type == 'button' || e.type == 'submit') {
+					e.disabled = true;
+					if (e.id == submit_id) {
+						e.value_saved = e.value;
+						e.value = 'processing...';
+					}
+				}
+			}
+		} catch (e) {
+
+		}
+	}
+}
+
+if (typeof(Nwa_SubmitForm) !== 'function') {
+	
+	Nwa_SubmitForm = function (form_name, submit_id) {
+		Nwa_DisableFormButtons(form_name, submit_id)
+		var f = document.getElementById(form_name)
+		if (f) {
+			if (typeof(document[form_name].Nwa_OnSubmit) == "function" && !document[form_name].Nwa_OnSubmit(form_name)) {
+                Nwa_EnableFormButtons(form_name);
+				return false;
+			}
+			if (!Nwa_SubmitForm.CallHooks(form_name, submit_id)) {
+				Nwa_EnableFormButtons(form_name);
+				return false;
+			}
+			f.submit()
+		}
+		return false
+	}
+	Nwa_SubmitForm.hooks = [];
+	Nwa_SubmitForm.AddHook = function(hook) {
+		Nwa_SubmitForm.hooks.push(hook);	
+	}
+	Nwa_SubmitForm.CallHooks = function(form_name, submit_id) {
+		if (typeof(Nwa_SubmitForm.hooks) == "object") {
+			for (var i in Nwa_SubmitForm.hooks) {
+				if (typeof(Nwa_SubmitForm.hooks[i]) == "function" && !(Nwa_SubmitForm.hooks[i])(form_name, submit_id)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+}
+
+function Nwa_FocusForm(form_name, element_name, force_focus) {
+	var f = document.getElementById(form_name), hash = self.document.location.hash;
+	if (!force_focus && hash) {
+
+		if (hash.indexOf('#A_') === 0) {
+			hash = hash.substring(3);
+		}
+	}
+	for (var i = 0; i < f.elements.length; ++i) {
+		var e = f.elements[i];
+		if (e.type == "hidden") {
+			continue;
+		}
+		if (hash && (e.name == hash || e.name == hash + '[]')) {
+			try { e.focus(); } catch (ex) { } 
+			if (typeof(e.select) == "function") e.select();
+			break;
+		} else if (e.name == element_name || e.name == element_name + '[]') {
+			try { e.focus(); } catch (ex) { } 
+			if (typeof(e.select) == "function") e.select();
+			if (!hash) break;
+		}
+	}
+}
+
+
+if (typeof(Nwa_AjaxSubmitForm) !== 'function') {
+	
+	Nwa_AjaxSubmitForm = function (form_name, submit_id, callback) {
+		if (typeof(callback) == "function") {
+			Nwa_DisableFormButtons(form_name, submit_id)
+			if (!Nwa_AjaxSubmitForm.CallHooks(form_name, submit_id)) {
+				Nwa_EnableFormButtons(form_name);
+				return false;
+			}
+			if (callback(form_name, Nwa_GetFormPostData(form_name))) {
+                var f = document.getElementById(form_name)
+                if (f) {
+                    f.submit()
+                } else {
+                    return true; // WTF?
+                }
+            } else {
+                Nwa_EnableFormButtons(form_name);
+            }
+            return false;
+		} else {
+			return Nwa_SubmitForm(form_name, submit_id)
+		}
+	}
+	Nwa_AjaxSubmitForm.hooks = [];
+	Nwa_AjaxSubmitForm.AddHook = function(hook) {
+		Nwa_AjaxSubmitForm.hooks.push(hook);	
+	}
+	Nwa_AjaxSubmitForm.CallHooks = function(form_name, submit_id) {
+		if (typeof(Nwa_AjaxSubmitForm.hooks) == "object") {
+			for (var i in Nwa_AjaxSubmitForm.hooks) {
+				if (typeof(Nwa_AjaxSubmitForm.hooks[i]) == "function" && !(Nwa_AjaxSubmitForm.hooks[i])(form_name, submit_id)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+}
+
+//-->
+</script>
+<form name="formecf92d15_weblogin" id="formecf92d15_weblogin" method="POST" action="http://216.9.98.194/guest/sfofreewifi.php?_browser=1" accept-charset="UTF-8" enctype="application/x-www-form-urlencoded" novalidate="novalidate">
+<table class="nwaContent" cellpadding="2" cellspacing="2">
+   <thead>
+    <tr>
+     <th class="nwaTop" colspan="2">Welcome to Free Wifi from SFO</th>
+    </tr>
+   </thead>
+  <!-- begin essid UI element (type: hidden; hidden: 1;) -->
+  <tbody><tr style="display: none;">
+    <th class="nwaLeft">
+      <label for="ID_formecf92d15_weblogin_essid">essid</label>    </th>
+    <td class="nwaBody"><a name="A_essid"></a>
+      <input type="hidden" name="essid" id="ID_formecf92d15_weblogin_essid" value="#SFO FREE WIFI">
+    </td>
+  </tr>
+  <!-- end essid UI element -->
+  <!-- begin mac UI element (type: hidden; hidden: 1;) -->
+  <tr style="display: none;">
+    <th class="nwaLeft">
+      <label for="ID_formecf92d15_weblogin_mac">mac</label>    </th>
+    <td class="nwaBody"><a name="A_mac"></a>
+      <input type="hidden" name="mac" id="ID_formecf92d15_weblogin_mac" value="34:23:87:45:37:59">
+    </td>
+  </tr>
+  <!-- end mac UI element -->
+  <!-- begin redirect UI element (type: hidden; hidden: 1;) -->
+  <tr style="display: none;">
+    <th class="nwaLeft">
+      <label for="ID_formecf92d15_weblogin_redirect">redirect</label>    </th>
+    <td class="nwaBody"><a name="A_redirect"></a>
+      <input type="hidden" name="redirect" id="ID_formecf92d15_weblogin_redirect" value="refdesk.com/">
+    </td>
+  </tr>
+  <!-- end redirect UI element -->
+  <!-- begin wlan UI element (type: hidden; hidden: 1;) -->
+  <tr style="display: none;">
+    <th class="nwaLeft">
+      <label for="ID_formecf92d15_weblogin_wlan">wlan</label>    </th>
+    <td class="nwaBody"><a name="A_wlan"></a>
+      <input type="hidden" name="wlan" id="ID_formecf92d15_weblogin_wlan" value="#SFO FREE WIFI">
+    </td>
+  </tr>
+  <!-- end wlan UI element -->
+  <!-- begin client_mac UI element (type: hidden; hidden: 1;) -->
+  <tr style="display: none;">
+    <th class="nwaLeft">
+      <label for="ID_formecf92d15_weblogin_client_mac">client_mac</label>    </th>
+    <td class="nwaBody"><a name="A_client_mac"></a>
+      <input type="hidden" name="client_mac" id="ID_formecf92d15_weblogin_client_mac" value="34:23:87:45:37:59">
+    </td>
+  </tr>
+  <!-- end client_mac UI element -->
+  <!-- begin ap_mac UI element (type: hidden; hidden: 1;) -->
+  <tr style="display: none;">
+    <th class="nwaLeft">
+      <label for="ID_formecf92d15_weblogin_ap_mac">ap_mac</label>    </th>
+    <td class="nwaBody"><a name="A_ap_mac"></a>
+      <input type="hidden" name="ap_mac" id="ID_formecf92d15_weblogin_ap_mac" value="7c:95:f3:8a:b3:00">
+    </td>
+  </tr>
+  <!-- end ap_mac UI element -->
+  <!-- begin switch_url UI element (type: hidden; hidden: 1;) -->
+  <tr style="display: none;">
+    <th class="nwaLeft">
+      <label for="ID_formecf92d15_weblogin_switch_url">switch_url</label>    </th>
+    <td class="nwaBody"><a name="A_switch_url"></a>
+      <input type="hidden" name="switch_url" id="ID_formecf92d15_weblogin_switch_url" value="http://2.2.2.2/login.html">
+    </td>
+  </tr>
+  <!-- end switch_url UI element -->
+  <!-- begin no_login UI element (type: hidden; hidden: 1;) -->
+  <tr style="display: none;">
+    <th class="nwaLeft">
+      <label for="ID_formecf92d15_weblogin_no_login">no_login</label>    </th>
+    <td class="nwaBody"><a name="A_no_login"></a>
+      <input type="hidden" name="no_login" id="ID_formecf92d15_weblogin_no_login" value="">
+    </td>
+  </tr>
+  <!-- end no_login UI element -->
+  <!-- begin username UI element (type: hidden; hidden: 1;) -->
+  <tr style="display: none;">
+    <th class="nwaLeft">
+      <label for="ID_formecf92d15_weblogin_username">Username:</label>    </th>
+    <td class="nwaBody"><a name="A_username"></a>
+      <input type="hidden" name="username" id="ID_formecf92d15_weblogin_username" value="sfotest">
+    </td>
+  </tr>
+  <!-- end username UI element -->
+  <!-- begin password UI element (type: hidden; hidden: 1;) -->
+  <tr style="display: none;">
+    <th class="nwaLeft">
+      <label for="ID_formecf92d15_weblogin_password">Password:</label>    </th>
+    <td class="nwaBody"><a name="A_password"></a>
+      <input type="hidden" name="password" id="ID_formecf92d15_weblogin_password" value="">
+    </td>
+  </tr>
+  <!-- end password UI element -->
+   <tr id="TR_formecf92d15_weblogin_submit">
+    <th class="nwaBottom" colspan="2">
+     <a name="A_submit"></a>
+       <input type="submit" id="ID_formecf92d15_weblogin_submit" value="Log In">
+<script language="JavaScript" type="text/javascript"><!--
+document.getElementById("ID_formecf92d15_weblogin_submit").onclick = function (ev) {
+	ev = ev || window.event;
+	r = Nwa_SubmitForm("formecf92d15_weblogin","ID_formecf92d15_weblogin_submit");
+	ev.returnValue = r;
+	return r;
+}
+//-->
+</script>
+    </th>
+   </tr>
+</tbody></table>
+
+
+</form>
+
+
+<script language="JavaScript" type="text/javascript"><!--
+
+function Nwa_SetFieldEnabled(id, enable) {
+	if (document.getElementById) {
+		return Nwa_SetInputEnabled(document.getElementById(id), enable);
+	}
+}
+function Nwa_SetInputEnabled(input, enable) {
+	var o = input;
+	if (o) {
+		o.disabled = ! enable;
+		if (o.length) {
+			for (var i = 0; i < o.length; i++) {
+				o[i].disabled = ! enable;
+			}
+		}
+	}
+}
+
+function Nwa_SetOnChange(id, onchange) {
+	if (document.getElementById) {
+		var o = document.getElementById(id);
+		if (o) o.onchange = onchange;
+	}
+}
+
+function Nwa_SetOnBlur(id, onblur) {
+	if (document.getElementById) {
+		var o = document.getElementById(id);
+		if (o) o.onblur = onblur;
+	}
+}
+
+function Nwa_SetOnFocus(id, onfocus) {
+	if (document.getElementById) {
+		var o = document.getElementById(id);
+		if (o) o.onfocus = onfocus;
+	}
+}
+
+function Nwa_SetOnKeyUp(id, onkeyup) {
+	if (document.getElementById) {
+		var o = document.getElementById(id);
+		if (o) o.onkeyup = onkeyup;
+	}
+}
+
+function Nwa_SetOnKeyDown(id, onkeydown) {
+	if (document.getElementById) {
+		var o = document.getElementById(id);
+		if (o) o.onkeydown = onkeydown;
+	}
+}
+
+function Nwa_SetOnKeyPress(id, onkeypress) {
+	if (document.getElementById) {
+		var o = document.getElementById(id);
+		if (o) o.onkeypress = onkeypress;
+	}
+}
+
+function Nwa_SetOnClick(id, onclick) {
+	if (document.getElementById) {
+		var o = document.getElementById(id);
+		if (o) o.onclick = onclick;
+	}
+}
+
+
+
+document.formecf92d15_weblogin.Nwa_OnFieldsChanged = function () {
+	var form;
+	try {
+
+		form = document.getElementById("formecf92d15_weblogin");
+		if (typeof(form) !== 'object' || form === null) {
+			return;
+		}
+		with (form) {
+			Nwa_SetFieldEnabled("ID_formecf92d15_weblogin_submit", username.value != "" && no_login.value == "");
+
+		}
+	} catch (e) {
+		alert("Internal form error: problem with element 'visible_if' or 'enable_if': " + e.message)
+	}
+}
+with (document.formecf92d15_weblogin) {
+
+	for (var i = 0; i < elements.length; ++i) {
+		if (elements[i].id.substr(0, 3) == 'ID_') {
+			if (elements[i].type == 'checkbox' || elements[i].type == 'radio') {
+				elements[i].onclick = function (event) {
+					document.formecf92d15_weblogin.Nwa_OnFieldsChanged(event);
+				}
+			} else {
+				elements[i].onchange = function (event) {
+					document.formecf92d15_weblogin.Nwa_OnFieldsChanged(event);
+				}
+			}
+			if (elements[i].type == 'select-one') {
+
+				elements[i].onkeyup = function (event) {
+					document.formecf92d15_weblogin.Nwa_OnFieldsChanged(event);
+				}
+			}
+		}
+	}
+}
+
+document.formecf92d15_weblogin.Nwa_OnFieldsChanged();
+addLoadEvent(function () {window.setTimeout(function () {document.formecf92d15_weblogin.Nwa_OnFieldsChanged()}, 750);}); // Call again after a short delay to catch auto-fill.
+
+
+
+
+// -->
+</script>
+</div>
+
+
+<style>
+.nwaContent {
+display: none;
+}
+.d1 .head, .d2 .head{
+background-color: rgba(0, 0, 0, .5);
+}
+.d1 .body .middle {
+background-color: rgba(0, 0, 0, .5);
+}
+
+.d1 .body .r-image { 
+background-color: #330000;
+opacity: .95;
+
+}
+.d1 .body .r-image img{
+width: 230px;
+}
+.d1 .body .content{
+display:none;
+}
+
+@media all and (max-width: 640px) {
+.d1 .body .r-image img{
+width: 120px;
+}
+.d1 .head .title {
+line-height:12px;
+}
+.d1 .body .middle {
+font-size: 17px;
+}
+img {
+width:500px;
+}
+
+@media all and (max-width: 640px) and (orientation: landscape) {
+.d1 .body .content {
+top:70%;
+}
+
+
+</style>
+
+<div class="wrap">
+<div class="logo">
+<!-- The SFO Logo (Top of Page) -->
+<img src="./SFO WiFi_files/sfo_logo_highres.png">
+</div>
+
+<div class="head">
+<div class="middle">
+
+                                <div class="title connecting" style="display: none;">Connecting...</div>
+
+<div class="title">
+<!-- SFO Welcome Message (TOP) -->
+Welcome to free SFO Wifi.
+</div>
+<div class="options">
+
+<!-- Buttons and Terms/Questions (TOP) -->
+<form>
+<div class="accept">
+<button onclick="document.forms[0].submit(); return false;" type="submit">Accept Terms</button><br>
+<a href="http://216.9.98.194/guest/public/sfoterms.html">Terms and Conditions <i class="fa fa-chevron-circle-right"></i></a>
+</div>
+<div class="decline">
+<button type="button" onclick="window.location=&#39;http://wifi.flysfo.com&#39;" class="white">No Thanks</button><br>
+Questions? 1.855.415.WIFI
+</div>
+</form>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+
+    <div class="body">
+      <div class="content">
+        <div class="middle">
+          <!-- Middle Text -->
+          
+        </div>
+
+        <div class="r-image"><!-- Middle Image -->
+       </div>
+      </div>
+    </div>
+
+            
+</div>
+<div class="foot">
+<div class="options">
+<form>
+<div class="title">
+<!-- SFO Welcome Message (BOTTOM) -->
+Welcome to free SFO WiFi.
+</div>
+<div class="buttons">
+<!-- Buttons and Terms/Questions (BOTTOM) -->
+<div class="accept">
+<button type="submit" onclick="document.forms[0].submit(); return false;">Accept Terms</button>
+</div>
+<div class="decline">
+<button type="button" onclick="window.location=&#39;http://www.flysfo.com&#39;" class="white">No Thanks</button>
+</div>
+<div class="terms"><span><a href="http://216.9.98.194/guest/sfofreewifi.php#">Terms and Conditions <i class="fa fa-chevron-circle-right"></i></a></span></div>
+<div class="questions"><span>Questions? 1.855.415.WIFI</span></div>
+<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+</form>
+</div>
+</div>
+
+
+<script type="text/javascript">
+jQuery.noConflict();
+(function ($) {
+$(document).ready(function () {
+
+// Setup the background image. You can add multiple images or change the image by changing the array below.
+var backgrounds = ["public/sfo_new/images/airport-butler_1116x858.jpg"];
+
+$.backstretch(
+backgrounds,
+{ duration: 3000, fade: 750 }
+);
+
+});
+})(jQuery);
+</script>
+
+
+
+<div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 600px; width: 1145px; z-index: -999999; position: fixed;"><img src="./SFO WiFi_files/airport-butler_1116x858.jpg" style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1145px; height: 880.296px; max-height: none; max-width: none; z-index: -999999; left: 0px; top: -140.148px;"></div></body></html>

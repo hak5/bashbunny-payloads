@@ -1,0 +1,90 @@
+
+
+body {
+    margin: 0px;
+    background-color: #999999;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+img {
+    display: block;
+    border: 0;
+}
+
+.table1 {
+    width: 197px;
+    text-align: center;
+    border: 0px solid red;
+    background-color: #CCCCCC;
+}
+
+.table2 {
+    width: 196px;
+    background-color: #CCCCCC;
+}
+
+.style1 {
+  	color: #000066;
+    font-size: 10pt;
+  	padding-top:15px;
+  	padding-bottom:20px;
+  	padding-left:100px;
+}
+
+.style2 {
+    padding-top: 35px;
+    font-size: 10pt;
+    background-color: #99CC99;
+}
+
+.style3 {
+    width: 91px;
+	  font-size: 12px;
+    text-align: center;
+}
+
+.style4 {
+    font-size: 10pt;
+    text-align:center;
+}
+
+.style5 {
+    color: #000000;
+    font-size: 12pt;
+    text-align:center;
+}
+
+.style6 {
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    text-align:center;
+}
+
+.style7 {
+  	font-size: 10px;
+    background-color: #FFFFCC;
+}
+
+.style8 {
+  	color: #FFFFFF;
+  	font-size: 10px;
+  	font-weight: bold;
+}
+
+.error {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #900B09;
+}
+
+#formstyle1 .formleft {
+    width: 130px;
+    padding-left: 8px;
+    padding-top: 10px;
+    vertical-align: top;
+}
+
+#formstyle1 .formright {
+    padding: 5px 0px 0px 10px;
+}

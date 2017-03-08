@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script type="text/JavaScript">
+   var startTime = (new Date()).getTime();
+</script>   <!-- 
+<?xml version='1.0' encoding='UTF-8'?>
+<WISPAccessGatewayParam	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'	xsi:noNamespaceSchemaLocation='WISPAccessGatewayParam.xsd'>
+	<Redirect>
+		<MessageType>100</MessageType>
+		<ResponseCode>0</ResponseCode>
+		<AccessProcedure>1.0</AccessProcedure>
+		<LocationName>Hotspot</LocationName>
+		<AccessLocation>BackEnd Remote Login</AccessLocation>
+		<LoginURL>https://clblgn.sceur.ch:8090/goform/HtmliPassLoginRequest</LoginURL>
+		<AbortLoginURL>https://clblgn.sceur.ch:8090/goform/HtmliPassLogout</AbortLoginURL>
+	</Redirect>
+</WISPAccessGatewayParam>
+ --> 
+        
+        <title>Novotel Amsterdam City</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <script type="text/javascript" src="Novotel%20Amsterdam%20City_files/jquery-2.js"></script>
+        <script type="text/javascript" src="Novotel%20Amsterdam%20City_files/jquery.js"></script>
+        <script type="text/javascript" src="Novotel%20Amsterdam%20City_files/modal.js"></script>
+        <link rel="stylesheet" href="Novotel%20Amsterdam%20City_files/accor.css" type="text/css" media="screen">
+        <link rel="shortcut icon" href="https://cdn01.sceur.ch/images/logos/std/novotel/novotel_favico.png">
+
+<style>
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #FFF;
+  background-color: #FFF;
+    background-image: url(https://cdn01.sceur.ch/images/logos/std/novotel/novotel_1441095192_image1.jpg);
+  background-size: cover; background-repeat: no-repeat; background-position: center center; background-attachment: fixed;    
+}
+
+a, a:hover, a:focus {
+  color: #FFF;
+}
+
+.btn {
+    border-radius: 20px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+  color: #FFF;
+  background-color: #1C1B57;
+  border-color: #19184d;
+}
+
+.btn-link, .btn-link:focus, .btn-link:hover {
+  color: #FFF;
+}
+
+.help-block {
+  color: #FFF;
+}
+
+.panel {
+  background-color:  #A9A6C5;
+    
+}
+
+.panel-primary {
+  border-color: #A9A6C5;
+}
+.panel-primary > .panel-heading {
+  color: #FFF;
+  background-color: transparent;
+  border-color: #A9A6C5;
+}
+.panel-primary > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #A9A6C5;
+}
+
+.panel-primary > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #A9A6C5;
+}
+
+.table .table {
+  background-color: #FFF;
+}
+
+.flag {
+  background-image :url(https://cdn01.sceur.ch/images/accor/drapeaux.1424079345.gif); 
+}
+
+ul {
+  list-style-image: url(https://cdn01.sceur.ch/images/accor/list-checkbox.1424079345.png);
+}
+</style>
+        
+    </head>
+    <body>
+        <div class="container">
+             
+            <div class="row">
+                <div class="col-xs-12">                    
+                    <img src="Novotel%20Amsterdam%20City_files/novotel_1441094289_logo.png" class="chain-logo">
+                </div>
+            </div>
+                        
+                             
+<script type="text/JavaScript">
+(function worker() {
+  $.ajax({
+    url: 'https://clblgn.sceur.ch/goform/userinfos.json', 
+    timeout: 3000,
+    success: function(data) {
+        if (data.nasid && data.nasid != null && data.nasid != 'HNL339991') { // check NASID
+            document.location = 'https://clblgn.sceur.ch/custom-page-2.asp';
+        } 
+        if (data.vlan && data.vlan != null && data.vlan != '2') { // check VLAN
+            document.location = 'https://clblgn.sceur.ch/custom-page-2.asp';
+        } 
+        if (data.isLoggedIn == 'yes') {
+            document.location = 'http://www.novotel.com/';
+        }        
+              
+    },
+    complete: function() {
+      setTimeout(worker, 5*60*1000); 
+    }
+  });
+})();
+</script> 
+<script type="text/JavaScript">
+$(document).ready(function () {
+    $.get("/analytic.php/index/dashboardUserAgent?nasId=HNL339991&ip=10.43.8.128&mac=40%3A25%3AC2%3AC3%3ACE%3AF0");
+});    
+</script>  
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Welcome back!</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>
+                            Your credentials are still valid                        </p>
+                                                <form id="welcomeback-form"></form>
+                        <div class="form-group">
+                            <button id="btn-reconnect" class="btn btn-primary">Connection</button>
+                            <a href="https://index05.hoisthospitality.com/accor.php/index/login" class="btn btn-link">Back</a>
+                        </div> 
+                        
+                    </div>
+                                        <div class="col-sm-6">
+                        <div class="alert alert-warning">
+                            <p style="margin-bottom: 9px;">
+                                Upgrade your connection                            </p>   
+
+                            <a class="btn btn-warning" href="https://index05.hoisthospitality.com/accor.php/index/upgrade?NASID=HNL339991&amp;LgnURL=https%3A%2F%2Fclblgn.sceur.ch%3A8090%2Fgoform%2FHtmlLoginRequest&amp;NASIP=clblgn.sceur.ch&amp;CallerID=40%3A25%3AC2%3AC3%3ACE%3AF0&amp;CustIP=10.43.8.128&amp;VLAN=2&amp;Location=Hotspot&amp;Port=8090&amp;OrgURL=http%3A%2F%2Fwww.offensive-security.com%2F&amp;username=SHS3%2F22924494">
+                                Upgrade                            </a>
+                        </div>
+                    </div>                       
+                                    </div>
+            </div>
+        </div>
+    </div>                    
+
+</div>
+
+<script type="text/JavaScript">
+    $("#btn-reconnect").click(function(event) {  
+        $('#welcomeback-form-error').remove();
+       
+        $.ajax({                
+            url: 'https://clblgn.sceur.ch/goform/userinfos.json',
+            timeout: 3000,
+            dataType: 'json',
+            cache: false
+        })
+        .always(function(data, textStatus, errorThrown ) {
+            var proceed = true;
+            if (textStatus === 'success') {
+                proceed = SH.Gateway.ensureContext(data,
+                    'HNL339991',
+                    '2',
+                    '10.43.8.128',
+                    'http://clblgn.sceur.ch/custom-page-2.asp',
+                    'http://www.novotel.com/');                    
+            }
+
+            if (proceed) {
+                $('#modal_wait').modal('show');
+
+                                    var request = $.ajax({
+                        url: "/accor.php/ajax/doFta",
+                        cache: false,
+                        type: "POST",
+                        data: {},
+                        dataType: "json"
+                    });
+               
+                
+                request.complete(function(jqXHR, textStatus) {
+                    $('#modal_wait').modal('hide');
+                });
+
+                request.fail(function( jqXHR, textStatus ) {
+                    $('#welcomeback-form').before('<div id="welcomeback-form-error" class="alert alert-danger">Login unsuccessful!</div>');              
+                });
+
+
+                request.done(function(msg) {  
+                    if (msg.connected) {
+                           window.location = 'http://www.novotel.com/';
+                    } else {
+                        $('#welcomeback-form').before('<div id="welcomeback-form-error" class="alert alert-danger">Login unsuccessful!</b></div>');             
+                    }
+
+                });
+            }
+        });
+        return false;
+    });
+</script>
+
+
+
+            <div class="row">
+                <div class="col-xs-12" id="footer">
+                    <div class="panel panel-primary">
+                      <div class="panel-body" style="padding-top: 15px;">
+                              <p>
+                              Select your language : 
+                                                            <a role="menuitem" tabindex="-1" href="javascript:changeLanguage('fr')">
+                                  <span class="flag flag-fr"></span>
+                              </a>
+                                                            <a role="menuitem" tabindex="-1" href="javascript:changeLanguage('en')">
+                                  <span class="flag flag-en"></span>
+                              </a>
+                                                            <a role="menuitem" tabindex="-1" href="javascript:changeLanguage('nl')">
+                                  <span class="flag flag-nl"></span>
+                              </a>
+                                                            </p>
+                              
+                              
+                              <ul>
+                                  <li><a href="https://index05.hoisthospitality.com/accor.php/index/static/c/t">Terms of Use</a></li>
+                                  <li><a href="https://index05.hoisthospitality.com/accor.php/index/static/c/d">Disclaimer</a></li>
+                                  <li><a href="https://index05.hoisthospitality.com/accor.php/index/static/c/p">Privacy statement</a></li>
+                                  <li>Customer service : 00800 38767768</li>                                  
+                                  <li><span onclick="window.location='/accor.php/index/voucher'">HNL339991</span></li>
+                              </ul>
+                              
+                      </div>
+                    </div>                 
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Modal -->
+        <div class="modal" id="modal_wait" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">
+                  <h4>Please wait.</h4>
+              </div>
+            </div>
+          </div>
+        </div>  
+        
+<script>
+function changeLanguage(language) {
+    $.cookie('language', language, {path: '/', expires: 365, domain: 'hoisthospitality.com'});
+    $('#modal_wait').modal('show');    
+    var qs = window.location.search;
+    if (qs === '') {
+        qs = '?lang='+language;
+    }
+    else {
+        // remove any existing language parameter
+        qs = qs.replace(/lang=\w{2}&/, '');        
+        qs = 'lang='+language+'&';
+        
+    }
+    window.location.search = qs;
+}
+
+function validateEmail(email){
+    var emailReg = new RegExp(/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z][a-z]+)|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i);
+    return emailReg.test(email.trim());
+}
+
+</script>
+
+
+<script type="text/JavaScript">
+$(window).load(function () {
+    var endTime = (new Date()).getTime();
+    var millisecondsLoading = endTime - startTime;
+    var viewPort = $(window).width()+'x'+$(window).height();
+    var screenSize = screen.width+'x'+screen.height;
+    
+    $.get("/analytic.php/?dp=%2Faccor.php%2Findex%2FwelcomeBack&dr=http%3A%2F%2FHNL339991&plt="+millisecondsLoading+"&vp="+viewPort+"&sr="+screenSize);
+});    
+
+</script>  <script src="Novotel%20Amsterdam%20City_files/jquery_002.js"></script>        
+        
+        
+    
+ </body></html>

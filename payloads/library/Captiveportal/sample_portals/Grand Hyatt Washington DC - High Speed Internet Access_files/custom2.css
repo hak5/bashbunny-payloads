@@ -1,0 +1,248 @@
+/* this is custom css */
+body {
+    background-color: #fff;
+}
+
+
+.required {
+    color:#900 !important;
+    font-size:1.3em;
+}
+
+img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+
+h1 {
+    font-size: 2em;
+    font-weight: normal;
+    color: #666;
+}
+
+/*This rule is here to create backgrounds for the help page. It's a hack using a too broad selector. Need a more specific rule*/
+/*h3 {
+	border: solid 1px #a62f2b !important;
+	background-color:#eee;
+	padding: 0.6em  0.6em  0.6em  1.8em;
+	color:#000;
+	border-radius:0.3em;
+	font-size: 1.2em;
+	cursor:pointer !important;
+}*/
+
+h3 {
+    font-weight:bold;
+    margin-top: 1.5em;
+}
+
+/*terms of service page*/
+h4 {
+    font-size:  1.4em;
+}
+
+h2 {
+    font-size:  1.7em;
+
+}
+
+footer {
+    padding:1em 0 0 0;
+    margin:1em 0 0 0;
+    border-top: 1px solid #ddd;
+    color:#999;
+    text-align: center;
+}
+
+.glyphicon {
+    color: #cdae51;
+}
+
+.glyphicon-heart,
+.glyphicon-pushpin {
+    color:#3f2b00;
+}
+
+.btn-info {
+    background-color: #cdae51;
+    border-color: #3f2b00;
+    color:#fff;
+}
+.btn-default {
+    background-color:#888;
+    border-color:#888;
+    color:white;
+}
+
+.btn-lg a{
+    color:white !important;
+}
+.btn-md a{
+    color:white !important;
+}
+
+.add_margin_top {
+    margin-top:3em;
+}
+.margin_top {
+    margin-top:1em;
+}
+.margin_top_bit {
+    margin-top:0.3em;
+}
+.margin_right_bit {
+    margin-right:0.3em;
+}
+
+.panel {
+    border-width: 2px
+}
+
+.border_child div{
+    border:solid 1px #ccc;
+    height:4em;
+}
+
+.centering {
+    float:none;
+    margin:0 auto;
+}
+
+.btn-danger {
+    background-color: #a62f2b;
+    border-color: #a62f2b;
+}
+
+.btn-danger:hover, .btn-danger:focus,
+.btn-danger:active, .btn-danger:active, .open >
+.dropdown-togggle.btn-danger {
+    background-color: #892623;
+    border-color: #892623;
+}
+
+.footer_image {
+    margin-top:0.3em;
+    text-align:center;
+}
+
+.footer_text {
+    font-weight:bold;
+    color:#a62f2b;
+    padding: 1.2em 2px 2px 2px;
+}
+
+.gray {
+    color:#888;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.no_border {
+    border:0;
+}
+
+
+a:link {
+    color:#a62f2b;
+    text-decoration: none;
+}
+a:visited {
+    color:#888;
+    text-decoration: none;
+}
+a:hover {
+    color: #860c10;
+    text-decoration: none;
+}
+a:active {
+    color:#860c10;
+    text-decoration: none;
+}
+
+
+
+
+/*Error box at top of index.php */
+#error_result .err_content{
+    padding:12px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color:#700;
+    font-size: 1.1em;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    color:#fff;
+}
+
+
+/* BEGIN Packages Page styles*/
+.panel-body > UL {
+    padding:8px 2px 0 8px;
+    list-style-type: none;
+    text-align:left;
+    font-size:1.3em;
+    line-height:1.2em;
+}
+.panel-body > UL > LI{
+    padding-bottom:8px;
+}
+
+.panel-body >  H2, H3, H4 {
+    margin-left:12px;
+    text-align:center;
+}
+
+.panel {
+    background-color:#e8e8e8;
+    border:solid 2px #ddd;
+}
+
+.heading {
+    margin-left:12px;
+    text-align:center;
+}
+
+.panel-body {
+    padding 0 12px 0 12px !important;
+    text-align:center;
+}
+
+h2.heading {
+    font-size:2.0em;
+    padding-top:.7em;
+}
+
+.banner {
+    color:white;
+}
+.margin-top {
+    margin-top:1em;
+}
+
+/* END Packages Page styles*/
+
+h4.price {
+    font-size:1.5em
+}
+
+
