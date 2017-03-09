@@ -39,9 +39,9 @@ QUACK ENTER
 QUACK DELAY 2000
 
 # PLATFORM COMMANDS
-if $PLATFORM_COMMAND == "terminal" then
+if [ $PLATFORM_COMMAND == "terminal" ]; then
 # MAC / LINUX
-    if $LINES > 0 then
+    if [ $LINES > 0 ]; then
         QUACK STRING head -n -$LINES ~/.bash_history
         QUACK ENTER
     else
