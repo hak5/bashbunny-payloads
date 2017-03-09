@@ -10,7 +10,10 @@ Cleans the input history on Windows, Mac and Linux
 
 ## Configuration
 
-By default this script clears ALL history.  To only delete a certain number of lines, use the LINES=XX param (MAC / LINUX).
+By default this script clears ALL Mac /Linux history.  
+To only delete a certain number of lines, use the LINES=XX param (MAC / LINUX).
+
+To delete Windows history, create the file '/root/udisk/loot/quickcreds/ghost_cleanup_win' manually, or in your attack.
 
 This Script:
 
