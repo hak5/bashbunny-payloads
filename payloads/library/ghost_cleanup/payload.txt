@@ -34,7 +34,7 @@ DELAY 100
 STRING $PLATFORM_COMMAND
 DELAY 1000
 
-if $LINES > 0 && $PLATFORM_COMMAND == "TERMINAL"
+if $LINES > 0 && $PLATFORM_COMMAND == "TERMINAL" then
     STRING head -n -$LINES ~/.bash_history
 else
     STRING rm ~/.bash_history
