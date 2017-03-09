@@ -2,27 +2,8 @@
 # Based on bashbunnypayloads installer
 # https://github.com/hak5/bashbunny-payloads/blob/master/payloads/library/tools_installer/install.sh
 
-##
-# Switch Position
-##
-
-check_switch() {
-	switch1=`cat /sys/class/gpio_sw/PA8/data`
-	switch2=`cat /sys/class/gpio_sw/PL4/data`
-	switch3=`cat /sys/class/gpio_sw/PL3/data`
-	if [ "x$switch1" = "x0" ] && [ "x$switch2" = "x1" ] && [ "x$switch3" = "x1" ]; then
-		SWITCH_POSITION="switch1"
-	elif [ "x$switch1" = "x1" ] && [ "x$switch2" = "x0" ] && [ "x$switch3" = "x1" ]; then
-		SWITCH_POSITION="switch2"
-	elif [ "x$switch1" = "x1" ] && [ "x$switch2" = "x1" ] && [ "x$switch3" = "x0" ]; then
-		SWITCH_POSITION="switch3"
-	else
-		SWITCH_POSITION="invalid"
-	fi
-}
-
-check_switch
-
+# Check Switch Position
+source bunny_helpers.sh
 
 TARGET_DIR='/root/tools'
 RELEASE_ARCHIVE=$(find /root/udisk/payloads/${SWITCH_POSITION} -name DuckToolkit-*)
