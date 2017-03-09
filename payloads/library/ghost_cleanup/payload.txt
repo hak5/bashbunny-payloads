@@ -14,7 +14,7 @@ LINES = 0
 
 # PLATFORM CHECK
 # LOOTFILE CHECK - DEFAULT MAC / LINUX.
-#FOR WINDOWS, CREAT FILE '/root/udisk/loot/quickcreds/ghost_cleanup_win' IN YOUR FIRST PAYLOAD.
+#FOR WINDOWS, CREATE FILE '/root/udisk/loot/quickcreds/ghost_cleanup_win' IN YOUR FIRST PAYLOAD.
 
 if [ -f /root/udisk/loot/quickcreds/ghost_cleanup_win ]; then
     PLATFORM_COMMAND = "cmd"
