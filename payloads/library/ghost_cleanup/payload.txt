@@ -32,12 +32,15 @@ DELAY 50
 BACKSPACE
 DELAY 100
 STRING $PLATFORM_COMMAND
+ENTER
 DELAY 1000
 
 if $LINES > 0 && $PLATFORM_COMMAND == "terminal" then
     STRING head -n -$LINES ~/.bash_history
+    ENTER
 else
     STRING rm ~/.bash_history
+    ENTER
 fi
 
 LED G
