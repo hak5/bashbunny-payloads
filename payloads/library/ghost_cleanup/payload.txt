@@ -14,7 +14,7 @@ LINES = 0
 
 # PLATFORM CHECK
 # LOOTFILE CHECK - DEFAULT MAC / LINUX.
-#FOR WINDOWS, CREATE FILE '/root/udisk/loot/quickcreds/ghost_cleanup_win' IN YOUR FIRST PAYLOAD.
+# FOR WINDOWS, CREATE FILE '/root/udisk/loot/quickcreds/ghost_cleanup_win' IN YOUR FIRST PAYLOAD.
 
 if [ -f /root/udisk/loot/quickcreds/ghost_cleanup_win ]; then
     PLATFORM_COMMAND = "cmd"
@@ -22,7 +22,7 @@ else
     PLATFORM_COMMAND = "terminal"
 fi
 
-#START
+# START
 LED R
 ATTACKMODE HID STORAGE
 
