@@ -4,6 +4,7 @@
 # Author:        bg-wa
 # Version:       0.1
 # Target:        Windows, Mac, Linux
+# Props:         Hak5 E2124 - https://www.youtube.com/watch?v=qGPGOoJn54E
 #
 # Cleans the input history on Windows, Mac and Linux
 #
