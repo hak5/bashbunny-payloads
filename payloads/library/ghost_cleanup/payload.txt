@@ -41,6 +41,8 @@ QUACK DELAY 2000
 # PLATFORM COMMANDS
 if [ $PLATFORM_COMMAND == "terminal" ]; then
 # MAC / LINUX
+    #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
+
     if [ $LINES > 0 ]; then
         QUACK STRING head -n -$LINES ~/.bash_history
         QUACK ENTER
@@ -48,23 +50,11 @@ if [ $PLATFORM_COMMAND == "terminal" ]; then
         QUACK STRING rm ~/.bash_history
         QUACK ENTER
     fi
-
-    #++ BEGIN CUSTOM MAC / LINUX GOODNESS +++
-
-
-
-    #++ END CUSTOM GOODNESS
-
 else
 # WINDOWS
+    #++ INSERT CUSTOM WINDOWS CLEANUP GOODNESS ++
+
     QUACK STRING reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
-
-    #++ BEGIN CUSTOM WINDOWS GOODNESS +++
-
-
-
-    #++ END CUSTOM GOODNESS
-
 fi
 
 QUACK STRING exit
