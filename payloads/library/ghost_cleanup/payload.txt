@@ -44,6 +44,8 @@ if $PLATFORM_COMMAND == "terminal" then
         QUACK STRING rm ~/.bash_history
         QUACK ENTER
     fi
+    QUACK STRING exit
+    QUACK ENTER
 fi
 
 LED G
