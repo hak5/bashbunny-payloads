@@ -58,7 +58,7 @@ if $PLATFORM_COMMAND == "terminal" then
 
 else
 # WINDOWS
-    QUACK reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
+    QUACK STRING reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
 
     #++ BEGIN CUSTOM WINDOWS GOODNESS +++
 
