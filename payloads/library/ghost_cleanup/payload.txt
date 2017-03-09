@@ -21,7 +21,6 @@ if [ ! -f ~/.bash_history ]; then
 else
     #MAC / LINUX
     $PLATFORM_COMMAND = "terminal"
-
 fi
 
 DELAY 1000
