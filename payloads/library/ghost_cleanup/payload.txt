@@ -24,7 +24,6 @@ else
 
 fi
 
-
 DELAY 1000
 ALT F2
 DELAY 50
@@ -33,12 +32,12 @@ DELAY 50
 BACKSPACE
 DELAY 100
 STRING $PLATFORM_COMMAND
-
+DELAY 1000
 
 if $LINES > 0 && $PLATFORM_COMMAND == "TERMINAL"
-    head -n -$LINES ~/.bash_history
+    STRING head -n -$LINES ~/.bash_history
 else
-    rm ~/.bash_history
+    STRING rm ~/.bash_history
 fi
 
 LED G

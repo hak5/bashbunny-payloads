@@ -10,7 +10,7 @@ Cleans the input history on Windows, Mac and Linux
 
 ## Configuration
 
-By default this script clears ALL history.  To only delete a certain number of lines, use the LINES=XX param.
+By default this script clears ALL history.  To only delete a certain number of lines, use the LINES=XX param (MAC / LINUX).
 
 This Script:
 
