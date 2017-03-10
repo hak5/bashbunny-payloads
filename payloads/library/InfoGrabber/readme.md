@@ -22,40 +22,41 @@ Gather a lot of information about the computer and place it in a text file in lo
 Here you can se what it will look like:
 
 
-System Information for:  DESKTOP-9BVPPVN
+	System Information for:  DESKTOP-9BVPPVN
 
-Manufacturer: Dell Inc.
+	Manufacturer: Dell Inc.
 
-Model: XPS 13 9360
+	Model: XPS 13 9360
 
-Serial Number: *******
+	Serial Number: *******
 
-CPU: Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz
+	CPU: Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz
 
-HDD Capacity: 464.38GB
+	HDD Capacity: 464.38GB
 
-HDD Space: 82.32 % Free (382.28GB)
-RAM: 15.89GB
+	HDD Space: 82.32 % Free (382.28GB)
+	
+	RAM: 15.89GB
 
-Operating System: Microsoft Windows 10 Home, Service Pack: 0
+	Operating System: Microsoft Windows 10 Home, Service Pack: 0
 
-User logged In: DESKTOP-9BVPPVN\aknem
+	User logged In: DESKTOP-9BVPPVN\aknem
 
-Last Reboot: 02/21/2017 19:49:30
+	Last Reboot: 02/21/2017 19:49:30
 
-Computers MAC adress: ****************
+	Computers MAC adress: ****************
 
-Computers IP adress: ***********
+	Computers IP adress: ***********
 
-Public IP adress: ****************
+	Public IP adress: ****************
 
-RDP: RDP is NOT enabled
+	RDP: RDP is NOT enabled
 
 
-| ProfileName      | SSID                                  | Password                              |
-| ---------------- | ------------------------------------- | ------------------------------------- |
-| privatsna11234   | privatsna11234                        | ********                              |
-| privatsna11234   | privatsna11234                        | ********                              |
+	| ProfileName      | SSID                                  | Password                              |
+	| ---------------- | ------------------------------------- | ------------------------------------- |
+	| privatsna11234   | privatsna11234                        | ********                              |
+	| privatsna11234   | privatsna11234                        | ********                              |
 
 
 
