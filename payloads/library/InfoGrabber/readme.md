@@ -71,9 +71,7 @@ DuckyTools for the BashBunny, and you need to change to the language the coputer
 | ---------------- | ------------------------------------- |
 | Purple (blinking)| Attack in progress                    |
 | Green            | Attack Finished                       |
-| Red (blinking)   | Setup Failed. Target didn't obtain IP |
-| Amber            | Responder running, waiting for creds  |
-| Green            | Finished                              |
+
 
 
 ## Discussion (Not yet created)
