@@ -13,7 +13,7 @@ Credit: Hak5Darren for inspiration
        _|    /_  \ \_\_
       {_\______\-'\__\_\
 	  Check out my website:
-	  [aknemis.com](http://aknemis.com "aknemis.com") 
+	  aknemis.com
 
 ## Description
 
