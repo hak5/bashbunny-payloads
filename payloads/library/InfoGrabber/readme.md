@@ -48,12 +48,10 @@ Public IP adress: ****************
 RDP: RDP is NOT enabled
 
 
-
-ProfileName     SSID            Password     
------------     ----            --------                   
-privatsna11234  privatsna11234  ********  
-
-
+| ProfileName      | SSID                                  | Password                              |
+| ---------------- | ------------------------------------- | ------------------------------------- |
+| privatsna11234   | privatsna11234                        | ********                              |
+| privatsna11234   | privatsna11234                        | ********                              |
 
 
 
