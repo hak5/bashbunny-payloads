@@ -57,7 +57,16 @@ else
 # WINDOWS
     #++ INSERT CUSTOM WINDOWS CLEANUP GOODNESS ++
 
-    # todo Remove extra ethernet connections
+    # REMOVE EXTRA ETHERNET CONNECTIONS
+    # QUACK STRING netsh show profiles
+    # QUACK ENTER
+    # QUACK DELAY 100
+    # QUACK ENTER
+    # QUACK STRING netsh delete profile interface= InterfaceName
+    # QUACK ENTER
+
+    # REMOVE ALL ETHERNET ADAPTERS
+    QUACK STRING reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles /va /f
 
     QUACK STRING reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
 fi

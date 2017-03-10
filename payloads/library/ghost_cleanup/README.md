@@ -19,6 +19,7 @@ This Script:
 
 1. Clears bash history (Mac, Linux)
 2. Clears Windows Run History
+3. Clears Windows Ethernet Adapters
 
 ## STATUS
 
