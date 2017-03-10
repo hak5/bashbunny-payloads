@@ -18,7 +18,10 @@ Credit: Hak5Darren for inspiration
 ## Description
 
 Gather a lot of information about the computer and place it in a text file in loot/info/.
+
+
 Here you can se what it will look like:
+
 
 System Information for:  DESKTOP-9BVPPVN
 
