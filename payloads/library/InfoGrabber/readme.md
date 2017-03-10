@@ -62,4 +62,4 @@ DuckyTools for the BashBunny, and you need to change to the language the coputer
 ----------------------------------------
 
 ## Discussion (Not yet created)
-[Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/ "Hak5 Forum Thread") 
+[Hak5 Forum Thread not yet created](https://forums.hak5.org/index.php?/topic/ "Hak5 Forum Thread") 
