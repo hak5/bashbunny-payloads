@@ -62,11 +62,11 @@ RDP: RDP is NOT enabled
 
 ## Configuration
 
-Made for windows. The only thing you will ned to chnge is the Ducky language so it matches the keyboard input.
+Made for windows. The only thing you will need to change is the Ducky language so it matches the keyboard input.
 
 ## Requirements
 
-DuckyTools for the BashBunny, and you need to change to the language the coputer uses.
+DuckyTools for the BashBunny, and you need to change to the language the computer uses.
 
 ## STATUS
 
