@@ -33,7 +33,7 @@ check_switch() {
 check_switch
 
 # Set your language here
-QUACK SET_LANGUAGE us
+QUACK SET_LANGUAGE no
 QUACK GUI r
 QUACK DELAY 200
 # Open run and run the run.ps1 script in the Bashbunny

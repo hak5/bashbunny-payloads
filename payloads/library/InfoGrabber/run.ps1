@@ -29,6 +29,7 @@ $datetime = get-date -f yyyy-MM-dd_HH-mm
 $backupPath = $backupDrive + "\loot\info\" + $computerSystem.Name + " - " + $datetime + ".txt"
 
 #Create output from info script
-$TARGETDIR = $backupDrive + "\payloads\switch1"
+$TARGETDIR = $MyInvocation.MyCommand.Path
+$TARGETDIR = $TARGETDIR -replace ".......$"
 cd $TARGETDIR
 PowerShell.exe -ExecutionPolicy Bypass -File info.ps1 > $backupPath
