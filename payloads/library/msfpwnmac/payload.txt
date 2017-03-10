@@ -10,7 +10,7 @@
 # Red................GNU Base64 is not installed on the Bunny! Go do that!
 # Green..............Finished
 #
-
+ATTACKMODE HID
 
 customphonehome=0
 customphonehomeip="If you are not using the BashBunny (ssh) as your receiver then put an ip for one here"
