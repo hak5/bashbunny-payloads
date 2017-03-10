@@ -43,6 +43,9 @@ if [ $PLATFORM_COMMAND == "terminal" ]; then
 # MAC / LINUX
     #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
 
+    # todo Remove extra ethernet connections
+
+
     if [ $LINES > 0 ]; then
         QUACK STRING head -n -$LINES ~/.bash_history
         QUACK ENTER
@@ -53,6 +56,8 @@ if [ $PLATFORM_COMMAND == "terminal" ]; then
 else
 # WINDOWS
     #++ INSERT CUSTOM WINDOWS CLEANUP GOODNESS ++
+
+    # todo Remove extra ethernet connections
 
     QUACK STRING reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
 fi
