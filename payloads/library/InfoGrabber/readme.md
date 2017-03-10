@@ -13,12 +13,11 @@ Credit: Hak5Darren for inspiration
        _|    /_  \ \_\_
       {_\______\-'\__\_\
 	  Check out my website:
-	  aknemis.com
+	  [aknemis.com](http://aknemis.com "aknemis.com") 
 
 ## Description
 
 Gather a lot of information about the computer and place it in a text file in loot/info/.
-
 
 Here you can se what it will look like:
 
