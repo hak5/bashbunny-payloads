@@ -19,6 +19,10 @@ MrGraysRubberHack information can be found here.
 https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Payload---mrgray's-rubber-hacks
 If you have any questions or concerns with the EXE files they can be found there as well. Enjoy and be safe.
 
+## Updated
+
+I have included a new payload to target user computers. You can place both grabNgo and grabNgoUser folders in the payload folder. You will only need a payload file in the switch as the user code does not require the use of the ducky_script.
+
 ## STATUS
 
 | LED                | Status                                       |
