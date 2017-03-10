@@ -1,7 +1,9 @@
 # InfoGrabber for the Bunnys
 
 Author: Simen Kjeserud
+
 Version: Version 1.0
+
 Credit: Hak5Darren for inspiration
 
                ((`\
