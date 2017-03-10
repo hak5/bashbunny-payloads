@@ -10,7 +10,7 @@ Credit: Hak5Darren for inspiration
         /    \   '. __.'
        _|    /_  \ \_\_
       {_\______\-'\__\_\
-	  Check out mye website:
+	  Check out my website:
 	  aknemis.com
 
 ## Description
