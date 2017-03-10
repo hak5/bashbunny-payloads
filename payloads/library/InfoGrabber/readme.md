@@ -53,13 +53,13 @@ DuckyTools for the BashBunny, and you need to change to the language the coputer
 
 ## STATUS
 
-+-----------------+--------------------+
+----------------------------------------
 | Light:          | Meaning:           |
-+-----------------+--------------------+
+----------------------------------------
 | Purple blinking | Attack in progress |
-+-----------------+--------------------+
+----------------------------------------
 | Green           | Attack Finished    |
-+-----------------+--------------------+
+----------------------------------------
 
 ## Discussion (Not yet created)
 [Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/ "Hak5 Forum Thread") 
