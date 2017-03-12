@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:         WiPassDump
-# Author:        Dax
+# Author:        samdeg555
 # Version:       1.0
 # Target:        Windows
 # 
