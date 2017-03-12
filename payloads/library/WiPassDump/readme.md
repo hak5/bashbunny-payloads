@@ -1,6 +1,6 @@
 # WiPassDump for Bash Bunnys
 
-* Author: Dax
+* Author: samdeg555
 * Version: Version 1.0
 * Target: Windows
 
