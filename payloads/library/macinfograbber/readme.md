@@ -15,6 +15,7 @@ This payload can be easily modified to grab other files like word docs or csv fi
 
 | LED                | Status                                       |
 | ------------------ | -------------------------------------------- |
+| Amber              | Executin Payload                             |
 | Green              | Attack Finished                              |
 | Purple             | Successfully grabbed xls or xlsx files       |
-| RED                | Did not get any xls or xlsx files            |
+| Red                | Did not get any xls or xlsx files            |
