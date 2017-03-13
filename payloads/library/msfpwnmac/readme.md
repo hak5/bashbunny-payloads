@@ -1,7 +1,7 @@
 # MSF Pwn Mac for the BashBunny
 
 * Author: kmakblob
-* Version: Version 1.0
+* Version: Version 1.2
 * Target: OSX
 
 ## Description
@@ -15,5 +15,6 @@ to ping the receiving IP which can be either the BashBunny's or a custom one.
 
 | LED                | Status                                       |
 | ------------------ | -------------------------------------------- |
+| AMBER              | Attack starting!                             |
 | Green              | Attack Finished                              |
 | RED                | Base64 (GNU) not installed! Go do that!      |
