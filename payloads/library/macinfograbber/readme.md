@@ -1,7 +1,7 @@
 # Mac Info Grabber for the BashBunny
 
 * Author: kmakblob
-* Version: Version 1.0
+* Version: Version 1.2
 * Target: OSX
 
 ## Description
