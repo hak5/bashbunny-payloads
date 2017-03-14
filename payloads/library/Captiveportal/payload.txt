@@ -4,6 +4,9 @@
 # Author:        Sebkinne
 # Version:       1.0
 
+# Usage of bunny_helpers.sh to avoid problems with find in function startCaptiveportal
+https://forums.hak5.org/index.php?/topic/40237-install-tools/
+
 # Add or remove inputs here
 INPUTS=(username password)
 
@@ -27,7 +30,8 @@ function setupNetworking() {
 
 # Find payload directory and execute payload
 function startCaptiveportal() {
-    cd $(dirname $(find /root/udisk/payloads/ -name portal.html))
+#    cd $(dirname $(find /root/udisk/payloads/ -name portal.html))
+    cd /root/udisk/payloads/$SWITCH_POSITION
     chmod +x captiveportal
     ./captiveportal ${INPUTS[@]}
 }
