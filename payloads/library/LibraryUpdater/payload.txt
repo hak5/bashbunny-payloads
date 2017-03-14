@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Title:     PayloadUpdater
+# Author:    audibleblink
+# Target:    any
+# Version:   1.0
+#
+# Update payloads from Github
+#
+# White  |  Ready
+# Red    |  No Internet
+# Amber  |  Running
+# Purple |  Cleaning Up
+# Green  |  Finished
+
+LED R G B
+ATTACKMODE ECM_ETHERNET
+
+# set your desired repo url and branch if you're not looking to update from mainline
+git_repo="https://github.com/hak5/bashbunny-payloads.git"
+git_branch="master"
+
+# test for internet connection
+wget -q --tries=5 --timeout=15 --spider http://example.com
+[[ "$?" -ne 0 ]] && { LED R; exit 1; }
+
+# clone repo
+LED R G
+export GIT_SSL_NO_VERIFY=1 # ssl fails because BB time is wrong
+git clone -b $git_branch $git_repo /tmp/repo
+
+# only copy over files that differ from existing payloads
+rsync -ar --checksum repo/payloads/library /root/udisk/payloads/
+[[ "$?" -eq 0 ]] && LED R B || { LED R; exit 1; }
+
+# cleaning up
+rm -rf /tmp/repo
+LED G
