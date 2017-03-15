@@ -1,0 +1,71 @@
+#!/bin/bash
+
+# Title:     Git Bunny Git
+# Author:    Draxiom && audibleblink
+# Target:    any
+# Version:   1.0
+#
+# Update payloads from Github
+#
+# White            |  Ready (to run bb.sh on the host computer)
+# Red              |  No Internet
+# Red (blinking)   |  Could not mount filesystem
+# Amber            |  Running
+# Green (blinking) |  Git Pull Finished
+# Green            |  Git Clone Finished
+
+LED R G B
+ATTACKMODE RNDIS_ETHERNET 
+#ATTACKMODE ECM_ETHERNET
+
+source bunny_helpers.sh
+
+# Set your desired repo url and branch if you're not looking to update from mainline
+git_repo="https://github.com/hak5/bashbunny-payloads.git"
+git_branch="master"
+payloads_dir="/root/udisk"
+log_file="/root/udisk/payloads/$SWITCH_POSITION/git.log"
+
+echo "Git Bunny Git" > $log_file
+
+# Test for internet connection
+wget -q --tries=15 --timeout=5 --spider http://example.com
+[[ "$?" -ne 0 ]] && { LED R; exit 1; }
+
+# Let's go
+LED R G
+cd $payloads_dir
+
+# Cannot verify ca certificate... skip it
+export GIT_SSL_NO_VERIFY=1
+if [ -d ".git" ]; then
+	# Get the newest payloads
+	git pull origin $git_branch &>> $log_file
+	LED G 200
+	exit 1
+else
+	# Move the existing payloads directory, in case hackers be hackin'
+	mv payloads payloads-orig
+	# Initialize Repository
+	git init &>> $log_file
+	# Let's pick the hak5 github repo
+	git remote add origin $git_repo &>> $log_file
+	# Instead of cloning the whole repo, 
+	git config core.sparsecheckout true
+	# isolate the payloads directory
+	echo "payloads" >> .git/info/sparse-checkout
+	# "git clone"
+	git pull origin $git_branch &>> $log_file
+
+	# Ignore any existing directories or files, so git status is pretty
+	LED R B
+	for file in $(ls -A); do
+		[[ "${file}" =~ [^payloads$] ]] && echo "${file}" >> .gitignore
+	done
+
+	# Put the existing switch directories back
+	cp -r payloads-orig/switch* payloads/.
+
+	# Git 'er done
+	LED G
+fi
