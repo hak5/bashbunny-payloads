@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Title:     Git Bunny Git
+# Author:    Draxiom && audibleblink
+# Target:    any
+# Version:   1.0
+#
+# Update payloads from Github
+#
+# White            |  Ready (to run bb.sh on the host computer)
+# Red              |  No Internet
+# Red (blinking)   |  Could not mount filesystem
+# Amber            |  Running
+# Green (blinking) |  Git Pull Finished
+# Green            |  Git Clone Finished
+
+LED R G B
+ATTACKMODE RNDIS_ETHERNET 
+#ATTACKMODE ECM_ETHERNET
+
+# Set your desired repo url and branch if you're not looking to update from mainline
+git_repo="https://github.com/hak5/bashbunny-payloads.git"
+git_branch="master"
+payloads_dir="/root/udisk"
+touch /tmp/git
+echo "Git Bunny Git" >> /tmp/git
+
+# Test for internet connection
+wget -q --tries=15 --timeout=5 --spider http://example.com
+[[ "$?" -ne 0 ]] && { LED R; exit 1; }
+
+# Let's go (`tail -f /tmp/git` to monitor progress)
+LED R G
+cd $payloads_dir
+
+# Paranoid mount
+if [ `ls $payloads_dir | wc -l` -eq 0 ]; then
+	mount -o sync /dev/nandf $payloads_dir
+	cd $payloads_dir
+	if [ `ls $payloads_dir | wc -l` -eq 0 ]; then
+		LED R 200
+		exit 1
+	fi
+fi
+
+# Cannot verify ca certificate... skip it
+export GIT_SSL_NO_VERIFY=1
+if [ -d ".git" ]; then
+	# Get the newest payloads
+	git pull origin $git_branch >> /tmp/git 2>> /tmp/git
+	LED G 200
+	exit 1
+else
+	# Move the existing payloads directory, in case hackers be hackin'
+	mv payloads payloads-orig
+	# Initialize Repository
+	git init >> /tmp/git 2>> /tmp/git
+	# Let's pick the hak5 github repo
+	git remote add origin $git_repo >> /tmp/git 2>> /tmp/git
+	# Instead of cloning the whole repo, 
+	git config core.sparsecheckout true
+	# isolate the payloads directory
+	echo "payloads" >> .git/info/sparse-checkout
+	# "git clone"
+	git pull origin $git_branch >> /tmp/git 2>> /tmp/git
+
+	# Ignore any existing directories or files, so git status is pretty
+	LED R B
+	for ignore_existing in *; do
+		if [[ "${ignore_existing}" =~ [^payloads$] ]]; then
+			echo "${ignore_existing}" >> .gitignore
+		fi
+	done
+
+	# Put the existing payloads back
+	cp -r payloads-orig/switch* payloads/.
+
+	# Show Purple... cause
+	sleep 1
+
+	# Git 'er done
+	LED G
+fi
