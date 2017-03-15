@@ -22,7 +22,6 @@ ATTACKMODE RNDIS_ETHERNET
 git_repo="https://github.com/hak5/bashbunny-payloads.git"
 git_branch="master"
 payloads_dir="/root/udisk"
-touch /tmp/git
 echo "Git Bunny Git" >> /tmp/git
 
 # Test for internet connection
@@ -74,9 +73,6 @@ else
 
 	# Put the existing payloads back
 	cp -r payloads-orig/switch* payloads/.
-
-	# Show Purple... cause
-	sleep 1
 
 	# Git 'er done
 	LED G
