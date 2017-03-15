@@ -47,22 +47,22 @@ fi
 export GIT_SSL_NO_VERIFY=1
 if [ -d ".git" ]; then
 	# Get the newest payloads
-	git pull origin $git_branch >> /tmp/git 2>> /tmp/git
+	git pull origin $git_branch &>> /tmp/git
 	LED G 200
 	exit 1
 else
 	# Move the existing payloads directory, in case hackers be hackin'
 	mv payloads payloads-orig
 	# Initialize Repository
-	git init >> /tmp/git 2>> /tmp/git
+	git init &>> /tmp/git
 	# Let's pick the hak5 github repo
-	git remote add origin $git_repo >> /tmp/git 2>> /tmp/git
+	git remote add origin $git_repo &>> /tmp/git
 	# Instead of cloning the whole repo, 
 	git config core.sparsecheckout true
 	# isolate the payloads directory
 	echo "payloads" >> .git/info/sparse-checkout
 	# "git clone"
-	git pull origin $git_branch >> /tmp/git 2>> /tmp/git
+	git pull origin $git_branch &>> /tmp/git
 
 	# Ignore any existing directories or files, so git status is pretty
 	LED R B
