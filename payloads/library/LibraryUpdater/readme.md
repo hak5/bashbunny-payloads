@@ -12,11 +12,13 @@ or storing them in your own forked repo and using your link/branch in the payloa
 
 ## Configuration
 
-Configured for *nix by default. Swap RNDIS_ETHERNET with ECM_ETHERNET on Windows
+Configured for \*nix by default. Swap RNDIS_ETHERNET with ECM_ETHERNET on Windows
 
 ## Requirements
 
-Target must be sharing internet
+The BashBunny must have internet access in order to pull down updated payloads.
+Run the [internet connection sharing](https://bashbunny.com/bb.sh)
+script and plug in the BashBunny with the appropriate switch activated.
 
 ## Status
 
