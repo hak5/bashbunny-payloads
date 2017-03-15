@@ -22,4 +22,4 @@ None needed.
 | Purple (blinking)  | Attack Complete                              |
 
 ## Discussion
-None yet. 
+https://forums.hak5.org/index.php?/topic/40413-payload-wificreds/
