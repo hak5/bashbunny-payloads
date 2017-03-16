@@ -17,7 +17,7 @@ None needed.
 
 | LED                | Status                                       |
 | ------------------ | -------------------------------------------- |
-| Red (blinking)     | Setting up                                   |
+| White (blinking)   | Setting up                                   |
 | Blue (blinking)    | Attack running                               |
 | Purple (blinking)  | Attack Complete                              |
 
