@@ -13,7 +13,7 @@ Configured for nix by default. Swap RNDIS_ETHERNET with ECM_ETHERNET on Windows
 
 ## Requirements
 
-Target must be sharing internet.
+Target must be sharing internet and have git installed.
 
  1. Run bb.sh (pause at main menu)
  2. Plug in da bunny
@@ -26,6 +26,7 @@ Target must be sharing internet.
 | ---------------- | ------------------------------------- |
 | White            | Ready (to share internet connection)  |
 | Red              | Failed (no internet)                  |
+| Red (blinking)   | Failed (could not mount filesystem)   |
 | Amber            | Running                               |
 | Purple           | Cleaning Up                           |
 | Green (blinking) | Finished (git pull)                   |
