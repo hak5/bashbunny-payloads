@@ -26,7 +26,7 @@ If you are afraid of .exe you can compile your self from his github: https://git
 | Green              | Attack Complete                              |
 
 ## Discussion
-[Hak5 Forum Thread]("")
+[Hak5 Forum Thread]("https://forums.hak5.org/index.php?/topic/40437-payload-passwordgrabber/")
 
 ## Future Work
 
