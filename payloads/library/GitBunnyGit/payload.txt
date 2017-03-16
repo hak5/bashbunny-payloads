@@ -22,11 +22,12 @@ ATTACKMODE RNDIS_ETHERNET
 git_repo="https://github.com/hak5/bashbunny-payloads.git"
 git_branch="master"
 payloads_dir="/root/udisk"
-log_file="/root/udisk/git.log"
+log_file="/var/log/git.log"
 
 echo " ---------  Git Bunny Git [started] -----------" >> $log_file
 
-[[ ! -d "$payloads_dir/payloads" ]] && { LED R 200; echo "Could not mount filesystem" >> $log_file; exit 1; }
+# Sanity check on mounted drive
+[[ ! `mount | grep "nandf"` ]] && { LED R 200; echo "Could not mount filesystem" >> $log_file; exit 1; }
 
 # Test for internet connection
 wget -q --tries=15 --timeout=5 --spider http://example.com
