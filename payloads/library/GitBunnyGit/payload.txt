@@ -67,10 +67,8 @@ else
 	for file in $(ls -A); do
 		[[ "${file}" =~ [^payloads$] ]] && { echo "${file}" >> .gitignore; echo ".gitignore add: ${file}" >> $log_file; }
 	done
-	echo "payloads/switch1" >> .gitignore
-	echo ".gitignore add: payloads/switch1" >> $log_file;
-	echo "payloads/switch2" >> .gitignore
-	echo ".gitignore add: payloads/switch2" >> $log_file;
+	echo "payloads/switch*" >> .gitignore
+	echo ".gitignore add: payloads/switch*" >> $log_file;
 
 	# Put the existing switch directories back
 	cp -r payloads-orig/switch* payloads/.
