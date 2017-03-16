@@ -11,7 +11,7 @@ Saves the files to the loot folder on the Bash Bunny under the BashKatz director
 
 ## Configuration
 
-None needed.
+No configuration required. Just copy the contents of this folder into one of the 'switch' directories and you're ready to go!
 
 ## STATUS
 
