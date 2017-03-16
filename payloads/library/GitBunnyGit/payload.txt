@@ -24,7 +24,7 @@ source bunny_helpers.sh
 git_repo="https://github.com/hak5/bashbunny-payloads.git"
 git_branch="master"
 payloads_dir="/root/udisk"
-log_file="/root/udisk/payloads/$SWITCH_POSITION/git.log"
+log_file="/root/udisk/git.log"
 
 echo "Git Bunny Git" > $log_file
 
