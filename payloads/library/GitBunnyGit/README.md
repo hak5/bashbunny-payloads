@@ -5,7 +5,7 @@ Version: 1.0
 
 ## Description
 
-Clones the bashbunny-payloads repository and also will update an existing repository.
+Clones the bashbunny-payloads repository and also will update an existing repository. Use this payload to get all the other payloads!
 
 ## Configuration
 
@@ -26,7 +26,6 @@ Target must be sharing internet.
 | ---------------- | ------------------------------------- |
 | White            | Ready (to share internet connection)  |
 | Red              | Failed (no internet)                  |
-| Red (blinking)   | Failed (could not mount filesystem)   |
 | Amber            | Running                               |
 | Purple           | Cleaning Up                           |
 | Green (blinking) | Finished (git pull)                   |

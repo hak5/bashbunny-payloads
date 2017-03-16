@@ -18,15 +18,15 @@ LED R G B
 ATTACKMODE RNDIS_ETHERNET 
 #ATTACKMODE ECM_ETHERNET
 
-source bunny_helpers.sh
-
 # Set your desired repo url and branch if you're not looking to update from mainline
 git_repo="https://github.com/hak5/bashbunny-payloads.git"
 git_branch="master"
 payloads_dir="/root/udisk"
-log_file="/root/udisk/payloads/$SWITCH_POSITION/git.log"
+log_file="/root/udisk/git.log"
 
-echo "Git Bunny Git" > $log_file
+echo "Git Bunny Git" >> $log_file
+
+[[ ! -d "$payloads_dir/payloads" ]] && { LED R; echo "Could not mount filesystem" >> $log_file; exit 1; }
 
 # Test for internet connection
 wget -q --tries=15 --timeout=5 --spider http://example.com
