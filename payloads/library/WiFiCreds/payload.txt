@@ -7,13 +7,14 @@
 # Dumps the stored plaintext Wifi SSID & passwords from Windows boxes using Powershell
 # then stashes them in /root/udisk/loot/WiFiCreds
 #
+# White..............Setup
 # Blue...............Running Script
 # Purple.............Got WiFi Creds
 
 # Source bunny_helpers.sh to get environment variable SWITCH_POSITION
 source bunny_helpers.sh
 
-LED R 200
+LED RGB 200
 LOOTDIR=/root/udisk/loot/WiFiCreds
 mkdir -p $LOOTDIR
 
