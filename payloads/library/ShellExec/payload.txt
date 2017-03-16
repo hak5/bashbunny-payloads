@@ -26,22 +26,12 @@ cd $payload_dir
 # starting server
 LED R G 500
 
-cat <<EOF | python &>> $log_file &
-import SimpleHTTPServer
-import BaseHTTPServer
-import SocketServer
-
-#Disable logging DNS lookups
-BaseHTTPServer.BaseHTTPRequestHandler.address_string = lambda self: str('$TARGET_IP')
-
-settings = ('$HOST_IP',80)
-Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
-httpd = SocketServer.TCPServer(settings, Handler)
-httpd.serve_forever();
-EOF
+# disallow outgoing dns requests so server starts immediately
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python -m SimpleHTTPServer 80
 
 # wait until port is listening
-while ! nc -z $HOST_IP 80; do sleep 0.2; done
+while ! nc -z localhost 80; do sleep 0.2; done
 
 # attack commences
 LED B 500
