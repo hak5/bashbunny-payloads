@@ -5,7 +5,7 @@ Version: 1.0
 
 ## Description
 
-Clones the bashbunny-payloads repository and also will update an existing repository.
+Clones the bashbunny-payloads repository and also will update an existing repository. Use this payload to get all the other payloads!
 
 ## Configuration
 
@@ -13,7 +13,7 @@ Configured for nix by default. Swap RNDIS_ETHERNET with ECM_ETHERNET on Windows
 
 ## Requirements
 
-Target must be sharing internet.
+Target must be sharing internet. BashBunny must have git installed.
 
  1. Run bb.sh (pause at main menu)
  2. Plug in da bunny
