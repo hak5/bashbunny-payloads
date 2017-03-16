@@ -1,7 +1,7 @@
 # WiFiCreds
 
 * Author: illwill
-* Version: Version 1.0
+* Version: Version 0.1
 * Target: Windows
 
 ## Description
