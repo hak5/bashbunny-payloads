@@ -10,17 +10,19 @@ Payload utilizes Windows Sysinternal ProcDump to dump lsass.exe process memory f
 
 ## Requirements
 
-procdump.exe, iPump.vps, 1PumpHidden.cmd, and 1PumpDump.cmd must be in root Bash Bunny folder
+procdump.exe, iPump.vps, 1PumpHidden.cmd, and 1PumpDump.cmd must be in the same folder as payload.txt
 
 ## Payload
-Launches cmd prompt as Administrator
-Executes 1PumpHidden.cmd from the root of the Bash Bunny USB Disk partition,
-which in turn executes 1PumpDump.cmd invisibly using iPump.vbs,
-which in turn copies the dump to the loot folder on the Bash Bunny.
+Launches PowerShell as Administrator
+Bypasses UAC
+Executes 1PumpHidden.cmd
+Runs procdump.exe
+Copies the dump to the loot folder on the Bash Bunny.
 
 ## Tweaks
 Adjust DELAY Statements if Target Systems are Super Slow
 
 ## LED Mapping
 Red LED - Payload Start
+Purple LED - Command Started
 Blue LED - Payload Complete
