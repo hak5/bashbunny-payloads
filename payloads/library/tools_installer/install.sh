@@ -1,6 +1,10 @@
+# To avoid the use of find in the next section, let's verify the switch position
+# and therefore the exact position of tools_to_install
+source bunny_helpers.sh
+
 # Check to ensure that the tools_to_install directory isn't empty. 
 # Exit with solid red LED if it is, otherwise note tools in log.
-TOOLSDIR=$(find /root/udisk/payloads/ -name tools_to_install)
+TOOLSDIR=/root/udisk/payloads/$SWITCH_POSITION/tools_to_install/
 if [ "$(ls -A $TOOLSDIR)" ]; then
     cd $TOOLSDIR
 	echo "Available Tools:" > /tmp/tools_installer.log
@@ -15,6 +19,9 @@ fi
 LED R B 100
 mkdir -p /pentest
 mv $TOOLSDIR/* /pentest/
+
+# Be sure that there are no OS made hidden files in the directory
+rm .*
 
 # Set LED to purple solid and check that move completed
 LED R B
