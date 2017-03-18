@@ -10,7 +10,6 @@
 #
 #	Purple LED..................Script Started
 #	Yellow LED..................Ducky Script Started
-#	White LED...................Scan Complete
 #	Red LED.....................Failed to run Ducky Script, see log file
 #	
 #	NOTE: p.ps1 MUST be in loot/payloads/ for this to work.
