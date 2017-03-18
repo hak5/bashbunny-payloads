@@ -33,6 +33,8 @@ Q ENTER
 
 # Bypass UAC
 Q DELAY 3000
+
+# You might need to change this to y if the computer is in english (o stands for "Oui" in french)
 Q ALT o
 Q ENTER
 Q DELAY 500
