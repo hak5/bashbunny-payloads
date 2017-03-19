@@ -1,0 +1,18 @@
+#!/bin/bash
+
+ATTACKMODE HID STORAGE
+
+LED R B 200
+
+LANGUAGE=‘gb’
+
+source bunny_helpers.sh
+
+if [ -f "/root/udisk/payloads/${SWITCH_POSITION}/ducky_script.txt" ]; then
+        QUACK ${SWITCH_POSITION}/ducky_script.txt
+        LED G
+else
+    LED R 
+    echo "Unable to load ducky_script.txt" >> /root/debuglog.txt
+        exit 1
+fi

