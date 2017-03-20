@@ -2,10 +2,7 @@
 #
 # Title:         Captiveportal
 # Author:        Sebkinne
-# Version:       1.0
-
-# Usage of bunny_helpers.sh to avoid problems with find in function startCaptiveportal
-https://forums.hak5.org/index.php?/topic/40237-install-tools/
+# Version:       1.1
 
 # Add or remove inputs here
 INPUTS=(username password)
@@ -17,6 +14,9 @@ ATTACKMODE RNDIS_ETHERNET
 ##################################################################
 #                  DO NOT EDIT BELOW THIS LINE                   #
 ##################################################################
+
+source bunny_helpers.sh
+WORKINGPATH="/root/udisk/payloads/$SWITCH_POSITION"
 
 # Sets up iptable forwarding and filters
 function setupNetworking() {
@@ -30,8 +30,7 @@ function setupNetworking() {
 
 # Find payload directory and execute payload
 function startCaptiveportal() {
-#    cd $(dirname $(find /root/udisk/payloads/ -name portal.html))
-    cd /root/udisk/payloads/$SWITCH_POSITION
+    cd $WORKINGPATH
     chmod +x captiveportal
     ./captiveportal ${INPUTS[@]}
 }
