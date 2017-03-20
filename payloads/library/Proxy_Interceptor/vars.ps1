@@ -1,3 +1,3 @@
 #Set variables for use in payload.
-$proxyVal = "ironport.amatson.lan:3128"
+$proxyVal = "proxyip:port"
 $certName = "cert.pem"
