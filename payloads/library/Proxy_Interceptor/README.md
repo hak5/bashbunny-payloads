@@ -27,4 +27,4 @@ payload.txt, set the certificate and proxy information in the vars.ps1 file.
 
 ## Discussion
 
-[Hak5 Forum Thread]( "Hak5 Forum Thread")
+https://forums.hak5.org/index.php?/topic/40476-payload-proxy-interceptor/
