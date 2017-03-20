@@ -1,4 +1,17 @@
-
+#!/bin/bash
+#
+# Title:         Proxy Interceptor
+# Author:        NightStalker
+# Version:       1.0
+#
+#This payload will enable a proxy and import an SSL certificate to a Windows
+#computer for Internet Explorer and Chrome (FireFox is in progress for 2.0)
+#The script uses a combination of Ducky Code and PowerShell.
+#
+# Set proxy and certificate varaibles in vars.ps1, certificate must be in same folder as payload.txt
+#
+# Red Blinking.............Running Payload
+# Purple Blinking .........Payload Completed
 
 #Set Red LED to indicate Starting of Script
 LED R 50
