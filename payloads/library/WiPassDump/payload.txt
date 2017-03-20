@@ -33,7 +33,7 @@ Q ENTER
 
 # Bypass UAC
 Q DELAY 3000
-Q ALT o
+Q ALT y
 Q ENTER
 Q DELAY 500
 
