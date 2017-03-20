@@ -1,6 +1,7 @@
 # Proxy Interceptor for Bash Bunny
 
 Author: NightStalker
+
 Version: Version 1.0
 
 ## Description
