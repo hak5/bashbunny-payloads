@@ -1,7 +1,7 @@
 # WiFiCreds
 
 * Author: illwill
-* Version: Version 0.1
+* Version: Version 0.3
 * Target: Windows
 
 ## Description
@@ -19,7 +19,9 @@ None needed.
 | ------------------ | -------------------------------------------- |
 | White (blinking)   | Setting up                                   |
 | Blue (blinking)    | Attack running                               |
-| Purple (blinking)  | Attack Complete                              |
+| Purple (blinking)  | Dumping WiFi Credentials                     |
+| Green  (blinking)  | Succeeded Dumping WiFi Credentials           |
+| Red  (blinking)    | Failed Dumping WiFi Credentials              |
 
 ## Discussion
 https://forums.hak5.org/index.php?/topic/40413-payload-wificreds/
