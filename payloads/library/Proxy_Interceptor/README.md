@@ -8,7 +8,7 @@ Version: 1.0
 
 This payload will enable a proxy and import an SSL certificate to a Windows
 computer for Internet Explorer and Chrome (FireFox is in progress for 2.0)
-The script uses a combination of Ducky Code and PowerShell.\
+The script uses a combination of Ducky Code and PowerShell.
 
 *Note: Currently no falure LED, if remains red for more than 60 seconds
 script failed. Will build checks in later version.
