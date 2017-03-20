@@ -1,7 +1,7 @@
 REM Title: WiFi password grabber for the bash bunny
-REM Author: Silvian 
+REM Author: Silvian
 REM Props: Siem, Darren Kitchen
-REM Version: 3
+REM Version: 1
 REM Description: Saves the SSID, Network type, Authentication and the password to Log.txt
 DELAY 1000
 GUI r
