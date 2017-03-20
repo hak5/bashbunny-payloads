@@ -28,6 +28,9 @@ Q LEFTARROW
 Q DELAY 100
 Q ENTER
 Q DELAY 1500
+Q STRING mode con:cols=18 lines=1
+Q ENTER
+Q DELAY 100
 Q STRING \$Bunny \= \(gwmi win32_volume -f \'label\=\'\'BashBunny\'\'\' \|  Select-Object -ExpandProperty DriveLetter\)
 Q ENTER
 Q DELAY 100
@@ -51,7 +54,7 @@ Q ENTER
 Q DELAY 100
 
 # GTFO
-# Q STRING EXIT
+Q STRING EXIT
 Q ENTER
 #Sync Drive
 sync
