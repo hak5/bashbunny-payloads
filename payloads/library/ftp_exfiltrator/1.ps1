@@ -12,8 +12,7 @@ $FTPUser = 'xxxxx'
 $FTPPass = 'xxxxx'
  
 #Directory where to find files to upload
-#$UploadFolder = "C:\Temp\"
-$UploadFolder = "$env:userprofile\Documents\OBS Audit\TempTest\"
+$UploadFolder = "$env:userprofile\Documents\"
   
 $webclient = New-Object System.Net.WebClient 
 $webclient.Credentials = New-Object System.Net.NetworkCredential($FTPUser,$FTPPass)  
