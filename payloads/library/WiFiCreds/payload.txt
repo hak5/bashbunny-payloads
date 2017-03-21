@@ -23,14 +23,11 @@ Q DELAY 500
 Q STRING POWERSHELL
 Q DELAY 1000
 Q CTRL-SHIFT ENTER
-Q DELAY 2500
+Q DELAY 2000
 Q LEFTARROW
 Q DELAY 100
 Q ENTER
-Q DELAY 1500
-Q STRING mode con:cols=18 lines=1
-Q ENTER
-Q DELAY 100
+Q DELAY 1200
 Q STRING \$Bunny \= \(gwmi win32_volume -f \'label\=\'\'BashBunny\'\'\' \|  Select-Object -ExpandProperty DriveLetter\)
 Q ENTER
 Q DELAY 100
