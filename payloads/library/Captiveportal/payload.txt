@@ -5,7 +5,7 @@
 # Version:       1.0
 
 # Usage of bunny_helpers.sh to avoid problems with find in function startCaptiveportal
-https://forums.hak5.org/index.php?/topic/40237-install-tools/
+# https://forums.hak5.org/index.php?/topic/40237-install-tools/
 
 # Add or remove inputs here
 INPUTS=(username password)
