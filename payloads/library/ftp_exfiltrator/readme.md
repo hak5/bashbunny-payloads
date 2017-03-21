@@ -23,4 +23,4 @@ Edit 1.ps1 to specify FTP site, username and password
 | Green              | Attack Complete                              |
 
 ## Discussion
-[Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/40225-payload-usb_exfiltrator/ "Hak5 Forum Thread")
+[Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/40492-payload-ftp-exfiltrator/ "Hak5 Forum Thread")
