@@ -21,7 +21,7 @@ source bunny_helpers.sh
 LED R
 
 #We are a keyboard
-ATTACKMODE HID
+ATTACKMODE HID STORAGE
 
 #Set keyboard language
 QUACK SET_LANGUAGE en
