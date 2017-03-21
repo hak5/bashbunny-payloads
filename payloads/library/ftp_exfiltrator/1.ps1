@@ -1,6 +1,5 @@
 clear
 #Clear Run History
-New-PSDrive -PSProvider registry -Root HKEY_USERS -Name HKU
 remove-item "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU"
 
 # Credit to dkittell - https://gist.github.com/dkittell/f029b6c7d1c46ebcffcb
