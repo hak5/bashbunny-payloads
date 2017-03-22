@@ -24,6 +24,7 @@ LINES=0
       mkdir /root/udisk/loot/ghost_cleanup
     fi
     touch "${DEBUG_FILE}"
+    echo "DEBUG STARTED" > "${DEBUG_FILE}"
 #fi
 
 # PLATFORM CHECK
@@ -42,7 +43,7 @@ fi
 # ATTACKMODE HID VID_0X05AC PID_0X021E
 ATTACKMODE HID
 
-QUACK DELAY 1000
+QUACK DELAY 500
 QUACK ALT F2
 QUACK DELAY 50
 QUACK GUI SPACE
@@ -53,19 +54,17 @@ QUACK DELAY 100
 QUACK STRING "${PLATFORM_COMMAND}"
 QUACK DELAY 200
 QUACK ENTER
-QUACK DELAY 2000
+QUACK DELAY 1000
 
 
 # PLATFORM COMMANDS
-if [ "${PLATFORM_COMMAND}"=="terminal" ]; then
+if [ "$PLATFORM_COMMAND"=="terminal" ]; then
 # MAC / LINUX
     LED RB 100
 
-    echo "${PLATFORM_COMMAND}" > "${LINES}"
-
     #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
 
-    if [ "${LINES}" -gt "0" ]; then
+    if [ "$LINES" -gt "0" ]; then
         QUACK STRING head -n -"${LINES}" "~/.bash_history"
         QUACK ENTER
         QUACK STRING history -c
@@ -78,9 +77,9 @@ if [ "${PLATFORM_COMMAND}"=="terminal" ]; then
     fi
 else
 # WINDOWS
-    LED B 100
-    QUACK @echo off
-    QUACK ENTER
+    # LED B 100
+    # QUACK @echo off
+    # QUACK ENTER
     #++ INSERT CUSTOM WINDOWS CLEANUP GOODNESS ++
 
 
