@@ -1,5 +1,5 @@
 REM Go to dump directory
-D:
+cd /d %~dp0
 cd ../../loot/WiPassDump/
 
 REM Dump saved Wi-Fi infos
