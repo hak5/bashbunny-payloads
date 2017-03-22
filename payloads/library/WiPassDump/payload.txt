@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# Title:         WiPassDump
-# Author:        samdeg555
-# Version:       1.0
+# Title:         WiPassDumpv2
+# Author:        greenwe333
+# Version:       2.0
 # Target:        Windows
 # 
 # Runs powershell as Administrator
