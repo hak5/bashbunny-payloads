@@ -3,6 +3,18 @@
 
 #Get info about pc
 $computerPubIP=(Invoke-WebRequest ipinfo.io/ip).Content
+$computerIP = get-WmiObject Win32_NetworkAdapterConfiguration|Where {$_.Ipaddress.length -gt 1}
+$IsDHCPEnabled = $false
+$Networks =  Get-WmiObject Win32_NetworkAdapterConfiguration -Filter "DHCPEnabled=$True" | ? {$_.IPEnabled}
+foreach ($Network in $Networks) {
+If($network.DHCPEnabled) {
+$IsDHCPEnabled = $true
+  }
+[string[]]$computerMAC =$Network.MACAddress
+}
+
+$computerSystem = Get-CimInstance CIM_ComputerSystem
+$computerBIOS = Get-CimInstance CIM_BIOSElement
 
 $computerOs=Get-WmiObject win32_operatingsystem | select Caption, CSName, Version, @{Name="InstallDate";Expression={([WMI]'').ConvertToDateTime($_.InstallDate)}} , @{Name="LastBootUpTime";Expression={([WMI]'').ConvertToDateTime($_.LastBootUpTime)}}, @{Name="LocalDateTime";Expression={([WMI]'').ConvertToDateTime($_.LocalDateTime)}}, CurrentTimeZone, CountryCode, OSLanguage, SerialNumber, WindowsDirectory  | Format-List
 $computerCpu=Get-WmiObject Win32_Processor | select DeviceID, Name, Caption, Manufacturer, MaxClockSpeed, L2CacheSize, L2CacheSpeed, L3CacheSize, L3CacheSpeed | Format-List
@@ -124,7 +136,14 @@ $vault = $vault.RetrieveAll() | % { $_.RetrievePassword();$_ }
 Clear-Host
 Write-Host 
 
-
+$computerSystem.Name
+"=================================================================="
+"Manufacturer: " + $computerSystem.Manufacturer
+"Model: " + $computerSystem.Model
+"Serial Number: " + $computerBIOS.SerialNumber
+""
+""
+""
 
 "OS:"
 "=================================================================="+ ($computerOs| out-string)
@@ -139,6 +158,11 @@ Write-Host
 "Mainboard:"
 "=================================================================="+ ($computerMainboard| out-string)
 
+"Bios:"
+"=================================================================="+ (Get-WmiObject win32_bios| out-string)
+
+
+
 "Local-user:"
 "=================================================================="+ ($luser| out-string)
 
@@ -147,7 +171,12 @@ Write-Host
 
 "Network: "
 "=================================================================="
-"Public IP adress: " + $computerPubIP + "RDP: " + $RDP + ($Network| out-string)
+"Computers MAC adress: " + $computerMAC
+"Computers IP adress: " + $computerIP.ipaddress[0] 
+"Public IP adress: " + $computerPubIP  
+"RDP: " + $RDP
+""
+($Network| out-string)
 
 "W-Lan profiles: "
 "=================================================================="+ ($WLANProfileObjects| out-string)
