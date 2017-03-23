@@ -21,11 +21,8 @@ Configured to copy PDF files by default. Change EXFILTRATE_FILES variable to des
 | ------------------- | -------------------------------------- |
 | Red (fast blink)    | Impacket not found in /pentest         |
 | Red (slow blink)    | Setup Failed. Target didn't obtain IP  |
-| Purple              | HID Stage                              |
-| Purple (fast blink) | Ethernet Stage                         |
+| Amber               | Initialization                         |
+| Purple (fast blink) | Switching to Mass Storage (optional)   |
 | Blue (interupt)     | Receiving files                        |
 | White               | Files received, moving to mass storage |
 | Green               | Finished                               |
-
-## Discussion
-[Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/40509-payload-smb-exfiltrator/ "Hak5 Forum Thread")
