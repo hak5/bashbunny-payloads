@@ -35,7 +35,7 @@ fi
 
 # HID STAGE
 # Runs minimized powershell waiting for Bash Bunny to appear as 172.16.64.1.
-# Once found, initiates file copy and once finished copying files it creates a file called 'd'.
+# Once found, initiates file copy and once finished copying files it creates a file called '.d'.
 # Then exits.
 LED R G
 ATTACKMODE HID
