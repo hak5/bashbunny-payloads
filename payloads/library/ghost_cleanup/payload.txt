@@ -17,8 +17,9 @@ LINES=0 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY - DEFAULT : 0 = ALL
 OS="WINDOWS" # OPTIONS: "UNITY", "MAC", OR "WINDOWS"
 
 UNMOUNT=false
+REMOVE_NETWORKS=false
 
-DEBUG=true
+DEBUG=false
 
 # SEARCH FOR 'INSERT CUSTOM' TO ADD MORE CODE IN THE PROPER PLACE, PER OS
 
@@ -158,10 +159,8 @@ clear_history_from_powershell()
 #        QUACK DELAY 200
         1=1
     else
-        0=0
-#        QUACK STRING reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /va /f
-#        QUACK ENTER
-#        QUACK DELAY 200
+        QUACK STRING reg delete \"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU\" /v /f
+        wait_enter_wait
     fi
     echo "HISTORY CLEARED FROM POWERSHELL" >> "${DEBUG_FILE}"
 }
