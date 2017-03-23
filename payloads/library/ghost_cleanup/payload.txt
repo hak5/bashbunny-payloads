@@ -17,7 +17,7 @@ LINES=0 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY (MAC / LINUX) - DEFAULT :
 OS="UNITY" # OPTIONS: "UNITY", "MAC", OR "WINDOWS"
 UNMOUNT=false
 
-DEBUG=true
+DEBUG=false
 
 #+++ END CONFIG +++
 
@@ -63,33 +63,38 @@ clear_active_input()
     QUACK DELAY 100
 }
 
-enter_and_wait()
+wait_enter_wait()
 {
     if [ -z "$1" ]; then
-        WAIT_DELAY=1000
+        BEFORE_WAIT=100
     else
-        WAIT_DELAY=$1
+        BEFORE_WAIT=$1
     fi
-    QUACK DELAY 200
+    if [ -z "$2" ]; then
+        AFTER_WAIT=100
+    else
+        AFTER_WAIT=$2
+    fi
+    echo "${BEFORE_WAIT}" >> "${DEBUG_FILE}"
+    echo "${AFTER_WAIT}" >> "${DEBUG_FILE}"
+
+    QUACK DELAY ${BEFORE_WAIT}
     QUACK ENTER
-    QUACK DELAY ${WAIT_DELAY}
+    QUACK DELAY ${AFTER_WAIT}
 }
 
 clear_history_from_terminal()
 {
     if [ "$LINES" -gt "0" ]; then
-        QUACK STRING head -n -$LINES "~/.bash_history"
-        QUACK ENTER
-        QUACK DELAY 100
+        QUACK STRING head -n -$LINES \$HOME/.bash_history
+        wait_enter_wait
         QUACK STRING history -c
-        QUACK ENTER
-        QUACK DELAY 100
+        wait_enter_wait
     else
-        QUACK STRING rm "~/.bash_history"
-        QUACK ENTER
-        QUACK DELAY 1000
+        QUACK STRING rm \$HOME/.bash_history
+        wait_enter_wait
         QUACK STRING history -c
-        QUACK ENTER
+        wait_enter_wait
     fi
     echo "HISTORY CLEARED FROM TERMINAL" >> "${DEBUG_FILE}"
 }
@@ -175,16 +180,15 @@ echo "FUNCTIONS LOADED" >> "${DEBUG_FILE}"
 LED R
 
 ATTACKMODE HID VID_0X05AC PID_0X021E
-
 QUACK DELAY 500
 
 #UNITY
 if [ "${OS}" = "UNITY" ]; then
     LED R B 100
-    QUACK ALT F2
+    QUACK GUI
     clear_active_input
     QUACK STRING terminal
-    enter_and_wait
+    wait_enter_wait 1000 2000
 
     #++ INSERT CUSTOM UNITY CLEANUP HERE ++
 
@@ -201,7 +205,7 @@ if [ "${OS}" = "MAC" ]; then
     QUACK GUI SPACE
     clear_active_input
     QUACK STRING terminal
-    enter_and_wait
+    wait_enter_wait 200 1000
 
     #++ INSERT CUSTOM MAC CLEANUP HERE ++
 
@@ -218,7 +222,7 @@ if [ "${OS}" = "WINDOWS" ]; then
     QUACK GUI r
     clear_active_input
     QUACK STRING powershell
-    enter_and_wait
+    wait_enter_wait 200 1000
 
     #++ INSERT CUSTOM WINDOWS CLEANUP HERE ++
 
@@ -228,9 +232,8 @@ if [ "${OS}" = "WINDOWS" ]; then
     clear_history_from_powershell
 fi
 
-QUACK DELAY 100
 QUACK STRING exit
-QUACK ENTER
+wait_enter_wait
 
 LED G
 # CLEANUP FINISHED
