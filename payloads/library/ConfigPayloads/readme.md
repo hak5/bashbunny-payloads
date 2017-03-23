@@ -11,10 +11,10 @@ This script update will allow you to create a config.txt in the root directory (
 
 ## Configuration
 
-You don't need a `config.txt` for this to work. However, it's the whole point so I would recommend it. In the root storage directory, create a file called config.txt. in it should have to lines:
+You don't need a `config.txt` for this to work. However, it's the whole point so I would recommend it. In the root storage directory, create a file called config.txt. in it should have two lines:
 ```
-switch1:/payloads/library/MacReverseShell
-switch2:/payloads/switch1
+switch1:payloads/library/MacReverseShell
+switch2:payloads/switch1
 ```
 
 that's it. Enjoy!
