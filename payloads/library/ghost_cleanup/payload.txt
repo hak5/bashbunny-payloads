@@ -14,7 +14,7 @@ LED R G
 #+++ CONFIG +++
 
 LINES=0 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY - DEFAULT : 0 = ALL
-OS="WINDOWS" # OPTIONS: "UNITY", "MAC", OR "WINDOWS"
+OS="MAC" # OPTIONS: "UNITY", "MAC", OR "WINDOWS"
 
 UNMOUNT=false
 REMOVE_NETWORKS=false
@@ -173,6 +173,8 @@ if [ "${OS}" = "UNITY" ]; then
     #++ END CUSTOM UNITY CLEANUP
 
     clear_history_from_terminal
+    QUACK STRING exit
+    wait_enter_wait
 fi
 
 
@@ -191,6 +193,9 @@ if [ "${OS}" = "MAC" ]; then
     #++ END CUSTOM MAC CLEANUP
     unmount_drive_from_mac
     clear_history_from_terminal
+    QUACK STRING exit
+    wait_enter_wait
+    QUACK GUI q
 fi
 
 
@@ -207,11 +212,9 @@ if [ "${OS}" = "WINDOWS" ]; then
     #++ END CUSTOM WINDOWS CLEANUP
 
     clear_history_from_powershell
+    QUACK STRING exit
+    wait_enter_wait
 fi
-
-
-QUACK STRING exit
-wait_enter_wait
 
 LED G
 # CLEANUP FINISHED
