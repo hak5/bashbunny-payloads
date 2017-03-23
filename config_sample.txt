@@ -1,0 +1,2 @@
+switch1:MacReverseShell
+switch2:smb_exfiltrator
