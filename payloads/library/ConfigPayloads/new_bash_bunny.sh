@@ -68,7 +68,7 @@ set_payload() {
 	config_file=$udisk_folder/config.txt
 	if [ -f $config_file ]; then
 		payload=$(cat $config_file | grep $switch | awk -F: '{print $2}')
-		payload_dir=$udisk_folder/payloads/library/$payload
+		payload_dir=$udisk_folder/$payload
 	fi
 	payload_file=$payload_dir/payload.txt
 }
@@ -105,7 +105,7 @@ run_script() {
 			echo DUCKY_LANG = $DUCKY_LANG
 			export DUCKY_LANG
 
-			# run install.sh in /payloads/$switch/ if it exists
+			# run install.sh in $payload_dir if it exists
 			local install_file=$payload_dir/install.sh
 			if [ -f $install_file ]; then
 				# make a copy of install.sh file to /tmp/ folder
