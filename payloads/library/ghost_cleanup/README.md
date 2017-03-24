@@ -31,13 +31,21 @@ To delete Mac(OSX) history, set the *OS="MAC"* param, or create the file '/root/
 
 To delete Linux(Unity) history, set the *OS="UNITY"* param, or create the file '/root/udisk/loot/ghost_cleanup/os_mac' in your initial payload.
 
-**To Debug, set the DEBUG=true param.**
+**Debugging**
 
-Write text to the debug file with:
+ON - `source bunny_debug_helpers.sh`
+
+OFF - `source bunny_debug_helpers.sh OFF`
 
 ```
 
-echo "DEBUG MESSAGE" >> "${DEBUG_FILE}"
+echo "DEBUG MESSAGE" >> "${DEBUG_FILE}" #Log without timestamps
+
+```
+
+```
+
+debug_log "DEBUG MESSAGE" #Log with timestamps
 
 ```
 
