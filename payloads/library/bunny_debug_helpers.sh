@@ -14,14 +14,10 @@
 ################################################################################
 # Start Debug
 ################################################################################
-if [ z "$1" ]; then
-    if [ "$1" = "OFF" ]; then
-        DEBUG_STATE="OFF"
-    else
-        DEBUG_STATE="ON"
-    fi
+if [ "$1" = "OFF" ]; then
+    DEBUG_STATE="OFF"
 else
-   DEBUG_STATE="ON"
+    DEBUG_STATE="ON"
 fi
 
 

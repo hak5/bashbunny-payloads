@@ -22,7 +22,7 @@ UNMOUNT=false
 REMOVE_NETWORKS=false
 
 # Source bunny_debug_helpers.sh for debug messages. Pass the OFF param clean to disable.
-source bunny_debug_helpers.sh
+source bunny_debug_helpers.sh OFF
 
 # SEARCH FOR 'INSERT CUSTOM' TO ADD MORE CODE IN THE PROPER PLACE, PER OS
 
