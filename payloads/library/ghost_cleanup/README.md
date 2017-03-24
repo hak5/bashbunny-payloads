@@ -1,7 +1,7 @@
 # ghost_cleanup for Bash Bunnys
 
 * Author: bg-wa
-* Version: Version 1.0
+* Version: Version 1.1
 * Target: Windows, Mac, Linux
 * Props: Hak5
 
