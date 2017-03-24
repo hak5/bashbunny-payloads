@@ -5,6 +5,12 @@
 * Target: Windows, Mac, Linux
 * Props: Hak5
 
+:fire: :fire: :fire:  
+
+This is the develop branch and will be updated frequently.  Please use the `Master` branch for a stable build.
+
+:fire: :fire: :fire:
+
 ## Description
 
 Cleans the input history on Windows, Mac and Linux (Unity)
