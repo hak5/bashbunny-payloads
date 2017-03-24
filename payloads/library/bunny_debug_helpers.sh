@@ -29,19 +29,18 @@ fi
 timestamp () {
     echo "$(date +"%Y-%m-%d_%H-%M-%S")"
 }
-ACTIVE_TIME_STAMP="${timestamp}"
 
 start_debug () {
-    DEBUG_FILE="./debug/debug_${ACTIVE_TIME_STAMP}.txt"
+    DEBUG_FILE="./debug/debug_$(timestamp).txt"
     if [ ! -d "./debug" ]; then
       mkdir ./debug
     fi
     touch "${DEBUG_FILE}"
-    echo $(timestamp) "DEBUG STARTED" >> "${DEBUG_FILE}"
+    echo "$(timestamp): DEBUG STARTED" >> "${DEBUG_FILE}"
 }
 
 debug_log () {
-    echo "${timestamp}: ${1}" >> "${DEBUG_FILE}"
+    echo "$(timestamp): ${1}" >> "${DEBUG_FILE}"
 }
 
 if [ "${DEBUG_STATE}" = "ON" ]; then
