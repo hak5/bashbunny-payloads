@@ -1,4 +1,2 @@
 LED R B
 ATTACKMODE ECM_ETHERNET STORAGE
-# Source bunny_debug_helpers.sh for debug messages
-source bunny_debug_helpers.sh

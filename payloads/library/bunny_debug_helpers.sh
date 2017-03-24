@@ -14,6 +14,16 @@
 ################################################################################
 # Start Debug
 ################################################################################
+if [ z "$1" ]; then
+    if [ "$1" = "OFF" ]; then
+        DEBUG_STATE="OFF"
+    else
+        DEBUG_STATE="ON"
+    fi
+else
+   DEBUG_STATE="ON"
+fi
+
 
 start_debug() {
 	DEBUG_FILE="/root/udisk/debug/debug.txt"
@@ -24,5 +34,11 @@ start_debug() {
     echo "DEBUG STARTED" >> "${DEBUG_FILE}"
 }
 
-start_debug
+
+if [ "${DEBUG_STATE}" = "ON" ]; then
+    start_debug
+else
+    DEBUG_FILE="/dev/null/"
+fi
+
 export DEBUG_FILE
