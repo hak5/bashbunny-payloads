@@ -5,13 +5,16 @@
 # on the BashBunny
 #
 # How this works?
-# 1) Write text to the debug file with:
+# 1) Once the lobrary is included in your payload, write text to 
+#    the debug file with:
 #       echo "DEBUG MESSAGE" >> "${DEBUG_FILE}"
-#	OR
-#	debug_log "DEBUG MESSAGE"
-#	(To write to log with timestamps)
+#	    OR
+#	    debug_log "DEBUG MESSAGE"
+#	    (To write to log with timestamps)
 # 2) After attack, Text can be read at: "/root/udisk/debug/debug.txt"
-# on the BashBunny
+#    on the BashBunny
+# 3) To turn off debugging, pass the OFF comand when including the helper
+#       source bunny_debug_helpers.sh OFF 
 ################################################################################
 
 ################################################################################
