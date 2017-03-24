@@ -1,24 +1,14 @@
 #!/bin/bash
 
 ################################################################################
-# Allow Debugging messages written to: "/root/udisk/debug/debug.txt"
-# on the BashBunny
+# Cross platform cleanup after an attack
 #
 # How this works?
-# 1) Once the library is included in your payload, write text to
-#    the debug file with:
-#       echo "DEBUG MESSAGE" >> "${DEBUG_FILE}"
-#	    OR
-#	    debug_log "DEBUG MESSAGE"
-#	    (To write to log with timestamps)
-# 2) After attack, Text can be read at: "/root/udisk/debug/debug.txt"
-#    on the BashBunny
-# 3) To turn off debugging, pass the OFF comand when including the helper
-#       source bunny_debug_helpers.sh OFF 
+# 1) Once the library is included in your payload, clean up with:
 ################################################################################
 
 ################################################################################
-# Start Debug
+# Start Cleanup
 ################################################################################
 if [ "$1" = "OFF" ]; then
     DEBUG_STATE="OFF"
