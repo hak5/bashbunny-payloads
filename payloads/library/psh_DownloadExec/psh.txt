@@ -1,0 +1,1 @@
+powershell "New-Item $ENV:UserProfile\Desktop\psh_downloadexec_test.txt -ItemType file"
