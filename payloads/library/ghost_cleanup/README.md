@@ -9,7 +9,7 @@
 
 This is the `develop` branch and will be updated frequently.  
 
-Please use the `master` branch for a stable build.
+Please use the `v1.0` branch for a stable build.
 
 :fire: :fire: :fire:
 
@@ -43,7 +43,7 @@ echo "DEBUG MESSAGE" >> "${DEBUG_FILE}"
 
 ## TODO
 
-* **Move Script to Bunny Helper**
+* **Abstract to Bunny Helpers**
 
 * Delete a fixed number of lines from Windows history
 
@@ -52,15 +52,6 @@ echo "DEBUG MESSAGE" >> "${DEBUG_FILE}"
 * Delete extra Network Adapters (Windows)
 
 * Delete last ssh login info (Mac, Linux)
-
-## CONTRIBUTING
-
-1. Clone this repo `https://github.com/bg-wa/bashbunny-payloads.git`
-2. Install `git-flow` with your package manager.
-3. Initialize your local copy with `git flow init`.
-    * Use all defaults when prompted.
-4. Start a new branch with `git flow feature start BRANCH_NAME`
-5. Submit a new Pull Request when you're ready to go!
 
 ## STATUS
 
