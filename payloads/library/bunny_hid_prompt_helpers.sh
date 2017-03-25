@@ -4,9 +4,18 @@
 # Quickly get to a prompt on any platform with the BashBunny
 #
 # How this works?
-# 1) Once the lobrary is included in your payload, launch terminal\poershell\run
+# 1) Once the library is included in your payload, launch terminal\powershell\run
 #    with:
-#
+#       open_prompt "${OS}"
+# 2) OS options are:
+#       "AUTO"       : Default - Hak5 2124 cross platform code
+#       "UNITY"      : Launches Terminal in Unity
+#       "UNITY_RUN"  : Opens run prompt in Unity
+#       "MAC"        : Launches Terminal in OSX
+#       "POWERSHELL" : Launches Powershell in Windows
+#       "WINDOWS_RUN": Opens run prompt in Windows
+# 3) To close a prompt use:
+#       close_prompt "${OS}"
 ################################################################################
 
 ################################################################################
