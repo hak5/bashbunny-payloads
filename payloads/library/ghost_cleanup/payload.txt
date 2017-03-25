@@ -16,13 +16,10 @@ LED R G
 #+++ USER CONFIG +++
 
 LINES=0 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY - DEFAULT : 0 = ALL
-OS="UNITY" # OPTIONS: "UNITY", "MAC", OR "WINDOWS_RUN"
-
-UNMOUNT=false
-REMOVE_NETWORKS=false
+OS="WINDOWS_RUN" # OPTIONS: "UNITY", "MAC", OR "WINDOWS_RUN"
 
 # Source bunny_debug_helpers.sh for debug messages. Pass the OFF param clean to disable.
-source bunny_debug_helpers.sh OFF
+source bunny_debug_helpers.sh
 
 # Source bunny_hid_prompt_helpers.sh for opening and closing CLI prompt.
 source bunny_hid_prompt_helpers.sh
@@ -146,6 +143,7 @@ debug_log "FUNCTIONS LOADED"
 
 
 # START CLEANUP
+init_keyboard "${OS}"
 open_prompt "${OS}"
 
 #UNITY
@@ -156,8 +154,7 @@ if [ "${OS}" = "UNITY" ]; then
     #++ END CUSTOM UNITY CLEANUP
 
     clear_history_from_terminal
-    QUACK STRING exit
-    wait_enter_wait
+    close_prompt
 fi
 
 
@@ -169,9 +166,7 @@ if [ "${OS}" = "MAC" ]; then
     #++ END CUSTOM MAC CLEANUP
     unmount_drive_from_mac
     clear_history_from_terminal
-    QUACK STRING exit
-    wait_enter_wait
-    QUACK GUI q
+    close_prompt "MAC"
 fi
 
 
@@ -183,8 +178,7 @@ if [ "${OS}" = "WINDOWS_RUN" ]; then
     #++ END CUSTOM WINDOWS CLEANUP
 
     clear_history_from_powershell
-    QUACK STRING exit
-    wait_enter_wait
+    close_prompt
 fi
 
 LED G

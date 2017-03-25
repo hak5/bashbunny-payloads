@@ -36,8 +36,6 @@ clear_active_input() {
     QUACK BACKSPACE
     QUACK DELAY 100
 }
-#END fUNCTIONS
-
 
 open_prompt() {
 if [ -z "$1" ]; then
@@ -46,20 +44,37 @@ else
     OS=$1
 fi
 
+close_prompt() {
+    if [ -z "$1" ]; then
+        QUACK ALT F4
+    else
+        if [ "$1" = "MAC" ]; then
+            QUACK GUI w
+        else
+             QUACK ALT F4
+         fi
+    fi
+}
+
+#END fUNCTIONS
+
+
+
 #AUTO
 if [ "${OS}" = "AUTO" ]; then
     LED G B 100
-    init_keyboard
-    QUACK GUI
+    QUACK ALT F2
+    QUACK DELAY 50
+    QUACK GUI SPACE
+    QUACK DELAY 50
+    QUACK GUI r
     clear_active_input
-    QUACK STRING terminal
     wait_enter_wait 200 1000
 fi
 
 #UNITY
 if [ "${OS}" = "UNITY" ]; then
     LED R B 100
-    init_keyboard
     QUACK GUI
     clear_active_input
     QUACK STRING terminal
@@ -69,13 +84,11 @@ fi
 #UNITY_RUN
 if [ "${OS}" = "UNITY_RUN" ]; then
     LED R B 100
-    init_keyboard
     QUACK ALT F2
 fi
 
 #MAC
 if [ "${OS}" = "MAC" ]; then
-    init_keyboard "${OS}"
     LED R B G 100
     QUACK GUI SPACE
     clear_active_input
@@ -85,7 +98,6 @@ fi
 
 #POWERSHELL
 if [ "${OS}" = "POWERSHELL" ]; then
-    init_keyboard
     LED B 100
     QUACK GUI
     QUACK DELAY 500
@@ -95,7 +107,6 @@ fi
 
 #WINDOWS_RUN
 if [ "${OS}" = "WINDOWS_RUN" ]; then
-    init_keyboard
     LED B 100
     QUACK GUI r
     QUACK DELAY 500
