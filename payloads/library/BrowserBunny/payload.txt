@@ -35,6 +35,6 @@ LED R G
 
 
 LED G
-echo "Starting php server..." >> $log_file;
+echo "Starting php server[${payload_root}]..." >> $log_file;
 cd $payload_root
 php -S 172.16.64.1:80 &>> $log_file
