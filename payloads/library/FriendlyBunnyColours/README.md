@@ -16,4 +16,4 @@ My Hope is if this example is usefull for others than I or someone else can writ
 
 | LED              | Status                                |
 | ---------------- | ------------------------------------- |
-| Green (blinking) | Finished (git pull)                   |
+| Green (blinking) | Finished			                   |
