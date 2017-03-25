@@ -76,11 +76,11 @@ clear_active_input()
 
 wait_enter_wait()
 {
-        if [ -z "$1" ]; then
-            BEFORE_WAIT=100
-        else
-            BEFORE_WAIT=$1
-        fi
+    if [ -z "$1" ]; then
+        BEFORE_WAIT=100
+    else
+        BEFORE_WAIT=$1
+    fi
     if [ -z "$2" ]; then
         AFTER_WAIT=100
     else

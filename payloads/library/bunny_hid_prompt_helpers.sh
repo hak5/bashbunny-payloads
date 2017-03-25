@@ -12,15 +12,9 @@
 ################################################################################
 # Start HID Prompt
 ################################################################################
-if [ -z "$1" ]; then
-    OS="UNITY"
-else
-    OS=$1
-fi
 
 #FUNCTIONS
-wait_enter_wait()
-{
+wait_enter_wait() {
     if [ -z "$1" ]; then
         BEFORE_WAIT=100
     else
@@ -37,8 +31,7 @@ wait_enter_wait()
     QUACK DELAY ${AFTER_WAIT}
 }
 
-clear_active_input()
-{
+clear_active_input() {
     QUACK DELAY 50
     QUACK BACKSPACE
     QUACK DELAY 100
@@ -46,9 +39,22 @@ clear_active_input()
 #END fUNCTIONS
 
 
-open_prompt()
-{
-OS=$1
+open_prompt() {
+if [ -z "$1" ]; then
+    OS="AUTO"
+else
+    OS=$1
+fi
+
+#AUTO
+if [ "${OS}" = "AUTO" ]; then
+    LED G B 100
+    init_keyboard
+    QUACK GUI
+    clear_active_input
+    QUACK STRING terminal
+    wait_enter_wait 200 1000
+fi
 
 #UNITY
 if [ "${OS}" = "UNITY" ]; then
@@ -66,7 +72,6 @@ if [ "${OS}" = "UNITY_RUN" ]; then
     init_keyboard
     QUACK ALT F2
 fi
-
 
 #MAC
 if [ "${OS}" = "MAC" ]; then
@@ -95,5 +100,7 @@ if [ "${OS}" = "WINDOWS_RUN" ]; then
     QUACK GUI r
     QUACK DELAY 500
 fi
+
+LED 0
 
 }
