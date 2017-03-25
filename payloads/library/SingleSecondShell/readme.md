@@ -8,7 +8,7 @@ Version: Version 1.0
 
 Plug in the bash bunny, get a shell. Instantly.
 
-The <1 Second ReverseShell Payload is going to run blazing fast on the Bash Bunny, and cannot work on any other BadUSB devices, such as the USB Rubber Ducky that quick. That is obviosuly the reason this Payload is dedicated and specifically developed for the Bash Bunny. Plug in, and before you know it, you've got a shell. How awesome is that?
+The <1 Second ReverseShell Payload is going to run blazing fast on the Bash Bunny, and cannot work on any other BadUSB devices, such as the USB Rubber Ducky that quick. That is obviously the reason this Payload is dedicated and specifically developed for the Bash Bunny. Plug in, and before you know it, you've got a shell. How awesome is that?
 
 ## Configuration
 
