@@ -16,8 +16,10 @@
 
 LED R G B
 ATTACKMODE RNDIS_ETHERNET 
+source bunny_helpers.sh
 
 log_file="/var/log/BrowserBunny.log"
+payload_root="/root/udisk/payloads/${SWITCH_POSITION}"
 
 echo " ---------  BrowserBunny [started] -----------" >> $log_file
 
@@ -34,5 +36,5 @@ LED R G
 
 LED G
 echo "Starting php server..." >> $log_file;
-cd /root/udisk/payloads/switch1
+cd $payload_root
 php -S 172.16.64.1:80 &>> $log_file
