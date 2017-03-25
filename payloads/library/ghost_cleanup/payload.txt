@@ -64,31 +64,6 @@ init_keyboard()
     QUACK DELAY 500
 }
 
-clear_active_input()
-{
-    QUACK DELAY 50
-    QUACK BACKSPACE
-    QUACK DELAY 100
-}
-
-wait_enter_wait()
-{
-    if [ -z "$1" ]; then
-        BEFORE_WAIT=100
-    else
-        BEFORE_WAIT=$1
-    fi
-    if [ -z "$2" ]; then
-        AFTER_WAIT=100
-    else
-        AFTER_WAIT=$2
-    fi
-
-    QUACK DELAY ${BEFORE_WAIT}
-    QUACK ENTER
-    QUACK DELAY ${AFTER_WAIT}
-}
-
 clear_history_from_terminal()
 {
     if [ "$LINES" -gt "0" ]; then
