@@ -16,13 +16,16 @@ LED R G
 #+++ USER CONFIG +++
 
 LINES=0 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY - DEFAULT : 0 = ALL
-OS="UNITY" # OPTIONS: "UNITY", "MAC", OR "WINDOWS"
+OS="UNITY" # OPTIONS: "UNITY", "MAC", OR "WINDOWS_RUN"
 
 UNMOUNT=false
 REMOVE_NETWORKS=false
 
 # Source bunny_debug_helpers.sh for debug messages. Pass the OFF param clean to disable.
 source bunny_debug_helpers.sh OFF
+
+# Source bunny_hid_prompt_helpers.sh for opening and closing CLI prompt.
+source bunny_hid_prompt_helpers.sh
 
 # SEARCH FOR 'INSERT CUSTOM' TO ADD MORE CODE IN THE PROPER PLACE, PER OS
 
@@ -35,7 +38,7 @@ source bunny_debug_helpers.sh OFF
 # PLATFORM CHECK
 # FOR DYNAMIC SWITCHING, CREATE FILE '/root/udisk/loot/ghost_cleanup/os_windows' IN YOUR FIRST PAYLOAD.
 if [ -f "/root/udisk/loot/ghost_cleanup/os_windows" ]; then
-    OS="WINDOWS"
+    OS="WINDOWS_RUN"
 fi
 if [ -f "/root/udisk/loot/ghost_cleanup/os_mac" ]; then
     OS="MAC"
@@ -73,11 +76,11 @@ clear_active_input()
 
 wait_enter_wait()
 {
-    if [ -z "$1" ]; then
-        BEFORE_WAIT=100
-    else
-        BEFORE_WAIT=$1
-    fi
+        if [ -z "$1" ]; then
+            BEFORE_WAIT=100
+        else
+            BEFORE_WAIT=$1
+        fi
     if [ -z "$2" ]; then
         AFTER_WAIT=100
     else
@@ -142,17 +145,11 @@ debug_log "FUNCTIONS LOADED"
 # END FUNCTIONS
 
 
-
 # START CLEANUP
+open_prompt "${OS}"
+
 #UNITY
 if [ "${OS}" = "UNITY" ]; then
-    LED R B 100
-    init_keyboard
-    QUACK GUI
-    clear_active_input
-    QUACK STRING terminal
-    wait_enter_wait 1000 2000
-
     #++ INSERT CUSTOM UNITY CLEANUP HERE ++
 
 
@@ -166,13 +163,6 @@ fi
 
 #MAC
 if [ "${OS}" = "MAC" ]; then
-    init_keyboard "${OS}"
-    LED R B G 100
-    QUACK GUI SPACE
-    clear_active_input
-    QUACK STRING terminal
-    wait_enter_wait 200 1000
-
     #++ INSERT CUSTOM MAC CLEANUP HERE ++
 
 
@@ -186,12 +176,7 @@ fi
 
 
 #Windows
-if [ "${OS}" = "WINDOWS" ]; then
-    init_keyboard
-    LED B 100
-    QUACK GUI r
-    QUACK DELAY 500
-
+if [ "${OS}" = "WINDOWS_RUN" ]; then
     #++ INSERT CUSTOM WINDOWS CLEANUP HERE ++
 
 
