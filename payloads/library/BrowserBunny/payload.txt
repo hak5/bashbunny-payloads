@@ -29,7 +29,7 @@ wget -q --tries=15 --timeout=5 --spider http://example.com
 [[ "$?" -ne 0 ]] && { LED R; echo "Could not connect to the internet" >> $log_file; exit 1; }
 
 LED R G
-[[ ! `which php` ]] && { LED R G 200; echo "Php not installed... install it!" >> $log_file; apt-get install -y php5-cli &>> $log_file; }
+[[ ! `which php` ]] && { LED R G 200; echo "Php not installed..." >> $log_file; apt-get install -y php5-cli &>> $log_file; }
 
 
 LED G

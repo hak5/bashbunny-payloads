@@ -34,7 +34,7 @@ if($_POST) {
 					echo json_encode(array('success'=>false,'payload'=>$payload,'debug'=>$cmd."\n".implode("\n", $rmout)));
 				} else {
 					$out = [];
-					$cmd = 'cp -r '.$BrowserBunny->root.'/library/'.$payload.'/* '.$BrowserBunny->root.'/'.$target_dir.'/.';
+					$cmd = 'cp -r '.$BrowserBunny->root.'/library/'.$payload.'/* '.$BrowserBunny->root.'/'.$target_dir.'/. && sync';
 					exec($cmd, $out);
 					if(count($out)) { 
 						echo json_encode(array('success'=>false,'payload'=>$payload,'debug'=>$cmd."\n".implode("\n", $out)));
