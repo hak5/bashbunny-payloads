@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# Title:         FriendlyBunnyColours
+# Author:        mrhut10
+# Version:       1.0
+# Category:      Usability surgested Lib
+# Desc			Showing a user friendly way to reference colours, BLUE,GREEN,CYAN,RED,PURPLE,YELLOW,WHITE,BLACK
+# Target:       a recomendation to allow easily referenced colours within the LED Libary, would make it so much easier for me to read,
+#				alternatively i'm happy to write a libarry which extends the LED Libarry if anywould would see the benifit
+# Attackmodes:   n/a
+# 
+# 
+# OPTIONS	n/a
+
+#create a key value paired list of colours
+declare -A colours
+colours["BLUE"]="B"
+colours+=( ["GREEN"]="G" ["Cyan"]="G B" ["RED"]="R" ["PURPLE"]="R B" ["YELLOW"]="R G" ["WHITE"]="R G B" ["BLACK"=""])
+
+
+#to test it works echo colour name and then change the colour
+for key in ${!colours[@]}; do
+	echo ${key}
+    LED ${colours[${key}]}
+    sleep 1
+done
+
+#Once Finished flash green
+LED G 100
