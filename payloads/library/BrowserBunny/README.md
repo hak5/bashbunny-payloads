@@ -33,4 +33,4 @@ Target must be sharing internet and have git installed.
 
 ![BrowserBunny - Payloads](https://github.com/mathew-fleisch/bashbunny-payloads/blob/master/payloads/library/BrowserBunny/inc/css/browserbunny_payloads_screenshot.png "BrowserBunny - Payloads")
 
-![BrowserBunny - Console](https://github.com/mathew-fleisch/bashbunny-payloads/blob/master/payloads/library/BrowserBunny/inc/css/browserbunny_console_screenshot.png "BrowserBunny - Payloads")
+![BrowserBunny - Console](https://github.com/mathew-fleisch/bashbunny-payloads/blob/master/payloads/library/BrowserBunny/inc/css/browserbunny_console_screenshot.png "BrowserBunny - Console")
