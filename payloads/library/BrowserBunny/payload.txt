@@ -16,6 +16,8 @@
 
 LED R G B
 ATTACKMODE RNDIS_ETHERNET 
+
+#Default switch position
 SWITCH_POSITION="switch1"
 source bunny_helpers.sh
 
