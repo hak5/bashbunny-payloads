@@ -50,7 +50,7 @@ pre {
 	width:100%;
 }
 
-
+.quick-command { margin-right:3px; }
 .console-input-container { 
 	margin-bottom:5px;
 }
@@ -73,3 +73,4 @@ pre {
 	border-radius: 5px;
 	resize:vertical;
 }
+#console-clear { cursor: pointer; }

@@ -8,6 +8,7 @@ if($_POST) {
 
 	switch($_POST['action']) {
 		case 'get_payload':
+			
 			$payload = strip_tags($_POST['payload']);
 			$valid = $BrowserBunny->is_valid_payload($payload);
 			if($valid) {
@@ -16,8 +17,10 @@ if($_POST) {
 			} else {
 				echo json_encode(array('success'=>false,'payload'=>$payload,'message'=>'Payload not found...'));
 			}
+			
 		break;
 		case 'get_attackmode':
+			
 			$payload = strip_tags($_POST['payload']);
 			$valid = $BrowserBunny->is_valid_payload($payload);
 			if($valid) {
@@ -28,13 +31,17 @@ if($_POST) {
 			} else {
 				echo json_encode(array('success'=>false,'payload'=>$payload,'message'=>'Payload not found...'));
 			}
+			
 		break;
 		case 'get_existing':
+			
 			$target = preg_replace("/\/inc.*$/", "", $BrowserBunny->target_dir);
 			$file = $Parsedown->text(file_get_contents($root."/$target/README.md"));
 			echo json_encode(array('success'=>true,'target'=>$target,'readme'=>$file));
+			
 		break;
 		case 'move_payload':
+			
 			$payload = strip_tags($_POST['payload']);
 			$valid = $BrowserBunny->is_valid_payload($payload);
 			if($valid) {
@@ -58,11 +65,14 @@ if($_POST) {
 			} else {				
 				echo json_encode(array('success'=>false,'payload'=>$payload,'message'=>'Payload not found...'));
 			}
+			
 		break;
 		case 'console':
+			
 			$out = [];
-			exec($_POST['cmd'], $out);
+			exec(urldecode($_POST['cmd']), $out);
 			echo json_encode(array('success'=>true,'output'=>htmlentities(implode("\n", $out))));
+			
 		break;
 
 		default:

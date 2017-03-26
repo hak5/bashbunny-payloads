@@ -1,4 +1,50 @@
 $(document).ready(function() {
+    
+    var git_repo = 'https://github.com/hak5/bashbunny-payloads.git';
+    var git_log = '/var/log/git.log';
+    var quick_commands = [
+        {
+            name:"Clone git repository",
+            command:'if [ ! -d /root/udisk/.git ]; then '  
+                        +'cd /root/udisk; '
+                        +'echo ""; '
+                        +'pwd; '
+                        +'mv /root/udisk/payloads /root/udisk/orig-payloads; '
+                        +'echo "Clone Git Repo..."; '
+                        +'git init; '
+                        +'echo "payloads/switch*" >> .gitignore; '
+                        +'git remote add origin '+git_repo+';  '
+                        +'echo "Git repository selected: '+git_repo+';"; '
+                        +'git config core.sparsecheckout true; '
+                        +'echo "Git configuration change: sparse-checkout=true."; '
+                        +'echo "payloads" >> /root/udisk/.git/info/sparse-checkout; '
+                        +'echo "Sparse checkout: payloads directory selected"; '
+                        +'git pull origin master; '
+                        +'echo "Git repository cloned."; '
+                        +'cp -fr /root/udisk/orig-payloads/switch* /root/udisk/payloads/.; '
+                    +'else '
+                        +'echo "Repository already exists..."; '
+                    +'fi',
+        },{
+            name:"Update git repository",
+            command:'if [ -d /root/udisk/.git ]; '
+                        +'then cd /root/udisk/payloads/; '
+                        +'echo ""; '
+                        +'pwd; '
+                        +'echo "Update Git Repo..."; '
+                        +'git pull origin master; '
+                    +'else '
+                        +'echo "Repository does not exist..."; '
+                    +'fi'
+        }
+    ];
+
+    for(var id in quick_commands) { 
+        $('#qc-container').html($('#qc-container').html()
+            +'<button class="btn btn-default quick-command" id="qc-'+id+'">'+quick_commands[id].name+'</button>'
+        );
+    }
+
     $(document).on('click', '.nav-btn', function() {
         var page = $(this).attr("id").replace(/nb-/, '');
         var pageuc = "&nbsp;| "+page.charAt(0).toUpperCase() + page.slice(1);
@@ -73,6 +119,12 @@ $(document).ready(function() {
     });
 
 
+    $(document).on('click', '.quick-command', function() {
+        var id = $(this).attr("id").replace(/qc-/, '');
+        console.log(quick_commands[id]);
+        $('#console-input').val(quick_commands[id].command);
+    });
+
     $(document).on('click', '#console-execute', function() {
         var cmd = $('#console-input').val();
         $.ajax({
@@ -92,6 +144,19 @@ $(document).ready(function() {
                 );
             }
         });
+    });
+
+    $(document).on('keyup', '#console-input', function(e) {
+        var code = e.which;
+        e.preventDefault();
+        if(code==32||code==13||code==188||code==186){
+            $('#console-execute').click();
+        }
+
+    });
+
+    $(document).on('click', '#console-clear', function() {
+         $('#console-output').html("");
     });
 
 

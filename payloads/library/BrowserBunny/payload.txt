@@ -16,6 +16,7 @@
 
 LED R G B
 ATTACKMODE RNDIS_ETHERNET 
+SWITCH_POSITION="switch1"
 source bunny_helpers.sh
 
 log_file="/var/log/BrowserBunny.log"

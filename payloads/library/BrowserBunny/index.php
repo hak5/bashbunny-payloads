@@ -16,7 +16,6 @@
             <ul class="nav navbar-nav">
                 <li><a href="javascript:;" class="nav-btn" id="nb-payloads">Payloads</a></li>
                 <li><a href="javascript:;" class="nav-btn" id="nb-console">Console</a></li>
-                <li><a href="javascript:;" class="nav-btn" id="nb-git">Git</a></li>
                 <li><a href="javascript:;" class="nav-btn" id="nb-help">Help</a></li>
             </ul>
         </div>
@@ -46,11 +45,6 @@
 
         <!-- Page - Console -->
         <div class="page" id="page-console"><?php echo $BrowserBunny->display_console(); ?></div>
-
-
-        <!-- Page - Git -->
-        <div class="page" id="page-git">
-        </div>
 
 
         <!-- Page - Help -->

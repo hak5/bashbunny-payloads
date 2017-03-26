@@ -50,9 +50,17 @@ class BrowserBunny
 		return $ret;
 	}
 
-	function display_console() { 
-		$ret = '<div class="console-input-container input-group">'
-			.'<span class="input-group-addon">$</span>'
+	function display_console() {
+		$ret = '<div class="panel panel-default">'
+				.'<div class="panel-body">'
+					.'<fieldset>'
+						.'<legend>Quick Commands</legend>'
+					.'<div id="qc-container"></div>'
+					.'</fieldset>'
+				.'</div>'
+			.'</div>'
+			.'<div class="console-input-container input-group">'
+			.'<span class="input-group-addon" id="console-clear">$</span>'
 			.'<input type="text" class="form-control" id="console-input">'
 			.'<span class="input-group-btn">'
 				.'<button class="btn btn-default" id="console-execute" type="button">Execute</button>'
