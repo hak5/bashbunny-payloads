@@ -29,3 +29,8 @@ Target must be sharing internet and have git installed.
 | Red (blinking)   | Failed (could not mount filesystem)             |
 | Amber            | Running                                         |
 | Green            | Finished (Web Server Ready: http://172.16.64.1) |
+
+
+![BrowserBunny - Payloads](https://github.com/mathew-fleisch/bashbunny-payloads/blob/master/payloads/library/BrowserBunny/inc/css/browserbunny_payloads_screenshot.png "BrowserBunny - Payloads")
+
+![BrowserBunny - Console](https://github.com/mathew-fleisch/bashbunny-payloads/blob/master/payloads/library/BrowserBunny/inc/css/browserbunny_console_screenshot.png "BrowserBunny - Payloads")
