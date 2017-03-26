@@ -10,18 +10,55 @@
 </head>
 <body>
 
+<div id="page-container">
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="javascript:;" class="nav-btn" id="nb-payloads">Payloads</a></li>
+                <li><a href="javascript:;" class="nav-btn" id="nb-console">Console</a></li>
+                <li><a href="javascript:;" class="nav-btn" id="nb-git">Git</a></li>
+                <li><a href="javascript:;" class="nav-btn" id="nb-help">Help</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="content-container">
+        <h1 id="main-title">
+            <div id="ascii">
+<pre>
+ _____ _____ _____ _ _ _ _____ _____ _____ _____ _____ _____ _____ __ __ 
+| __  | __  |     | | | |   __|   __| __  | __  |  |  |   | |   | |  |  |  (\___/)
+| __ -|    -|  |  | | | |__   |   __|    -| __ -|  |  | | | | | | |_   _|  (='.'=)
+|_____|__|__|_____|_____|_____|_____|__|__|_____|_____|_|___|_|___| |_|    (")_(")
+<pre>
+            </div>
+            <span id="page-id"></span>
+        </h1>
+        <?php
+            include $_SERVER['DOCUMENT_ROOT'].'/inc/BrowserBunny.php';
+            $BrowserBunny = new BrowserBunny();
+        ?>
+        
+        <!-- Page - Switch Payloads -->
+        <div class="page" id="page-payloads">
+            <div id="payload-list-target"><?php echo $BrowserBunny->display_payload_list(); ?></div>
+            <div id="readme-target"></div>
+        </div>
 
-<div id="payload-list-target">
-<?php
-include $_SERVER['DOCUMENT_ROOT'].'/inc/BrowserBunny.php';
-$BrowserBunny = new BrowserBunny();
-// echo "PWD: ".$BrowserBunny->pwd."<br />";
-// echo "Target: ".$BrowserBunny->target_dir."<br />";
-echo $BrowserBunny->display_payload_list();
-?>
+        <!-- Page - Console -->
+        <div class="page" id="page-console"><?php echo $BrowserBunny->display_console(); ?></div>
+
+
+        <!-- Page - Git -->
+        <div class="page" id="page-git">
+        </div>
+
+
+        <!-- Page - Help -->
+        <div class="page" id="page-help">Go fuck yourself. (coming soon)</div>
+
+
+    </div>
 </div>
-<div id="readme-target"></div>
-
 
     <script src="inc/js/jquery.min.js"></script>
     <script src="inc/js/bootstrap.min.js"></script>

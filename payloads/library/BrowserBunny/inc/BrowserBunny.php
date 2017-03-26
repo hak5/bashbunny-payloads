@@ -35,9 +35,9 @@ class BrowserBunny
 	function display_payload_list() {
 		$ret = '';
 		$ret .= '<div class="btn-group-vertical">'
-			.'<button class="target-switch btn btn-primary">Active Payload</button>';
+			.'<button class="target-switch btn btn-default" id="active-payload">Active Payload</button>';
 		foreach($this->payload_names as $payload) { 
-		    $ret .= '<button class="payload btn btn-primary" id="'.$payload.'">'.$payload.'</button>';
+		    $ret .= '<button class="payload btn btn-default" id="'.$payload.'">'.$payload.'</button>';
 		}
 		$ret .= '</div>';
 		return $ret;
@@ -47,6 +47,19 @@ class BrowserBunny
 		foreach($this->payload_names as $payload_name) { 
 			if($payload_name == $payload) { $ret = true; break; }
 		}
+		return $ret;
+	}
+
+	function display_console() { 
+		$ret = '<div class="console-input-container input-group">'
+			.'<span class="input-group-addon">$</span>'
+			.'<input type="text" class="form-control" id="console-input">'
+			.'<span class="input-group-btn">'
+				.'<button class="btn btn-default" id="console-execute" type="button">Execute</button>'
+			.'</span>'
+		.'</div>'
+		.'<div id="console-output"></div>';
+
 		return $ret;
 	}
 
