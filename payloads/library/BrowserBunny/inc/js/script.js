@@ -36,6 +36,24 @@ $(document).ready(function() {
                     +'else '
                         +'echo "Repository does not exist..."; '
                     +'fi'
+        },{
+            name:"Tools Installer",
+            command:'if [ -d /root/udisk/payloads/library/tools_installer ]; then '
+                    +'if [ -d /pentest ]; then '
+                        +'echo "/pentest already exists..."; '
+                    +'else '
+                        +'mkdir -r /pentest; '
+                        +'cp -r /root/udisk/payloads/library/tools_installer/tools_to_install/* /pentest/.; '
+                        +'if [ -d /pentest/impacket ]; then '
+                            +'cd /pentest/impacket; '
+                            +'python ./setup.py install; '
+                        +'else '
+                            +'echo "Missing /pentest/impacket folder."; '
+                        +'fi '
+                    +'fi '
+                +'else '
+                    +'echo "Cannot run tools installer: Missing git repository"; '
+                +'fi '
         }
     ];
 
