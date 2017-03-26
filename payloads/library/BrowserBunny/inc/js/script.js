@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    
+
     var git_repo = 'https://github.com/hak5/bashbunny-payloads.git';
     var git_log = '/var/log/git.log';
     var quick_commands = [
@@ -149,7 +149,7 @@ $(document).ready(function() {
     $(document).on('keyup', '#console-input', function(e) {
         var code = e.which;
         e.preventDefault();
-        if(code==32||code==13||code==188||code==186){
+        if(code==13){
             $('#console-execute').click();
         }
 
