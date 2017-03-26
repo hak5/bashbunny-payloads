@@ -53,22 +53,6 @@ else
     OS=$1
 fi
 
-close_prompt() {
-    if [ -z "$1" ]; then
-        QUACK ALT F4
-    else
-        if [ "$1" = "MAC" ]; then
-            QUACK GUI w
-        else
-             QUACK ALT F4
-         fi
-    fi
-}
-
-#END fUNCTIONS
-
-
-
 #AUTO
 if [ "${OS}" = "AUTO" ]; then
     LED G B 100
@@ -124,3 +108,17 @@ fi
 LED 0
 
 }
+
+close_prompt() {
+    if [ -z "$1" ]; then
+        QUACK ALT F4
+    else
+        if [ "$1" = "MAC" ]; then
+            QUACK GUI w
+        else
+             QUACK ALT F4
+         fi
+    fi
+}
+
+#END fUNCTIONS
