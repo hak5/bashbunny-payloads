@@ -11,6 +11,8 @@ INPUTS=(username password)
 ATTACKMODE RNDIS_ETHERNET
 #ATTACKMODE ECM_ETHERNET
 
+source bunny_helpers.sh
+
 ##################################################################
 #                  DO NOT EDIT BELOW THIS LINE                   #
 ##################################################################
