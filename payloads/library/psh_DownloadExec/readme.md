@@ -22,5 +22,6 @@ Ensure psh.txt exists in payload directory. This is the powershell script that w
 | Amber (fast blink)  | Initialization                           |
 | Red                 | No psh.txt present in payload directory  |
 | Blue (fast blink)   | HID Attack Stage                         |
-| White (fast blink)  | Ethernet Attack Stage                    |
+| White blink)        | Ethernet Attack Stage                    |
+| White (fast blink)  | Web server started                       |
 | Green               | Finished                                 |
