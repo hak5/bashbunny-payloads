@@ -3,6 +3,9 @@ var git_log = '/var/log/git.log';
 var bunny_root = '/root/udisk';
 var quick_commands = [
     {
+        name:"Update apt-get",
+        command:'apt-get-update && apt-get upgrade && apt-get autoremove'
+    },{
         name:"Clone git repository",
         command:'if [ ! -d '+bunny_root+'/.git ]; then '  
                     +'cd '+bunny_root+'; '
@@ -53,5 +56,11 @@ var quick_commands = [
             +'else '
                 +'echo "Cannot run tools installer: Missing git repository"; '
             +'fi '
+    },{
+        name:"cat switch1/payload.txt",
+        command:'cat /root/udisk/payloads/switch1/payload.txt'
+    },{
+        name:"cat switch2/payload.txt",
+        command:'cat /root/udisk/payloads/switch2/payload.txt'
     }
 ];
