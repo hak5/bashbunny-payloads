@@ -1,6 +1,6 @@
 var git_repo = 'https://github.com/hak5/bashbunny-payloads.git';
 var git_log = '/var/log/git.log';
-var bunny_root = ''+bunny_root+'';
+var bunny_root = '/root/udisk';
 var quick_commands = [
     {
         name:"Clone git repository",
