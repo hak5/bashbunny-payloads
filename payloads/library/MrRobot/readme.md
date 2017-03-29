@@ -1,7 +1,7 @@
 # MrRobot
 ![alt tag](http://i.imgur.com/eunFr0U.jpg)
 * Author: illwill & tuxxy
-* Version: Version 0.1
+* Version: Version 0.2
 * Target: Windows
 
 ## Description
@@ -17,11 +17,11 @@ None needed.
 
 | LED                | Status                                       |
 | ------------------ | -------------------------------------------- |
-| Amber (blinking)   | Starting WebServer                           |
 | Blue (blinking)    | Running Powershell / Waiting for WebServer   |
 | White (blinking)   | WebServer started and Uploading Results      |
 | Purple  (blinking) | DChecking for Results                        |
-| Green (blinking)   | Got Creds and copied to loot folder          |
+| Green              | Got Creds and copied to loot folder          |
+| Amber (blinking)   | MimiKatz failed (Not Admin?)                 |
 | Red (blinking)     | No Creds / Mimikatz failed                   |
 
 ## Discussion
