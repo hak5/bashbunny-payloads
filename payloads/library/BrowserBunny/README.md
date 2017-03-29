@@ -13,7 +13,7 @@ Configured for nix by default. Swap RNDIS_ETHERNET with ECM_ETHERNET on Windows
 
 ## Requirements
 
-Target must be sharing internet and have git installed.
+Target must be sharing internet
 
  1. Run bb.sh (pause at main menu)
  2. Plug in da bunny
@@ -34,3 +34,8 @@ Target must be sharing internet and have git installed.
 ![BrowserBunny - Payloads](https://github.com/mathew-fleisch/bashbunny-payloads/blob/master/payloads/library/BrowserBunny/inc/css/browserbunny_payloads_screenshot.png "BrowserBunny - Payloads")
 
 ![BrowserBunny - Console](https://github.com/mathew-fleisch/bashbunny-payloads/blob/master/payloads/library/BrowserBunny/inc/css/browserbunny_console_screenshot.png "BrowserBunny - Console")
+
+
+
+## Discussion
+[Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/40571-payload-browserbunny/ "Hak5 Forum Thread")
