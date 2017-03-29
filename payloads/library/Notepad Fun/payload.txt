@@ -1,7 +1,7 @@
 #
 #
 # Title:             Notepad Fun
-# Author:            Pancakes
+# Author:            The10FpsGuy
 # Category:          Fun
 #
 #
