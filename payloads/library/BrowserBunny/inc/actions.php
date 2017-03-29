@@ -43,6 +43,7 @@ if($_POST) {
 		case 'move_payload':
 			
 			$payload = strip_tags($_POST['payload']);
+			$attack_modes = json_decode(strip_tags($_POST['attack_modes']));
 			$valid = $BrowserBunny->is_valid_payload($payload);
 			if($valid) {
 				//pwd is run where ever the BrowserBunny is called from, so remove all trailing chars, but the "webroot"
@@ -59,7 +60,20 @@ if($_POST) {
 					if(count($out)) { 
 						echo json_encode(array('success'=>false,'payload'=>$payload,'debug'=>$cmd."\n".implode("\n", $out)));
 					} else {
-						echo json_encode(array('success'=>true,'payload'=>$payload));
+
+						$path_to_file = $BrowserBunny->root.'/'.$target_dir.'/payload.txt';
+						$file_contents = file_get_contents($path_to_file);
+						foreach($attack_modes as $attack_mode=>$is_active) {
+							if($is_active) {
+								$file_contents = str_replace("#".$attack_mode,$attack_mode,$file_contents);
+							} else { 
+								$file_contents = str_replace($attack_mode,"#".$attack_mode,$file_contents);
+								$file_contents = str_replace("##".$attack_mode,"#".$attack_mode,$file_contents);
+							}
+						}
+						file_put_contents($path_to_file,$file_contents);
+
+						echo json_encode(array('success'=>true,'payload'=>$payload,'attack_modes'=>$attack_modes));
 					}
 				}
 			} else {				

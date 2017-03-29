@@ -1,62 +1,5 @@
 $(document).ready(function() {
 
-    var git_repo = 'https://github.com/hak5/bashbunny-payloads.git';
-    var git_log = '/var/log/git.log';
-    var quick_commands = [
-        {
-            name:"Clone git repository",
-            command:'if [ ! -d /root/udisk/.git ]; then '  
-                        +'cd /root/udisk; '
-                        +'echo ""; '
-                        +'pwd; '
-                        +'mv /root/udisk/payloads /root/udisk/orig-payloads; '
-                        +'echo "Clone Git Repo..."; '
-                        +'git init; '
-                        +'echo "payloads/switch*" >> .gitignore; '
-                        +'git remote add origin '+git_repo+';  '
-                        +'echo "Git repository selected: '+git_repo+';"; '
-                        +'git config core.sparsecheckout true; '
-                        +'echo "Git configuration change: sparse-checkout=true."; '
-                        +'echo "payloads" >> /root/udisk/.git/info/sparse-checkout; '
-                        +'echo "Sparse checkout: payloads directory selected"; '
-                        +'git pull origin master; '
-                        +'echo "Git repository cloned."; '
-                        +'cp -fr /root/udisk/orig-payloads/switch* /root/udisk/payloads/.; '
-                    +'else '
-                        +'echo "Repository already exists..."; '
-                    +'fi',
-        },{
-            name:"Update git repository",
-            command:'if [ -d /root/udisk/.git ]; '
-                        +'then cd /root/udisk/payloads/; '
-                        +'echo ""; '
-                        +'pwd; '
-                        +'echo "Update Git Repo..."; '
-                        +'git pull origin master; '
-                    +'else '
-                        +'echo "Repository does not exist..."; '
-                    +'fi'
-        },{
-            name:"Tools Installer",
-            command:'if [ -d /root/udisk/payloads/library/tools_installer ]; then '
-                    +'if [ -d /pentest ]; then '
-                        +'echo "/pentest already exists..."; '
-                    +'else '
-                        +'mkdir -r /pentest; '
-                        +'cp -r /root/udisk/payloads/library/tools_installer/tools_to_install/* /pentest/.; '
-                        +'if [ -d /pentest/impacket ]; then '
-                            +'cd /pentest/impacket; '
-                            +'python ./setup.py install; '
-                        +'else '
-                            +'echo "Missing /pentest/impacket folder."; '
-                        +'fi '
-                    +'fi '
-                +'else '
-                    +'echo "Cannot run tools installer: Missing git repository"; '
-                +'fi '
-        }
-    ];
-
     for(var id in quick_commands) { 
         $('#qc-container').html($('#qc-container').html()
             +'<button class="btn btn-default quick-command" id="qc-'+id+'">'+quick_commands[id].name+'</button>'
@@ -84,7 +27,8 @@ $(document).ready(function() {
                 var response = JSON.parse(res);
                 // console.log(response);
                 var btn = '<button class="btn btn-success btn-group-justified move-payload" id="move-'+response.payload+'">Activate this payload!</button><br />';
-                $('#readme-target').html(btn+(response.readme.length ? response.readme : '<strong>Missing Read-Me file</strong>'));
+                var attack_mode = '<div id="attack-mode-switcher"></div><br />';
+                $('#readme-target').html(btn+attack_mode+(response.readme.length ? response.readme : '<strong>Missing Read-Me file</strong>'));
 
                 $.ajax({
                     url: 'inc/actions.php',
@@ -93,12 +37,31 @@ $(document).ready(function() {
                         'action':'get_attackmode',
                         'payload':id
                     },
-                    success: function(res1) { 
-                        console.log(res1);
+                    success: function(get_response) { 
+                        get_response = JSON.parse(get_response);
+                        var attack_modes = get_response.attackmodes.split(/,/);
+                        console.log(attack_modes);
+                        for(var am in attack_modes) {
+                            var is_active = (attack_modes[am].match(/^#/) ? false : true);
+                            var name = attack_modes[am].replace(/^#/, '').replace(/\ /g, '-');
+                            $('#attack-mode-switcher').append('<div id="'+name+'" class="attack-mode is_active_'+(is_active ? 'true' : 'false')+'">'+attack_modes[am]+'</div>');
+                        }
                     }
                 });
             }
         });
+    });
+    $(document).on('click', '.attack-mode', function() {
+        var active = ($(this).attr('class').match(/is_active_true/) ? true : false);
+        if(active) {
+            //Turn it off
+            $(this).removeClass('is_active_true').addClass('is_active_false');
+            $(this).html('#'+$(this).html());
+        } else { 
+            //Turn it on
+            $(this).removeClass('is_active_false').addClass('is_active_true');
+            $(this).html($(this).html().replace(/^#/, ''));
+        }
     });
     $(document).on('click', '.target-switch', function() {
         var id = $(this).attr("id");
@@ -119,11 +82,20 @@ $(document).ready(function() {
     $(document).on('click', '.move-payload', function() {
         $(this).prop("disabled", true);
         var id = $(this).attr("id").replace(/move-/, '');
+        var attack_modes = {};
+        $('.attack-mode').each(function(i, that) {
+            var this_attack_mode = $(that).attr('id').replace(/-/g, ' ');
+            var this_is_active   = ($(that).attr('class').match(/is_active_true/) ? true : false);
+            // console.log('attack-mode: '+this_attack_mode+':'+this_is_active);
+            attack_modes[this_attack_mode] = this_is_active;
+        });
+        // console.log('attack_modes: ',attack_modes);
         $.ajax({
             url: 'inc/actions.php',
             type: 'POST',
             data: {
                 'action':'move_payload',
+                'attack_modes': JSON.stringify(attack_modes),
                 'payload':id
             },
             success: function(res) {

@@ -40,6 +40,7 @@ pre {
 	float:left; 
 	width: 25%;
 }
+.is_active_true, .is_active_false { cursor: pointer; }
 #readme-target {
 	float:left;
 	width:75%;

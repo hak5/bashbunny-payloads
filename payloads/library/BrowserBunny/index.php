@@ -54,8 +54,9 @@
     </div>
 </div>
 
-    <script src="inc/js/jquery.min.js"></script>
-    <script src="inc/js/bootstrap.min.js"></script>
-    <script src="inc/js/script.js"></script>
+    <script type="text/javascript" src="inc/js/jquery.min.js"></script>
+    <script type="text/javascript" src="inc/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="inc/js/quick_commands.js"></script>
+    <script type="text/javascript" src="inc/js/script.js"></script>
 </body>
 </html>
