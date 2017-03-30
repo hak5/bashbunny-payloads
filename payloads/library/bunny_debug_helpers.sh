@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Allow Debugging messages written to: "/root/udisk/[payload]/debug/debug_[timestamp].txt"
+# Allow Debugging messages written to: "payload/[switch]/debug/debug_[timestamp].txt"
 # on the BashBunny
 #
 # How this works?
@@ -11,7 +11,7 @@
 #	    OR
 #	    debug_log "DEBUG MESSAGE"
 #	    (To write to log with timestamps)
-# 2) After attack, Text can be read at: "/root/udisk/[payload]/debug/debug_[timestamp].txt"
+# 2) After attack, Text can be read at: "payload/[switch]/debug/debug_[timestamp].txt"
 #    on the BashBunny
 # 3) To turn off debugging, pass the OFF comand when including the helper
 #       source bunny_debug_helpers.sh OFF
