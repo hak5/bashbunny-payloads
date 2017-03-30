@@ -1,8 +1,8 @@
 LED G
 ATTACKMODE HID STORAGE
 
-# Set your language here
-LANGUAGE='us'
+# Set your language here i.e. German
+DUCKY_LANG='de'
 
 LED R G
 # Check for switch position to make it easier for us.
