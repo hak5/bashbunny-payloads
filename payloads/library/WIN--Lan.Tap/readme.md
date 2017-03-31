@@ -1,8 +1,8 @@
 # LAN TAP
 
 * Author: TheDragonkeeper
-* Version: Version 1.0
-* Target: WINDOWS
+* Version: Version 1.1
+* Target: WINDOWS , *nix 
 
 ## Description
 
@@ -19,7 +19,7 @@ run the payload
 
 | LED                | Status                                       |
 | ------------------ | -------------------------------------------- |
-| White              | Running HID                                  |
-| Cyan               | Network Started                              |
-| Red                | HID Failed to give IP                        |
-| Purple             | Running Lan Tap                              |
+| White     /         | Running HID                                  |
+| Cyan       /        | Network Started                              |
+| Red         /       | HID Failed to give IP                        |
+| Purple       /      | Running Lan Tap                              |
