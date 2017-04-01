@@ -10,7 +10,6 @@
 # 
 # Amber Blink Fast.....Initialization
 # Amber................Begin
-# Blue Interstitial....Receiving Files
 # White Blinking... ...Moving loot to mass storage
 # Blue Blinking........Syncing File System
 # Green................Finished
