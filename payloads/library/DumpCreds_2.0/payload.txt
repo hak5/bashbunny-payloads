@@ -2,9 +2,9 @@
 #
 # Title:         DumpCreds 2.0
 # Author:        QDBA
-# Version:       2.0
+# Version:       2.0.1
 # Category:      Exfiltration
-# Target:        Windows XP SP3+ (Powershell)
+# Target:        Windows XP SP3+ , 7, 10 (Powershell)
 # Attackmodes:   HID, Ethernet
 # 
 # 
@@ -42,7 +42,7 @@ fi
 
 # remove old Handshake Files
 rm -f $SWITCHDIR/CON_*
-rm -f nohup.out
+
 
 # HID STAGE
 # Runs minimized powershell waiting for Bash Bunny to appear as 172.16.64.1.
