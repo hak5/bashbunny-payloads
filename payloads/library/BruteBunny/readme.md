@@ -20,7 +20,7 @@ length of time your list will take to go through.
 
 This was designed and tested on a Netgear Nighthawk Router, and an Arris Xfinity Modem/Router combo; however
 I don't see why it couldn't be used for any internet connected device that uses basic http authentication.
-And please... Don't feed the bunnnies.
+And please... Don't feed the bunnies.
 
 ## STATUS
 
