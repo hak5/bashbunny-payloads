@@ -1,7 +1,9 @@
 ATTACKMODE HID VID_0X05AC PID_0X021E
 
-
+#Use format described in the readme
 time=1051
+
+#run payload
 
 LED R 200
 
@@ -21,6 +23,7 @@ Q DELAY 500
 
 Q ENTER
 
+#Hide tracks
 LED B 500
 
    QUACK GUI r
