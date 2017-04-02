@@ -1,17 +1,15 @@
-# WiPassDump for Bash Bunnys
+# UnifiedRickRoll for Bash Bunny
 
-* Author: Jafahulo --creds: samdeg555, hak5darren
-* Version: Version 2.0
-* Target: Windows
+* Author: Jafahulo
+* Version: Version 1.0
+* Target: OSX
 
 ## Description
-
-Dumps saved Wi-Fi infos including clear text passwords to the bash bunny
-Saves to the loot folder on the Bash Bunny USB Mass Storage partition in WiPassDump folder.
+Runs a script in background that will crank up volume and rick roll target at specified time.
 
 ## Configuration
 
-None needed. 
+set time to run in payload.txt
 
 ## STATUS
 
@@ -21,4 +19,4 @@ None needed.
 | Green              | Attack Complete                              |
 
 ## Discussion
-None yet. 
+https://forums.hak5.org/index.php?/topic/40618-payload-unifiedrickroll/
