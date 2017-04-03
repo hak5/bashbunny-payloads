@@ -23,6 +23,15 @@ echo "##Wifi Creds"
 echo "======================================================"
 echo ""
 
-Get-WiFiCreds
+# Update output buffer size to 500
+if( $Host -and $Host.UI -and $Host.UI.RawUI ) {
+  $rawUI = $Host.UI.RawUI
+  $oldSize = $rawUI.BufferSize
+  $typeName = $oldSize.GetType( ).FullName
+  $newSize = New-Object $typeName (500, $oldSize.Height)
+  $rawUI.BufferSize = $newSize
+}
 
+Get-WiFiCreds
+echo "`n`n`n"
 ###################################

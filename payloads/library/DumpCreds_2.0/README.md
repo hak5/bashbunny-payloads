@@ -1,6 +1,6 @@
 # DumpCreds 2.0 
 * Author: QDBA
-* Version: Version 2.0.1
+* Version: Version 2.0.2
 * Target: Windows
 
 ## Description
@@ -8,14 +8,15 @@
 Dumps the usernames & plaintext passwords from 
  - Browsers (Crome, IE, FireFox)
  - Wifi 
- - SAM Hashes
- - Mimimk@tz Dump
+ - SAM Hashes (only if AdminMode=True)
+ - Mimimk@tz Dump (only if AdminMode=True)
  - Computerinformation (Hardware Info, Windows ProductKey, Hotfixes, Software, Local, AD Userlist)
  
  without 
  - Use of USB Storage (Because USB Storage ist mostly blocked by USBGuard or DriveLock)
  - Internet connection (becaus Firewall ContentFilter Blocks the download sites)
  
+
 
 ## Configuration
 
@@ -29,9 +30,15 @@ Install it from tools_installer payload
 https://github.com/hak5/bashbunny-payloads/tree/master/payloads/library/tools_installer
 
 
+## Download
+
+
+https://github.com/qdba/bashbunny-payloads/tree/master/payloads/library/DumpCreds_2.0
+
+
 ## Install
 
-Copy payload.txt, main.ps1 and the complete PS Folder to your switch direcrory.
+Copy payload.txt, main.ps1 and the complete PS Folder to your favorite switch direcrory.
 
 ## STATUS
 
@@ -56,9 +63,10 @@ https://forums.hak5.org/index.php?/topic/40582-payload-drumpcreds-20-wo-internet
 
 ## ToDo
 
-- paralellize Creds gathering with PS
+- paralellize Creds gathering with PS  -- check 
 - while Bashbunny is waiting for Target finished the script it can some other nice work. i.e. nmap the target. 
   (Not very useful at ths time because I'm still Admin on Computer)
-- remove the modifications of the Powersploit scripts, so you can download and use the original Files. (At the moment you must use my scripts)
-- rewrite some code of the payload so the payload will work no matter if you have admin rights (UAC MsgBox) or not (Credentials MsgBox)
+- remove the modifications of the Powersploit scripts, so you can download and use the original Files. (At the moment you must use my scripts) (and in future) 
+- rewrite some code of the payload so the payload will work no matter if you have admin rights (UAC MsgBox) or not (Credentials MsgBox) -- check
+  (There is no exploitation. You will not get admin rights, but it passes sucessfully never mind if there is a Credential prompt or a UAC prompt)
 - Maybe! If Target is in a AD Domain and Mimik@tz give us some Passwords try to get some more information about the AD Domain  

