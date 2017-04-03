@@ -75,8 +75,8 @@ $FILECOPY 						= "Y" 		#Y=yes N=no <> +/- 1sec - Virusscanner Alarm: Low
 #-----------------------------------------------------------
 # CREATE BASIC LOOT DIR
 #-----------------------------------------------------------
-New-Item -ItemType directory -Force -Path $PSScriptRoot\loot\$filetimestamp
-$LootDir = "$PSScriptRoot\loot\$filetimestamp"
+cd $PSScriptRoot
+$LootDir = New-Item -ItemType directory -Force -Path "..\..\loot\BlackBackup\$filetimestamp"
 
 
 
