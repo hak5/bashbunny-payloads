@@ -1,6 +1,6 @@
 # DumpCreds 2.0 
 * Author: QDBA
-* Version: Version 2.0.2
+* Version: Version 2.0.2 Build 1003
 * Target: Windows
 
 ## Description
@@ -65,8 +65,7 @@ https://forums.hak5.org/index.php?/topic/40582-payload-drumpcreds-20-wo-internet
 
 to...... 
 
-https://github.com/sekirkity/BrowserGather      Get-ChromeCreds.ps1
-https://github.com/EmpireProject/Empire         Get-FoxDump.ps1, Invoke-M1m1k@tz.ps1, Invoke-PowerDump.ps1
+https://github.com/EmpireProject/Empire         Get-FoxDump.ps1, Invoke-M1m1k@tz.ps1, Invoke-PowerDump.ps1, Get-ChromeCreds.ps1
 
 
 ## ToDo

