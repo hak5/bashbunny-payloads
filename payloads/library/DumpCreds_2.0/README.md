@@ -61,6 +61,14 @@ Copy payload.txt, main.ps1 and the complete PS Folder to your favorite switch di
 
 https://forums.hak5.org/index.php?/topic/40582-payload-drumpcreds-20-wo-internet-wo-usb-storage
 
+## Credits
+
+to...... 
+
+https://github.com/sekirkity/BrowserGather      Get-ChromeCreds.ps1
+https://github.com/EmpireProject/Empire         Get-FoxDump.ps1, Invoke-M1m1k@tz.ps1, Invoke-PowerDump.ps1
+
+
 ## ToDo
 
 - paralellize Creds gathering with PS  -- check 
