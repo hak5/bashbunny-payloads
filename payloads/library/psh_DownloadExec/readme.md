@@ -17,9 +17,10 @@ Quick HID attack to retrieve and run powershell payload from BashBunny web serve
 Ensure psh.txt exists in payload directory. This is the powershell script that will be downloaded and executed.
 
 ## STATUS
-
-# | Attack Stage        | Description                              |
-# | ------------------- | ---------------------------------------- |
-# | Stage 1             | Running Initial Powershell Commands      |
-# | Stage 2             | Turning up web server and DHCP           |
-# | Stage 3             | Delivering powershell payload            |
+```
+| Attack Stage        | Description                              |
+| ------------------- | ---------------------------------------- |
+| Stage 1             | Running Initial Powershell Commands      |
+| Stage 2             | Turning up web server and DHCP           |
+| Stage 3             | Delivering powershell payload            |
+```
