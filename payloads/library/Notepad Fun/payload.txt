@@ -11,16 +11,13 @@
 # DESCRIPTION:
 # Opens Notepad on Windows Systems and leaves a message for the owner of the machine
 #
-# Requires bunny_helpers.sh to determine switch position.
+# Requires Firmware 1.1
 #
-# Cyan Blinking......Setup
-# Blue Blinking......Typing
-# Green..............Finished
-# 
-
 
 # SETUP
 # Select Files
+LED SETUP
+
 header_file=header.txt
   body_file=body.txt
 footer_file=footer.txt
@@ -34,12 +31,12 @@ footer_repeats=1
 # DO NOT EDIT BELOW THIS LINE #
 # #############################
 
-# Indicate starting  
-LED B G 100
-
 # Attack Setup
 ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
 source bunny_helpers.sh
+
+# Indicate Attacking
+LED ATTACK
 
 # Open Notepad
 Q GUI r
@@ -47,10 +44,6 @@ Q DELEY 150
 Q STRING notepad.exe
 Q ENTER
 Q DELAY 200
-
-
-# Indicate injecting keystrokes
-LED B 500
 
 
 # Type out contents of the header file into the target computer keyboard
@@ -75,5 +68,5 @@ done
 
 
 # Complete
-LED G 0
+LED FINISH 
 
