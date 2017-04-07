@@ -1,34 +1,79 @@
-#
+
+#!/bin/bash
 #
 # Title:             Notepad Fun
 # Author:            The10FpsGuy and Mrhut10
 #                    Big thanks to Mrhut10 for helping to put a loop in it :D
+#                    Edits by Biocow to create separate header, body and footer files.
+# Target Platform:   Windows
 # Category:          Fun
 #
+# DESCRIPTION:
+# Opens Notepad on Windows Systems and leaves a message for the owner of the machine
 #
-#options
-LED B G 100
-msg_header="begining"
-msg_body="I will learn to lock my computer"
-msg_body_repeats=10
-msg_end="Please remember to lock your computer when you walk away."
+# Requires bunny_helpers.sh to determine switch position.
+#
+# Cyan Blinking......Setup
+# Blue Blinking......Typing
+# Green..............Finished
+# 
 
-ATTACKMODE HID
+
+# SETUP
+# Select Files
+header_file=header.txt
+  body_file=body.txt
+footer_file=footer.txt
+
+# How many times do you want each file to repeat? (Zero is a valid entry)
+header_repeats=1
+body_repeats=5
+footer_repeats=1
+
+# #############################
+# DO NOT EDIT BELOW THIS LINE #
+# #############################
+
+# Indicate starting  
+LED B G 100
+
+# Attack Setup
+ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
+source bunny_helpers.sh
+
+# Open Notepad
 Q GUI r
 Q DELEY 150
 Q STRING notepad.exe
 Q ENTER
+Q DELAY 200
+
+
+# Indicate injecting keystrokes
 LED B 500
 
-Q DELAY 200
-Q STRING $msg_header
-Q ENTER
 
-for (( i=1; i<=$msg_body_repeats; i++ ))
+# Type out contents of the header file into the target computer keyboard
+for (( i=1; i<=$header_repeats; i++ ))
 do
-   Q STRING $msg_body
-   Q ENTER
+  QUACK $SWITCH_POSITION/$header_file
 done
-Q STRING $msg_end
-Q ENTER
+
+
+# Type out contents of the body file into the target computer keyboard
+for (( i=1; i<=$body_repeats; i++ ))
+do
+   Q $SWITCH_POSITION/$body_file
+done
+
+
+# Type out contents of the footer file into the target computer keyboard
+for (( i=1; i<=$footer_repeats; i++ ))
+do
+   Q $SWITCH_POSITION/$footer_file
+done
+
+
+# Complete
 LED G 0
+
