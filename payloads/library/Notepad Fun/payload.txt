@@ -32,7 +32,7 @@ footer_repeats=1
 # #############################
 
 # Attack Setup
-ATTACKMODE HID VID_0X05AC PID_0X021E
+ATTACKMODE HID
 
 # Indicate Attacking
 LED ATTACK
