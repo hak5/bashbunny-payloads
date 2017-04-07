@@ -1,3 +1,0 @@
-# All of the heavy lifting of this payload occurs in install.sh
-# which gets renamed to install.sh.INSTALLED once completed.
-ATTACKMODE SERIAL STORAGE
