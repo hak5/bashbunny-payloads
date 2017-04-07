@@ -1,8 +1,11 @@
 # Exfiltrator for Bash Bunnys
 
-* Author: Hak5Darren
-* Version: Version 1.1
-* Target: Windows
+- Title:         USB Exfiltrator
+- Author:        Hak5Darren
+- Version:       1.1
+- Target:        Windows XP SP3+
+- Props:         Diggster, IMcPwn
+- Category:      Exfiltration
 
 ## Description
 
@@ -15,11 +18,9 @@ By default the staged payload exfiltrates PDF files. Change the xcopy commands f
 
 ## STATUS
 
-| LED                | Status                                       |
-| ------------------ | -------------------------------------------- |
-| White (blinking)   | Setup Failed. Target didn't obtain IP        |
-| Red                | Attack Setup                                 |
-| Green              | Attack Complete                              |
+| LED      | Status       |
+| -------- | ------------ |
+| ATTACK   | Attacking :) |
 
 ## Discussion
 [Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/40225-payload-usb_exfiltrator/ "Hak5 Forum Thread")

@@ -1,7 +1,10 @@
-# Nmapper for Bash Bunnys
+# Nmapper for Bash Bunny
 
-Author: Hak5Darren
-Version: Version 1.0
+- Author: Hak5Darren
+- Version: Version 1.1
+- Target: multi
+- Category: Enumeration
+
 
 ## Description
 
@@ -15,13 +18,13 @@ Uncomment ATTACKMODE at the bottom of this payload to enable switching to USB Ma
 
 ## STATUS
 
-| LED              | Status                                |
-| ---------------- | ------------------------------------- |
-| Red              | Setup                                 |
-| Red (blinking)   | Setup Failed. Target didn't obtain IP |
-| Amber            | Scanning                              |
-| White            | Switching to Mass Storage (optional)  |
-| Green            | Finished                              |
+| LED     | Status                                |
+| ------- | ------------------------------------- |
+| SETUP   | Setup                                 |
+| FAIL    | Setup Failed. Target didn't obtain IP |
+| ATTACK  | Scanning                              |
+| CLEANUP | Syncing file system                   |
+| FINISH  | Finished                              |
 
 ## Discussion
 
