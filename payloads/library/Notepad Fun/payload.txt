@@ -39,7 +39,7 @@ LED ATTACK
 
 # Open Notepad
 Q GUI r
-Q DELEY 150
+Q DELAY 150
 Q STRING notepad.exe
 Q ENTER
 Q DELAY 200
