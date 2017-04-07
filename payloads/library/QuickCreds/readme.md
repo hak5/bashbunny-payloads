@@ -3,6 +3,7 @@
 Author: Hak5Darren
 Version: Version 1.0
 Credit: Mubix
+Firmware: >= 1.1
 
 ## Description
 
@@ -17,18 +18,17 @@ Configured for Windows by default. Swap RNDIS_ETHERNET for ECM_ETHERNET on Mac/*
 
 ## Requirements
 
-Responder must be in /pentest/responder/
-Run the latest tools_installer payload or manually install
+Responder must be in /tools/responder/
 
 ## STATUS
 
-| LED              | Status                                |
-| ---------------- | ------------------------------------- |
-| White (blinking) | Dependencies not met                  |
-| Red              | Setup                                 |
-| Red (blinking)   | Setup Failed. Target didn't obtain IP |
-| Amber            | Responder running, waiting for creds  |
-| Green            | Finished                              |
+```
+| Status              | Description                              |
+| ------------------- | ---------------------------------------- |
+| FAIL1               | Responder not found at /tools/responder  |
+| FAIL2               | Target did not aquire IP address         |
+```
+All other LED statuses are standard to v1.1
 
 ## Discussion
 [Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/40226-payload-quickcreds/ "Hak5 Forum Thread")
