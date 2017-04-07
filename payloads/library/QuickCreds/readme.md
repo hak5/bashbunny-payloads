@@ -22,12 +22,12 @@ Responder must be in /tools/responder/
 
 ## STATUS
 
-```
+
 | Status              | Description                              |
 | ------------------- | ---------------------------------------- |
 | FAIL1               | Responder not found at /tools/responder  |
 | FAIL2               | Target did not aquire IP address         |
-```
+
 All other LED statuses are standard to v1.1
 
 ## Discussion
