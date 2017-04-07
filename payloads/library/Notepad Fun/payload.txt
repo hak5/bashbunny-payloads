@@ -33,6 +33,7 @@ footer_repeats=1
 
 # Attack Setup
 ATTACKMODE HID
+GET SWITCH_POSITION
 
 # Indicate Attacking
 LED ATTACK
