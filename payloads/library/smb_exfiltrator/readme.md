@@ -13,7 +13,7 @@ Liberated documents will reside in Bash Bunny loot directory under loot/smb_exfi
 
 ## Configuration
 
-Configured to copy PDF files by default. Change EXFILTRATE_FILES variable to desired. 
+Configured to copy PDF files by default. Change EF variable to desired file extension. 
 
 ## STATUS
 
