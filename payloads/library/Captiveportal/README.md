@@ -1,7 +1,7 @@
 # Captive Portal for the Bash Bunny
 
 Author: Sebkinne  
-Version: 1.0
+Version: 1.2
 
 ## Description
 
@@ -17,8 +17,7 @@ To capture more information from the user, simply add more form inputs to *porta
 
 ## STATUS
 
-| LED              | Status                              |
-| ---------------- | ----------------------------------- |
-| Green (blinking) | The captive portal is starting up   |
-| Blue (solid)     | The captive portal is ready for use |
-
+| LED      | Status                              |
+| ---------| ----------------------------------- |
+| SETUP    | The captive portal is starting up   |
+| ATTACK   | The captive portal is ready for use |

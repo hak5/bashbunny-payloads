@@ -1,0 +1,24 @@
+ATTACKMODE HID VID_0X05AC PID_0X021E
+
+time=1734
+
+LED R 200
+
+Q GUI SPACE
+Q DELAY 200
+Q STRING terminal
+Q DELAY 100
+Q ENTER
+Q DELAY 1000
+Q GUI n
+Q DELAY 1000
+
+Q STRING hi=0\; ho=\$\(date \'+%H%M\'\)\; while test \$hi == \'0\'\;  do    if [ \$ho == $time ]\;    then osascript -e \"set Volume 9\" \&\& open \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\" \;    hi=1\;    fi\;    ho=\$\(date \'+%H%M\'\)\; sleep 1\; done \& disown
+
+# close up shop
+Q DELAY 1000
+Q ENTER
+Q GUI W
+Q ENTER
+
+LED G

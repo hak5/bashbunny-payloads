@@ -1,26 +1,29 @@
-# RDP Checker for Bash Bunnys
+# RDP Checker for Bash Bunny
 
-Author: Hak5Darren
-Version: Version 1.0
+- Title: RDP Checker for Bash Bunny
+- Author: Hak5Darren
+- Version: 1.1
+- Target: Windows
+- Category: Enumeration
 
 ## Description
 
 Checks whether RDP is enabled on target machine
-Green=Enabled. Red=Disables.
+Green=Enabled. Red=Disabled.
 
 ## Requirements
 
-impacket must be installed in /pentest (run tools-installer if not)
+impacket must be installed and setup in /tools
 
 ## STATUS
 
-| LED              | Status                                |
-| ---------------- | ------------------------------------- |
-| White (blinking) | Dependencies not installed.           |
-| Purple           | Setup.                                |
-| Amber (blinking) | Scanning                              |
-| Red              | RDP not enabled.                      |
-| Green            | RDP enabled.                          |
+| LED           | Status                        |
+| ------------- | ----------------------------- |
+| FAIL          | Failed to find dependencies   |
+| SETUP         | Setting up attack             |
+| ATTACK        | Scanning                      |
+| GREEN SUCCESS | RDP Enabled                   |
+| FAIL2         | RDP Not Enabled               |
 
 ## Discussion
 
