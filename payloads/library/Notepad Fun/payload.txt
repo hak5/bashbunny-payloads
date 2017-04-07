@@ -32,8 +32,7 @@ footer_repeats=1
 # #############################
 
 # Attack Setup
-ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
-source bunny_helpers.sh
+ATTACKMODE HID VID_0X05AC PID_0X021E
 
 # Indicate Attacking
 LED ATTACK
