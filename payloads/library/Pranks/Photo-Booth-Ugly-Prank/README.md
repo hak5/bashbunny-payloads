@@ -1,17 +1,18 @@
-# WiPassDump for Bash Bunnys
+# Photo booth ugly prank for Bash Bunny
 
-* Author: Jafahulo --creds: samdeg555, hak5darren
-* Version: Version 2.0
-* Target: Windows
+* Author: Jafahulo
+* Version: Version 1.0
+* Target: OSX
 
 ## Description
 
-Dumps saved Wi-Fi infos including clear text passwords to the bash bunny
-Saves to the loot folder on the Bash Bunny USB Mass Storage partition in WiPassDump folder.
+Quick payload that takes a photo of target, and tells them that they're ugly
+
+REQUIRES THE BASH BUNNY TO BE PLUGGED IN THE FULL TIME
 
 ## Configuration
 
-None needed. 
+None needed
 
 ## STATUS
 
@@ -21,4 +22,4 @@ None needed.
 | Green              | Attack Complete                              |
 
 ## Discussion
-None yet. 
+none
