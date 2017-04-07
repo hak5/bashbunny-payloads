@@ -11,7 +11,10 @@ Saves to the loot folder on the Bash Bunny USB Mass Storage partition in WiPassD
 
 ## Configuration
 
-None needed. 
+On line 38, there is a modification to make depending of your language to accept a modification (put y for english, 
+o for french, etc...). 
+
+On line 22, you can set the language for the DuckyScript (ca=Canadian french, us=English US, etc...). 
 
 ## STATUS
 
