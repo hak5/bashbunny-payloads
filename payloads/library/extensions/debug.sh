@@ -14,7 +14,7 @@
 # 2) After attack, Text can be read at: "/root/udisk/debug/debug_[timestamp].txt"
 #    on the BashBunny
 # 3) To turn off debugging, pass the OFF command when including the helper
-#       source bunny_debug_helpers.sh OFF
+#       source debug.sh OFF
 ################################################################################
 
 ################################################################################
