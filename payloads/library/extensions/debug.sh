@@ -7,10 +7,12 @@
 # How this works?
 # 1) Once the library is included in your payload, write text to
 #    the debug file with:
-#       echo "DEBUG MESSAGE" >> "${DEBUG_FILE}"
-#	    OR
 #	    debug_log "DEBUG MESSAGE"
 #	    (To write to log with timestamps)
+#	    OR
+#       echo "DEBUG MESSAGE" >> "${DEBUG_FILE}"
+#	    (To write to log without timestamps)
+#
 # 2) After attack, Text can be read at: "/root/udisk/debug/debug_[timestamp].txt"
 #    on the BashBunny
 # 3) To turn off debugging, pass the OFF command when including the helper
