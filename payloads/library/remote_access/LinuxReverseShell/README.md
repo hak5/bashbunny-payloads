@@ -1,7 +1,7 @@
 # Linux Reverse Shell for Bash Bunny
 
 Author: tuzzmaniandevil
-Version: Version 1.0
+Version: Version 1.1
 
 ## Description
 
@@ -26,6 +26,6 @@ The RHOST pc must be accessible from the target machine
 
 | LED              | Status                                |
 | ---------------- | ------------------------------------- |
-| Red              | Setup                                 |
-| Blue (blinking)  | Executing Ducky and starting script   |
-| Green            | Finished                              |
+| SETUP            | Setting Attack mode                   |
+| ATTACK           | Executing Ducky and starting script   |
+| FINISH           | Finished executing payload            |
