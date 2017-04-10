@@ -4,7 +4,7 @@
 # Author:            The10FpsGuy and Mrhut10
 #                    Big thanks to Mrhut10 for helping to put a loop in it :D
 # Category:          Fun
-#
+# Target:.           Windows (Notepad)
 #
 #options
 LED B G 100
