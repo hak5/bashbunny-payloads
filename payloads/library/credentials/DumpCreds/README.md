@@ -1,33 +1,40 @@
-# DumpCreds 2.0 
+# DumpCreds 2.1
 * Author: QDBA
-* Version: Version 2.0.2 Build 1003
-* Target: Windows
+* Version: Version 2.1.0 Build 1004
+* Target: Windows 10
 
 ## Description
 
+** !!!!! works only at Bash Bunny with FW 1.1 !!!!! **
+
 Dumps the usernames & plaintext passwords from 
- - Browsers (Crome, IE, FireFox)
- - Wifi 
- - SAM Hashes (only if AdminMode=True)
- - Mimimk@tz Dump (only if AdminMode=True)
- - Computerinformation (Hardware Info, Windows ProductKey, Hotfixes, Software, Local, AD Userlist)
+ * Browsers (Crome, IE, FireFox)
+ * Wifi 
+ * SAM Hashes (only if AdminMode=True)
+ * Mimimk@tz Dump (only if AdminMode=True)
+ * Computerinformation (Hardware Info, Windows ProductKey, Hotfixes, Software, Local, AD Userlist)
  
  without 
- - Use of USB Storage (Because USB Storage ist mostly blocked by USBGuard or DriveLock)
- - Internet connection (becaus Firewall ContentFilter Blocks the download sites)
+ * Use of USB Storage (Because USB Storage ist mostly blocked by USBGuard or DriveLock)
+ * Internet connection (becaus Firewall ContentFilter Blocks the download sites)
  
-
+ 
+# Problems
+- if you first use the payload on a computer, it will take some time and tries until the drivers are successfully loaded.
+- If the payload doesnt work. (Red LED or Yellow LED blinks 2 or 4 times) plug off the BB  and try it once more (can take 3 or 4 times)
+- If the payload stops working yellow LED blinks very fast longer than 2min. You get no white LED. Your run in a time out. 
+  If you plugin the BB every payload has 1min 30sfor doing the job. At 1min 30s every payload stops. (Thats a FW 1.1 issue)  
+ 
+# Debug 
+If you want some debug information, create a file with name "DEBUG" in the payload folder
+you got the debug information in \loot\DumpCred_2.1\log.txt Folder
+ 
 
 ## Configuration
 
 None needed. 
 
 ## Requirements
-
-Impacket must be installed. 
-Install it from tools_installer payload 
-
-https://github.com/hak5/bashbunny-payloads/tree/master/payloads/library/tools_installer
 
 
 ## Download
@@ -38,23 +45,45 @@ https://github.com/qdba/bashbunny-payloads/tree/master/payloads/library/DumpCred
 
 ## Install
 
-Copy payload.txt, main.ps1 and the complete PS Folder to your favorite switch direcrory.
+1. Put Bash Bunny in arming mode
+
+2. Coppy All Folders into the root of Bunny Flash Drive 
+	Mandatory 
+		* payloads/library/DumpCreds_2.1 --> the payload Files
+		  * payloads/library/DumpCreds_2.1/PS --> the Powershell scripts for the payload
+		* tools --> impacket tools (provide the smbserver.py) (not neccessary if you had already installed)
+	Not neccessary
+		* docs --> this doc file
+		* languages --> languauge files for DUCKY_LANG
+				
+3. eject Bash Bunny safely!!
+
+4. Insert Bash Bunny in arming mode ( Impacket and languages will be installed ) 		
+
+5. Put all Files and Folders to payload from payloads /payloads/library/DumpCreds_2.1 to payloads/switch1 or payloads/switch2
+
+6. eject Bash Bunny safely 
+
+7. move switch in right position
+
+8. plugin Bash Bunny and have fun....! :-)
+
 
 ## STATUS
 
-| LED                | Status                                       |
-| ------------------ | -------------------------------------------- |
-| White              | Give drivers some time for installation      |
-| Red Blink Fast     | Impacket not found                           |
-| Red Blink Slow     | Target did not acquire IP address            |
-| Amber Blink Fast   | Initialization                               |
-| Amber              | HID Stage                                    |
-| Purple Blink Fast  | Wait for IP coming up                        |
-| Purple Blink Slow  | Wait for Handshake (SMBServer Coming up)     |
-| Purple / Amber     | Powershell scripts running                   |
-| RED                | Error in Powershell Scripts                  |
-| Green              | Finished                                     |
-| ------------------ | -------------------------------------------- |
+| LED                     | Status                                       |
+| ----------------------- | -------------------------------------------- |
+| Magenta Solid           | Setup                                        |
+| Red slow blink          | Impacket not found                           |
+| Red fast blink          | Target did not acquire IP address            |
+| Yellow single blink     | Initialization                               |
+| Yellow double blink     | HID Stage                                    |
+| Yellow triple blink     | Wait for IP coming up                        |
+| Yellow quad blink       | Wait for Handshake (SMBServer Coming up)     |
+| Yellow very fast blink  | Powershell scripts running                   |
+| White fast blink        | Cleanup, copy Files to <root>/loot           |
+| Green              	  | Finished                                     |
+| ----------------------- | -------------------------------------------- |
 
 
 ## Discussion
@@ -67,13 +96,7 @@ to...... 
 
 https://github.com/EmpireProject/Empire         Get-FoxDump.ps1, Invoke-M1m1k@tz.ps1, Invoke-PowerDump.ps1, Get-ChromeCreds.ps1
 
+## Changelog
 
-## ToDo
-
-- paralellize Creds gathering with PS  -- check 
-- while Bashbunny is waiting for Target finished the script it can some other nice work. i.e. nmap the target. 
-  (Not very useful at ths time because I'm still Admin on Computer)
-- remove the modifications of the Powersploit scripts, so you can download and use the original Files. (At the moment you must use my scripts) (and in future) 
-- rewrite some code of the payload so the payload will work no matter if you have admin rights (UAC MsgBox) or not (Credentials MsgBox) -- check
-  (There is no exploitation. You will not get admin rights, but it passes sucessfully never mind if there is a Credential prompt or a UAC prompt)
-- Maybe! If Target is in a AD Domain and Mimik@tz give us some Passwords try to get some more information about the AD Domain  
+- Complete new payload.txt code for BashBunny 1.1
+- Added a lot of debug cod into the payload 
