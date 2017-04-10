@@ -20,7 +20,7 @@ LED SETUP
 # Set Attack Mode
 ATTACKMODE HID STORAGE
 
-DUCKY_LANG=us
+DUCKY_LANG us
 
 # Wait for Storage to mount
 sleep 5
