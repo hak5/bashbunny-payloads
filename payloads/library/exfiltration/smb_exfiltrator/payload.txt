@@ -92,7 +92,8 @@ rm -rf /loot/smb/EXFILTRATION_COMPLETE
 mv /loot/smb/e/* /root/udisk/loot/smb_exfiltrator
 # Clean up temporary loot directory
 rm -rf /loot/smb/e/*
-
+# Sync file system
+sync
 
 
 ######## FINISH ########
