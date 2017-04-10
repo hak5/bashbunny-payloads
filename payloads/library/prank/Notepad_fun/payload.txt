@@ -15,7 +15,7 @@ msg_end="Please remember to lock your computer when you walk away."
 
 ATTACKMODE HID
 Q GUI r
-Q DELEY 150
+Q DELAY 150
 Q STRING notepad.exe
 Q ENTER
 LED B 500
