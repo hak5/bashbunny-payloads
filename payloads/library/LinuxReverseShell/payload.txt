@@ -22,9 +22,6 @@ ATTACKMODE HID STORAGE
 
 DUCKY_LANG=us
 
-# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
-source bunny_helpers.sh
-
 # Wait for Storage to mount
 sleep 5
 
