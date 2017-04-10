@@ -1,0 +1,4 @@
+ENTER
+ENTER
+STRING Please remember to lock your computer when you walk away.
+ENTER
