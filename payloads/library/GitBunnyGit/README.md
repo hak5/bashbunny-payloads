@@ -1,6 +1,6 @@
 # Git-Bunny-Git
 
-Author: Draxiom & audibleblink
+Author: Draxiom & audibleblink & Nicholas Adamou
 Version: 1.0
 
 ## Description
