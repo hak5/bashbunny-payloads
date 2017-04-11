@@ -13,10 +13,14 @@ Starts a terminal window on a Mac,then creates a bash reverse shell inside a scr
 
 ## Configuration
 Set the location of your listener:
+
 LISTENER_IP="192.168.1.100"
+
 LISTENER_PORT="4444"
 
+
 Set the frequency you want the script to run (in minutes)
+
 FREQUENCY="60"
 
 ## STATUS
