@@ -7,8 +7,11 @@
 
 ## Dependencies
 The following files must exist in the switch folder:
+
 nc.exe - Windows binary for netcat with the -e flag
+
 listener_port.txt - The Port number for the netcat listener
+
 listener_ip.txt - The IP Address for the netcat listener
  
 ## Description
