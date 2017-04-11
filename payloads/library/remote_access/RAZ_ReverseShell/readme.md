@@ -7,11 +7,9 @@
 
 ## Dependencies
 The following files must exist in the switch folder:
-| File              | Description                                |
-| ----------------- | ------------------------------------------ |
-| nc.exe            | Windows binary for netcat with the -e flag |
-| listener_port.txt | The Port number for the netcat listener    |
-| listener_ip.txt   | The IP Address for the netcat listener     |
+nc.exe - Windowsbinaryfornetcatwiththe-eflag
+listener_port.txt - ThePortnumberforthenetcatlistener
+listener_ip.txt - TheIPAddressforthenetcatlistener
  
 ## Description
 Executes a netcat reverse cmd shell at a given IP and Port.  This script leaves a trace in the Run Box.  The script can auto-increment the listener port so that the PenTester can create several listeners, and target multiple machines while on a walkabout in an office.  

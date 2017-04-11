@@ -7,9 +7,7 @@
 
 ## Dependencies
 The following files must exist in the switch folder:
-| File  | Description                                           |
-| ----- | ----------------------------------------------------- |
-| a.vbs | VBScript to be executed in a hidden Powershell window |
+a.vbs - VBScript to be executed in a hidden Powershell window |
 
 ## Description
 VBScript (a.vbs) in the switch folder with this file
