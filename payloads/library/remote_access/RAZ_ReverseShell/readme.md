@@ -1,9 +1,15 @@
 # RAZ_ReverseShell
 * Author: RalphyZ 
-* Version: 1.0
+* Version: 1.1
 * Target: Windows 7+
 * Category: Reverse Shell
 * Attackmode: HID, STORAGE
+
+## Change Log
+| Version | Changes                       |
+| ------- | ------------------------------|
+| 1.1     | Updated for firmware 1.1      |
+| 1.0     | Initial release               |
 
 ## Dependencies
 The following files must exist in the switch folder:
@@ -21,14 +27,15 @@ Executes a netcat reverse cmd shell at a given IP and Port.  This script leaves 
 Set the location of your listener in the listener_ip and listener_port text files.  
 
 If you want the listener port to auto-increment, set:
+
 auto_increment=true
 
-## STATUS
-| LED                   | Status                                     |
-| --------------------- | ------------------------------------------ |
-| Green                 | Working                                    | 
-| White                 | Completed without error                    | 
-| White (blinking)      | Incrementing the port in listener_port.txt | 
-| Blue (blinking)       | listener_port.txt was not found            | 
-| Light-Blue (blinking) | listener_ip.txt was not found              | 
-| Amber (blinking)      | nc.exe was not found                       |
+## Colors
+| Status     | Color                         | Description                                      |
+| ---------- | ------------------------------| ------------------------------------------------ |
+| SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
+| FAIL1      | Red slow blink                | Could not find the listener_port.txt file        | 
+| FAIL2      | Red fast blink                | Could not find the listener_ip.txt file          | 
+| FAIL3      | Red very fast blink           | Could not find the nc.exe file                   | 
+| ATTACK     | Yellow single blink           | Running the VBScript                             | 
+| FINISH     | Green blink followed by SOLID | Script is finished                               |
