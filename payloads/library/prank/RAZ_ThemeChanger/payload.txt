@@ -28,7 +28,7 @@ ATTACKMODE HID STORAGE
 LED ATTACK
 
 # Run the command to change the theme
-RUN WIN powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\theme.themepack')"
+RUN WIN "powershell \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\theme.themepack')\""
 
 # Wait a bit so that the correct window closes
 QUACK DELAY 15000
