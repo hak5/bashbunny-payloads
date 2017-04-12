@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# Title:         Change windows theme
+# Author:        sil3n7h
+# Version:       1.1
+# Target:        Windows 7+
+# 
+# Executes theme file (theme.themepack) from the RAZ_ThemeChanger folder 
+# in the payloads library of the Bash Bunny USB Disk partition.
+#
+# Colors:
+# | Status     | Color                         | Description                                      |
+# | ---------- | ------------------------------| ------------------------------------------------ |
+# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
+# | ATTACK     | Yellow single blink           | Running the VBScript                             | 
+# | FINISH     | Green blink followed by SOLID | Script is finished                               | 
+
+# Magenta solid
+LED SETUP
+
+# Get the switch position
+GET SWITCH_POSITION
+
+# Set the attack mode to HID and STORAGE
+ATTACKMODE HID STORAGE
+
+# Yellow single blink
+LED ATTACK
+
+# Run the command to change the theme
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\theme.themepack')"
+QUACK ENTER
+
+# Wait a bit so that the correct window closes
+QUACK DELAY 15000
+QUACK ALT F4
+
+# Green LED for finished
+LED FINISH
