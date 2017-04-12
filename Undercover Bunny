@@ -7,7 +7,13 @@
 # Category: General?
 # Target: Windows 10 and most likely 7 (CMD)
 # Attackmodes: HID
- 
+
+----------------------------------------
+                 LEDS
+Magenta solid = setting up 
+White fast = cleaning up
+Green 1000ms VERYFAST blink followed by SOLID = you have completed the mission
+----------------------------------------
  
 ################## Options ###################                                                                        
 # Bash Bunny name
