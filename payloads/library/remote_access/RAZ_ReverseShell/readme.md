@@ -37,5 +37,6 @@ auto_increment=true
 | FAIL1      | Red slow blink                | Could not find the listener_port.txt file        | 
 | FAIL2      | Red fast blink                | Could not find the listener_ip.txt file          | 
 | FAIL3      | Red very fast blink           | Could not find the nc.exe file                   | 
+| SPECIAL    | Cyan inverted single blink    | Incrementing the port in listener_port.txt       | 
 | ATTACK     | Yellow single blink           | Running the VBScript                             | 
 | FINISH     | Green blink followed by SOLID | Script is finished                               |

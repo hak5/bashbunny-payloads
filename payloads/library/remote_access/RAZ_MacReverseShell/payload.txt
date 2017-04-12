@@ -40,10 +40,7 @@ QUACK DEFAULT_DELAY 300
 LED ATTACK
 
 # Start the Mac Terminal
-QUACK COMMAND SPACE
-QUACK STRING terminal
-QUACK DELAY 500
-QUACK ENTER
+RUN OSX terminal
 
 # Give the terminal window a second to pop up
 QUACK DELAY 1000
