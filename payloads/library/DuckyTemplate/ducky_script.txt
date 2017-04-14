@@ -1,9 +1,0 @@
-DELAY 2000
-GUI r
-DELAY 1000
-STRING notepad.exe
-DELAY 100
-ENTER
-DELAY 3000
-STRING https://bunnytoolkit.com running Ducky Script on a Bash Bunny
-Enter
