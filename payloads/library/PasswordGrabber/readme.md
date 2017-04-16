@@ -18,7 +18,7 @@ By default the payload is identical to the Payload [usb_exfiltrator] but adds so
 I have commented out the copy command but if you want copy command and password just remove the remove infront of xcopy
 
 Hak5 is not responsible for the execution of 3rd party binaries. Therefore I am not allowed to include it in github. You can easily download the binary from here or compile yourself https://github.com/AlessandroZ/LaZagne
-When compiled and downloaded, just drop it of to the PasswordGrabbers folder and you are good to go!
+When compiled or downloaded, just drop it of to the PasswordGrabbers folder and you are good to go!
 
 ## STATUS
 
