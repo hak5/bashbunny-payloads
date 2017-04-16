@@ -8,6 +8,7 @@
 # SETKB START (set the keyboard layout to a US keyboard layout)
 # SETKB DONE (set the keyboard layout to the default keyboard determined by the OS language settings)
 # SETKB xx-XX (overwrite the keyboard layout to whatever keyboard layout you need, you will need the [lanugage].json file to run Ducky scripts) 
+# One caveat is that the "-" keycode has to be set to the appropriate key code. Not an issue for most might be an issue for some.
 
 
 function SETKB() {
