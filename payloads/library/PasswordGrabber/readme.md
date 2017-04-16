@@ -3,6 +3,7 @@
 * Author: RazerBlade
 * Creds: Hak5Darren, AlessandroZ
 * Version: Version 1.1
+* Firmware support: 1.1
 * Target: Windows
 
 ## Description
