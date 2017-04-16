@@ -2,7 +2,7 @@
 
 * Author: RazerBlade
 * Creds: Hak5Darren, AlessandroZ
-* Version: Version 1.0
+* Version: Version 1.1
 * Target: Windows
 
 ## Description
