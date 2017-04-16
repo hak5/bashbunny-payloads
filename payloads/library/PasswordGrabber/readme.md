@@ -28,5 +28,5 @@ When compiled and downloaded, just drop it of to the PasswordGrabbers folder and
 | Green              | Attack Complete                              |
 
 ## Discussion
-[Hak5 Forum Thread]("https://forums.hak5.org/index.php?/topic/40437-payload-passwordgrabber/")
+[Hak5 Forum Thread] https://forums.hak5.org/index.php?/topic/40437-payload-passwordgrabber/
 
