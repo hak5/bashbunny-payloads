@@ -1,0 +1,3 @@
+# Install payload for the DuckToolkit 
+# See install.sh and readme.txt for details
+ATTACKMODE ECM_ETHERNET STORAGE
