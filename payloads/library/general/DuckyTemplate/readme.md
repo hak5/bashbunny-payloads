@@ -1,7 +1,7 @@
 # Ducky Script Template for Bash Bunnys
 
 Author: @kevthehermit
-Version: Version 1.0
+Version: Version 1.1
 
 ## Description
 
@@ -17,9 +17,8 @@ Install DuckToolkit payload for extra language support
 
 ## STATUS
 
-| LED              | Status                                |
-| ---------------- | ------------------------------------- |
-| Red              | Failed to open script file            |
-| Amber            | Script Running                        |
-| Green            | Finished                              |
-
+| LED                                              | Status                      |
+| ------------------------------------------------ | --------------------------- |
+| Magenta solid                                    | Setup                       |
+| Yellow single blink                              | Script Running (Attack)     |
+| Green 1000ms VERYFAST blink followed by SOLID    | Finished                    |
