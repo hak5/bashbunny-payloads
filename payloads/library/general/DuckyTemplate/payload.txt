@@ -1,18 +1,19 @@
-LED G
+LED SETUP
 ATTACKMODE HID STORAGE
 
 # Set your language here
-LANGUAGE='us'
+DUCKY_LANG us
 
-LED R G
 # Check for switch position to make it easier for us.
-source bunny_helpers.sh
+GET SWITCH_POSITION
+
+LED ATTACK
 
 if [ -f "/root/udisk/payloads/${SWITCH_POSITION}/ducky_script.txt" ]; then
         QUACK ${SWITCH_POSITION}/ducky_script.txt
-        LED G
+        LED FINISH
 else
-    LED R
+    LED FAIL
     echo "Unable to load ducky_script.txt" >> /root/debuglog.txt
         exit 1
 fi
