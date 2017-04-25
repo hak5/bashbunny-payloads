@@ -1,7 +1,7 @@
 # Installs dependencies for BunnyTap payload
 # Requires Internet connection
 # See documentation for Internet Connection Sharing details
-# 
+#
 # LED STATUS
 # purple..............setup
 # purple (blinking)...installing dependencies
@@ -11,8 +11,8 @@
 
 # Setup Ethernet (Switch RNDIS to ECM if Mac/Linux)
 LED R B
-ATTACKMODE RNDIS_ETHERNET
-# ATTACKMODE ECM_ETHERNET
+#ATTACKMODE RNDIS_ETHERNET
+ATTACKMODE ECM_ETHERNET
 
 # Check if connected to the Internet
 wget -q --tries=5 --timeout=15 --spider http://example.com
