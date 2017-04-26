@@ -1,6 +1,7 @@
 # WifiPass
 * Author: TheRoninRunner
 * Version: Version 1.0
+* Props: illwill
 * Target: Windows
 
 ## About
