@@ -1,0 +1,67 @@
+ATTACMODE HID
+
+# Title:         Bunny-Flip
+# Description:   Flips screen for 20 'rounds' and blinks yellow every time.
+# Author:        Hkyq
+# Version:       1.1
+# Category:      Prank
+# Target:        Windows 7 
+# Attackmodes:   HID
+
+###### OPTIONS #######
+
+# Amount of time to flip screen. 1 = flips screen up, left, down then right once.
+time = 20
+
+###### OPTIONS #######
+
+for run in {1..$time}
+do
+  Q DELAY 500
+  Q WINDOWS ALT UPARROW
+  Q LED Y SINGLE
+  Q DELAY 500
+  Q WINDOWS ALT LEFTARROW
+  Q LED Y SINGLE
+  Q DELAY 500
+  Q WINDOWS ALT DOWNARROW
+  Q LED Y SINGLE
+  Q DELAY 500
+  Q WINDOWS ALT RIGHTARROW
+  Q LED Y SINGLE
+done
+
+### READ ME - PLEASE ADD ###
+
+                                                       
+```                                                       
+/|                    _..._     _..._                  
+||                  .'     '. .'     '..-.          .- 
+||                 .   .-.   .   .-.   .\ \        / / 
+||  __             |  '   '  |  '   '  | \ \      / /  
+||/'__ '.   _    _ |  |   |  |  |   |  |  \ \    / /   
+|:/`  '. ' | '  / ||  |   |  |  |   |  |   \ \  / /    
+||     | |.' | .' ||  |   |  |  |   |  |    \ `  /     
+||\    / '/  | /  ||  |   |  |  |   |  |     \  /      
+|/\'..' /|   `'.  ||  |   |  |  |   |  |     / /       
+'  `'-'` '   .'|  '/  |   |  |  |   |  | |`-' /        
+          `-'  `--''--'   '--'--'   '--'  '..'         
+         .---.                                         
+         |   |.--._________   _...._                   
+     _.._|   ||__|\        |.'      '-.                
+   .' .._|   |.--. \        .'```'.    '.              
+   | '   |   ||  |  \      |       \     \             
+ __| |__ |   ||  |   |     |        |    |             
+|__   __||   ||  |   |      \      /    .              
+   | |   |   ||  |   |     |\`'-.-'   .'               
+   | |   |   ||__|   |     | '-....-'`                 
+   | |   '---'      .'     '.                          
+   | |            '-----------'                        
+   |_| 
+   ```
+   
+# Bunny-Flip - a BB script you didn't know you needed
+Bunny-Flip is the future. Who needs to manually flip a monitor when you can do it virtually?
+
+Windows 7 only. 
+Bunnyscript uses a simple loop to flip screens every 0.500 seconds. You may need to adjust the time.
