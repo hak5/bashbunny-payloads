@@ -1,7 +1,7 @@
 # sMacAndGrab
 
 Author: audibleblink  
-Version: Version 1.1  
+Version: Version 1.2  
 Target: macOS  
 
 ## Description
