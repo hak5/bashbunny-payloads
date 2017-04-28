@@ -16,6 +16,8 @@ The following files must exist in the switch folder:
 
 theme.themepack - The Windows theme file used to set the wallpaper and colors of the screen.
 
+Note: themepack files are windows zipfiles which contain wallpapers and other files (screensavers, sounds, etc).  You can export your own themepack using Windows GUIs.  Just look it up `exporting a windows themepack`.
+
 ## Description
 Executes theme file (theme.themepack) from the RAZ_ThemeChanger folder in the payloads library of the Bash Bunny USB Disk partition.
 
