@@ -1,15 +1,16 @@
 # RAZ_ThemeChanger
 * Author: sil3n7h
-* Version: 1.1
+* Version: 1.2
 * Target: Windows 7+
 * Category: Prank
 * Attackmode: HID, STORAGE
 
 ## Change Log
-| Version | Changes                       |
-| ------- | ------------------------------|
-| 1.1     | Updated for firmware 1.1      |
-| 1.0     | Initial release               |
+| Version | Changes                                |
+| ------- | ---------------------------------------|
+| 1.2     | Updated docs and check for themepack   |
+| 1.1     | Updated for firmware 1.1               |
+| 1.0     | Initial release                        |
 
 ## Dependencies
 The following files must exist in the switch folder:

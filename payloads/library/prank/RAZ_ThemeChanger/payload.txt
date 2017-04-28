@@ -2,7 +2,7 @@
 #
 # Title:         Change windows theme
 # Author:        sil3n7h
-# Version:       1.1
+# Version:       1.2
 # Target:        Windows 7+
 # 
 # Executes theme file (theme.themepack) from the RAZ_ThemeChanger folder 
