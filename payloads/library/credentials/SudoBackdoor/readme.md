@@ -11,7 +11,7 @@ Cleaner: Get back the password grabbed by the sudo backdoor and do cleanup.
 
 ## Configuration
 
-Inside the injector and the cleaner you can specify macos=true to switch the playload to macos mode.    
+Inside the injector and the cleaner you can specify mac=true to switch the playload to macos mode.    
 
 ## STATUS
 Injector
