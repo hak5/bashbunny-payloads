@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# Title:         90s Mode
+# Author:        Hak5Darren
+# Version:       1.1
+# Category:      Prank
+# Target:        Windows XP SP3+
+# 
+# Turns back the clock to a k-rad ultra ereet 1990's VGA resolution
+# Executes p.ps1 from the selected switch folder of the Bash Bunny USB Disk partition,
+
+LED SETUP
+GET SWITCH_POSITION
+ATTACKMODE HID STORAGE
+LED ATTACK
+RUN WIN powershell \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\r.ps1')\"
+LED FINISH
