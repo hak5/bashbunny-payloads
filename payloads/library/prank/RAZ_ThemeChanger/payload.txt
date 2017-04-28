@@ -12,6 +12,7 @@
 # | Status     | Color                         | Description                                      |
 # | ---------- | ------------------------------| ------------------------------------------------ |
 # | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
+# | FAIL1      | Red slow blink                | Could not find the theme.themepack file          | 
 # | ATTACK     | Yellow single blink           | Running the VBScript                             | 
 # | FINISH     | Green blink followed by SOLID | Script is finished                               | 
 
@@ -20,6 +21,12 @@ LED SETUP
 
 # Get the switch position
 GET SWITCH_POSITION
+
+# Check for all the files - error if not found. If found, put into variables
+if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/theme.themepack" ] ; then
+    LED FAIL1
+    exit 1
+fi
 
 # Set the attack mode to HID and STORAGE
 ATTACKMODE HID STORAGE

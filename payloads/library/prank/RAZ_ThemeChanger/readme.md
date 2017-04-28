@@ -26,5 +26,6 @@ None
 | Status    | Color                         | Description                                      |
 | --------- | ------------------------------| ------------------------------------------------ |
 | SETUP     | Magenta solid                 | Setting attack mode, getting the switch position | 
+| FAIL1     | Red slow blink                | Could not find the theme.themepack file          | 
 | ATTACK    | Yellow single blink           | Running the VBScript                             | 
 | FINISH    | Green blink followed by SOLID | Script is finished                               |
