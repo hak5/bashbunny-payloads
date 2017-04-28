@@ -15,16 +15,16 @@ Inside the injector and the cleaner you can specify macos=true to switch the pla
 
 ## STATUS
 Injector    
-| LED                | Status               |
-| ------------------ | -------------------- |
-| White              |  Ready               |
-| Ammber blinking    |  Waiting for server  |
-| Blue blinking      |  Attacking           |
-| Green              |  Finished            |
+| LED              | Status               |
+| ---------------- | -------------------- |
+| White            |  Ready               |
+| Ammber blinking  |  Waiting for server  |
+| Blue blinking    |  Attacking           |
+| Green            |  Finished            |
     
 Cleaner
-| LED              | Status                 |
-| ---------------- | ----------             |
-| White            |  Ready                 |
-| Blue blinking    |  Attacking             |
-| Green            |  Finished              |
+| LED              | Status               |
+| ---------------- | -------------------- |
+| White            |  Ready               |
+| Blue blinking    |  Attacking           |
+| Green            |  Finished            |
