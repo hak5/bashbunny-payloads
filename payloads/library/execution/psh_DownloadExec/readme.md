@@ -2,11 +2,11 @@
 ## Powershell Download and Execute
 
 * Author: LowValueTarget
-* Version: Version 1.1
+* Version: Version 1.2
 * Target: Windows XP SP3+ (Powershell)
 * Category: Powershell
 * Attackmodes: HID, RNDIS_Ethernet
-* Firmware: >= 1.1
+* Firmware: >= 1.2
 
 ## Description
 
@@ -21,6 +21,5 @@ Ensure psh.txt exists in payload directory. This is the powershell script that w
 | Attack Stage        | Description                              |
 | ------------------- | ---------------------------------------- |
 | Stage 1             | Running Initial Powershell Commands      |
-| Stage 2             | Turning up web server and DHCP           |
 | Stage 3             | Delivering powershell payload            |
 ```
