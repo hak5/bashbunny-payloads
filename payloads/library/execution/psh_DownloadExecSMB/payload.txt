@@ -2,7 +2,7 @@
 #
 # Title:         Powershell Download and Execute SMB
 # Author:        LowValueTarget
-# Version:       1.1
+# Version:       1.2
 # Category:      Powershell
 # Target:        Windows XP SP3+ (Powershell)
 # Attackmodes:   HID, RNDIS_ETHERNET
