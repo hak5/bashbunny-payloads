@@ -1,8 +1,6 @@
 LED SETUP
 ATTACKMODE HID STORAGE
 
-# Set your language here
-DUCKY_LANG us
 
 # Check for switch position to make it easier for us.
 GET SWITCH_POSITION
