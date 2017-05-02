@@ -7,7 +7,9 @@
 
 ## About
 A bit of a fork from WiFiCreds, this uses the same Powershell attack to get wifi networks and their passwords.
+
 WifiPass starts with getting the list of wireless networks saved on the device, storing those to a file.  With a little bit of logic, it runs through the networks, only saving out networks that have a Key Content of anything besides 1 (1 being used in the case of WEP and open networks).
+
 It stores all those in a loot file with the name of the computer.  Eject, sync, Ghostbusters reference, then you're good to go.
 
 # No Configuration needed
