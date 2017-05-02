@@ -49,6 +49,10 @@ official Bash Bunny payload at Github
    Edit Get-WifiCreds.ps1 and change ".... | Select-String -Pattern entries to your language if other than "de" or "us"
 
 3. Copy all files and folders in Githubs DumpCred Folder to your favorit switch folder		
+2. Change DUCKY_LANG in payload.txt if needed, 
+   Edit Get-WifiCreds.ps1 and change ".... | Select-String -Pattern entries to your language if other than "de" or "us"
+
+3. Copy all files and folders in Githubs DumpCred Folder to your favorit switch folder		
 				
 4. eject Bash Bunny safely!!
 
@@ -86,6 +90,21 @@ https://forums.hak5.org/index.php?/topic/40806-payload-new-dumpcreds-22
 Version 2.2
  [Build 1008]
  - Removed DUCKY_LANG from payload.txt because set it in config.txt [FW 1.2]. 
+ [Build 1007] 
+ - Some Errors fixed with Char Encoding and Encrypted PS Payloads in Windows 7 
+
+ [Build 1006]
+- smbserver stuff removed
+- handshake removed
+- HTTP Server added (Download Powershell scripts, upload loot)
+- Invoke-m1m1d0gz.ps1 AES encrypted to Invoke-M1m1d0gz.enc. 
+     Not really neccessary but if you are in storage mode, the AV doesn't remove it. :-)
+- All in all a little bit faster
+- remove the debug code
+- recoded the Get-WiFiCreds.ps1 for working on Windows 7
+
+Version 2.1
+Version 2.2
  [Build 1007] 
  - Some Errors fixed with Char Encoding and Encrypted PS Payloads in Windows 7 
 
