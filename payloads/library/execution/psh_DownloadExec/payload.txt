@@ -30,10 +30,6 @@ SERVER_LOG=$PAYLOAD_DIR/server.log
 rm -f $SERVER_LOG
 
 # Check for gohttp
-if [ ! -f /tools/gohttp ]; then
-    cp -r $PAYLOAD_DIR/gohttp /tools/
-    chmod +x /tools/gohttp/gohttp
-fi
 REQUIRETOOL gohttp
 
 # Start web server
