@@ -2,11 +2,11 @@
 ## Powershell Download and Execute SMB
 
 * Author: LowValueTarget  
-* Version: Version 1.0  
+* Version: Version 1.2  
 * Target: Windows XP SP3+ (Powershell)  
 * Category: Powershell  
 * Attackmodes: HID, RNDIS_Ethernet  
-* Firmware: >= 1.1  
+* Firmware: >= 1.2  
 
 ## Description
 
@@ -21,6 +21,5 @@ Quick HID attack to retrieve and run powershell payload from BashBunny SMBServer
 
 | Attack Stage        | Description                   |
 | ------------------- | ------------------------------|
-| Stage 1             | HID                           |
-| Stage 2             | RNDIS_ETHERNET                |
-| Stage 3             | Delivering powershell payload |
+| Stage 1             | Powershell                    |
+| Stage 2             | Delivering powershell payload |
