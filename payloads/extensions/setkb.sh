@@ -28,7 +28,7 @@ function SETKB() {
       'DONE')
          QUACK GUI r
          QUACK DELAY 500
-         QUACK "STRING powershell.exe \$back2kb=(get-Culture | Select -ExpandProperty Name) ; Set-WinUserLanguageList -LanguageList \$back2kb -force; "
+         QUACK "STRING powershell.exe \$sl=(Get-WinSystemLocale | Select -ExpandProperty Name) ; Set-WinUserLanguageList -LanguageList \$sl -force; "
          QUACK ENTER
          QUACK DELAY 1500
 
