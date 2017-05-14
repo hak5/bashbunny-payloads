@@ -1,15 +1,17 @@
 JavaScript Meterpreter Stager Win x86_64
 
-Author: subinacls
+Author: SubINclS
 Version: Version 0.1
-Target: Windows 10 x64
+Target: Windows 10
 
 Description:
 
   - Tested successful on Win10
-  - Modified from original posted code:
+  - Modified from following like:
     - https://github.com/Cn33liz/JSMeter/blob/master/JSMeter.js
-  - USB HID Attck that attempts HTTP download of two (2) additional payloads.
+      - Run js on target machine, cscript JSMeter.js
+  - USB HID STORAGE Attck
+    - Attempts HTTP(s) download of Two (2) additional payloads.
   - These files coinsist of:
     - BB-Meterpreter-Winx64.js -> Actual bytecode of Meterpreter Stager payload
     - inv.vbs -> creates hidden command terminal to execute commands
