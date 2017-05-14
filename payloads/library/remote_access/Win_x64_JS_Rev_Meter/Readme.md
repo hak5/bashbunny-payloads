@@ -54,8 +54,10 @@ Configuration:
 
 Status:
 
-  - LED	  =>  Status/PHASE
-  - Green	=>  Stage1/EXECUTING
-  - Red	  =>  Stage2/EXECUTING
-  - Blue  =>  Stage3/SHUTDOWN
-  - OFF   =>  Remove Device from victim
+  - LED =>  Status/PHASE
+  - G   =>  Power/INITILIZE
+  - Off =>  Init/MOUNTING
+  - G   =>  Stage1/EXECUTING
+  - R   =>  Stage2/EXECUTING
+  - B   =>  Stage3/SHUTDOWN
+  - OFF =>  Remove Device from victim
