@@ -7,13 +7,13 @@ Target: Windows 10 x64
 Description:
 
   Tested successful on Win10
-  Modified from original posted code:
-    https://github.com/Cn33liz/JSMeter/blob/master/JSMeter.js
-  USB HID Attck that attempts HTTP download of two (2) additional payloads.
-  These files coinsist of:
-    BB-Meterpreter-Winx64.js -> Actual bytecode of Meterpreter Stager payload
-    inv.vbs -> creates hidden command terminal to execute commands
-  Attempts to execute the malicious payload in an automated fashion from hidden cmd prompts
+  - Modified from original posted code:
+    - https://github.com/Cn33liz/JSMeter/blob/master/JSMeter.js
+  - USB HID Attck that attempts HTTP download of two (2) additional payloads.
+  - These files coinsist of:
+    - BB-Meterpreter-Winx64.js -> Actual bytecode of Meterpreter Stager payload
+    - inv.vbs -> creates hidden command terminal to execute commands
+  - Attempts to execute the malicious payload in an automated fashion from hidden cmd prompts
 
 Script Logic:
 
