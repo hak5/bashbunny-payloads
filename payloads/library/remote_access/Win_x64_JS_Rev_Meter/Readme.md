@@ -1,8 +1,6 @@
 JavaScript Meterpreter Stager Win x86_64
 
-Author: SubINclS
-Version: Version 0.1
-Target: Windows 10
+(Author: SubINclS | Version: Version 0.1 | Target: Windows 10)
 
 Description:
 
