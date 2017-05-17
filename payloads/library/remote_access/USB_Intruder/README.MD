@@ -40,3 +40,5 @@ Replace the shell.bat file in the USB_Intruder folder with your own custom Meter
 | Yellow Flashing | Cleanup of Run   |
 | Green Flashing  | Sync/EOF         |
 | Solid Green     | 100% Complete    |
+
+Discussion and Comments at https://forums.hak5.org/index.php?/topic/40981-payloadusb_intruder/
