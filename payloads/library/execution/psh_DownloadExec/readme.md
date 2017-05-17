@@ -2,11 +2,11 @@
 ## Powershell Download and Execute
 
 * Author: LowValueTarget
-* Version: Version 1.2
+* Version: Version 1.3
 * Target: Windows XP SP3+ (Powershell)
 * Category: Powershell
 * Attackmodes: HID, RNDIS_Ethernet
-* Firmware: >= 1.2
+* Firmware: >= 1.3
 
 ## Description
 
@@ -24,17 +24,7 @@ gohttp is a standalone simple webserver that is quicker and more stable than pyt
 
 __Installation__
 
-Assuming you have Golang Installed (https://golang.org/dl/)
-
-```
-go get -u github.com/itang/gohttp
-cd $GOPATH/src/github.com/itang/gohttp
-GOOS=linux GOARCH=arm go build
-mkdir $HOME/gohttp
-mv gohttp $HOME/gohttp/
-```
-
-Then copy the gohttp folder in your home directory to the BashBunny /tools/ folder.
+See Hak5's Tool Thread Here: https://forums.hak5.org/index.php?/topic/40971-info-tools/
 
 ## STATUS
 ```
