@@ -16,6 +16,7 @@ Sets powershell execution to unrestricted
 Copies files from the USB_Intruder directory on the BashBunny to the hidden ProgData folder in the Windows directory
 Creates a new user with the following credentials - pwnie:dungothacked
 Shares the root of the C: drive with full permissions to the new user pwnie with the label HACKED$ (Hidden)
+Hides the new user pwnie from the logon screen
 Executes the eject.ps1 file that properly ejects the Mass Storage portion of the payload
 Executes a shell.bat file that is in fact a Meterpreter script calling back to the Attacker's Handler (RTFM if you don't know how to DIY)
 Cleans up the Run dialogue history
