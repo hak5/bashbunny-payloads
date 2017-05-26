@@ -1,0 +1,34 @@
+# Title:         Bunny-Flip
+# Description:   Flips screen for 20 'rounds' and blinks yellow every time.
+# Author:        Hkyq
+# Version:       1.1
+# Category:      Prank
+# Target:        Windows 7 
+# Attackmodes:   HID
+
+ATTACMODE HID
+
+###### OPTIONS #######
+
+# Amount of time to flip screen. 1 = flips screen up, left, down then right once.
+time = 20
+
+###### OPTIONS #######
+
+for run in {1..$time}
+do
+  Q DELAY 300
+  Q WINDOWS ALT UPARROW
+  Q LED Y SINGLE
+  Q DELAY 300
+  Q WINDOWS ALT LEFTARROW
+  Q LED Y SINGLE
+  Q DELAY 300
+  Q WINDOWS ALT DOWNARROW
+  Q LED Y SINGLE
+  Q DELAY 300
+  Q WINDOWS ALT RIGHTARROW
+  Q LED Y SINGLE
+done
+
+
