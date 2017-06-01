@@ -34,4 +34,4 @@ Here is the<a href="https://github.com/CoreSecurity/impacket" target=_blank>impa
 | FINISH  | Complete "Light is green trap is clean"     |
 
 ## Discussion
-[Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/40240-poisontap-on-the-bunny/ "Hak5 Forum Thread")
+[Hak5 Forum Thread](https://forums.hak5.org/index.php?/topic/41132-payload-smbhashgrab/ "Hak5 Forum Thread")
