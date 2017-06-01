@@ -1,8 +1,8 @@
 # SMB Hash Grabbing for Bash Bunnys
 
-Author: Combat_Wombat
-Version: Version 1.0
-Credit: <a href="https://twitter.com/zac_borders" target=_blank>@zac_borders</a>
+* Author: Combat_Wombat
+* Version: Version 1.0
+* Credit: <a href="https://twitter.com/zac_borders" target=_blank>@zac_borders</a>
 
 ## Description
 Bash Bunny script to exfiltrate hash via SMB attack standalone against Windows Domain computers.
