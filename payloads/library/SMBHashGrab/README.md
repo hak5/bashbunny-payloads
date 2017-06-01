@@ -1,4 +1,4 @@
-# BunnyTap for Bash Bunnys
+# SMB Hash Grabbing for Bash Bunnys
 
 Author: Combat_Wombat
 Version: Version 1.0
