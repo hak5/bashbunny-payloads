@@ -6,20 +6,20 @@
 
 ## Description
 Bash Bunny script to exfiltrate hash via SMB attack standalone against Windows Domain computers.
-Inspired by Darren's <a href="https://twitter.com/hak5darren/status/869575984483147777" target=_blank>post</a>.<a href="https://twitter.com/hak5darren" target=_blank>@hak5darren</a> || <a href="https://hakshop.com/blogs/news/whats-the-quickest-way-to-steal-a-windows-password-hash" target=_blank>Hak5 Blog</a>
+Inspired by Darren's <a href="https://twitter.com/hak5darren/status/869575984483147777" target=_blank>post</a>.  <a href="https://twitter.com/hak5darren" target=_blank>@hak5darren</a> || <a href="https://hakshop.com/blogs/news/whats-the-quickest-way-to-steal-a-windows-password-hash" target=_blank>Hak5 Blog</a>
 
 ## Configuration
 
 Run on a domain computer that is logged in.
 
-## Requirements***
+## Requirements
 
-impacket must be installed.
-	Download impacket
-	Place in /tools
-	This will install when you reconnect the drive
-	From the BashBunny run python setup.py install" in /tools/impacket
-	<a href="https://github.com/CoreSecurity/impacket" target=_blank>impacket github</a> <>
+* impacket must be installed.
+	1) Download impacket
+	2) Place in /tools
+	3) This will install when you reconnect the drive
+	4) From the BashBunny run python setup.py install" in /tools/impacket
+Here is the<a href="https://github.com/CoreSecurity/impacket" target=_blank>impacket github</a>.
 
 
 ## Payload LED STATUS
