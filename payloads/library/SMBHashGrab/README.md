@@ -19,7 +19,7 @@ Run on a domain computer that is logged in.
 	2) Place in /tools
 	3) This will install when you reconnect the drive
 	4) From the BashBunny run python setup.py install" in /tools/impacket
-Here is the<a href="https://github.com/CoreSecurity/impacket" target=_blank>impacket github</a>.
+Here is the <a href="https://github.com/CoreSecurity/impacket" target=_blank>impacket github</a>.
 
 
 ## Payload LED STATUS
