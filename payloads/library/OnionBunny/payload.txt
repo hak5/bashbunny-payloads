@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# Title:         OnionBunny
+# Author:        mrhut10
+# Version:       1.0
+# Category:      
+# Desc			 
+# Target:        Windows 10
+# Attackmodes:   n/a
+
+# OPTIONS	n/a
+
+
+### this is where code will be. 
+
+### source Code not published can expect it shortly,
+### just need to migrate my previously made powershell script into this.
