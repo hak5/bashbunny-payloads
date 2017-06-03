@@ -1,0 +1,56 @@
+
+#dialog {
+    width: 95%;
+    background: url(/images/capture_dialog_top_mobile.gif) top left no-repeat;
+    border-radius: 15px;
+}
+
+#dialog_header {
+    height: auto;
+    padding-bottom: 0;
+}
+
+#dialog_header a {
+    left: 20px;
+}
+
+#dialog_header h1 {
+    font-size: 1.7em;
+    padding-top: 45px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+#dialog_content {
+    padding: 0 5px 1px;
+}
+
+#dialog_content h3 { margin: 0 0 5px; }
+
+#dialog_content p {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#dialog_footer {
+    background: url(/images/capture_dialog_mid.gif) bottom left no-repeat;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 9px 5px 15px;
+}
+
+.required, #dialog_content a {
+    color: #ffc726;
+}
+
+tr.gap td { padding-top: 10px; font-size: .1em; }
+th { padding: 2px 7px 2px 2px; text-align: right; font-size: 1.3em; }
+.compact th { padding: 2px; }
+td { padding: 2px 2px 2px 7px; }
+
+.login_input {
+  width: 180px;
+}
+
+.systray { display: none; }
+#connect{padding-right:0}

@@ -1,0 +1,1427 @@
+@charset "UTF-8";
+
+/* CSS Reset */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, figure, footer, header, 
+hgroup, menu, nav, section, menu,
+time, mark, audio, video {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}         
+
+article, aside, figure, footer, header, 
+hgroup, nav, section { display:block; }
+
+nav ul { list-style:none; }
+
+blockquote, q { quotes:none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content:''; content:none; }
+
+a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; }
+
+ins { background-color:#ff9; color:#000; text-decoration:none; }
+
+mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom:1px dotted #000; cursor:help; }
+
+/* tables still need cellspacing="0" in the markup */
+table { border-collapse:collapse; border-spacing:0; }
+
+hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 0; padding:0; }
+
+/*input, select { vertical-align:middle; }*/
+
+/* END RESET CSS */
+
+
+/* Sticky Footer */
+
+html, body {height: 100%;}
+
+.page {min-height: 100%;}
+
+.main {
+    overflow:auto;
+    padding-bottom: 50px; /* must be same height as the footer */
+    margin-left: auto;
+    margin-right: auto;}   
+    
+    .footer {
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    font-size: 10px;
+    color: #333333;
+    background-image: url(../../../graphics/hiltonV2/footer_bk.jpg);
+    background-position: 0 top;
+    background-repeat: repeat-x;
+    position:relative;
+    width: 100%;
+    height: 50px;
+    margin-top: -50px; /* negative value of footer height */
+    clear:both;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+    .footer_txt {
+    padding-top: 20px;
+    text-align:center;
+    }
+
+.footer_txt a {
+    text-decoration:none;
+    color:#333333;
+}
+    
+/*Opera Fix*/
+body:before {
+    content:"";
+    height:100%;
+    float:left;
+    width:0;
+    margin-top:-32767px;/
+}
+
+/* End Sticky Footer */
+
+body{
+    background-color: #efefef;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 12px;
+    color: #6c6e6e;
+
+}
+
+.page {
+    position:relative;
+    display:block;
+    width: 1000px;
+    margin-left:auto;
+    margin-right:auto;
+
+}
+
+/*BEGIN TOPLINKS STYLES*/
+.toplinks {
+    margin-bottom: 5px;
+    padding-top: 5px;
+    position:relative;
+    display:block;
+    width: 960px;
+    height:24px;
+    font-size: 12px;
+}
+
+.toplinks a {
+    color: #20417e;
+    font-weight: bold;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.toplinks #rightside {
+    float:right;
+}
+
+#aupAgree {
+	margin-top: 5px;
+}
+
+#rightside select {
+    top: 10px;
+}
+/*END TOPLINKS STYLES*/
+
+/*BEGIN NAVBAR STYLES*/
+.navbar {
+    width:960px;
+    height:100px;
+}
+
+.location_logo_box {
+    height: 100px;
+    float: left;
+    margin-right: 13px;
+}
+
+.navbar_divider {
+    width: 1px;
+    height: 100px;
+    background-image: url(../../../graphics/hiltonV2/navbar_divider.gif);
+    float: left; 
+}
+
+.location_address {
+    width: 400px;
+    font-size: 11px;
+    color: #6e6e6e;
+    margin-top: 48px;
+    margin-left: 13px;
+    float: left;
+}
+
+.address1 {
+    font-weight: bold;
+}
+
+.address2 {
+}
+
+.att_logo {
+    width: 156px;
+    height: 100px;
+    background-image: url(../../../graphics/hiltonV2/att_wifi_htspt_hz_rgb_grd.png);
+    float: right;
+}
+/*END NAVBAR STYLES*/
+
+/*BEGIN CONTENT LAYOUT*/
+
+.content {
+    width:960px;
+    background-image: url(../../../graphics/hiltonV2/content_main_bg2.gif);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    display: table;
+    border-color: blue;
+    border: 1px;
+}
+
+.leftcolumn {
+    display:block;
+    position:relative;
+    width:472px;
+    height: 424px;
+    float:left;
+
+}
+    
+.rightcolumn {
+    position:relative;
+    width:488px;
+    float:right;
+    background-image: url(../../../graphics/hiltonV2/right_bg.gif);
+    background-repeat: no-repeat;
+    background-position: top;
+    margin-bottom: 19px;
+
+}
+
+
+.dualspan, #wypt_trans {
+    width: 960px;
+    float: left;
+}
+/*END CONTENT LAYOUT*/
+/*START GENERIC CONTENT STYLES*/
+/* Begin Title Styles */
+
+.content h1 {
+    font-size: 24px;
+    font-weight: lighter;
+    font-stretch: semi-condensed;
+    margin-left: 19px;
+    margin-top: 37px;
+    color: #504d4d;
+}
+
+.subtitle {
+    position: absolute;
+    left: 19px;
+    top:48px;
+    font-size: 11px;
+}
+
+.subtitle_accent {
+    font-weight: bold;
+}
+
+.accent_color {
+    color: #a89654;
+}
+
+.accent_spacing {
+    letter-spacing: .09em;
+}
+/* End Title Styles */
+
+.content h3 {
+    font-size: 16px;
+}
+
+.content h4 {
+    margin-top: 4px;
+    font-size: 13px;
+    margin-top: 12px;
+    float:left;
+    clear:none;
+}
+
+.content h5 {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.content a {
+    text-decoration: none;
+    color: #20417e;
+    font-weight: bold;
+}
+
+.form_item {
+    position: relative;
+    display: block;
+    padding-top:8px;
+    margin-left:11px;
+
+}
+
+.form_item_tac {
+    position: relative;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+	display: block;
+
+}
+
+.form_sub_item {
+    position: relative;
+    display: block;
+    margin-top: 0px;
+}
+
+.form_input {
+    height: 28px;
+    border-width: 1px;
+    border-color:  #d3d3d3;
+    border-style: solid;
+    color: #6c6e6e;
+    font-size: 14px;
+    line-height: 28px;
+    padding-left: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    padding-top: 0px;
+}
+
+.form_dropdown {
+	height: 32px;
+	border-width: 1px;
+	border-color:  #d3d3d3;
+	border-style: solid;
+	color: #6c6e6e;
+	font-size: 14px;
+/*	line-height: 28px;*/
+	padding-top: 5px; 
+	 padding-bottom: 5px; 
+	padding-left: 5px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	background-color: #ffffff;
+}
+
+/*
+.form_dropdown select {
+  height:30px;
+  width: 188px;
+  font-size: 14px;
+  border: 1px solid #D5E6EE;
+}
+
+.skinned-wrapper {
+	height:30px;
+	background: url('../../../graphics/hiltonV2/skin.png') no-repeat scroll 0pt 100%; } .skinned-wrapper select {
+
+	opacity: 0;
+	filter: alpha(opacity = 0);
+	moz-opacity: 0;
+	position: relative;
+	z-index: 100;
+}
+.skinned-wrapper .skinned-text {
+  position: absolute;
+	text-indent: 10px;
+	width: 150px;
+	z-index: 1;
+  padding: 6px 0 0;
+}
+.skinned-wrapper .skinned-text,
+.skinned-wrapper select,
+.skinned-wrapper select option {
+	height:30px;
+	width: 188px; 
+	font-size: 14px;
+	color: #6C6E6E;
+}
+*/
+
+
+.form_title {
+    margin-left: 2px;
+}
+
+.hhonors_option .form_title {
+	font-size: 13px;
+}
+
+.form_sub_title {
+    font-weight: normal;
+    font-size: 11px;
+}
+
+.form_set {
+	position: relative;
+    height: 32px;
+    /*display: block;*/
+	margin-bottom: 12px;
+}
+
+.dual_form {
+	position: relative;
+    /*height: 28px;*/
+    /*display: block;*/
+	margin-bottom: 12px;
+	float:left;
+	clear:none;
+	margin-right: 10px;
+}
+
+#HiltonLoginForm .dual_form {
+	margin-bottom: 0px;
+}
+
+#HiltonLoginForm  #roamRealm {
+	margin-bottom: 75px;
+}
+
+
+#promo_button_option .long {
+	margin-bottom: 80px;
+}
+
+#last_form{
+	margin-bottom: 0px;
+}
+
+
+.option_detail_subscriber .form_set, .option_detail_code .form_set {
+    margin-top: 0px;
+        backgroud-color:green;
+    float: left;
+}
+
+.right { 
+    float:right; 
+    clear:right; 
+	height: 32px;
+    position: relative; 
+    top:0px; 
+    margin-right: 60px;
+	margin-bottom: 56px;
+}
+
+.form_element_spacing, .form_element_cb {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 1px;
+    border: 0px;
+    
+}
+
+.learn_more {
+    margin-left: 10px;
+    color: #20417e;
+    cursor: default;
+}
+
+#subscriber_button_option .domain_dropdown {
+	clear: left;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.submit_buttons {
+    float:left;
+    clear:none;
+    margin-top: 35px;
+    
+}
+
+.button_connect {
+    float: left;
+    margin-left: 20px;
+}
+
+.button_back {
+    clear: right;
+}
+
+.inset_label {
+    color: #6c6e6e;
+    font-size: 14px;
+    padding-left: 5px;
+    padding-top: 5px;
+    top: 3px;
+    left: 2px;
+    position: absolute;
+}
+
+.main_content {
+    width: 469px;
+    margin-left: 19px;
+    margin-top: 13px;
+    display: table;
+}
+
+.error_container {
+    color: #9e0b0f;
+    font-size: 10px;
+    margin-top: 10px;
+    background-color: #fef0ec;
+    margin-right: 19px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.error_accent {
+    font-weight: bold;
+}
+
+.info_container {
+    color: #174ac4;
+    font-size: 10px;
+    margin-top: 10px;
+	margin-bottom: 10px;
+    background-color: #ecf1fe;
+    margin-right: 19px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/*END GENERIC CONTENT STYLES*/
+
+/*BEGIN INDEX_PAGE STYLES*/
+
+
+.hhonors_option {
+    border: 1px solid #ECECEC;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    padding: 10px 10px 0;
+    width: 100%;
+	/*height: 40px;*/
+}
+
+.hhonors_option .form_item {
+    margin-left: 0px;
+}
+
+.hhonors_container {
+    width: 208px;
+    float: left;
+    margin-top: 18px;
+    height: 272px;
+    
+}
+
+.hhonors_desc {
+   /* font-size: 10px;
+    color: #555555;
+    float:right;
+    clear:none;
+    width:210px;
+    top: -10px;
+	margin-left: 10px;*/
+	width:205px;
+	position: relative;
+	left: 200px;
+	top: -20px;
+	font-size: 10px;
+    color: #555555;
+}
+
+.hhonors_ad {
+    float:right;
+    clear:none;
+    font-size: 10px;
+    font-weight: bold;
+    margin-top:35px;
+}
+
+#index_page .hhonors_ad {
+	margin-top: 40px;
+}
+
+#add_device {
+	font-size: 80%;
+	margin-left: 20px;
+}
+
+#tosaup {
+	font-size: 80%;
+	margin-left: 10px;
+	width: 200px;
+}
+
+.options_container h5 {
+	margin-bottom: 5px;
+}
+
+.options_container .hhonors_ad {
+	margin-top: 10px;
+}
+
+.hhonors_logo {
+    margin-top: 12px;
+    margin-left: 20px;
+}
+
+.hhonors_accent_color {
+    color: #20417e;
+}
+
+.hhonors_link {
+    margin-left: 10px;
+}
+
+.hhonors_button {
+    margin-left: 19px;
+    margin-top: 184px;
+}
+
+.hhonors_password {
+    display: block;
+    margin-top: 13px;
+    font-size: 10px;
+    float:left;
+    clear:both;
+}
+
+.hhonors_join {
+    display: block;
+    margin-top: 2px;
+    font-size: 10px;
+}
+
+.hhonors_container .form_input {
+    width: 180px;
+}
+
+.options_container {
+    width: 410px;
+    float: left;
+    margin-top: 18px;
+}
+
+.choose {
+    text-align: right;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 80%;
+    margin-right: 75px;
+}
+
+.purchase_options_container {
+    width: 220px;
+    float: left;
+    clear:right;
+    margin-left: 10px;
+}
+
+.purchase_options_submit {
+    width: 375px;
+    clear: both;
+}
+
+.options_container .long{
+    width: 300px;
+    margin-right: 8px;
+     height: 28px;
+    border-width: 1px;
+    border-color:  #d3d3d3;
+    border-style: solid;
+    color: #6c6e6e;
+    font-size: 14px;
+    line-height: 28px;
+    padding-left: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    padding-top: 0px;
+}
+
+.room_location { height:30px; width:310px;}
+
+.options_container .half {
+	width: 141px;
+}
+
+.options_container .form_dropdown {
+    width: 148px;
+    margin-right: 5px;
+    margin-top: 12px;
+}
+
+.options_container #tac_title,.options_container #tac_title a {
+    font-weight: 100;
+    font-size: 10px;
+}
+
+.options_container .submit_buttons {
+    position: relative;
+    bottom: 0px;
+    margin-top: 10px;
+}
+
+#index_page .submit_buttons {
+	margin-top: 40px;
+}
+
+.option_detail_subscriber {
+    height: 74px;
+    display: none;
+    overflow: hidden;
+}
+
+.option_detail_code {
+    height: 32px;
+    display: none;
+    overflow: hidden;
+}
+
+.roamRealm {
+	margin-top: 0px;
+}
+
+/* 
+ACH: Added here to accommodate the way motd really works (just simple HTML markup like "B", "P", etc.)
+     and also to allow us to recycle our existing MOTD module
+*/
+.message_of, #wypt_trans .moduleleft_middle, #motd_block .moduleleft_middle {
+    margin-left: 399px;
+    width: 540px;
+    font-size: 12px;
+    margin-bottom: 19px;
+    margin-top: 19px;
+}
+
+.message_of_title, .message_of b, #wypt_trans .moduleleft_middle b, #motd_block .moduleleft_middle b {
+    font-weight: bold;
+    color: #000000;
+}
+
+#wypt_trans .moduleleft_top, #wypt_trans .moduleleft_bottom, #motd_block .moduleleft_top, #motd_block .moduleleft_bottom {
+    visibility:hidden;
+    display:none;
+}
+
+.content_divider {
+    width: 40px;
+    height: 256px;
+    float: left;
+    background-image:  url(../../../graphics/hiltonV2/content_divider.png);
+    background-repeat: no-repeat;
+    margin-top: 18px;
+}
+/*END INDEX_PAGE STYLES*/
+
+
+/*BEGIN CCBILL_PAGE STYLES*/
+
+/*
+.cc_button {
+    margin-top: 10px;
+}
+*/
+
+.ccform_box {
+    width: 100%;
+    display: table;
+    float: left;
+}
+
+#ccform_main_content .hhonors_ad {
+    margin-right:40px;
+}
+
+.ccform_box .form_title {
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    font-weight:bold;
+    width: 110px;
+    display: block;
+    float: left;
+}
+
+.ccform_box #form_cvv2 {
+    width: 50px;
+}
+
+.ccform_box .form_input {
+    width: 180px;
+}
+
+.ccform_box .form_dropdown {
+    width: 188px;
+}
+/*
+.ccform_box #ExpirationYear,.ccform_box #ExpirationMonth {
+    width: 90px;
+}
+
+#ExpirationMonth {
+	margin-right: 5px;
+}
+
+#ExpirationYear {
+	margin-top: 20px;
+	margin-bottom: 21px;
+}*/
+
+.ccform_box #Country {
+	
+}
+
+.ccform_box .cc_link {
+    font-size: 10px;
+    margin-left: 10px;
+}
+
+.expire_time_description {
+	font-size: 18px;
+	margin: 8px 0px 15px 0px;
+	color: #212121;
+	max-width: 200px;
+	clear:none;
+}
+
+#use_connect_page #LastName {
+	margin-left: 20px;
+}
+
+/*END CCBILL_PAGE STYLES*/
+
+
+/*BEGIN PMS_PAGE STYLES*/
+
+.rate_container {
+    width: 200px;
+    float: left;
+    padding-bottom: 20px;
+}
+
+.rate_container .form_input {
+    width: 140px;
+    margin-right: 8px;
+}
+
+.rate_container .form_dropdown {
+    width: 148px;
+    margin-right: 5px;
+    margin-top: 9px;
+}
+
+.rate_container .form_title {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.rate_container .right_column {
+    margin-top: 83px;
+}
+
+.rate_container .form_sub_title {
+    margin-right: 10px;
+}
+
+.rate_container .form_dropdown {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    width: 200px;
+    font-size: 12px;
+}
+
+#pms_page .pms_container .form_input, #use_connect_page .pms_container .form_input {
+    width: 180px;
+    /*margin-top: 9px;*/
+}
+
+#pms_page .rate_container, #use_connect_page .rate_container {
+    width: 200px;
+    float: left;
+    /*margin-left: 100px;*/
+    margin-top: 18px;
+}
+
+#pms_page .hhonors_ad, #use_connect_page .hhonors_ad {
+    /* margin-top: 125px; */  
+}
+
+#use_connect_content h4 {
+	display: none;
+}
+
+
+.pms_container {
+    width: 236px;
+    float: left;
+    margin-top: 18px;
+    height: 290px;
+}
+/*END PMS_PAGE STYLES*/
+
+/*
+.back {
+    background-color: red;
+    display: none;
+    margin-top: 0px;
+    top:0px;
+}
+*/
+
+
+/*BEGIN INDEX_CP_PAGE STYLES*/
+.receipt_container .submit_buttons {
+    position: relative;
+}
+
+.hhonors_welcome_box {
+    margin-top: 44px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.receipt_container .hhonors_ad {
+    position: relative;
+    top:363px;
+}
+
+
+/*END INDEX_CP_PAGE STYLES*/
+
+/*BEGIN INDEX_FAQ_PAGE STYLES*/
+
+#faq_page.page {
+    background-color: #fff;
+    width: 100%;
+}
+
+#faq_page h3 {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left: 19px;
+    margin-right: 19px;
+}
+
+#faq_page h4 {
+    font-size: 16px;
+    margin-top: 19px;
+    margin-left: 19px;
+    margin-right: 19px;
+}
+
+#faq_page h5 {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 40px;
+    margin-right: 19px;
+}
+
+#faq_page p {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 19px;
+    margin-right: 19px;
+    width: 560px;
+}
+
+#faq_page ol {
+    margin-left: 55px;
+    width: 560px;
+}
+
+/*BEGIN HELP PAGE STYLES*/
+
+ul.contents {
+    margin-left: 19px;
+    margin-top: 10px;
+}
+
+ul.question {
+    margin-left: 30px;
+    padding-left: 0px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+
+}
+
+ul.question li{
+    width: 530px;
+    cursor: pointer;
+    list-style: none;
+    margin-left: 0px;
+    list-style-image: url(../../../graphics/hiltonV2/slug.png);
+}
+
+ul.question1 li{
+    width: 530px;
+    cursor: pointer;
+    list-style: none;
+    margin-left: 30px;
+    padding-left: 0px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+ul.question li a:hover,ul.contents a:hover,ul.question1 a:hover,.fineprint a:hover {
+    color:#2f92c6;
+}
+
+ul.contents a, ul.question1 a, .fineprint a,  li.answer a {
+    color: #20417e;
+}
+
+ul.question li li{
+    list-style-image: none;
+    list-style-type:circle;
+    width: 500px;
+    cursor: text !important;
+}
+
+ul.question ul {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+
+ li.answer {
+ border-color: #999;
+ border-style: solid;
+ border-width: 1px;
+ padding-top: 3px;
+ padding-left: 11px;
+ padding-right: 11px;
+ padding-bottom: 11px;
+ font-size: 11px;
+ line-height: 12px;
+ margin-top: 4px;
+ display: none;
+ list-style-image: none !important;
+ list-style-type: none !important;
+ cursor: text !important;
+}
+
+.open {
+    font-size: 11px;
+    line-height: 12px;
+    color:#333;
+    list-style-image: none;
+    list-style-type: none;
+}
+
+ul.question img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+ul.contents li{
+    list-style-image: none;
+    list-style-type: none;
+}
+
+.help_top {
+    display: block;
+    margin-top: 7px;
+}
+
+.help_close {
+    display: block;
+    width: 540px;
+    height: 10px;
+}
+
+.help_close_text {
+    position: absolute;
+    color: #20417e;
+    font-weight: bold;
+    left: 900px;
+    top:5px;
+    text-decoration: none;
+}
+
+.help_close img{
+    float: right;
+    cursor: pointer;
+}
+
+.fineprint {
+    margin-left: 19px;
+    font-size: 10px;
+    margin-top: 19px;
+    width: 560px;
+}
+
+.help_chat {
+    display: block;
+    width: 180px;
+    margin-left: 19px;
+    margin-top: 10px;
+}
+
+/*END HELP PAGE STYLES*/
+
+
+/*END INDEX_FAQ_PAGE STYLES*/
+
+
+/*BEGIN CODE_PAGE_1 STYLES*/
+.code_container {
+    width: 436px;
+    float: left;
+    margin-top: 18px;
+    height: 290px;
+}
+
+.code_container .submit_buttons {
+    position: absolute;
+    left: 255px;
+}
+
+.code_detail {
+background-color: #ececec;
+font-size: 18px;
+padding: 10px;
+text-align: center;
+margin-top: 10px;
+}
+
+.code_alert {
+margin-top: 10px;
+color: #20417e;
+}
+
+.code_payment {
+height: 30px;
+}
+
+.code_payment .form_item {
+float: left;
+width: 216px;
+}
+
+/*END CODE_PAGE_1 STYLES*/
+
+#tosaup_box {
+padding: 40px;
+background-image: url(../../../graphics/hiltonV2/content_main_bg3.gif);
+margin-bottom: 5px;
+}
+
+h2.tosaup_title {
+font-size: 18px;
+}
+
+.tos_head,.tos_subhead, .aup_head, .aup_subhead {
+margin-top: 10px;
+}
+
+
+/*BEGIN PROMOBAR*/
+.promobar {
+    width:960px;
+    height:268px;
+    background-image: url(../../../graphics/hiltonV2/promo_bg.gif);
+    margin-top: 9px;
+}
+
+.promo1 {
+    width:300px;
+    height:250px;
+    float: left;
+    margin-top: 9px;
+    margin-left: 10px;
+    margin-right: 9px;
+}
+
+.promo2 {
+    width:300px;
+    height:250px;
+    float: left;
+    margin-top: 9px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.promo_divider {
+    width:1px;
+    height:250px;
+    float: left;
+    background-image: url(../../../graphics/hiltonV2/promo_divider.gif);
+}
+
+#jiwire_ad, .promo3 {
+    width:300px;
+    height:250px;
+    float: left;
+    margin-top: 9px;
+    margin-left: 9px;
+}
+/*END PROMOBAR*/
+
+/*BEGIN BRANDBAR*/
+
+.brandbar{
+    background-position: left top;
+    background-repeat: no-repeat;
+    border-top-color: #cccccc;
+    border-top-width: 1px;
+    border-top-style: solid;
+    width: 1000px;
+    height: 101px;
+    margin-left:auto;
+    margin-right:auto;
+	background-size: 1000px 101px;
+	background-image: url(/graphics/hiltonV2/brandbar_2016.png);
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+	.brandbar {
+		background-image: url(/graphics/hiltonV2/brandbar_2016_RETINA.png);
+		background-size: 1000px 101px;
+	}
+}
+
+.brandbar ul,.brandbar ul li,.brandbar ul li a {
+    display:block; float:left;
+}
+
+.brandbar ul li a {
+    text-decoration: none;
+}
+
+.brandbar li {
+    /* background-color: #ffcc00;opacity:0.2; 
+    margin-right: 8px;
+    margin-left: 9px;*/
+
+    height: 90px;
+}
+
+/*
+.brandbar #waldorf {
+
+background-image: url(../../../graphics/hiltonV2/logos_gray/waldorf.png);
+    background-repeat: no-repeat;
+
+
+}
+
+.brandbar #conrad {
+
+background-image: url(../../../graphics/hiltonV2/logos_gray/conrad.png);
+    background-repeat: no-repeat;
+
+}
+
+.brandbar #hilton {
+
+background-image: url(../../../graphics/hiltonV2/logos_gray/hilton.png);
+    background-repeat: no-repeat;
+
+}
+
+.brandbar #doubletree { 
+
+background-image: url(../../../graphics/hiltonV2/logos_gray/doubletree.png);
+    background-repeat: no-repeat;
+
+}
+
+.brandbar #embassy {
+
+background-image: url(../../../graphics/hiltonV2/logos_gray/embassy.png);
+    background-repeat: no-repeat;
+
+}
+
+.brandbar #garden {
+
+background-image: url(../../../graphics/hiltonV2/logos_gray/hiltongarden.png);
+    background-repeat: no-repeat;
+
+}
+
+.brandbar #hampton {
+
+background-image: url(../../../graphics/hiltonV2/logos_gray/hampton.png);
+    background-repeat: no-repeat;
+
+}
+.brandbar #homewood {
+
+background-image: url(../../../graphics/hiltonV2/logos_gray/homewood.png);
+    background-repeat: no-repeat;
+
+}
+.brandbar #home2 {
+
+background-image: url(../../../graphics/hiltonV2/logos_gray/home2.png);
+    background-repeat: no-repeat;
+
+}
+.brandbar #vacations {
+
+background-image: url(../../../graphics/hiltonV2/logos_gray/hiltonvacations.png);
+    background-repeat: no-repeat;
+
+}
+*/
+.stage {
+    margin-bottom: 20px;
+    position: relative;
+    display: block;
+    width: 960px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/* END BRANDBAR */
+
+/* Begin Tooltip */
+p#vtip { 
+    display: none; 
+    position: absolute; 
+    padding: 10px; 
+    left: 5px; 
+    font-size: 0.8em; 
+    background-color: white; 
+    border: 2px solid #a6c9e2; 
+    -moz-border-radius: 5px; 
+    -webkit-border-radius: 5px; 
+    z-index: 9999 ;
+    margin-right: 25px;
+}
+
+p#vtip #vtipArrow { 
+    position: absolute; 
+    top: -10px; 
+    left: 5px ;
+}
+
+/* End Tooltip */
+
+/*test*/
+
+div#hitosaup_content.content {
+    background-repeat:repeat-y;
+}
+
+div#lpChatButtonDiv {
+    position:absolute;
+    right:24px;
+}
+
+#promo{
+		cursor: pointer;
+	}
+	.infowindow{
+		position: relative;
+		display: none;
+		width: 810px;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		z-index: 102;
+		padding: 0px;
+	}
+	.infomask {
+	position: fixed;
+	background-color: #000;
+	z-index: 101;
+	display: none;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+	#svpromobox {
+		padding-top:2%;
+		position:fixed;
+	}
+	
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+		.infowindow{
+			width: 360px;
+		}
+
+		#svpromobox {
+	position: absolute;
+	padding-top: 0px;
+}
+
+
+
+.infomask {
+	position: fixed;
+	background-color: #000;
+	z-index: 101;
+	display: none;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+	}
+	
+	
+@media (max-device-width: 480px)  {
+
+.infowindow{
+	position: relative;
+	display: none;
+	width: 360px;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 102;
+
+}
+
+#svpromobox {
+	position: absolute;
+	padding-top: 0px;
+}
+
+.infomask {
+	position: fixed;
+	background-color: #000;
+	z-index: 101;
+	display: none;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+}

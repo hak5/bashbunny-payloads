@@ -1,0 +1,141 @@
+.mwaa-security-widget {
+    background: #eeeeee;
+    clear: both;
+    margin-bottom: 1em;
+}
+
+.mwaa-security-widget .timing-header {
+    background: #03244f url('/sites/all/modules/custom/mwaa_timing/img/security.png') no-repeat 15px center;
+    color: #FFF;
+    font-size: 17px;
+    line-height: 22px;
+    font-family: HelveticaNeue;
+    padding: 20px 15px 20px 54px;
+}
+
+/* The Last updated timestamp */
+.mwaa-security-widget .timing-header span.timestamp {
+    display: inline-block;
+    float: right;
+    font-size: 90%;
+}
+.mwaa-security-widget .timing-body .point {
+    padding: 15px 20px;
+}
+.mwaa-security-widget .point {
+    width: 49.99%;
+    float: right;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 15px 0 22px;
+}
+.mwaa-security-widget.map-link .point {
+    border-bottom: 1px dotted #828282;
+    text-align: right;
+}
+
+.mwaa-security-widget .point:last-child {
+    border-right: 1px dotted #828282;
+    padding-right: 20px;
+}
+
+.mwaa-security-widget .wait-time-location {
+    float: right;
+    font-size: 2em;
+    font-style: italic;
+    margin-top: .9em;
+    color: #555;
+    padding-right: 20px;
+    text-align: right;
+}
+.mwaa-security-widget .wait-time {
+    float: right;
+    min-width: 49.9%;
+    text-align: right;
+}
+.mwaa-security-widget .wait-time .time {
+    display: inline-block;
+    font-size: 3.5em;
+    line-height: 1em;
+    font-family: HelveticaNeueLight;
+}
+
+.mwaa-security-widget .wait-time .format {
+    display: inline-block;
+    margin-top: 1.5em;
+    margin-left: 3px;
+    font-size: 1.25em;
+    font-family: HelveticaNeueLight;
+}
+
+.mwaa-security-widget .map-link {
+    text-align: right;
+    padding: 3px 20px;
+    border-top: 1px dotted #828282;
+    display: none;
+}
+.mwaa-security-widget.map-link .map-link {
+    display: block;
+}
+
+/* Mobile styles */
+.mwaa-security-widget.mobile .point {
+    width: 100%;
+    float: none;
+    box-sizing: border-box;
+    padding: 15px 10px 15px 10px;
+    border-bottom: none;
+}
+
+.mwaa-security-widget.mobile .timing-body {
+    margin-top: 1.35em;
+}
+
+.mwaa-security-widget.mobile .point:last-child {
+    border-top: 1px dotted #828282;
+    border-right: none;
+}
+
+.mwaa-security-widget.mobile .timing-header {
+    position: relative;
+}
+
+.mwaa-security-widget.mobile .timing-header .timestamp {
+    position: absolute;
+    bottom: -1.35em;
+    left: 0;
+    background: #00143E;
+    width: 100%;
+    padding: 0 0 0 20px;
+}
+
+.mwaa-security-widget.mobile.tiny .timing-header span.timestamp span {
+    display: none;
+}
+
+.mwaa-security-widget.mobile.tiny .wait-time-location {
+    float: right;
+    width: auto;
+    font-size: 1.5em;
+    margin-top: 1.25em;
+    padding-right: 7px;
+}
+.mwaa-security-widget.mobile.tiny .wait-time {
+    float: right;
+    width: auto;
+}
+.mwaa-security-widget.mobile.tiny .wait-time .time {
+    display: inline-block;
+    font-size: 2.5em;
+    line-height: 1.5em;
+    font-family: HelveticaNeueLight;
+}
+
+.mwaa-security-widget.mobile.tiny .wait-time .format {
+    display: inline-block;
+    margin-top: 1.5em;
+    margin-left: 3px;
+    font-size: 1.25em;
+    font-family: HelveticaNeueLight;
+}

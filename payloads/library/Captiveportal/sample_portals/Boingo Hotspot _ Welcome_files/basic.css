@@ -1,0 +1,1308 @@
+﻿/* =============================================================================
+   Base
+================================================================================ */
+
+body { 
+	background: #fff; 
+}
+
+body, button, input, select, textarea { 
+	color: #545861; 
+	font-weight: normal;  
+}
+
+/* =============================================================================
+   Links
+   ========================================================================== */
+
+footer a { color: #d42b1e; }
+footer a:visited { color: #d42b1e; }
+footer a:hover, a:focus { color: #d42b1e; text-decoration: underline }
+
+/* =============================================================================
+   Button Styles
+================================================================================ */
+
+/* 
+** Base Button Style 
+*/
+
+a.button,
+input[type=button] {
+	display: block;
+	cursor: pointer; 
+	padding: .4em 1.75em; 
+	margin: 1em 0;	
+	text-align: center;
+	font-size: 120%;
+	font-weight: normal;
+	line-height: 1;
+	color: #555;
+	
+	-webkit-border-radius: .25em;
+	-moz-border-radius: .25em;
+	border-radius: .25em;
+	
+	-moz-text-shadow: 0 1px 0 #fff;
+	-webkit-ext-shadow: 0 1px 0 #fff;
+	text-shadow: 0 1px 0 #fff;	
+	
+	-moz-box-shadow: 0 1px 1px 0 rgba(0,0,0,.5);
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.5);
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.5);
+}
+
+a.button:hover { 
+	text-shadow: none;
+	text-decoration: none;	
+}
+
+a.button:active { 
+	-webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+	-o-box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+	-moz-box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+	box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+}
+
+/*
+img { 
+	max-width: 100%; 
+	height: auto !important;
+}
+*/
+
+
+/* =============================================================================
+   Cross-Component Styles
+   ========================================================================== */
+
+.legal_disclaimer {
+    font-size: 75%;
+}
+
+
+/* =============================================================================
+   Sections
+   ========================================================================== */
+
+/* Containers */
+
+.content_container {
+  width: 92%;
+  margin: 0 auto;
+  max-width: 1024px;
+}
+
+.section_container {
+  width: 92%;
+  margin: 0 auto;
+  max-width: 1024px;
+}
+
+#intro.module.legal {
+    padding: 1em 1.5em 1em 1em;
+}
+
+#intro.legal ul { 
+    list-style-type: disc; 
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px; 
+    padding-left: 40px;
+}
+
+#intro.legal a,
+#intro.legal a:visited { color: #D52B1E; }
+
+#intro.legal a:hover { color: #35C0E2; }
+
+#intro.legal ol { list-style-type: decimal; }
+
+#intro.legal ol li { margin-left: 40px; }
+
+
+.greyBg { background-color: #CFCFCF;}
+
+.contactUs { border-collapse: collapse; }
+
+.contactUs td { padding: 3px 15px 3px 5px; }
+     
+/* Content */
+
+article[role="main"],
+aside[role="complementary"] { 
+	/*width: 100%;*/
+	margin-bottom: 1em;
+}
+
+/* =============================================================================
+   Header (Mobile)
+   ========================================================================== */
+
+header {
+	width: 100%;
+	background: #3d434a;
+}
+
+#site-title a {
+	height: 42px;
+	margin: .25em 0;
+}
+
+/* =============================================================================
+   Mobile Menu
+   ========================================================================== */
+
+#topMenu {
+	/* Hide by Default */
+	display: none;
+	background: #3d434a;
+	width: 100%;
+}
+
+#topMenu a {
+	display: block;
+	padding: 2% 4%;	
+	color: #fff; 
+	-webkit-transition: background .15s ease-in-out;
+	-moz-transition: background .15s ease-in-out;
+	transition: background .15s ease-in-out;
+}
+
+#topMenu a:hover, a:focus {  
+	background: #37393f;
+	background: rgba(0,0,0,.15);
+	cursor: pointer;
+	text-decoration: none;
+}
+
+#topMenu li {
+	border-bottom: 1px solid #4f5258;
+	border-bottom: 1px solid rgba(0,0,0,.25);
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.08);
+	-moz-box-shadow: 0 1px 0 rgba(255,255,255,.08);
+	box-shadow: 0 1px 0 rgba(255,255,255,.08); 
+}
+
+#topMenu a span {
+	color: #fff;
+	font-size: 70%;
+	margin-right: .5em;
+}
+
+#topMenu a span:last-child {
+	float: right;
+}
+
+/* 
+* Target Specific Mobile Navigation Icons with :nth-child selectors to fine-tune spacing 
+* For more info on nth-child here: http://css-tricks.com/how-nth-child-works/
+*/
+
+/* Airport Info Icon */
+#topMenu li:nth-child(2) span:first-child { margin: 0 1em 0 .3em; }	
+
+/* Access Pass Icon */
+#topMenu li:nth-child(3) span:first-child { margin: 0 .4em 0 0; }	
+
+/* Self Care Icon */
+#topMenu li:nth-child(4) span:first-child { 
+	margin: 0 .5em 0 0; 
+	font-size: 80%;
+}
+
+/* Self Care Icon */
+#topMenu li:nth-child(5) span:first-child { 
+	margin-right: .4em;
+	font-size: 80%; 
+}	
+
+/* =============================================================================
+   Mobile Navigation (Toggle Styles)
+   ========================================================================== */
+
+.mobile_nav { 
+	display: block;
+	float: right;
+	margin: 1.45em 0 0 0;
+}
+
+.mobile_nav a,
+.mobile_nav a span,
+.mobile_nav a [class^="icon-"]:before,
+.mobile_nav a [class*=" icon-"]:before {
+	color: #fff; 
+	cursor: pointer;
+}
+
+.mobile_nav a:hover,
+.mobile_nav a:hover [class^="icon-"]:before,
+.mobile_nav a:hover [class*=" icon-"]:before { color: #35c0e2; }
+
+.mobile_nav li { float: left; }
+
+.mobile_nav li a span {
+	padding: .75em .9em .65em .9em;
+	margin-left: .5em;
+	font-size: 1em;
+	background: #32363e; 
+	border: 1px solid rgba(255,255,255,.2);
+	border-radius: .4em;
+}
+
+
+/* =============================================================================
+   Large-Res Device Navigation
+   ========================================================================== */
+
+.lrg-res_nav .mobile_nav_indicator {
+    display:none; /* hide mobile navigation indicator on header navigation */
+}
+
+.lrg-res_nav ul {
+	display: none;
+	float: right;
+	margin-top: .75em;			
+}
+
+.lrg-res_nav ul li { 
+	float: left; 
+	margin-left: .25em;
+}
+
+.lrg-res_nav ul a {	
+	margin-right: .25em;		
+	color: #fff;
+	font-size: 85%;
+	/* Fix Background on Seleced links in Mozilla */
+	background: transparent;
+}
+
+.lrg-res_nav ul a:last-child { margin-right: 0; }
+.lrg-res_nav ul li a:hover { 
+	color: #35c0e2;
+	text-decoration: none; 
+}
+
+.lrg-res_nav span { margin-right: .25em; }
+
+/* =============================================================================
+   Log In Form (Mobile)
+   ========================================================================== */
+
+/* Specific Form Styles */
+
+.login-form { padding: 1em 0 0; }
+
+.login-form ul {
+	float: left;
+	width: 49%; 
+	margin: 0;
+}
+
+select { cursor: pointer; }
+
+.login-form ul:first-child { margin-right: 2%; }
+
+.login-form ul li { margin-bottom: 4%; }
+
+/* Adjust for default select input override in in IE  */
+
+.login-form input[type=button],
+.login-form input[type=submit] { 
+	font-size: 90%;
+	height: 32px;
+	border: none;  
+	margin: 0;
+}
+
+
+/* Form Components */
+
+.login-form select {
+	width: 100%;
+	border: 1px solid #CFCFCF;
+	padding: .25em;
+	height: 32px;
+
+	-moz-border-radius: .4em;
+	-webkit-border-radius: .4em;
+	-ms-border-radius: .4em;
+	-webkit-border-radius: .4em;
+	border-radius: .4em;	
+}
+
+input:hover { border: 1px solid #afafaf; }
+
+input:focus { outline: none; }
+
+#loader_dialog{
+    text-align: center;
+    font-weight: bold;
+    background: url('../img/Loading.gif') top center no-repeat;
+    padding: 100px 0 20px 0;
+    margin-top: 30px;
+}
+
+/* Custom Select Input Styles */
+
+.customSelect {
+	width: 100%;
+	border: 1px solid #CFCFCF; 
+	padding: .25em;
+	height: 2em;
+	background: url(../../sales/img/select-box-neutral-bg@1x.png) right center;
+	overflow: hidden;
+	cursor: pointer;
+	
+	font-size: 1em;
+	font-weight: normal;
+	color: #999;
+	
+	-moz-border-radius: .4em;
+	-webkit-border-radius: .4em;
+	-ms-border-radius: .4em;
+	-webkit-border-radius: .4em;
+	border-radius: .4em;	
+}
+
+.customSelect.customSelectHover,
+.customSelect.customSelectFocus,
+.customSelect.customSelectOpen { 
+	background: url(../../sales/img/select-box-neutral-bg@1x.png) right center;
+	border: 1px solid #afafaf; 
+}
+
+
+/* =============================================================================
+   Intro (Mobile)
+   ========================================================================== */
+
+#single_content { 
+	margin-top: 1em;
+}
+
+#intro { 
+	width: 100%;
+	float: left;
+	margin-top: 1em;
+}
+
+#lrg_intro { 	
+	/* Hide on Mobile Devices */
+	display: none;
+	font-weight: 200;
+	padding-bottom: .5em; 			
+	margin-bottom: .5em;		
+	border-bottom: 1px solid #ccc;
+}
+
+#intro hgroup h2 {
+    font-size: 140%;
+    overflow:hidden;
+}
+
+#intro hgroup h2 em { font-size: 65%; }
+
+/* Force Pointer on Price */
+#intro hgroup h2 em:hover { cursor: pointer; }
+
+#intro hgroup h3 { 
+
+	/* Hide on Mobile Devices */
+	display: none; 	
+	font-size: 110%;
+	letter-spacing: .04em; 
+}
+
+#intro hgroup h4 { 
+	margin-bottom: .15em;
+	font-size: 120%;	
+}
+
+p.price { 
+	margin: 0 0 .25em; 
+	font-size: 230%;
+	line-height: 80%;
+	letter-spacing: -.05em; 
+}
+
+#main_cta a { 
+	margin: 0 0 .25em .5em;
+	display: block;
+	padding: .75em 0;
+}
+
+#main_cta { margin-bottom: 0;}
+#intro footer { display: none; }
+
+
+/* Addtional Info List (Mobile only) */
+
+ul.additional {
+	/* Hide by Default */
+	display: none; 	
+	width: 270px;
+	margin: 0 auto;	
+	font-size: 80%;
+	line-height: 130%;
+	padding: 1em 0 0 1em;	
+}
+
+ul.additional h5 { 
+	text-transform: uppercase; 
+	margin-bottom: 0;
+}
+
+ul.additional p { margin: 0; }
+
+ul.additional li { margin: 0 0 1.75em; }
+
+
+/* 
+* Additional List Icons
+* Target Specific Info Section Icons with :nth-child selectors to fine-tune spacing 
+* For more info on nth-child here: http://css-tricks.com/how-nth-child-works/
+*/
+
+
+ul.additional li span { 
+	float: left;
+	font-size: 200%;  
+	margin: .15em .5em .5em 0;
+}
+
+/* 10XFaster Icon */
+ul.additional li:nth-child(3) span {
+	margin: .4em .6em .75em -.25em;
+	font-size: 120%;	
+}
+
+/* No Contracts Icon */
+ul.additional li:nth-child(4) span { margin-top: .1em; }
+
+/* No Per-Minute Chareges Icon */
+ul.additional li:nth-child(5) span { margin-top: -.25em; }
+
+
+/* =============================================================================
+   Highlight Content Slider
+   ========================================================================== */
+
+.flexslider,
+.flex-direction-nav,
+.flex-container { display: none; }
+
+
+/* 
+* Image Slider Icons
+* Target Specific Info Section Icons with :nth-child selectors to fine-tune spacing 
+* For more info on nth-child here: http://css-tricks.com/how-nth-child-works/
+*/
+
+.flexslider span { 
+	float: left;
+	font-size: 200%;
+	margin-top: -.15em;
+	color: #a3a5ac; 
+} 
+
+
+/* =============================================================================
+   Info Section (Mobile)
+   ========================================================================== */
+
+#info {
+	/* Hide Info Section on Mobile/Tablet */
+	display: none; 		
+	position: absolute;
+	 /* Fixed Width Sidebar */
+    width: 300px;
+    top: 0;
+ 	right: 0;
+ 	margin-top: 1em;
+	background: #3d434a;
+	background: rgba(0,0,0,.75);
+	border-top: 4px solid #35c0e2;
+	
+	-webkit-box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+	-moz-box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+	box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+	
+	border-bottom-left-radius: .3em;
+	border-bottom-right-radius: .3em;
+}
+
+#info h3 {
+	display: inline;	
+	position: absolute;
+	top: .5em;
+	left: -.3em;		
+	padding: 1.15em;	
+	background: url(../../sales/img/sales_sprite@1x.png) no-repeat -81px 0;
+	width: 273px;
+	height: 52px;
+	font-size: 100%;
+}
+
+#info ul { padding: .5em 1em 0; }
+
+#info li { margin-bottom: .5em; }
+
+#info ul:nth-child(2) { 
+	margin-top: 4.75em; 
+	font-size: 80%;
+}
+ 
+
+
+/* 
+* Info Section Icons
+* Target Specific Info Section Icons with :nth-child selectors to fine-tune spacing 
+* For more info on nth-child here: http://css-tricks.com/how-nth-child-works/
+*/
+
+#info li span { 
+	margin: 0 .5em 0 0;
+	color: #35c0e2; 
+	font-size: 140%; 
+}
+
+/* Cafe Icon */
+#info li:nth-child(2) span { margin: 0 .4em 0 .1em; }
+
+/* Hotel Icon */
+#info li:nth-child(3) span { font-size: 100%; }
+
+
+
+/* =============================================================================
+   Secondary (Mobile)
+   ========================================================================== */
+
+aside[role="complementary"] {
+	margin-bottom: 1em;
+}
+
+aside[role="complementary"] h4 { 
+	margin: 0;
+	font-size: 120%;		
+	cursor: pointer;		 
+}
+	
+aside[role="complementary"] p { 
+	width: 100%; 
+	float: left;		
+	font-weight: 200;
+	line-height: 140%;
+}
+
+aside[role="complementary"] p.show_leading_icon:before { 
+	content: "";
+	float: left;
+	background: url(../../sales/img/sales_sprite@1x.png) no-repeat -422px 0;
+	width: 70px;
+	height: 67px;
+	margin: 0 .75em 0 0;
+}
+
+aside[role="complementary"] a {
+	display: block;
+	clear: both;
+	width: 100%;
+	margin: 0 auto;	
+}
+
+aside[role="complementary"] .module > div { 
+	/* Hide by Default */
+	display: none; 
+	margin: .5em 0;
+}
+
+
+/* =============================================================================
+   Footer
+   ========================================================================== */
+
+footer[role="contentinfo"] {
+	padding: 1em 0 6em;
+	font-size: 70%;
+	line-height: 120%;
+	text-align: center;	
+	border-top: 1px solid #ccc;
+}
+
+footer[role="contentinfo"] p { margin-bottom: .15em; }
+
+
+/* =============================================================================
+   Ad Section 
+   ========================================================================== */
+
+#lrg_ad {
+	/* Hide on Mobile Devices  */
+	display: none; 
+	position: absolute;
+	width: 300px;
+	top: 0;
+	right: 0; 
+}
+
+/* 
+*
+* Conditional Fallbacks 
+*
+*/
+
+/* Prevent IE8 From getting tripped up on Conditional Media Query for HiDPI Boingo Logo */
+.no-backgroundsize .flex-direction-nav li a { background: url(../../sales/img/sales_sprite@1x.png) no-repeat; }
+
+/* Prevent IE8 From getting tripped up on Conditional Media Query for HiDPI Airport Logo */	
+.no-backgroundsize .flex-direction-nav li .next { background-position: -388px 0; }
+
+/* Prevent IE8 From getting tripped up on Conditional Media Query for HiDPI Ad */	
+.no-backgroundsize .flex-direction-nav li .prev { background-position: -356px 0; }
+
+
+/* =============================================================================
+   Utility Styles
+================================================================================ */
+
+.underline { 
+	padding-bottom: .25em;
+	margin-bottom: .25em; 
+	border-bottom: 1px solid #ccc; 
+}
+
+.module {
+	padding: 1em;
+    margin-bottom: 1em;
+	background: #fff;
+	border-top: 4px solid #d42b1e;
+	
+	border-bottom-left-radius: .3em;
+	border-bottom-right-radius: .3em;
+		
+	-webkit-box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+	-moz-box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+	box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);	
+}
+
+/* Remove margin from last module */
+.module_container:last-of-type .module {
+	margin-bottom: 0;
+}
+
+/* Price Toggle Styles */
+
+.price-tog {
+	float: right;	
+	/* Revert Inline Elemnt Default styling */
+	font-style: normal;
+	font-size: .75em;
+	padding-top: .15em;
+}
+
+.price-tog span { float: left; }
+
+.price-tog i { 
+	float: right;
+	padding: .25em 0 0 .5em;
+	font-size: 60%;
+	font-style: normal;
+}
+
+.price-tog b { font-weight: normal; }
+
+
+/* =============================================================================
+   Knockout Styles
+================================================================================ */
+
+.knockout { 
+	color: #fff; 
+	text-shadow: none; 
+}
+
+.knockout .underline { 
+	padding-bottom: .25em;
+	margin-bottom: .25em; 
+	border-bottom: 2px solid #2f3131;
+	border-bottom: 2px solid rgba(0,0,0,.2); 	
+	
+	-moz-box-shadow: 0 1px 0 0 rgba(255,255,255,.15);
+	-webkit-box-shadow: 0 1px 0 0 rgba(255,255,255,.15);
+	box-shadow: 0 1px 0 0 rgba(255,255,255,.15);
+}
+
+/* =============================================================================
+  Media Queries
+================================================================================ */
+
+
+/* 
+* Retina Display Media Query to Target HiDPI Devices 
+* For including high-res graphics, but only for screens that can make us of them. "Retina" being "2x":
+* Info: http://css-tricks.com/snippets/css/retina-display-media-query/
+*/
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi),
+only screen and (min-resolution: 2dppx) { 
+
+	/* HiDPI Boingo Logo */	
+	#site-title a {
+		background: url(../../sales/img/sales_sprite@2x.png) no-repeat;
+		background-size: 492px 67px;
+	}
+			
+	/* HiDPI Mobile Ad */
+	footer .ad { 
+		-webkit-background-size: 100% 100%;
+		-moz-background-size: 100% 100%;
+		background-size: 100% 100%;
+	}
+	
+	aside[role="complementary"] p.show_leading_icon:before { 
+		background-url: url(../../sales/img/sales_sprite@2x.png);
+		background-size: 492px 67px;	
+	}
+
+	.customSelect {
+		background: url(../../sales/img/select-box-neutral-bg@2x.png) right center;
+		-webkit-background-size: auto 100%;
+		-moz-background-size: auto 100%;
+		background-size: auto 100%;
+	}
+
+	.customSelect.customSelectHover,
+	.customSelect.customSelectFocus,
+	.customSelect.customSelectOpen { 
+		background: url(../../sales/img/select-box-neutral-bg@2x.png) right center;
+		-webkit-background-size: auto 100%;
+		-moz-background-size: auto 100%;
+		background-size: auto 100%;
+	}
+
+		
+}
+
+
+/*
+ * screen only
+ * width >= 480px
+ */
+
+@media only screen and (min-width: 480px) {
+	
+	
+	/******  Primary Section  *******/
+	
+	#main_cta { 
+		width: 50%; 
+		margin: .4em auto 0;
+	}
+	
+	#intro hgroup h2 { font-size: 180%; }	
+	
+	#intro hgroup h2 em { display: none; }
+	
+	#intro p:nth-child(1) { font-size: 100%; }
+	
+	#intro hgroup h4 { display: none; }
+	
+	#intro hgroup h3 { 
+		display: block;
+		margin-bottom: .5em;  
+	}
+	
+	/*
+	 * 1. Hide small introduction
+	 * 2. Reveal larger introduction 
+	*/
+	
+	#sml_intro { display: none; }
+	
+	#lrg_intro { display: block; }
+	
+	/* End introduction display styles */
+	
+	
+	
+	/* Secondary Section */
+	
+	aside[role="complementary"] .module > div { display: inline; }
+	
+	aside[role="complementary"] h4 i { display: none; }
+		
+	aside[role="complementary"] h4 { 
+		cursor: default; 
+		border-bottom: 1px solid #c8c9cd;
+		padding-bottom: .5em;	
+		margin-bottom: .5em;	
+	}
+	
+	aside[role="complementary"] .module p { 
+		width: 100%;
+		margin-top: 1em;
+	}
+	
+	aside[role="complementary"] p:before { margin-top: -1em; }
+		
+	aside[role="complementary"] a { width: 60%; }
+	
+	aside[role="complementary"] em {
+		font-style: normal;
+		display: inline;
+		vertical-align: baseline;
+		padding: .05em 0 0 .15em;
+	}
+	
+	/* End Secondary Section */
+}
+
+
+
+
+
+/*
+ * screen only
+ * width >= 768px
+ */
+
+@media only screen and (min-width: 768px) {
+
+	
+	/* Containers */
+	
+	.section_container {
+	  position: relative;
+	}
+
+    .knockout_container,
+    .lrg_ad_container {
+      padding-right: 320px;
+    }
+
+
+	/******  Header Section  *******/
+	
+	header {	
+		background: #545861;
+		background: rgba(0,0,0,.75);
+	}
+
+    nav ul li a {
+        padding: .25em .5em;	
+        font-family:'Avenir LT W01 85 Heavy', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        -webkit-transition: color .25s ease-in;
+        -moz-transition: color .25s ease-in;
+        transition: color .25s ease-in;
+    }
+
+    nav ul li  {
+        border-right: 1px solid rgba(0,0,0,.5);
+        -moz-box-shadow: 1px 0 0 rgba(255,255,255,.15);
+        -webkit-box-shadow: 1px 0 0 rgba(255,255,255,.15);
+        box-shadow: 1px 0 0 rgba(255,255,255,.15);
+    }
+
+    nav ul li:last-child { 
+        border: none; 
+        box-shadow: none; 
+        
+        /* This hack is to remove the box-shadow from last item in iOSX   */
+        -webkit-box-shadow: none;
+    }
+	
+	a.button {
+		display: inline-block;
+		cursor: pointer; 
+		padding: .5em 1.75em; 
+		margin: 0;
+	}
+
+	.mobile_nav { display: none; } /* Remove Mobile Nav */
+
+	.lrg-res_nav ul { 
+		display: block; 
+		margin-top: 1.25em;
+	}
+
+	/* Login Form */
+
+	.login-form {
+		background: #545861;
+		background: rgba(0,0,0,.65);
+		border-top: 1px solid rgba(0,0,0,.5);
+	}
+
+	.login-form ul { width: 50%; }
+
+	.login-form ul li { 
+		float: left; 
+		width: 50%;
+		padding-left: 4%;
+	}
+
+	.login-form ul:first-child { margin-right: 0; }
+
+	.customSelect,
+	.customSelect.customSelectHover,
+	.customSelect.customSelectFocus,
+	.customSelect.customSelectOpen { border: none; }
+
+	
+	/* Primary Section */
+		
+	
+	/*
+	 * 1. Add full-width background image to #main for browsers that understand background-size:cover
+	 * 2. Use a solid color fallback for browsers that don't understand background-size:cover
+	*/
+	
+	article[role="main"] {		
+		width: 100%;
+		padding: 0 0 1em;
+		margin-bottom: 1em;	
+		border-bottom: #fff;	
+		
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		background-size: cover;		
+	}
+	
+	.no-backgroundsize article[role="main"]  { background: #e6f6f6; }
+	
+	/* End Conditional Background Image Styles */
+	
+	#intro > div { float: left; }
+	
+	#intro hgroup h2 { font-size: 200%; }	
+
+	#intro hgroup h4 { display: none; }
+	#intro hgroup h3 { 
+		display: block;
+		margin-bottom: .5em;
+		font-size: 120%;
+	}
+		
+	#lrg_intro { 
+		display: block;
+		font-weight: 200;
+		font-size: 100%; 		
+		padding-bottom: .25em;
+		margin-bottom: 0;		
+		border-bottom: 1px solid #ccc;
+	}
+	
+	p.price { 
+		width: 35%;
+		text-align: right;
+		display: inline-block;
+		margin: .8em 0 0 0; 
+		font-size: 240%;
+	}
+	
+	#main_cta {
+		width: 60%;
+		text-align: left;
+		display: inline-block;
+	}
+	
+	#intro footer { 
+		width: 100%;
+		display: inline-block;
+		text-align: center; 
+	}
+	
+	
+	
+	/* Info Section */
+		
+	#info { display: inline; }	
+	#info > div { display: block; }
+	
+	/* End Info Section */
+	
+	
+	/* End Primary Section */
+	
+	
+	
+	/* Secondary Section */
+				
+	aside[role="complementary"] h4 i { display: none; }
+			
+	aside[role="complementary"] a {
+		float: right;
+		display: block;
+		width: auto;
+	}
+	
+	
+	/*
+	 * 1. Hide mobile ad
+	 * 2. Display larger ad for larger devices/resolutions
+	*/
+
+	/* Make Space for ad (only for laptop) */ 
+	.lrg_ad_container { min-height: 250px; }
+	
+	.mobile_ad_container { display: none; }				
+	#lrg_ad { display: block; }
+		
+	/* End Ad Switch */
+		
+	
+	/* End Secondary Section */
+		
+	
+	/* Footer Section */
+	
+	/*footer[role="contentinfo"] { margin-top: 8em; }*/
+
+    footer div p:first-child { float: left;}
+
+    ooter div p:last-child { float: right;}
+	
+	/* End Footer Section */
+}
+
+
+
+/* 
+* Retina Display Media Query to Target HiDPI Devices 
+* For including high-res graphics, but only for screens that can make us of them. "Retina" being "2x":
+* Info: http://css-tricks.com/snippets/css/retina-display-media-query/
+*/
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px),
+only screen and (min--moz-device-pixel-ratio: 2) and (min-width: 768px),
+only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: 768px),
+only screen and (min-device-pixel-ratio: 2) and (min-width: 768px),
+only screen and (min-resolution: 192dpi) and (min-width: 768px),
+only screen and (min-resolution: 2dppx) and (min-width: 768px) { 
+
+
+	/* HiDPI Primary Ad */	
+	article[role="main"] .ad { 
+		background: url(../../sales/img/ad@2x.jpg) no-repeat;
+		-webkit-background-size: 100% 100%;
+		-moz-background-size: 100% 100%;
+		background-size: 100% 100%;
+	}
+		
+}
+
+
+
+@media only screen and (min-width: 820px) {
+
+	/* Header Section */
+	
+	h1#site-title a { 
+		margin-bottom: .15em;
+		height: 45px;
+	}
+	
+	/* End Header Section */
+
+	
+	/* Footer Section */
+	
+	/*footer[role="contentinfo"] { margin-top: 10em; }*/
+	
+	footer > p { float: left; }
+	footer p:last-child { float: right; }
+	
+	/* End Footer Section */
+
+}
+
+
+
+@media only screen and (min-width: 980px) {
+	
+	
+	/******  Header Section  *******/
+	
+	#topMenu { display: none; }
+		
+	a#login-toggle_btn,
+	a#menu-toggle_btn { display: none; }
+	
+	
+	
+	/* Primary Section */
+	
+	/* Force Sections to conform to same height */
+	article[role="main"] { min-height: 330px; }
+	
+	#intro h3 { margin-bottom: 1em; }
+	
+	#lrg_intro { 
+		width: 60%;
+		float: left;
+		padding-right: 1em;
+		padding-top: .75em; 
+		font-size: 90%;
+		line-height: 140%;		
+		border-bottom: 0;
+	}
+	
+	p.price { 
+		width: 40%;
+		text-align: center;
+		display: inline-block;
+		margin: .5em 0 .25em; 
+		font-size: 220%;
+	}
+	
+	#main_cta {
+		width: 36%;
+		text-align: center;
+		display: inline-block;
+		margin: 0 0 0 1em;
+		float: none;	
+	}
+	
+	#intro footer { 
+		width: 100%;
+		display: inline-block;
+		margin: 1em 0 0;		
+		font-size: 100%;
+		text-align: center; 
+	}
+	
+	
+	/* Secondary Section */
+	
+	aside[role="complementary"] h4 { margin-bottom: .75em; }
+	
+	aside[role="complementary"] p.show_leading_icon { 
+		float: left;
+		width: 70%; 
+		margin-top: .5em;
+		padding-right: 2%;
+		font-weight: 200;
+		line-height: 140%;
+	}
+	
+	aside[role="complementary"] p:before { margin-top: -.5em; }
+	
+	aside[role="complementary"] a { 
+		float: left;
+		width: 30%;
+		margin: .5em 0 0;
+		padding: .75em .5em;
+		clear: none;		
+		font-size: 90%;
+	}
+
+	aside[role="complementary"] .module img {
+		display: inline-block;
+		width: 10%;
+		margin: 0 2% 0 0
+	}
+	
+	/* End Secondary Section */
+	
+	
+	/* Footer Section */
+	
+	/*footer[role="contentinfo"] { margin-top: 12em; }*/
+	
+	/* End Footer Section */
+}
+
+
+
+
+
+
+/*
+ * screen only
+ * width >= 1024px
+ */
+
+@media only screen and (min-width: 1024px) {
+
+	/* Header */
+	
+	.login-form fieldset {
+		padding-left: 6em;
+	}
+
+
+	/* Primary Section */
+
+	article[role="main"] {
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		background-size: cover;	
+	}
+	
+	#intro hgroup h2 { font-size: 240%; }
+	#intro hgroup h3 { font-size: 130%; }		
+	#lrg_intro { margin-bottom: .5em; }
+		
+	
+	/* Display Content Slider for Laptop Res Only */	
+	.flexslider,
+	.flex-direction-nav,
+	.flex-container { display: block; }
+	
+	/* End Primary Section */
+	
+	
+	/* Adjust Main Section Intro for Full-Width Image Slider */
+	
+	#intro.module { padding: 1em 0; }
+	
+	#intro.module hgroup,
+	#intro.module > p, #intro.module > div { padding-left: 1em; }
+}
+
+
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 1024px),
+only screen and (min--moz-device-pixel-ratio: 2) and (min-width: 1024px),
+only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: 1024px),
+only screen and (min-device-pixel-ratio: 2) and (min-width: 1024px),
+only screen and (min-resolution: 192dpi) and (min-width: 1024px),
+only screen and (min-resolution: 2dppx) and (min-width: 1024px) { 
+
+
+	/* HiDPI Image Slider Nav Icons */	
+	.flex-direction-nav li a {
+		background-image: url(../../sales/img/sales_sprite@2x.png);
+		background-size: 492px 67px;
+	}	
+		
+}
+
+
+@media only screen and (max-width: 480px) {
+
+	/* For Devices with a maximum screen width of 480px only:
+	 *
+	 * 1. Hide the 'Regular' BGO Unlimited Price from Mobile Users
+	 * 2. Remove bottom rounded corners from first .module 
+	 * 3. Remove top border on second .module
+	*/
+	
+	p#reg_price { display: none; }
+	
+	aside[role="complementary"] div:first-child { border-radius: 0; }
+	
+	aside[role="complementary"] div:nth-child(2) { border-top: none; }
+}

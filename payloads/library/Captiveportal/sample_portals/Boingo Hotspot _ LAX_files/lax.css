@@ -1,0 +1,691 @@
+﻿.airport_menu {
+    display: none !important;
+}
+
+.mobile { display: none; }
+
+body {
+    background: none !important;
+    background-color: #fff !important;
+}
+
+.lax_background {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 440px;
+    background: url('/~/media/boingo/backgrounds/lax_laptop_preroll.ashx') no-repeat;
+    background-position: center center;
+    background-size: cover;
+    margin-bottom: -440px;
+    z-index: -1;
+}
+
+.utility_menu span:first-child, .utility_menu span:last-child {
+    color: #00bce4 !important;
+}
+
+
+.lax .custom_preroll_content {
+    display: block;
+    width: 770px;
+    margin: 100px auto 0;
+}
+
+.custom_preroll_content .cont {
+    float: left;
+    width: 100%;
+}
+
+.custom_preroll_content img { margin: 5px;}
+
+.left_custom_block {
+    display: block;
+    float: left;
+    background: url('/~/media/venues/preroll/lax_transformation_bg1.gif') no-repeat;
+    width: 351px;
+    height: 175px;
+    position: relative;
+    top: 5px;
+}
+
+.left_custom_block h2 {
+    color: #fff;
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 124%;
+    width: 60%;
+    position: relative;
+    left: 120px;
+    top: 30px;
+    line-height: 1.2em;
+    font-family: 'MrEavesHeavy', 'Avenir LT W01 85 Heavy', 'Avenir','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+}
+
+.left_custom_block h3 {
+    color: #000;
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 82%;
+    position: relative;
+    top: 27px;
+    left: 120px;
+    line-height: 1em;
+    width: 65%;
+    font-size: 18px;
+    font-family: 'MrEavesReg', 'Avenir LT W01 65 Medium','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    letter-spacing: .5px;
+}
+
+.left_custom_block h4 {
+    color: #fff;
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 204%;
+    position: relative;
+    top: 43px;
+    left: 122px;
+    line-height: 1.3em;
+    width: 80%;
+    font-family: 'MrEavesReg', 'Avenir LT W01 65 Medium','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    border-bottom: none !important;
+    letter-spacing: 1px;
+}
+
+.left_custom_block p { display:none; }
+
+.right_custom_block {
+    position: relative;
+    float: left;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.food {
+    float: left;
+    background: url('/~/media/venues/preroll/lax_food_bg.gif') no-repeat;
+    width: 165px;
+    margin-top: 5px;
+    margin-left: 18px;
+}
+
+.rodeo {
+    float: left;
+    background: url('/~/media/venues/preroll/lax_rodeo_bg.gif') no-repeat;
+    width: 171px;
+    margin-top: 5px;
+    margin-left: 18px;
+}
+
+.gateway {
+    float: left;
+    background: url('/~/media/venues/preroll/lax_gateway_bg.gif') no-repeat;
+    width: 183px;
+    margin-top: 5px;
+}
+
+.realtimeinfo {
+    float: left;
+    background: url('/~/media/venues/preroll/lax_realtimeinfo_bg.gif') no-repeat;
+    width: 165px;
+    margin-top: 5px;
+    margin-left: 18px;
+}
+
+
+.food h3, .rodeo h3, .gateway h3, .realtimeinfo h3 {
+    color: #fff;
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 75%;
+    width: 70%;
+    position: relative;
+    top: 15px;
+    left: 9px;
+    line-height: 1.1em;
+    font-family: 'MrEavesBold', 'Avenir LT W01 65 Medium','Helvetica Neue',Helvetica,Arial,sans-serif;
+    letter-spacing: .4px;
+    height: 96px;
+}
+
+.gateway h3 { width: 54%; }
+
+.right_custom_block .gateway p { width: 102%; }
+
+.right_custom_block .blurb {
+    color: #333;
+    clear: both;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: left;
+}
+
+.right_custom_block .blurb h4{
+    border-bottom: 0;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.right_custom_block .blurb .link,
+.left_custom_block .link {
+    color: #f69731;
+    text-decoration: underline;
+}
+
+.roundedGrey {
+    float: left; 
+    background-color: #e3e3e3;
+    width: 100%;
+    border-radius: .7em;
+    margin-top: 30px;
+    padding: 22px 0 15px 0;
+    text-align: center;
+}
+
+.roundedGrey h3 { 
+    font-size: 14.5px; 
+    text-transform: uppercase;
+}
+
+.roundedGrey ul {
+    width: 80%;
+    margin : 0 auto;
+}
+
+.roundedGrey li {
+    position: relative;
+    font-size: 14.5px;
+    display: inline-block;
+}
+
+.roundedGrey li:before {
+    content:"";
+    float: left;
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    background-color: #666;
+    margin: 9px 10px 0;
+    position: relative;
+}
+
+.roundedGrey li a {
+    color: #f69731;
+    border-bottom: solid 1px #f69731;
+    padding-bottom: 2px;
+}
+
+/* IE font fixes */
+@media screen\0 {
+    .left_custom_block h2 {
+        font-size: 110%;
+    }
+
+    .left_custom_block h3 {
+        font-size: 60%;
+    }
+
+    .left_custom_block h4 {
+        font-size: 165%;
+        top: 58px;
+        left: 120px;
+    }
+
+    .food h3, .rodeo h3, .gateway h3, .realtimeinfo h3 {
+        font-size: 70%;
+    }
+}
+
+
+.button {
+    font-weight: 600;
+    font-family: 'Avenir', 'Helvetica Neue', Arial, Helvetica, sans-serif, Arial, sans-serif !important;
+}
+
+a.grey span.icon-right-arrow {
+    font-size: 14px;
+    margin-left: 2px;
+}
+
+
+footer {
+    margin-top: 20px !important;
+}
+
+.box a.button {
+    width: initial !important;
+    background: #35c0e2 !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#35c0e2 ', endColorstr='#35c0e2 ',GradientType=0 ) !important;
+    color: #fff !important;
+    text-shadow: 0 -1px 1px rgba(0,0,0,.5) !important;
+}
+
+.mobile_nav ul li:last-of-type {
+    display: none;
+}
+
+
+/****************** SALES PAGE ************************/
+
+.box.box4 h4 {
+    font-size: 24px;
+}
+
+.box4 p.headerBlurb {
+    height: 40px;
+}
+
+.button.offerpod-signup {
+    max-width: 185px;
+}
+
+img.gt, img.arrow, .headerz h3 {
+    display: none;
+}
+
+
+@media only screen and (max-width:414px) {
+
+    .left_custom_block h3 {
+        font-size: 63%;
+        top: 21px;
+        left: 80px;
+        width: 74%;
+    }
+
+    .left_custom_block h4 {
+        font-size: 165%;
+        top: 23px;
+        left: 103px;
+        width: 55%;
+    }
+
+    .food h3, .rodeo h3, .gateway h3, .realtimeinfo h3 {
+        font-size: 70%;
+        top: 10px;
+        width: 66%;
+        letter-spacing: 0.3px;
+    }
+
+    a.button.blue {
+        width: 90% !important;
+        padding: .5em 2em !important;
+        font-size: 21px !important;
+    }
+
+    h2.airport_logo {
+        max-width: 320px;
+    }
+
+    .slat.utility_menu {
+        bottom: 123px !important;
+        margin-bottom: 100px !important;
+        z-index: 500;
+    }
+
+    footer {
+        clear: both;
+    }
+}
+
+@media only screen and (max-width:767px) {
+    
+    .laptop { display: none;}
+    .mobile { display: block;}
+
+    .lax_background {
+        height: 335px;
+        margin-bottom: -335px;
+    }
+
+    h2.airport_logo {
+        margin-top: 30px !important;
+    }
+
+    aside[role="complementary"] {
+        background: url(/~/media/boingo/backgrounds/lax_laptop_preroll.ashx) no-repeat !important;
+        background-position: top;
+        background-size: 100% 270px !important;
+        background-color: #fff !important;
+    }
+
+    .lax .custom_preroll_content {
+         margin-top:62px; 
+         width: 100%; 
+    }
+
+    .right_custom_block { 
+        max-width: 340px;
+        float: none;
+        margin: 35px auto 45px;
+    }
+
+    .right_custom_block .blurb,
+    .right_custom_block > div h3,
+    .laptop { display: none; }
+
+    .left_custom_block { 
+        height: auto; 
+        float: none;
+    }
+
+    .left_custom_block p.mobile { 
+        display: block; 
+        padding: 70px 10px 0;
+        color: #333;
+        text-align: left;
+    }
+
+    .left_custom_block h2 { 
+        left: 116px; 
+        top: 22px;
+        width: 59%;
+    }
+
+    .left_custom_block h3 { 
+        font-size: 16px;
+        left: 116px;
+        width: 65%;
+        top: 15px;
+    }
+
+    .right_custom_block > div {
+        width:160px;
+        height: 125px;
+        background-size: contain;
+    }
+
+    .right_custom_block > div a { 
+        display: block; 
+        width: 100%;
+        height: 100%;
+    }
+
+    .food { 
+        background: url('/~/media/venues/preroll/lax_tastes_m.gif') no-repeat; 
+        margin: 20px 0 0 0;
+    }
+
+    .gateway {
+        background: url('/~/media/venues/preroll/lax_upgrade_m.gif') no-repeat;
+        margin-top: 0;
+    }
+
+    .rodeo {
+        background: url('/~/media/venues/preroll/lax_shop_m.gif') no-repeat;
+        margin:20px 0 0 20px;
+    }
+
+    .realtimeinfo {
+        background: url('/~/media/venues/preroll/lax_informed_m.gif') no-repeat;
+        margin: 0 0 0 20px;
+    }
+
+    .roundedGrey { 
+        max-width: 340px;
+        float: none;
+        display: inline-block;
+        margin: 45px auto 105px;
+        clear: both;
+    }
+
+    .roundedGrey h3 {
+        width: 80%;
+        margin: 0 auto;
+        line-height: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .roundedGrey ul { width: 90%;}
+
+    .roundedGrey li {
+        float: left;
+    }
+
+    .slat.utility_menu {
+        bottom: 123px !important;
+        margin-bottom: 0px;
+        z-index: 500;
+    }
+
+    .slat.utility_menu p {
+        display: none;
+    }
+
+    .slat.utility_menu span {
+        padding-left: 10%;
+    }
+
+    .slat.utility_menu h3 {
+        margin-top: 1em !important;
+    }
+
+    .utility_menu span:last-child {
+        right: 2.75em !important;
+        top: 2.5em;
+    }
+
+    .slat.utility_menu li {
+        background-color: #3d434a;
+    }
+
+    .slat.utility_menu {
+        display: block;
+        margin-bottom: 102px !important;
+        position: absolute;
+        width: 100%;
+        bottom: 111px !important;
+    }
+
+    #main_cta .button, .lrg_ad_container .button {
+        background: rgba(70,212,235,1);
+        background: -webkit-linear-gradient(rgba(70,212,235,1), rgba(38,174,218,1));
+        background: linear-gradient(rgba(70,212,235,1), rgba(38,174,218,1));
+    }
+
+    .lrg_ad_container .button {
+        color: #fff;
+        text-shadow: 0 -1px 0px rgba(0,0,0,.7) !important;
+    }
+}
+
+@media only screen and (max-width:320px) {
+    .left_custom_block {
+        margin: 0px auto !important;
+    }
+
+    .left_custom_block {
+        width: 300px;
+        background-size: contain;
+    }
+
+    .left_custom_block h2 {
+        left: 100px;
+        width: 61%;
+    }
+
+    .right_custom_block,
+    .roundedGrey { max-width: 300px;}
+    
+    .roundedGrey ul { width: 100%;}
+
+    .left_custom_block h3 { left: 100px; }
+
+    .left_custom_block p { padding-top: 50px; }
+
+    .right_custom_block > div { 
+        width: 140px;
+        height: 110px;
+    }
+
+
+
+}
+
+@media only screen and (max-width:768px) {
+    aside[role="complementary"] {
+        background: none !important;
+    }
+
+    .left_custom_block .mobile { width: 100%; }
+}
+
+@media only screen and (min-width:769px) {
+
+
+    a.button.blue {
+        padding: .8em 2.5em !important;
+        font-size: 24px !important;
+        width: 330px;
+    }
+
+    a.button.grey {
+        margin-top: 30px;
+        padding: .75em 1em !important;
+        font-size: 16px !important;
+    }
+
+
+    footer[role="contentinfo"] {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+
+
+@media only screen and (max-width:1150px) {
+
+        .custom_preroll_content img {
+            padding: 0;
+        }
+
+    .left_custom_block { margin: 10px auto; }
+
+    footer {
+        margin-top: 170px !important;
+    }
+}
+
+
+
+@media only screen and (min-width: 1200px) {
+
+
+    a.button.blue {
+        padding: .8em 2.5em !important;
+        font-size: 24px !important;
+    }
+
+    a.button.grey {
+        margin-top: 0px;
+        padding: .8em 2em !important;
+        font-size: 18px !important;
+    }
+
+
+    p.welcome {
+        margin: 1.3em 1em .3em !important;
+        font-size: 1.6em !important;
+        font-weight: bold;
+    }
+}
+
+
+/* Fix for iOS portrait */
+
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation:portrait) {
+    .left_custom_block h2 {
+        font-size: 116%;
+    }
+
+    .left_custom_block h4 {
+        top: 26px !important;
+    }
+
+    .food h3, .rodeo h3, .gateway h3, .realtimeinfo h3 {
+        font-size: 61%;
+    }
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation:portrait) {
+    .left_custom_block h2 {
+        font-size: 116%;
+    }
+
+    .left_custom_block h4 {
+        top: 26px !important;
+    }
+
+    .food h3, .rodeo h3, .gateway h3, .realtimeinfo h3 {
+        font-size: 61%;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation:portrait) {
+    .left_custom_block h2 {
+        font-size: 116%;
+    }
+
+    .left_custom_block h4 {
+        top: 26px !important;
+    }
+
+    .food h3, .rodeo h3, .gateway h3, .realtimeinfo h3 {
+        font-size: 61%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .lax .custom_preroll_content { width:80%;}
+
+    .left_custom_block { 
+        float: none; 
+        height: 275px;
+    }
+
+    .right_custom_block { 
+        float: none;
+        margin: 40px auto 0;
+        width: 366px;
+    }
+
+    .food{
+        clear:left;
+        margin-left: 0;
+    }
+
+    .left_custom_block .mobile { 
+        display: block;
+        width: 100%;
+        color: #000;
+        text-align: left;
+        margin-top: 75px;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .left_custom_block { width: 100%; }
+
+    .left_custom_block h2 { width: 25%; }
+
+    .left_custom_block h3 { width: 30%; }
+
+    .left_custom_block .laptop {
+        display: block;
+        width: 44%;
+        text-align: left;
+        color: #000;
+        position: absolute;
+        top: 9px;
+        right: 40px;
+        font-size: 14.5px;
+    }
+
+
+}

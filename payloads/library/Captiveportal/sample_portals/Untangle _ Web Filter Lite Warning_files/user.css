@@ -1,0 +1,296 @@
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}img,body,html{border:0;}
+body{
+    font-family:Tahoma, Arial, Helvetica, sans-serif;
+}  
+/* quarantine page body */
+body.quarantine {
+	background-color: #808080;
+}
+/* user pages content container */
+#content
+{
+  padding: 17px 12px 12px 12px;
+}
+/* blockpage body*/
+body.blockpage
+{ 
+  text-align: center;
+  background-color: #808080;
+}
+/* quarantine content */
+body.quarantine #content
+{
+  width:75%;
+  background: transparent url(../images/user/background_content.png) repeat !important;
+  border:1px solid #666;
+  margin:0 auto;
+  margin-top:50px;
+}
+.service-error-height{
+    height:400px;
+}
+/* blockpage content */
+body.blockpage #content 
+{
+  width : 627px;
+  height: 505px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  border : 1px solid #666;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: transparent url(../images/user/background_content.png) repeat-x !important;
+}
+
+/* blockpage body*/
+body.blockpage
+{ 
+  font-family: arial, tahoma, helvetica, sans-serif;
+  font-size: 10pt;
+ }
+
+/* blockpage description text*/
+body.blockpage .description
+{ 
+  margin-bottom: 30px;
+  color:#ccc;
+}
+
+/* blockpage contact text*/
+body.blockpage p.contact
+{ 
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  font-size: 8pt;
+  color:#ccc;
+}
+/* header container */
+#header {
+    margin-bottom: 0px;
+}
+/* quarantine header container */
+body.quarantine #header
+{ 
+  width: 100%;
+  margin-bottom:10px;
+  }
+/* quarantine page title */
+body.quarantine #header .title
+{
+  position: absolute;
+  top: 30px;
+  font-weight:bold;
+  right: 1px;
+  text-align: right;
+  font-size:14pt;
+  color: #669900;
+}
+/* block page title */
+.title-block-page {
+    padding-left: 30px;
+    vertical-align: bottom;
+    text-align: left;
+    font: bold 36px arial, tahoma, helvetica, sans-serif;
+    color: #67686B;
+}
+/* blocked page icon*/
+.icon-block {
+    background:transparent url(../images/user/icon_block.png) no-repeat center center;
+    height: 130px;
+}
+/* quarantined messages toolbar message*/
+.message, .message-2 {
+    padding: 5px 5px 5px 28px;
+    border: 1px solid #60BB3F;
+    font-size: 8pt;
+    background: #FEFEDD url(../images/user/icon_message.png) no-repeat scroll 7px center !important;
+    color:#333;
+}
+.message-2{
+    display:block;
+    margin-bottom:10px;
+}
+.message-container{
+     padding:2px;
+}
+.white-background{
+    background-color:#FFF;
+    background-image:none;
+}
+.quarantine-left-indented{
+    margin-left:20px;
+}
+.quarantine-received-messages-grid{
+    margin:7px 0px 0px 20px;
+    width:500px;
+}
+/* safelist grid */
+.safelist-grid{
+    width:50%;
+}
+/*
+.safelist-grid, .quarantine-grid{
+    margin-top:20px;
+}
+*/
+.quarantine-label{
+    font-size:9pt;
+    margin:20px 0px 0px 10px;
+}
+.quarantine-received-messages{
+    margin-top:50px;
+}
+
+.quarantine-attachment-header
+{ 
+  background: transparent url(../images/user/icon_attach.png) no-repeat center center;
+  height : 16px;
+  }
+
+.description {
+    font-size: larger;
+}
+/* block page main container */
+body.blockpage #main 
+{
+  position : absolute;
+  left: 15px;
+  top: 130px;
+  width: 620px;
+  height: 380px;
+  text-align: center;
+  /* This is to place this above the border */
+  z-index: 100;
+}
+
+body.blockpage #extra-div-1
+{ 
+  position : absolute;
+  left: 15px;
+  top: 130px;
+  width: 620px;
+  height: 380px;
+  background: transparent url(../images/user/blockpage_border.gif) no-repeat;
+}
+
+body.blockpage #extra-div-2
+{ 
+  position : absolute;
+  left: 15px;
+  bottom: 20px;
+  width: 620px;
+  height: 12px;
+  background: transparent url(../images/user/blockpage_border_bottom.gif) no-repeat;
+}
+
+#header
+{ 
+  position : relative;
+}
+/* block page title */
+body.blockpage #header .title
+{ 
+  position : absolute;
+  left : 180px;
+  bottom : 0px;
+  font: bold 36px arial, tahoma, helvetica, sans-serif;
+  color: #669900;
+ }
+/* block page information list container*/
+.info-list {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width:340px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: left;
+  background-color: #FFFFFF;
+  -moz-border-radius:5px 10px 10px 5px;
+}
+/* block page information list element */
+.info-list div{
+  padding:5px 5px 5px 5px;
+}
+/* block page footer */
+body.blockpage #footer
+{
+  font-size: small;
+  text-align: right;
+  position : absolute;
+  left: 490px;
+  top: 520px;
+  display: none;
+}
+
+.action-messages
+{ 
+  width: 300px;
+  position:absolute;
+  top:93px;
+  left:40%;
+  text-align:center;
+  font-weight:bold;
+ }
+ /* Button icons*/
+.x-btn .icon-move-mails {
+    background: transparent url(../images/user/icon_email_move.png) no-repeat center left !important;
+}
+.x-btn .icon-add-row {
+    background: transparent url(../images/admin/icons/icon_add_row.gif) no-repeat center left !important;
+}
+.x-btn .icon-safe-list{
+    background: transparent url(../images/user/icon_safelist.png) no-repeat center left !important;
+}
+.x-btn .icon-delete-row{
+    background:transparent url(../images/user/icon_remove.png) no-repeat center left !important;
+}
+/* clear filter button icon */
+.x-btn .icon-clear-filter {
+    background: transparent url(../images/admin/icons/icon_clear_filter.png) no-repeat center left !important;
+}
+ /* Ext Js Overrides - across the board */
+.x-grid3-hd-inner{
+    text-transform:capitalize;
+}
+.x-fieldset{
+    padding:5px 10px 10px 20px;
+    border:none;
+}
+.x-fieldset-bwrap{
+    padding-bottom:5px;
+    border-bottom:1px #d0d0d0 dotted;
+}
+.x-fieldset legend{
+    margin-left:-15px;
+    color:#111;
+    font-size:12px;
+}
+/* block page */
+.u-form-item{
+    margin:5px 0px 0px 170px;
+    text-align:left;
+    width:340px;
+}
+.u-form-item-label{
+    margin-right: 5px;
+    float:left;
+    font-weight:bold;
+    text-align:left;
+    color: white;
+}
+#unblockNowButton{
+    margin-left:0px;
+    font-size:11px;
+    font-family:Tahoma,Helvetica,Arial,sans-serif;
+}
+#unblockGlobalButton{
+    margin-left:5px;
+    font-size:11px;
+    font-family:Tahoma,Helvetica,Arial,sans-serif;
+}
+#invalid-password{
+    color:#FF0000;
+}

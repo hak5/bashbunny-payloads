@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+/* SLCIA Free Wi-Fi CSS */
+
+body {
+	font: bold 13px Arial, Helvetica, sans-serif;
+	background: #000000;
+	margin: 40px 0 0;
+	padding: 0;
+	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
+	color: #FFFFFF;
+}
+
+#container  {
+	width: 900px;
+	margin: 0 auto;
+}
+
+a:link, a:visited {
+	color: #FFD204;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #E51937;
+}
+
+.accept a:link, .accept a:visited {
+	padding: 3px 10px 3px 9px;
+	background: #E51937;
+	margin-top: 5px;
+}
+
+.accept a:hover {
+	padding: 3px 10px 3px 9px;
+	background: #FFFFFF;
+	margin-top: 5px;
+	color: #E51937;
+}
+
+.accept input {
+	color: #FFD204;
+	background: #E51937;
+}
+
+.accept input:hover {
+	background: #FFFFFF;
+	color: #E51937;
+}
+
+.walledgarden a:link, .walledgarden a:visited, .walledgarden a:hover {
+	color: #000000;
+}

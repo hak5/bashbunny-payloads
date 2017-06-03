@@ -1,0 +1,59 @@
+/* =============================================================================
+   Button Styles
+================================================================================ */
+
+/* 
+** Base Button Style 
+*/
+
+a.button,
+input[type=button] {
+	display: block;
+	cursor: pointer; 
+	padding: .4em 1.75em; 
+	margin: 1em 0;	
+	text-align: center;
+	font-size: 120%;
+	line-height: 1;
+
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.1);
+	
+	-webkit-border-radius: .25em;
+	-moz-border-radius: .25em;
+	border-radius: .25em;
+	
+	-moz-text-shadow: 0 1px 0 #fff;
+	-webkit-ext-shadow: 0 1px 0 #fff;
+	text-shadow: 0 1px 0 #fff;	
+	
+	-moz-box-shadow: 0 1px 1px 0 rgba(0,0,0,.5);
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.5);
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.5);
+}
+
+
+/* =============================================================================
+   Warning Message
+================================================================================ */
+
+.top_page_message.show_warning {
+    background-color: #FFF9E3;
+    text-align: center;
+    padding: 0.5em;
+    display: block;
+}
+
+.top_page_message.show_warning a {
+    text-decoration: underline;
+}
+
+@media only screen and (min-width: 768px) {
+    .top_page_message.show_warning {
+        font-size: 1.22em;
+    }
+
+    article[role="main"] .inner_content.show_warning {
+        top: 3.4em;
+    }
+}

@@ -1,0 +1,484 @@
+﻿#venue-specific-site-title { margin: 0; }
+
+.download_box span:hover {
+    color: #42c4e4;
+}
+
+.mobile_hide,
+.learn_hide {
+    display: none;
+}
+
+.logout {
+    float: left;
+    clear: both;
+}
+
+.download-pad {
+    padding: 20px;
+}
+
+.app_list {
+    line-height: 1.5em;
+    list-style-type: none;
+    padding: 0;
+}
+
+#wifinder .tablet_box > img, .learn_hide .tablet_box > img{ margin-right: 25px; }
+
+.download_app span, .get_passpoint span {
+    font-family: 'Avenir LT W01 65 Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+a.grey.button {
+    border: solid 1px #ccc;
+}
+
+.welcome {
+    height: 100%;
+    float: left;
+    padding: 30px;
+    width: 68%;
+}
+
+.online_status {
+    float: right;
+    height: 96px;
+    position: relative;
+}
+
+.banner_ad {
+    float: right;
+    margin-top: 1em;
+}
+
+h2.wifinder {
+    clear: both;
+    font-style:normal;
+}
+
+.stat_module {
+    padding: 1em;
+    background: #fff;
+    border-top: 4px solid #42c4e4;
+    -webkit-box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+    -moz-box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+    box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+    border-bottom-left-radius: .3em;
+    border-bottom-right-radius: .3em;
+    width: 100%;
+    margin-top: 1em;
+}
+
+a.mobile_download_app {
+    width: 100%;
+    height: 42px;
+    clear: both;
+    margin: 1em 0;
+}
+
+.mobile_button {
+    height: 100%;
+    margin-top: 20px;
+}
+
+.mobile-button-text {
+    display: block;
+    margin-top: -43px;
+    margin-left: 50px;
+}
+
+.start_button {
+    border-top: 1px solid #ccc;
+    height: 100%;
+    width: 100%;
+}
+
+.button_box {
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+}
+
+.social_share {
+    display: block;
+    width: 155px;
+    margin: 0 auto;
+}
+
+.social_share li {
+    float: left;
+    list-style: none;
+    width: 35px;
+    margin-right: 4px;
+}
+
+.social_share li:last-child {
+    margin-right: 0;
+}
+
+.tablet {
+    float: left;
+    margin-top: 20px;
+}
+
+.app_list li {
+    font-size: 12px;
+    margin: 7px 0;
+}
+
+.app_check {
+    margin: 0 10px 12px 0;
+    float: left;
+}
+
+.app_text {
+    margin-top: -5px;
+}
+
+.tablet_box {
+    width: 100%;
+    clear: both;
+    float: left;
+    margin: 20px 0;
+}
+
+.app_tab {
+    float: left;
+}
+
+.bottom_button {
+    height: 70px;
+}
+
+.icon-text-mobile {
+    display: none;
+}
+
+.large_hide {
+    display: none !important;
+}
+
+.mobile-button-icon {
+    width: 100%;
+    height: auto;
+}
+
+.boingo_icon{
+    float: left;
+    margin: 20px 20px 20px 0;
+}
+
+.boingo_icon + h3{ margin-top:  19px; line-height: 1.3em;}
+
+#intro hgroup, #wifinder hgroup { padding: 20px;}
+#intro hgroup h2{ display: inline;}
+
+#intro hgroup h2, #wifinder hgroup h2 {
+    font-size: 250%;
+    line-height: 110%;
+    display: block;
+}
+
+
+#intro hgroup .underline h3{
+    margin-top: 13px;
+    display: inline-block;
+    width: inherit;
+}
+#intro hgroup .underline h2{ 
+    margin-right: 20px;
+    float: left;
+    width: inherit;
+
+}
+
+#intro hgroup p{ margin: 1.4em 0;}
+
+#intro ul li.passpoint_icon{ 
+    padding: 0px 0px 20px 75px; 
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+#intro ul li.passpoint_icon:first-child{  background: url('/Assets/shared/img/passpoint_icon_1.png')  10px 0 no-repeat; }
+#intro ul li.passpoint_icon:nth-child(2){  background: url('/Assets/shared/img/passpoint_icon_2.png') no-repeat; }
+#intro ul li.passpoint_icon:last-child{  background: url('/Assets/shared/img/passpoint_icon_3.png') no-repeat; }
+
+#wifinder {
+    width: 100%;
+    float: left;
+    margin-top: 1em;
+    padding: 1em 0;
+}
+
+a.button {
+    width: 100%;
+}
+
+a.button {
+    text-align: center;
+    position: relative;
+    clear: both;
+    font-size: 16px;
+    height: 42px;
+    padding-top: 11px;
+}
+
+.learn_more {
+    margin: 0px auto 10px;
+    float: left;
+    font-style: italic;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+}
+
+#intro .secondary-font.red.wifinder {
+    font-size: 150%;
+    font-weight: 600;
+    text-align: center;
+    display: block;
+}
+
+.disclaimer {
+    float: left;
+    font-size: 70%;
+}
+
+.disclaimer a,
+.disclaimer a:visited {
+    color: #d42b1e;
+}
+
+.disclaimer a:hover {
+    color: #35c0e2;
+}
+
+:lang(ar-ae) { direction: ltr; }
+
+:lang(ar-ae) .boingo_icon {
+    float: right;
+    margin: 20px 0 20px 20px;
+}
+
+:lang(ar-ae) .download_app,
+:lang(ar-ae) .start_browsing,
+:lang(ar-ae) .disclaimer { float: right; }
+
+:lang(ar-ae) .download_box .learn_more {
+    float: right;
+    margin: 5px 20px 0 0;
+}
+
+:lang(ar-ae) footer p:first-child { float: right;}
+
+:lang(ar-ae) footer p:last-child { float: left;}
+
+@media screen and (width:768px) {
+   :lang(ar-ae) .learn_more { float: right; }
+}
+
+/********************* Mobile Style Only ********************************/
+@media screen and (max-width:767px) {
+    .boingo_icon {
+        position: absolute;
+        top: -35px;
+        left: 10px;
+    }
+
+    .learn_more {
+        clear: both;
+        width: 100%;
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    .laptop {
+        display: none;
+    }
+
+    #intro hgroup h3.icon_text {
+        display: block;
+    }
+
+    #wifinder, #intro{ padding: 0;}
+    #intro hgroup h3 {
+        font-size: 140%;
+        letter-spacing: -0.01em;
+        display: block;
+        line-height: 27px;
+    }
+
+    .app_list{ margin-left: 20px;}
+
+    #intro hgroup h4 {
+        margin-bottom: .15em;
+        font-size: 140%;
+        display: none;
+    }
+
+    #wifinder h3{
+        width: 100%;
+    }
+
+    a.download_app {
+        margin-top: 42px;
+        margin-bottom: 45px;
+        display: inline-block;
+    }
+
+    .logIn { float: left; }
+
+    .mobile_nav li:first-child {display: none; }
+
+    .m_logout { display: block;}
+}
+
+/********************* Desktop Style Only ********************************/
+@media screen and (min-width:768px) {
+/*    .boingo_icon {
+        float: left;
+        margin-bottom: 20px;
+        margin-right: 20px;
+        font-style: italic;
+    }*/
+
+    article {
+        background: url(/assets/shared/img/backgrounds/main_bg.jpg) no-repeat 0 0;
+    }
+
+    .mobile_hide {
+        display: none;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    .laptop {
+        display: block;
+    }
+
+     
+    .laptop_hide {
+        display: none;
+    }
+
+    #intro hgroup h3 {
+        font-size: 140%;
+    }
+
+    .section_container {
+        overflow: hidden;
+    }
+
+    .download_box {
+        clear: both;
+    }
+
+    #intro, #wifinder {
+        float: left;
+        position: relative;
+        margin-left: -315px;
+        width: 100%;
+    }
+
+    #intro.module hgroup, #wifinder hgroup {
+        float: left;
+        padding-left: 340px;
+    }
+
+    #intro .secondary-font.red.wifinder {
+        font-size: 260%;
+        text-align: left;
+        padding-top: 20px;
+    }
+
+    a.start_browsing {
+        margin: 35px 0 20px 0;
+    }
+
+    .learn_more {
+        margin: 5px 0 0 20px;
+    }
+
+    .connect {
+        margin-top: 1em;
+        display: block;
+    }
+
+    a.button {
+        float: left;
+        width: 327px;
+    }
+
+    a.download_app {
+        clear: both;
+    }
+
+    .social_share {
+        margin: 0;
+    }
+
+    .online_status {
+        height: 141px;
+    }
+
+    .stat_module {
+        width: 300px;
+        height: 140px;
+    }
+
+    .stat_module hr {
+        border: 0;
+        border-bottom: solid 1px #ccc;
+        margin-top: 20px;
+    }
+    /*.app_list {
+        width: 60%;
+        margin-left: 25px;
+        float: left;
+    }*/
+}
+
+/********************* Special Styles ********************************/
+@media screen and (max-width: 945px) and (min-width: 767px) {
+    #intro hgroup h3 {
+        /*width: 70%;*/
+    }
+}
+
+@media screen and (min-width: 946px) {
+    #intro hgroup h3 {
+        /*width: 80%;*/
+    }
+}
+
+@media screen and (max-width: 767px) and (min-width:480px) {
+   /* .download_box { width: 80%; }*/
+}
+
+@media screen and (max-width: 485px) {
+    .download_app span, .get_passpoint span{
+        white-space: nowrap;
+        line-height: 18px;
+    }
+    a.download_app span {
+        float: left;
+        margin: 0 0 0 64px;
+        line-height: 18px;
+        white-space: nowrap;
+        font-size: 13px;
+    }
+
+    .button_box {
+        margin-bottom: 15px;
+    }
+    #intro hgroup .underline h2{
+        margin-bottom: 0;
+    }
+}

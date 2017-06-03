@@ -1,0 +1,504 @@
+/* =============================================================================
+   Color Key
+================================================================================ */
+
+/* primary_color: #d42b1e; */
+/* secondary_color: #35c0e2; */
+/* tertiary_color: #fff; */
+
+
+::-moz-selection { 
+	background: #d42b1e; 
+	color: #fff; 
+	text-shadow: none; 
+}
+::selection { 
+	background: #d42b1e; 
+	color: #fff; 
+	text-shadow: none; 
+}
+
+/* Font Colors */
+.red, span.red { color: #d42b1e; }
+.cyan, span.cyan { color: #35c0e2; }
+
+/* =============================================================================
+   Base
+================================================================================ */
+body { 
+	background: #fff; 
+}
+
+body, button, input, select, textarea { 
+	color: #545861;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+}
+
+/* =============================================================================
+   Links
+   ========================================================================== */
+
+footer a,
+footer a:visited,
+footer a:hover, 
+footer a:focus { color: #d42b1e; }
+
+/* =============================================================================
+   Header 
+   ========================================================================== */
+
+header {	
+	background: #3d434a;
+}
+
+
+#site-title a {
+	background: url(/Assets/preroll/img/preroll_sprite@1x.png) no-repeat 0 3px;
+		
+	/* Image Replacement */
+	background-color: transparent;
+	border: 0;
+	overflow: hidden;
+	/* IE 6/7 fallback */
+	*text-indent: -9999px;	
+}
+
+h1 span, 
+h2 span, 
+h3 span {
+    font-family: 'Avenir LT W01 65 Medium', Helvetica, Arial, sans-serif;
+}
+
+#venue-specific-site-title { display: none; }
+
+/* =============================================================================
+   Mobile Menu
+   ========================================================================== */
+
+#topMenu {
+	background: #3d434a;
+}
+
+#topMenu a {
+	color: #fff; 
+}
+
+#topMenu a:hover, a:focus {  
+	background: #37393f;
+	background: rgba(0,0,0,.15);
+}
+
+#topMenu li {
+	border-bottom: 1px solid #4f5258;
+	border-bottom: 1px solid rgba(0,0,0,.25);
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.08);
+	-moz-box-shadow: 0 1px 0 rgba(255,255,255,.08);
+	box-shadow: 0 1px 0 rgba(255,255,255,.08); 
+}
+
+#topMenu a span {
+	color: #fff;
+}
+
+/* =============================================================================
+   Mobile Navigation (Toggle Styles)
+   ========================================================================== */
+
+
+.mobile_nav a,
+.mobile_nav a span,
+.mobile_nav a [class^="icon-"]:before,
+.mobile_nav a [class*=" icon-"]:before {
+	color: #fff; 
+}
+
+.mobile_nav a:hover,
+.mobile_nav a:hover [class^="icon-"]:before,
+.mobile_nav a:hover [class*=" icon-"]:before { color: #35c0e2; }
+
+.mobile_nav li a span {
+	background: #32363e; 
+	border: 1px solid rgba(255,255,255,.2);
+}
+
+/* =============================================================================
+   Large-Res Device Navigation
+   ========================================================================== */
+
+.lrg-res_nav ul a {	
+	color: #fff;
+}
+
+.lrg-res_nav ul li a:hover { 
+	color: #35c0e2;
+}
+
+/* =============================================================================
+   Log In Form (Mobile)
+   ========================================================================== */
+
+input:hover { border: 1px solid #afafaf; }
+
+
+input[type],
+.login-form select {
+	border: 1px solid #CFCFCF;
+    height: 32px;
+    padding: .25em;
+    width: 100%;
+
+	-moz-border-radius: .4em;
+	-webkit-border-radius: .4em;
+	-ms-border-radius: .4em;
+	-webkit-border-radius: .4em;
+	border-radius: .4em;	
+}
+
+.login-form ul li.pwreset { width: 80%;}
+
+.customSelect {
+	border: 1px solid #CFCFCF; 
+	background: url(../img/select-box-neutral-bg@1x.png) right center;
+	color: #999;
+
+	-moz-border-radius: .4em;
+	-webkit-border-radius: .4em;
+	-ms-border-radius: .4em;
+	-webkit-border-radius: .4em;
+	border-radius: .4em;	
+}
+
+.customSelect.customSelectHover,
+.customSelect.customSelectFocus,
+.customSelect.customSelectOpen { 
+	background: url(../img/select-box-neutral-bg@1x.png) right center;
+	border: 1px solid #afafaf; 
+}
+
+/* =============================================================================
+   Intro (Mobile)
+   ========================================================================== */
+
+#lrg_intro { 	
+	border-bottom: 1px solid #ccc;
+}
+
+/* =============================================================================
+   Highlight Content Slider
+   ========================================================================== */
+
+/* 
+* Image Slider Icons
+* Target Specific Info Section Icons with :nth-child selectors to fine-tune spacing 
+* For more info on nth-child here: http://css-tricks.com/how-nth-child-works/
+*/
+
+.flexslider span { 
+	color: #a3a5ac; 
+} 
+
+/* =============================================================================
+   Info Section (Mobile)
+   ========================================================================== */
+
+#info {
+	background: #3d434a;
+	background: rgba(0,0,0,.75);
+	border-top: 4px solid #35c0e2;
+
+	-webkit-box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+	-moz-box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+	box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+	
+	border-bottom-left-radius: .3em;
+	border-bottom-right-radius: .3em;
+}
+
+#info li span { 
+	color: #35c0e2; 
+}
+
+/* =============================================================================
+   Secondary (Mobile)
+   ========================================================================== */
+
+aside[role="complementary"] p.show_leading_icon:before { 
+	background: url(../img/sales_sprite@1x.png) no-repeat -422px 0;
+}
+
+/* =============================================================================
+   Utility Styles
+================================================================================ */
+
+.underline { 
+	border-bottom: 1px solid #ccc; 
+}
+
+.module {
+	border-top: 4px solid #d42b1e;
+	background: #fff;
+	
+	border-bottom-left-radius: .3em;
+	border-bottom-right-radius: .3em;
+
+	-webkit-box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+	-moz-box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+	box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);	
+}
+
+
+/* =============================================================================
+   Knockout Styles
+================================================================================ */
+
+.knockout { 
+	color: #fff; 
+}
+
+.knockout .underline { 
+	border-bottom: 2px solid #2f3131;
+	border-bottom: 2px solid rgba(0,0,0,.2); 	
+	
+	-moz-box-shadow: 0 1px 0 0 rgba(255,255,255,.15);
+	-webkit-box-shadow: 0 1px 0 0 rgba(255,255,255,.15);
+	box-shadow: 0 1px 0 0 rgba(255,255,255,.15);
+}
+
+/* =============================================================================
+   Button Color Styles
+================================================================================ */
+
+/* Grey */
+
+a.grey {
+    color: #555;
+    background: rgba(254,254,254,1);
+	background: -webkit-linear-gradient(rgba(254,254,254,1), rgba(236,236,236,1));
+	background: linear-gradient(rgba(254,254,254,1), rgba(236,236,236,1));
+}
+
+a.grey:hover {	background: #f3f3f3; }
+
+/* Red */
+
+a.button.red, /* override default */
+input.red,
+a.red {
+	color: #fff;
+    z-index: 8;
+	
+	-moz-text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+	-o-text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+	-webkit-text-shadow: 0 -1px 0 rgba(0,0,0,.25); 
+	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+	background: #e13827;
+	background: -webkit-linear-gradient(#e13827, #c61d15);
+	background: linear-gradient(#e13827, #c61d15);
+}
+
+a.red:hover, input.red:hover { background: #e13827; }
+
+/* Blue */
+
+a.blue, 
+input[type=button].blue,  /* override default */
+input.blue { 
+	color: #fff;
+    background: rgba(70,212,235,1);
+	background: -webkit-linear-gradient(rgba(70,212,235,1), rgba(38,174,218,1));
+	background: linear-gradient(rgba(70,212,235,1), rgba(38,174,218,1));
+	text-shadow: none;
+}
+
+a.blue:hover, 
+input.blue:hover { background: #35c0e2; }
+
+a.blue:active, 
+input.blue:active { 
+	-webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+	-o-box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+	-moz-box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+	box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+}
+
+/* =============================================================================
+ Aiport Menu Icons 
+================================================================================ */
+
+.airport_menu [class^="icon-"]:before,
+.airport_menu [class*=" icon-"]:before,
+.airport_menu a [class^="icon-"]:before
+.airport_menu a [class*=" icon-"]:before { color: #35c0e2; }
+.airport_menu [class^="icon-"], .airport_menu [class*=" icon-"] {
+    color: #35c0e2;
+}
+
+
+
+/* =============================================================================
+  Media Queries
+================================================================================ */
+
+
+/* 
+* Retina Display Media Query to Target HiDPI Devices 
+* For including high-res graphics, but only for screens that can make us of them. "Retina" being "2x":
+* Info: http://css-tricks.com/snippets/css/retina-display-media-query/
+*/
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi),
+only screen and (min-resolution: 2dppx) { 
+
+	/* HiDPI Boingo Logo */	
+	#site-title a {
+		background: url(../img/sales_sprite@2x.png) no-repeat;
+	}
+
+	aside[role="complementary"] p.show_leading_icon:before { 
+		background: url(../img/sales_sprite@2x.png);
+	}
+
+	.customSelect {
+		background: url(../img/select-box-neutral-bg@2x.png) right center;
+	}
+
+	.customSelect.customSelectHover,
+	.customSelect.customSelectFocus,
+	.customSelect.customSelectOpen { 
+		background: url(../img/select-box-neutral-bg@2x.png) right center;
+	}
+}
+
+
+@media only screen and (min-width: 480px) {
+
+	/* Secondary Section */
+
+	aside[role="complementary"] h4 { 
+		border-bottom: 1px solid #c8c9cd;
+	}
+
+}
+
+@media only screen and (max-width: 767px) {
+
+    
+    /* Mobile Footer Color */
+    footer a,
+    footer a:visited { color: #fff; }
+    footer a:hover { color: #35c0e2; }
+    footer a:hover:after { color: #fff; }
+}
+
+/*
+ * screen only
+ * width >= 768px
+ */
+
+@media only screen and (min-width: 768px) {
+
+	nav ul li a {
+        -webkit-transition: color .25s ease-in;
+        -moz-transition: color .25s ease-in;
+        transition: color .25s ease-in;
+    }
+
+     nav ul li  {
+        border-right: 1px solid rgba(0,0,0,.5);
+        -moz-box-shadow: 1px 0 0 rgba(255,255,255,.15);
+        -webkit-box-shadow: 1px 0 0 rgba(255,255,255,.15);
+        box-shadow: 1px 0 0 rgba(255,255,255,.15);
+    }
+
+    nav ul li:last-child {
+        border-right:0;
+        box-shadow: none;
+    }
+
+    /* Login Form */
+
+	.login-form {
+		background: #545861;
+		background: rgba(0,0,0,.65);
+	}
+
+	.customSelect,
+	.customSelect.customSelectHover,
+	.customSelect.customSelectFocus,
+	.customSelect.customSelectOpen { border: none; }
+
+	/* Primary Section */
+		
+	
+	/*
+	 * 1. Add full-width background image to #main for browsers that understand background-size:cover
+	 * 2. Use a solid color fallback for browsers that don't understand background-size:cover
+	*/
+
+    /* Style now set by SalesPageBackground.cshtml */
+    /*article[role="main"] {		
+		border-bottom: #fff;	
+		background: url('../img/backgrounds/main_bg.jpg') no-repeat center top;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		background-size: cover;		
+	}*/
+
+	article[role="main"] {		
+		border-bottom: #fff;	
+	}
+
+	.no-backgroundsize article[role="main"]  { background: #e6f6f6; }
+
+    footer a,
+	footer a:visited { color: #74787e; }
+	
+	footer a:hover { color: #35c0e2; }
+	
+	footer a:hover:after { color: #74787e; }
+
+}
+
+/* 
+* Retina Display Media Query to Target HiDPI Devices 
+* For including high-res graphics, but only for screens that can make us of them. "Retina" being "2x":
+* Info: http://css-tricks.com/snippets/css/retina-display-media-query/
+*/
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px),
+only screen and (min--moz-device-pixel-ratio: 2) and (min-width: 768px),
+only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: 768px),
+only screen and (min-device-pixel-ratio: 2) and (min-width: 768px),
+only screen and (min-resolution: 192dpi) and (min-width: 768px),
+only screen and (min-resolution: 2dppx) and (min-width: 768px) { 
+
+
+	/* HiDPI Primary Ad */	
+	article[role="main"] .ad { 
+		background: url(../img/ad@2x.jpg) no-repeat;
+	}
+
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 1024px),
+only screen and (min--moz-device-pixel-ratio: 2) and (min-width: 1024px),
+only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: 1024px),
+only screen and (min-device-pixel-ratio: 2) and (min-width: 1024px),
+only screen and (min-resolution: 192dpi) and (min-width: 1024px),
+only screen and (min-resolution: 2dppx) and (min-width: 1024px) { 
+
+
+	/* HiDPI Image Slider Nav Icons */	
+	.flex-direction-nav li a {
+		background-image: url(../img/sales_sprite@2x.png);
+	}	
+		
+}
+
