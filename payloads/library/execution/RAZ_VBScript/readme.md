@@ -1,6 +1,6 @@
 # RAZ_VBScript
 * Author: RalphyZ 
-* Version: 1.1
+* Version: 1.1a
 * Target: Windows 7+
 * Category: Execution
 * Attackmode: HID, STORAGE
@@ -8,6 +8,7 @@
 ## Change Log
 | Version | Changes                       |
 | ------- | ------------------------------|
+| 1.1a    | Fixed an error with a comment |
 | 1.1     | Updated for firmware 1.1      |
 | 1.0     | Initial release               |
 

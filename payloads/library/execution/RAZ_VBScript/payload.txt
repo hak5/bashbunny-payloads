@@ -2,7 +2,7 @@
 #
 # Title:         RAZ_VBScript
 # Author:        RalphyZ
-# Version:       1.1
+# Version:       1.1a
 # Target:        Windows 7+
 # Dependencies:  VBScript (a.vbs) in the switch folder with this file
 # 
@@ -25,8 +25,8 @@ ATTACKMODE HID STORAGE
 # Get the switch position
 GET SWITCH_POSITION
 
- Check if a.vbs is present
- if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/a.vbs" ] ; then
+# Check if a.vbs is present
+if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/a.vbs" ] ; then
     LED FAIL
     exit 1
 fi

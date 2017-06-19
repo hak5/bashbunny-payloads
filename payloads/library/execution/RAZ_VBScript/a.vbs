@@ -3,7 +3,7 @@ Option Explicit
 '==============================================================================
 ' Title:         a.vbs
 ' Author:        RalphyZ
-' Version:       1.1
+' Version:       1.1a
 ' Target:        Windows 7+
 '
 ' Description:

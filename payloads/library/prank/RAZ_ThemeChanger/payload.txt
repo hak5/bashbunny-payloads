@@ -2,10 +2,10 @@
 #
 # Title:         Change windows theme
 # Author:        sil3n7h
-# Version:       1.2
+# Version:       1.2a
 # Target:        Windows 7+
 # 
-# Executes theme file (theme.themepack) from the RAZ_ThemeChanger folder 
+# Executes theme file (theme.themepack) from the ${SWITCH_POSITION} folder 
 # in the payloads library of the Bash Bunny USB Disk partition.
 #
 # Colors:
