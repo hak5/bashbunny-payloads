@@ -61,11 +61,11 @@ echo "Starting stage3, launching full screen browser on the website" >> $LOOTDIR
 if [ "$OS" = "MAC" ]; then
     # May need csf instead of ccf for Chrome
     RUN OSX "terminal"
-    QUACK STRING "open \"http://www.windows93.net\" \&\& osascript -e \"sleep 3\;ccf\;\"\;"
+    QUACK STRING "open \"http://www.windows93.net\" && osascript -e \"sleep 3;ccf;\";"
 elif [ "$OS" = "LINUX" ]; then
     DUCKY_LANG fr
     RUN UNITY "xterm"
-    QUACK STRING "chromium-browser --start-fullscreen --incognito --new-window http://www.windows93.net &\; exit\;"
+    QUACK STRING "chromium-browser --start-fullscreen --incognito --new-window http://www.windows93.net &; exit;"
     QUACK ENTER
     QUACK DELAY 1000
     QUACK F11
