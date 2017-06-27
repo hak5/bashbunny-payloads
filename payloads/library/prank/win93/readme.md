@@ -28,3 +28,6 @@ None needed but:
 
 ## Discussion
 None yet
+
+## TODO
+Relaunch the attack in RDNIS_ETHERNET if no ip has been found previously, to start supporting windows too.
