@@ -1,0 +1,77 @@
+# Title:         Win93
+# Description:   Open a new fullscreen navigator to windows93.net
+# Author:        gled
+# Version:       0.1
+# Category:      pranck
+# Target:        MacOs and Linux
+# Attackmodes:   Ethernet, HID
+
+LED SETUP
+LOOTDIR='/root/udisk/loot/win93'
+DEFAULT_OS='LINUX'
+mkdir -p $LOOTDIR
+echo "Starting win93 prank" > $LOOTDIR/win93.log
+
+LED STAGE1
+ATTACKMODE ECM_ETHERNET
+sleep 3
+GET TARGET_IP
+if [ -z "${TARGET_IP}" ]; then
+# could be that we are connected to windows, and need to change the attackmode
+  echo "No target IP, bailing out" >> $LOOTDIR/win93.log
+  LED FAIL
+  exit 1
+fi
+echo "Starting stage1, launching scan" >> $LOOTDIR/win93.log
+nmap -O -sV --osscan-guess $TARGET_IP > $LOOTDIR/nmap_results.log
+
+LED SPECIAL
+ATTACKMODE HID
+echo "Starting stage2, launching terminal" >> $LOOTDIR/win93.log
+grep -i 'linux' $LOOTDIR/nmap_results.log
+RES=$?
+echo "After first grep: $RES" >> $LOOTDIR/win93.log
+if [ $RES -eq 0 ]
+then
+    OS='LINUX'
+else
+    grep -v 'MAC Address' $LOOTDIR/nmap_results.log | grep -i 'mac'
+    RES=$?
+    echo "After second grep: $RES" >> $LOOTDIR/win93.log
+    if [ $RES -eq 0 ]
+    then
+       OS='MAC'
+    else
+       grep "Too many fingerprints match this host to give specific OS details" $LOOTDIR/nmap_results.log
+       RES=$?
+       echo "After third grep: $RES" >> $LOOTDIR/win93.log
+       if [ $RES -eq 0 ]
+       then
+          OS=$DEFAULT_OS
+       else
+           echo "No OS found" >> $LOOTDIR/win93.log
+           LED FAIL
+           exit 1
+       fi
+    fi
+fi
+
+echo "$OS Host detected" >> $LOOTDIR/win93.log
+echo "Starting stage3, launching full screen browser on the website" >> $LOOTDIR/win93.log
+if [ "$OS" = "MAC" ]; then
+    # May need csf instead of ccf for Chrome
+    RUN OSX "terminal"
+    QUACK STRING "open \"http://www.windows93.net\" \&\& osascript -e \"sleep 3\;ccf\;\"\;"
+elif [ "$OS" = "LINUX" ]; then
+    DUCKY_LANG fr
+    RUN UNITY "xterm"
+    QUACK STRING "chromium-browser --start-fullscreen --incognito --new-window http://www.windows93.net &\; exit\;"
+    QUACK ENTER
+    QUACK DELAY 1000
+    QUACK F11
+fi
+
+LED CLEANUP
+echo "Cleaning up now, syncing" >> $LOOTDIR/win93.log
+sync
+LED FINISH
