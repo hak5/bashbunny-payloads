@@ -2,7 +2,15 @@
 # Simen Kjeserud (Original creator), Gachnang
 
 #Get info about pc
-$computerPubIP=(Invoke-WebRequest ipinfo.io/ip).Content
+
+try
+{
+$computerPubIP=(Invoke-WebRequest ipinfo.io/ip -UseBasicParsing).Content
+}
+catch
+{
+$computerPubIP="Error getting Public IP"
+}
 $computerIP = get-WmiObject Win32_NetworkAdapterConfiguration|Where {$_.Ipaddress.length -gt 1}
 $IsDHCPEnabled = $false
 $Networks =  Get-WmiObject Win32_NetworkAdapterConfiguration -Filter "DHCPEnabled=$True" | ? {$_.IPEnabled}
@@ -171,9 +179,9 @@ $computerSystem.Name
 
 "Network: "
 "=================================================================="
-"Computers MAC adress: " + $computerMAC
-"Computers IP adress: " + $computerIP.ipaddress[0] 
-"Public IP adress: " + $computerPubIP  
+"Computers MAC address: " + $computerMAC
+"Computers IP address: " + $computerIP.ipaddress[0] 
+"Public IP address: " + $computerPubIP  
 "RDP: " + $RDP
 ""
 ($Network| out-string)
