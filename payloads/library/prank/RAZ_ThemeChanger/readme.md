@@ -1,6 +1,6 @@
 # RAZ_ThemeChanger
 * Author: sil3n7h
-* Version: 1.2
+* Version: 1.2a
 * Target: Windows 7+
 * Category: Prank
 * Attackmode: HID, STORAGE
@@ -8,6 +8,7 @@
 ## Change Log
 | Version | Changes                                |
 | ------- | ---------------------------------------|
+| 1.2a    | Documentation change                   |
 | 1.2     | Updated docs and check for themepack   |
 | 1.1     | Updated for firmware 1.1               |
 | 1.0     | Initial release                        |
@@ -20,7 +21,7 @@ theme.themepack - The Windows theme file used to set the wallpaper and colors of
 Note: themepack files are windows zipfiles which contain wallpapers and other files (screensavers, sounds, etc).  You can export your own themepack using Windows GUIs.  Just look it up `exporting a windows themepack`.
 
 ## Description
-Executes theme file (theme.themepack) from the RAZ_ThemeChanger folder in the payloads library of the Bash Bunny USB Disk partition.
+Executes theme file (theme.themepack) from the ${SWITCH_POSITION} folder in the payloads library of the Bash Bunny USB Disk partition.
 
 ## Configuration
 None
