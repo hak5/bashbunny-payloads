@@ -1,0 +1,64 @@
+#!/bin/bash
+#
+# Title:         Nmapper for Bash Bunny
+# Author:        Hak5Darren
+# Version:       1.1
+#
+# Scans target with nmap using specified options
+# Saves sequential logs to mass storage loot folder
+#
+# Red ...........Setup
+# Red Blinking...Setup Failed. Target did not obtain IP address. Exit.
+# Amber..........Scanning
+# White..........Switching to Mass Storage (optional)
+# Green..........Finished
+# 
+# See nmap --help for options. Default "-O --fuzzy" profiles target OS.
+NMAP_OPTIONS="-O --fuzzy"
+LOOTDIR=/root/udisk/loot/nmap
+
+
+
+######## INITIALIZATION ########
+LED SETUP
+# Use RNDIS for Windows. Mac/*nix use ECM_ETHERNET
+ATTACKMODE RNDIS_ETHERNET 
+#ATTACKMODE ECM_ETHERNET
+GET TARGET_IP
+GET TARGET_HOSTNAME
+
+
+
+######## MAKE LOOT DIRECTORY ########
+# Setup named logs in loot directory
+mkdir -p $LOOTDIR
+HOST=${TARGET_HOSTNAME}
+# If hostname is blank set it to "noname"
+[[ -z "$HOST" ]] && HOST="noname"
+COUNT=$(ls -lad $LOOTDIR/$HOST*.log | wc -l)
+COUNT=$((COUNT+1))
+
+
+
+######## ERROR IF NO TARGET IP ########
+if [ -z "${TARGET_IP}" ]; then
+    LED FAIL
+	exit 1
+fi
+
+
+
+######## ATTACK ########
+LED ATTACK
+nmap $NMAP_OPTIONS $TARGET_IP >> $LOOTDIR/$HOST-$COUNT.log
+
+
+
+######## CLEANUP ########
+LED CLEANUP
+sync
+
+
+
+######## FINISH ########
+LED FINISH
