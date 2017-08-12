@@ -1,3 +1,5 @@
+pid=$$
+touch /tmp/$pid
 for (( i=0; i < 5; ++i ))
 do
   if [ ! -e /tmp/1.jpg ]; then
@@ -32,4 +34,4 @@ do
   sleep $time 
 done
 
-rm /tmp/1.jpg /tmp/2.jpg /tmp/3.jpg /tmp/4.jpg /tmp/5.jpg
+rm /tmp/1.jpg /tmp/2.jpg /tmp/3.jpg /tmp/4.jpg /tmp/5.jpg /tmp/$pid
