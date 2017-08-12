@@ -1,4 +1,4 @@
-macWallpaper by Jajahulo
+## macWallpaper by Jafahulo
 
 * Author: Jafahulo
 * Version: Version 1.0
@@ -15,16 +15,8 @@ background.
 
 None
 
-## STATUS
-
-| LED                | Status
-|
-| ------------------ |
--------------------------------------------- |
-| Red (blinking)     | Running
-|
-| Green              | Attack Complete
-|
+## Status
+too fast to really be useful
 
 ## Discussion
 https://forums.hak5.org/topic/41605-payload-macwallpaper/
