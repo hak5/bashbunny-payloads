@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Allow Debugging messages written to: "/root/udisk/debug/debug_[timestamp].txt"
+# Allow Debugging messages written to: "/root/udisk/debug/[session].txt"
 # on the BashBunny
 #
 # How this works?
