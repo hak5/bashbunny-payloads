@@ -5,50 +5,36 @@
 # on the BashBunny
 #
 # How this works?
-# 1) Once the library is included in your payload, write text to
-#    the debug file with:
-#	    debug_log "DEBUG MESSAGE"
-#	    (To write to log with timestamps)
-#	    OR
-#       echo "DEBUG MESSAGE" >> "${DEBUG_FILE}"
-#	    (To write to log without timestamps)
-#
-# 2) After attack, Text can be read at: "/root/udisk/debug/debug_[timestamp].txt"
+# 1) Example Command: DEBUG "switch-1-debug" "Hello from debug extension!"
+# 2) After bashing, text can be read at: "/root/udisk/debug/[session].txt"
 #    on the BashBunny
-# 3) To turn off debugging, pass the OFF command when including the helper
-#       source debug.sh OFF
 ################################################################################
 
-################################################################################
-# Start Debug
-################################################################################
-if [ "$1" = "OFF" ]; then
-    DEBUG_STATE="OFF"
-else
-    DEBUG_STATE="ON"
-fi
+function DEBUG() {
+    session = $1
+    message = $2
 
-timestamp () {
-    echo "$(date +"%Y-%m-%d_%H-%M-%S")"
+    init_debug
+    debug_log
+
+    timestamp () {
+        echo "$(date +"%Y-%m-%d_%H-%M-%S")"
+    }
+
+    init_debug () {
+        DEBUG_FILE="/root/udisk/debug/$(session).txt"
+        if [ ! -d "/root/udisk/debug/" ]; then
+          mkdir /root/udisk/debug/
+        fi
+        if [ ! -f "/root/udisk/debug/${DEBUG_FILE}" ]; then
+            touch "${DEBUG_FILE}"
+            echo "$(timestamp): DEBUG STARTED" >> "${DEBUG_FILE}"
+        fi
+    }
+
+    debug_log () {
+        echo "$(timestamp): $(message)" >> "${DEBUG_FILE}"
+    }
 }
 
-start_debug () {
-    DEBUG_FILE="/root/udisk/debug/debug_$(timestamp).txt"
-    if [ ! -d "/root/udisk/debug/" ]; then
-      mkdir /root/udisk/debug/
-    fi
-    touch "${DEBUG_FILE}"
-    echo "$(timestamp): DEBUG STARTED" >> "${DEBUG_FILE}"
-}
-
-debug_log () {
-    echo "$(timestamp): ${1}" >> "${DEBUG_FILE}"
-}
-
-if [ "${DEBUG_STATE}" = "ON" ]; then
-    start_debug
-else
-    DEBUG_FILE="/dev/null/"
-fi
-
-export -f DEBUG_FILE
+export -f DEBUG
