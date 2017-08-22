@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# Title:     Git Bunny Git
+# Author:    Draxiom && audibleblink && Nicholas Adamou
+# Target:    any
+# Version:   1.1
+#
+# Update payloads from Github
+#
+# White            |  Ready (to run bb.sh on the host computer)
+# Red              |  No Internet
+# Red (blinking)   |  Could not mount filesystem
+# Amber            |  Running
+# Green (blinking) |  Git Pull Finished
+# Green            |  Git Clone Finished
+
+LED W
+#ATTACKMODE RNDIS_ETHERNET
+ATTACKMODE ECM_ETHERNET
+
+# Set your desired repo url and branch if you're not looking to update from mainline
+git_repo="https://github.com/hak5/bashbunny-payloads.git"
+git_branch="master"
+payloads_dir="/root/udisk"
+log_file="/var/log/git.log"
+
+if [ -f "$log_file" ]; then
+	rm -rf "$log_file"
+fi
+
+echo " ---------  Git Bunny Git [started] -----------" >> $log_file
+
+# Sanity check on mounted drive
+[[ ! `mount | grep "nandf"` ]] && { LED R DOUBLE; echo "Could not mount filesystem" >> $log_file; exit 1; }
+
+# Test for internet connection
+wget -q --tries=15 --timeout=5 --spider http://example.com
+[[ "$?" -ne 0 ]] && { LED R; echo "Could not connect to the internet" >> $log_file; exit 1; }
+
+# Let's go
+LED Y
+cd $payloads_dir
+
+# Cannot verify ca certificate... skip it
+export GIT_SSL_NO_VERIFY=1
+if [ -d ".git" ]; then
+	# Get the newest payloads
+	git pull origin $git_branch &>> $log_file
+	echo "Git repository updated." >> $log_file
+	LED G SLOW
+else
+	# Move the existing payloads directory, in case hackers be hackin'
+	mv payloads payloads-orig
+	echo "Existing 'payloads' directory preserved as 'payloads-orig'" >> $log_file
+	# Initialize Repository
+	git init &>> $log_file
+	# Let's pick the hak5 github repo
+	git remote add origin $git_repo &>> $log_file
+	echo "Git repository selected: $git_repo" >> $log_file
+	# Instead of cloning the whole repo,
+	git config core.sparsecheckout true
+	echo "Git configuration change: sparse-checkout=true." >> $log_file
+	# isolate the payloads directory
+	echo "payloads" >> .git/info/sparse-checkout
+	echo "Sparse checkout: 'payloads' directory selected" >> $log_file
+	# "git clone"
+	git pull origin $git_branch &>> $log_file
+	echo "Git repository cloned." >> $log_file
+
+	# Ignore any existing directories or files, so git status is pretty, and git pull will work after the "clone"
+	LED M
+	for file in $(ls -A); do
+		[[ "${file}" =~ [^payloads$] ]] && { echo "${file}" >> .gitignore; echo ".gitignore add: ${file}" >> $log_file; }
+	done
+	echo "payloads/switch*" >> .gitignore
+	echo ".gitignore add: payloads/switch*" >> $log_file;
+
+	# Put the existing switch directories back
+	cp -r payloads-orig/switch* payloads/.
+
+	# Git 'er done
+	LED G
+fi
+echo " ---------  Git Bunny Git [finished] ----------" >> $log_file

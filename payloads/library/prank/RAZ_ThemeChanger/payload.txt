@@ -1,0 +1,48 @@
+#!/bin/bash
+#
+# Title:         Change windows theme
+# Author:        sil3n7h
+# Version:       1.2a
+# Target:        Windows 7+
+# 
+# Executes theme file (theme.themepack) from the ${SWITCH_POSITION} folder 
+# in the payloads library of the Bash Bunny USB Disk partition.
+#
+# Colors:
+# | Status     | Color                         | Description                                      |
+# | ---------- | ------------------------------| ------------------------------------------------ |
+# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
+# | FAIL1      | Red slow blink                | Could not find the theme.themepack file          | 
+# | ATTACK     | Yellow single blink           | Running the VBScript                             | 
+# | FINISH     | Green blink followed by SOLID | Script is finished                               | 
+
+# Magenta solid
+LED SETUP
+
+# Get the switch position
+GET SWITCH_POSITION
+
+# Check for all the files - error if not found. If found, put into variables
+if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/theme.themepack" ] ; then
+    LED FAIL1
+    exit 1
+fi
+
+# Set the attack mode to HID and STORAGE
+ATTACKMODE HID STORAGE
+
+# Yellow single blink
+LED ATTACK
+
+# Run the command to change the theme
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\theme.themepack')"
+QUACK ENTER
+
+# Wait a bit so that the correct window closes
+QUACK DELAY 15000
+QUACK ALT F4
+
+# Green LED for finished
+LED FINISH

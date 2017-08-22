@@ -1,0 +1,34 @@
+#
+#
+# Title:             Notepad Fun
+# Author:            The10FpsGuy and Mrhut10
+#                    Big thanks to Mrhut10 for helping to put a loop in it :D
+# Category:          Fun
+# Target:.           Windows (Notepad)
+#
+#options
+LED B G 100
+msg_header="begining"
+msg_body="I will learn to lock my computer"
+msg_body_repeats=10
+msg_end="Please remember to lock your computer when you walk away."
+
+ATTACKMODE HID
+Q GUI r
+Q DELAY 150
+Q STRING notepad.exe
+Q ENTER
+LED B 500
+
+Q DELAY 200
+Q STRING $msg_header
+Q ENTER
+
+for (( i=1; i<=$msg_body_repeats; i++ ))
+do
+   Q STRING $msg_body
+   Q ENTER
+done
+Q STRING $msg_end
+Q ENTER
+LED G 0
