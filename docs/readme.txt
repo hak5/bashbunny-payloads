@@ -6,7 +6,7 @@
  Bash Bunny by Hak5                           USB Attack/Automation Platform
 
 
-                      -+- QUICK REFERENCE GUIDE v1.3 -+-
+                      -+- QUICK REFERENCE GUIDE v1.4 -+-
 
 
      +-----------------+
@@ -34,24 +34,31 @@
  Mass-Storage Directory Structure                 Default Settings
  --------------------------------------------     -----------------------------
  .
- |-payloads/                                      Username: root
- | |-library/                                     Password: hak5bunny
- | | |-* Payloads from Bash Bunny repository    
- | | |-extensions/ - Additional Bunny Script      Hostname: bunny
- | |                 commands/functions.
- | |-switch1/                                     IP Address: 172.16.64.1
- | | |-payload.txt - Bunny Script executed on     DHCP Range: 172.16.64.10-12
- | |                 boot in switch position 1  
- | |-switch2/                                     LED Status:
- |   |-payload.txt - Bunny Script executed on     Green Solid    - Boot up
- |                   boot in switch position 2    Blue Blink     - Arming Mode
- |-loot/  - Where payloads store logs and data    Red/Blue Blink - Recovery
- |-docs/  - EULA, License, this readme.txt
- |-tools/ - Contents placed here will be copied
- |          to /tools at boot in arming mode.
- |          *.deb packages will be installed.
- |-languages/ - HID languages placed here will
-                install at boot in arming mode.
+ |-config.txt      - Global config script         Username: root
+ |                   Sourced by all payloads      Password: hak5bunny
+ |-payloads/                                      Hostname: bunny
+ | |-library/                                     
+ | | |-* Payloads from Bash Bunny repository      IP Address: 172.16.64.1
+ | |                                              DHCP Range: 172.16.64.10-12
+ | |-extensions/   - Additional Bunny Script      
+ | |                 commands/functions.          LED Status:
+ | |-switch1/                                     Green Solid    - Boot up
+ | | |-payload.txt - Bunny Script executed on     Blue Blink     - Arming Mode
+ | |                 boot in switch position 1    Red/Blue Blink - Recovery
+ | |-switch2/                                     
+ | | |-payload.txt - Bunny Script executed on     
+ | |                 boot in switch position 2    
+ | |-arming/                                      
+ |   |-payload.txt - Override payload for
+ |                   Arming Mode *USE CAUTION*
+ |
+ |-loot/           - Where payloads store logs and data    
+ |-docs/           - EULA, License, this readme.txt
+ |-tools/          - Contents placed here will be copied
+ |                   to /tools at boot in arming mode.
+ |                   *.deb packages will be installed.
+ |-languages/      - HID languages placed here will
+                     install at boot in arming mode.
 
         
 
@@ -70,7 +77,8 @@
  -----------------------------------------------------------   ---------------
  ATTACKMODE  Specifies the USB devices to emulate.             REM
              Accepts combinations of three: SERIAL,            DELAY
-             ECM_ETHERNET, RNDIS_ETHERNET, STORAGE, HID        STRING
+             ECM_ETHERNET, RNDIS_ETHERNET, STORAGE, HID,       STRING
+             RO_STORAGE or disable all USB with OFF            SPACE
                                                                WINDOWS/GUI
  LED         Control the RGB LED. Accepts color and pattern    MENU/APP
              or predefined payload state.                      SHIFT
@@ -89,7 +97,7 @@
  DUCKY_LANG=us Sets keystroke injection language               PAGEUP P
                                                                PAGEDOWN
                                                                PRINTSCREEN
-                                 SPACE
+                                                               SPACE
  Bunny Script Environment Variables                            TAB
  ----------------------------------------------------------    NUMLOCK      
  $TARGET_IP         IP Address of the computer received        SCROLLOCK  
@@ -109,14 +117,45 @@
  payloads may make use of these command. Similar to payloads, the extensions 
  can be obtain and updated from the Bash Bunny repository.
  
- Example extension: RUN - Simplifies command execution for HID attacks.
+ RUN - Simplifies command execution for HID attacks.
  Usage: RUN [OS] [Command] 
    RUN WIN notepad.exe
    RUN WIN "powershell -Exec Bypass \"tree c:\\ > tree.txt; type tree.txt\"
    RUN OSX http://www.example.com
 
    
- 
+ CUCUMBER - CPU Control (May be specified globally in /config.txt)
+ Usage: CUCUMBER [Mode]
+   CUCUMBER ENABLE   Single CPU core mode with governor set to ondemand
+                     *Best thermal option for long-term deployments
+   CUCUMBER DISABLE  Quad CPU core mode with governor set to ondemand
+                     *Default behavior. Best overall power/performance
+   CUCUMBER PLAID    Quad CPU core mode with governor set to performance
+                     *Ludicrous speed. Not intended for long-term deployments.
+
+           
+ DUCKY_LANG - Specifies HID injection language for QUACK commands
+ Usage: DUCKY_LANG [Language]
+   DUCKY_LANG us 
+   * Specified in two letter language abbreviation
+   * Uses language json file from langauge database (updated via /languages)
+
+   
+ REQUIRETOOL - Checks if a tool is installed. Exits with LED FAIL if not.
+ Usage: REQUIRETOOL [tool]
+   REQUIRETOOL impacket
+   * Checks /tools/ for named directory or system installed tool name
+   
+   
+ GET - Returns variable
+ Usage: GET [variable]
+   GET TARGET_IP         Returns $TARGET_IP
+   GET TARGET_HOSTNAME   Returns $TARGET_HOSTNAME
+   GET HOST_IP           Returns $HOST_IP
+   GET SWITCH_POSITION   Returns $SWITCH_POSITION
+
+
+           
  Connecting to the Linux Serial Console from Windows           Serial Settings
  ---------------------------------------------------------     ---------------
  Find the COM# from Device Manager > Ports (COM & LPT)         115200/8N1
@@ -141,16 +180,21 @@
 
  Example Payload Structure
  -------------------------
- payloads/switch#/
+ /config.txt - Sourced by all payloads enabling global configurations
+               Example: DUCKY_LANG us
+ /payloads/switch#/
                  |-payload.txt   Primary payload file executed on boot in
                  |               specified switch position
-                 |-readme.txt    Optional payload documentation
-                 |-config.txt    Optional payload configuration for variables
-                 |               sourced by complex payloads
+                 |-readme.md     Payload documentation in markdown for github
                  |-install.sh    Installation script for complex payloads
-                 |               requiring initial setup (may require Internet)
-                 |-remove.sh     Uninstall/Cleanup script for complex payloads
-
+                                 requiring initial setup (may require Internet)
+ /payloads/arming/
+                |-payload.txt    Special payload executed when switch is in 
+                                 position 3 (arming mode). Overrides default
+                                 STORAGE+SERIAL mode. For advanced users only.
+                                 WARNING: Be careful not to lock yourself out
+                                 of the Bash Bunny by disabling access via 
+                                 STORAGE or SERIAL when using this feature.
 
 
  Share Internet Connection with Bash Bunny from Windows
@@ -184,18 +228,30 @@
  ATTACKMODE Command
  -----------------------------------------------------------------------------
  ATTACKMODE sets the device emulation parameters for the Bash Bunny. 
- Three of five attack modes may be executed simultaneously.
+ Three attack modes may be executed simultaneously.
  
  Parameter      Type                                  Target/Use
- -------------- ------------------------------------  -------------------
+ -------------- ------------------------------------  ------------------------
  SERIAL         ACM     Abstract Control Model        Serial Console
  ECM_ETHERNET   ECM     Ethernet Control Model        Linux/Mac/Android
  RNDIS_ETHERNET RNDIS   Remote Network Dvr Int Spec   Windows (some *nix)
  STORAGE        UMS     USB Mass Storage              Flash Drive
+ RO_STORAGE     UMS     USB Mass Storage              Read-Only Flash Drive
  HID            HID     Human Interface Device        Keystroke Injection
 
+ ATTACKMODE Advanced Parameters
+ ------------- ----------------------------------------------------------------
+ PID_          Specifies the USB device product ID
+ VID_          Specifies the USB device vendor ID
+ MAN_          Specifies the USB device manufacturer
+ SN_           Specifies the USB device serial number
+ OFF           Disables all USB emulaiton
 
+ Example:
+ ATTACKMODE HID STORAGE VID_0XF000 PID_0X1234 SN_12345678 MAN_HAK5
 
+ 
+ 
  LED Command
  -----------------------------------------------------------------------------
  The multi-color LED enables at-a-glance information on payload status.

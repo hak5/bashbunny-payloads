@@ -1,0 +1,30 @@
+#!/bin/bash
+# Title:         Infinite Control
+# Author:        Didier Stevens (https://DidierStevens.com)
+# Version:       0.0.1 2017/04/08
+#
+# Hit the CONTROL key every 10 seconds in an infinite loop,
+# while blinking the red LED with every keypress.
+#
+# Can be used to prevent a machine from sleeping or auto-locking.
+#
+# WARNING: Do not type on the machine's keyboard while this script
+#          is running, or your keystrokes might become commands,
+#          for example CTRL-Q: Quit
+#
+# Red ...............Hitting CONTROL key
+# Red Blinking.......Wow! We broke out of the infinite while loop!
+
+ATTACKMODE HID
+
+# infinite while loop
+while true
+do
+	LED R
+	QUACK CTRL
+	LED
+	sleep 10
+done
+
+# this code will never be reached
+LED R 100
