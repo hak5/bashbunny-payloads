@@ -3,7 +3,7 @@
 * Author: willem640 (and the person that made the original payload targeting MACOSX)
 * Version: Version 1
 * Category: Prank
-* Target: Linux Distros that support xterm and the alt-f2 shortcut for
+* Target: Linux Distros that support xterm and the alt-f2 shortcut
 
 
 ## Description
