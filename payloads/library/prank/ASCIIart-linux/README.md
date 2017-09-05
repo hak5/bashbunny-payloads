@@ -9,6 +9,7 @@
 ## Description
 opens xterm and shows whatever was in the art file ( text )
 there is no difference with the other script for macosx except that this one can operate at both switch positions :)
+(And of course it is for linux)
 
 
 
