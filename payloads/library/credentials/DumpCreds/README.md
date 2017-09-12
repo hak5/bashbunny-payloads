@@ -1,6 +1,6 @@
 # DumpCreds 2.2
 * Author: QDBA
-* Version: Version 2.2.0 Build 1006
+* Version: Version 2.2.0 Build 1009
 * Target: Windows 7, 10
 
 ## Description
@@ -82,12 +82,15 @@ https://forums.hak5.org/index.php?/topic/40806-payload-new-dumpcreds-22
 ## Credits
 
 - special thx to illwill & tux for the server.py (HTTP_Server)  
-
 - https://github.com/EmpireProject/Empire     (Get-FoxDump.ps1, Invoke-M1m1k@tz.ps1, Invoke-PowerDump.ps1, Get-ChromeCreds.ps1)
+- Valentin-Metz for inserting the Fodhelper UAC-Bypass  ( Resource: https://github.com/winscripting/UAC-bypass/blob/master/FodhelperBypass.ps1 )
 
 ## Changelog
 
 Version 2.2
+ [Build 1009]
+ - Merged the UAC Bypass fodhelper changes from valentin-metz
+ 
  [Build 1008]
  - Removed DUCKY_LANG from payload.txt because set it in config.txt [FW 1.2]. 
  [Build 1007] 
@@ -103,8 +106,8 @@ Version 2.2
 - remove the debug code
 - recoded the Get-WiFiCreds.ps1 for working on Windows 7
 
+
 Version 2.1
-Version 2.2
  [Build 1007] 
  - Some Errors fixed with Char Encoding and Encrypted PS Payloads in Windows 7 
 
