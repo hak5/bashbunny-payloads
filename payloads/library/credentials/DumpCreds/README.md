@@ -63,6 +63,7 @@ official Bash Bunny payload at Github
 
 ## STATUS
 
+
 | LED                     | Status                                       |
 | ----------------------- | -------------------------------------------- |
 | Magenta Solid           | Setup                                        |
@@ -88,6 +89,7 @@ https://forums.hak5.org/index.php?/topic/40806-payload-new-dumpcreds-22
 ## Changelog
 
 Version 2.2
+
  [Build 1009]
  - Merged the UAC Bypass fodhelper changes from valentin-metz
  
@@ -108,6 +110,7 @@ Version 2.2
 
 
 Version 2.1
+
  [Build 1007] 
  - Some Errors fixed with Char Encoding and Encrypted PS Payloads in Windows 7 
 
