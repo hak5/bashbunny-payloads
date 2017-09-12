@@ -1,6 +1,6 @@
-# DumpCreds 2.2
+# DumpCreds 2.3
 * Author: QDBA
-* Version: Version 2.2.0 Build 1009
+* Version: Version 2.3.0 Build 1009
 * Target: Windows 7, 10
 
 ## Description
@@ -88,10 +88,12 @@ https://forums.hak5.org/index.php?/topic/40806-payload-new-dumpcreds-22
 
 ## Changelog
 
-Version 2.2
+Version 2.3
 
  [Build 1009]
  - Merged the UAC Bypass fodhelper changes from valentin-metz
+ 
+Version 2.2 
  
  [Build 1008]
  - Removed DUCKY_LANG from payload.txt because set it in config.txt [FW 1.2]. 
