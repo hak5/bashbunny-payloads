@@ -1,6 +1,6 @@
-# DumpCreds 2.3
+# DumpCreds 2.3.1
 * Author: QDBA
-* Version: Version 2.3.0 Build 1009
+* Version: Version 2.3.1 Build 1010
 * Target: Windows 7, 10
 
 ## Description
