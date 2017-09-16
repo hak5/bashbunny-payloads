@@ -1,0 +1,12 @@
+[{
+    "jobName"   :"Name of job, used for file name.",
+    "command"   :"Powershell function and parameters to execute your code.",
+	"runType"	:"Run inside agent as 'thread' or outside agent as 'process'.  Accepts string 'thread' or 'process'"
+    "scriptName":"Name of script file in jobs folder"
+},
+{
+    "jobName"   :"",
+    "command"   :"",
+	"runType"	:""'
+    "scriptName":""
+}]

