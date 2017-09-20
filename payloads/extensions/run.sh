@@ -37,6 +37,20 @@ function RUN() {
          QUACK DELAY 500
          QUACK ENTER
          ;;
+      i3-Win)
+         QUACK GUI ENTER
+         QUACK DELAY 500
+         QUACK STRING "$@"
+         QUACK DELAY 500
+         QUACK ENTER
+         ;;
+      i3-Alt)
+         QUACK ALT ENTER
+         QUACK DELAY 500
+         QUACK STRING "$@"
+         QUACK DELAY 500
+         QUACK ENTER
+         ;;
       *)
          # OS parameter must be one of the above
          exit 1
