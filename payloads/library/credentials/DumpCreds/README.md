@@ -1,4 +1,4 @@
-# DumpCreds 2.3.1
+# DumpCreds 2.3.2
 * Author: QDBA
 * Version: Version 2.3.2 Build 1012
 * Target: Windows 7, 10
@@ -90,7 +90,7 @@ https://forums.hak5.org/index.php?/topic/40806-payload-new-dumpcreds-22
 
 ## Changelog
 
-Version 2.3.1
+Version 2.3.2
 
  [Build 1012]
  - Multiple UAC Modes 1 = Fodhelper; 0 = Standard UAC
