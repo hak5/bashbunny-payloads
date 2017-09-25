@@ -13,7 +13,7 @@
 
 
 $_Version = "2.3.1"
-$_BUILD = "1011"
+$_BUILD = "1012"
 
 # Encoded File Info
 $HTTP_Server="172.16.64.1"
