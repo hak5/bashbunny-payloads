@@ -24,7 +24,7 @@ if [ -z "${TARGET_IP}" ]; then
   echo "No target IP, checking if it's a windows host" >> $LOOTDIR/win93.log
   DEFAULT_OS='WIN'
   LED SPECIAL
-  ATTACKMODE RDNIS_ETHERNET
+  ATTACKMODE RNDIS_ETHERNET
   sleep 3
   GET TARGET_IP
   if [ -z "${TARGET_IP}" ]; then
