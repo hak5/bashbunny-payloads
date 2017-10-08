@@ -11,7 +11,7 @@ Set up a reverse shell and execute powershell/generic commands in the background
 
 ## Configuration
 
-Place powershell and/or generic commands between lines 54 and 60 (within the EOF).
+Place powershell and/or generic commands between lines 54 and 59 (within the EOF).
 <br>
 Don't need to run as admin? Set the variable ADMIN to false. It'll be much faster.
 <br>
