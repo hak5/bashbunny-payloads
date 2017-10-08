@@ -7,7 +7,7 @@
 
 ## Description
 
-Set up a reverse shell and execute powershell/generic commands in the background from the Bash Bunny via USB ethernet.
+Set up a reverse shell and execute PowerShell/generic commands in the background from the Bash Bunny via USB ethernet.
 
 ## Configuration
 
@@ -29,4 +29,4 @@ Having issues obtaining a connection with the listener? Alter the time before co
 
 ## Discussion
 
-
+https://forums.hak5.org/topic/41955-payload-revshellback/
