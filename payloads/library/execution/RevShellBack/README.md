@@ -1,7 +1,7 @@
 # RevShellBack
 
 - Author: NodePoint
-- Version: 0.1.2
+- Version: 0.1.3
 - Target: Windows
 - Category: Execution
 
@@ -23,7 +23,7 @@ Having issues obtaining a connection with the listener? Alter the time before co
 | -------- | ----------------------------------------- |
 | SETUP    | Setup (attackmode, variables, networking) |
 | STAGE1   | Open CMD (bypass UAC if ADMIN is true)    |
-| STAGE2   | Hide CMD and initiate reverse shell       |
+| STAGE2   | Initiate reverse shell                    |
 | SPECIAL1 | Set up listener and send out commands     |
 | FINISH   | Finished                                  |
 
