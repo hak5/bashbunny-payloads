@@ -3,7 +3,7 @@
 # Title:         RevShellBack
 # Description:   Set up a reverse shell and execute powershell/generic commands in the background from the Bash Bunny via USB ethernet.
 # Author:        NodePoint
-# Version:       0.1.1
+# Version:       0.1.2
 # Category:      Execution
 # Target:        Windows
 # Attackmodes:   Ethernet, HID
@@ -36,7 +36,7 @@ if [ "$ADMIN" = true ] ; then
     Q DELAY 300
 else
     # Run as normal user
-    RUN WIN powershell -c "Start-Process cmd"
+    RUN WIN cmd
     Q DELAY 200
 fi
 
