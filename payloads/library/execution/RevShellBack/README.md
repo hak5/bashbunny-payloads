@@ -1,7 +1,7 @@
 # RevShellBack
 
 - Author: NodePoint
-- Version: 0.1
+- Version: 0.1.1
 - Target: Windows
 - Category: Execution
 
@@ -11,9 +11,9 @@ Set up a reverse shell and execute PowerShell/generic commands in the background
 
 ## Configuration
 
-Place powershell and/or generic commands between lines 54 and 59 (within the EOF).
+Place powershell and/or generic commands between lines 53 and 58 (within the EOF).
 <br>
-Don't need to run as admin? Set the variable ADMIN to false. It'll be much faster.
+Need to run as admin? Set the variable ADMIN to true.
 <br>
 Having issues obtaining a connection with the listener? Alter the time before connection attempt in NCDELAY.
 

