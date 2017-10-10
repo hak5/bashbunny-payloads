@@ -39,7 +39,7 @@ function GET() {
 			       then
 			          export OS='WIN'
 			       else
-			          OS=$DEFAULT_OS
+			          export OS=$DEFAULT_OS
 				  	fi
 			   	fi
 		   	fi
