@@ -181,7 +181,10 @@ def prewrap():
 def postwrap(user, password, loot):
     if not passwordNeeded:
         if user:
-            password = loot[user]
+            try:
+                password = loot[user]
+            except:
+                password = ""
     blueTurtleShell(password)    
 
 if __name__ == '__main__':
