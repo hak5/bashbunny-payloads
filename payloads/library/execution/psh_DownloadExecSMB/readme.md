@@ -10,12 +10,16 @@
 
 ## Description
 
-Quick HID attack to retrieve and run powershell payload from BashBunny SMBServer. Credentials are stored as loot.  
+Quick HID attack to retrieve and run powershell payload from BashBunny SMBServer. SMB Credentials are stored as loot.  
 
 ## Configuration
 
-* Ensure psh.txt exists in payload directory. This is the powershell script that will be downloaded and executed.  
-* Requires Impacket is installed (python ./impacket/setup.py install)  
+* Ensure p.txt exists in payload directory. This is the powershell script that will be downloaded and executed.  
+* Requires Impacket
+
+__Installation__
+
+See Hak5's Tool Thread Here: https://forums.hak5.org/index.php?/topic/40971-info-tools/
 
 ## STATUS
 
