@@ -14,7 +14,7 @@ Quick HID attack to retrieve and run powershell payload from BashBunny web serve
 
 ## Configuration
 
-Ensure psh.txt exists in payload directory. This is the powershell script that will be downloaded and executed.
+Ensure p.txt exists in payload directory. This is the powershell script that will be downloaded and executed.
 
 ## Requirements
 
