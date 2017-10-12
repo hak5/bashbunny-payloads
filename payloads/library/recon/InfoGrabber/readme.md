@@ -1,13 +1,10 @@
-# Info Grabber for the BashBunny
+# InfoGrabber for the Bunnys
 
-Original Author Simen Kjeserud
+Author: Simen Kjeserud
 
-V2.0 Author: DannyK999
+Version: Version 1.0
 
-Version: Version 2.0
-
-Credit: Hak5Darren, Hak5 and Simen Kjeserud for inspiration
-
+Credit: Hak5Darren for inspiration
 
                ((`\
             ___ \\ '--._
@@ -15,14 +12,12 @@ Credit: Hak5Darren, Hak5 and Simen Kjeserud for inspiration
         /    \   '. __.'
        _|    /_  \ \_\_
       {_\______\-'\__\_\
-	  Check out Simen's website:
+	  Check out my website:
 	  aknemis.com
 
 ## Description
 
 Gather a lot of information about the computer and place it in a text file in loot/info/.
-
-Updates include code/output cleanup, faster runtime, and more veiled execution.
 
 Here you can se what it will look like:
 
@@ -69,9 +64,18 @@ Here you can se what it will look like:
 
 Made for windows. The only thing you will need to change is the Ducky language so it matches the keyboard input.
 
+## Requirements
+
+DuckyTools for the BashBunny, and you need to change to the language the computer uses.
+
 ## STATUS
 
 | LED              | Status                                |
 | ---------------- | ------------------------------------- |
 | Purple (blinking)| Attack in progress                    |
 | Green            | Attack Finished                       |
+
+
+
+## Discussion (Not yet created)
+[Hak5 Forum Thread not yet created](https://forums.hak5.org/index.php?/topic/ "Hak5 Forum Thread") 
