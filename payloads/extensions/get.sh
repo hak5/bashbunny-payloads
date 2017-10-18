@@ -17,33 +17,6 @@ function GET() {
 			[[ "$(cat /sys/class/gpio_sw/PL3/data)" == "0" ]] && export SWITCH_POSITION="switch3" && return
 			export SWITCH_POSITION="invalid"
 			;;
-		"OS")
-			LOOTDIR = '/root/udisk/loot/nmap'
-			GET TARGET_IP
-			nmap -O -sV --osscan-guess $TARGET_IP > $LOOTDIR/nmap_results.log
-			grep -i 'linux' $LOOTDIR/nmap_results.log
-			RES=$?
-			if [ $RES -eq 0 ]
-			then
-			    export OS='LINUX'
-			else
-			    grep -v 'MAC Address' $LOOTDIR/nmap_results.log | grep -i 'mac'
-			    RES=$?
-				if [ $RES -eq 0 ]
-			    then
-			       export OS='MAC'
-			    else
-			       grep -i 'windows' $LOOTDIR/nmap_results.log
-			       RES=$?
-				   if [ $RES -eq 0 ]
-			       then
-			          export OS='WIN'
-			       else
-			          export OS='OTHER'
-				  	fi
-			   	fi
-		   	fi
-			;;
 	esac
 }
 
