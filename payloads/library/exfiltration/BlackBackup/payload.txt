@@ -18,6 +18,8 @@ OBFUSCATECMD="N" # Y=yes or N=no
 # Purple LED - initializing
 LED SETUP
 
+GET SWITCH_POSITION
+
 # Attackmode HID / Storage
 ATTACKMODE HID STORAGE
 

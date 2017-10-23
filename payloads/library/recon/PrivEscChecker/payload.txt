@@ -16,6 +16,7 @@
 # Red................No Possible Privilege Escalation
 
 LED SETUP
+GET SWITCH_POSITION
 LOOTDIR=/root/udisk/loot/PrivEscChecker
 mkdir -p $LOOTDIR
 #cleanup any prior unfinished payloads

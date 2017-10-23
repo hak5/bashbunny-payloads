@@ -17,6 +17,8 @@
 
 LED SETUP
 
+GET SWITCH_POSITION
+
 ATTACKMODE HID STORAGE
 
 if [ -f "/root/udisk/payloads/${SWITCH_POSITION}/ducky_script.txt" ]; then
