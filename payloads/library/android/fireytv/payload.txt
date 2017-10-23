@@ -64,7 +64,6 @@ Q DELAY 200
 Q ESCAPE
 ATTACKMODE ECM_ETHERNET
 LED B 2000
-source bunny_helpers.sh
 if [ -z "${TARGET_IP}" ]; then
     LED R 2000
 	exit 1
