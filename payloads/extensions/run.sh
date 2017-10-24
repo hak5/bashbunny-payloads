@@ -13,9 +13,9 @@
 function RUN() {
    local os=$1
    shift
-   
+
    [[ -z "$os" || -z "$*" ]] && exit 1 # Both OS and Command parameter must be set
-   
+
    case "$os" in
       WIN)
          QUACK GUI r
@@ -31,6 +31,13 @@ function RUN() {
          QUACK ENTER
          ;;
       UNITY)
+         QUACK ALT F2
+         QUACK DELAY 500
+         QUACK STRING "$@"
+         QUACK DELAY 500
+         QUACK ENTER
+         ;;
+      LINUX)
          QUACK ALT F2
          QUACK DELAY 500
          QUACK STRING "$@"

