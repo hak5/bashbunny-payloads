@@ -23,7 +23,7 @@
 # Sharing is caring
 # Right-Click Ineternet interface click on
 # "Properties" and select "Sharing" tab
-# 
+#
 # From "Sharing" tab check
 # "Allow other netwrk usrs 2 connect... thru dis connection"
 # Select the Bash Bunny Gadget and hit "OK"
@@ -34,9 +34,11 @@
 # Set the IPv4=172.16.64.64 and Subnet=24-bit
 # Hit all the OKs
 
+GET SWITCH_POSITION
+
 # Or we could just have the Bash Bunny do all the work...
 LED SETUP
-SWITCHDIR=/root/udisk/payloads/$SWITCH_POSITION
+SWITCHDIR=/root/udisk/payloads/$(SWITCH_POSITION)
 
 # HID Attack Starts
 ATTACKMODE HID
