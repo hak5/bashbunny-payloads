@@ -78,7 +78,6 @@ if [ "$OS" = "MAC" ]; then
     RUN OSX "terminal"
     QUACK STRING "open \"http://www.windows93.net\" && osascript -e \"sleep 3;ccf;\";"
 elif [ "$OS" = "LINUX" ]; then
-    DUCKY_LANG fr
     RUN UNITY "xterm"
     QUACK STRING "chromium-browser --start-fullscreen --incognito --new-window http://www.windows93.net &; exit;"
     QUACK ENTER
