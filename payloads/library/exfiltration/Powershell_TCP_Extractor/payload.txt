@@ -9,7 +9,9 @@
 # which in turn runs powershell script to copy move and extract data.
 
 LED SETUP
+
 GET SWITCH_POSITION
+
 ATTACKMODE HID STORAGE
 QUACK GUI r
 QUACK DELAY 100
