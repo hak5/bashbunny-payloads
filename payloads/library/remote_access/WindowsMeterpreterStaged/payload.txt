@@ -29,6 +29,9 @@
 #         Red: failure to load dependency ducky script
 #
 
+LED SETUP
+
+GET SWITCH_POSITION
 
 ATTACKMODE HID
 
