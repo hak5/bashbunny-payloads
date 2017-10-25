@@ -6,8 +6,8 @@
 # Category:      Recon
 # Target:        Windows XP SP3+ (Powershell)
 # Attackmodes:   HID, Storage
-# 
-# 
+#
+#
 # Amber Blink Fast.....Initialization
 # Amber................Begin
 # White Blinking... ...Moving loot to mass storage

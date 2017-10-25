@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 # Title:     Git Bunny Git
 # Author:    Draxiom && audibleblink && Nicholas Adamou
 # Target:    any
@@ -13,6 +13,7 @@
 # Amber            |  Running
 # Green (blinking) |  Git Pull Finished
 # Green            |  Git Clone Finished
+#
 
 LED W
 #ATTACKMODE RNDIS_ETHERNET

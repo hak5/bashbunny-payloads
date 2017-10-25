@@ -12,7 +12,7 @@ function Get-FileVersionInfo ($FilePath) {
 
     $VersionInfo = (Get-Item $FilePath).VersionInfo
     $FileVersion = ( "{0}.{1}.{2}.{3}" -f $VersionInfo.FileMajorPart, $VersionInfo.FileMinorPart, $VersionInfo.FileBuildPart, $VersionInfo.FilePrivatePart )
-        
+
     return $FileVersion
 
 }
@@ -83,7 +83,7 @@ function Find-AllVulns {
     if ( !$Global:ExploitTable ) {
 
         $null = New-ExploitTable
-    
+
     }
 
         Find-MS10015
@@ -170,7 +170,7 @@ function Find-MS10092 {
             default { $VulnStatus = "Not Vulnerable" }
 
         }
-        
+
     } ElseIf ( $Architecture[0] -eq "64-bit" -and $Architecture[1] -eq "x86" ) {
 
         $VulnStatus = "Migrate to a 64-bit process to avoid WOW64 Filesystem Redirection shenanigans"

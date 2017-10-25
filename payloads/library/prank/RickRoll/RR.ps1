@@ -26,7 +26,7 @@ for($counter = 0; $counter -lt $frames.Count; $counter++)
     $frame = (($frame -split "`t") -replace '(.)(.)(.)',$expansion) -join "`t"
     $frames[$counter] = $frame
 }
-    
+
 ## Prepare the screen
 $counter = 0
 $maxCounter = $frames.Count - 1
@@ -72,20 +72,20 @@ $player = @($bgPowerShell.AddScript($script).Invoke())[0]
 try
 {
     ## Wait for it to buffer (or error out)
-    
+
     while($true)
     {
         Start-Sleep -m 500
         if($player.HasError -or ($player.ReadyState -eq 4)) { break }
     }
-    
+
     Start-Sleep -m 1600
     Clear-Host
-    
+
     $host.UI.RawUI.CursorPosition = New-Object System.Management.Automation.Host.Coordinates `
         0,([Console]::WindowHeight - 1)
     Write-Host -NoNewLine 'Q or ESC to Quit'
-    
+
     ## Loop through the frames and display them
     [Console]::TreatControlCAsInput = $true
     while($true)
@@ -100,11 +100,11 @@ try
                 break
             }
         }
-        
+
         if((-not $player.HasError) -and ($player.PlayState -eq 0)) { break }
         $host.UI.RawUI.CursorPosition = New-Object System.Management.Automation.Host.Coordinates 0,0
         Write-Host (($frames[$counter] -split "`t") -join "`r`n")
-        
+
         Start-Sleep -m 100
         $counter = ($counter + 1) % $maxCounter
     }
@@ -121,4 +121,3 @@ finally
     $player.Stop()
     $bgPowerShell.Dispose()
 }
- 

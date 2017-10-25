@@ -3,7 +3,7 @@
 # Author:        Hkyq
 # Version:       1.1
 # Category:      Prank
-# Target:        Windows 7 
+# Target:        Windows 7
 # Attackmodes:   HID
 
 ATTACMODE HID
@@ -30,5 +30,3 @@ do
   Q WINDOWS ALT RIGHTARROW
   Q LED Y SINGLE
 done
-
-

@@ -3,9 +3,9 @@
 # Version: 1.1
 # Target: Windows
 # Category: Enumeration
-# 
+#
 # Checks whether RDP is enabled on target machine
-# 
+#
 # REQUIREMENTS
 # ============
 # Needs impacket to be copied to /tools/impacket and installed
@@ -15,7 +15,7 @@
 #   3. Boot Bash Bunny into arming mode and connect to console via serial
 #   4. Issue "python /tools/impacket/setup.py install"
 # Option B:
-#   1. Download impacket deb package 
+#   1. Download impacket deb package
 #   2. Copy impacket.deb to /tools on the Bash Bunny flash drive
 #   3. Boot Bash Bunny into arming mode. Impacket will install automatically.
 #

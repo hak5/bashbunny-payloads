@@ -1,5 +1,5 @@
 REM Title: FileInfoExfil
-REM Creator: A_SarcasticGuy 
+REM Creator: A_SarcasticGuy
 REM Target: Windows
 REM Version: 1.0
 

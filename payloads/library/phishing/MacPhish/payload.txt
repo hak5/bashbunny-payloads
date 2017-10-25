@@ -4,7 +4,7 @@
 # Author:        Ahhh
 # Version:       1.0
 #
-# Prompts for user password, writes response to the bunny 
+# Prompts for user password, writes response to the bunny
 #
 # Blue...............Starting
 # Amber..............Executing payload
@@ -13,7 +13,6 @@
 
 LED B
 
-LANGUAGE='us'
 lootdir=loot/MacLoot
 
 # Gimme a Keyboard please. Thanks.

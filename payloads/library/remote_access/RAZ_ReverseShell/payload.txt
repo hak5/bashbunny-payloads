@@ -8,20 +8,20 @@
 #                nc.exe - Windows binary for netcat with the -e flag
 #                listener_port.txt - The Port number for the netcat listener
 #                listener_ip.txt - The IP Address for the netcat listener
-# 
+#
 # Description:   Executes a netcat reverse cmd shell at a given IP and Port
 #                Intentionally, this script leaves a trace in the Run Box
 #
 # Colors:
 # | Status     | Color                         | Description                                      |
 # | ---------- | ------------------------------| ------------------------------------------------ |
-# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
-# | FAIL1      | Red slow blink                | Could not find the listener_port.txt file        | 
-# | FAIL2      | Red fast blink                | Could not find the listener_ip.txt file          | 
-# | FAIL3      | Red very fast blink           | Could not find the nc.exe file                   | 
-# | SPECIAL    | Cyan inverted single blink    | Incrementing the port in listener_port.txt       | 
-# | ATTACK     | Yellow single blink           | Running the VBScript                             | 
-# | FINISH     | Green blink followed by SOLID | Script is finished                               | 
+# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position |
+# | FAIL1      | Red slow blink                | Could not find the listener_port.txt file        |
+# | FAIL2      | Red fast blink                | Could not find the listener_ip.txt file          |
+# | FAIL3      | Red very fast blink           | Could not find the nc.exe file                   |
+# | SPECIAL    | Cyan inverted single blink    | Incrementing the port in listener_port.txt       |
+# | ATTACK     | Yellow single blink           | Running the VBScript                             |
+# | FINISH     | Green blink followed by SOLID | Script is finished                               |
 
 # Magenta solid
 LED SETUP
@@ -55,7 +55,7 @@ fi
 if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/nc.exe" ] ; then
     LED FAIL3
     exit 1
-fi 
+fi
 
 # Start the attack - yellow single blink
 LED ATTACK
@@ -68,10 +68,10 @@ QUACK ENTER
 
 
 # If auto_increment, then update the listener_port file
-if [ "$auto_increment" = true ] ; then   
+if [ "$auto_increment" = true ] ; then
    LED SPECIAL
    echo $((my_port + 1)) > /root/udisk/payloads/${SWITCH_POSITION}/listener_port.txt
-   
+
    # Allow the write to sync to the USB
    sleep 1
 fi

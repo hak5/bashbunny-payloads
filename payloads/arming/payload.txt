@@ -1,0 +1,1 @@
+# Arming default payload - Implemented in Version 1.3+

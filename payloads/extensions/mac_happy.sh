@@ -10,17 +10,17 @@
 #
 
 function mac_happy() {
-    [[ -z "$1" ]] && exit 1 # parameter must be set
+  [[ -z "$1" ]] && exit 1 # parameter must be set
 
-    [[ ! $1 =~ "ATTACKMODE" ]] && exit 1 # parameter must be for ATTACKMODE
+  [[ ! $1 =~ "ATTACKMODE" ]] && exit 1 # parameter must be for ATTACKMODE
 
-    for i in $*;
-    do
-        command=$(echo $command $i)
-    done
+  for i in $*;
+  do
+    command=$(echo $command $i)
+  done
 
-    command=$(echo $command VID_0X05AC PID_0X021E)
+  command=$(echo $command VID_0X05AC PID_0X021E)
 
-    eval $command
+  eval $command
 }
 export -f mac_happy

