@@ -3,7 +3,6 @@
 #Author: thehappydinoa
 #Target: OS X
 
-
 LED R 200
 
 ATTACKMODE HID
