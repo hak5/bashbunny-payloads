@@ -44,7 +44,7 @@ call render_frame
 
 jmp $
 ;For bonus points, make a jump to the address at which the original bootloader is stored.
-;(You DID save the original 0x8940 bytes somewhere, right?)
+;(You DID save the original 0x200 bytes somewhere, right?)
 
 ;Functions
 
