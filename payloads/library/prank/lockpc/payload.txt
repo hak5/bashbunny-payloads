@@ -1,0 +1,68 @@
+#
+#
+# Title:             PC Lock Fun
+# Original Authors:            The10FpsGuy and Mrhut10
+#                    Big thanks to Mrhut10 for helping to put a loop in it :D
+# Modified:	     FraterVI
+# Category:          Fun
+# Target:.           Windows, Linux, Mac
+# Description:	     Takes original prank payload and adds OS detection so
+#		     it can be run on any(mostly any) OS.
+#
+#options
+mount -o /dev/nandf /root/udisk
+LED SETUP
+OS="FAIL3"
+#CUCUMBER ENABLE
+GET_OS OS
+echo "$OS" > /root/udisk/loot/OS.txt
+msg_header="begining"
+msg_body="I will learn to lock my computer"
+msg_body_repeats=50
+msg_end="Please remember to lock your computer when you walk away."
+
+LED ATTACK
+Q DELAY 500
+case "$OS" in
+	"LINUX")ATTACKMODE HID
+		RUN UNITY gedit
+		;;
+	"MAC")	ATTACKMODE HID VID_0x05AC PID_0x021E
+		RUN OSX terminal
+		;;
+	"WIN")	ATTACKMODE HID
+		RUN WIN notepad.exe
+		;;
+	"FAIL3") LED FAIL3
+		umount /root/udisk
+		exit 1
+		;;
+esac
+Q DELAY 1000		
+Q STRING $msg_header
+Q ENTER
+
+for (( i=1; i<=$msg_body_repeats; i++ ))
+do
+   Q STRING $msg_body
+   Q ENTER
+done
+Q STRING $msg_end
+Q ENTER
+case "$OS" in
+	"LINUX") Q GUI l
+		;;
+	"MAC") Q STRING "/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+		Q ENTER
+		;;
+	"WIN") Q GUI l
+		;;
+	"FAIL3") LED FAIL3
+		umount /root/udisk
+		exit 1
+		;;
+esac
+
+LED CLEANUP
+umount /root/udisk
+LED FINISH
