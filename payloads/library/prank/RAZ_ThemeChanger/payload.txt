@@ -4,17 +4,17 @@
 # Author:        sil3n7h
 # Version:       1.2a
 # Target:        Windows 7+
-# 
-# Executes theme file (theme.themepack) from the ${SWITCH_POSITION} folder 
+#
+# Executes theme file (theme.themepack) from the ${SWITCH_POSITION} folder
 # in the payloads library of the Bash Bunny USB Disk partition.
 #
 # Colors:
 # | Status     | Color                         | Description                                      |
 # | ---------- | ------------------------------| ------------------------------------------------ |
-# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
-# | FAIL1      | Red slow blink                | Could not find the theme.themepack file          | 
-# | ATTACK     | Yellow single blink           | Running the VBScript                             | 
-# | FINISH     | Green blink followed by SOLID | Script is finished                               | 
+# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position |
+# | FAIL1      | Red slow blink                | Could not find the theme.themepack file          |
+# | ATTACK     | Yellow single blink           | Running the VBScript                             |
+# | FINISH     | Green blink followed by SOLID | Script is finished                               |
 
 # Magenta solid
 LED SETUP

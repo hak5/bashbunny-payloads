@@ -12,7 +12,7 @@
 # Amber..........Scanning
 # White..........Switching to Mass Storage (optional)
 # Green..........Finished
-# 
+#
 # See nmap --help for options. Default "-O --fuzzy" profiles target OS.
 NMAP_OPTIONS="-O --fuzzy"
 LOOTDIR=/root/udisk/loot/nmap
@@ -22,7 +22,7 @@ LOOTDIR=/root/udisk/loot/nmap
 ######## INITIALIZATION ########
 LED SETUP
 # Use RNDIS for Windows. Mac/*nix use ECM_ETHERNET
-ATTACKMODE RNDIS_ETHERNET 
+ATTACKMODE RNDIS_ETHERNET
 #ATTACKMODE ECM_ETHERNET
 GET TARGET_IP
 GET TARGET_HOSTNAME

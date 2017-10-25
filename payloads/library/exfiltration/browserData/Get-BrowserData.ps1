@@ -77,7 +77,7 @@ function Get-BrowserInformation {
         Add-Type -AssemblyName System.Web.Extensions
         $ps_js = New-Object System.Web.Script.Serialization.JavaScriptSerializer
         return ,$ps_js.DeserializeObject($item)
-        
+
     }
 
     function Get-ChromeHistory {
@@ -97,7 +97,7 @@ function Get-BrowserInformation {
                     Data = $_
                 }
             }
-        }        
+        }
     }
 
     function Get-ChromeBookmarks {
@@ -202,7 +202,7 @@ function Get-BrowserInformation {
                         Browser = 'Firefox'
                         DataType = 'History'
                         Data = $_
-                        }    
+                        }
                     }
                 }
             }

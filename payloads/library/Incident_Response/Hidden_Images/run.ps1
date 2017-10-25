@@ -73,8 +73,7 @@ if ($fileheader -ne "False") {
 [PSCustomObject]@{
        File = $file
        Header = $fileheader
-       } | Export-Csv $backupPath\$datetime.csv -notype -Append 
+       } | Export-Csv $backupPath\$datetime.csv -notype -Append
 }
 }
 }
-

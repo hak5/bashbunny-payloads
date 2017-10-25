@@ -10,7 +10,7 @@
 # Red ...................... Failed to wipe files
 # Green .................... Done
 #
-# 
+
 LED R G B 100
 
 # Create directory to mount the mass storage partition to

@@ -9,41 +9,43 @@ var gr
 var server = http.createServer((request, response) => {
   console.log((new Date()) + ' HTTP server. URL ' + request.url + ' requested.')
 
-  if (request.url.indexOf('/exec?') === 0)
-  {
-    response.writeHead(404, {'Content-Type': 'text/html'})
+  if (request.url.indexOf('/exec?') === 0) {
+    response.writeHead(404, {
+      'Content-Type': 'text/html'
+    })
     for (var i in conns)
-      conns[i].sendUTF(JSON.stringify({ request: 'eval', content: request.url.substr(6) }))
+      conns[i].sendUTF(JSON.stringify({
+        request: 'eval',
+        content: request.url.substr(6)
+      }))
     response.end("sent")
-  }
-  else if (request.url.indexOf('/send?') === 0)
-  {
-    response.writeHead(404, {'Content-Type': 'text/html'})
+  } else if (request.url.indexOf('/send?') === 0) {
+    response.writeHead(404, {
+      'Content-Type': 'text/html'
+    })
     for (var i in conns)
-      conns[i].sendUTF('{"' + decodeURI(request.url.substr(6)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
-    var checkgr = () =>
-    {
-      if (gr)
-      {
+      conns[i].sendUTF('{"' + decodeURI(request.url.substr(6)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
+    var checkgr = () => {
+      if (gr) {
         response.end(gr)
         gr = ""
-      }
-      else
+      } else
         setTimeout(checkgr, 500)
     }
     checkgr()
-  }
-  else if (request.url === '/status')
-  {
-    response.writeHead(200, {'Content-Type': 'application/json'})
+  } else if (request.url === '/status') {
+    response.writeHead(200, {
+      'Content-Type': 'application/json'
+    })
     var responseObject = {
       currentClients: 1234,
       totalHistory: 567
     }
     response.end(JSON.stringify(responseObject))
-  }
-  else {
-    response.writeHead(404, {'Content-Type': 'text/html'})
+  } else {
+    response.writeHead(404, {
+      'Content-Type': 'text/html'
+    })
     response.end('Sorry, unknown url')
   }
 })
@@ -56,8 +58,7 @@ wsServer = new WebSocketServer({
   httpServer: server
 })
 
-function handleReq(obj, con)
-{
+function handleReq(obj, con) {
   if (obj.request === 'getresponse')
     gr = obj.html
 }
@@ -72,7 +73,9 @@ wsServer.on('request', (request) => {
   })
 
   connection.on('message', (message) => {
-    try { obj = JSON.parse(message.utf8Data) } catch(e) { }
+    try {
+      obj = JSON.parse(message.utf8Data)
+    } catch (e) {}
     console.log('message: ' + message.utf8Data)
     console.log(obj)
 
@@ -87,7 +90,7 @@ wsServer.on('request', (request) => {
     console.log('connection closed')
     for (var i in conns)
       if (conns[i] == connection)
-      //if (_.isEqual(conns[i], connection)) // XXX
+        //if (_.isEqual(conns[i], connection)) // XXX
         conn.splice(i, 1)
   })
 })

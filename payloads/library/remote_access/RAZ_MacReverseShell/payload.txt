@@ -8,15 +8,15 @@
 #
 # Description:   Starts a terminal window on a Mac,then creates a bash reverse
 #                shell inside a script, /tmp/s.sh.  It then adds the script to the
-#                Launch Agent - establishing persistence - running at a 
+#                Launch Agent - establishing persistence - running at a
 #                user-defined interval
 #
 # Colors:
 # | Status     | Color                         | Description                                      |
 # | ---------- | ------------------------------| ------------------------------------------------ |
-# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
-# | ATTACK     | Yellow single blink           | Running the VBScript                             | 
-# | FINISH     | Green blink followed by SOLID | Script is finished                               | 
+# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position |
+# | ATTACK     | Yellow single blink           | Running the VBScript                             |
+# | FINISH     | Green blink followed by SOLID | Script is finished                               |
 
 #Magenta solid
 LED SETUP

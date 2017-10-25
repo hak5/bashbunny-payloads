@@ -4,12 +4,12 @@
 # Author:        zachstanford
 # Version:       0.1 (Tested on Windows 10)
 #
-# Dumps browser info like history and bookmarks from  powershell script 
+# Dumps browser info like history and bookmarks from  powershell script
 # then saves them in /root/udisk/loot/BrowserData/%ComputerName%
 # Credits to this Empire's powershell script:
 # https://github.com/EmpireProject/Empire/blob/master/data/module_source/collection/Get-BrowserData.ps1
 
-#script 
+#script
 # Blue...............Running Script
 # Purple.............Finished
 

@@ -2,7 +2,7 @@
 #Description: Attacks the host file to redirect a website of your chosing for a given domain
 #Author: DavidSpek
 #Props: ashbreeze96 and overwraith
-#Target: Windows (Including 10 latest build) 
+#Target: Windows (Including 10 latest build)
 
 
 LED R 200

@@ -41,17 +41,17 @@ $Hdds = Get-WmiObject Win32_LogicalDisk | select DeviceID, VolumeName, @{Name="D
 
 # Check RDP
 $RDP
-if ((Get-ItemProperty "hklm:\System\CurrentControlSet\Control\Terminal Server").fDenyTSConnections -eq 0) { 
-	$RDP = "RDP is Enabled" 
+if ((Get-ItemProperty "hklm:\System\CurrentControlSet\Control\Terminal Server").fDenyTSConnections -eq 0) {
+	$RDP = "RDP is Enabled"
 } else {
-	$RDP = "RDP is NOT enabled" 
+	$RDP = "RDP is NOT enabled"
 }
 
 # Get network interfaces
-#| where { $_.ipaddress -notlike $null } 
-$Network = Get-WmiObject Win32_NetworkAdapterConfiguration | where { $_.MACAddress -notlike $null }  | select Index, Description, IPAddress, DefaultIPGateway, MACAddress | Format-Table Index, Description, IPAddress, DefaultIPGateway, MACAddress 
+#| where { $_.ipaddress -notlike $null }
+$Network = Get-WmiObject Win32_NetworkAdapterConfiguration | where { $_.MACAddress -notlike $null }  | select Index, Description, IPAddress, DefaultIPGateway, MACAddress | Format-Table Index, Description, IPAddress, DefaultIPGateway, MACAddress
 
-# Get wifi SSID and password	
+# Get wifi SSID and password
 $WLANProfileNames =@()
 #Get all the WLAN profile names
 $Output = netsh.exe wlan show profiles | Select-String -pattern " : "
@@ -69,7 +69,7 @@ Foreach($WLANProfileName in $WLANProfileNames){
         $WLANProfilePassword = "The password is not stored in this profile"
     }
     #Build the object and add this to an array
-    $WLANProfileObject = New-Object PSCustomobject 
+    $WLANProfileObject = New-Object PSCustomobject
     $WLANProfileObject | Add-Member -Type NoteProperty -Name "ProfileName" -Value $WLANProfileName
     $WLANProfileObject | Add-Member -Type NoteProperty -Name "ProfilePassword" -Value $WLANProfilePassword
     $WLANProfileObjects += $WLANProfileObject
@@ -96,7 +96,7 @@ $listener = $listener | foreach-object {
       "OwningProcess" = $listenerItem.OwningProcess
       "ProcessName" = $processItem.ProcessName
     }
-} | select LocalAddress, RemoteAddress, State, AppliedSetting, OwningProcess, ProcessName | Sort-Object LocalAddress | Format-Table 
+} | select LocalAddress, RemoteAddress, State, AppliedSetting, OwningProcess, ProcessName | Sort-Object LocalAddress | Format-Table
 
 # process last
 $process = $process | Sort-Object ProcessName | Format-Table Handle, ProcessName, ExecutablePath, CommandLine
@@ -118,7 +118,7 @@ $profileRows = $output | Select-String -Pattern 'All User Profile'
 $profileNames = New-Object System.Collections.ArrayList
 for($i = 0; $i -lt $profileRows.Count; $i++){
 $profileName = ($profileRows[$i] -split ":")[-1].Trim()
-$profileOutput = netsh.exe wlan show profiles name="$profileName" key=clear 
+$profileOutput = netsh.exe wlan show profiles name="$profileName" key=clear
 $SSIDSearchResult = $profileOutput| Select-String -Pattern 'SSID Name'
 $profileSSID = ($SSIDSearchResult -split ":")[-1].Trim() -replace '"'
 $passwordSearchResult = $profileOutput| Select-String -Pattern 'Key Content'
@@ -137,12 +137,12 @@ $profileNames.Add($networkObject)
 $profileNames.Add($networkObject)
 
 [void][Windows.Security.Credentials.PasswordVault,Windows.Security.Credentials,ContentType=WindowsRuntime]
-$vault = New-Object Windows.Security.Credentials.PasswordVault 
+$vault = New-Object Windows.Security.Credentials.PasswordVault
 $vault = $vault.RetrieveAll() | % { $_.RetrievePassword();$_ }
 
 #The output
 Clear-Host
-Write-Host 
+Write-Host
 
 $computerSystem.Name
 "=================================================================="
@@ -180,8 +180,8 @@ $computerSystem.Name
 "Network: "
 "=================================================================="
 "Computers MAC address: " + $computerMAC
-"Computers IP address: " + $computerIP.ipaddress[0] 
-"Public IP address: " + $computerPubIP  
+"Computers IP address: " + $computerIP.ipaddress[0]
+"Public IP address: " + $computerPubIP
 "RDP: " + $RDP
 ""
 ($Network| out-string)
@@ -210,5 +210,3 @@ $computerSystem.Name
 "Windows/user passwords"
 "=================================================================="
 $vault | select Resource, UserName, Password | Sort-Object Resource | ft -AutoSize
-
-

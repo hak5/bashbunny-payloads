@@ -27,10 +27,10 @@
 #   3. Boot Bash Bunny into arming mode and connect to console via serial
 #   4. Issue "python /tools/impacket/setup.py install"
 # Option B:
-#   1. Download impacket deb package 
+#   1. Download impacket deb package
 #   2. Copy impacket.deb to /tools on the Bash Bunny flash drive
 #   3. Boot Bash Bunny into arming mode. Impacket will install automatically.
-# 
+#
 # LED STATUS
 # ==========
 # FAIL........Failed to find dependencies

