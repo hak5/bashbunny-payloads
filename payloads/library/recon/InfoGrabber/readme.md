@@ -1,10 +1,13 @@
-# InfoGrabber for the Bunnys
+# Info Grabber for the BashBunny
 
-Author: Simen Kjeserud
+Original Author Simen Kjeserud
 
-Version: Version 1.0
+V2.0 Author: DannyK999
 
-Credit: Hak5Darren for inspiration
+Version: Version 2.0
+
+Credit: Hak5Darren, Hak5 and Simen Kjeserud for inspiration
+
 
                ((`\
             ___ \\ '--._
@@ -12,12 +15,14 @@ Credit: Hak5Darren for inspiration
         /    \   '. __.'
        _|    /_  \ \_\_
       {_\______\-'\__\_\
-	  Check out my website:
+	  Check out Simen's website:
 	  aknemis.com
 
 ## Description
 
 Gather a lot of information about the computer and place it in a text file in loot/info/.
+
+Updates include code/output cleanup, faster runtime, and more veiled execution.
 
 Here you can se what it will look like:
 
@@ -63,10 +68,6 @@ Here you can se what it will look like:
 ## Configuration
 
 Made for windows. The only thing you will need to change is the Ducky language so it matches the keyboard input.
-
-## Requirements
-
-DuckyTools for the BashBunny, and you need to change to the language the computer uses.
 
 ## STATUS
 
