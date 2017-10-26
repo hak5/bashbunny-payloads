@@ -10,12 +10,23 @@
 #		     it can be run on any(mostly any) OS.
 #
 #options
-mount -o /dev/nandf /root/udisk
 LED SETUP
-OS="FAIL3"
-#CUCUMBER ENABLE
-GET_OS OS
-echo "$OS" > /root/udisk/loot/OS.txt
+TARGET_OS="UNKNOWN"
+ATTACKMODE RNDIS_ETHERNET
+sleep 3
+GET TARGET_IP
+	if [ -z "${TARGET_IP}" ]; then
+		echo "No Target IP" > /dev/null
+		ATTACKMODE ECM_ETHERNET
+		sleep 3
+		GET TARGET_IP
+		if [ -z "${TARGET_IP}" ]; then
+			LED FAIL3
+			exit 1
+		fi
+	fi
+
+GET TARGET_OS
 msg_header="begining"
 msg_body="I will learn to lock my computer"
 msg_body_repeats=50
@@ -23,18 +34,17 @@ msg_end="Please remember to lock your computer when you walk away."
 
 LED ATTACK
 Q DELAY 500
-case "$OS" in
-	"LINUX")ATTACKMODE HID
+case "$TARGET_OS" in
+	"LINUX") ATTACKMODE HID
 		RUN UNITY gedit
 		;;
-	"MAC")	ATTACKMODE HID VID_0x05AC PID_0x021E
+	"MACOS") ATTACKMODE HID VID_0x05AC PID_0x021E
 		RUN OSX terminal
 		;;
-	"WIN")	ATTACKMODE HID
+	"WINDOWS") ATTACKMODE HID
 		RUN WIN notepad.exe
 		;;
-	"FAIL3") LED FAIL3
-		umount /root/udisk
+	"UNKNOWN") LED FAIL3
 		exit 1
 		;;
 esac
@@ -49,20 +59,17 @@ do
 done
 Q STRING $msg_end
 Q ENTER
-case "$OS" in
+case "$TARGET_OS" in
 	"LINUX") Q GUI l
 		;;
-	"MAC") Q STRING "/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+	"MACOS") Q STRING "/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 		Q ENTER
 		;;
-	"WIN") Q GUI l
+	"WINDOWS") Q GUI l
 		;;
-	"FAIL3") LED FAIL3
-		umount /root/udisk
+	"UNKNOWN") LED FAIL3
 		exit 1
 		;;
 esac
 
-LED CLEANUP
-umount /root/udisk
 LED FINISH
