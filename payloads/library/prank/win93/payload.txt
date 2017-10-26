@@ -13,7 +13,7 @@ LOOTDIR='/root/udisk/loot/win93'
 # Script section, do not modify after that line
 LED SETUP
 mkdir -p $LOOTDIR
-echo "Starting win93 prank" > $LOOTDIR/win93.log
+echo "Starting win93 prank: " > $LOOTDIR/win93.log
 DEFAULT=0
 
 LED STAGE1
@@ -21,7 +21,7 @@ ATTACKMODE ECM_ETHERNET
 sleep 3
 GET TARGET_IP
 if [ -z "${TARGET_IP}" ]; then
-  echo "No target IP, checking if it's a windows host" >> $LOOTDIR/win93.log
+  echo "No target IP, checking if it's a windows host: " >> $LOOTDIR/win93.log
   DEFAULT_OS='WIN'
   LED SPECIAL
   ATTACKMODE RNDIS_ETHERNET
@@ -84,8 +84,12 @@ elif [ "$OS" = "LINUX" ]; then
     QUACK DELAY 1000
     QUACK F11
 elif [ "$OS" = "WIN" ]; then
-    LED FAIL
-    echo "Payload not supported on windows for now, exiting" >> $LOOTDIR/win93.log
+    QUACK GUI r 
+	QUACK STRING "chrome http://www.windows93.net"
+	QUACK ENTER
+	QUACK DELAY 1000
+	QUACK F11
+    
     exit 1
 fi
 
