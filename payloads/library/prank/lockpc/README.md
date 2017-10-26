@@ -12,7 +12,7 @@ A variation of the Notepad fun payload written by The10FpsGuy and Mrhut10
 None
 
 ## Status
-LED SETUP - detecting OS using get_os.sh extension
+LED SETUP - detecting OS using get.sh extension
 
 LED ATTACK - launching the payload based on OS detected
 
