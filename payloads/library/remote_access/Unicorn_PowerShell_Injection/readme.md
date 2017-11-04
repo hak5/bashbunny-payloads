@@ -10,7 +10,7 @@
 
 A simple script that allows you to inject any metasploit payload with powershell and gain meterpreter or shell access to the target PC.
 
-##Configuration
+## Configuration
 
 Configuring this payload is pretty time-consuming, but it's worth it.
 
@@ -21,7 +21,7 @@ Configuring this payload is pretty time-consuming, but it's worth it.
 5. Put a **\** before each special character (**,**,**"**,**'**,**:**,**;**,**(**,**)**,**[**,**]**,**+**).
 6. Save the **payload.txt** file and eject Bash Bunny. You are good to go! Sessions will be opened in the metasploit's listener!
 
-##Status
+## Status
 
 | LED                  | Status                                       |
 | -------------------- | -------------------------------------------- |
