@@ -17,6 +17,9 @@ RPORT=4444
 # Start Setup
 LED SETUP
 
+# Gets Switch Position
+GET SWITCH_POSITION
+
 # Set Attack Mode
 ATTACKMODE HID STORAGE
 

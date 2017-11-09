@@ -3,7 +3,6 @@ LED G
 REM set attackmode to HID device
 ATTACKMODE HID
 REM set keyboard
-DUCKY_LANG us
 REM open run menu
 Q GUI r
 Q DELAY 1000

