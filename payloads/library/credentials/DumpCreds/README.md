@@ -1,7 +1,7 @@
-# DumpCreds 2.3.1
+# DumpCreds 2.3.2
 * Author: QDBA
-* Version: Version 2.3.1 Build 1011
-* Target: Windows 10
+* Version: Version 2.3.2 Build 1012
+* Target: Windows 7, 10
 
 
 ## Description
@@ -59,7 +59,9 @@ official Bash Bunny payload at Github
 
 5. move switch into right position
 
-6. plugin Bash Bunny and have fun....! :-)
+6. if necessary set UAC Mode in payload.txt ( 1 = Fodhelper UAC  (Win 10 only) ; 0 = Standard UAC ( Win 7 + Win 10))
+
+7. plugin Bash Bunny and have fun....! :-)
 
 
 ## STATUS
@@ -89,10 +91,15 @@ https://forums.hak5.org/index.php?/topic/40806-payload-new-dumpcreds-22
 
 ## Changelog
 
-Version 2.3
+Version 2.3.2
 
+ [Build 1012]
+ - Multiple UAC Modes 1 = Fodhelper; 0 = Standard UAC
+ 
  [Build 1011]
  - Undo all changes in RunMRU and Powershell history
+
+Version 2.3.1
 
  [Build 1009]
  - Merged the UAC Bypass fodhelper changes from valentin-metz
