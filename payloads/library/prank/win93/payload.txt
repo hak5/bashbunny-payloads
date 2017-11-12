@@ -78,15 +78,11 @@ if [ "$OS" = "MAC" ]; then
     RUN OSX "terminal"
     QUACK STRING "open \"http://www.windows93.net\" && osascript -e \"sleep 3;ccf;\";"
 elif [ "$OS" = "LINUX" ]; then
-    RUN UNITY "xterm"
-    QUACK STRING "chromium-browser --start-fullscreen --incognito --new-window http://www.windows93.net &; exit;"
-    QUACK ENTER
+    RUN LINUX "xdg-open http://www.windows93.net"
     QUACK DELAY 1000
     QUACK F11
 elif [ "$OS" = "WIN" ]; then
-    QUACK GUI r 
-	QUACK STRING "chrome http://www.windows93.net"
-	QUACK ENTER
+    RUN WIN "cmd /c start http://www.windows93.net"
 	QUACK DELAY 1000
 	QUACK F11
     
