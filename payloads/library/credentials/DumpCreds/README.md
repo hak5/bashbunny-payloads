@@ -1,6 +1,6 @@
 # DumpCreds 2.3.2
 * Author: QDBA
-* Version: Version 2.3.2 Build 1012
+* Version: Version 2.3.3 Build 1013
 * Target: Windows 7, 10
 
 ## Description
@@ -89,6 +89,13 @@ https://forums.hak5.org/index.php?/topic/40806-payload-new-dumpcreds-22
 - Valentin-Metz for inserting the Fodhelper UAC-Bypass  ( Resource: https://github.com/winscripting/UAC-bypass/blob/master/FodhelperBypass.ps1 )
 
 ## Changelog
+
+Version 2.3.3
+
+  [Build 1013]
+  - Minor changes
+  - Encode Invoke-PowerDump because of caught by AV
+  - Add dumpCredStore; Dumps credentioal from Vault
 
 Version 2.3.2
 
