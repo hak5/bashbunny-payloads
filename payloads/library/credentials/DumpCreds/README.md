@@ -5,7 +5,7 @@
 
 ## Description
 
-** !!!!! works only at Bash Bunny with FW 1.1 !!!!! **
+** !!!!! works only at Bash Bunny with FW 1.1+ !!!!! **
 
 Dumps the usernames & plaintext passwords from 
  * Browsers (Crome, FireFox)
