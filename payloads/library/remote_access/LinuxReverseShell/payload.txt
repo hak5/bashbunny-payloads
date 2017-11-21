@@ -2,7 +2,7 @@
 #
 # Title:         Linux Reverse Shell
 # Author:        tuzzmaniandevil
-# Version:       1.1
+# Version:       1.2
 #
 # Runs a script in the background that creates a reverse shell connection to the configured address and then removes itself.
 #
@@ -23,8 +23,8 @@ GET SWITCH_POSITION
 # Set Attack Mode
 ATTACKMODE HID STORAGE
 
-# Wait for Storage to mount
-sleep 5
+# Get the switch position
+GET SWITCH_POSITION
 
 # Open a terminal
 Q CTRL-ALT t

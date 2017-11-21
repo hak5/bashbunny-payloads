@@ -1,7 +1,7 @@
 # Linux Reverse Shell for Bash Bunny
 
-Author: tuzzmaniandevil
-Version: Version 1.1
+Author: tuzzmaniandevil --creds: hak5darren
+Version: Version 1.2
 
 ## Description
 
