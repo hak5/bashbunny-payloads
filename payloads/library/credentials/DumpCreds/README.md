@@ -8,7 +8,7 @@
 ** !!!!! works only at Bash Bunny with FW 1.1+ !!!!! **
 
 Dumps the usernames & plaintext passwords from 
- * Browsers (Crome, FireFox)
+ * Browsers (Chrome, FireFox)
  * Wifi 
  * SAM Hashes (only if AdminMode=True)
  * Mimimk@tz Dump (only if AdminMode=True) 
@@ -95,7 +95,7 @@ Version 2.3.3
   [Build 1013]
   - Minor changes
   - Encode Invoke-PowerDump because of caught by AV
-  - Add dumpCredStore; Dumps credentioal from Vault
+  - Add dumpCredStore; Dumps credential from Vault
 
 Version 2.3.2
 
