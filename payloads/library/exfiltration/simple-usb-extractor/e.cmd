@@ -1,1 +1,0 @@
-mkdir %USERPROFILE%\Desktop\testfolder
