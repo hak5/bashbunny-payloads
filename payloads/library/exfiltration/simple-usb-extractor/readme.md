@@ -18,7 +18,7 @@ None :)
 
 ### Configuration (optional)
 ---
-By default the payload is set to pull all .pdf and .docx files from the Desktop and Documents folders. You can add new items/locations by making new xcopy lines in the x.cmd file.
+By default the payload is set to pull all .pdf and .docx files from the Desktop, Downloads, and Documents folders. You can add new items/locations by making new xcopy lines in the x.cmd file.
 
 
 ### Status:
