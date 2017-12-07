@@ -26,7 +26,6 @@ By default the payload is set to pull all .pdf and .docx files from the Desktop,
 |LED|Status|
 |---|---|
 |Yellow single blink|Running payload|
-|Blue Single blink|Copying any files to Bash Bunny|
 |Solid Green|Files copied|
 
 ---
