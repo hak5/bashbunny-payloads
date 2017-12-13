@@ -94,4 +94,4 @@ QUACK STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -P
 QUACK ENTER
 
 LED FINISH
-#ATTACKMODE OFF
+ATTACKMODE OFF
