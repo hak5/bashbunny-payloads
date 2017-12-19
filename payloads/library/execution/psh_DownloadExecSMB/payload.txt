@@ -13,6 +13,11 @@
 # Ensure p.txt exists in payload directory  (using .txt instead of .ps1 in case of security countermeasures)
 #
 # Required tools: impacket 
+=======
+# Credentials captured by  are stored as loot.
+# Ensure p.txt exists in payload directory  (using .txt instead of .ps1 in case of security countermeasures)
+#
+# Required tools: impacket
 #
 # | Attack Stage        | Description                   |
 # | ------------------- | ------------------------------|

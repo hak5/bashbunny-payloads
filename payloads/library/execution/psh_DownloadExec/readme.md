@@ -31,5 +31,5 @@ See Hak5's Tool Thread Here: https://forums.hak5.org/index.php?/topic/40971-info
 | Attack Stage        | Description                              |
 | ------------------- | ---------------------------------------- |
 | Stage 1             | Running Initial Powershell Commands      |
-| Stage 3             | Delivering powershell payload            |
+| Stage 2             | Delivering powershell payload            |
 ```
