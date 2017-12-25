@@ -1,0 +1,20 @@
+#!/bin/bash
+# Title:         ViperBunny
+# Description:   Viper Malware Analysis on Bash Bunny
+# Author:        Zappus
+# Version:       1.0
+# Category:      Incident-Response
+# Attackmodes:   Ethernet
+#
+# LED State Descriptions
+# Magenta Blinking - setup in progress
+# Blue Blinking - ready to use
+
+LED M SLOW
+ATTACKMODE AUTO_ETHERNET
+CUCUMBER ENABLE
+
+cd /tools/viper/
+python web.py -H 0.0.0.0 -p 8080 &
+
+LED B SLOW
