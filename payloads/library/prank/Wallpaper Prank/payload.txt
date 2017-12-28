@@ -1,0 +1,35 @@
+# Title:			Wallpaper Prank
+# Description:		Changes a wallpaper to a file called a.png in the switch's folder.
+# Catagory: 		Prank
+# Target:			Windows 7+
+# Attackmodes:		HID, STORAGE
+LED SETUP
+ATTACKMODE HID STORAGE
+QUACK SET_LANGUAGE en
+LED ATTACK
+Q DELAY 1000
+Q GUI d
+Q DELAY 500
+Q GUI r
+Q DELAY 700
+Q STRING mspaint
+Q ENTER
+Q DELAY 500
+Q CTRL o
+Q DELAY 500
+Q STRING E:\\payloads\\$SWITCH_POSITION\\a.png
+Q ENTER
+Q DELAY 500
+Q ALT f
+Q DELAY 400
+Q STRING K
+Q DELAY 100
+Q STRING F
+LED CLEANUP
+Q DELAY 250
+Q ALT F4
+Q DELAY 300
+Q GUI d
+Q DELAY 2000
+ATTACKMODE OFF
+LED FINISH
