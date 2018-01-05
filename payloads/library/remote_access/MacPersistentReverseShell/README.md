@@ -24,7 +24,6 @@ Have a working Bash Bunny :)
 | Amber (Double Blink) | Creating cron job            |
 | White (Fast Blink)   | Cleaing up                   |
 | Green                | Finished                     |
-| -------------------- | ---------------------------- |
 
 ## Installation and Execution
 
