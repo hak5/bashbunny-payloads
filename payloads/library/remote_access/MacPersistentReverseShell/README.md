@@ -41,4 +41,4 @@ Have a working Bash Bunny :)
 
 ## Discussion
 
-There will be a link [here](https://forums.hak5.org/topic/42728-payload-mac-persistent-reverse-shell/).
+[Click here](https://forums.hak5.org/topic/42728-payload-mac-persistent-reverse-shell/) to access the forum post.
