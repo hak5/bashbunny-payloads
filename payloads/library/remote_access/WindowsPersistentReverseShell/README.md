@@ -6,7 +6,7 @@
 ## Description
 
 Opens a persistent reverse shell through NetCat on victim's Windows machine and connects it back to host attacker.
-* Targets Windows 10 (working on support for older verions)
+* Targets Windows 10 (working on support for older versions)
 * Connection can be closed and reconnected at any time
 * Deploys in roughly 15-20 sec
 * Works with NetCat
@@ -40,4 +40,4 @@ Have a working Bash Bunny :)
 
 ## Discussion
 
-Discussion coming soon.
+[Click here](https://forums.hak5.org/topic/42729-payload-windows-persistent-reverse-shell/) for forum discussion
