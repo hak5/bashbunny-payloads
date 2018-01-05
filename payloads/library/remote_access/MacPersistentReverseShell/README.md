@@ -22,7 +22,7 @@ Have a working Bash Bunny :)
 | Purple               | Setup                        |
 | Amber (Single Blink) | Installing connect.sh script |
 | Amber (Double Blink) | Creating cron job            |
-| White (Fast Blink)   | Cleaing up                   |
+| White (Fast Blink)   | Cleaning up                   |
 | Green                | Finished                     |
 
 ## Installation and Execution
