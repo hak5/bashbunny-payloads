@@ -29,7 +29,7 @@ Have a working Bash Bunny :)
 
 1. Plug in Bash Bunny in arming mode
 2. Move files from MacPersistentReverseShell to either switch folder
-3. Edit the connect.sh file and replace the placeholder IP with attacker's IP and the port with whichever port you like to use (I use 1337 :wink:)
+3. Edit the connect.sh file and replace `ATTACKER_IP` with attacker's IP and `PORT` with whichever port you like to use (I use 1337 :wink:)
 4. Save the connect.sh file
 5. Unplug Bash Bunny and switch it to the position the payload is loaded on
 6. Plug the Bash Bunny into your victim's Mac and wait until the final light turns green (about 30 sec)
