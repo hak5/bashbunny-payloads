@@ -1,7 +1,7 @@
 # Reverse Shell Mac for Bash Bunny
 
 * Author: 0dyss3us (KeenanV)
-* Version: 1.0
+* Version: 1.1
 
 ## Description
 
