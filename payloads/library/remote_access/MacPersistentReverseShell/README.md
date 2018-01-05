@@ -1,9 +1,9 @@
-#Reverse Shell Mac for Bash Bunny
+# Reverse Shell Mac for Bash Bunny
 
 * Author: 0dyss3us (KeenanV)
 * Version: 1.0
 
-##Description
+## Description
 
 Opens a persistent reverse shell on victim's mac and connects it back to host attacker over TCP.
 * Targets MacOS
@@ -11,11 +11,11 @@ Opens a persistent reverse shell on victim's mac and connects it back to host at
 * Deploys in roughly 30 sec (working on making it faster)
 * Works well with NetCat as the listener
 
-##Requirements
+## Requirements
 
 Have a working Bash Bunny :)
 
-##STATUS
+## STATUS
 
 | LED                  | STATUS                       |
 | -------------------- | ---------------------------- |
@@ -24,8 +24,9 @@ Have a working Bash Bunny :)
 | Amber (Double Blink) | Creating cron job            |
 | White (Fast Blink)   | Cleaing up                   |
 | Green                | Finished                     |
+| -------------------- | ---------------------------- |
 
-##Installation and Execution
+## Installation and Execution
 
 1. Plug in Bash Bunny in arming mode
 2. Move files from ReverseShellMac to either switch folder
@@ -39,6 +40,6 @@ Have a working Bash Bunny :)
 9. Wait for connection (Should take no longer than 1 minute as the cron job runs every minute)
 10. Once a bash shell prompt appears...YOU'RE DONE!! :-) and you can disconnect and reconnect at any time as long as the user is logged in
 
-##Discussion
+## Discussion
 
 There will be a link [here](https://www.google.com).
