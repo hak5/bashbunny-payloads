@@ -1,1 +1,0 @@
-YOUR MSFVENOM REVERSE PYTHON SHELL HERE (check out the readme.md file for more instructions)

