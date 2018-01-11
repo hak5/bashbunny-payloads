@@ -29,3 +29,4 @@
 #"Don't look at the branch of the problem, look at the root! (C1PH3R)"
 
 #For older or slower computers you can visit this link to download a version that is optimized for those applications.
+# https://github.com/CIPH3R0/BashBunny/tree/master/USB-PWNR%20-SLOW
