@@ -84,7 +84,7 @@ Q ALT F4
 #Copy reverse shell file to shell:startup and start it
 
 LED STAGE4
-QUACK switch1/copy-reverse.txt
+QUACK $SWITCH_POSITION/copy-reverse.txt
 
 #Cleaning up fase
 LED CLEANUP
