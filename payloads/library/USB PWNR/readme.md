@@ -1,7 +1,7 @@
 # USB PWNR
 
-* Written by: speedy22013
-* Creds: speedy22013, Hak5Darren, Nirsoft
+* Written by: C1PH3R
+* Creds: C1PH3R, Hak5Darren, Nirsoft
 * Target: Windows
 
 ## Description
