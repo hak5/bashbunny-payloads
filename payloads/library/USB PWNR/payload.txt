@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#USB PWNR
+#P0WNS a computer in seconds
+
 #CONFIGURATION BELOW!!!
 
 #Delay CONFIGURATION
@@ -26,9 +29,6 @@ TP="#"
 AM="#"
 
 #Editing text below this line may prevent the script from working!
-
-#USB PWNR
-#P0WNS a computer in seconds
 
 #Setup
 LED SETUP
