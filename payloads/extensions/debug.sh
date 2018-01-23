@@ -11,30 +11,17 @@
 ################################################################################
 
 function DEBUG() {
-    session = $1
-    message = $2
-
-    init_debug
-    debug_log
+    session=$1
+    message=$2
 
     timestamp () {
         echo "$(date +"%Y-%m-%d_%H-%M-%S")"
     }
 
-    init_debug () {
-        DEBUG_FILE="/root/udisk/debug/$(session).txt"
-        if [ ! -d "/root/udisk/debug/" ]; then
-          mkdir /root/udisk/debug/
-        fi
-        if [ ! -f "/root/udisk/debug/${DEBUG_FILE}" ]; then
-            touch "${DEBUG_FILE}"
-            echo "$(timestamp): DEBUG STARTED" >> "${DEBUG_FILE}"
-        fi
-    }
-
-    debug_log () {
-        echo "$(timestamp): $(message)" >> "${DEBUG_FILE}"
-    }
+    mkdir -p /root/udisk/debug/
+    debug_file="/root/udisk/debug/${session}.txt"
+    [[ -f "${debug_file}" ]] || echo "$(timestamp): DEBUG STARTED" >> "${debug_file}"
+    echo "$(timestamp): ${message}" >> ${debug_file}
 }
 
 export -f DEBUG
