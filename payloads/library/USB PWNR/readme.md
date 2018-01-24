@@ -4,7 +4,7 @@
 * Creds: C1PH3R, Hak5Darren, Nirsoft
 * Target: Windows
 
-# Description
+# Description:
 
 # Starts up multiple programs: 
 
