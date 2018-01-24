@@ -6,7 +6,7 @@
 
 # Description
 
-- [x] Starts up multiple programs: 
+# Starts up multiple programs: 
 
 - [x] BPG (BrowserPasswordGrabber): Grabs passwords from web browsers: Internet Explorer, Mozilla Firefox, Google Chrome, Safari, and Opera. 
 - [x] BHG (BrowserHistoryGrabber): Grabs history from web browsers: Internet Explorer, Mozilla Firefox, Google Chrome, Safari, and Opera. 
