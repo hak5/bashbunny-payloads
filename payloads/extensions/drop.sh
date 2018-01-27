@@ -7,14 +7,15 @@
 # Example:
 # DROP /root/udisk/payloads/$SWITCH_POSITION/source.txt ~/target_destination.txt true
 source ./run.sh
+source ./debug.sh
 
 function DROP() {
+    DEBUG "drop" "start"
     local source=$2
     local destination=$3
     local overwrite=$4
    #local os=
 
-    ehco "start" >> "/root/udisk/payloads/${SWITCH_POSITION}/debug.txt"
     RUN terminal
     QUACK DELAY 1000
     QUACK STRING vi "$destination"

