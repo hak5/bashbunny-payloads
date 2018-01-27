@@ -1,12 +1,11 @@
 #!/bin/bash
 #
-# Title:         Optical Exfiltration
+# Title:         The Ol'Drop'n'Run
 # Author:        bg-wa
 # Version:       1.0
 # Category:      HID
 # Target:        *NIX
 # Attackmodes:   HID
-# Sources:       Hak5 2320, https://github.com/bg-wa/QRExtractor
 #
 # Quick HID only attack to write an HTML/JS file to target machine
 # and open a browser, to exfiltrate data Using QR Codes and a video
