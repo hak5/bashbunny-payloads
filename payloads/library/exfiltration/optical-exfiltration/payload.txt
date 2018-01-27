@@ -12,11 +12,20 @@
 # and open a browser, to exfiltrate data Using QR Codes and a video
 # recording device.
 #
+# Optional html params:
+# base64: Passing a base64 string to this param will auto-start processing QR Codes.
+#
+# playback: Passing the string "finish" to this param will auto-play the results,
+#           when QR codes finish rendering.
+#
+# Example:
+# Ln65: Q STRING firefox "$target_html?playback=finish&base64=my_long_string"
+#
 # | Attack Stage        | Description                              |
 # | ------------------- | ---------------------------------------- |
 # | SETUP               | Open vi                                  |
 # | ATTACK              | Writing HTML                             |
-# | FINISH              | Browser Ready                            |
+# | FINISH              | Browser Ready/Processing                            |
 #
 
 ATTACKMODE HID
