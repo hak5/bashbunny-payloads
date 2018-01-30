@@ -1,6 +1,6 @@
 # Payload Library for the Bash Bunny by Hak5
 
-![Bash Bunny](https://cdn.shopify.com/s/files/1/0068/2142/products/bashbunny_2a_large.png "Bash Bunny")
+![Bash Bunny](https://ucarecdn.com/936d2af6-f968-458e-8ea3-1ab80b3b45a0/-/stretch/off/-/resize/3000x/-/quality/lighter/ "Bash Bunny")
 
 * [Purchase at HakShop.com](https://hakshop.com/products/bash-bunny "Purchase at HakShop.com")
 * [Documentation and Wiki](http://wiki.bashbunny.com/#!index.md "Documentation and Wiki")
