@@ -1,11 +1,9 @@
-# Nyanloader
+## Nyanloader
 
-# Title:         Nyanloader
 # Author:        Pusher
 # Version:       1.0
 # Category:      Prank
 # Target:        Attack script written for Debian-based OSes. Payload will work on any x86 architecture
-
 
 ## Description
 
@@ -15,9 +13,8 @@ A backup of the original data is created at /home/username/mbr_backup.bin
 This payload does leverage some code from /library/credentials/SudoBackdoor/injector by oXis.
 Requires root. That's right, if unmodified, this payload will only work against root warriors!
 
-TODO: Add OS detection and privlege escalation
-TODO: Add animation and audio to the payload
-
+# TODO: Add OS detection and privlege escalation
+# TODO: Add animation and audio to the payload
 
 ## STATUS
 
