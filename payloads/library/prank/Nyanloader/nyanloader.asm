@@ -1,5 +1,6 @@
 ;nyanloader.asm - replaces sector 0 with custom bootloader intsructions.
-;Copyright 2017 by Pusher. 
+;Renders a single frame directly to video memory
+;Copyright 2018 by Pusher. 
 
 ;This program is free software: you can redistribute it and/or modify
 ;it under the terms of the GNU General Public License as published by
