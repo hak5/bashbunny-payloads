@@ -20,7 +20,7 @@ function GET() {
     "TARGET_OS")
       TARGET_IP=$(cat /var/lib/dhcp/dhcpd.leases | grep ^lease | awk '{ print $2 }' | sort | uniq)
       ScanForOS=$(nmap -Pn -O $TARGET_IP -p1 -v2)
-      [[ $ScanForOS == *"Too many fingerprints"* ]] && ScanForOS=$(nmap -Pn -O $TARGET_IP --osscan-guess -p1 -v2)
+      [[ $ScanForOS == *"Too many fingerprints"* ]] && ScanForOS=$(nmap -Pn -O $TARGET_IP --osscan-guess -v2)
       [[ "${ScanForOS,,}" == *"windows"* ]] && export TARGET_OS='WINDOWS' && return
       [[ "${ScanForOS,,}" == *"linux"* ]] && export TARGET_OS='LINUX' && return
       [[ "${ScanForOS,,}" == *"apple"* ]] && export TARGET_OS='MACOS' && return
