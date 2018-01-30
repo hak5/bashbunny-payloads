@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# Title:         Android Open Url (unlocked)
+# Author:        bg-wa
+# Version:       1.0
+# Target:        Android (4.2.2)
+# Props:         Hak5
+#
+# Opens the browser to a specified url on an unlocked android phone.
+#
+
+LED G
+
+#+++ USER CONFIG +++
+
+URL="https://www.hak5.org/"
+
+#+++ END USER CONFIG +++
+
+ATTACKMODE HID
+
+Q GUI b
+Q DELAY 500
+Q ENTER
+Q DELAY 1000
+Q CTRL l
+Q DELAY 100
+Q STRING "${URL}"
+Q DELAY 100
+Q ENTER
+
+LED R

