@@ -22,8 +22,8 @@ function GET() {
       ScanForOS=$(nmap -Pn -O $TARGET_IP -p1 -v2)
       [[ $ScanForOS == *"Too many fingerprints"* ]] && ScanForOS=$(nmap -Pn -O $TARGET_IP --osscan-guess -v2)
       [[ "${ScanForOS,,}" == *"windows"* ]] && export TARGET_OS='WINDOWS' && return
-      [[ "${ScanForOS,,}" == *"linux"* ]] && export TARGET_OS='LINUX' && return
       [[ "${ScanForOS,,}" == *"apple"* ]] && export TARGET_OS='MACOS' && return
+      [[ "${ScanForOS,,}" == *"linux"* ]] && export TARGET_OS='LINUX' && return
       export TARGET_OS='UNKNOWN'
       ;;
   esac
