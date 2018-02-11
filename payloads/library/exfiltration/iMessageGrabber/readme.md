@@ -5,7 +5,7 @@
 
 ### Description
 ---
-This payload grabs the iMessage archive of the current user, packs it to message.zip and moves it to the BashBunny /loot/iMessage/ folder
+This payload grabs the iMessage archive of the current user, packs it to a zip file  and moves it to the BashBunny /loot/iMessage/ folder
 
 ### Dependencies
 ---
