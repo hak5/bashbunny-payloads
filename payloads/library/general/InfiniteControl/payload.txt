@@ -26,6 +26,13 @@ ATTACKMODE HID
 INFINITE_KEY=CTRL
 #INFINITE_KEY=BREAK
 
+# Setting MAX_SECONDS will utilize random value
+#  else leave blank, "MAX_SECONDS=", to use 
+#  FIXED_SECONDS value every time.
+# 300 == 5min
+MAX_SECONDS=300
+FIXED_SECONDS=9
+
 # infinite while loop
 while true
 do
@@ -33,7 +40,13 @@ do
 	QUACK $INFINITE_KEY
 	sleep 1
 	LED ATTACK
-	sleep 9
+	# Slight change from original to support "random"
+	# delays between key presses.
+	if [ ! -z MAX_SECONDS ]; then
+		sleep $(($RANDOM % $MAX_SECONDS))
+	else
+		sleep $FIXED_SECONDS
+	fi
 done
 
 # this code will never be reached

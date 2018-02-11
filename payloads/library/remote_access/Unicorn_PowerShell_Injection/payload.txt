@@ -1,0 +1,19 @@
+# Author: Prodicode
+# Creds: trustedsec
+# Version: 1.0
+# Firmware support: 1.1
+# Target: Windows
+
+ATTACKMODE HID
+LED ATTACK
+
+Q GUI r
+Q DELAY 100
+Q STRING powershell
+Q DELAY 250
+Q ENTER
+Q DELAY 500
+Q STRING your_powershell_attack_here 
+Q ENTER
+
+LED FINISH

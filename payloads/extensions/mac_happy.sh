@@ -1,26 +1,29 @@
 #!/bin/bash
 
-#Title:     Mac_Happy
+# Title:     Mac_Happy
 # Author:    thehappydinoa
-# Target:    Mac
-# Version:   0.1
+# Target:    macOS
+# Version:   0.3
 #
 # Makes Mac happy by correctly setting pid and vid
-# Use by running mac_happy ATTACKMODE HID <attack modes here>
+# Use by running MAC_HAPPY HID/ETHERNET/...
 #
 
-function mac_happy() {
-    [[ -z "$1" ]] && exit 1 # parameter must be set
-
-    [[ ! $1 =~ "ATTACKMODE" ]] && exit 1 # parameter must be for ATTACKMODE
-
-    for i in $*;
-    do
-        command=$(echo $command $i)
-    done
-
-    command=$(echo $command VID_0X05AC PID_0X021E)
-
-    eval $command
+function MAC_HAPPY() {
+    [[ "$#" -gt 1 ]] || exit 1
+    case "$1" in
+        HID)
+            ATTACKMODE HID vid_0x05ac pid_0x021e
+            ;;
+        ETHERNET)
+            ATTACKMODE ECM_ETHERNET vid_0x05ac pid_0x021e
+            ;;
+        ATTACKMODE)
+            eval "$@ vid_0x05ac pid_0x021e"
+            ;;
+        *)
+            exit 1
+            ;;
+    esac
 }
-export -f mac_happy
+export -f MAC_HAPPY
