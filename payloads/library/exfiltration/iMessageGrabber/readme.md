@@ -22,7 +22,7 @@ If you have renamed your BashBunny storage device, you have to change the name i
 |---|---|
 |SETUP |Preparing attack|
 |ATTACK|beginning attack (HID & STORAGE)|
-|STAGE2|waiting until zip is copied|
+|STAGE2|waiting until zip is moved|
 |FINISH|ready to remove BashBunny|
 
 ---
