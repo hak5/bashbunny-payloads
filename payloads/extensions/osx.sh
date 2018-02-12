@@ -47,7 +47,7 @@ function OSX() {
                     Q ENTER
                     Q STRING "clear"
                     Q ENTER
-			     ;;
+		;;
                  
                  # @desc  Minimize the terminal
                  # @usage OSX TERMINAL MINIMIZE
@@ -55,7 +55,7 @@ function OSX() {
                  "MINIMIZE")
                     Q STRING 'printf \\e[2t'
                     Q ENTER
-			     ;;
+		;;
                  
                  # @desc  Hide the focused terminal
                  # @usage OSX TERMINAL HIDE
@@ -63,7 +63,7 @@ function OSX() {
                  "HIDE")
                     Q STRING 'printf \\e[6t'
                     Q ENTER
-			     ;;
+		;;
                  
                  # @desc  Show the focused terminal
                  # @usage OSX TERMINAL SHOW
@@ -89,7 +89,7 @@ function OSX() {
                  "RESIZE")
                     Q STRING "printf '\e[8;'$3';'$2't'"
                     Q ENTER
-			     ;;
+		 ;;
                  
                  # @desc  Clear the focused terminal
                  # @usage OSX TERMINAL ZOOM
