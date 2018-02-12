@@ -1,0 +1,55 @@
+REM Title: Chrome Extension Installer
+REM Author: audibleblink
+DELAY 1000
+
+REM Open Extension URL
+GUI SPACE
+DELAY 500
+STRING chrome
+DELAY 500
+ENTER
+DELAY 4000
+GUI l
+DELAY 200
+STRING https://chrome.google.com/webstore/detail/ncage/hnbmfljfohghaepamnfokgggaejlmfol
+DELAY 500
+ENTER
+
+DELAY 3000
+
+REM Open the JavaScript console in the browser
+REM GUI-ALT j doesn't work, so we have to do it the long way
+CTRL F2
+DELAY 100
+STRING v
+DELAY 100
+DOWNARROW
+DELAY 100
+STRING d
+DELAY 100
+RIGHTARROW
+DELAY 100
+STRING j
+DELAY 100
+ENTER
+
+DELAY 3000
+
+REM Use jQuery to click the Install button
+STRING $("div[role='button']").click()
+ENTER
+
+DELAY 2000
+
+REM Confirm the installation
+REM Depends on a MacOS setting that allows tabbing through dialogs
+SHIFT TAB
+DELAY 300
+SPACE
+
+DELAY 4000
+
+REM Close the tabs you just opened
+GUI w
+DELAY 300
+GUI w

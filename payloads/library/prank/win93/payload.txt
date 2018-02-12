@@ -13,7 +13,7 @@ LOOTDIR='/root/udisk/loot/win93'
 # Script section, do not modify after that line
 LED SETUP
 mkdir -p $LOOTDIR
-echo "Starting win93 prank" > $LOOTDIR/win93.log
+echo "Starting win93 prank: " > $LOOTDIR/win93.log
 DEFAULT=0
 
 LED STAGE1
@@ -21,10 +21,10 @@ ATTACKMODE ECM_ETHERNET
 sleep 3
 GET TARGET_IP
 if [ -z "${TARGET_IP}" ]; then
-  echo "No target IP, checking if it's a windows host" >> $LOOTDIR/win93.log
+  echo "No target IP, checking if it's a windows host: " >> $LOOTDIR/win93.log
   DEFAULT_OS='WIN'
   LED SPECIAL
-  ATTACKMODE RDNIS_ETHERNET
+  ATTACKMODE RNDIS_ETHERNET
   sleep 3
   GET TARGET_IP
   if [ -z "${TARGET_IP}" ]; then
@@ -78,15 +78,14 @@ if [ "$OS" = "MAC" ]; then
     RUN OSX "terminal"
     QUACK STRING "open \"http://www.windows93.net\" && osascript -e \"sleep 3;ccf;\";"
 elif [ "$OS" = "LINUX" ]; then
-    DUCKY_LANG fr
-    RUN UNITY "xterm"
-    QUACK STRING "chromium-browser --start-fullscreen --incognito --new-window http://www.windows93.net &; exit;"
-    QUACK ENTER
+    RUN LINUX "xdg-open http://www.windows93.net"
     QUACK DELAY 1000
     QUACK F11
 elif [ "$OS" = "WIN" ]; then
-    LED FAIL
-    echo "Payload not supported on windows for now, exiting" >> $LOOTDIR/win93.log
+    RUN WIN "cmd /c start http://www.windows93.net"
+	QUACK DELAY 1000
+	QUACK F11
+    
     exit 1
 fi
 

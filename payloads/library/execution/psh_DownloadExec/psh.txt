@@ -1,3 +1,0 @@
-New-Item $ENV:UserProfile\Desktop\SUCCESS -ItemType file
-Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue
-
