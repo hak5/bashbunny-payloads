@@ -24,6 +24,8 @@
 - [x] Ip grabber.
 
 # Configuration:
+* Required: download the binary files and put them in the switch position you chose:
+https://github.com/CIPH3R0/BashBunny/tree/master/Binary-s/USB%20PWNR
 * Optional: edit the "Delay CONFIGURATION" in payload file to your preferences to make the payload work with slower/older or faster/newer computers
 * Optional: edit the "Shutting off CONFIGURATION" in the payload file to shut the bunny off after the payload is done
 * Optional: edit the "Target ip CONFIGURATION" in the payload file to grab the ip of the victim
