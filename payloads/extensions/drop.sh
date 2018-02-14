@@ -52,7 +52,11 @@ function DROP() {
     case "$os" in
       WIN)
             QUACK STRING fsutil file createnew "$destination"
-            RUN WIN notepad.exe "$destination"
+            QUACK ENTER
+            QUACK DELAY 500
+            QUACK STRING notepad.exe "$destination"
+            QUACK ENTER
+            QUACK DELAY 1000
          ;;
       *)
             QUACK STRING vi "$destination"
