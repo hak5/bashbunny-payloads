@@ -13,7 +13,7 @@
 # Configuration:
 * Download/make a keylogger using whatever program you want (sAINT for example)
 * Place a file whatever.whatever in Bashbunny/payloads
-* Replace the text: servicehost.txt in payload.txt file to whatever.whatever (Whatever = the filetype/name you have selected for your keylogger)
+* Edit the "Reverse shell name CONFIGURATION" in the payload file to the name you chose for your reverse_shell
 * Optional: edit the "Delay CONFIGURATION" in payload file to your preferences to make the payload work with slower/older or faster/newer computers
 * Optional: edit the "Shutting off CONFIGURATION" in the payload file to shut the bunny off after the payload is done
 
