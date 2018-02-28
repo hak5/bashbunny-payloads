@@ -1,7 +1,7 @@
 # Windows Backdoor
 * Author:	Rogue(editor) Squibs(main Concept)
 * Version:	0.3
-* Target:	Windows
+* Target:	Windows 10 windows 7 not tested
 * Time:		18s
 
 ## Description
