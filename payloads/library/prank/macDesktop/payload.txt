@@ -1,3 +1,6 @@
+# Blue - Running
+# Green - Finished
+LED B
 ATTACKMODE HID STORAGE 0xF000/0xFF02
 
 LED ATTACK
@@ -15,8 +18,12 @@ Q STRING bash \<\(cat \/Volumes\/BashBunny\/payloads\/switch1\/macWallpaper.sh\)
 
 Q ENTER
 
-Q GUI W
+# Eject the bunny
+LED R
+QUACK STRING diskutil eject /Volumes/BashBunny/;
+QUACK ENTER
+QUACK STRING killall Terminal
+QUACK ENTER
 
-Q ENTER
 
-LED FINISH
+LED G
