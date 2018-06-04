@@ -1,6 +1,6 @@
 #!/bin/bash
 # Title:         Hershell Encrypted Reverse Shell (Cross-platform - Manual Mode)
-# Author:        m3t4lk3y
+# Author:        metalkey
 # Version:       0.5
 # Target:        Windows, Mac OSX, Linux
 # Creds:         Ronan Kervella (Creator of Hershell) - https://github.com/sysdream/hershell
