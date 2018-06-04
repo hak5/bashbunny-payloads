@@ -1,6 +1,6 @@
 # Hershell Encrypted Reverse Shell (Cross-platform - Manual Mode)
 
-Author: m3t4lk3y<br>
+Author: metalkey<br>
 Creds: Ronan Kervella (Creator of Hershell)<br>
 Version: Version 0.5<br>
 
