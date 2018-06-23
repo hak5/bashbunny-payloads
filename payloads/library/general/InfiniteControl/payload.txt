@@ -1,0 +1,53 @@
+#!/bin/bash
+# Title:         Infinite Control
+# Author:        Didier Stevens (https://DidierStevens.com)
+# Version:       0.0.2 2017/09/02
+# History:       0.0.1 2017/04/08 start
+#                0.0.2 2017/09/02 changed LED colors, added BREAK
+#
+# Hit the CONTROL key every 10 seconds in an infinite loop,
+# while blinking the CYAN LED with every keypress.
+#
+# Can be used to prevent a machine from sleeping or auto-locking.
+#
+# Some users have suggested to hit F15 (BREAK) in stead of CTRL.
+# This can be done by uncommenting line #INFINITE_KEY=BREAK.
+#
+# WARNING: Do not type on the machine's keyboard while this script
+#          is running, or your keystrokes might become commands,
+#          for example CTRL-Q: Quit
+#
+# Cyan ..............Hitting CONTROL key
+# Yellow Blinking ...Sleeping
+# Red Blinking.......Wow! We broke out of the infinite while loop!
+
+ATTACKMODE HID
+
+INFINITE_KEY=CTRL
+#INFINITE_KEY=BREAK
+
+# Setting MAX_SECONDS will utilize random value
+#  else leave blank, "MAX_SECONDS=", to use 
+#  FIXED_SECONDS value every time.
+# 300 == 5min
+MAX_SECONDS=300
+FIXED_SECONDS=9
+
+# infinite while loop
+while true
+do
+	LED SPECIAL
+	QUACK $INFINITE_KEY
+	sleep 1
+	LED ATTACK
+	# Slight change from original to support "random"
+	# delays between key presses.
+	if [ ! -z MAX_SECONDS ]; then
+		sleep $(($RANDOM % $MAX_SECONDS))
+	else
+		sleep $FIXED_SECONDS
+	fi
+done
+
+# this code will never be reached
+LED FAIL

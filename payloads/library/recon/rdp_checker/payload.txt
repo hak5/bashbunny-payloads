@@ -1,0 +1,52 @@
+# Title: RDP Checker for Bash Bunny
+# Author: Hak5Darren
+# Version: 1.1
+# Target: Windows
+# Category: Enumeration
+# 
+# Checks whether RDP is enabled on target machine
+# 
+# REQUIREMENTS
+# ============
+# Needs impacket to be copied to /tools/impacket and installed
+# Option A:
+#   1. Download impacket from https://github.com/CoreSecurity/impacket
+#   2. Copy impacket folder to /tools on the Bash Bunny flash drive
+#   3. Boot Bash Bunny into arming mode and connect to console via serial
+#   4. Issue "python /tools/impacket/setup.py install"
+# Option B:
+#   1. Download impacket deb package 
+#   2. Copy impacket.deb to /tools on the Bash Bunny flash drive
+#   3. Boot Bash Bunny into arming mode. Impacket will install automatically.
+#
+# LED STATUS
+# ==========
+# FAIL..............Failed to find dependencies
+# SETUP.............Setting up attack
+# ATTACK............Scanning
+# GREEN SUCCESS.....RDP Enabled
+# FAIL2.............RDP Not Enabled
+
+
+######## INITIALIZATION ########
+
+REQUIRETOOL impacket
+LED SETUP
+ATTACKMODE RNDIS_ETHERNET
+# ATTACKMODE ECM_ETHERNET
+GET TARGET_IP
+
+
+
+######## ATTACK ########
+LED ATTACK
+python /tools/impacket/examples/rdp_check.py $TARGET_IP >> /tmp/rdp_check
+# Check scan results and set LED red or green accordingly
+if grep Granted /tmp/rdp_check
+then
+# RDP is enabled
+LED G SUCCESS
+else
+# RDP is not enabled
+LED FAIL2
+fi

