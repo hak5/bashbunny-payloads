@@ -1,9 +1,9 @@
 #!/bin/bash
-# Title:		    expl0it
-# Description:	Remote System Exploit
-# Author:  		  n3uron
-# Category: 	  Remote_Access
-# Target: 		  macOS
+# Title:  expl0it
+# Description:	 Remote System Exploit
+# Author:  n3uron
+# Category:  Remote_Access
+# Target:  macOS
 # Attackmodes: 	STORAGE, HID
 
 # Setup
