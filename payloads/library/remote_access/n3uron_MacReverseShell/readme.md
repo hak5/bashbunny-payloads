@@ -1,7 +1,6 @@
 # Xpl0it
-
-Author: n3uron
-Version: Version 1.0  
+#### Author:  n3uron
+#### Version: Version 1.0  
 
 ## Description
 
