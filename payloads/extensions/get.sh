@@ -1,15 +1,33 @@
 #!/bin/bash
 
 function GET() {
+  TIMEOUT=$2
+  [[ -z "$2" ]] && TIMEOUT=0
+  WAITED=0
   case $1 in
     "TARGET_IP")
-      export TARGET_IP=$(cat /var/lib/dhcp/dhcpd.leases | grep ^lease | awk '{ print $2 }' | sort | uniq)
+      export TARGET_IP=$(tac /var/lib/dhcp/dhcpd.leases | grep ^lease | awk '{print $2}')
+      while [[ -z $TARGET_IP && $WAITED -lt $TIMEOUT ]]; do
+        sleep 1
+        ((WAITED++))
+	export TARGET_IP=$(tac /var/lib/dhcp/dhcpd.leases | grep ^lease | awk '{print $2}')
+      done
       ;;
     "TARGET_HOSTNAME")
-      export TARGET_HOSTNAME=$(cat /var/lib/dhcp/dhcpd.leases | grep hostname | awk '{print $2 }' | sort | uniq | tail -n1 | sed "s/^[ \t]*//" | sed 's/\"//g' | sed 's/;//')
+      export TARGET_HOSTNAME=$(tac /var/lib/dhcp/dhcpd.leases | grep hostname | awk '{print $2}' | sed "s/^[ \t]*//" | sed 's/[\";]//g')
+      while [[ -z $TARGET_HOSTNAME && $WAITED -lt $TIMEOUT ]]; do
+        sleep 1
+	((WAITED++))
+	export TARGET_HOSTNAME=$(tac /var/lib/dhcp/dhcpd.leases | grep hostname | awk '{print $2}' | sed "s/^[ \t]*//" | sed 's/[\";]//g')
+      done
       ;;
     "HOST_IP")
       export HOST_IP=$(cat /etc/network/interfaces.d/usb0 | grep address | awk {'print $2'})
+      while [[ -z $HOST_IP && $WAITED -lt $TIMEOUT ]]; do
+        sleep 1
+        ((WAITED++))
+        export HOST_IP=$(cat /etc/network/interfaces.d/usb0 | grep address | awk {'print $2'})
+      done
       ;;
     "SWITCH_POSITION")
       [[ "$(cat /sys/class/gpio_sw/PA8/data)" == "0" ]] && export SWITCH_POSITION="switch1" && return
