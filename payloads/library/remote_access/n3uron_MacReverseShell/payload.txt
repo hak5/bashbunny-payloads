@@ -1,10 +1,10 @@
 #!/bin/bash
-# Title:  expl0it
-# Description:	 Remote System Exploit
-# Author:  n3uron
-# Category:  Remote_Access
-# Target:  macOS
-# Attackmodes: 	STORAGE, HID
+# Title:                 expl0it
+# Description:	         Remote System Exploit
+# Author:                n3uron
+# Category:              Remote_Access
+# Target:                macOS
+# Attackmodes: 	         STORAGE, HID
 
 # Setup
 ATTACKMODE STORAGE HID SN_0000202020202ABC&0 MAN_SanDisk VID_0X05AC PID_0X021E
