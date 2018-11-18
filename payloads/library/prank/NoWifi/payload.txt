@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Title:         Wifi Disabler
+# Title:         NoWifi
 # Author:        JeffParkerModHD
 # Version:       1.0
 # Target:        Tested on Windows 10
