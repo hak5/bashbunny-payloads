@@ -1,3 +1,8 @@
+ param (
+    [string]$Width
+    [string]$Height
+ )
+
 Function Set-ScreenResolution { 
  
 <# 
@@ -158,19 +163,4 @@ Add-Type $pinvokeCode -ErrorAction SilentlyContinue
 [Resolution.PrmaryScreenResolution]::ChangeResolution($width,$height) 
 } 
 
-# Read dimensions from config file
-Get-Content -Path "config.txt" |
-    foreach-object `
-        -begin {
-            $config=@{}
-        } `
-        -process {
-            $option = [regex]::split($_,'=')
-            if($option[0].CompareTo("") -ne 0)
-            {
-                # Add the Key, Value into the Hashtable
-                $config.Add($option[0], $option[1])
-            }
-        } `
-
-Set-ScreenResolution -Width $config.Width -Height $config.Height
+Set-ScreenResolution -Width $Width -Height $Height
