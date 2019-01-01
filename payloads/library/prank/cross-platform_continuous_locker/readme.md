@@ -1,4 +1,4 @@
-# Cross Platform Lock-out
+# Cross Platform Continuous Locker
 
 * Author: Hak5Darren
 * Version: Version 1.0
