@@ -1,0 +1,52 @@
+# Title:         win-iconprank
+# Description:   screenshots the desktop with icons, then hides icons
+# Author:        BobyMCbobs
+# Version:       1.0.0
+# Category:      Prank
+# Target:        Windows 7? - Windows 10
+# Attackmodes:   HID
+
+# Options
+DELAY_RATIO=1
+
+# setup
+LED SETUP
+ATTACKMODE HID
+
+# begin attack
+LED ATTACK
+Q GUI d
+Q DELAY $((500 * $DELAY_RATIO))
+Q PRINTSCREEN
+Q DELAY $((100 * $DELAY_RATIO))
+Q MENU
+Q DELAY $((300 * $DELAY_RATIO))
+Q STRING V
+Q DELAY $((40 * $DELAY_RATIO))
+Q RIGHT
+Q DELAY 50
+Q STRING D
+Q DELAY $((300 * $DELAY_RATIO))
+Q GUI r
+Q DELAY $((700 * $DELAY_RATIO))
+Q STRING mspaint
+Q ENTER
+Q DELAY $((1200 * $DELAY_RATIO))
+Q CTRL v
+Q DELAY $((500 * $DELAY_RATIO))
+Q CTRL s
+Q DELAY $((1000 * $DELAY_RATIO))
+Q STRING %userprofile%\\${RANDOM}${RANDOM}.bmp
+Q ENTER
+Q DELAY $((500 * $DELAY_RATIO))
+Q ALT f
+Q DELAY $((400 * $DELAY_RATIO))
+Q STRING K
+Q DELAY $((100 * $DELAY_RATIO))
+Q STRING F
+Q DELAY $((1000 * $DELAY_RATIO))
+Q ALT F4
+Q DELAY $((300 * $DELAY_RATIO))
+Q GUI d
+
+LED FINISH

