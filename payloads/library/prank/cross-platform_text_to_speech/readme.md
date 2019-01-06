@@ -26,5 +26,4 @@ ha."
 | Yellow double blink     | Running the TTS code                         |
 | Yellow triple blink     | Hiding/minimizing the terminal/cmd           |
 | Green                   | Finished                                     |
-| ----------------------- | -------------------------------------------- |
 
