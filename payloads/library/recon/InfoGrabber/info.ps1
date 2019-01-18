@@ -188,3 +188,12 @@ $computerSystem.Name
 "Windows/user passwords"
 "=================================================================="
 $vault | select Resource, UserName, Password | Sort-Object Resource | ft -AutoSize
+
+Remove-Variable -Name computerPubIP,
+computerIP,IsDHCPEnabled,Network,Networks, 
+computerMAC,computerSystem,computerBIOS,computerOs,
+computerCpu, computerMainboard,computerRamCapacity,
+computerRam,driveType,Hdds,RDP,WLANProfileNames,WLANProfileName,
+Output,WLANProfileObjects,WLANProfilePassword,WLANProfileObject,luser,
+process,listener,listenerItem,process,service,software,drivers,videocard,
+vault -ErrorAction SilentlyContinue -Force
