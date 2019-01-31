@@ -1,0 +1,6 @@
+# Cross-Platform Continuous Locker
+# Hak5Darren
+#
+LED M FAST
+ATTACKMODE HID
+while true; do QUACK GUI l; sleep 0.5; QUACK CTRL-ALT l; sleep 0.5; QUACK COMMAND-CTRL q; sleep 0.5; done

