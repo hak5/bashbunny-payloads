@@ -1,6 +1,6 @@
 # Chromebook Demo Payload
 
- Author: Julz4455
+Author: Julz4455
 Version: 1.2
 
  ## Description
