@@ -6,7 +6,7 @@
 ## Description
 
 ## Target =  Unlocked Linux machine (only tested on Ubuntu 18.04 LTS)
-Base install of OS, plus OPENSSH-SERVER & NET-TOOLS (if NET-TOOLS is not installed, the route command will not return data [noting major])
+Base install of OS, plus OPENSSH-SERVER & NET-TOOLS (if NET-TOOLS is not installed, the route command will not return data [nothing major])
 
 ## Loot =      Contents of ~/$USER/.ssh folder (pub/priv RSA keys, known_hosts, etc..)
   whoami
