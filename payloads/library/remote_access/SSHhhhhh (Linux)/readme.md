@@ -21,7 +21,7 @@ Base install of OS, plus OPENSSH-SERVER & NET-TOOLS (if NET-TOOLS is not install
   
   uname -a
 
-##Two opportunites for persistence are injected:
+## Two opportunites for persistence are injected:
 
   Attacker's RSA key is added to ~/$USER/.ssh/authorized_keys (aka I'll Call You)
 
