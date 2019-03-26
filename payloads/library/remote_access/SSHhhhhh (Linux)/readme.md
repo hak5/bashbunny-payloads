@@ -9,12 +9,12 @@
 Base install of OS, plus OPENSSH-SERVER & NET-TOOLS (if NET-TOOLS is not installed, the route command will not return data [noting major])
 
 ## Loot =      Contents of ~/$USER/.ssh folder (pub/priv RSA keys, known_hosts, etc..)
-whoami
-ip addr
-route -n
-/etc/passwd
-/etc/shadow (on the off chance you get a root terminal)
-uname -a
+  whoami
+  ip addr
+  route -n
+  /etc/passwd
+  /etc/shadow (on the off chance you get a root terminal)
+  uname -a
 
 Two opportunites for persistence are injected:
 Attacker's RSA key is added to ~/$USER/.ssh/authorized_keys (aka I'll Call You)
