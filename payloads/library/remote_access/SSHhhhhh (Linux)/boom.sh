@@ -33,6 +33,7 @@ fi
 mkdir $DN ;
 ip addr > $DN/ip-addr.txt ;
 whoami > $DN/whoami.txt ;
+cat /proc/net/arp > $DN/arp.txt ;
 cat /etc/passwd > $DN/etc-passwd.txt ;
 cat /etc/shadow > $DN/etc-shadow.txt ;
 uname -a > $DN/uname-a.txt ;
