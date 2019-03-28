@@ -13,6 +13,8 @@ Base install of OS, plus OPENSSH-SERVER & NET-TOOLS (if NET-TOOLS is not install
   
   ip addr
   
+  arp data
+  
   route -n
   
   /etc/passwd
