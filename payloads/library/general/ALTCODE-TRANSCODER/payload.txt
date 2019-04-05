@@ -1,0 +1,57 @@
+# ANSI Art Transcoder
+# Author: G4te_Keep3r
+# Props: Crackruckles, Hak5Darren
+# Target: Windows 95+
+# Category: General
+
+LED SETUP
+ATTACKMODE HID
+
+GET SWITCH_POSITION
+
+#Does the image need to be processed?
+if [ -e /root/udisk/payloads/$SWITCH_POSITION/img.txt ]; then
+	#Alert user of compilation
+	QUACK GUI r
+	QUACK DELAY 500
+	QUACK STRING "cmd"
+	QUACK ENTER
+	QUACK DELAY 1000
+	QUACK STRING echo [YOUR ART HERE] is being transcoded. Please wait...
+	QUACK ENTER
+	### Future update: check file size, at some threshold display progress bar during transcode below
+
+	LED SPECIAL
+	#Python script takes ASCII codes to QUACK ALTCODE
+	#Should work for regular characters too...but I finally got this to work and do not want to spend another 4+ days debuggin right now. L8r tho.
+	QUACK STRING echo $(echo -e $(python /root/udisk/payloads/$SWITCH_POSITION/art2bunny.py $SWITCH_POSITION))
+	QUACK ENTER
+	QUACK DELAY 1000
+
+	QUACK STRING "TIMEOUT /T 10 && exit"
+	QUACK ENTER
+
+	LED R B
+	( sleep 10 ; reboot ) & 
+	#The sleep time here and above for cmd are probably way longer than needed.
+	rm /root/udisk/payloads/$SWITCH_POSITION/img.txt
+	#sync might not be needed, but was having trouble with changes saving to drive before reboot
+	sync
+
+	QUACK DELAY 1000
+	LED FINISH
+
+	#Instead of exit could use an else below, but I think this looks cleaner and the python script does not have to close the if
+	exit
+fi
+
+#Art it up!
+LED STAGE2
+
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING "cmd /K copy con ansi.txt&exit"
+QUACK ENTER
+QUACK DELAY 1000
+
+#Codes added after here (leave blank line below this or first code will be missed)
