@@ -1,0 +1,148 @@
+LED B SLOW
+ATTACKMODE HID
+LED R 0
+# set your keyboard !!
+DUCKY_LANG gb
+
+## add keys for pre 70
+ChromePre70='n'
+
+WIFI_NAME="xxx"
+##wifi creds
+WIFI_USER="xxx" #only used on enterprise
+WIFI_PASS="xxx"
+#creds to enrol device
+ENROL_USER="xxx"
+ENROL_PASS="xxx"
+
+# change
+EwWPA='n'
+EwPEAP='n'
+EwLEAP='n'
+
+
+## ent wifi options
+checkCERT='n'
+sendGoogleData='n'
+
+
+
+##defaults to WPA if more than one wifi type set as 'y'
+EwDEFAULT='n'
+options=($EwWPA $EwPEAP $EwLEAP);
+options=(${options[@]/n/})
+[[ ${#options[@]} -gt 1 ]] && $EwDEFAULT='y'
+
+
+keys () {
+    if [ -z $2 ]; then
+        QUACK $1
+        sleep 1
+    else
+        count=0
+        while [ $count -lt $2 ]; do
+            count=$((count+1))
+            QUACK $1
+            sleep 1
+        done
+    fi
+}
+
+
+## main screen needs to have the language bar hightlighted
+
+# just added this sleep to be sure the OS has had time to accept HID
+# as some devices can be slower
+sleep 5
+
+## open sys tray 
+QUACK ALT-SHIFT s
+sleep 2
+
+#select wifi
+keys "TAB" 4
+keys "ENTER"
+
+## add wifi
+keys "TAB" 3
+keys "ENTER"
+
+##ssid
+sleep 3
+QUACK STRING $WIFI_NAME
+sleep 1
+keys "TAB"
+
+## wpa
+if [ $EwDEFAULT == 'y' ] || [ $EwWPA == 'y' ]; then
+    keys "DOWNARROW" 2
+    keys "TAB"
+    QUACK STRING $WIFI_PASS
+    sleep 1
+    keys "TAB" 3
+    keys "ENTER"
+fi
+
+## enterprise with PEAP
+if [ $EwDEFAULT == 'n' ] && [[ $EwPEAP == 'y' || $EwLEAP == 'y' ]]; then
+    keys "DOWNARROW" 3
+    keys "TAB"
+    keys "DOWNARROW"
+    keys "TAB"
+### add in the extra keys for leap
+## add vars for types
+    keys "DOWNARROW" 2
+    keys "TAB"
+    [[ $checkCERT == 'n' ]] && keys "DOWNARROW"
+    keys "TAB"
+    # wifi creds
+    QUACK STRING $WIFI_USER
+    keys "TAB"
+    QUACK STRING $WIFI_PASS
+    sleep 1
+    #save ?
+    keys "TAB" 3
+    keys "ENTER"
+    ##connect ?
+    keys "TAB" 2
+    QUACK ENTER
+fi
+
+## waiting for wifi connection
+sleep 25
+
+
+## main screen starting on Lang button
+keys "TAB" 2
+keys "ENTER"
+
+# check if need two more tabs?
+
+keys "TAB" 3
+keys "ENTER"
+sleep 2
+
+##enter TOS
+
+keys "TAB" 2
+[[ $sendGoogleData == 'n' ]] && keys "ENTER"
+sleep 2
+keys "TAB" 3
+QUACK ENTER
+### waiting on device
+## could be performing updates so will wait for this to finish
+## and continue by moving the switch
+LED G FAST
+WAIT
+LED R 0
+##########################  enrollment
+QUACK STRING $ENROL_USER
+sleep 1
+keys "ENTER"
+## enroll pass
+QUACK STRING $ENROL_PASS
+sleep 1
+QUACK ENTER
+
+## green light, finished, waiting for user to input asset info
+LED G
