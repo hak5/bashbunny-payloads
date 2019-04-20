@@ -2,14 +2,12 @@ ChromeOS Deployment For Bash Bunny
 
 Author: TheDragonkeeper
 
-Version: Version 1
+Version: Version 2
 
 ## Description
 
 This is the enterprise enrolment process for ChromeOS.
-I use this code at work when we get a bulk order in.
-
-WIP im still merging my different payloads into one.
+I use this code at work when we get a bulk order in, but i have added more options so i can be used by anyone.
 
 Set the DUCKY_LANG to the correct keyboard to avoid credential mistypes
 ## Variables
