@@ -9,6 +9,9 @@ Version: Version 2
 This is the enterprise enrolment process for ChromeOS.
 I use this code at work when we get a bulk order in, but i have added more options so i can be used by anyone.
 
+Set the following variables in the payload for your network. only select one wifi type or it will use WPA by default
+and dont forget those backslashes if you use symbols in the strings.
+
 Set the DUCKY_LANG to the correct keyboard to avoid credential mistypes
 ## Variables
 | Vars              | Notes                                                                        |
@@ -34,12 +37,12 @@ Set the DUCKY_LANG to the correct keyboard to avoid credential mistypes
 | EwDEFAULT | Do not change this; it is used to check that only one wifi type is set to 'y' else use EwWPA |
 | - | - |
 | AuthMethod | This defines what you want to use as authentication when using enterprise wifi, set one of the following numbers |
-| 0 | auto |
-| 1 | EAP-MDS |
-| 2 or 3 | MSCHAP  or MSCHAPv2 |
-| 4 | PAP |
-| 5 | CHAP |
-| 6 | GTC |
+| 0 | auto - PEAP and EAP|
+| 1 | EAP-MDS  - PEAP and EAP |
+| 2 or 3 | MSCHAP  or MSCHAPv2  - PEAP and EAP |
+| 4 | PAP  - EAP|
+| 5 | CHAP  - EAP |
+| 6 | GTC   - EAP|
 
 
 ## STATUS
