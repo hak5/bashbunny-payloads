@@ -87,8 +87,12 @@ keys "TAB"
 #wifi security
 ## wpa or wep
 if [ $EwDEFAULT == 'y' ] || [[ $EwWPA == 'y' || $EwWEP == 'y' ]]; then
-    [[ $EwWEP == 'y' ]] && keys "DOWNARROW"
-    [[ $EwWPA == 'y' ]] && keys "DOWNARROW" 2
+    if [ $EwDEFAULT == 'y' ]; then
+        keys "DOWNARROW" 2
+    else
+        [[ $EwWEP == 'y' ]] && keys "DOWNARROW"
+        [[ $EwWPA == 'y' ]] && keys "DOWNARROW" 2
+    fi
     keys "TAB"
     QUACK STRING $WIFI_PASS
     sleep 1
