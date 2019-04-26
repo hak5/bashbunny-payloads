@@ -18,8 +18,8 @@ Note: A fantastic collection of password wordlists are available: [SecLists](htt
 
 | LED                     | Status                                       |
 | ----------------------- | -------------------------------------------- |
-| FAIL2                   | Attack failed, username/password not found   |
-| FAIL                    | Attack failed, network inaccessible          |
+| FAIL                    | Attack failed, username/password not found   |
+| FAIL2                   | Attack failed, network inaccessible          |
 | STAGE 1                 | Stage 1: checking for SMB port with nmap     |
 | STAGE 2                 | Stage 2: Brute forcing                       |
 | Green (solid)           | Attack complete, check loot!                 |
