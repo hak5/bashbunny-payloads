@@ -1,4 +1,18 @@
 # Jackalope
+```
+   `\ #   # /'
+   | \ # # /;|
+   \ :\# #|; /
+    \./#_#\./
+     /     \
+    : o   o "
+    |  \ /  |
+     \  v  /
+      \_x_/
+    
+Jackalope
+  by: catatonic
+```
 * Author: catatonic
 * Target: Windows (for now)
 
