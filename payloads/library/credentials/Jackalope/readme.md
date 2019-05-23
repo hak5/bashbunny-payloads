@@ -18,13 +18,12 @@ Jackalope
 
 ## Description
 
-Uses ethernet to attempt dictionary attacks against passwords. When the password is discovered a payload is automatically generated and placed in the alternate switch location. This alternate payload may be used to unlock the machine by:
+Uses ethernet to attempt dictionary attacks against passwords. When the password is discovered it is stored in a file for future use. The password may be used to unlock the machine by:
 
-1. Checking loot OR...
-2. Manually select user/password at login screen
-3. Flip switch to alternate payload to enter password
+1. Manually select user & place focus on the password field at the login screen
+2. Toggle the switch position from switch1 to switch2 (or vice versa) & the bunny will auto-type the stored password.
 
-To clear an already identified password from a GREEN status light, flip the switch to switch3 (arming) and the status light will change to SPECIAL (cyan).
+To clear a stored password move the switch to switch3 (aka arming mode) after the payload runs and displays GREEN. The status light will change to SPECIAL (cyan) indicating the password has been removed. Positioning the switch to switch1 or switch2 will re-initiate the attack.
 
 ## Configuration
 No initial configuration is required for bunny firmware v1.6+.
