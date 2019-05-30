@@ -25,7 +25,7 @@
 ------------------------------------------------
 SMBruteBunny by: @SymbianSyMoh
 ```
-* Author: Mohamed A. Baset (SymbianSyMoh)
+* Author: Mohamed A. Baset [@SymbianSyMoh](https://twitter.com/symbiansymoh)
 
 ## Description
 This payload exploits the inherited trust between USB pripherals and computers by setting up an RNDIS interface that works as a DHCP server and offer leases to the connected hosts then it can see the open SMB port which is 445 hence the bruteforcing process starts and once the password is found it will be entered to the lock screen via HID script and unlocking the target machine.
@@ -45,3 +45,6 @@ pass_bruteforce_list
 4.
 5.
 6. Plug the BashBunny in a locked computer, once the DHCP lease is being offered it will perform SMB bruteforce attack and once succeded it will fire HID script to enter the password and unlock the machine.
+
+## Credits
+[Corey Gilks](https://github.com/Gilks) for [mmcbrute](https://github.com/Gilks/mmcbrute)
