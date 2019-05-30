@@ -34,17 +34,9 @@ This payload exploits the inherited trust between USB pripherals and computers b
 Once the password found it will be stored under the "loot" folder and will be entered automatically in the lock screen resulting in unlocking the targeted machine.
 
 ## Setup
-1. Clone this repo XXX in XXXX
-2. Put all the required files in place:
-password_process_file
-password_loot_file
-unlock_hid_script
-user_bruteforce_list
-pass_bruteforce_list
-3.
-4.
-5.
-6. Plug the BashBunny in a locked computer, once the DHCP lease is being offered it will perform SMB bruteforce attack and once succeded it will fire HID script to enter the password and unlock the machine.
+1. Copy the payload files to the desired Bash Bunny switch.
+2. Switch to the switch which contains the payload
+3. Plug the BashBunny in a locked computer, once the DHCP lease is being offered it will perform SMB bruteforce attack and once succeded it will fire HID script to enter the password and unlock the machine.
 
 ## Credits
 [Corey Gilks](https://github.com/Gilks) for [mmcbrute](https://github.com/Gilks/mmcbrute)
