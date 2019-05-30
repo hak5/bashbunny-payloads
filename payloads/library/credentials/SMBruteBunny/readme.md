@@ -25,7 +25,7 @@
 ------------------------------------------------
 SMBruteBunny by: @SymbianSyMoh
 ```
-* Author: Mohamed A. Baset [@SymbianSyMoh](https://twitter.com/symbiansymoh)
+* Author: Mohamed A. Baset aka [@SymbianSyMoh](https://twitter.com/symbiansymoh)
 
 ## Description
 This payload exploits the inherited trust between USB pripherals and computers by setting up an RNDIS interface that works as a DHCP server and offer leases to the connected hosts then it can see the open SMB port which is 445 hence the bruteforcing process starts and once the password is found it will be entered to the lock screen via HID script and unlocking the target machine.
