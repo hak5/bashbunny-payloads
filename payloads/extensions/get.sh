@@ -18,12 +18,20 @@ function GET() {
       export SWITCH_POSITION="invalid"
       ;;
     "TARGET_OS")
-      TARGET_IP=$(cat /var/lib/dhcp/dhcpd.leases | grep ^lease | awk '{ print $2 }' | sort | uniq)
+      GET TARGET_IP
       ScanForOS=$(nmap -Pn -O $TARGET_IP -p1 -v2)
       [[ $ScanForOS == *"Too many fingerprints"* ]] && ScanForOS=$(nmap -Pn -O $TARGET_IP --osscan-guess -v2)
       [[ "${ScanForOS,,}" == *"windows"* ]] && export TARGET_OS='WINDOWS' && return
       [[ "${ScanForOS,,}" == *"apple"* ]] && export TARGET_OS='MACOS' && return
       [[ "${ScanForOS,,}" == *"linux"* ]] && export TARGET_OS='LINUX' && return
+      export TARGET_OS='UNKNOWN'
+      ;;
+    "TARGET_OS_QUICK")
+      GET TARGET_IP
+      ScanForOS=$(ping -c1 $TARGET_IP)
+      [[ "${ScanForOS,,}" == *"ttl=128"* ]] && export TARGET_OS='WINDOWS' && return
+      [[ "${ScanForOS,,}" == *"ttl=64"* ]] && export TARGET_OS='LINUX' && return
+      [[ "${ScanForOS,,}" == *"ttl=63"* ]] && export TARGET_OS='CHROMEOS' && return
       export TARGET_OS='UNKNOWN'
       ;;
   esac
