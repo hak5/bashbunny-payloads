@@ -21,7 +21,7 @@ function GET() {
       DATABASE=/root/udisk/payloads/extensions/OSdatabase
       FINGERPRINT=$(cat /var/log/syslog | grep FINGERPRINT | awk '{ print $9 " " $7 }' | awk '{ print $2 }' | awk 'END{print}')
       [[ -f $DATABASE ]] || touch $DATABASE
-      sed -i $FINGERPRINT /var/log/syslog
+      sed -i "/$FINGERPRINT/d" /var/log/syslog
       if [ -f $DATABASE ] ; then
           TARGET_OS=$(cat $DATABASE | grep $FINGERPRINT | awk '{ print $2 }')
           GET TARGET_IP
