@@ -3,7 +3,7 @@
 # Version: 1.1
 # Target: Windows
 # Category: Recon
-# Tags: enumeration, recon, portscan, impacket
+# Tags: enumeration, recon, portscan, impacket, rdp
 # 
 # Checks whether RDP is enabled on target machine
 # 
