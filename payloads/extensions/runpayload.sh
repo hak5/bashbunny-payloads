@@ -3,7 +3,15 @@
 #Payload selector by Dragonkeeper
 #  Allows selecting payloads by amount of switch changes
 #
-#  Execution RUN_PAYLOAD "/Payload/folder/" "payload1.txt" "anotherpayload.txt" "awesomepayload.txt"
+#Step1. put all your payloads into a folder
+#
+#Step2. in the switch folder make a payload.txt and define the payloads and the dir to use as variables. like so:
+#scriptfolder=" /root/udisk/payloads/payloads/ "
+#script1="payload1.txt"
+#script2="payload2.txt"
+#
+#Step3. now call the extension as with the payloads you would like to use 
+#RUN_PAYLOAD $scriptfolder $script1 $script2 $script3 $script4
 #
 # LED will go red, to let you know its ready.  It is currently about to execute the 1st given payload
 # the LED will blue, to let you decide if you want to run that payload.  if yes do nothing, if no flick the switch.
