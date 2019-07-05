@@ -10,6 +10,8 @@
 # Blue Blinking: Running ADB command to push payload.apk
 # Red Blinking: FireTV failed to get an IP address from the Bash Bunny
 # Green: Finished
+#
+# Target: Android (4.4.2)
 
 LED SETUP
 GET TARGET_IP
