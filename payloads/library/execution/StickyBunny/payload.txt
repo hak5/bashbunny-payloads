@@ -1,15 +1,17 @@
 #!/bin/bash
 #
-# Title:         StickyBunny
-# Author:        Squibs
-# Version:       0.3
-# Plug2Pwn:		 18s
+# Title:        StickyBunny
+# Author:       Squibs
+# Version:      0.3
+# Attack Modes: HID
+# Target:       Windows
+# Runtime:      18s
+# Description:  Creates the sticky keys back door on a windows machine
 #
-# Creates the sticky keys back door on a windows machine
-#
-# Blue...............Preparing Attack
-# Yellow.............Attacking
-# Green..............GTFO
+# LEDS:
+# Blue: Preparing Attack
+# Yellow: Attacking
+# Green: Finished
 
 #Open Admin Powershell 
 ATTACKMODE HID
