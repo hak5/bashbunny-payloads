@@ -1,3 +1,15 @@
+# Title: Link File Analysis
+# Author: thehappydinoa
+# Version: 1.0
+# Description: This payload uses a powershell script to search the user profle for lnk files where the target
+# is on a drive other than the C: Drive. The output is put into a CSV file in the folder \loot\link-files.
+#
+# LEDS:
+# Magenta - Setup
+# Yellow Blinking - Attacking
+#
+# Target: Windows
+
 LED SETUP
 ATTACKMODE HID STORAGE
 GET SWITCH_POSITION
