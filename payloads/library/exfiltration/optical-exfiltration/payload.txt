@@ -1,31 +1,22 @@
 #!/bin/bash
 #
-# Title:         Optical Exfiltration
-# Author:        bg-wa
-# Version:       1.0
-# Category:      HID
-# Target:        *NIX
-# Attackmodes:   HID
-# Sources:       Hak5 2320, https://github.com/bg-wa/QRExtractor
+# Title:        Optical Exfiltration
+# Author:       bg-wa
+# Version:      1.0
+# Targets:      macOS, Linux
+# Attack Modes: HID
+# Sources:      Hak5 2320, https://github.com/bg-wa/QRExtractor
+# Description:  Quick HID only attack to write an HTML/JS file to target machine
+#               and open a browser, to exfiltrate data Using QR Codes and a video recording device.
+#               Optional html params:
+#               base64: Passing a base64 string to this param will auto-start processing QR Codes.
+#               playback: Passing the string "finish" to this param will auto-play the results, when QR codes finish rendering.
+#               Example: Ln65: Q STRING firefox "$target_html?playback=finish&base64=my_long_string"
 #
-# Quick HID only attack to write an HTML/JS file to target machine
-# and open a browser, to exfiltrate data Using QR Codes and a video
-# recording device.
-#
-# Optional html params:
-# base64: Passing a base64 string to this param will auto-start processing QR Codes.
-#
-# playback: Passing the string "finish" to this param will auto-play the results,
-#           when QR codes finish rendering.
-#
-# Example:
-# Ln65: Q STRING firefox "$target_html?playback=finish&base64=my_long_string"
-#
-# | Attack Stage        | Description                              |
-# | ------------------- | ---------------------------------------- |
-# | SETUP               | Open vi                                  |
-# | ATTACK              | Writing HTML                             |
-# | FINISH              | Browser Ready/Processing                            |
+# LEDS:
+# Magenta: Open vi
+# Yellow Blink: Writing HTML
+# Green:  Browser Ready/Processing
 #
 
 ATTACKMODE HID
