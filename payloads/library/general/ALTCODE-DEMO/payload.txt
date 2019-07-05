@@ -1,10 +1,16 @@
-# ANSI Art Demo
+#!/bin/bash
+# Title: ANSI Art Demo
 # Author: Hak5Darren
-
 # Props: Crackruckles
 # Demo: Hak5 episode 2506
-# Target: Windows 95+
-# Category: General
+# Targets: Windows
+# Attack Modes: HID
+# Description: Demo of Alt Codes Injection
+#
+# LEDS:
+# Magenta: Setting up
+# Yellow Blink: Attacking
+# Green: Finished
 
 LED SETUP
 ATTACKMODE HID
