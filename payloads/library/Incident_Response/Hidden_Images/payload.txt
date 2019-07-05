@@ -1,3 +1,15 @@
+# Title: Hidden_Images
+# Author: Murty007
+# Creds: thehappydinoa
+# Description: A (naive) user may attempt to hide image(picture) files by simply
+# renaming them to appear to be other filetypes (i.e. Word documents etc).
+# This payload uses a powershell script to walk the userprofile to look
+# for image files that have been hidden in this manner.
+#
+# LEDS:
+# Magenta: Setup
+# Yellow Blink: Attacking
+
 LED SETUP
 GET SWITCH_POSITION
 ATTACKMODE HID STORAGE
