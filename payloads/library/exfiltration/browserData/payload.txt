@@ -2,16 +2,17 @@
 #
 # Title:         BrowserData
 # Author:        zachstanford
-# Version:       0.1 (Tested on Windows 10)
+# Version:       0.1
+# Targets:       Windows
+# Attack Modes:  HID, STORAGE
+# Description:   Dumps browser info like history and bookmarks from  powershell script 
+#                then saves them in /root/udisk/loot/BrowserData/%ComputerName%
+#                Credits to this Empire's powershell script:
+#                https://github.com/EmpireProject/Empire/blob/master/data/module_source/collection/Get-BrowserData.ps1
 #
-# Dumps browser info like history and bookmarks from  powershell script 
-# then saves them in /root/udisk/loot/BrowserData/%ComputerName%
-# Credits to this Empire's powershell script:
-# https://github.com/EmpireProject/Empire/blob/master/data/module_source/collection/Get-BrowserData.ps1
-
-#script 
-# Blue...............Running Script
-# Purple.............Finished
+# LEDS:
+# Blue: Running Script
+# Magenta: Finished
 
 # Not sure if this is the right variable. Feel free to change it.
 
@@ -22,7 +23,6 @@ GET SWITCH_POSITION
 LED R SLOW
 LOOTDIR=/root/udisk/loot/BrowserData
 mkdir -p $LOOTDIR
-
 
 LED B SLOW
 
