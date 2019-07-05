@@ -1,4 +1,16 @@
-# Executes z.cmd from the switch position's folder, thus launching x.cmd silently using i.vbs
+#!/bin/bash
+#
+# Title: simple-usb-extractor
+# Version: 1.0
+# Author: danthegoodman1
+# Targets: Windows
+# Attack Modes: HID, STORAGE
+# Description: Executes z.cmd from the switch position's folder, thus launching x.cmd silently using i.vbs
+# 
+# LEDS:
+# Yellow Blink - Attacking
+# Green - Finished
+
 GET SWITCH_POSITION
 LED ATTACK
 ATTACKMODE HID STORAGE
