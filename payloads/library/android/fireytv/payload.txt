@@ -1,16 +1,15 @@
-# Title:         Firey TV
-# Author:        DemmSec
-# Version:       1.0
-#
-# Enables ADB and unknown sources on a target FireTV
-# Then pushes a payload APK via ADB
-#
+# Title: Firey TV
+# Author: DemmSec
+# Version: 1.0
+# Description:
+# Enables ADB and unknown sources on a target FireTV, Then pushes a payload APK via ADB.
 # Requires android-tools-adb installed on the Bash Bunny
 #
-# Purple ............Running HID emulation, enabling ADB and unknown sources
-# Blue Blinking ...............Running ADB command to push payload.apk
-# Red Blinking.......FireTV failed to get an IP address from the Bash Bunny
-# Green..............Finished
+# LEDS:
+# Purple: Running HID emulation, enabling ADB and unknown sources
+# Blue Blinking: Running ADB command to push payload.apk
+# Red Blinking: FireTV failed to get an IP address from the Bash Bunny
+# Green: Finished
 
 LED SETUP
 GET TARGET_IP
