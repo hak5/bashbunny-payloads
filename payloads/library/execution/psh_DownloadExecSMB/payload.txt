@@ -4,26 +4,22 @@
 # Author:        LowValueTarget
 # Version:       2.0
 # Category:      Powershell
-# Target:        Windows XP SP3+ (Powershell)
-# Attackmodes:   HID, RNDIS_ETHERNET
+# Target:        Windows XP SP3+
+# Attack Modes:  HID, RNDIS_ETHERNET
 # Firmware:      >= 1.2
+# Required Tools: impacket 
+# Description: Quick HID attack to retrieve and run powershell payload from BashBunny SMBServer.
+#              Possibilities are limitless! Credentials captured by  are stored as loot.  
+#              Ensure p.txt exists in payload directory  (using .txt instead of .ps1 in case of security countermeasures)
 #
-# Quick HID attack to retrieve and run powershell payload from BashBunny SMBServer. Possibilities are limitless!
-# Credentials captured by  are stored as loot.  
-# Ensure p.txt exists in payload directory  (using .txt instead of .ps1 in case of security countermeasures)
+# LEDS:
+# Magenta: Setup
+# Yellow Single Blink: Powershell
+# Yellow Double Blink: Delivering powershell payload
+# White: Clean up
+# Green: Finished
 #
-# Required tools: impacket 
-=======
-# Credentials captured by  are stored as loot.
-# Ensure p.txt exists in payload directory  (using .txt instead of .ps1 in case of security countermeasures)
-#
-# Required tools: impacket
-#
-# | Attack Stage        | Description                   |
-# | ------------------- | ------------------------------|
-# | Stage 1             | Powershell                    |
-# | Stage 2             | Delivering powershell payload |
-#
+
 ATTACKMODE RNDIS_ETHERNET HID
 
 # SETUP
