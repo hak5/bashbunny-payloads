@@ -1,12 +1,19 @@
 #!/bin/bash
 #
 # Title:         RevShellBack
-# Description:   Set up a reverse shell and execute powershell/generic commands in the background from the Bash Bunny via USB ethernet.
 # Author:        NodePoint
 # Version:       0.1.3
 # Category:      Execution
 # Target:        Windows
-# Attackmodes:   Ethernet, HID
+# Attack Modes:  RNDIS_ETHERNET, HID
+# Description:   Set up a reverse shell and execute powershell/generic commands in the background from the Bash Bunny via USB ethernet.
+#
+# LEDS:
+# Magenta: Setup
+# Yellow Single Blink: Open CMD
+# Yellow Double Blink: Start Reverse Shell
+# Cyan Blink: Attack
+# Green: Finished
 
 # Set attack mode
 LED SETUP

@@ -2,17 +2,17 @@
 
 # Title:     ShellExec
 # Author:    audibleblink
-# Target:    Mac/Linux
+# Target:    Mac, Linux
 # Version:   1.1
+# Attack Modes: ECM_ETHERNET, HID
+# Description: Create a web server on the BashBunny and force the victim to download and execute a script.
+#              Perfect for when mass storage isn't an option.
 #
-# Create a web server on the BashBunny and force
-# the victim to download and execute a script.
-# Perfect for when mass storage isn't an option.
-#
-# White            |  Ready
-# Ammber blinking  |  Waiting for server
-# Blue blinking    |  Attacking
-# Green            |  Finished
+# LEDS:
+# White: Ready
+# Amber Blink: Waiting for server
+# Blue Blink: Attacking
+# Green: Finished
 
 LED SETUP
 ATTACKMODE ECM_ETHERNET HID VID_0X05AC PID_0X021E

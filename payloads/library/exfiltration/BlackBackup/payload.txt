@@ -1,15 +1,16 @@
-# Title:         BlackBackup
-# Author:        JWHeuver & JBaselier
-# Version:       1.0
-#
-# Runs powershell script to get Wlan and logon credentials
-# from computer and save them on USB drive (Storage attack)
-#
-# Purple.............Loading
-# Green .............Execute Credential Ripper Powershell
-# Off................Finished
-#
 #!/bin/bash
+
+# Title:       BlackBackup
+# Author:      JWHeuver & JBaselier
+# Version:     1.0
+# Description: Runs powershell script to get Wlan and logon credentials 
+#	       from computer and save them on USB drive (Storage attack)
+#
+# LEDS:
+# Purple: Loading
+# Green:  Execute Credential Ripper Powershell
+# Off:     Finished
+#
 
 # OPTIONS - More options available in the Powershell payload
 OBFUSCATECMD="N" # Y=yes or N=no

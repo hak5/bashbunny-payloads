@@ -4,9 +4,9 @@
 # Author:        k1ul3ss
 # Props:         audibleblink
 # Version:       1.0
-# Category:      Exfiltration
-# Target:        macOS
-# Attackmodes:   HID, Storage
+# Targets:       macOS
+# Attack Modes:  HID, Storage
+# Description:   Finds all PDFs in the users Home directory, and then copies them to the Bunnys storage.
 
 ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
 

@@ -1,12 +1,18 @@
 # Title:         TwoStageMac
 # Description:   A simple two stage payload for OSX. Sample second stage
 #                does some device profiling.
+#
 # Author:        Draxiom
 # Props:         jdetmold
 # Version:       1.0
 # Category:      Exfiltration
 # Target:        OSX
 # Attack Modes:  HID, STORAGE
+# LEDS:
+# Magenta - Setup
+# Yellow Blink - Attacking
+# White - Clean up
+# Green - Finished
 
 LED SETUP
 ATTACKMODE HID VID_0X05AC PID_0X021E STORAGE

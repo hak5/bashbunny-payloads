@@ -3,14 +3,16 @@
 # Title:         USB Exfiltrator
 # Author:        Hak5Darren
 # Version:       1.1
-# Target:        Windows XP SP3+
+# Target:        Windows XP
 # Props:         Diggster, IMcPwn
-# Category:      Exfiltration
+# Description:   Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
+#                which in turn executes e.cmd invisibly using i.vbs
+#                which in turn copies documents to the loot folder on the Bash Bunny.
 #
-# Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
-# which in turn executes e.cmd invisibly using i.vbs
-# which in turn copies documents to the loot folder on the Bash Bunny.
-#
+# LEDS:
+# Yellow Blink: Attacking
+# Green: Finished
+
 GET SWITCH_POSITION
 LED ATTACK
 ATTACKMODE HID STORAGE

@@ -4,47 +4,20 @@
 # Author:        Hak5Darren
 # Props:         ImNatho, mike111b, madbuda
 # Version:       1.1
-# Category:      Exfiltration
-# Target:        Windows XP SP3+ (Powershell)
-# Attackmodes:   HID, Ethernet
+# Target:        Windows XP
+# Attack Modes:  HID, RNDIS_ETHERNET
+# Requires:      Impacket Tool
+# Description:   Exfiltrates select files from users's documents folder via SMB.
+#                Liberated documents will reside in Bash Bunny loot directory under
+#                loot/smb_exfiltrator/HOSTNAME/DATE_TIME. Exfiltration options configured from included s.ps1 script.
 #
-# CHANGELOG
-# =========
-# Rewrite of the original SMB Exfiltrator payload with:
-# - Faster copying, using robocopy multithreaded mode
-# - Faster finish, using a EXFILTRATION_COMPLETE file
-# - Offload logic to target PC for accurate date/time
-# - Clears tracks by default without second run dialog
-# - Test-Connection handling by ICMP (no lame sleeps)
-# - Hidden powershell window by default
-#
-# REQUIREMENTS
-# ============
-# Needs impacket to be copied to /tools/impacket and installed
-# Option A:
-#   1. Download impacket from https://github.com/CoreSecurity/impacket
-#   2. Copy impacket folder to /tools on the Bash Bunny flash drive
-#   3. Boot Bash Bunny into arming mode and connect to console via serial
-#   4. Issue "python /tools/impacket/setup.py install"
-# Option B:
-#   1. Download impacket deb package 
-#   2. Copy impacket.deb to /tools on the Bash Bunny flash drive
-#   3. Boot Bash Bunny into arming mode. Impacket will install automatically.
-# 
-# LED STATUS
-# ==========
-# FAIL........Failed to find dependencies
-# STAGE1......HID Stage
-# STAGE2......Ethernet Stage
-# SPECIAL.....Receiving Files
-# CLEANUP.....Moving Liberated Files
-# FINISH......Finished
-#
-# OPTIONS
-# =======
-# Exfiltration options configured from included s.ps1 script
-
-
+# LEDS:
+# Red: Failed to find dependencies
+# Yellow Single Blink: HID Stage
+# Yellow Double Blink: Ethernet Stage
+# Cyan: Receiving Files
+# White: Moving Liberated Files
+# Green: Finished
 
 ######## INITIALIZATION ########
 REQUIRETOOL impacket

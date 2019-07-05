@@ -4,17 +4,15 @@
 # Author:        RalphyZ
 # Version:       1.1a
 # Target:        Windows 7+
-# Dependencies:  VBScript (a.vbs) in the switch folder with this file
+# Dependencies:  Included a.vbs script
 # 
 # Description:   Executes a VBScript, concealed in a hidden PowerShell window
 #
-# Colors:
-# | Status     | Color                         | Description                                      |
-# | ---------- | ------------------------------| ------------------------------------------------ |
-# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
-# | FAIL       | Red slow blink                | Could not find the a.vbs script                  | 
-# | ATTACK     | Yellow single blink           | Running the VBScript                             | 
-# | FINISH     | Green blink followed by SOLID | Script is finished                               | 
+# LEDS:
+# Magenta: Setting attack mode, getting the switch position
+# Red Blink: Could not find the a.vbs script
+# Yellow Single Blink: Running the VBScript
+# Green Blink to Solid: Script is finished
 
 # Magenta solid
 LED SETUP

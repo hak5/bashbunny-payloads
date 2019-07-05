@@ -4,18 +4,17 @@
 # Author:        LowValueTarget
 # Version:       1.2
 # Category:      Powershell
-# Target:        Windows XP SP3+ (Powershell)
+# Target:        Windows XP SP3+
 # Attackmodes:   HID, RNDIS_ETHERNET
 # Firmware:      >= 1.3
+# Description: Quick HID attack to retrieve and run powershell payload from BashBunny web server.
+#              Ensure p.txt (your powershell payload) exists in payload directory
 #
-# Quick HID attack to retrieve and run powershell payload from BashBunny web server
-# ensure p.txt (your powershell payload) exists in payload directory
-#
-# | Attack Stage        | Description                              |
-# | ------------------- | ---------------------------------------- |
-# | Stage 1             | Running Initial Powershell Commands      |
-# | Stage 2             | Delivering powershell payload            |
-#
+# LEDS:
+# Yellow Single Blink: Running Initial Powershell Commands
+# Yellow Double Blink: Delivering powershell payload
+# Green: Finished
+# Red Blink: Failure
 
 ATTACKMODE RNDIS_ETHERNET HID
 LED SETUP

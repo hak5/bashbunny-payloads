@@ -3,10 +3,15 @@
 # Title:         Powershell Extractor
 # Author:        $irLurk$alot
 # Version:       1.0
-# Target:        Windows
+# Targets:       Windows
+# Attack Modes:  HID, STORAGE
+# Description: Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
+#              which in turn runs powershell script to copy move and extract data.
 #
-# Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
-# which in turn runs powershell script to copy move and extract data.
+# LEDS:
+# Magenta: Setting Up
+# Yellow Blink: Executing Powershell
+# Green: Finished
 
 LED SETUP
 

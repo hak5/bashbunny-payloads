@@ -1,9 +1,14 @@
-# Dropbox Exfiltrator
+# Title: Dropbox Exfiltrator
 # Author: Hak5Darren
-# Props: jimcola99 Buchanan
-# Demo: Hak5 episode 2505
-# Target: Windows Vista+
-# Category: Exfiltration
+# Props: jimcola99, Buchanan
+# Demo: Hak5 Episode 2505
+# Targets: Windows
+# Description: Exfiltrate via DropBox
+#
+# LEDS:
+# Magenta: Setup
+# Yellow Blink: Getting Script
+# Green: Finish
 
 LED SETUP
 ATTACKMODE HID

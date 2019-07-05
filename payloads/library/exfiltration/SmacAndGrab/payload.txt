@@ -2,13 +2,14 @@
 #
 # Title:         sMacAndGrab
 # Author:        audibleblink
-# Target:      macOS
+# Targets:       macOS
 # Version:       1.2
+# Attack Modes:  STORAGE, HID
+# Description:   Backup a list of files from macOS
 #
-# Backup a list of files from macOS
-#
-# Yellow (blinking)...Attacking
-# Green...............Finished
+# LEDS:
+# Yellow Blink: Attacking
+# Green: Finished
 
 LED ATTACK
 ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E

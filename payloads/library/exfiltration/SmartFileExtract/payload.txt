@@ -1,16 +1,18 @@
 #!/bin/bash
 #
-# Title:         ExecutableInstaller
-# Author:        IMcPwn (original)
-# Additions:     SaintCrossbow (only for the parts to run SFE)
-# Version:       1.0
-# Target:        Windows 7+
+# Title:       SmartFileExtract
+# Author:      IMcPwn
+# Props:       SaintCrossbow
+# Version:     1.0
+# Targets:     Windows
+# Description: Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
+#              which in turn executes e.cmd invisibly using i.vbs
+#              which in turn copies payload.exe from the root of the Bash Bunny and then executes it
+#              using the --startup parameter. Change these settings inside of e.cmd.
 #
-# Executes d.cmd from the selected switch folder of the Bash Bunny USB Disk partition,
-# which in turn executes e.cmd invisibly using i.vbs
-# which in turn copies payload.exe from the root of the Bash Bunny and then executes it
-# using the --startup parameter. Change these settings inside of e.cmd.
-#
+# LEDS:
+# Red: Attacking
+# Green: Finished
 
 # Source bunny_helpers.sh to get environment variable SWITCH_POSITION
 source bunny_helpers.sh
