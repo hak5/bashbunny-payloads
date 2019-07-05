@@ -1,6 +1,6 @@
 # Title: Dropbox Exfiltrator
 # Author: Hak5Darren
-# Props: jimcola99 Buchanan
+# Props: jimcola99, Buchanan
 # Demo: Hak5 Episode 2505
 # Targets: Windows
 # Description: Exfiltrate via DropBox
