@@ -12,15 +12,6 @@
 Exfiltrates select files from users's documents folder via SMB.
 Liberated documents will reside in Bash Bunny loot directory under loot/smb_exfiltrator/HOSTNAME/DATE_TIME
 
-Rewrite of the original SMB Exfiltrator payload with:
-
-* Faster copying, using robocopy multithreaded mode
-* Faster finish, using a EXFILTRATION_COMPLETE file
-* Offload logic to target PC for accurate date/time
-* Clears tracks by default
-* Hidden powershell window by default
-
-
 ## Configuration
 
 Configured to copy docx, pdf, and xlsx files by default. Change $exfil_ext# in s.ps1 to desired. 
