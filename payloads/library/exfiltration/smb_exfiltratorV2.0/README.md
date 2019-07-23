@@ -54,6 +54,6 @@ Both the username and the password have been set as 'user' and 'Password01' resp
 
 # Changes to the payload.txt include:
 
-  Support for SMB version 2 enabled.
-  Username and password set to bypass Microsoft's disallowing of anonymous access.
-  Authentication to said SMB share with credentials specified in both the payload.txt and s.ps1 files.
+* Support for SMB version 2 enabled.
+* Username and password set to bypass Microsoft's disallowing of anonymous access.
+* Authentication to said SMB share with credentials specified in both the payload.txt and s.ps1 files.
