@@ -1,0 +1,32 @@
+# Cross-Platform Lock-Out
+# Author: Hak5Darren
+
+# Props: jake_eggmc
+
+# Demo: Hak5 episode 2503
+# Target: Windows, Mac, (most) Linux
+
+# Category: Prank
+
+
+LED SETUP
+ATTACKMODE HID
+LED ATTACK
+
+QUACK GUI l
+QUACK CTRL-ALT l
+QUACK COMMAND-CTRL q
+
+while true; do 
+	QUACK GUI l
+	QUACK KEYCODE 02,00,4a
+	QUACK BACKSPACE
+
+	QUACK CTRL-ALT l
+	QUACK KEYCODE 02,00,4a
+	QUACK BACKSPACE
+
+	QUACK COMMAND-CTRL q
+	QUACK KEYCODE 02,00,4a
+	QUACK BACKSPACE
+done

