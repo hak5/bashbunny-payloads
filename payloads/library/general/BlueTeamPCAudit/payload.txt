@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# Title:         Blue Team PC Audit
+# Author:        Sorsnce	
+# Version:       1.0
+# Target:        Windows
+# 
+#The PowerShell script changes the users background to "background.bmp", this allows Blue team to remind users to lock their PCs.
+#The PowerShell script also sends an email to the Security Team with information about the users PC.
+#This allows the Security Team to keep a record of repeatable offenders.
+
+#Executes 1.ps1
+
+# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
+source bunny_helpers.sh
+LED SETUP
+ATTACKMODE HID STORAGE
+LED ATTACK
+Q  GUI r
+Q  DELAY 1000
+Q  STRING powershell -windowstyle hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\1.ps1')"
+Q  ENTER
+LED FINISH

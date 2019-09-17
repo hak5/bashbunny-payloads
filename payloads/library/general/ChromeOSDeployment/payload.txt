@@ -1,0 +1,181 @@
+LED B SLOW
+ATTACKMODE HID
+LED R 0
+# set your keyboard !!
+DUCKY_LANG gb
+
+## wifi ssid
+WIFI_NAME="xxx"
+##wifi creds
+WIFI_USER="xxx" #only used on enterprise
+WIFI_PASS="xxx"
+## wifi annonymous ID
+WIFI_ANNON=''
+#creds to enrol device
+ENROL_USER="xxx"
+ENROL_PASS="xxx"
+
+# change
+EwWEP='n'
+EwWPA='n'
+EwPEAP='n'
+EwLEAP='n'
+EwEAP='n'
+
+##Authentication method
+# 0: auto  1: EAP_MDS 2: MSCHAP 3: MSCHAPv2
+# 4: PAP  5: CHAP  6: GTC
+AuthMethod=0
+##check wifi cert
+checkCERT='n'
+##save wifi creds
+SaveWIFI='y'
+# send data to google
+sendGoogleData='n'
+#wait on device updates
+WaitForUpdates='y'
+
+
+
+##defaults to WPA if more than one wifi type set as 'y'
+EwDEFAULT='n'
+options=($EwWPA $EwPEAP $EwLEAP $EwEAP $EwWEP);
+options=(${options[@]/n/})
+[[ ${#options[@]} -gt 1 ]] && $EwDEFAULT='y'
+
+
+keys () {
+    if [ -z $2 ]; then
+        QUACK $1
+        sleep 1
+    else
+        count=0
+        while [ $count -lt $2 ]; do
+            count=$((count+1))
+            QUACK $1
+            sleep 1
+        done
+    fi
+}
+
+
+## main screen needs to have the language bar hightlighted
+
+# just added this sleep to be sure the OS has had time to accept HID
+# as some devices can be slower
+sleep 5
+
+## open sys tray 
+QUACK ALT-SHIFT s
+sleep 2
+
+#select wifi
+keys "TAB" 4
+keys "ENTER"
+
+## add wifi
+keys "TAB" 3
+keys "ENTER"
+
+##ssid
+sleep 2
+QUACK STRING $WIFI_NAME
+sleep 1
+keys "TAB"
+
+
+#wifi security
+## wpa or wep
+if [ $EwDEFAULT == 'y' ] || [[ $EwWPA == 'y' || $EwWEP == 'y' ]]; then
+    if [ $EwDEFAULT == 'y' ]; then
+        keys "DOWNARROW" 2
+    else
+        [[ $EwWEP == 'y' ]] && keys "DOWNARROW"
+        [[ $EwWPA == 'y' ]] && keys "DOWNARROW" 2
+    fi
+    keys "TAB"
+    QUACK STRING $WIFI_PASS
+    sleep 1
+    keys "TAB" 3
+    keys "ENTER"
+fi
+
+## enterprise with PEAP
+if [ $EwDEFAULT == 'n' ] && [[ $EwPEAP == 'y' || $EwLEAP == 'y' || $EwEAP == 'y' ]]; then
+    [[ $EwPEAP == 'y' ]] && keys "DOWNARROW" 1
+    [[ $EwEAP == 'y' ]] && keys "DOWNARROW" 2
+    keys "TAB"
+    if [ $EwLEAP == 'y' ]; then
+        QUACK STRING $WIFI_USER
+        keys "TAB"
+        QUACK STRING $WIFI_PASS
+        keys "TAB" 2
+        ## check this line, positive keys correct, might not be for save.
+        [[ $SaveWIFI == 'y' ]] && keys "ENTER"
+        keys "TAB" 2
+        keys "ENTER"
+    else
+
+        if [ $AuthMethod != 0 ]; then
+            if [ $AuthMethod == 3 ] && [ $EwPEAP == 'y' ]; then
+                keys "DOWNARROW" 2
+            else
+                keys "DOWNARROW" $AuthMethod
+            fi
+        fi
+        keys "TAB"
+        [[ $checkCERT == 'n' ]] && keys "DOWNARROW"
+        keys "TAB"
+        # wifi creds
+        QUACK STRING $WIFI_USER
+        keys "TAB"
+        QUACK STRING $WIFI_PASS
+        keys "TAB" 2
+        [[ $WIFI_ANNON != '' ]] && QUACK STRING $WIFI_ANNON
+        keys "TAB"
+        [[ $SaveWIFI == 'y' ]] && keys "ENTER"
+        keys "TAB" 2
+        QUACK ENTER
+    fi
+fi
+
+## waiting for wifi connection
+sleep 25
+
+
+## main screen starting on Lang button
+keys "TAB" 2
+keys "ENTER"
+keys "TAB" 3
+keys "ENTER"
+#waitng on screen change
+sleep 2
+##enter TOS
+keys "TAB" 2
+[[ $sendGoogleData == 'n' ]] && keys "ENTER"
+keys "TAB" 3
+QUACK ENTER
+### waiting on device
+## could be performing updates so will wait for this to finish
+## and continue by moving the switch or by waiting 10 seconds while it does checks
+if [ $WaitForUpdates == 'y' ];then
+    LED G FAST
+    WAIT
+    LED R 0
+else
+    sleep 10
+fi
+##########################  enrollment
+QUACK ALT-CTRL e
+## if not previously enrolled, wont show this screen so force it
+sleep 2
+QUACK STRING $ENROL_USER
+keys "ENTER"
+## wait for screen swap
+sleep 2
+## enroll pass
+QUACK STRING $ENROL_PASS
+QUACK ENTER
+
+## green light, finished, waiting for user to input asset info
+LED G

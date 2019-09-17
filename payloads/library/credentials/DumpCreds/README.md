@@ -1,15 +1,15 @@
-# DumpCreds 2.3.2
+# DumpCreds 2.3.3
 * Author: QDBA
-* Version: Version 2.3.2 Build 1012
+* Version: Version 2.3.3 Build 1013
 * Target: Windows 7, 10
 
 
 ## Description
 
-** !!!!! works only at Bash Bunny with FW 1.1 !!!!! **
+** !!!!! works only at Bash Bunny with FW 1.1+ !!!!! **
 
 Dumps the usernames & plaintext passwords from 
- * Browsers (Crome, FireFox)
+ * Browsers (Chrome, FireFox)
  * Wifi 
  * SAM Hashes (only if AdminMode=True)
  * Mimimk@tz Dump (only if AdminMode=True) 
@@ -90,6 +90,13 @@ https://forums.hak5.org/index.php?/topic/40806-payload-new-dumpcreds-22
 - Valentin-Metz for inserting the Fodhelper UAC-Bypass  ( Resource: https://github.com/winscripting/UAC-bypass/blob/master/FodhelperBypass.ps1 )
 
 ## Changelog
+
+Version 2.3.3
+
+  [Build 1013]
+  - Minor changes
+  - Encode Invoke-PowerDump because of caught by AV
+  - Add dumpCredStore; Dumps credential from Vault
 
 Version 2.3.2
 

@@ -17,6 +17,7 @@
     "__comment":" ",
     "__comment":"A = LeftShift + a, { = LeftShift + [",
     "__comment":" ",
+    "__comment":"German umlauts added by Simon Dankelmann",
     "a":"00,00,04",
     "b":"00,00,05",
     "c":"00,00,06",
@@ -165,5 +166,14 @@
     "|":"40,00,64",
     "COMMAND-CTRL-SHIFT":"40,00,64",
     "COMMAND-CTRL":"40,00,64",
-    "COMMAND-OPTION-SHIFT'":"40,00,64"
+    "COMMAND-OPTION-SHIFT'":"40,00,64",
+    "ß":"00,00,2d",
+    "€":"40,00,08",
+    "§":"02,00,20",
+    "ä":"00,00,34",
+    "ö":"00,00,33",
+    "ü":"00,00,2f",
+    "Ä":"02,00,34",
+    "Ö":"02,00,33",
+    "Ü":"02,00,2f"
 }
