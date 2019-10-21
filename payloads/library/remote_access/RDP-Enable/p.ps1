@@ -1,6 +1,6 @@
 ﻿# Vars for log
 $destFile = ("$env:COMPUTERNAME-{0:yyyy-MM-dd-HH-mm-ss}.log" -f (Get-Date))
-$destPath = ((Get-WmiObject win32_volume -f 'label=''BashBunny''').Name+'loot\badmin')
+$destPath = ((Get-WmiObject win32_volume -f 'label=''BashBunny''').Name+'loot\Enable-RDP')
 $dest = "$destPath\$destFile"
 
 # Vars for user stuff

@@ -3,9 +3,10 @@
 * Author: Mike Galvin
 * Version: Version 1.0
 * Category: Enabling services and accounts
-* Target: Windows 10 / Powershell
+* Target: Windows 10 / PowerShell
 
-[Mike Galvin's site](https://gal.vin)
+Mike Galvin's site: [https://gal.vin](https://gal.vin)
+
 Twitter:[@mikegalvin_](https://twitter.com/mikegalvin_)
 
 ## Description
