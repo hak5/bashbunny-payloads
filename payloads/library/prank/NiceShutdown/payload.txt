@@ -7,5 +7,5 @@
 # Category: Prank
 # Supported: Windows
 # Development status: In development
-# Tested: No
+# Tested: No, you can't test nothing.
 ###########################################################
