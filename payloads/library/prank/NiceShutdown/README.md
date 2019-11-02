@@ -4,7 +4,7 @@
 * Version: 1.0
 * Category: Prank and Troll
 * Supported: Windows
-* Development status: Actually quite done
+* Development status: 1.0 Done
 
 ## What does it do?
 
