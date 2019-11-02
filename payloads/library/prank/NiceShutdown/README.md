@@ -22,3 +22,6 @@ You are required to change the DUCKY_LANG.
 | SETUP  | Getting stuff ready  |
 | ATTACK | Running the command  |
 | FINISH | Done, shutting down. |
+
+
+Emilius123 payloads. Quality made in Notepad since 2019.
