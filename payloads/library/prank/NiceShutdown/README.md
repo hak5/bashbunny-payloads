@@ -1,7 +1,7 @@
 # NiceShutdown
 
 * Author: Emilius123
-* Version: 0.0
+* Version: 1.0
 * Category: Prank and Troll
 * Supported: Windows
 * Development status: Actually quite done
