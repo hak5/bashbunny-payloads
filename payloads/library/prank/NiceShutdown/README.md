@@ -4,7 +4,7 @@
 * Version: 0.0
 * Category: Prank
 * Supported: Windows
-* Development status: In development
+* Development status: Actually quite done
 
 ## What does it do?
 
