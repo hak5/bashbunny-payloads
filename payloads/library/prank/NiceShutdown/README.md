@@ -2,7 +2,7 @@
 
 * Author: Emilius123
 * Version: 0.0
-* Category: Prank
+* Category: Prank and Troll
 * Supported: Windows
 * Development status: Actually quite done
 
