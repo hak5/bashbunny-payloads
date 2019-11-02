@@ -1,11 +1,13 @@
 #!/bin/bash
 
-###########################################################
-# Title: NiceShutdown
-# Author: Emilius123
-# Version: 0.0
-# Category: Prank
-# Supported: Windows
-# Development status: In development
-# Tested: No, you can't test nothing.
-###########################################################
+############################################################
+# Title: NiceShutdown					   #
+# Author: Emilius123					   #
+# Version: 0.0						   #
+# Category: Prank					   #
+# Supported: Windows					   #
+# Development status: In development			   #
+# Tested: No, you can't test nothing.                      #
+############################################################
+
+# Configuring - You can change stuff here
