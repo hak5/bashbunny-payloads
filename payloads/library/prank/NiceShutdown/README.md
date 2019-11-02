@@ -1,0 +1,2 @@
+# NiceShutdown
+## Ends it all.
