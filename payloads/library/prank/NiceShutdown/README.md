@@ -2,7 +2,7 @@
 
 * Author: Emilius123
 * Version: 0.0
-* Category: Prank
+* Category: Prank and Troll
 * Supported: Windows
 * Development status: Actually quite done
 
@@ -22,3 +22,6 @@ You are required to change the DUCKY_LANG.
 | SETUP  | Getting stuff ready  |
 | ATTACK | Running the command  |
 | FINISH | Done, shutting down. |
+
+
+Emilius123 payloads. Quality made in Notepad since 2019.
