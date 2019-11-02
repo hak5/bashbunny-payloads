@@ -12,7 +12,8 @@ This payload shuts down the target's computer with a nice message.
 
 ## Configuration
 
-The shutdown message and delay can be changed. Standard message is "this is truly amazing" and standard delay is 10 seconds
+The shutdown message and delay can be changed. Standard message is "this is truly amazing" and standard delay is 10 seconds. 
+You are required to change the DUCKY_LANG.
 
 ## Status
 
