@@ -4,6 +4,7 @@
 * Version: 0.0
 * Category: Prank
 * Supported: Windows
+* Development status: In development
 
 ## What does it do?
 
