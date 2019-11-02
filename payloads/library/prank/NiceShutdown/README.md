@@ -24,4 +24,4 @@ You are required to change the DUCKY_LANG.
 | FINISH | Done, shutting down. |
 
 
-Emilius123 payloads. Quality made in Notepad since 2019.
+*Emilius123 payloads. Quality made in Notepad since 2019.*
