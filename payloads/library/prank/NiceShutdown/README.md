@@ -23,9 +23,9 @@ You are required to change the DUCKY_LANG.
 | ATTACK | Running the command  |
 | FINISH | Shutting down, unplug|
 
-~~~~~~~~~~~~~~
+\~\~\~\~\~\~\~\~\~\~\~\~\~\~
 Please give feedback in the [Forum topic](https://forums.hak5.org/topic/50271-payload-tester-needed-niceshutdown-shutdown-payload/?tab=comments#comment-324760).
-~~~~~~~~~~~~~~
+\~\~\~\~\~\~\~\~\~\~\~\~\~\~
 
 
 *Emilius123 payloads. Quality made in Notepad since 2019.*
