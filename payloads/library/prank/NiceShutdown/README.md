@@ -5,6 +5,8 @@
 * Category: Prank and Troll
 * Supported: Windows
 * Development status: 1.0 Done
+* Attackmode: HID - Human Interface Device
+* Extensions used: Run
 
 ## What does it do?
 

@@ -1,12 +1,15 @@
 #!/bin/bash
 ############################################################
 # Title: NiceShutdown					   #
+# Description: Shuts down the target with the given message#
 # Author: Emilius123					   #
 # Version: 1.0						   #
 # Category: Prank					   #
 # Supported: Windows					   #
 # Development status: 1.0 Done		   		   #
-# Tested: No                      			   #
+# Tested: No						   #
+# Attackmode: HID - Human Interface Device		   #
+# Extensions used: Run		   			   #
 ############################################################
 
 LED SETUP
