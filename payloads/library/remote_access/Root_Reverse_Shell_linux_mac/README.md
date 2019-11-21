@@ -2,10 +2,8 @@
 
 ### Since i dont have a bash bunny this is tested in digispark
 ### I have converted this script to bash bunny
-### If any issues put in git i will fix it
-
+### If any issues put in discussion i will fix it
 POC DIGISPARK LINK : https://drive.google.com/open?id=1DvKX8QXHImVRZMaoTvmtreFkiL4rwYF-
-
 ### Special thanks to sudobackdoor for bash script sample
 Dont forgot to change IP in payload.sh
 Before using this payload don't forgot to start netcat listeners on port 4444 and 1337
