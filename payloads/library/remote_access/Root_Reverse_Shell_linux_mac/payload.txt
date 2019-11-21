@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# Since i dont have a bash bunny i only have digispark, i have converted this script to bash bunny
-# If any issues put in git i will fix it
-
-#POC DIGISPARK LINK : https://drive.google.com/open?id=1DvKX8QXHImVRZMaoTvmtreFkiL4rwYF-
-
-# Special thanks to sudobackdoor for bash script sample
-
-# Dont forgot to change IP in payload.sh
-
-
 # Title:         Linux/Mac Reverse Shell
 # Author:        Darkprince(Sridhar)
 # Version:       1.0
@@ -21,8 +11,6 @@
 # Red,Green,Blue......Executing
 # Green....................Finished
 
-#Before using this payload don't forgot to start netcat listeners on port 4444 and 1337
-#Because it gives both user shell and root shell
 
 # INITIALIZING
 LED M
