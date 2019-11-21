@@ -1,6 +1,6 @@
 # Root_Reverse_Shell_linux_mac
 
-## Since i dont have a bash bunny i only have digispark, i have converted this script to bash bunny
+### Since i dont have a bash bunny i only have digispark, i have converted this script to bash bunny
 ## If any issues put in git i will fix it
 
 ## POC DIGISPARK LINK : https://drive.google.com/open?id=1DvKX8QXHImVRZMaoTvmtreFkiL4rwYF-
