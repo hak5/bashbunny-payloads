@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Title:         Linux/Mac Reverse Shell
 # Author:        Darkprince(Sridhar)
 # Version:       1.0
