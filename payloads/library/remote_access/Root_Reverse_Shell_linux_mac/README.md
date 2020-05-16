@@ -5,10 +5,10 @@
 ### If any issues put in discussion i will fix it
 POC DIGISPARK LINK : https://drive.google.com/open?id=1DvKX8QXHImVRZMaoTvmtreFkiL4rwYF-
 ### Special thanks to sudobackdoor for bash script sample
-Dont forgot to change IP in payload.sh
-Before using this payload don't forgot to start netcat listeners on port 4444 and 1337
-Because it gives both user shell and root shell
-Make sure switch is in 1st position.
+Dont forgot to change IP in payload.sh.<br/>
+Before using this payload don't forgot to start netcat listeners on port 4444 and 1337.<br/>
+It reverse connects user shell in port 4444 and root shell in port 1337.<br/>
+Make sure switch is in position 1.<br/>
 
 When bash bunny executes payload in a machine wich is neither linux nor mac, it will executes payload.sh.
 
