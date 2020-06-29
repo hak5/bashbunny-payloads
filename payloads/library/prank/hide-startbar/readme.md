@@ -1,4 +1,4 @@
-# Hide/Unhide Startbar
+# Hide Startbar
 * Author: Cribbit 
 * Version: 1.0
 * Target: Windows 7+ (Powershell)
