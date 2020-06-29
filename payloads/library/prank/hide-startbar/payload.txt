@@ -5,6 +5,7 @@
 # Category:     pranks
 # Target:       Windows 7+ (Powershell)
 # Attackmodes:	HID
+# Extensions:   Run
 # Notes:	0x0080 = SWP_HIDEWINDOW, 0x0040 = SWP_SHOWWINDOW	
 
 LED SETUP
