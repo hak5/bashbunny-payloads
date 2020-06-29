@@ -1,29 +1,31 @@
-# Hide Startbar
-* Author: Cribbit 
-* Version: 1.0
-* Target: Windows 7+ (Powershell)
-* Category: pranks
-* Attackmode: HID
-* Extensions used: Run
+# Title:        Hide-StartBar
+# Description:  Hides the Windows startbar
+# Author:       Cribbit
+# Version:      1.0
+# Category:     pranks
+# Target:       Windows 7+ (Powershell)
+# Attackmodes:	HID
+# Extensions:   Run
+# Notes:	0x0080 = SWP_HIDEWINDOW, 0x0040 = SWP_SHOWWINDOW	
 
-## Change Log
-| Version | Changes                       |
-| ------- | ------------------------------|
-| 1.0     | Initial release               |
+LED SETUP
 
-## Description
-Hides the Window Start bar
+ATTACKMODE HID VID_0X05AC PID_0X021E
 
-## Configuration
-Change hex to hide or show the startbar
-```
-0x0080 = SWP_HIDEWINDOW, 0x0040 = SWP_SHOWWINDOW
-```
+LED ATTACK
 
-## Colors
-| Status    | Color                         | Description                                      |
-| --------- | ------------------------------| ------------------------------------------------ |
-| SETUP     | Magenta solid                 | Setting attack mode, getting the switch position | 
-| ATTACK    | Yellow single blink           | Injecting Powershell script                      | 
-| FINISH    | Green blink followed by SOLID | Script is finished                               |
+Q DELAY 200
+RUN WIN "cmd"
+Q DELAY 100
+Q STRING "mode con:cols=18 lines=1"
+Q ENTER
+Q STRING "color FE"
+Q ENTER
+Q STRING "powershell \"\$w=Add-Type -Namespace Win32 -Name Funcs -PassThru -MemberDefinition '[DllImport(\\\"user32.dll\\\")] public static extern IntPtr FindWindow(String C, String A); [DllImport(\\\"user32.dll\\\")] public static extern bool SetWindowPos(IntPtr H,IntPtr A,int X,int Y,int C,int D,uint F);';\$w::SetWindowPos(\$w::FindWindow('Shell_traywnd',''),0,0,0,0,0,0x0080);\""
+Q DELAY 100
+Q ENTER
+Q STRING exit
+Q ENTER
+
+LED FINISH
 
