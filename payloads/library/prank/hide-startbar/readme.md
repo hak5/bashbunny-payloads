@@ -15,8 +15,9 @@
 Hides the Window Start bar
 
 ## Configuration
-Change hex to hide or show
-```0x0080 = SWP_HIDEWINDOW, 0x0040 = SWP_SHOWWINDOW```
+Change hex to hide or show the startbar
+```
+0x0080 = SWP_HIDEWINDOW, 0x0040 = SWP_SHOWWINDOW```
 
 ## Colors
 | Status    | Color                         | Description                                      |
