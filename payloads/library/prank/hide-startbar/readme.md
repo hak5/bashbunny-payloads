@@ -26,3 +26,4 @@ Change hex to hide or show the startbar
 | SETUP     | Magenta solid                 | Setting attack mode, getting the switch position | 
 | ATTACK    | Yellow single blink           | Injecting Powershell script                      | 
 | FINISH    | Green blink followed by SOLID | Script is finished                               |
+
