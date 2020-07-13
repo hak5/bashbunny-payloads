@@ -11,7 +11,7 @@
 | 1.0     | Initial release               |
 
 ## Description
-Uses PowerShell show a progress bar telling the user it's installing a virus. After that uses text-to-speech, then shows a few silly error messages.
+Uses PowerShell to show a progress bar telling the user it's installing a virus. After that uses text-to-speech, then shows a few silly error messages.
 
 ## Configuration
 May need to change the text-to-speech to `Add-Type -AN System.speech;$s=New-Object System.Speech.Synthesis.SpeechSynthesizer;`
