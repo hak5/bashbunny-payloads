@@ -1,4 +1,4 @@
-# Progress bar 'n' Popup
+# Progress bar and Popup
 * Author: Cribbit 
 * Version: 1.0
 * Target: Windows 10 (Powershell)
@@ -11,7 +11,7 @@
 | 1.0     | Initial release               |
 
 ## Description
-Opens PowerShell show a progress bar telling the user it's installing a virus. After that uses text-to-speech, then shows a few error messages.
+Uses PowerShell show a progress bar telling the user it's installing a virus. After that uses text-to-speech, then shows a few silly error messages.
 
 ## Configuration
 May need to change the text-to-speech to `Add-Type -AN System.speech;$s=New-Object System.Speech.Synthesis.SpeechSynthesizer;`
