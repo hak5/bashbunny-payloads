@@ -1,7 +1,7 @@
 # Title:       	Backup User registry (HKU)
 # Description:  Uses PowerShell, to run Reg.exe to export the HKU entry to a file on the bunny  
 # Author:       Cribbit
-# Version:      1.0
+# Version:      1.1
 # Category:     Exfiltration
 # Target:       Windows 10 (Creators Update) (Powershell)
 # Attackmodes:	HID & STORAGE	
