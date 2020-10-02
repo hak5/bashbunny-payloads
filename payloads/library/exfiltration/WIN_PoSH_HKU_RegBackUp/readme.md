@@ -1,7 +1,7 @@
 # Backup User registry (HKU)
 * Author: Cribbit 
 * Version: 1.0
-* Target: Windows 7+ (Powershell)
+* Target: Windows 10 (Creators Update) (Powershell)
 * Category: Exfiltration
 * Attackmode: HID & STORAGE
 
