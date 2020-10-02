@@ -1,14 +1,15 @@
 # Backup User registry (HKU)
 * Author: Cribbit 
-* Version: 1.0
+* Version: 1.1
 * Target: Windows 10 (Creators Update) (Powershell)
 * Category: Exfiltration
 * Attackmode: HID & STORAGE
 
 ## Change Log
-| Version | Changes                       |
-| ------- | ------------------------------|
-| 1.0     | Initial release               |
+| Version | Changes                        |
+| ------- | -------------------------------|
+| 1.0     | Initial release                |
+| 1.1     | Use Admin Shell (for all keys) |
 
 ## Description
 Uses PowerShell, to run Reg.exe to export the HKU entry to a file on the bunny.
