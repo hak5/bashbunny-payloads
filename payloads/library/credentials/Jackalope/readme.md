@@ -26,7 +26,9 @@ Uses ethernet to attempt dictionary attacks against passwords. When the password
 To clear a stored password move the switch to switch3 (aka arming mode) after the payload runs and displays GREEN. The status light will change to SPECIAL (cyan) indicating the password has been removed. Positioning the switch to switch1 or switch2 will re-initiate the attack.
 
 ## Configuration
-No initial configuration is required for bunny firmware v1.6+.
+You must have a Metasploit installation up and running in path /tools/metasploit-framework/  
+Information and instructions for the installation of additional tools to the Bash Bunny can be found [here](https://docs.hak5.org/hc/en-us/articles/360010554133-Installing-and-using-additional-tools).  
+No further initial configuration is required for Firmware v1.6+.
 
 ### Per attack configuration
 1. userlist.txt contains usernames to use in attack.
