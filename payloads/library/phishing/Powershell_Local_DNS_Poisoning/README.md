@@ -2,6 +2,7 @@
 
 ## Description
 Redirects a given domain name to the target IP address. Uses the run prompt and Powershell to edit the hosts file, should work with any Windows version with those features but only tested on Windows 10.
+
 Change the variables under "options" in the setup stage before executing.
 
 ## Options
