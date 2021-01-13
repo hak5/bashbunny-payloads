@@ -6,7 +6,7 @@
 
 ## Description
 
-Steals Passwords Mac using laZagne.py then stashes them in /loot/MacPass 
+Steals Mac Passwords using laZagne.py then stashes them in /loot/MacPass 
 
 
 
