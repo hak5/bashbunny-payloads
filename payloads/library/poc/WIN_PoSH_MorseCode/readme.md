@@ -11,7 +11,7 @@
 | 1.0     | Initial release               |
 
 ## Description
-Reads all txt file and Flashes the Scrolllock on and off to represent morse code of the engish alphanumeric charaacters (0..9 A..Z)
+Reads all txt file in my documents and Flashes the Scrolllock on and off to represent morse code of the engish alphanumeric characters (0..9 A..Z)
 
 ## Note
 This is not a very useful payload with limitation of morse code but I thought it was fun to create.
