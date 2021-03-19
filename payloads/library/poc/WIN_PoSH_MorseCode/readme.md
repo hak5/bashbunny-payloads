@@ -9,9 +9,13 @@
 | Version | Changes                       |
 | ------- | ------------------------------|
 | 1.0     | Initial release               |
+| 1.1     | Update for non-alphanumeric   |
 
 ## Description
-Reads all txt file in my documents and Flashes the Scrolllock on and off to represent morse code of the engish alphanumeric characters (0..9 A..Z)
+Reads all txt file in my documents and Flashes the Scrolllock on and off to represent Morse code of the engish alphanumeric characters (0..9 A..Z)
+
+## Update
+For characters out side the Morse code 0..9 A..Z it now flash one long pulse then the chars ordinal value ie (@ = 64 = -.... ....-)  
 
 ## Note
 This is not a very useful payload with limitation of morse code but I thought it was fun to create.
