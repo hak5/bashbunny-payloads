@@ -10,6 +10,7 @@
 | ------- | ------------------------------|
 | 1.0     | Initial release               |
 | 1.1     | Update for non-alphanumeric   |
+| 1.2     | Update for space timing       |
 
 ## Description
 Reads all txt file in my documents and Flashes the Scrolllock on and off to represent Morse code of the engish alphanumeric characters (0..9 A..Z)

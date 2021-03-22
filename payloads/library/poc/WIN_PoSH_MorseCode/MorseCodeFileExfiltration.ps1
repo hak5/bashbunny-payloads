@@ -4,8 +4,9 @@ $l = '{SCROLLLOCK}';
 function flashy($t){    
     $o.SendKeys($l);
     sleep -m ([int]$t);
-    $o.SendKeys($l);
-    sleep -m 900;
+    $o.SendKeys($l);	
+	#[console]::beep(600,([int]$t));
+    sleep -m 300;
 }
 gci ([Environment]::GetFolderPath('MyDocuments')) -file -r *.txt | % { gc($_.FullName).ToUpper()} | % {$_[0..($_.length)]} | % {
     $v = $h[[string]$_];
@@ -27,4 +28,6 @@ gci ([Environment]::GetFolderPath('MyDocuments')) -file -r *.txt | % { gc($_.Ful
     }else{ 
         sleep -m 1200;
     }
+    sleep -m 600;
  }
+ 
