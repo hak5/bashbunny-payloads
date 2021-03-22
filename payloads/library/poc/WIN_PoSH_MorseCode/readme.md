@@ -21,7 +21,7 @@ For characters out side the Morse code 0..9 A..Z it now flash one long pulse the
 ## Note
 This is not a very useful payload with limitation of morse code but I thought it was fun to create.
 
-The payload uses a base64 encode version of the payload (b.txt) to get round the Script Execution Policy. There is a not base64 version in the file (MorseCodeFileExfiltration.ps1) so you can see what it is doing. 
+The payload uses a base64 encode version of the payload (b.txt) to get round the Script Execution Policy. There is a non-base64 version in the file (MorseCodeFileExfiltration.ps1) so you can see what it is doing. 
 
 Please check the encoded payload before execution, to make sure it has not been replaced with something more malicious. 
 
