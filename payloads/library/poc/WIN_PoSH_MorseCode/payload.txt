@@ -1,7 +1,7 @@
 # Title:        Morse Code File Exfiltration
-# Description:  Reads all txt file and Flashes the Scrolllock on and off to represent morse code  
+# Description:  Reads all txt files in myDocs and Flashes the Scrolllock on and off to represent morse code  
 # Author:       Cribbit
-# Version:      1.0
+# Version:      1.2
 # Category:     PoC
 # Target:       Windows (Powershell 5.1+)
 # Attackmodes:	HID & STORAGE
