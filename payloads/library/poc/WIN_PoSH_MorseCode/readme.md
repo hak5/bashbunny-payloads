@@ -1,6 +1,6 @@
 # Morse Code File Exfiltration
 * Author: Cribbit 
-* Version: 1.0
+* Version: 1.2
 * Target: Windows (Powershell 5.1+)
 * Category: PoC
 * Attackmode: HID & Storage
@@ -13,7 +13,7 @@
 | 1.2     | Update for space timing       |
 
 ## Description
-Reads all txt file in my documents and Flashes the Scrolllock on and off to represent Morse code of the engish alphanumeric characters (0..9 A..Z)
+Reads all txt files in "my documents" and Flashes the Scrolllock on and off to represent Morse code of the engish alphanumeric characters (0..9 A..Z)
 
 ## Update
 For characters out side the Morse code 0..9 A..Z it now flash one long pulse then the chars ordinal value ie (@ = 64 = -.... ....-)  
