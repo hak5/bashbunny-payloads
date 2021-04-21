@@ -18,7 +18,7 @@ Shows a fake login screen. Saves the entered value to the loots folder on the bu
 ## To Do
 Adding a To Do section just in case someone (or me if I can be bothered) want to fix some issues:
 
-- Fade between Time panel 1 and login panel 2
+- Fade between time panel 1 and login panel 2
     - The beginnings of the code are there but has too much noticeable flicker.
 - Disable notifications as they display over the form:
     - HKEY\_LOCAL\_MACHINE\\Software\\Policies\\Microsoft\\Windows\\Explorer, this Explorer needs to be created, Dword32 “DisableNotificationCenter”, value as 1.
