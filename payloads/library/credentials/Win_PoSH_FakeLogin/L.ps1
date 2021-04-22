@@ -16,7 +16,7 @@ $H = ($Height / 2);
  
 <#
 # Images
-# Below are 7 images that have been convert to base64.
+# Below are 9 images that have been convert to base64.
 # To get the originals:
 # $Img = [System.Drawing.Image]::FromStream([System.IO.MemoryStream][System.Convert]::FromBase64String('<Base64String>'));
 # $Img.Save('<FilePath>'); 

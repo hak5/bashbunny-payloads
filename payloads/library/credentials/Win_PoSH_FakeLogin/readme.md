@@ -15,10 +15,22 @@
 ## Description
 Shows a fake login screen. Saves the entered value to the loots folder on the bunny.
 
+## Config
+This payload contains 9 base64 encode images.
+If you do not wish to use them you could have the files on the bunny and do something like this:
+```powershell
+$BGImg = [System.Drawing.Image]::FromFile(<PathToBunny>"bg.jpg");
+```
+or if you have web hosting or a http server runing on the bunny then you can do something like:
+```powershell
+$R = Invoke-WebRequest 'https://<MyURL/IPAddress>/bg.jpg'; 
+$BGImg = [System.Drawing.Image]::FromStream($R.RawContentStream);
+```
+
 ## To Do
 Adding a To Do section just in case someone (or me if I can be bothered) want to fix some issues:
 
-- Fade between time panel 1 and login panel 2
+- Fade between Time panel 1 and login panel 2
     - The beginnings of the code are there but has too much noticeable flicker.
 - Disable notifications as they display over the form:
     - HKEY\_LOCAL\_MACHINE\\Software\\Policies\\Microsoft\\Windows\\Explorer, this Explorer needs to be created, Dword32 “DisableNotificationCenter”, value as 1.
