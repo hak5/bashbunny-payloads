@@ -21,7 +21,7 @@ If you do not wish to use them you could have the files on the bunny and do some
 ```powershell
 $BGImg = [System.Drawing.Image]::FromFile(<PathToBunny>"bg.jpg");
 ```
-or if you have web hosting or a http server runing on the bunny then you can do something like:
+or if you have web hosting or a http server running on the bunny then you can do something like:
 ```powershell
 $R = Invoke-WebRequest 'https://<MyURL/IPAddress>/bg.jpg'; 
 $BGImg = [System.Drawing.Image]::FromStream($R.RawContentStream);
