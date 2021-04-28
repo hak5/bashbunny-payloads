@@ -1,5 +1,5 @@
 # Title:       	Word Report
-# Description:  This payload in similar to the InfoGrabber payload. But save slighty different info to a MS Word document.
+# Description:  This payload in similar to the InfoGrabber payload. But save slightly different info to a MS Word document.
 # Author:       Cribbit
 # Version:      1.0
 # Category:     Recon
