@@ -1,6 +1,6 @@
 # Title:         Quick and Dirty PrintNightmare
 # Author:        PanicACid
-# Version:       1.0
+# Version:       1.1
 #
 # Leverages the following Powershell script https://github.com/calebstewart/CVE-2021-1675 to invoke the PrintNightmare Vuln and create a local administator
 # As Powershell ASAI or whatever it's called kept picking it up and blocking it. However if we run it via PowersShell ISE it works fine. So we're going to type out the whole
