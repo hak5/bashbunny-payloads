@@ -1,6 +1,9 @@
 Title:         PrintNightmare
+
 Author:        PanicAcid
+
 Version:       1.2
+
 
 Leverages the following Powershell script https://github.com/calebstewart/CVE-2021-1675 to invoke the PrintNightmare Vuln and create a local administator account, without bypassing defender or exectuon policy. It aint prudy but it works.
 
