@@ -523,3 +523,5 @@ function struct
 }
 
 Invoke-Nightmare -DriverName 'Hak5Rules' -NewUser 'Hak5Rules' -NewPassword 'Hak5Rules'
+
+exit
