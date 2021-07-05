@@ -13,7 +13,6 @@ Huge thanks to Cribbit for the clipboard string- without it I would have been ty
 # Green .............Execute
 # Off................Finished
 
-
 Note that it's set to GB for my language, set to yours so you get the correct \'s when copying the text file to clipboard.
 
 Other than that it creates the function for Invoke-Nightmare and then uses that to create our Hak5Rules user (which is an admin) and then launches CMD as said admin.
