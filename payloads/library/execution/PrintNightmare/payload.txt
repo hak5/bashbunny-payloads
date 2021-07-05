@@ -1,5 +1,5 @@
 # Title:         Quick and Dirty PrintNightmare
-# Author:        PanicACid
+# Author:        PanicAcid
 # Version:       1.0
 #
 # Leverages the following Powershell script https://github.com/calebstewart/CVE-2021-1675 to invoke the PrintNightmare Vuln and create a local administator
