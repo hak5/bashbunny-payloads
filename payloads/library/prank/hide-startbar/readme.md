@@ -4,7 +4,7 @@
 * Target: Windows 7+ (Powershell)
 * Category: pranks
 * Attackmode: HID
-* Extensions used: Run
+* Extensions: Run
 
 ## Change Log
 | Version | Changes                       |
