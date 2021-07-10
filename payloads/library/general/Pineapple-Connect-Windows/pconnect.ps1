@@ -49,3 +49,4 @@ netsh wlan connect name=$SSID
 
 rm $profilexml
 
+Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue
