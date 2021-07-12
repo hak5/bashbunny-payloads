@@ -6,4 +6,4 @@
 * [Documentation and Wiki](https://wiki.bashbunny.com/#!index.md "Documentation and Wiki")
 * [Bash Bunny Forums](https://forums.hak5.org/index.php?/forum/92-bash-bunny/ "Bash Bunny Forums")
 * IRC: irc.hak5.org #BashBunny
-* Discord:  https://discord.gg/WuteWPf
+* Discord:  https://hak5.org/discord
