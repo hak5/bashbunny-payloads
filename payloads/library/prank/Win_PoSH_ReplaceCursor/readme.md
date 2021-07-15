@@ -5,7 +5,7 @@
 - Category: Pranks
 - Attackmode: HID & Storage
 - Extensions: Run
-- Props: The Hak5 Team
+- Props: The Hak5 Team (Wallpaper changer & Eject USB sound)
 
 ## Change Log
 | Version | Changes         |
