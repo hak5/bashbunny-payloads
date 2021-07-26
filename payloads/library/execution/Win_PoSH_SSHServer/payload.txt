@@ -21,7 +21,7 @@ sleep 2
 # This works for all languages
 Q LEFT
 Q ENTER
-sleep 2
+sleep 5
 Q STRING "Get-WindowsCapability -Online | ? Name -like 'OpenSSH.Server*' | ? State -EQ 'NotPresent' | % {Add-WindowsCapability -Online -Name \$_.Name}; Start-Service sshd"
 # Q ENTER 
 LED FINISH
