@@ -12,7 +12,7 @@
 | 1.0     | Initial release |
 
 ## Description
-Spinning Ascii Hak5 Logo in a powershell window
+Spinning Ascii Hak5 Logo in a powershell window\
 ![Demo](demo.gif)
 
 ## Props
