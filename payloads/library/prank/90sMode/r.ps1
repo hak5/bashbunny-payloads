@@ -1,3 +1,8 @@
+ param (
+    [string]$Width
+    [string]$Height
+ )
+
 Function Set-ScreenResolution { 
  
 <# 
@@ -157,4 +162,5 @@ namespace Resolution
 Add-Type $pinvokeCode -ErrorAction SilentlyContinue 
 [Resolution.PrmaryScreenResolution]::ChangeResolution($width,$height) 
 } 
-Set-ScreenResolution -Width 640 -Height 480
+
+Set-ScreenResolution -Width $Width -Height $Height

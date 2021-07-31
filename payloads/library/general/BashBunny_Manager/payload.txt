@@ -1,0 +1,34 @@
+#!/bin/bash
+#
+# Title: Bash Bunny Manager
+# Author: David Haintz	
+# Version: 1.0
+# Target: Any
+# Attackmodes: HID, Ethernet
+# Description: A python-based web interface to quickly switch between payloads and languages, as well as deleting/adding them.
+
+
+
+LED SETUP
+
+#ATTACKMODE HID ECM_ETHERNET 0xF000/0xFF02  # use if doesn't work on Mac/Linux
+ATTACKMODE HID RNDIS_ETHERNET 0xF000/0xFF02 # Should work on all OSs, but may not work on older Mac/Linux hosts
+
+
+GET SWITCH_POSITION
+GET HOST_IP
+GET TARGET_IP
+SWITCHDIR=/root/udisk/payloads/$SWITCH_POSITION
+PORT=8337
+
+cd $SWITCHDIR/panel
+python main.py $PORT &
+
+sleep 12
+
+RUN OSX http://$HOST_IP:$PORT				# OSX
+#RUN UNITY http://$HOST_IP:$PORT			# LINUX
+#RUN WIN http://$HOST_IP:$PORT				# WIN
+
+
+LED FINISH

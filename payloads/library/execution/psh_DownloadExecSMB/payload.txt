@@ -9,6 +9,11 @@
 # Firmware:      >= 1.2
 #
 # Quick HID attack to retrieve and run powershell payload from BashBunny SMBServer. Possibilities are limitless!
+# Credentials captured by  are stored as loot.  
+# Ensure p.txt exists in payload directory  (using .txt instead of .ps1 in case of security countermeasures)
+#
+# Required tools: impacket 
+=======
 # Credentials captured by  are stored as loot.
 # Ensure p.txt exists in payload directory  (using .txt instead of .ps1 in case of security countermeasures)
 #
