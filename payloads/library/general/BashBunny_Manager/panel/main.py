@@ -1,4 +1,4 @@
-from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+from http.server import BaseHTTPRequestHandler,HTTPServer
 import sys, os.path, cgi, base64, hashlib
 
 
