@@ -1,0 +1,60 @@
+﻿# Ansi art base64 encoded gzip file
+$data = 'H4sIAAAAAAAEAOXaT0rDQBQG8L3gHdLiNYSCgkdw3UVBF1aoBa8wS5sYC4LgWTxKT6ItBtLJm3l/5ntBKZ2V6bz3/TJJJy1erKvLajY9P9u91Sc1kOLNYXjERFbGi7FufE0vMSQgvKCzuDAjttpYYnNMYCmZuPn67F4FCQ0h7XX6
+iRvFyjZH2v3soI+3iTMMzx8zlRrhuE5DwnK2ups0FIaBMwoVKAwNDFnRbzPKQnMYUd2bTbuSfxBz2Cr9DOq7i6ZEmn5zTX7J7KhtPqPoMzHB6F1qZkSqzgDBOKSUWNONgMLEoMMgW/JZdRsWwSmFJFA6hcWyH5kgytzpQ7pESgMk
+PjvNTQAMz0x3yE/2HrTn7xLNLH9DKkfaIXmPm0F0QcAJMgRKIMul+TgGpZc1w74wZ125Fye2V2JIVzLxDA3xcCq5RiIjm3vCcrdx9ICSJwWOl2nvrMupqUfKDPHoDazKU2sBH8y2RTVKeeyYXtUN+l+9erH5OoZqFWDbVodEaVy2
+rdn2QmePlqX0xGoXVbsmFl2du6ZQOMbniUtdgkBaUqcOivnVAUvDAVG/R/xJHwDnRBtbNy4NASzcy7rDHjK+K27l+CTKKfCCUDGgVbZOeQVpHcD3Q3lY1CjKw4uV5dvXXfsCHVssWieu+art5nq+Wi2W1e398qla3y2qq8fn6mb+
+sJhMfg4K+gx7ll2hmtG+o9frA5vwFP/vbDr7Boj0wJV1JwAA'
+
+## Decompress the ansi art
+$binaryData = [System.Convert]::FromBase64String($data)
+$ms = New-Object System.IO.MemoryStream
+$ms.Write($binaryData, 0, $binaryData.Length)
+$ms.Seek(0,0) | Out-Null
+$cs = New-Object System.IO.Compression.GZipStream($ms, [System.IO.Compression.CompressionMode]"Decompress")
+$sr = New-Object System.IO.StreamReader($cs)
+$structure = $sr.ReadToEnd()
+iex $structure
+
+Clear-Host
+# Resize window
+1..4 | % {
+try
+{
+    $host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size 80,47
+}
+catch {}
+}
+
+# Loop each char
+$t | % {$_[0..($_.length)]} | % {
+    # Set colour
+    switch ($_) {
+        "▒" {
+            $c = "Green"
+            $b = "Green"
+        }
+        "░" {
+            $c = "DarkYellow"
+            $b = "Yellow"
+        }
+        "▓" {
+            # to get pink
+            $c = "Red"
+            $b = "White"
+        }
+        "█" {
+            $c = "Black"
+            $b = "Black"
+        }
+        " " {
+            $c = "White"
+            $b = "White"
+        }
+        default {
+            $c = "White"
+            $b = "DarkBlue"
+        }
+    }
+    # Write char
+    Write-Host $_ -NoNewline -ForegroundColor $c -backgroundcolor $b
+}
