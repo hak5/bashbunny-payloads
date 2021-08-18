@@ -30,8 +30,8 @@ RUN_IMMEDIATELY=true
 # Alter second stage based on settings & merge final stage.ps1 into second stage
 LED SETUP
 GET SWITCH_POSITION
+rm /root/udisk/DONE
 cd /root/udisk/payloads/$SWITCH_POSITION
-
 if [ "$RUN_IMMEDIATELY" = true ] ; then
 	RUN_IMMEDIATELY_TEXT='iex `$p'
 fi
@@ -70,5 +70,6 @@ done
 # Removes the generated stage file and sync file system
 LED CLEANUP
 rm 2
+rm /root/udisk/DONE
 sync
 LED FINISH
