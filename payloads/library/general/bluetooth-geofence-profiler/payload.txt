@@ -1,0 +1,33 @@
+# Title:       Bluetooth Geofence Profiler
+# Description: Saves bluetooth scan in loot folder for geofenced payloads
+# Author:      Hak5Darren
+# Version:     1.0
+# Category:    General
+
+#
+# Enable serial BTLE module
+#
+LED SETUP
+stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost 
+stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost 
+sleep 1
+
+#
+# Set BTLE module to observation mode
+#
+echo -n -e "AT+ROLE=2" > /dev/ttyS1
+echo -n -e "AT+RESET" > /dev/ttyS1
+
+#
+# Copy strings from 10 second observation scan to file in loot folder
+#
+LED ATTACK
+timeout 10s cat /dev/ttyS1 > /tmp/bt_observation
+strings /tmp/bt_observation > /root/udisk/loot/btle-profile.txt
+
+#
+# Sync file system and finish
+#
+LED CLEANUP
+sync
+LED FINISH

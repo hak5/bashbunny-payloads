@@ -13,10 +13,10 @@
 | 1.2     | Update for space timing       |
 
 ## Description
-Reads all txt files in "my documents" and Flashes the Scrolllock on and off to represent Morse code of the engish alphanumeric characters (0..9 A..Z)
+Reads all txt files in "my documents" and flashes the scroll lock on and off to represent Morse code of the English alphanumeric characters (0..9 A..Z)
 
 ## Update
-For characters out side the Morse code 0..9 A..Z it now flash one long pulse then the chars ordinal value ie (@ = 64 = -.... ....-)  
+For characters outside the Morse code 0..9 A..Z it now flash one long pulse then the chars ordinal value i.e. (@ = 64 = -.... ....-)
 
 ## Note
 This is not a very useful payload with limitation of morse code but I thought it was fun to create.
