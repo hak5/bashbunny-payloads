@@ -1,0 +1,60 @@
+﻿# Ansi art base64 encoded gzip file
+$data = 'H4sIAAAAAAAEAO3aTUrDQBQH8L3gHdLiNYSCgkdw3UVBF1aoBa+QpU2MBUHwLB6lJ9EWC8nMm3kf838tUsmsTOe9/y+TrxYvltVlNRmfn23empMaSPFqNzxiIivjxVg3vqaXGBIQXtBZXJgRW+1QYnNMYCmZuP363G8FCQ0h7XX6
+iVvFyrYD7XZ2rY+3CjPEx4+ZSo16WKclYTlbs58UC+vIGYSqKQwNrLOi32aUheYwoqY3m3Yl/yDmsFX6GdRXF00JNP3mmvyS2UHbfEbRPbFNSHrnmlmRqhN3ZYNK7+9x4bafoBATgnaDbMln1T2xCEspJI1SKCyW7cgEUeZO79Il
+Uhog8dlpbgJgeGa6Q36yd9Sev0o0s/wNqRxph+QzbgbRCQEnyBAogSyX5nYMSi9rht0wR135LE48XokhXcnESzTEw6nkGomMbO4Jy13GwftWnlRzvEx7Z11OTb2GZYiDD7AqT60FvDPbFtUo5bGH9Kou0L/q1YvN5zFUqwDbHnVI
+lMZlezTbNnT2YFlKD6x2UQ3LotY1/jS+gyKu5WfxY+p0WTE/O2BpOaCr7lA0EPBfdxwaAlj4NNvv9pDxXXErxydRToEXhIoBrbJ1yitI6wC+IcrDokZRHl6sLN+9broX6Fhj0Tpxw1ftVtfTxWI2r27v50/V8m5WXT0+VzfTh9lo
+9LNT0CfuWXaGakb3jl6vD2zCU/zXs/HkGzPXN594JwAA'
+
+## Decompress the ansi art
+$binaryData = [System.Convert]::FromBase64String($data)
+$ms = New-Object System.IO.MemoryStream
+$ms.Write($binaryData, 0, $binaryData.Length)
+$ms.Seek(0,0) | Out-Null
+$cs = New-Object System.IO.Compression.GZipStream($ms, [System.IO.Compression.CompressionMode]"Decompress")
+$sr = New-Object System.IO.StreamReader($cs)
+$structure = $sr.ReadToEnd()
+iex $structure
+
+Clear-Host
+# Resize window
+1..4 | % {
+try
+{
+    $host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size 80,47
+}
+catch {}
+}
+
+# Loop each char
+$t | % {$_[0..($_.length)]} | % {
+    # Set colour
+    switch ($_) {
+        "▒" {
+            $c = "Green"
+            $b = "Green"
+        }
+        "░" {
+            $c = "DarkYellow"
+            $b = "Yellow"
+        }
+        "▓" {
+            # to get pink
+            $c = "Red"
+            $b = "White"
+        }
+        "█" {
+            $c = "Black"
+            $b = "Black"
+        }
+        " " {
+            $c = "White"
+            $b = "White"
+        }
+        default {
+            $c = "White"
+            $b = "DarkBlue"
+        }
+    }
+    # Write char
+    Write-Host $_ -NoNewline -ForegroundColor $c -backgroundcolor $b
+}
