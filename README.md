@@ -1,9 +1,10 @@
 # Payload Library for the Bash Bunny by Hak5
 
-![Bash Bunny](https://www.hak5.org/wp-content/uploads/2017/10/icon3-169x169.png)
+By emulating combinations of trusted USB devices — like gigabit Ethernet, serial, flash storage and keyboards — the Bash Bunny tricks computers into divulging data, exfiltrating documents, installing backdoors and many more exploits.
 
-* [Purchase at HakShop.com](https://hakshop.com/products/bash-bunny "Purchase at HakShop.com")
-* [Documentation and Wiki](https://wiki.bashbunny.com/#!index.md "Documentation and Wiki")
-* [Bash Bunny Forums](https://forums.hak5.org/index.php?/forum/92-bash-bunny/ "Bash Bunny Forums")
-* IRC: irc.hak5.org #BashBunny
+![Bash Bunny](https://cdn.shopify.com/s/files/1/0068/2142/products/bash-bunny-mk2_001_c58d9658-b151-4328-af26-11eef3c47355_2000x.jpg)
+
+* [Purchase at Hak5](https://hak5.org/products/bash-bunny "Purchase at Hak5")
+* [Documentation](https://docs.hak5.org/hc/en-us/categories/360000982534-Bash-Bunny "Documentation")
+* [Bash Bunny Forums](https://forums.hak5.org/index.php?/forum/92-bash-bunny/ "Forums")
 * Discord:  https://hak5.org/discord
