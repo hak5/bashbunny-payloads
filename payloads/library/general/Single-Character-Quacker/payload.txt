@@ -1,0 +1,17 @@
+# Title: Single Character Quacker
+# Description: Injects keystrokes from $string one character at a time
+# Author: Hak5Darren
+# Version: 1.0
+
+
+LED SETUP
+ATTACKMODE HID VID_0X062A PID_0X4101
+sleep 15
+LED ATTACK
+string="the quick brown fox jumped over the lazy dog 1234567890"
+i=1
+while true; do
+Q DELAY 20000
+while read -n1 chr; do [[ "$chr" == "" ]] && QUACK "SPACE" || QUACK "$chr"; done < <(echo -n "$string")
+((i=i+1))
+done

@@ -23,7 +23,7 @@ So, one could say this payload *decreases* the disk space of the victim computer
 
 ## Configuration
 
-By default the payload switches to the very cool 640x480 resoluiton, however this can be configured to other standards such as 800x600 or 1024x768 in the last line of r.ps1 (this should eventually become a config line in payload.txt)
+By default the payload switches to the very cool 640x480 resoluiton, however this can be configured to other standards such as 800x600 or 1024x768 in the options within payload.txt)
 
 ## STATUS
 

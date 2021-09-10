@@ -17,12 +17,13 @@
 #Green - Attack Completion
 
 #Initialization - Setting AttackModes
-LED W
+LED SETUP
 ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
 #Initialization Completed
 
 #Beginning of HID/STORAGE Phase
-LED B 10
+LED ATTACK
 #Description::
 Q DELAY 2000
 Q GUI d
@@ -61,7 +62,7 @@ Q DELAY 500
 #End of HID/STORAGE Phase
 
 #Cleanup
-LED Y 100
+LED CLEANUP
 #Clears complete run history
 Q GUI r
 Q DELAY 500
@@ -70,7 +71,6 @@ Q ENTER
 #End of Cleanup
 
 #Completion of script
-LED G 100
 sync
-LED G
+LED FINISH
 #Completed
