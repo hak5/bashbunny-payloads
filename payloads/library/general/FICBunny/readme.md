@@ -12,6 +12,8 @@ The main purpose of this script is to create a backup image (in case you wanted 
 
 Note: It may be a good idea to disable all any non-critical services - if any - on the bunny before starting this payload. 
 
+**WARNING: /dev/nandg CONTAINS RECOVERY RELATED FILES! WHILE I HAVE TESTED THIS SCRIPT MANY TIMES TO ENSURE IT DOESN'T DO ANYTHING SCREWEY, YOU NORMALLY SHOULD NOT TOUCH /dev/nandg! IF YOU DON'T WANT TO MESS WITH THE RECOVERY PARTITION, TURN OFF "WriteToRecovery"!!**
+
 ## Variables
 | Name            | Description                                                                       | Default |
 | --------------- | --------------------------------------------------------------------------------- | ------- |
