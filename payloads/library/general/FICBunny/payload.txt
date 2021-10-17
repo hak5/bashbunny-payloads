@@ -7,15 +7,15 @@
 # Last tested Bunny Firmware version: 1.7
 #
 # LED STATUS
-# Slow blinking Red - Failed to get script, please check that "UIBEX.py" exists within the payload directory.
-# Solid Magenta - Setup in progress....
+# Slow blinking Red - Failed to get the script. Please check that "UIBEX.py" exists within the payload directory.
+# Solid Magenta - Setup in progress...
 # Single blinking Yellow - STAGE 1
 # Double blinking Yellow - STAGE 2
 # Triple blinking Yellow - STAGE 3
 # Quadruple blinking Yellow - STAGE 4 
-# Solid Red (After STAGE 4) - Firmware image is missing. If WriteToRecovery is on, will copy missing firmware image to recovery.
-# Quadruple blinking Cyan (After STAGE 4) - Firmware image exists. If Overwrite and WriteToRecovery is on, will replace. 
-# Very fast Blinking Mageneta - I am writing to the recovery partition, DO NOT UNPLUG!
+# Solid Red (After STAGE 4) - Firmware image is missing. If WriteToRecovery is on, will copy the missing firmware image to recovery.
+# Quadruple blinking Cyan (After STAGE 4) - Firmware image exists. If Overwrite and WriteToRecovery are on, will replace the firmware image. 
+# Very fast Blinking Magenta - I am writing to the recovery partition, DO NOT UNPLUG!
 
 
 ########
@@ -24,7 +24,7 @@
 # WriteToRecovery - When firmware image extraction is complete, write the firmware image to recovery?
 WriteToRecovery=1
 
-# Overwrite - If a existing firmware file is detected within recovery, overwrite it?
+# Overwrite - If an existing firmware file is detected within recovery, overwrite it?
 Overwrite=0
 
 #################################
@@ -35,7 +35,7 @@ GET SWITCH_POSITION
 ###############
 # SETUP Stage.#
 ###############
-# Setup stage will force turn off ATTACKMODE to allow access to storage, then we will copy the required script and make the required directories.
+# Setup stage will force turn off ATTACKMODE to allow access to storage, then we will copy the required script and make the necessary directories.
 ATTACKMODE OFF # Enforce no access to storage. Once execution is complete, we will turn ATTACKMODE to SERIAL STORAGE.
 LED SETUP
 mount /dev/nandf /root/udisk # Ensure udisk is avalible to copy our UIBEX script.
@@ -44,11 +44,11 @@ if [ ! -e /root/udisk/payloads/$switchPOS/UIBEX.py ]; then # Needed uImage extra
     LED FAIL
     exit 1
 fi
-mkdir /tmp/rootexfs # Temporary directory for holding blank system folders, and the UIBEX.py script.
+mkdir /tmp/rootexfs # Temporary directory for holding blank system folders and the UIBEX.py script.
 mkdir /tmp/massdisk # /dev/nandf OR /dev/mmcblk0p1. We will copy our completed firmware image here for later keeping.
 # Since we're executing this script from /tmp, we can unmount udisk once we're ready.
 mkdir /tmp/recdisk # /dev/nandg. We will be copying our completed firmware image here once done to re-enable recovery.
-mkdir /tmp/cachedisk # /dev/nandh. We will need this to store our temporary large files.
+mkdir /tmp/cachedisk # /dev/nandh. We will need this to store our large temporary files.
 cp /root/udisk/payloads/$switchPOS/UIBEX.py /tmp/rootexfs # Copy the required script.
 sleep 1 # Safety net, copying the file over.
 umount /root/udisk # We're finished here. 
@@ -57,7 +57,7 @@ mkdir media mnt proc sys tmp # Make blank directories - We will use this later f
 chmod 555 proc sys # dr-xr-xr-x
 chmod 777 tmp # drwxrwxrwx
 # Mounting required partitions.
-if [ -b /dev/mmcblk0p1 ]; then # If we have the SD card avalible to us, mount it. 
+if [ -b /dev/mmcblk0p1 ]; then # If we have the SD card available to us, mount it. 
     mount /dev/mmcblk0p1 /tmp/massdisk
 else
     mount /dev/nandf /tmp/massdisk
@@ -84,7 +84,7 @@ mv UIBEX_ExtractionLog.txt /tmp/massdisk/loot/recscript/ # Move the extraction l
 ###########
 # Copy all system directories into rootfs.tar
 LED STAGE2
-sleep 1 # Script may be quicker than LED blinking, so let's delay by one second for user interface.
+sleep 1 # Script may be quicker than LED blinking, so let's delay by one second for the user interface.
 tar --transform 's,^,/rootfs/,S' -cvf /tmp/cachedisk/upgrade/cherry.rootfs.tar media/ mnt/ proc/ sys/ tmp/ /boot/ /home/ /opt/ /srv/ /dev/pts /dev/shm/ /dev/fd/ /dev/ptmx /dev/stderr /dev/stdin /dev/stdout /dev/full /dev/null /dev/random /dev/urandom /dev/zero /dev/tty /root/ /run/ /etc/ /sbin/ /bin/ /lib/ /var/ /usr/ &> /tmp/massdisk/loot/recscript/RootFS_EX_errors.txt > /tmp/massdisk/loot/recscript/RootFS_EX_output.txt
 # Tar all filesystem resources to rootfs.tar in upgrade folder
 md5sum /tmp/cachedisk/upgrade/cherry.rootfs.tar > /tmp/cachedisk/upgrade/cherry.rootfs.tar.md5 # Calculate MD5, save to upgrade folder.
