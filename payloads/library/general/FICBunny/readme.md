@@ -11,7 +11,7 @@
 
 The primary purpose of this script is to create a backup image (in case you want to revert to a known good point). Then replace the missing firmware image within /dev/nandg, should it be missing.
 
-Note: It may be a good idea to disable all any non-critical services - if any - on the bunny before starting this payload. 
+Note: It may be a good idea to disable non-critical services - if any - on the bunny before starting this payload.
 
 **WARNING: /dev/nandg CONTAINS RECOVERY RELATED FILES! WHILE I HAVE TESTED THIS SCRIPT MANY TIMES TO ENSURE IT DOESN'T DO ANYTHING SCREWEY, YOU NORMALLY SHOULD NOT TOUCH /dev/nandg! IF YOU DON'T WANT TO MESS WITH THE RECOVERY PARTITION, TURN OFF "WriteToRecovery"!!**
 
