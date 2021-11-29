@@ -9,10 +9,11 @@
 
 LED SETUP
 
-#GET SWITCH_POSITION
 DUCKY_LANG de
 
 ATTACKMODE HID
+
+#If needed, use this option
 #WAIT_FOR_PRESENT Your_Device
 
 DELAY 5000
