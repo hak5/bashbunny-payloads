@@ -34,6 +34,6 @@ run away <3
 
 
 Credit for code and ideas:
-bdamele
-nishang
+bdamele,
+nishang,
 krabelize
