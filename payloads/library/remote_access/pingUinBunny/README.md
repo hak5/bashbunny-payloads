@@ -15,13 +15,13 @@ What is pingUinBunny?
 #
 There you go, a reverse shell.
 
-Instruction:
+**Instruction:**
 
 Upload Bunny.pl onto your attacking machine.
 Install dependencies, if needed:
-    IO::Socket,
-    NetPacket::IP,
-    NetPacket::ICMP
+- IO::Socket
+- NetPacket::IP
+- NetPacket::ICMP
 
 Disable ICMP replies by the OS:
     *sysctl -w net.ipv4.icmp_echo_ignore_all=1*
@@ -34,6 +34,6 @@ run away <3
 
 
 Credit for code and ideas:
-bdamele,
-nishang,
-krabelize
+- bdamele
+- nishang
+- krabelize
