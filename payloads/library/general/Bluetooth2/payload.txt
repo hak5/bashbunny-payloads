@@ -9,9 +9,7 @@
 # Suggestion: Use BLE Tool if triggers take to long
 #
 
-
-# Function #
-
+#--// Function \\--#
 WAIT_FOR_BLUETOOTH() {
     stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost 
     stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost 
@@ -20,81 +18,59 @@ WAIT_FOR_BLUETOOTH() {
     echo -n -e "AT+RESET" > /dev/ttyS1
     timeout 5s cat /dev/ttyS1 > /tmp/bt_observation
 }
-#----------#
+#------------------#
 
 
-# Setup/Config #
-
+#--// Setup/Config \\--#
 ATTACKMODE HID
 
-attack1="your device"
+device="notepad"
 
-attack2="your device"
-#--------------#
+otherdevice="attack"
+#----------------------#
 
 
-# Code/Attack #
-
+#--// Check for devices \\--#
 while true; do
+LED W
+WAIT_FOR_BLUETOOTH
+LED Y
 
-	LED W
+if grep -qao $device /tmp/bt_observation; then
+if1="true"
+break
 
-	WAIT_FOR_BLUETOOTH
+sleep 1
 
-	LED Y
+elif grep -qao $otherdevice /tmp/bt_observation; then
+if2="true"
+break
 
-	if grep -qao $attack1 /tmp/bt_observation; then
+sleep 1
 
-		LED G
+#add more if's for more bluetooth devices to look for
 
-		Q GUI r
-
-		Q DELAY 100
-
-		Q STRING "notepad"
-
-		Q ENTER
-
-		Q DELAY 200
-
-		Q STRING "attack1"
-
-		Q ENTER
-
-		break
-    	fi
-
-	sleep 1
-
-	if grep -qao $attack2 /tmp/bt_observation; then
-
-		LED B
-
-		Q GUI r
-
-		Q DELAY 100
-
-		Q STRING "notepad"
-
-		Q ENTER
-
-		Q DELAY 200
-
-		Q STRING "attack2"
-
-		Q ENTER
-
-		break
-    	fi
-
-	sleep 1
+fi
 done
-#-------------#
+#---------------------------#
 
 
-# Program is Done #
+#--// Your attacks \\--#
+if [ $if1 = "true" ]; then
+LED G
+Q GUI r
+Q DELAY 100
+Q STRING "notepad"
+Q ENTER
+Q DELAY 200
+Q STRING "Hak5 rules"
+Q ENTER
 
-Q DELAY 2000
+elif [ $if2 = "true" ]; then
+LED B
+# do something cool here
 
-LED M
-#-----------------#
+else
+LED R
+
+fi
