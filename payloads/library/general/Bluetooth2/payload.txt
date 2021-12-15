@@ -1,0 +1,100 @@
+#!/bin/bash
+#
+# Title: 	BlueTooth2
+# Description:	multiple remote triggers
+# Author:	JustaProgrammer9
+# Category:	General
+# Target:	Windows
+# Attackmodes:	HID
+# Suggestion: Use BLE Tool
+#
+
+
+# Function #
+
+WAIT_FOR_BLUETOOTH() {
+    stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost 
+    stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost 
+    sleep 1
+    echo -n -e "AT+ROLE=2" > /dev/ttyS1
+    echo -n -e "AT+RESET" > /dev/ttyS1
+    timeout 5s cat /dev/ttyS1 > /tmp/bt_observation
+}
+#----------#
+
+
+# Setup/Config #
+
+ATTACKMODE HID
+
+attack1="your device"
+
+attack2="your device"
+#--------------#
+
+
+# Code/Attack #
+
+while true; do
+
+	LED W
+
+	WAIT_FOR_BLUETOOTH
+
+	LED Y
+
+	if grep -qao $attack1 /tmp/bt_observation; then
+
+		LED G
+
+		Q GUI r
+
+		Q DELAY 100
+
+		Q STRING "notepad"
+
+		Q ENTER
+
+		Q DELAY 200
+
+		Q STRING "attack1"
+
+		Q ENTER
+
+		break
+    	fi
+
+	sleep 1
+
+	if grep -qao $attack2 /tmp/bt_observation; then
+
+		LED B
+
+		Q GUI r
+
+		Q DELAY 100
+
+		Q STRING "notepad"
+
+		Q ENTER
+
+		Q DELAY 200
+
+		Q STRING "attack2"
+
+		Q ENTER
+
+		break
+    	fi
+
+	sleep 1
+done
+#-------------#
+
+
+# Program is Done #
+
+Q DELAY 2000
+
+LED M
+#-----------------#
