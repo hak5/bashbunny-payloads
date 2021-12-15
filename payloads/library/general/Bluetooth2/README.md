@@ -21,4 +21,3 @@ make it more efficient or even pretty. It worked when I tested it (I use BLE Too
 | Yellow  | Checking    |
 | Green   | Attack1     |
 | Blue    | Attack2     |
-| Magenta | Finished    |
