@@ -6,7 +6,7 @@
 # Category:	General
 # Target:	Windows
 # Attackmodes:	HID
-# Suggestion: Use BLE Tool
+# Suggestion: Use BLE Tool if triggers take to long
 #
 
 
