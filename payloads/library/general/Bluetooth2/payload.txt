@@ -1,0 +1,76 @@
+#!/bin/bash
+#
+# Title: 	BlueTooth2
+# Description:	multiple remote triggers
+# Author:	JustaProgrammer9
+# Category:	General
+# Target:	Windows
+# Attackmodes:	HID
+# Suggestion: Use BLE Tool if triggers take to long
+#
+
+#--// Function \\--#
+WAIT_FOR_BLUETOOTH() {
+    stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost 
+    stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost 
+    sleep 1
+    echo -n -e "AT+ROLE=2" > /dev/ttyS1
+    echo -n -e "AT+RESET" > /dev/ttyS1
+    timeout 5s cat /dev/ttyS1 > /tmp/bt_observation
+}
+#------------------#
+
+
+#--// Setup/Config \\--#
+ATTACKMODE HID
+
+device="notepad"
+
+otherdevice="attack"
+#----------------------#
+
+
+#--// Check for devices \\--#
+while true; do
+LED W
+WAIT_FOR_BLUETOOTH
+LED Y
+
+if grep -qao $device /tmp/bt_observation; then
+if1="true"
+break
+
+sleep 1
+
+elif grep -qao $otherdevice /tmp/bt_observation; then
+if2="true"
+break
+
+sleep 1
+
+#add more if's for more bluetooth devices to look for
+
+fi
+done
+#---------------------------#
+
+
+#--// Your attacks \\--#
+if [ $if1 = "true" ]; then
+LED G
+Q GUI r
+Q DELAY 100
+Q STRING "notepad"
+Q ENTER
+Q DELAY 200
+Q STRING "Hak5 rules"
+Q ENTER
+
+elif [ $if2 = "true" ]; then
+LED B
+# do something cool here
+
+else
+LED R
+
+fi
