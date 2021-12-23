@@ -2,7 +2,7 @@
 
 Author: 0iphor13
 
-Version: 1.0
+Version: 1.3
 
 What is PingZhellBunny?
 #
