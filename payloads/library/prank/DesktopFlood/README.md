@@ -1,7 +1,7 @@
 # DesktopFlood
 Floods the desktop with a image of your choice
 
-## Config
+## Configuration
 Image Link, Image Name, Amount of Images. Bluetooth if you want, in Setup
 
 ## LED
