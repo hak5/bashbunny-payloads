@@ -3,6 +3,7 @@ Floods the desktop with a image of your choice
 
 ## Config
 Image Link, Image Name, Amount of Images
+Bluetooth if you want, in Setup
 
 ## LED
 
