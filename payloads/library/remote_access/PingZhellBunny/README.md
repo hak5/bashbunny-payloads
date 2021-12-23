@@ -29,6 +29,7 @@ Disable ICMP replies by the OS:
 Start Bunny.pl -> perl Bunny.pl
 #
 !!!Insert the IP of your attacking machine into PingZhell.ps1!!!
+#
 Plug in Bashbunny with PingZhellBunny equipped.
 Achieve reverse shell.
 run away <3
