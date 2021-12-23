@@ -16,7 +16,7 @@ ImageLink='i.ytimg.com/vi/7yN0g2QIJSU/maxresdefault.jpg'
 
 ImageName="Gift"
 
-Amount=10
+Amount=50
 
 
 ####--// SETUP \\--####
