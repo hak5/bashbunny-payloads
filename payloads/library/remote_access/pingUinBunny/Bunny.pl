@@ -29,7 +29,7 @@ use NetPacket::ICMP qw(ICMP_ECHOREPLY ICMP_ECHO);
 use Net::RawIP;
 use Fcntl;
 
-print "Bunny waitin' for his friend...\n";
+print "Bunny waitin' for connection...\n";
 
 # create raw socket
 my $sock = IO::Socket::INET->new(
@@ -40,7 +40,7 @@ my $sock = IO::Socket::INET->new(
 # set stdin to non-blocking
 fcntl(STDIN, F_SETFL, O_NONBLOCK) or die "$!";
 
-print "Let's wait for PingUin!\n";
+print "Let's wait for PingZhell!\n";
 
 my $input = '';
 while(1) {
