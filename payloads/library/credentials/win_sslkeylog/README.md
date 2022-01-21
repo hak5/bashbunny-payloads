@@ -10,6 +10,7 @@
 
 >
 > Captures the client network session.
+> 
 > Captures the client side session keys.
 >
 
@@ -38,10 +39,10 @@ readonly SNIFFING_TIME=300
 ## Required
 
 Utility that converts an .etl file containing a Windows network packet capture into .pcapng format.
-[etl2pcapng](https://github.com/microsoft/etl2pcapng)
+[ETL2PCAPNG](https://github.com/microsoft/etl2pcapng)
 
 Wireshark network protocol analyzer.
-[wireshark](https://www.wireshark.org/)
+[WIRESHARK](https://www.wireshark.org/)
 
 ## Steps
 
