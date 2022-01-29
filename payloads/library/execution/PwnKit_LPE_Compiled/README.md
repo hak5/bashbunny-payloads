@@ -26,3 +26,11 @@ readonly BB_LABEL="BashBunny"
 
 
 ```
+
+## Checksums
+
+>
+> 9e2c0af3d55192449760f1364a67f290554b98cdbe9ace9f84e6c33ea3e957eb ./CVE-2021-4034_files/pwnkit
+>
+> acd21bf70492d22317a4592551dcd4666a693b9622ddf952e63cf3ce288f3745 ./CVE-2021-4034_files/pwnkit.so
+> 
