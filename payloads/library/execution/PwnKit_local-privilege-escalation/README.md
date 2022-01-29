@@ -4,7 +4,8 @@
 - Author:        TW-D
 - Version:       1.0
 - Target:        Linux
-- Category:      Execution      
+- Category:      Execution
+- Credits:       Qualys Research Team   
 
 ## Description
 
