@@ -4,6 +4,10 @@ Author: 0iphor13
 
 Version: 1.0
 
+**Instruction:**
+
+This payload will run an obfuscated script to dump user hashes. If you don't trust this obfuscated .bat file, you should run it within a save space first - which should be best practice anyways ;-)
+
 #
 
 **Instruction:**
