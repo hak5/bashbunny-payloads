@@ -1,7 +1,7 @@
 **Title: SessionBunny**
 
 Author: 0iphor13
-Credit for SessionGopher: Brandon Arvanaghi
+(Credit for SessionGopher: Brandon Arvanaghi)
 
 Version: 1.0
 
