@@ -6,7 +6,7 @@ This repository contains payloads and extensions for the Hak5 Bash Bunny. Commun
 
 By emulating combinations of trusted USB devices — like gigabit Ethernet, serial, flash storage and keyboards — the Bash Bunny tricks computers into divulging data, exfiltrating documents, installing backdoors and many more exploits.
 -   [Purchase at Hak5](https://hak5.org/products/bash-bunny "Purchase at Hak5")
--   [Documentation](https://hak5.org/products/bash-bunny "Documentation")
+-   [Documentation](https://docs.hak5.org/bash-bunny/ "Documentation")
 -   [Bash Bunny Forums](https://forums.hak5.org/forum/92-bash-bunny/ "Forums")
 -   Discord:  [https://hak5.org/discord](https://hak5.org/discord)
 
