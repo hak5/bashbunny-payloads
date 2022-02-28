@@ -1,7 +1,7 @@
 #!/bin/bash
 # Title:          Hi There
 # Description:    Creates a hidden link file that override the ctrl+c functionality.
-#                 So, where the use press ctrl+c it lunches the first sign-in animation.
+#                 So, when the user press ctrl+c it lunches the first sign-in animation.
 # Author:         Cribbit
 # Version:        1.0
 # Category:       Pranks

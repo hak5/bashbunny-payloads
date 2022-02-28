@@ -14,7 +14,7 @@
 
 ## Description
 Creates a hidden link file that override the ctrl+c functionality.
-So, where the use press ctrl+c it lunches the first sign-in animation.
+So, when the user press ctrl+c it lunches the first sign-in animation.
 
 ## Notes
 to kill the animation, you need to open task manger and look for "First Sign-in Animation".
