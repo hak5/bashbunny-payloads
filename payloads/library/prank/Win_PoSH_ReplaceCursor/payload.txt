@@ -1,0 +1,20 @@
+# Title:        Replace Cursor
+# Description:  Replaces the standard arrow with a little bash bunny.
+# Author:       Cribbit
+# Version:      1.0
+# Category:     Pranks
+# Target:       Windows (Powershell 5.1+)
+# Attackmodes:	HID & STORAGE 
+# Extensions:   Run
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE
+
+LED ATTACK
+
+RUN WIN "powershell -Noni -NoP -W h -EP Bypass .((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\ps.ps1')"
+
+LED FINNISH

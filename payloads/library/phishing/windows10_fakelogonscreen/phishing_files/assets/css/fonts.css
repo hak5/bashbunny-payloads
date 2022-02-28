@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "text-security-disc";
+    src: url("./../font/text-security-disc.ttf") format("truetype");
+}
+
+body, .password::placeholder {
+    font-family: "Segoe UI";
+    font-weight: lighter;
+}
+
+.password {
+    font-family: "text-security-disc";
+}

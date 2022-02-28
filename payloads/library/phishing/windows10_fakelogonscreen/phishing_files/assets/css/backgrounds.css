@@ -1,0 +1,16 @@
+body {
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+.login {
+    min-width: 42px;
+    background-image: url("./../img/submit.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+}
