@@ -16,7 +16,7 @@
 1. Prevent storing history.
 2. Fetching BashBunny's block device.
 3. Mounting BashBunny.
-4. Tranfering payload script and executing it.
+4. Transfering payload script and executing it.
 5. Deleting script from victims system.
 6. Unmounting BashBunny.
 
