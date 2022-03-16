@@ -1,0 +1,24 @@
+# Get the RSS feed for the Hak5 Channel
+Write-Output "Connecting to youtube"
+$Response = Invoke-WebRequest -Uri "https://www.youtube.com/feeds/videos.xml?channel_id=UC3s0BtrBJpwNDaflRSoiieQ" -UseBasicParsing -ContentType "application/xml"
+Write-Output $Response.StatusCode
+# See if it successful
+If ($Response.StatusCode -eq "200") {
+	# set the XML
+	$Xml = [xml]$Response.Content
+	$Entries = @()
+	# Loop each entry creating an object
+	ForEach ($Entry in $Xml.feed.entry) {
+			$Entries += [PSCustomObject] @{
+				'Updated' = [datetime]$Entry.updated
+				'Title' = $Entry.title
+				'Link' = $Entry.Link.href
+		}
+	}
+	# Gets a random number
+	$int = (Get-Random -Maximum ($Entries.Count -1) -Minimum 0)
+	$Entry = $Entries[$int]
+    # Opens link
+	Start-Process $Entry.Link
+	Write-Output $Entry.Title
+}

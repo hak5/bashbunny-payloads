@@ -13,7 +13,8 @@
 
 ## Description
 Downloads a list of Hak5 vids from YouTube (about 15 in the rss feed). 
-Then pick one at random one then opens it in the browser.
+
+Then pick one at random, then opens it in the browser.
 
 ## Colours
 | Status   | Colour                        | Description                 |
