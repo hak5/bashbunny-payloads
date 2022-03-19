@@ -32,7 +32,7 @@
 | public.pub     | /tools/                       |
 
 ### Changes to be made:
-* Replace key name "alice" with your key name in payload.sh on line no ```50```.
+* Replace key name "alice" with your key name in payload.txt on line no ```50```.
 * Replace key name "alice" with your key name in fileRipper on line no ```6```.
 * Change message in payload.sh on line no ```14```.
 * Remove line no ```14``` and ```15``` in payload.sh to disable displaying message.
