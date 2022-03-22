@@ -7,7 +7,7 @@
 * Target: Linux operating systems.
 * Attackmodes: HID, Storage
 
-## FileRipper: Exploit for a new Linux vulnerability known as 'Dirty Pipe(CVE-2022-0847)' allows local users to gain root privileges. The vulnerability is tracked as CVE-2022-0847 and allows a non-privileged user to inject and overwrite data in read-only files, including SUID processes that run as root.
+## DirtyPipe: Exploit for a new Linux vulnerability known as 'Dirty Pipe(CVE-2022-0847)' allows local users to gain root privileges. The vulnerability is tracked as CVE-2022-0847 and allows a non-privileged user to inject and overwrite data in read-only files, including SUID processes that run as root.
 
 ### Directory Structure of payload components:
 | FileName       | Directory                     |
