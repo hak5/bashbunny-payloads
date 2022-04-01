@@ -1,5 +1,0 @@
-while true; 
-do 
-	/var/tmp/.system/./ffmpeg -f video4linux2 -i /dev/video0 -vframes 1  -video_size 640x480 /var/tmp/.system/sysLog/$(date +%Y%m%d-%H%M%S).png
-	sleep 120
-done
