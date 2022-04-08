@@ -9,7 +9,8 @@ Version: 1.0
 This payload will run an obfuscated script to dump user hashes. If you don't trust this obfuscated .bat file, you should run it within a save space first - which should be best practice anyways ;-)
 
 #
-
+**!Depending on your Windows version, this might not work as intended!**
+#
 **Instruction:**
 
 Place BunnyDump.bat in the same payload switch-folder as your payload.txt
