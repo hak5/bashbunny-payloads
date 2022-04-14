@@ -28,7 +28,7 @@ Keeping tracks clear by disabling and deleting history. Creating hidden director
 | FileName                | Directory                     |
 | ----------------------- | ----------------------------- |
 | payload.txt             | /payloads/switch1/            |
-| persistentReverseBummy/ | /payloads/libray/             |
+| persistentReverseBunny/ | /payloads/libray/             |
 
 ### Note:
 * Change ip address(0.0.0.0) and port number(4444) to your server's ip address and port number in `reversePersistentBunny/payload.sh` on line `6`.
