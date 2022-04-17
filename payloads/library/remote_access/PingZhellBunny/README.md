@@ -24,18 +24,18 @@ Install dependencies, if needed:
 - NetPacket::ICMP
 
 Disable ICMP replies by the OS:
-    *sysctl -w net.ipv4.icmp_echo_ignore_all=1*
+    `sysctl -w net.ipv4.icmp_echo_ignore_all=1`
 
 Start Bunny.pl -> perl Bunny.pl
 #
 !!!Insert the IP of your attacking machine into PingZhell.ps1!!!
 #
-Plug in Bashbunny with PingZhellBunny equipped.
-Achieve reverse shell.
-run away <3
+<p>Plug in Bashbunny with PingZhellBunny equipped.<br>
+Achieve reverse shell.<br>
+   run away <3</p>
 
 
 Credit for code and ideas:
 - bdamele
-- nishang
+- samratashok
 - krabelize
