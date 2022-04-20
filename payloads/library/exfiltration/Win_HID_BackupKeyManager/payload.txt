@@ -1,6 +1,6 @@
 #!/bin/bash
 # Title:        KeyManager Backup
-# Description:  Create a backup of the key manager log-on credentials for servers, websites and programs
+# Description:  Create a backup of the key manager which stores log-on credentials for servers, websites and programs
 # Author:       Cribbit
 # Version:      1.0
 # Category:     Exfiltration

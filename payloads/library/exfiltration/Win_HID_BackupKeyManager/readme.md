@@ -8,7 +8,7 @@
 - Props: Paranoid Ninja https://twitter.com/NinjaParanoid/status/1516442028963659777
 
 ## Description
-Create a backup of the key manager log-on credentials for servers, websites and programs.
+Create a backup of the key manager which stores log-on credentials for servers, websites and programs.
 
 ## Change Log
 | Version | Changes         |
