@@ -27,4 +27,4 @@ I recommend openssl itself or ncat - Example syntax for both:<br>
 **Disclaimer: Because of obfuscation, it may take some time until the shell is fully executed by powershell**
 
 ![alt text](https://github.com/0iphor13/omg-payloads/blob/master/payloads/library/remote_access/ReverseCableSSL/CreateCert.png)
-![alt text](https://github.com/0iphor13/bashbunny-payloads/blob/master/payloads/library/remote_access/ReverseBunnySSL/Startscreen.jpg)
+![alt text](https://github.com/0iphor13/bashbunny-payloads/blob/master/payloads/library/remote_access/ReverseBunnySSL/Startscreen.png)
