@@ -7,7 +7,7 @@
 #                   command by defining an persistent alias.
 #
 # Author:           TW-D
-# Version:          1.0
+# Version:          1.1
 # Category:         Phishing
 # Target:           Linux
 # Attackmodes:      HID and STORAGE
