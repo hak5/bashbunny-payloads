@@ -6,14 +6,14 @@ This repository contains payloads and extensions for the Hak5 Bash Bunny. Commun
 
 By emulating combinations of trusted USB devices — like gigabit Ethernet, serial, flash storage and keyboards — the Bash Bunny tricks computers into divulging data, exfiltrating documents, installing backdoors and many more exploits.
 -   [Purchase at Hak5](https://hak5.org/products/bash-bunny "Purchase at Hak5")
--   [Documentation](https://docs.hak5.org/hc/en-us/categories/360000982534-Bash-Bunny "Documentation")
--   [Bash Bunny Forums](https://forums.hak5.org/index.php?/forum/92-bash-bunny/ "Forums")
+-   [Documentation](https://docs.hak5.org/bash-bunny/ "Documentation")
+-   [Bash Bunny Forums](https://forums.hak5.org/forum/92-bash-bunny/ "Forums")
 -   Discord:  [https://hak5.org/discord](https://hak5.org/discord)
 
 ![enter image description here](https://cdn.shopify.com/s/files/1/0068/2142/products/bash-bunny-mk2_001_c58d9658-b151-4328-af26-11eef3c47355_300x.jpg)
 
 ## Documentation
-Documentation on developing payloads for the Bash Bunny can be found on the [docs.hak5.org](https://docs.hak5.org/hc/en-us/categories/360000982534-Bash-Bunny) website. Guides can be found on the [Bash Bunny blog](https://hak5.org/blogs/bash-bunny).
+Documentation on developing payloads for the Bash Bunny can be found on the [docs.hak5.org](https://docs.hak5.org/bash-bunny/) website. Guides can be found on the [Bash Bunny blog](https://hak5.org/blogs/bash-bunny).
 
 ## Disclaimer
 Generally, payloads may execute commands on your device. As such, it is possible for a payload to damage your device. Payloads from this repository are provided AS-IS without warranty. While Hak5 makes a best effort to review payloads, there are no guarantees as to their effectiveness. As with any script, you are advised to proceed with caution.

