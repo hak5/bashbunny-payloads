@@ -1,5 +1,5 @@
 #!/bin/bash
-# Title:          Random Video
+# Title:          My Pictures 2 Ascii Art
 # Description:    Converts Jpeg, Png & BMP's in the My Pictures to ascii art versions.
 # Author:         Cribbit
 # Version:        1.0
