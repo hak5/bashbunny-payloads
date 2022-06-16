@@ -1,5 +1,5 @@
 # Title:       	Be a pest using CLSID
-# Description:  Uses CLSID to open system dialogs to swop the left and right mouse button, change the region to Welsh and turn off system sounds. 
+# Description:  Uses CLSID to open system dialogs to swap the left and right mouse button, change the region to Welsh and turn off system sounds. 
 # Author:       Cribbit
 # Version:      1.0
 # Category:     Pranks

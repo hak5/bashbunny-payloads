@@ -13,7 +13,7 @@
 
 ## Description
 Uses CLSID to open system dialogs.
-To swop the left and right mouse button. 
+To swap the left and right mouse button. 
 Change the region to Welsh.
 And turn off system sounds.
 
