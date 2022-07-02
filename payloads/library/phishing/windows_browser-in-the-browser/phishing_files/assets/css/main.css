@@ -1,0 +1,40 @@
+#draggable {
+    font-family: "Segoe UI Light" !important;
+}
+
+#microsoft-logo {
+    height: 40px;
+}
+
+#title-text {
+    margin-left: 5px;
+}
+
+#minimize {
+    font-size: 20px;
+}
+
+#maximize {
+    font-size: 30px;
+}
+
+#container-minimize:hover, #container-maximize:hover {
+    opacity: 0.5;
+}
+
+#container-exit:hover {
+    background-color: red;
+}
+
+#exit {
+    font-size: 20px;
+}
+
+#ssl-logo {
+    height: 40px;
+}
+
+#phishing-iframe {
+    width: 100%;
+    height: 75vh;
+}
