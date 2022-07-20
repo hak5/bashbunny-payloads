@@ -14,5 +14,5 @@ A payload that Exfiltrates files from logged in users Documents and Desktop fold
 | LED                | Status                                       |
 | ------------------ | -------------------------------------------- |
 | Purple             | Executing Payload                            |
-| Green              | Successfully grabbed xls or xlsx files       |
-| Red                | Did not get any xls or xlsx files            |
+| Green              | Successfully grabbed files                   |
+| Red                | Did not get files                            |
