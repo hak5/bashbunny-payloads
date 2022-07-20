@@ -6,7 +6,7 @@
 
 ## Description
 
-A payload that Exfiltrates files from logged in users Documents and Desktop folders
+A payload that Exfiltrates Word, Excel & PDF files from logged in users Documents and Desktop folders
 
 
 ## STATUS
