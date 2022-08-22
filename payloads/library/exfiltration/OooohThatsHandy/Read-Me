@@ -1,0 +1,17 @@
+OooohThatsHandy
+Extract useful information such as nmap scan results, wifi keys, Local DNS Cache, User privilieges and group memberships, user folder contents with images and documents being transferred
+Designed for and tested on Win 10
+@PeteDavis91 - Follow me on Twitter! 
+v0.4
+Exfiltration
+Attackmodes - HID Storage RNDIS_ETHERNET
+Credit to Hak5 & Darren for making amaizng content and products for years! 
+Thanks to 0iphori3 and Cribbit for answering my annoying questions all the time on the discord!  
+
+
+LED CODES:
+SOLID BLUE LED:			Setting Up
+FAST BLUE LED: 			Creating Data
+VERY FAST BLUE LED:		Exporting Data Created and Discovered
+SOLID WHITE LED:		Cleaning up and finalizing
+FINISH GREEN LED: 		Safe to remove your Bash Bunny - Enjoy the data 

@@ -15,7 +15,10 @@ Afterwards you can use a tool like samdump2 to extract the users hashes.</p>
 
 2. Unzip the exfiltrated zip file onto your machine.
 
-3. Use a tool like samdump2 on your machine to extract the users hashes.
+3. Use a tool like samdump2 or pypykatz on your machine to extract the users hashes.
 	> `samdump2 BunnySys BunnySam`
+	or  `pypykatz registry BunnySys --sam BunnySam`
+	
+	**!Disclaimer! samdump2 has proven to be unreliable in the recent past.**
 
 ![alt text](https://github.com/0iphor13/omg-payloads/blob/master/payloads/library/credentials/SamDumpCable/sam.png)
