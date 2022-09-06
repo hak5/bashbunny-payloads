@@ -41,7 +41,7 @@ if (-not(Test-Path -Path "$env:USERPROFILE/AppData/Local/Microsoft/Edge/User Dat
         throw $_.Exception.Message
     }
 }
- # Copy Chrome Bookmarks to Bash Bunny
+ # Copy Edge Bookmarks to Bash Bunny
  else {
     Copy-Item "$env:USERPROFILE/AppData/Local/Microsoft/Edge/User Data/Default/Bookmarks" -Destination "$TARGETDIR2" 
 }
