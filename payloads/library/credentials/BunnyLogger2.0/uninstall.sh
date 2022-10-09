@@ -1,4 +1,4 @@
 #!/bin/bash
-path=~/.config/bunnyLogger
-rm -rf $path
+loc=$HOME/.config/bunnyLogger
+rm -rf $loc
 sudo rm /usr/local/bin/bunnyLoggerMgr
