@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Title:         ReverseBunnySSL
-# Description:   Get remote access, using an obfuscated powershell reverse shell.
+# Title:         PingZhellBunny
+# Description:   Getting remote access via ICMP
 # Author:        0iphor13
 # Version:       1.5
 # Category:      Remote_Access
