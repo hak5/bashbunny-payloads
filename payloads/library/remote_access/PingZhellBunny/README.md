@@ -28,7 +28,7 @@ Disable ICMP replies by the OS:
 
 Start the client -> `perl Bunny.pl`
 
-<p>!!!Insert the IP of your attacking machine into the payload variable $IP!!!<br>
+<p>!!!Insert the IP of your attacking machine into the payload.txt variable $IP & Load PingZhellBunny.ps1 onto your Bunny!!!<br>
 
 <p>Plug in your BashBunny.<br>
 Achieve reverse shell.<br>
