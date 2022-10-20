@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#  Modified by 0iphor13 for PingZhell
+#  Modified by 0iphor13 for PingZhellBunny
 #
 # 
 #
@@ -29,7 +29,7 @@ use NetPacket::ICMP qw(ICMP_ECHOREPLY ICMP_ECHO);
 use Net::RawIP;
 use Fcntl;
 
-print "Bunny waitin' for connection...\n";
+print "Loading PingZhellBunny...\n";
 
 # create raw socket
 my $sock = IO::Socket::INET->new(
@@ -40,8 +40,16 @@ my $sock = IO::Socket::INET->new(
 # set stdin to non-blocking
 fcntl(STDIN, F_SETFL, O_NONBLOCK) or die "$!";
 
-print "Let's wait for PingZhell!\n";
 
+#Unnecessary print output - just for fun
+sleep(2);
+print ". .\n";
+sleep(1);
+print ". . .";
+sleep(1);
+print ". . . .";
+sleep(2);
+print "PingZhellBunny client ready!\n";
 my $input = '';
 while(1) {
         if ($sock->recv(my $buffer, 4096, 0)) {
