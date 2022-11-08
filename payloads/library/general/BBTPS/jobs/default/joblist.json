@@ -1,0 +1,18 @@
+[{
+    "jobName"   :"testjob1",
+    "command"   :"get-selecteddir -Path 'c:\\'",
+    "runType"   :"thread",
+    "scriptName":"testjob1.ps1"
+},
+{
+    "jobName"   :"testjob2",
+    "command"   :"get-selecteddir -Path $env:userprofile\\Documents",
+    "runType"   :"thread",
+    "scriptName":"testjob1.ps1"
+},
+{
+    "jobName"   :"testjob3",
+    "command"   :"get-selecteddir -Path $env:userprofile\\Documents | set-content c:\\temp\\test.txt",
+    "runType"   :"process",
+    "scriptName":"testjob1.ps1"
+}]
