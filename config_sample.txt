@@ -1,0 +1,2 @@
+switch1:payloads/library/MacReverseShell
+switch2:payloads/library/smb_exfiltrator
