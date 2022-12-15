@@ -7,7 +7,6 @@
 #	 LINUX_UMOUNT - to unmount mounted BashBunny.
 
 function LINUX_MOUNT() {
-	Q DELAY 1000
 	Q CTRL-ALT t
 	Q DELAY 1000
 	Q STRING unset HISTFILE
@@ -24,7 +23,6 @@ function LINUX_MOUNT() {
 	Q DELAY 500
 }
 function LINUX_UMOUNT() {
-	Q DELAY 1000
 	Q STRING udisksctl unmount -b /dev/'$disk'
 	Q ENTER
 	Q DELAY 1000
