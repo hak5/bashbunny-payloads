@@ -12,7 +12,7 @@ function LINUX_MOUNT() {
 	Q DELAY 1000
 	Q STRING unset HISTFILE
 	Q ENTER
-	Q DELAY 1000
+	Q DELAY 200
 	Q STRING disk='$(lsblk -fs | grep BashBunny | awk '\'{print\ '$1'}\'\)''
 	Q ENTER
 	Q DELAY 200
