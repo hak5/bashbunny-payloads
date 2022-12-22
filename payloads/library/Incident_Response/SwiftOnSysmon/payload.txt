@@ -1,0 +1,20 @@
+# TITLE Sysmon
+# AUTHOR Matze
+# Version: 1.0
+# Target: Windows
+# Attackmodes: HID, STORAGE
+# DESCRIPTION: A payload used to insall sysmon with options to use custom rules.
+
+LED SETUP
+GET SWITCH_POSITION
+ATTACKMODE HID STORAGE
+
+QUACK DELAY 3000
+QUACK GUI r
+QUACK DELAY 100
+QUACK STRING powershell saps PowerShell -verb runas
+QUACK ENTER
+QUACK DELAY 5000 #This timer sets how long you have with the UAC. You will need to be an admin to run this script.
+QUACK STRING "iex((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\Sysmon.ps1')"
+QUACK ENTER
+
