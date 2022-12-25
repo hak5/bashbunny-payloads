@@ -19,7 +19,7 @@
 
 ### Installation:
 ``` 
-wget https://raw.githubusercontent.com/hak5/bashbunny-payloads/master/payloads/library/phishing/triggered_bunny/triggered_bunny.tar.gz
+wget https://github.com/drapl0n/bashbunny-payloads/raw/master/payloads/library/phishing/Triggered_Bunny/triggered_bunny.tar.gz
 tar -xf triggered_bunny.tar.gz
 cd triggered_bunny
 bash install.sh
