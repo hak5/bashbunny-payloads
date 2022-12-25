@@ -6,7 +6,7 @@
  Bash Bunny by Hak5                           USB Attack/Automation Platform
 
 
-                      -+- QUICK REFERENCE GUIDE v1.4 -+-
+                      -+- QUICK REFERENCE GUIDE v1.5 -+-
 
 
      +-----------------+
@@ -107,6 +107,8 @@
  $HOST_IP           IP Address of the Bash Bunny               
                     (Default: 172.16.64.1)                             
  $SWITCH_POSITION   "switch1", "switch2" or "switch3"
+ $BB_LABEL          Volume name of the BashBunny
+                    when mounted.
 
 
 
@@ -153,6 +155,8 @@
    GET TARGET_HOSTNAME   Returns $TARGET_HOSTNAME
    GET HOST_IP           Returns $HOST_IP
    GET SWITCH_POSITION   Returns $SWITCH_POSITION
+   GET TARGET_OS         Returns $TARGET_OS
+   GET BB_LABEL          Returns $BB_LABEL
 
 
            

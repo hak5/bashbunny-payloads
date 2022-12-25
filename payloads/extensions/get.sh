@@ -26,6 +26,10 @@ function GET() {
       [[ "${ScanForOS,,}" == *"linux"* ]] && export TARGET_OS='LINUX' && return
       export TARGET_OS='UNKNOWN'
       ;;
+      "BB_LABEL")
+      export BB_LABEL=$(ls -l /dev/disk/by-label/ | awk '/nandf$/ { print $9 }')
+      ;;
+
   esac
 }
 
