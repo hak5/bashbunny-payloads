@@ -37,7 +37,6 @@
 
 ######## INITIALIZATION ########
 
-readonly BB_LABEL="BashBunny"
 readonly TELNET_PORT="44423"
 readonly TELNET_PASSWORD="VLC_T3LN3T"
 
@@ -46,6 +45,7 @@ readonly TELNET_PASSWORD="VLC_T3LN3T"
 LED SETUP
 
 ATTACKMODE HID STORAGE
+GET BB_LABEL
 GET SWITCH_POSITION
 
 ######## ATTACK ########
