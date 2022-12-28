@@ -27,7 +27,6 @@ From "payload.txt" change the values of the following constants :
 
 ######## INITIALIZATION ########
 
-readonly BB_LABEL="BashBunny"
 readonly TELNET_PORT="44423"
 readonly TELNET_PASSWORD="VLC_T3LN3T"
 
