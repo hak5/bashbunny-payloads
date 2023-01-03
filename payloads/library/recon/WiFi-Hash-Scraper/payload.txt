@@ -11,6 +11,7 @@
 # Target:           Microsoft Windows 10 & 11
 
 ATTACKMODE HID STORAGE
+GET BB_LABEL
 
 LED SETUP
 GET SWITCH_POSITION
