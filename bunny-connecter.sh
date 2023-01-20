@@ -4,7 +4,7 @@
 # License https://www.bashbunny.com/licence/software_licence.txt
 
 bbver=1
-BBSH_CONFIG=$(dirname $0)/bbsh_config.txt
+BBSH_CONFIG=$(dirname $0)/bunny_connecter_config.txt
 
 if [ "$EUID" -ne 0 ]
     then echo "This Bash Bunny Connection script requires root."
