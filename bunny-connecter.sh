@@ -4,7 +4,7 @@
 # License https://www.bashbunny.com/licence/software_licence.txt
 
 bbver=1
-BBSH_CONFIG=$(dirname $0)/bunny_connecter_config.txt
+BBSH_CONFIG="$(dirname $0)/bunny_connecter_config.txt"
 
 if [ "$EUID" -ne 0 ]
     then echo "This Bash Bunny Connection script requires root."
@@ -241,14 +241,14 @@ function advancedsetup {
 
 function savechanges {
     # using ";" as a delmiter in sed is a-okay
-    sed -i "s;^sbunnynmask.*;sbunnynmask=$sbunnynmask;"     $BBSH_CONFIG
-    sed -i "s;^sbunnynet.*;sbunnynet=$sbunnynet;"           $BBSH_CONFIG
-    sed -i "s;^sbunnylan.*;sbunnylan=$sbunnylan;"           $BBSH_CONFIG
-    sed -i "s;^sbunnywan.*;sbunnywan=$sbunnywan;"           $BBSH_CONFIG
-    sed -i "s;^sbunnygw.*;sbunnygw=$sbunnygw;"              $BBSH_CONFIG
-    sed -i "s;^sbunnyhostip.*;sbunnyhostip=$sbunnyhostip;"  $BBSH_CONFIG
-    sed -i "s;^sbunnyip.*;sbunnyip=$sbunnyip;"              $BBSH_CONFIG
-    sed -i "s;^sfirsttime.*;sfirsttime=0;"                  $BBSH_CONFIG
+    sed -i "s;^sbunnynmask.*;sbunnynmask=$sbunnynmask;"     "$BBSH_CONFIG"
+    sed -i "s;^sbunnynet.*;sbunnynet=$sbunnynet;"           "$BBSH_CONFIG"
+    sed -i "s;^sbunnylan.*;sbunnylan=$sbunnylan;"           "$BBSH_CONFIG"
+    sed -i "s;^sbunnywan.*;sbunnywan=$sbunnywan;"           "$BBSH_CONFIG"
+    sed -i "s;^sbunnygw.*;sbunnygw=$sbunnygw;"              "$BBSH_CONFIG"
+    sed -i "s;^sbunnyhostip.*;sbunnyhostip=$sbunnyhostip;"  "$BBSH_CONFIG"
+    sed -i "s;^sbunnyip.*;sbunnyip=$sbunnyip;"              "$BBSH_CONFIG"
+    sed -i "s;^sfirsttime.*;sfirsttime=0;"                  "$BBSH_CONFIG"
     sfirsttime=0
     printf "\n    Settings saved.\n"
     showsettings
@@ -291,14 +291,14 @@ function start_clean {
 }
 
 function create_bbsh_config {
-    echo "sbunnynmask=255.255.255.0"     > $BBSH_CONFIG
-    echo "sbunnynet=172.16.64.0/24"     >> $BBSH_CONFIG
-    echo "sbunnylan=enx001122334455"    >> $BBSH_CONFIG
-    echo "sbunnywan=wlo1"               >> $BBSH_CONFIG
-    echo "sbunnygw=192.168.1.1"         >> $BBSH_CONFIG
-    echo "sbunnyhostip=172.16.64.64"    >> $BBSH_CONFIG
-    echo "sbunnyip=172.16.64.1"         >> $BBSH_CONFIG
-    echo "sfirsttime=1"                 >> $BBSH_CONFIG
+    echo "sbunnynmask=255.255.255.0"     > "$BBSH_CONFIG"
+    echo "sbunnynet=172.16.64.0/24"     >> "$BBSH_CONFIG"
+    echo "sbunnylan=enx001122334455"    >> "$BBSH_CONFIG"
+    echo "sbunnywan=wlo1"               >> "$BBSH_CONFIG"
+    echo "sbunnygw=192.168.1.1"         >> "$BBSH_CONFIG"
+    echo "sbunnyhostip=172.16.64.64"    >> "$BBSH_CONFIG"
+    echo "sbunnyip=172.16.64.1"         >> "$BBSH_CONFIG"
+    echo "sfirsttime=1"                 >> "$BBSH_CONFIG"
 }
 
 function bunny {
@@ -311,8 +311,8 @@ banner #remove for less 1337
 showsettings
 
 # create bbsh_config if it doesn't exist
-[ -f $BBSH_CONFIG ] || create_bbsh_config
-source $BBSH_CONFIG
+[ -f "$BBSH_CONFIG" ] || create_bbsh_config
+source "$BBSH_CONFIG"
 
 if [[ "$sfirsttime" == "1" ]]; then
     printf "
