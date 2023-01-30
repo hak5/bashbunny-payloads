@@ -125,12 +125,6 @@ function manualsetup {
 }
 
 function guidedsetup {
-    bunnydetected=$(ip addr | grep '00:11:22' -B1 | awk {'print $2'} | head -1 | grep 'eth\|en')
-    if [[ "$?" == 0 ]]; then
-        printf "\n    Bash Bunny detected. Please disconnect the Bash Bunny from\n    this computer and $(tput bold)press any key$(tput sgr0) to continue with guided setup.\n    "
-        read -r -sn1 anykey
-        guidedsetup
-    fi
     hasiproute2=$(which ip)
     if [[ "$?" == 1 ]]; then
         printf "\n\n    Configuration requires the 'iproute2' package (aka the 'ip' command).\n    Please install 'iproute2' to continue.\n"; menu
