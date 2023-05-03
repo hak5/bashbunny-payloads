@@ -32,5 +32,6 @@ Get a bunch of delicious data from unlocked macOS devices.
 | Magenta solid (SETUP) | Set ATTACKMODE and get SWITCH_POSITION |
 | Yellow single blink (ATTACK) | Ongoing information collection |
 | White fast blink (CLEANUP) | Erase the footprint and clean up |
+| Green 1000ms VERYFAST blink followed by SOLID (FINISH) | Attack finished |
 
 *Average runtime: 25 seconds*
