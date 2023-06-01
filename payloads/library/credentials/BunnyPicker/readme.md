@@ -29,7 +29,7 @@
                                                                                                              
 Author: rf_bandit
 Version: Version 1.0
-Credit: Hak5Darren, Mubix, catatonic, mame82, Rogan Dawes for the Pw4nP1-ALOA
+Credit: Hak5Darren, Mubix, catatonic, mame82
 Firmware: 1.7
 Target: Windows 10/11
 Date: May 2023
