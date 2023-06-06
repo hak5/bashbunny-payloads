@@ -1,12 +1,6 @@
 # Payload Library for the Bash Bunny by Hak5
 
-### For spanish users: Por favor, comenta positivamente en [esta pull request](https://github.com/hak5/bashbunny-payloads/pull/583) para traer un payload español y este gran payload para el bash bunny al repositorio oficial de Hak5.
-
 This repository contains payloads and extensions for the Hak5 Bash Bunny. Community developed payloads are listed and developers are encouraged to create pull requests to make changes to or submit new payloads.
-
-## Ediciones
-
-- Se añadió el payload [bb-logger](https://github.com/Genplat/bb-logger)
 
 ## About the Bash Bunny
 
