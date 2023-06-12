@@ -6,7 +6,7 @@
 # Target:        MacOS
 # Category:      Exfiltration
 #
-# Exfilter all the images from the principal folders on unlocked MacOS targets.
+# Exfilter all the documents like excel or pdfs from the principal folders on unlocked MacOS targets.
 # Stashes them in /loot/MacDocsExfill
 #
 # Purple             Setup
