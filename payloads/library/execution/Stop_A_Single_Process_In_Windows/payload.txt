@@ -1,30 +1,25 @@
-REM #####################################################
-REM #                                                   |
-REM # Title        : Stop A Single Process In Windows   |
-REM # Author       : Aleff                              |
-REM # Version      : 1.0                                |
-REM # Category     : Execution                          |
-REM # Target       : Windows 10/11                      |
-REM #                                                   |
-REM #####################################################
+* #####################################################
+* #                                                   |
+* # Title        : Stop A Single Process In Windows   |
+* # Author       : Aleff                              |
+* # Version      : 1.0                                |
+* # Category     : Execution                          |
+* # Target       : Windows 10/11                      |
+* #                                                   |
+* #####################################################
 
 
-REM Requirements:
-REM     - Nothing
+* Requirements:
+*     - Nothing
 
-
-REM Write the name of the process that you want to stop 
-DEFINE PROCESS_NAME example
-
-
-REM Open Task Manager
+* Open Task Manager
 GUI
 DELAY 1000
 STRING Task Manager
 ENTER
 DELAY 1000
 
-REM Goto search bar
+* Goto search bar
 TAB
 DELAY 500
 TAB
@@ -34,7 +29,7 @@ DELAY 500
 TAB
 DELAY 500
 
-REM Write the process name
+* Write the name of the process that you want to stop 
 STRING PROCESS_NAME
 DELAY 500
 ENTER
@@ -48,7 +43,7 @@ DELAY 500
 TAB
 DELAY 500
 
-REM Open the menu and close it ending the task
+* Open the menu and close it ending the task
 SHIFT F10
 DELAY 500
 DOWN_ARROW
@@ -58,5 +53,5 @@ DELAY 500
 ENTER
 DELAY 2000
 
-REM Close the task manager
+* Close the task manager
 ALT F4
