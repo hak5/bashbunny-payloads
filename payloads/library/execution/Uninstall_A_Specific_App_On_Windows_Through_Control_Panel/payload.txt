@@ -1,34 +1,31 @@
-REM ##############################################################################
-REM #                                                                            |
-REM # Title        : Uninstall A Specific App On Windows Through Control Panel   |
-REM # Author       : Aleff                                                       |
-REM # Version      : 1.0                                                         |
-REM # Category     : Execute                                                     |
-REM # Target       : Windows 10/11                                               |
-REM #                                                                            |
-REM ##############################################################################
+* ##############################################################################
+* #                                                                            |
+* # Title        : Uninstall A Specific App On Windows Through Control Panel   |
+* # Author       : Aleff                                                       |
+* # Version      : 1.0                                                         |
+* # Category     : Execute                                                     |
+* # Target       : Windows 10/11                                               |
+* #                                                                            |
+* ##############################################################################
 
-REM Requirements:
-REM     - The application you want to uninstall must be installed on the target (?obvious right? ^^)
+* Requirements:
+*     - The application you want to uninstall must be installed on the target (?obvious right? ^^)
 
-REM Note:
-REM     - Payload tested on Windows 11 Eng 
-
-REM Set the exact name of the application as it appears within the control panel. Do not assume that just because an application is known by a certain name then it will have exactly that name, e.g. `Firefox` shows up again as `Mozilla Firefox (x64 en)`
-DEFINE APP_NAME example
+* Note:
+*     - Payload tested on Windows 11 Eng 
 
 
-REM Open Windows research
+* Open Windows research
 DELAY 2000
 GUI
 DELAY 1000
 
-REM Search and opern explorer app
+* Search and opern explorer app
 STRING explorer
 ENTER
 DELAY 1000
 
-REM Goto search bar and open "Uninstall or change a program" page
+* Goto search bar and open "Uninstall or change a program" page
 TAB
 DELAY 500
 TAB
@@ -41,7 +38,7 @@ STRING Control Panel\Programs\Programs and Features
 ENTER
 DELAY 1500
 
-REM Goto search bar and search the app
+* Goto search bar and search the app
 TAB
 DELAY 500
 TAB
@@ -50,10 +47,12 @@ TAB
 DELAY 500
 TAB
 DELAY 500
+
+* Set the exact name of the application as it appears within the control panel. Do not assume that just because an application is known by a certain name then it will have exactly that name, e.g. `Firefox` shows up again as `Mozilla Firefox (x64 en)`
 STRING APP_NAME
 DELAY 500
 
-REM Select the app and click on it
+* Select the app and click on it
 TAB
 DELAY 500
 TAB
