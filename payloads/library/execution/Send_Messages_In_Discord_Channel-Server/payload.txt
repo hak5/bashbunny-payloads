@@ -15,7 +15,7 @@ REM     - Discord Installed
 
 
 REM If, for example, the server is Hak5 and the channel in which you want to send the message is called wifi-pineapple then you should write just wifi-pineapple
-DEFINE #CHAT_NAME example
+DEFINE CHAT_NAME example
 
 
 REM Open Discord app
@@ -29,13 +29,11 @@ DELAY 6000
 REM Search by Discord keyboard shortcut and open it
 CTRL-k
 DELAY 500
-STRINGLN ##CHAT_NAME
+STRINGLN #CHAT_NAME
 DELAY 500
 
-STRINGLN_BLOCK
-    Write here..
-    your...
-    messages...
-END_STRINGLN
+STRINGLN Write here...
+STRINGLN your...
+STRINGLN messages...
 
 ALT F4
