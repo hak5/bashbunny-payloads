@@ -1,39 +1,44 @@
-REM ############################################################
-REM #                                                          |
-REM # Title        : Send Messages In Discord Channel-Server   |
-REM # Author       : Aleff                                     |
-REM # Version      : 1.0                                       |
-REM # Category     : Execution                                 |
-REM # Target       : Windows 10-11                             |
-REM #                                                          |
-REM ############################################################
+* ############################################################
+* #                                                          |
+* # Title        : Send Messages In Discord Channel-Server   |
+* # Author       : Aleff                                     |
+* # Version      : 1.0                                       |
+* # Category     : Execution                                 |
+* # Target       : Windows 10-11                             |
+* #                                                          |
+* ############################################################
 
 
-REM Requirements:
-REM     - Internet connection
-REM     - Discord Installed
+* Requirements:
+*     - Internet connection
+*     - Discord Installed
 
 
-REM If, for example, the server is Hak5 and the channel in which you want to send the message is called wifi-pineapple then you should write just wifi-pineapple
+* If, for example, the server is Hak5 and the channel in which you want to send the message is called wifi-pineapple then you should write just wifi-pineapple
 DEFINE CHAT_NAME example
 
 
-REM Open Discord app
+* Open Discord app
 GUI
 DELAY 1000
-STRINGLN Discord
+STRING Discord
+ENTER
 
-REM This depends on the power of the computer and whether there are upgrades to be done
+* This depends on the power of the computer and whether there are upgrades to be done
 DELAY 6000
 
-REM Search by Discord keyboard shortcut and open it
+* Search by Discord keyboard shortcut and open it
 CTRL-k
 DELAY 500
-STRINGLN #CHAT_NAME
+STRING #CHAT_NAME
+ENTER
 DELAY 500
 
-STRINGLN Write here...
-STRINGLN your...
-STRINGLN messages...
+STRING Write here...
+ENTER
+STRING your...
+ENTER
+STRING messages...
+ENTER
 
 ALT F4
