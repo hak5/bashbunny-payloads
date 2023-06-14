@@ -1,27 +1,19 @@
-REM ###########################################
-REM #                                         |
-REM # Title        : Change Remote Git Link   |
-REM # Author       : Aleff                    |
-REM # Version      : 1.0                      |
-REM # Category     : Execution                |
-REM # Target       : Windows 10-11/Linux      |
-REM #                                         |
-REM ###########################################
+* ###########################################
+* #                                         |
+* # Title        : Change Remote Git Link   |
+* # Author       : Aleff                    |
+* # Version      : 1.0                      |
+* # Category     : Execution                |
+* # Target       : Windows 10-11/Linux      |
+* #                                         |
+* ###########################################
 
-REM Requirements:
-REM     - Internet Connection
-REM     - git installed
-REM     - Full path of the cloned repository
-REM     - ExecutionPolicy Bypass if runned on Windows
+* Requirements:
+*     - Internet Connection
+*     - git installed
+*     - Full path of the cloned repository
+*     - ExecutionPolicy Bypass if runned on Windows
 
-REM Full path of the local repository i.e. "C:\Users\User\Documents\Repository1"
-DEFINE #FULL-PATH example
-
-REM Link from which updates are to be downloaded so the new repository the Repository2
-DEFINE #NEW-GIT-LINK example.git
-
-REM Define the branch of the new repository Repository2, i.e. "main"
-DEFINE #BRANCH example
 
 DELAY 1000
 GUI r
@@ -30,13 +22,21 @@ STRING powershell
 ENTER
 DELAY 2000
 
-STRINGLN cd #FULL-PATH
+* Full path of the local repository i.e. "C:\Users\User\Documents\Repository1"
+STRING cd #FULL-PATH
+ENTER
 DELAY 1000
-STRINGLN git remote set-url origin #NEW-GIT-LINK
+* Link from which updates are to be downloaded so the new repository the Repository2
+STRING git remote set-url origin #NEW-GIT-LINK
+ENTER
 DELAY 1000
-STRINGLN git pull --force origin #BRANCH
+* Define the branch of the new repository Repository2, i.e. "main"
+STRING git pull --force origin #BRANCH
+ENTER
 DELAY 1000
-STRINGLN git reset --hard origin/#BRANCH
+* Define the branch of the new repository Repository2, i.e. "main"
+STRING git reset --hard origin/#BRANCH
+ENTER
 DELAY 1000
 
 ALT F4
