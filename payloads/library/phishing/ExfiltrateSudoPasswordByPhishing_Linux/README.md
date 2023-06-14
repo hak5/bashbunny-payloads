@@ -3,7 +3,7 @@
 
 A script used to exfiltrate the sudo password by a popup phishing based on linux systems.
 
-**Category**: Credentials, Phishing
+**Category**: Phishing
 
 ## Description
 
