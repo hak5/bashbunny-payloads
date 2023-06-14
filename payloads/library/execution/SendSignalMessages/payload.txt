@@ -1,23 +1,19 @@
-REM #########################################
-REM #                                       |
-REM # Title        : Send Signal Messages   |
-REM # Author       : Aleff                  |
-REM # Version      : 1.0                    |
-REM # Category     : Prank, Execution       |
-REM # Target       : Windows 10-11          |
-REM #                                       |
-REM #########################################
+* #########################################
+* #                                       |
+* # Title        : Send Signal Messages   |
+* # Author       : Aleff                  |
+* # Version      : 1.0                    |
+* # Category     : Prank, Execution       |
+* # Target       : Windows 10-11          |
+* #                                       |
+* #########################################
 
-REM Requirements:
-REM   - Internet Connection
-REM   - Signal App installed
-REM Payload Plug-And-Play but can be edited as you want the message
 
-REM REQUIRED - Receiver number
-DEFINE NUMBER 3332211000
+* Requirements:
+*   - Internet Connection
+*   - Signal App installed
+* Payload Plug-And-Play but can be edited as you want the message
 
-REM REQUIRED - Message to send
-DEFINE MESSAGE YOUR_MESSAGE
 
 DELAY 1000
 GUI r
@@ -35,6 +31,7 @@ TAB
 TAB
 ENTER
 DELAY 100
+* REQUIRED - Receiver number
 STRING NUMBER
 DELAY 100
 TAB
@@ -42,11 +39,11 @@ DELAY 100
 ENTER
 DELAY 200
 
-REM This is the message that will be sent.
-REM You can change it as you want, if you want.
+* This is the message that will be sent.
+* You can change it as you want, if you want.
 STRING YOUR_MESSAGE
 ENTER
 
-REM Closing Signal App
+* Closing Signal App
 DELAY 500
 ALT F4
