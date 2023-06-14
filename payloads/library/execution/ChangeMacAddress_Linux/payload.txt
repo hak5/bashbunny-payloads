@@ -1,47 +1,42 @@
-REM ###########################################
-REM #                                         |
-REM # Title        : Change Linux MAC Address |
-REM # Author       : Aleff                    |
-REM # Version      : 1.0                      |
-REM # Category     : Execution                |
-REM # Target       : Linux                    |
-REM #                                         |
-REM ###########################################
+* ###########################################
+* #                                         |
+* # Title        : Change Linux MAC Address |
+* # Author       : Aleff                    |
+* # Version      : 1.0                      |
+* # Category     : Execution                |
+* # Target       : Linux                    |
+* #                                         |
+* ###########################################
 
-REM Requirements:
-REM     - Permissions
+* Requirements:
+*     - Permissions
 
 DELAY 1000
 CTRL-ALT t
 DELAY 2000
 
 
-REM #### PERMISSIONS SECTION ####
-
-
-REM You need to know the sudo password and replace 'example' with this
-DEFINE SUDO_PASS example
+* #### PERMISSIONS SECTION ####
 
 STRING sudo su
 ENTER
 DELAY 1000
+
+* You need to know the sudo password and replace 'SUDO_PASS' with this
 STRING SUDO_PASS
 ENTER
 DELAY 1000
 
 
-REM #### MAC SECTION ####
+* #### MAC SECTION ####
 
 
-REM net-tools command
+* net-tools command
 STRING apt install net-tools
 ENTER
 DELAY 2000
 
-REM Set here your preferred MAC, you can don't change it remaining with the default value
-DEFINE NEW_MAC FF:FF:FF:FF:FF:FF
-
-REM Get the net interface name
+* Get the net interface name
 STRING INTERFACE=$(ip route get 8.8.8.8 | awk '{print $5}')
 ENTER
 DELAY 500
@@ -51,6 +46,7 @@ ENTER
 DELAY 500
 
 STRING ifconfig $INTERFACE hw ether 
+* Set here your preferred MAC, you can don't change it remaining with the default value
 STRING NEW_MAC
 ENTER
 DELAY 500
@@ -60,13 +56,13 @@ ENTER
 DELAY 500
 
 
-REM #### REMOVE TRACES ####
+* #### *OVE TRACES ####
 
 
 DELAY 2000
 STRING history -c
 ENTER
 
-REM Close shell
+* Close shell
 STRING exit
 ENTER
