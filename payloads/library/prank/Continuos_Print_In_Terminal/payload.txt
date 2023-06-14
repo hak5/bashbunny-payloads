@@ -1,20 +1,20 @@
-REM ####################################################
-REM #                                                  |
-REM # Title        : Continuos Print In Terminal       |
-REM # Author       : Aleff                             |
-REM # Version      : 1.0                               |
-REM # Category     : Prank                             |
-REM # Target       : Windows 10/11                     |
-REM #                                                  |
-REM ####################################################
+* ####################################################
+* #                                                  |
+* # Title        : Continuos Print In Terminal       |
+* # Author       : Aleff                             |
+* # Version      : 1.0                               |
+* # Category     : Prank                             |
+* # Target       : Windows 10/11                     |
+* #                                                  |
+* ####################################################
 
 
-REM Plug And Play <3
+* Plug And Play <3
 
-REM Requirements:
-REM     - Internet Connection
-REM     - ExecutionPolicy Bypass
-REM     - Python
+* Requirements:
+*     - Internet Connection
+*     - ExecutionPolicy Bypass
+*     - Python
 
 
 DELAY 1000
@@ -24,13 +24,17 @@ STRING powershell
 ENTER
 DELAY 2000
 
-STRINGLN (New-Object -ComObject WScript.Shell).SendKeys("{F11}")
+STRING (New-Object -ComObject WScript.Shell).SendKeys("{F11}")
+ENTER
 DELAY 500
 
-STRINGLN New-Item -Path ".\script.py" -ItemType "file" -Force
+STRING New-Item -Path ".\script.py" -ItemType "file" -Force
+ENTER
 DELAY 500
 
-STRINGLN Set-Content -Path ".\script.py" -Value "import os`nos.system('pip install colorama')`nimport colorama`nimport random`nfrom time import sleep`ncolorama.init()`nwhile True:`n`tcolor = random.choice([colorama.Fore.RED, colorama.Fore.GREEN, colorama.Fore.YELLOW])`n`tprint(color + 'Your computer is infected!')`n`tsleep(0.1)"
+STRING Set-Content -Path ".\script.py" -Value "import os`nos.system('pip install colorama')`nimport colorama`nimport random`nfrom time import sleep`ncolorama.init()`nwhile True:`n`tcolor = random.choice([colorama.Fore.RED, colorama.Fore.GREEN, colorama.Fore.YELLOW])`n`tprint(color + 'Your computer is infected!')`n`tsleep(0.1)"
+ENTER
 DELAY 500
 
-STRINGLN clear; python .\script.py;
+STRING clear; python .\script.py;
+ENTER
