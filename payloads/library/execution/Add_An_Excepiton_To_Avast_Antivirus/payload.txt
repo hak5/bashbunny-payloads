@@ -1,23 +1,19 @@
-REM ########################################################
-REM #                                                      |
-REM # Title        : Add An Exception To Avast Antivirus   |
-REM # Author       : Aleff                                 |
-REM # Version      : 1.0                                   |
-REM # Category     : Execute                               |
-REM # Target       : Windows 10/11                         |
-REM #                                                      |
-REM ########################################################
+* ########################################################
+* #                                                      |
+* # Title        : Add An Exception To Avast Antivirus   |
+* # Author       : Aleff                                 |
+* # Version      : 1.0                                   |
+* # Category     : Execute                               |
+* # Target       : Windows 10/11                         |
+* #                                                      |
+* ########################################################
 
 
-REM Requirements:
-REM     - Avast installed and configured
+* Requirements:
+*     - Avast installed and configured
 
 
-REM Set the full-path that you want to set as exception
-DEFINE FULL-PATH example/to/path
-
-
-REM Open Avast application
+* Open Avast application
 DELAY 2000
 GUI
 DELAY 1000
@@ -25,7 +21,7 @@ STRING avast
 DELAY 1000
 ENTER
 
-REM Go to Avast menu
+* Go to Avast menu
 DELAY 1000
 TAB
 DELAY 500
@@ -35,36 +31,8 @@ TAB
 DELAY 500
 ENTER
 
-REM Go to Avast settings
+* Go to Avast settings
 DELAY 1000
-TAB
-DELAY 500
-TAB
-DELAY 500
-TAB
-DELAY 500
-TAB
-DELAY 500
-ENTER
-
-REM Go to Exceptions menu
-DELAY 1000
-TAB
-DELAY 500
-TAB
-DELAY 500
-TAB
-DELAY 500
-TAB
-DELAY 500
-TAB
-DELAY 500
-TAB
-DELAY 500
-TAB
-DELAY 500
-TAB
-DELAY 500
 TAB
 DELAY 500
 TAB
@@ -75,16 +43,46 @@ TAB
 DELAY 500
 ENTER
 
-REM Add Exception button
+* Go to Exceptions menu
+DELAY 1000
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
 DELAY 500
 TAB
 DELAY 500
 ENTER
 
-REM Write the full-path and then close the Avast app
+* Add Exception button
+DELAY 500
+TAB
+DELAY 500
+ENTER
+
+* Write the full-path and then close the Avast app
 DELAY 1000
 TAB
 DELAY 500
+
+* Set the full-path that you want to set as exception
 STRING FULL-PATH
 DELAY 500
 TAB
