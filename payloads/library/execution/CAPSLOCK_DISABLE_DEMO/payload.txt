@@ -1,0 +1,23 @@
+# Title: CAPSLOCK_DISABLE_DEMO
+# Description: Demonstration of CAPSLOCK_DISABLE extension.
+# AUTHOR: drapl0n
+# Version: 1.0
+# Category: Execution
+# Target: GNU/Linux.
+# Attackmodes: HID.
+
+LED SETUP
+ATTACKMODE STORAGE HID
+GET SWITCH_POSITION
+LED ATTACK
+Q DELAY 1000
+Q CTRL-ALT t
+Q DELAY 1000
+
+# [Prevent storing history]
+Q STRING unset HISTFILE
+Q ENTER
+Q DELAY 200
+
+# [Calling Extension]
+CAPSLOCK_DISABLE
