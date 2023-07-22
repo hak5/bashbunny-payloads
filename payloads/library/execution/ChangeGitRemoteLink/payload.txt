@@ -15,28 +15,28 @@
 *     - ExecutionPolicy Bypass if runned on Windows
 
 
-DELAY 1000
-GUI r
-DELAY 1000
-STRING powershell
-ENTER
-DELAY 2000
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 1000
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 2000
 
 * Full path of the local repository i.e. "C:\Users\User\Documents\Repository1"
-STRING cd #FULL-PATH
-ENTER
-DELAY 1000
+QUACK STRING cd #FULL-PATH
+QUACK ENTER
+QUACK DELAY 1000
 * Link from which updates are to be downloaded so the new repository the Repository2
-STRING git remote set-url origin #NEW-GIT-LINK
-ENTER
-DELAY 1000
+QUACK STRING git remote set-url origin #NEW-GIT-LINK
+QUACK ENTER
+QUACK DELAY 1000
 * Define the branch of the new repository Repository2, i.e. "main"
-STRING git pull --force origin #BRANCH
-ENTER
-DELAY 1000
+QUACK STRING git pull --force origin #BRANCH
+QUACK ENTER
+QUACK DELAY 1000
 * Define the branch of the new repository Repository2, i.e. "main"
-STRING git reset --hard origin/#BRANCH
-ENTER
-DELAY 1000
+QUACK STRING git reset --hard origin/#BRANCH
+QUACK ENTER
+QUACK DELAY 1000
 
-ALT F4
+QUACK ALT F4
