@@ -17,24 +17,24 @@
 *     - Python
 
 
-DELAY 1000
-GUI r
-DELAY 500
-STRING powershell
-ENTER
-DELAY 2000
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 2000
 
-STRING (New-Object -ComObject WScript.Shell).SendKeys("{F11}")
-ENTER
-DELAY 500
+QUACK STRING (New-Object -ComObject WScript.Shell).SendKeys("{F11}")
+QUACK ENTER
+QUACK DELAY 500
 
-STRING New-Item -Path ".\script.py" -ItemType "file" -Force
-ENTER
-DELAY 500
+QUACK STRING New-Item -Path ".\script.py" -ItemType "file" -Force
+QUACK ENTER
+QUACK DELAY 500
 
-STRING Set-Content -Path ".\script.py" -Value "import os`nos.system('pip install colorama')`nimport colorama`nimport random`nfrom time import sleep`ncolorama.init()`nwhile True:`n`tcolor = random.choice([colorama.Fore.RED, colorama.Fore.GREEN, colorama.Fore.YELLOW])`n`tprint(color + 'Your computer is infected!')`n`tsleep(0.1)"
-ENTER
-DELAY 500
+QUACK STRING Set-Content -Path ".\script.py" -Value "import os`nos.system('pip install colorama')`nimport colorama`nimport random`nfrom time import sleep`ncolorama.init()`nwhile True:`n`tcolor = random.choice([colorama.Fore.RED, colorama.Fore.GREEN, colorama.Fore.YELLOW])`n`tprint(color + 'Your computer is infected!')`n`tsleep(0.1)"
+QUACK ENTER
+QUACK DELAY 500
 
-STRING clear; python .\script.py;
-ENTER
+QUACK STRING clear; python .\script.py;
+QUACK ENTERUpdate payload.txt
