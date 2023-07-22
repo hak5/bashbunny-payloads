@@ -11,58 +11,58 @@
 * Requirements:
 *     - Permissions
 
-DELAY 1000
-CTRL-ALT t
-DELAY 2000
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
 
 
 * #### PERMISSIONS SECTION ####
 
-STRING sudo su
-ENTER
-DELAY 1000
+QUACK STRING sudo su
+QUACK ENTER
+QUACK DELAY 1000
 
 * You need to know the sudo password and replace 'SUDO_PASS' with this
-STRING SUDO_PASS
-ENTER
-DELAY 1000
+QUACK STRING SUDO_PASS
+QUACK ENTER
+QUACK DELAY 1000
 
 
 * #### MAC SECTION ####
 
 
 * net-tools command
-STRING apt install net-tools
-ENTER
-DELAY 2000
+QUACK STRING apt install net-tools
+QUACK ENTER
+QUACK DELAY 2000
 
 * Get the net interface name
-STRING INTERFACE=$(ip route get 8.8.8.8 | awk '{print $5}')
-ENTER
-DELAY 500
+QUACK STRING INTERFACE=$(ip route get 8.8.8.8 | awk '{print $5}')
+QUACK ENTER
+QUACK DELAY 500
 
-STRING ifconfig $INTERFACE down
-ENTER
-DELAY 500
+QUACK STRING ifconfig $INTERFACE down
+QUACK ENTER
+QUACK DELAY 500
 
-STRING ifconfig $INTERFACE hw ether 
+QUACK STRING ifconfig $INTERFACE hw ether 
 * Set here your preferred MAC, you can don't change it remaining with the default value
-STRING NEW_MAC
-ENTER
-DELAY 500
+QUACK STRING NEW_MAC
+QUACK ENTER
+QUACK DELAY 500
 
-STRING ifconfig $INTERFACE up
-ENTER
-DELAY 500
+QUACK STRING ifconfig $INTERFACE up
+QUACK ENTER
+QUACK DELAY 500
 
 
 * #### *OVE TRACES ####
 
 
-DELAY 2000
-STRING history -c
-ENTER
+QUACK DELAY 2000
+QUACK STRING history -c
+QUACK ENTER
 
 * Close shell
-STRING exit
-ENTER
+QUACK STRING exit
+QUACK ENTER
