@@ -1,25 +1,25 @@
-REM ################################################
-REM #                                              |
-REM # Title        : Play A Song With An iPhone    |
-REM # Author       : Aleff                         |
-REM # Version      : 1.0                           |
-REM # Category     : Prank                         |
-REM # Target       : iPhone                        |
-REM #                                              |
-REM ################################################
+* REM ################################################
+* REM #                                              |
+* REM # Title        : Play A Song With An iPhone    |
+* REM # Author       : Aleff                         |
+* REM # Version      : 1.0                           |
+* REM # Category     : Prank                         |
+* REM # Target       : iPhone                        |
+* REM #                                              |
+* REM ################################################
 
 
-REM Requirements:
-REM     - The phone must be unlocked
+* REM Requirements:
+* REM     - The phone must be unlocked
 
-REM Tested on:
-REM     - iPhone 14
-REM     - iOS 16.4.1
+* REM Tested on:
+* REM     - iPhone 14
+* REM     - iOS 16.4.1
 
 QUACK GUI SPACE
 QUACK DELAY 300
 
-REM You need to change the name of the application according to the language you have on your phone.
+* REM You need to change the name of the application according to the language you have on your phone.
 QUACK STRING #MUSIC-APP-NAME
 QUACK ENTER
 QUACK DELAY 1000
