@@ -14,24 +14,35 @@
 *     - Instagram account logged in
 
 
-DELAY 1000
-GUI r
-DELAY 500
-STRING powershell
-ENTER
-DELAY 500
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 500
 
 * You must set the Instagram account that you want to follow i.e. https://www.instagram.com/alessandro_greco_aka_aleff/
-STRING Start-Process "#INSTAGRAM_LINK"; exit;
-ENTER
+QUACK STRING Start-Process "#INSTAGRAM_LINK"; exit;
+QUACK ENTER
 * It depends by the computer power and by the internet connection power
-DELAY 2000
+QUACK DELAY 2000
 
 * Go to Follow button and click it
-REPEAT 12 TAB
-DELAY 500
-ENTER
-DELAY 1000
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 1000
 
 * Close the Browser
-ALT F4
+QUACK ALT F4
