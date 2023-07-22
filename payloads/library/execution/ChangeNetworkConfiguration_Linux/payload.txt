@@ -11,63 +11,63 @@
 * Requirements:
 *     - Permissions
 
-DELAY 1000
-CTRL-ALT t
-DELAY 2000
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
 
 
 * #### PERMISSIONS SECTION ####
 
-STRING sudo su
-ENTER
-DELAY 1000
+QUACK STRING sudo su
+QUACK ENTER
+QUACK DELAY 1000
 * Required: You need to know the sudo password and replace 'example' with this
 * DEFINE SUDO_PASS example
-STRING SUDO_PASS
-ENTER
-DELAY 1000
+QUACK STRING SUDO_PASS
+QUACK ENTER
+QUACK DELAY 1000
 
 
 * #### IP SECTION ####
 
 
 * net-tools command
-STRING apt install net-tools
-ENTER
-DELAY 2000
+QUACK STRING apt install net-tools
+QUACK ENTER
+QUACK DELAY 2000
 
 * Set network interface
 * Set your #IP i.e. 192.168.1.100
-STRING IP="#IP"
-ENTER
-DELAY 500
+QUACK STRING IP="#IP"
+QUACK ENTER
+QUACK DELAY 500
 
 * Set your #MASK i.e. 255.255.255.0
-STRING MASK="#MASK"
-ENTER
-DELAY 500
+QUACK STRING MASK="#MASK"
+QUACK ENTER
+QUACK DELAY 500
 
 * Set your #GATEWAY i.e.192.168.1.1
-STRING GATEWAY="#GATEWAY"
-ENTER
-DELAY 500
+QUACK STRING GATEWAY="#GATEWAY"
+QUACK ENTER
+QUACK DELAY 500
 
 * Get the net interface name
-STRING INTERFACE=$(ip route get 8.8.8.8 | awk '{print $5}')
-ENTER
-DELAY 500
-STRING ifconfig $INTERFACE $IP netmask $MASK up
-ENTER
-DELAY 500
+QUACK STRING INTERFACE=$(ip route get 8.8.8.8 | awk '{print $5}')
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING ifconfig $INTERFACE $IP netmask $MASK up
+QUACK ENTER
+QUACK DELAY 500
 
 
 * #### *OVE TRACES ####
 
 
-STRING history -c
-ENTER
-DELAY 500
+QUACK STRING history -c
+QUACK ENTER
+QUACK DELAY 500
 
 * Close shell
-STRING exit
-ENTER
+QUACK STRING exit
+QUACK ENTER
