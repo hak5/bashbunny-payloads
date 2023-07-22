@@ -1,17 +1,17 @@
-REM ###################################################
-REM #                                                 |
-REM # Title        : Change Github Profile Settings   |
-REM # Author       : Aleff                            |
-REM # Version      : 1.0                              |
-REM # Category     : Prank                            |
-REM # Target       : Windows 10/11                    |
-REM #                                                 |
-REM ###################################################
+* REM ###################################################
+* REM #                                                 |
+* REM # Title        : Change Github Profile Settings   |
+* REM # Author       : Aleff                            |
+* REM # Version      : 1.0                              |
+* REM # Category     : Prank                            |
+* REM # Target       : Windows 10/11                    |
+* REM #                                                 |
+* REM ###################################################
 
 
-REM Requirements:
-REM     - Internet connection
-REM     - Logged in Github
+* REM Requirements:
+* REM     - Internet connection
+* REM     - Logged in Github
 
 
 QUACK DELAY 1000
@@ -23,7 +23,7 @@ QUACK DELAY 500
 
 QUACK STRING Start-Process "https://github.com/settings/profile"; exit;
 QUACK ENTER
-REM It depends by the computer power and by the internet connection power
+* REM It depends by the computer power and by the internet connection power
 QUACK DELAY 2000
 
 QUACK TAB
@@ -63,26 +63,26 @@ QUACK TAB
 QUACK TAB
 QUACK TAB
 QUACK TAB
-REM Here you should define the new name
+* REM Here you should define the new name
 QUACK STRING NAME
 QUACK TAB
 QUACK TAB
 QUACK TAB
 QUACK TAB
-REM Here you should define the new Biography
+* REM Here you should define the new Biography
 QUACK STRING BIO
 QUACK TAB
 QUACK DOWNARROW
 QUACK DOWNARROW
 QUACK DOWNARROW
 QUACK DOWNARROW
-REM Here you should define the custom pronouns
+* REM Here you should define the custom pronouns
 QUACK STRING CUSTOM-PRONOUNS
 QUACK TAB
-REM Here you should define the new personal website url
+* REM Here you should define the new personal website url
 QUACK STRING URL
 QUACK TAB
-REM Here you should define the new social network links
+* REM Here you should define the new social network links
 QUACK STRING SOCIAL-ACCOUNT-1
 QUACK TAB
 QUACK STRING SOCIAL-ACCOUNT-2
@@ -91,10 +91,10 @@ QUACK STRING SOCIAL-ACCOUNT-3
 QUACK TAB
 QUACK STRING SOCIAL-ACCOUNT-4
 QUACK TAB
-REM Here you should define the new company
+* REM Here you should define the new company
 QUACK STRING COMPANY
 QUACK TAB
-REM Here you should define the new location
+* REM Here you should define the new location
 QUACK STRING LOCATION
 QUACK TAB
 QUACK TAB
