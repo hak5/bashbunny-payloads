@@ -21,48 +21,48 @@
 * 5. Downarrow and enter to open the chat
 
 
-DELAY 1000
-GUI r
-DELAY 1000
-STRING powershell
-ENTER
-DELAY 2000
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 1000
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 2000
 
 * #### Powershell ####
-STRING Stop-Process -Name "Teams"
-ENTER
-DELAY 1000
-STRING Start-Process "$Env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school)"
-ENTER
+QUACK STRING Stop-Process -Name "Teams"
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING Start-Process "$Env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school)"
+QUACK ENTER
 * It depends by the computer power
-DELAY 10000
+QUACK DELAY 10000
 
 * #### Teams ####
-CTRL N
-DELAY 2000
+QUACK CTRL N
+QUACK DELAY 2000
 
 * REQUIRED - Name, email, id or what you want for contact the target
-STRING USER-ID
-ENTER
-DELAY 2000
-TAB
-DELAY 1000
-TAB
-DELAY 1000
+QUACK STRING USER-ID
+QUACK ENTER
+QUACK DELAY 2000
+QUACK TAB
+QUACK DELAY 1000
+QUACK TAB
+QUACK DELAY 1000
 
 * #### Messages ####
 
 * REQUIRED - Messages
 * ...
 * DEFINE MESSAGEn example..
-STRING MESSAGE1
-ENTER
-DELAY 1000
+QUACK STRING MESSAGE1
+QUACK ENTER
+QUACK DELAY 1000
 * ...
 * STRING MESSAGEN
 * ENTER
 
-DELAY 500
-ALT F4
-DELAY 500
-ALT F4
+QUACK DELAY 500
+QUACK ALT F4
+QUACK DELAY 500
+QUACK ALT F4
