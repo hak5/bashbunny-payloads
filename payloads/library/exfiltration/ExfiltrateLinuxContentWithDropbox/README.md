@@ -1,4 +1,4 @@
-# Exfiltrate Linux Content With Dropbox - BADUSB ✅
+# Exfiltrate Linux Content With Dropbox
 
 A script used to take folder content on Linux Systems.
 
