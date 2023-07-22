@@ -19,26 +19,26 @@ DEFINE CHAT_NAME example
 
 
 * Open Discord app
-GUI
-DELAY 1000
-STRING Discord
-ENTER
+QUACK GUI
+QUACK DELAY 1000
+QUACK STRING Discord
+QUACK ENTER
 
 * This depends on the power of the computer and whether there are upgrades to be done
-DELAY 6000
+QUACK DELAY 6000
 
 * Search by Discord keyboard shortcut and open it
-CTRL-k
-DELAY 500
-STRING #CHAT_NAME
-ENTER
-DELAY 500
+QUACK CTRL-k
+QUACK DELAY 500
+QUACK STRING #CHAT_NAME
+QUACK ENTER
+QUACK DELAY 500
 
-STRING Write here...
-ENTER
-STRING your...
-ENTER
-STRING messages...
-ENTER
+QUACK STRING Write here...
+QUACK ENTER
+QUACK STRING your...
+QUACK ENTER
+QUACK STRING messages...
+QUACK ENTER
 
-ALT F4
+QUACK ALT F4
