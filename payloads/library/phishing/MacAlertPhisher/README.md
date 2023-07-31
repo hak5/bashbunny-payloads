@@ -8,7 +8,7 @@
 Creates a customizable alert that prompts for the victim's credentials and shares them with you via Discord. Even after unplugging the Bash Bunny.
 
 ### Setup
-Please insert your [Discord’s Webhook](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) link into the `discord` variable in the `script.sh` file.
+Please insert your [Discord’s Webhook](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) link into the `discord` variable in the `script.sh` file. Optional, you can change the other variables at the top of the `script.sh` file to your needs.
 
 ### Status
 | LED | State |
@@ -17,4 +17,4 @@ Please insert your [Discord’s Webhook](https://support.discord.com/hc/en-us/ar
 | Yellow single blink (ATTACK) | Prepaires and executes phishing-script on the victims machine |
 | Green 1000ms VERYFAST blink followed by SOLID (FINISH) | Attack finished (Ready to unplug) |
 
-*Average runtime: 26 seconds*
+*Average runtime: 27 seconds*

