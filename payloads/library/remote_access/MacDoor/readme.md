@@ -12,7 +12,7 @@
 * Version:    1.0
 * Target:     MacOS
 * Tested on:  Ventura 13.3.1
-* Category:   Execution
+* Category:   Remote Access
 
 # DESCRIPTION
 
