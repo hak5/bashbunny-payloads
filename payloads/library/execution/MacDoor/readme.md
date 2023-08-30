@@ -1,4 +1,4 @@
-# MacDoor - Python Backdoor Execution for the BashBunny
+# MacDoor - Python Backdoor Execution
 
 ```
     __  ___              ____                     
