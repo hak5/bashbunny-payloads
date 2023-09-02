@@ -5,7 +5,8 @@
    /  |/  /____ _ _____ / __ \ ____   ____   _____
   / /|_/ // __ `// ___// / / // __ \ / __ \ / ___/
  / /  / // /_/ // /__ / /_/ // /_/ // /_/ // /    
-/_/  /_/ \__,_/ \___//_____/ \____/ \____//_/     
+/_/  /_/ \__,_/ \___//_____/ \____/ \____//_/
+
 ```
 
 * Author:     afsh4ck
@@ -28,3 +29,6 @@ Download a Python backdoor from our server, run it in terminal and minimize the 
 
 * You need to modify the script with your attacker IP and the port or your local server.
 
+# VIDEO
+
+https://www.instagram.com/reel/Cwk1SEft5FA/?igshid=MzRlODBiNWFlZA==
