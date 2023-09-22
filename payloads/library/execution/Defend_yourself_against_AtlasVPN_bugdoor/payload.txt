@@ -1,0 +1,35 @@
+* REM ############################################################
+* REM #                                                          #
+* REM # Title        : Defend yourself against AtlasVPN Bug-Door #
+* REM # Author       : Aleff                                     #
+* REM # Version      : 1.0                                       #
+* REM # Category     : Execution                                 #
+* REM # Target       : Linux                                     #
+* REM #                                                          #
+* REM ############################################################
+
+* REM Requirements:
+* REM     - Administrator Permission
+* REM     - AtlasVPN installed
+
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
+
+* REM Add the rule and close the shell
+QUACK STRING sudo iptables -A INPUT -p tcp --dport 8076 -m state --state NEW -j DROP; exit;
+
+* REM Add the rule and display it
+* REM QUACK STRING sudo iptables -A INPUT -p tcp --dport 8076 -m state --state NEW -j DROP; sudo iptables -S | grep "8076";
+
+* REM Remove the rule
+* REM STRING sudo iptables -D INPUT -p tcp --dport 8076 -m state --state NEW -j DROP
+
+QUACK ENTER
+
+QUACK DELAY 500
+
+* REM Put here the sudo user password
+QUACK STRING example
+
+QUACK ENTER
