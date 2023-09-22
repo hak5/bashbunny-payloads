@@ -1,0 +1,44 @@
+* ############################################################
+* #                                                          |
+* # Title        : Send Messages In Discord Channel-Server   |
+* # Author       : Aleff                                     |
+* # Version      : 1.0                                       |
+* # Category     : Execution                                 |
+* # Target       : Windows 10-11                             |
+* #                                                          |
+* ############################################################
+
+
+* Requirements:
+*     - Internet connection
+*     - Discord Installed
+
+
+* If, for example, the server is Hak5 and the channel in which you want to send the message is called wifi-pineapple then you should write just wifi-pineapple
+DEFINE CHAT_NAME example
+
+
+* Open Discord app
+QUACK GUI
+QUACK DELAY 1000
+QUACK STRING Discord
+QUACK ENTER
+
+* This depends on the power of the computer and whether there are upgrades to be done
+QUACK DELAY 6000
+
+* Search by Discord keyboard shortcut and open it
+QUACK CTRL-k
+QUACK DELAY 500
+QUACK STRING #CHAT_NAME
+QUACK ENTER
+QUACK DELAY 500
+
+QUACK STRING Write here...
+QUACK ENTER
+QUACK STRING your...
+QUACK ENTER
+QUACK STRING messages...
+QUACK ENTER
+
+QUACK ALT F4
