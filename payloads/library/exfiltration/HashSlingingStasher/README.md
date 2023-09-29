@@ -56,7 +56,7 @@ Backup checksums.txt after running HSS and name it something specific so that yo
 
 If the script completes its scan of the target system, it will create a file called "nosferatu" in the loot directory. Otherwise you may simply come back and run the HSS script again to resume scanning at any time. nosferatu is deleted at the beginning of each scan, if it exists on the Bash Bunny already.
 
-Unplug the Bash Bunny device when the script is finished, or at any time if you wish to return and finish later (TBD; does this corrupt or not back up files?). You may now move the files off of the device for storage elsewhere, if desired. Leave the checksums.txt file inside the loot directory on the device if the script did not complete. The script will pick up where it left off, skipping over any files that were copied before (as long as checksums.txt is left on the device).
+Unplug the Bash Bunny device when the script is finished, or at any time if you wish to return and finish later. You may now move the files off of the device for storage elsewhere, if desired. Leave the checksums.txt file inside the loot directory on the device if the script did not complete. The script will pick up where it left off, skipping over any files that were copied before (as long as checksums.txt is left on the device).
 
 # Nuances
 The tool will attempt to mount all connected disks and run as super user if possible (better results), unmounting whatever was not previously mounted before, once the script completes.
@@ -64,6 +64,8 @@ The tool will attempt to mount all connected disks and run as super user if poss
 If an unsupported filesystem is connected, you may instead run the script from a bootable USB OS attached to the target, which supports the desired filesystem.
 
 MacOS Time Machine backups and hidden ".Trashes" folders can not be accessed by running this script from the local machine running MacOS, unless full disk access has been granted to the termial application. You can do this relatively quickly (if you have the password to the user logged in) by pressing command + space, type "full disk access" and press return, then click the toggle to enable Terminal if it is not already enabled. Don't forget to turn it off afterwards if you go this route.
+
+If you unplug the Bash Bunny before the script finishes, and then modify payload.txt, you will have to manually delete the .../BashBunny/HSS directory for the changes to take effect.
 
 # LED Status Indicators (Standard)
 SETUP.... Magenta solid
