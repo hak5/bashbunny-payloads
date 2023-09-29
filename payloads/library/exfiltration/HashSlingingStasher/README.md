@@ -67,7 +67,9 @@ MacOS Time Machine backups and hidden ".Trashes" folders can not be accessed by 
 
 # LED Status Indicators (Standard)
 SETUP.... Magenta solid
+
 ATTACK... Yellow single blink
+
 FINISH... Green 1000ms VERY FAST blink followed by SOLID
 
 # hss_checksummer.sh
