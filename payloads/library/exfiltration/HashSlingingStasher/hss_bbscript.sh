@@ -46,7 +46,7 @@ find $target_directory -path "$mountpt/loot/hss" -prune -o -size $find_file_size
     if [ -f "./backup/${p##*/}" ]; then
       cp "$p" "./backup/`cksum "$(echo "$p" | tr -d '\\\')" | cut -d ' ' -f1`_${p##*/}"
       if [ $? -ne 0 ] ; then
-        # Provide indication the drive was full, unmount only the disks that were mounted at the beginning of the script and delete any mount points created
+        # Provide indication the drive was full, and unmount only the disks that were mounted at the beginning of the script
         touch ./disk_drive_full
         if uname | grep -i darwin; then for i in $mounted; do diskutil unmountDisk $i; done; fi
         if uname | grep -i darwin; then :; else for i in $mounted; do udisksctl unmount -b $i; done; fi
@@ -57,7 +57,7 @@ find $target_directory -path "$mountpt/loot/hss" -prune -o -size $find_file_size
     else
       cp "$p" "./backup/"
       if [ $? -ne 0 ] ; then
-        # Provide indication the drive was full, unmount only the disks that were mounted at the beginning of the script and delete any mount points created
+        # Provide indication the drive was full, and unmount only the disks that were mounted at the beginning of the script
         touch ./disk_drive_full
         if uname | grep -i darwin; then for i in $mounted; do diskutil unmountDisk $i; done; fi
         if uname | grep -i darwin; then :; else for i in $mounted; do udisksctl unmount -b $i; done; fi
@@ -69,7 +69,7 @@ find $target_directory -path "$mountpt/loot/hss" -prune -o -size $find_file_size
   fi
 done
 
-###### Unmount only the disks that were mounted at the beginning of the script, delete any mount points created and provide indication that the script completed successfully ######
+###### Unmount only the disks that were mounted at the beginning of the script, and provide indication that the script completed successfully ######
 if [ $? -ne 0 ] ; then
   :
 else
