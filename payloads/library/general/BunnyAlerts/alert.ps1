@@ -12,7 +12,7 @@
 
 # options
 $msg = "Hostname: ${env:computername}, Username: ${env:username} left their computer unlocked!"
-$uriSlack = "https://hooks.slack.com/services/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"
+$uriSlack = "<Your Slack Webhook Url>"
 $body = ConvertTo-Json @{
     text = $msg
 }
