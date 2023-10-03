@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# Title:         Nmap_Installer
+# Author:        golem445
+# Version:       1.0
+# Dependencies:  Internet Connection Sharing enabled
+#
+# Installs the latest Nmap via subversion
+
+## Get setup
+LED SETUP 
+ATTACKMODE RNDIS_ETHERNET 
+
+# Install dependencies
+apt-get update -y
+apt-get install subversion autoconf build-essential libssl-dev
+
+## Install Nmap
+LED ATTACK
+cd /root/
+svn co https://svn.nmap.org/nmap/
+cd nmap
+./configure
+make
+make install
+
+# Cleanup 
+cd /root/
+rm -rf nmap
+
+# Sync the file system
+sync
+
+## Finished
+LED FINISH
