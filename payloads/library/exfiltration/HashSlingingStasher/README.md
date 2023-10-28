@@ -42,7 +42,7 @@ NNNNNNNNNNNXXNNNNXK0OOOOO00KXXNNNNNNXXKKKKKKXXNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 </pre>
 
-HSS is a data backup tool for MacOS and Linux targets (tested on Ubuntu 22.04.3 LTS, MacOS 13.6, and Kali Linux 2023.3) (not compatible with Windows). It is designed to find and copy user defined file types/sizes to the udisk on the Bash Bunny, and keep track of them using checksums. This allows the user to scan, stop, and revisit the target to resume copying only new files, skipping those previously copied. 
+HSS is a data backup tool for MacOS and Linux targets (tested on MacOS 13.x/14.0, Ubuntu 22.04.3 LTS, Manjaro 23.0.4, and Kali Linux 2023.3) (not compatible with Windows). It is designed to find and copy user defined file types/sizes to the udisk on the Bash Bunny, and keep track of them using checksums. This allows the user to scan, stop, and revisit the target to resume copying only new files, skipping those previously copied. 
 
 # Instructions
 
@@ -80,6 +80,6 @@ FINISH... Green 1000ms VERY FAST blink followed by SOLID
 Manually run this script in the parent directory above a directory called "backup" containing files you want to add to a checksums.txt list. Then take the checksums.txt file and place it in .../loot/hss/ to prevent the files from being copied to the .../loot/hss/backups/ directory the next time HSS is run.
 
 # hss_cleanup.sh
-### To perform cleanup functions on the loot directory
+### To manually perform cleanup functions on the loot directory
 
 Manually run this script inside the .../loot/hss/ directory to unhide hidden files, and sort files into directories based on their file extension inside the loot directory.

