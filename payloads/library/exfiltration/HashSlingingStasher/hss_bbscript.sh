@@ -39,7 +39,7 @@ done <<< "$partitions"
 fi
 
 ###### Find all files under a given directory of a given size and filetype, copy the files to a folder on the USB drive, and save their checksums to a running list ######
-find $target_directory -path "$mountpt/loot/hss" -prune -o -size $find_file_size -type f \( -name "" `for i in ${target_extensions[@]}; do echo "-o -iname "*.$i" "; done` \) -exec echo {} ';' | while read p; do
+find "$target_directory" -path "$mountpt/loot/hss" -prune -o -size $find_file_size -type f \( -name "" `for i in ${target_extensions[@]}; do echo "-o -iname "*.$i" "; done` \) -exec echo {} ';' | while read p; do
   if cat ./checksums.txt | grep -qw `cksum "$(echo "$p" | tr -d '\\\')" | cut -d ' ' -f1`; then
     :
   else
