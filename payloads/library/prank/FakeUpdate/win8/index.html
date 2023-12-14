@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Microsoft update</title>
+  <meta name="description" content="Update">
+  <meta name="author" content="Microsoft">
+  <style>
+    body {
+      padding:0px;
+      margin:0px;
+      background:#07466c;
+    }
+    #container {
+      width: 100vw;
+      height: 100vh;
+      max-width:100%; 
+      background-color:#07466c;
+      cursor:none;
+      font-family: Segoe UI Light, Segoe UI, Arial;
+      font-size: 23px;
+      color: #fff;
+      font-weight: normal;
+      user-select: none;
+    }
+    #update {
+      width: 400px;
+      height: 200px;
+      position: absolute;
+      top:-10%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      align:center;
+      text-align:center;
+      margin: auto;
+      user-select: none;
+    }
+    .loader {
+      position: relative;
+      padding-top: 100px;
+      left: 0px;
+      top:25px;
+      margin: auto;
+    }
+    .loader .circle {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      opacity: 0;
+      transform: rotate(225deg);
+      animation-iteration-count: infinite;
+      animation-name: orbit;
+      animation-duration: 5.5s;
+    }
+    .loader .circle:after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 4px;
+      background: #fff;
+    }
+    .loader .circle:nth-child(2) {
+      animation-delay: 240ms;
+    }
+    .loader .circle:nth-child(3) {
+      animation-delay: 480ms;
+    }
+    .loader .circle:nth-child(4) {
+      animation-delay: 720ms;
+    }
+    .loader .circle:nth-child(5) {
+      animation-delay: 960ms;
+    }
+    @keyframes orbit {
+      0% {
+        transform: rotate(225deg);
+        opacity: 1;
+        animation-timing-function: ease-out;
+      }
+      7% {
+        transform: rotate(345deg);
+        animation-timing-function: linear;
+      }
+      30% {
+        transform: rotate(455deg);
+        animation-timing-function: ease-in-out;
+      }
+      39% {
+        transform: rotate(690deg);
+        animation-timing-function: linear;
+      }
+      70% {
+        transform: rotate(815deg);
+        opacity: 1;
+        animation-timing-function: ease-out;
+      }
+      75% {
+        transform: rotate(945deg);
+        animation-timing-function: ease-out;
+      }
+      76% {
+        transform: rotate(945deg);
+        opacity: 0;
+      }
+      100% {
+        transform: rotate(945deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="update">
+    <div class="loader">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+    <div>Configuring Windows Updates</div>
+    <div><span id="countdown">0</span>% complete.</div>
+    <div>Do not turn of your computer.</div>
+  </div>
+</div>
+<script>
+document.addEventListener('contextmenu', function(e) { e.preventDefault() } );
+(function fnCountDown() {
+  setTimeout(function() {
+    var cnt=parseInt(document.getElementById('countdown').innerText);
+    document.getElementById('countdown').innerText = cnt + 1;
+    if(cnt < 99) {
+      fnCountDown();
+    }
+  }, Math.floor((Math.random() * 10) + 1) * 1000)
+})()
+</script>
+</body>
+</html>
