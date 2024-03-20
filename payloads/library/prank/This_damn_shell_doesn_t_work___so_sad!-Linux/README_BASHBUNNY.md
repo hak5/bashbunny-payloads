@@ -4,6 +4,8 @@ This payload can be used to prank your friends so that when they open their term
 
 **Category**: Prank
 
+*How it works on Kali Linux...*
+
 ![](1.gif)
 
 ## Dependencies
