@@ -1,6 +1,6 @@
 **Title: PingZhellBunny**
 
-<p>Author: 0iphor13<br>
+<p>Author: 0i41E<br>
 OS: Windows<br>
 Version: 1.5<br>
 

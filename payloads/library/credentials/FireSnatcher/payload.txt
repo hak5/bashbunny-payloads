@@ -1,7 +1,7 @@
 # Title:         FireSnatcher
 # Description:   Copies Wifi Keys, and Firefox Password Databases
 # Author:        KarrotKak3
-# Props:         saintcrossbow & 0iphor13
+# Props:         saintcrossbow & 0i41E
 # Version:       1.0.2.0 (Work in Progress)
 # Category:      Credentials
 # Target:        Windows (Logged in) 

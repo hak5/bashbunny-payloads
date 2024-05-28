@@ -2,7 +2,7 @@
 #
 # Title:         WifiSnatch
 # Description:   Extract wifi information, such as passphrases & SSIDs
-# Author:        0iphor13
+# Author:        0i41E
 # Version:       1.1
 # Category:      Exfiltration
 # Attackmodes:   HID, Storage

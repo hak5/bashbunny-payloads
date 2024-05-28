@@ -2,7 +2,7 @@
 #
 # Title:         PingZhellBunny
 # Description:   Getting remote access via ICMP
-# Author:        0iphor13
+# Author:        0i41E
 # Version:       1.5
 # Category:      Remote_Access
 # Attackmodes:   HID, RNDIS_ETHERNET

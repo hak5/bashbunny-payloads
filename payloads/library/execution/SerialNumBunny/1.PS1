@@ -12,4 +12,4 @@ $Picture=@"
 Sleep -s 5
 Write-Host -ForegroundColor red "$Picture"
 Sleep -s 2
-Write-Host -ForegroundColor green "SerialNumBunny by 0iphor13"
+Write-Host -ForegroundColor green "SerialNumBunny by 0i41E"
