@@ -9,7 +9,7 @@
 * REM ###################################################
 
 * REM Open Thunderbird and goto settings
-QUACK WIN r
+QUACK GUI r
 QUACK STRING thunderbird
 QUACK ENTER
 QUACK DELAY 1000
@@ -47,7 +47,7 @@ QUACK TAB
 QUACK TAB
 QUACK TAB
 QUACK DELAY 500
-QUACK SPACEBAR
+QUACK SPACE
 QUACK DELAY 500
 QUACK ENTER
 QUACK DELAY 500
@@ -57,7 +57,7 @@ QUACK ALT F4
 QUACK DELAY 500
 
 * REM Open the powershell and goto the directory
-QUACK WIN r
+QUACK GUI r
 QUACK STRING powershell
 QUACK ENTER
 QUACK DELAY 1500
