@@ -4,7 +4,7 @@ This script has been developed to allow you to mitigate a well-known vulnerabili
 
 **Category**: Incident Response
 
-![](1.png)
+![](https://i.ibb.co/BP7Rv4B/1.png)
 
 ## Table of contents:
 
@@ -87,11 +87,11 @@ One of the ways to delete iptables rules is by rule specification. To do so, you
 
 `sudo iptables -D INPUT -p tcp --dport 8076 -m state --state NEW -j DROP`
 
-![](1.png)
+![](https://i.ibb.co/BP7Rv4B/1.png)
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center"> Aleff</h2>
 <div align=center>
 <table>
   <tr>

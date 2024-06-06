@@ -8,6 +8,8 @@
 * REM #                                                          #
 * REM ############################################################
 
+ATTACKMODE HID
+
 * REM Requirements:
 * REM     - Administrator Permission
 * REM     - AtlasVPN installed
@@ -26,10 +28,8 @@ QUACK STRING sudo iptables -A INPUT -p tcp --dport 8076 -m state --state NEW -j 
 * REM STRING sudo iptables -D INPUT -p tcp --dport 8076 -m state --state NEW -j DROP
 
 QUACK ENTER
-
 QUACK DELAY 500
 
 * REM Put here the sudo user password
 QUACK STRING example
-
 QUACK ENTER
