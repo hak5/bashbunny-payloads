@@ -41,39 +41,42 @@ This program automates the process of saving your Thunderbird settings to Dropbo
 
 Before running the program, ensure to set the following parameters correctly/as you prefer:
 
-- `#ACCESS_TOKEN`: Your private Dropbox access token, i.e. mine is aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ==
-- `#ARCHIVE_NAME`: The name of the archive file to be created (e.g., `cache.zip`).
-- `#DROPBOX_FOLDER_PATH`: The path in your Dropbox where the file will be uploaded (e.g., `/`).
+- `#ACCESS_TOKEN`: Your private Dropbox access token
+- `#ARCHIVE_NAME`: The name of the archive file to be created.
+- `#DROPBOX_FOLDER_PATH`: The path in your Dropbox where the file will be uploaded.
 
 ### I.E.
 
-- 1°
+- **Configuration**
 
-```plaintext
-[79] * REM Required replace '[2]': Set here the archive name, you must use the same!
-[80] QUACK STRING  -DestinationPath ./cache.zip
+```shell
+ARCHIVE_NAME="cache.zip"
+ACCESS_TOKEN="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ=="
+DROPBOX_FOLDER_PATH="/"
 ```
 
-- 2°
+- **1°**
 
 ```plaintext
-[85] * REM Required replace '[2]': Set here the archive name, you must use the same!
-[86] QUACK STRING $filePath = "$env:TEMP/[2]"
+[86] QUACK STRING  -DestinationPath ./cache.zip
 ```
 
-- 3°
+- **2°**
 
 ```plaintext
-[93] * REM Required replace '[2]': Set here the archive name, you must use the same!
-[94] * REM Required replace '[3]': Set here the path of your dropbox folder, i.e. '/'
-[95] QUACK STRING $dropboxPath = "/cache.zip"
+[91] QUACK STRING $filePath = "$env:TEMP/cache.zip"
 ```
 
-- 4°
+- **3°**
 
 ```plaintext
-[97] * REM Required replace '[1]': Set here your Dropbox access TOKEN
-[98] QUACK STRING $accessToken = "aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ=="
+[97] QUACK STRING $dropboxPath = "/cache.zip"
+```
+
+- **4°**
+
+```plaintext
+[100] QUACK STRING $accessToken = "aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ=="
 ```
 
 ## Functionality

