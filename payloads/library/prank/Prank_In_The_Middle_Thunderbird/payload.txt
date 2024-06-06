@@ -2,11 +2,13 @@
 * REM #                                                 #
 * REM # Title       : Prank In The Middle - Thunderbird	#
 * REM # Author      : Aleff                 		        #
-* REM # Version	  : 1.0                   		          #
+* REM # Version	    : 1.0                   		        #
 * REM # Category	  : Prank                 	          #
-* REM # Target	  : Windows 10/11         		          #
+* REM # Target	    : Windows 10/11         		        #
 * REM #                                     		        #
 * REM ###################################################
+
+ATTACKMODE HID
 
 * REM Open Thunderbird and goto settings
 QUACK GUI r
