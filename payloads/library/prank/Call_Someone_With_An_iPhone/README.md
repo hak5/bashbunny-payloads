@@ -14,28 +14,23 @@ Open search bar, then open the Phone app (I used the italian name so 'Telefono')
 
 * The phone must be unlocked
 
-## Test
-
-- iPhone 14
-- iOS 16.4.1
-
 ## Settings
 
 - You need to change the name of the application according to the language you have on your phone.
 
   ```DuckyScript
-  STRING #PHONE-APP-NAME
+  PHONE-APP-NAME='Telefono'
   ```
 
 - You must set the phone number to be called
 
 ```DuckyScript
-  STRING #NUMBER
+  NUMBER='...'
 ```
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
