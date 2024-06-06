@@ -1,18 +1,22 @@
-* ################################################
-* #                                              |
-* # Title        : Follow someone on Instagram   |
-* # Author       : Aleff                         |
-* # Version      : 1.0                           |
-* # Category     : Prank                         |
-* # Target       : Windows 10/11                 |
-* #                                              |
-* ################################################
+* REM ################################################
+* REM #                                              #
+* REM # Title        : Follow someone on Instagram   #
+* REM # Author       : Aleff                         #
+* REM # Version      : 1.0                           #
+* REM # Category     : Prank                         #
+* REM # Target       : Windows 10/11                 #
+* REM #                                              #
+* REM ################################################
 
+ATTACKMODE HID
 
-* Requirements:
-*     - Internet Connection
-*     - Instagram account logged in
+QUACK REM REQUIREMENTS
+* REM - Internet Connection
+* REM - Instagram account logged in
 
+QUACK REM VARIABLES
+* REM You must set the Instagram account that you want to follow
+INSTAGRAM_LINK='example'
 
 QUACK DELAY 1000
 QUACK GUI r
@@ -20,14 +24,13 @@ QUACK DELAY 500
 QUACK STRING powershell
 QUACK ENTER
 QUACK DELAY 500
-
-* You must set the Instagram account that you want to follow i.e. https://www.instagram.com/alessandro_greco_aka_aleff/
-QUACK STRING Start-Process "#INSTAGRAM_LINK"; exit;
+QUACK STRING Start-Process \"$INSTAGRAM_LINK\"; exit;
 QUACK ENTER
-* It depends by the computer power and by the internet connection power
+
+* REM It depends by the computer power and by the internet connection power
 QUACK DELAY 2000
 
-* Go to Follow button and click it
+* REM Go to Follow button and click it
 QUACK TAB
 QUACK TAB
 QUACK TAB
@@ -44,5 +47,5 @@ QUACK DELAY 500
 QUACK ENTER
 QUACK DELAY 1000
 
-* Close the Browser
+* REM Close the Browser
 QUACK ALT F4

@@ -23,17 +23,17 @@ Tested on:
 
 ## Settings
 
-- You must set the Instagram account that you want to follow i.e. https://www.instagram.com/alessandro_greco_aka_aleff/
+- You must set the Instagram account that you want to follow
 
-    `[17] DEFINE #INSTAGRAM_LINK example`
+    `[19] INSTAGRAM_LINK='example'`
 
 - It depends by the computer power and by the internet connection power
 
-    `[32] DELAY 2000`
+    `[31] DELAY 2000`
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -44,16 +44,10 @@ Tested on:
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
