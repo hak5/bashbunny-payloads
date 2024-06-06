@@ -8,15 +8,14 @@
 * REM #                                                          #
 * REM ############################################################
 
+ATTACKMODE HID
 
 * REM Requirements:
 * REM     - Nothing <3
 
-
 QUACK DELAY 1000
 QUACK CTRL-ALT t
 QUACK DELAY 2000
-
 QUACK STRING echo "exit" > .tmp
 QUACK ENTER
 QUACK DELAY 500
