@@ -33,7 +33,7 @@ This payload is intended as a basic reference point for developing payloads on a
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center"> Aleff</h2>
 <div align=center>
 <table>
   <tr>
