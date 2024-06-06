@@ -10,6 +10,6 @@ def convert_to_hex(filename, output_file):
         output.write(hex_code)
 
 # Esempio di utilizzo
-exe_filename = 'C:/Users/Aleff/Documents/GitHub/tmp/TODO Install_And_Run_Any_Arbitrary_Executable-No_Internet_Needed/assets/dist/example.exe'
-output_filename = 'C:/Users/Aleff/Documents/GitHub/tmp/TODO Install_And_Run_Any_Arbitrary_Executable-No_Internet_Needed/assets/example.txt'
+exe_filename = './example.exe'
+output_filename = './example.txt'
 convert_to_hex(exe_filename, output_filename)

