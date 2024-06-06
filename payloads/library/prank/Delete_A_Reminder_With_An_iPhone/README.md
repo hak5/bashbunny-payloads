@@ -14,28 +14,23 @@ Open search bar, then open the Reminder app (I used the italian name so 'Promemo
 
 * The phone must be unlocked
 
-## Test
-
-- iPhone 14
-- iOS 16.4.1
-
 ## Settings
 
 - You need to change the name of the application according to the language you have on your phone.
 
   ```DuckyScript
-  STRING #REMINDER-APP-NAME
+  REMINDER-APP-NAME='Promemoria'
   ```
 
 - You should know the reminder name that you want to delete
 
 ```DuckyScript
-  STRING #REMINDER-NAME
+  REMINDER-NAME='example'
 ```
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
