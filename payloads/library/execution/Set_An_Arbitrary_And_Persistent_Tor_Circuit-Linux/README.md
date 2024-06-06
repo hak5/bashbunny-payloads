@@ -38,10 +38,10 @@ To find fingerprints of various nodes you can go to https://metrics.torproject.o
 
 ![](https://i.ibb.co/YN5515G/tor-node.png)
 
-The script begins by defining the fingerprints of the entry, middle, and exit nodes using the `DEFINE` commands. Additionally, it provides instructions for activating administrator permissions, with specific considerations for systems like Debian and Ubuntu.
+The script begins by defining the fingerprints of the entry, middle, and exit nodes using the variables function of Bash-Bunny i.e. `ENTRY_NODE="here"` and you should replace `here` with the specific fingerprint. Additionally, it provides instructions for activating administrator permissions, with specific considerations for systems like Debian and Ubuntu.
 
 **Configuration on Linux:**
-- If the operating system is Linux, the user must provide the command to obtain root privileges (`#root_permission_command`) as `sudo su` instead of `su` and the associated password (`#sudo_pass`).
+- If the operating system is Linux, the user must provide the command to obtain root privileges (`ROOT_PERMISSION_COMMAND`) as `sudo su` instead of `su` and the associated password (`ROOT_PASSWORD`).
 
 The script aims to edit the Tor configuration process to ensure the specific use of entry, middle, and exit nodes. Users need to customize the node fingerprints and provide specific operating system information to ensure the correct operation of the script on the target platform.
 
@@ -50,10 +50,9 @@ In any case, the script is designed to completely overwrite the old configuratio
 ## Note
 
 - Tor must be installed.
-- **#EntryNode**, **#MiddleNode**, **#ExitNode**: These variables must contain the fingerprint of the relays you want to use as nodes in your circuit.
-- **#root_permission_command**: Activation of administrator permissions may vary from system to system. For example, for Debian it is necessary to use 'su' while for other systems such as Ubuntu it is necessary to use 'sudo su'. In general this can vary and is information that could be crucial in case the target has tampered with this functionality.
-- **#sudo_pass**: Edit this field only if you plan to use this script on Linux operating systems as you need administrator permissions and therefore you need to know the password.
-- **#const_var**: Do not change the variables that begin with 'const', they are constants that allow the nodes to be configured correctly.
+- **$ENTRY_NODE**, **$MIDDLE_NODE**, **$EXIT_NODE**: These variables must contain the fingerprint of the relays you want to use as nodes in your circuit.
+- **$ROOT_PERMISSION_COMMAND**: Activation of administrator permissions may vary from system to system. For example, for Debian it is necessary to use 'su' while for other systems such as Ubuntu it is necessary to use 'sudo su'. In general this can vary and is information that could be crucial in case the target has tampered with this functionality.
+- **$ROOT_PASSWORD**: Edit this field only if you plan to use this script on Linux operating systems as you need administrator permissions and therefore you need to know the password.
 
 ## Tor Configuration
 
