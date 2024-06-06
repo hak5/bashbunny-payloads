@@ -14,34 +14,29 @@ Open search bar, then open the REMINDER app (I used the italian name so 'Promemo
 
 * The phone must be unlocked
 
-## Test
-
-- iPhone 14
-- iOS 16.4.1
-
 ## Settings
 
 - You need to change the name of the application according to the language you have on your phone.
 
   ```DuckyScript
-  STRING #REMINDER-APP-NAME
+  REMINDER-APP-NAME='Promemoria'
   ```
 
 - You should know the old name of the reminder that you want to change
 
 ```DuckyScript
-  STRING #OLD-REMINDER-NAME
+  OLD-REMINDER-NAME='example'
 ```
 
 - Here you should set the new reminder name
 
 ```DuckyScript
-  STRING #NEW-REMINDER-NAME
+  NEW-REMINDER-NAME='example'
 ```
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>

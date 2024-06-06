@@ -8,31 +8,33 @@
 * REM #                                                 |
 * REM ###################################################
 
+ATTACKMODE HID
+
+QUACK REM VARIABLES
+* REM 1) You need to change the name of the application according to the language you have on your phone.
+REMINDER-APP-NAME='Promemoria'
+* REM 2) You should know the old name of the reminder that you want to change
+OLD-REMINDER-NAME='example'
+* REM 3) Here you should set the new reminder name
+NEW-REMINDER-NAME='example'
 
 * REM Requirements:
 * REM     - The phone must be unlocked
 
-* REM Tested on:
-* REM     - iPhone 14
-* REM     - iOS 16.4.1
-
 QUACK GUI SPACE
 QUACK DELAY 300
-* REM You need to change the name of the application according to the language you have on your phone.
-QUACK STRING #REMINDER-APP-NAME
+QUACK STRING $REMINDER-APP-NAME
 QUACK ENTER
 QUACK DELAY 2000
 QUACK GUI f
 QUACK DELAY 1000
-* REM You should know the old name of the reminder that you want to change
-QUACK STRING #OLD-REMINDER-NAME
+QUACK STRING $OLD-REMINDER-NAME
 QUACK DELAY 500
 QUACK TAB
 QUACK DELAY 500
 QUACK GUI a
 QUACK BACKSPACE
-* REM Here you should set the new reminder name
-QUACK STRING #NEW-REMINDER-NAME
+QUACK STRING $NEW-REMINDER-NAME
 QUACK ENTER
 QUACK DELAY 500
 QUACK GUI h
