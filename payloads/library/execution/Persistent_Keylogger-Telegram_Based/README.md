@@ -32,7 +32,7 @@ Because Telegram uses a limited size per message, the script divides the output 
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
