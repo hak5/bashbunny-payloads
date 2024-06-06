@@ -1,44 +1,46 @@
-* ############################################################
-* #                                                          |
-* # Title        : Send Messages In Discord Channel-Server   |
-* # Author       : Aleff                                     |
-* # Version      : 1.0                                       |
-* # Category     : Execution                                 |
-* # Target       : Windows 10-11                             |
-* #                                                          |
-* ############################################################
+* REM ############################################################
+* REM #                                                          #
+* REM # Title        : Send Messages In Discord Channel-Server   #
+* REM # Author       : Aleff                                     #
+* REM # Version      : 1.0                                       #
+* REM # Category     : Execution                                 #
+* REM # Target       : Windows 10-11                             #
+* REM #                                                          #
+* REM ############################################################
 
+ATTACKMODE HID
 
-* Requirements:
-*     - Internet connection
-*     - Discord Installed
+QUACK REM REQUIREMENTS
+* REM - Internet connection
+* REM - Discord Installed
 
+QUACK REM VARIABLES
+* REM If, for example, the server is Hak5 and the channel in which you want to send the message is called wifi-pineapple then you should write just wifi-pineapple
+CHAT_NAME='example'
+* REM Write here your messages
+MESSAGE1='example'
+MESSAGE2='example'
+MESSAGE3='example'
 
-* If, for example, the server is Hak5 and the channel in which you want to send the message is called wifi-pineapple then you should write just wifi-pineapple
-DEFINE CHAT_NAME example
-
-
-* Open Discord app
+* REM Open Discord app
 QUACK GUI
 QUACK DELAY 1000
 QUACK STRING Discord
 QUACK ENTER
 
-* This depends on the power of the computer and whether there are upgrades to be done
+* REM This depends on the power of the computer and whether there are upgrades to be done
 QUACK DELAY 6000
 
-* Search by Discord keyboard shortcut and open it
+* REM Search by Discord keyboard shortcut and open it
 QUACK CTRL-k
 QUACK DELAY 500
-QUACK STRING #CHAT_NAME
+QUACK STRING $CHAT_NAME
 QUACK ENTER
 QUACK DELAY 500
-
-QUACK STRING Write here...
+QUACK STRING $MESSAGE1
 QUACK ENTER
-QUACK STRING your...
+QUACK STRING $MESSAGE2
 QUACK ENTER
-QUACK STRING messages...
+QUACK STRING $MESSAGE3
 QUACK ENTER
-
 QUACK ALT F4
