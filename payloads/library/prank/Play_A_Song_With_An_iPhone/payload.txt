@@ -8,19 +8,19 @@
 * REM #                                              |
 * REM ################################################
 
+ATTACKMODE HID
 
 * REM Requirements:
 * REM     - The phone must be unlocked
 
-* REM Tested on:
-* REM     - iPhone 14
-* REM     - iOS 16.4.1
+QUACK REM VARIABLES
+* REM You need to change the name of the application according to the language you have on your phone.
+MUSIC-APP-NAME='Musica'
 
+QUACK DELAY 1500
 QUACK GUI SPACE
 QUACK DELAY 300
-
-* REM You need to change the name of the application according to the language you have on your phone.
-QUACK STRING #MUSIC-APP-NAME
+QUACK STRING $MUSIC-APP-NAME
 QUACK ENTER
 QUACK DELAY 1000
 QUACK SPACE

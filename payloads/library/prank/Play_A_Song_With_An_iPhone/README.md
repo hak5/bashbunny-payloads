@@ -8,28 +8,23 @@ This script can be used to play a song really fast using an iPhone, so iOS syste
 
 This script can be used to play a song really fast using an iPhone, so iOS system.
 
-Open search bar, then open the Music app (I used the italian name so 'Telefono'), then delete what is (hidden) stored and write the number, then call it.
+Open search bar, then open the Music app (I used the italian name so 'Musica'), then delete what is (hidden) stored and write the number, then call it.
 
 ## Dependencies
 
 * The phone must be unlocked
-
-## Test
-
-- iPhone 14
-- iOS 16.4.1
 
 ## Settings
 
 - You need to change the name of the application according to the language you have on your phone.
 
   ```DuckyScript
-  STRING #MUSIC-APP-NAME
+  MUSIC-APP-NAME='Musica'
   ```
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
