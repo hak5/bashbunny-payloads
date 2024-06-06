@@ -19,7 +19,7 @@ The script will run a shell and open the default browser in `https://github.com/
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>

