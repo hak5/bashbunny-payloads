@@ -58,25 +58,25 @@ DROPBOX_FOLDER_PATH="/"
 - **1°**
 
 ```plaintext
-[86] QUACK STRING  -DestinationPath ./cache.zip
+[88] QUACK STRING  -DestinationPath ./cache.zip
 ```
 
 - **2°**
 
 ```plaintext
-[91] QUACK STRING $filePath = "$env:TEMP/cache.zip"
+[93] QUACK STRING $filePath = "$env:TEMP/cache.zip"
 ```
 
 - **3°**
 
 ```plaintext
-[97] QUACK STRING $dropboxPath = "/cache.zip"
+[99] QUACK STRING $dropboxPath = "/cache.zip"
 ```
 
 - **4°**
 
 ```plaintext
-[100] QUACK STRING $accessToken = "aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ=="
+[102] QUACK STRING $accessToken = "aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ=="
 ```
 
 ## Functionality

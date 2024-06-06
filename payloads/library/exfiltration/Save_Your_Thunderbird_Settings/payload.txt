@@ -8,6 +8,8 @@
 * REM #                                                             #
 * REM ###############################################################
 
+ATTACKMODE HID
+
 * REM Variables Settings
 ARCHIVE_NAME="cache.zip"
 ACCESS_TOKEN="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ=="
