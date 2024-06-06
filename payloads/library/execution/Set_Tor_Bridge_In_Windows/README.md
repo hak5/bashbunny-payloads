@@ -8,7 +8,7 @@ Introducing the "Set Tor Bridge in Windows" payload a DuckyScript payload design
 >
 > Bridges can be manually configured in the Tor client settings, allowing users to overcome restrictions and access the Tor network in situations where it might otherwise be prevented.
 
-*Source: What is a bridge\[[1](#sources)]*
+***Source**: What is a bridge\[[1](#sources)]*
 
 **Category**: Execution
 
@@ -24,8 +24,8 @@ Introducing the "Set Tor Bridge in Windows" payload a DuckyScript payload design
 
 The following DuckyScript payload is designed to execute a series of commands using the TorBrowser. It requires Tor to be installed before running. Here's a description of the payload's behavior:
 
-1. Opens the Start menu by pressing the GUI (Windows) key.
-2. Types "TorBrowser" and presses Enter to launch the TorBrowser.
+1. Opens the Start menu by pressing the GUI (*Windows*) key.
+2. Types "*TorBrowser*" and presses Enter to launch the TorBrowser.
 3. Executes a sequence of key presses to navigate in the browser:
     
    a. Presses ALT
@@ -41,16 +41,24 @@ The following DuckyScript payload is designed to execute a series of commands us
    f. Now the ALT TAB command combination is repeated 12 times. It is seemingly counterintuitive to go backwards, but this strategy allows the use of this payload to be generalized in that it does not change whether other active bridges are already present.
    
    h. Presses Enter to open the Manual Bridge area.
-5. Moves the cursor to the text area (TAB).
-6. Writes the contents of the variables #BRIDGE, #BRIDGE-N, multiple bridges can be entered.
+5. Moves the cursor to the text area (*TAB*).
+6. Writes the contents of the variables $BRIDGE, $BRIDGE-N, multiple bridges can be entered (*see note 4*).
 7. Saves the new settings and closes
 8. Closes the TorBrowser using the ALT F4 key combination.
 
 ## Note
 
-- The payload is designed to run on a Windows system and requires Tor to be installed.
-- The variable #BRIDGE is defined at the beginning of the payload to allow the user to specify their own bridge.
-- Ensure that the key sequences are adapted to the specific version of the TorBrowser in use.
+1) The payload is designed to run on a Windows system and requires Tor to be installed.
+2) The variable $BRIDGE is defined at the beginning of the payload to allow the user to specify their own bridge.
+3) Ensure that the key sequences are adapted to the specific version of the TorBrowser in use.
+4) If you want to add more nodes, you need to enter a new BRIDGE-N variable at the beginning and the STRING + ENTER command when writing nodes. An example below...
+
+```plaintext
+[22] BRIDGE1="<an-another-one-bridge>"
+...
+[55] QUACK STRING $BRIDGE1
+[56] QUACK ENTER
+```
 
 ## Sources
 
@@ -58,7 +66,7 @@ The following DuckyScript payload is designed to execute a series of commands us
 
 ## Credits
 
-<h2 align="center"> Aleff</h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
