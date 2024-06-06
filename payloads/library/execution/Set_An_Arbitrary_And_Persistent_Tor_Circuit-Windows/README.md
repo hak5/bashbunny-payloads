@@ -38,7 +38,7 @@ To find fingerprints of various nodes you can go to https://metrics.torproject.o
 
 ![](https://i.ibb.co/YN5515G/tor-node.png)
 
-The script begins by defining the fingerprints of the entry, middle, and exit nodes using the `DEFINE` commands. Additionally, it provides instructions for activating administrator permissions, with specific considerations for systems like Debian and Ubuntu.
+The script begins by defining the fingerprints of the entry, middle, and exit nodes using the variables function of Bash-Bunny i.e. `ENTRY_NODE="here"` and you should replace `here` with the specific fingerprint. Additionally, it provides instructions for activating administrator permissions, with specific considerations for systems like Debian and Ubuntu.
 
 **Configuration on Windows:**
 - If the operating system is Windows, the script opens TorBrowser using Windows GUI commands.
@@ -52,8 +52,7 @@ In any case, the script is designed to completely overwrite the old configuratio
 ## Note
 
 - Tor must be installed.
-- **#EntryNode**, **#MiddleNode**, **#ExitNode**: These variables must contain the fingerprint of the relays you want to use as nodes in your circuit.
-- **#const_var**: Do not change the variables that begin with 'const', they are constants that allow the nodes to be configured correctly.
+- **$ENTRY_NODE**, **$MIDDLE_NODE**, **$EXIT_NODE**: These variables must contain the fingerprint of the relays you want to use as nodes in your circuit.
 
 ## Tor Configuration
 
@@ -133,7 +132,7 @@ Tor is a valuable tool for browsing the web anonymously, but since it's powered 
 
 ## Credits
 
-<h2 align="center"> Aleff</h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
