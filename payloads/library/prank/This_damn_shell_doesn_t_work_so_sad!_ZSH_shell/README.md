@@ -27,7 +27,7 @@ To restore proper shell operation, it will be necessary to edit via a text edito
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center"> Aleff</h2>
 <div align=center>
 <table>
   <tr>

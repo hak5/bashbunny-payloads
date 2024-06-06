@@ -4,7 +4,7 @@
 * REM # Author       : Aleff                                     #
 * REM # Version      : 1.0                                       #
 * REM # Category     : Prank                                     #
-* REM # Target       : Linux                                     #
+* REM # Target       : BASH Shell                                #
 * REM #                                                          #
 * REM ############################################################
 
