@@ -4,7 +4,7 @@ This script allows the exfiltration of the structure of the files contained in a
 
 **Category**: Exfiltration
 
-![](1.png)
+![](https://i.ibb.co/fDt6xcN/1.png)
 
 ## Description
 
@@ -20,7 +20,7 @@ Open a PowerShell and run the command `tree /f /a > out.txt` that permit to list
 
 - You must define your Dropbox accessToken or modify the exfiltration modality.
 
-    `DEFINE #DROPBOX_ACCESS_TOKEN example`
+    `[18] DROPBOX_ACCESS_TOKEN='example'`
 
 - The path to check can be changed putting the full-path `tree <full-path> /f /a > out.txt`.
 
@@ -29,7 +29,7 @@ Open a PowerShell and run the command `tree /f /a > out.txt` that permit to list
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -40,16 +40,10 @@ Open a PowerShell and run the command `tree /f /a > out.txt` that permit to list
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>

