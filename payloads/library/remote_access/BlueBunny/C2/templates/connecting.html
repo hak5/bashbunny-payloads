@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="SHORTCUT ICON" type="image/x-icon" href="static/bb_icon.png"/>
+	<link rel="icon" type="image/x-icon" href="static/bb_icon.png" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>BlueBunny</title>
+	<meta name="description" content="Remote control your Bash Bunny MKII">
+	<link href="static/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		.btn-imp {
+			--bs-btn-color: #EC1A24 !important;
+			--bs-btn-border-color: #EC1A24 !important;
+			--bs-btn-hover-border-color: #1a62ec !important;
+			--bs-btn-hover-bg: #1a62ec !important;
+			--bs-btn-hover-color: #ffffff !important;
+		}
+
+		@keyframes spinner {
+			0% {transform: rotate( 0deg ) scale( 1 );}
+			100% {transform: rotate( 360deg ) scale( 1 );}
+		};
+	</style>
+	<script type="text/javascript">
+		let fail_counter = 0
+
+		function tryAgain() {
+			document.getElementById("action").innerHTML = '<h3 class="text-center" style="color: #ced4da; margin-bottom: 10px;">Connecting your Bash Bunny...</h3><div class="text-center" style="margin-top: 100px;"><a class="btn btn-imp" title="Connect" href="/connect" id="connectBtn">Too many fails occured... Try again</a><br><br><p class="fw-bold">OR</p></div><ul style="margin-bottom: 100px;"><li>Make sure your bluetooth adapter is running properly</li><li>Restart your Bash Bunny via unplugging and plugging it back in</li><li>Restart the BlueBunny C2 server\'s operating system</li></ul><p>Please be patient - Making BLE connections can be buggy. It\'s likely a temporary problem that will be gone in a minute.</p>'
+		}
+
+		function connectionCheck() {
+			fetch("/con-check").then(function(response) {
+				return response.json();
+			}).then(function(data) {
+				if (data.connected == 1) {
+					window.location.replace("/");
+				} else if (data.connected == 2) {
+					tryAgain();
+				}
+			})
+		}
+
+		setInterval(connectionCheck, 5000);
+	</script>
+</head>
+<body style="background-color: #202124; color: #adb5bd; height: 100%; overflow: hidden">
+	<div style="filter: blur(2.5px); position: absolute; width: 100%; height: 100%;">
+		<nav class="navbar navbar-expand navbar-light fixed-top shadow-sm" style="border-bottom: solid; border-color: #1a62ec; border-width: 2.5px; background: #202124;">
+			<div class="container-fluid">
+				<a class="navbar-brand">
+					<img src="static/logo.png" style="height: 45px; padding-right: 15px; filter: brightness(0) saturate(100%) invert(23%) sepia(75%) saturate(3313%) hue-rotate(217deg) brightness(99%) contrast(86%);" class="d-inline-block">
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarToggler">
+					<ul class="nav ms-auto">
+					<li class="nav-item">
+						<button class="btn" title="Connect" disabled>Connect to Bash Bunny</button>
+					</li>
+					<li class="nav-item" style="margin: auto; margin-right: 15px; margin-left: 20px;">
+						<a>©</a>
+					</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<nav class="navbar navbar-expand-lg navbar-light" style="visibility: hidden;">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">
+					<img src="static/bb_icon.png" style="height: 45px; padding-right: 15px;" class="d-inline-block"><span style="vertical-align: middle;">BlueBunny</span>
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse">
+					<ul class="nav">
+						<li class="nav-item">
+							<a class="btn">Connect to Bash Bunny</a>
+						</li>
+						<li class="nav-item" style="margin: auto; margin-right: 15px; margin-left: 20px;">
+							<a>©</a>
+						</li>
+					</ul>
+					<ul class="nav ms-auto">
+					<li class="nav-item">
+						<a class="nav-link">©</a>
+					</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<br>
+		<br>
+		<div class="container" style="display: flex; flex-flow: wrap; justify-content: start;">
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">Payload One-Liner <p class="text-dark-emphasis" style="font-size: 15px;"><small>Run a single line of code</small></p></h4>
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" placeholder="Q ALT F4" style="background-color: #202124; border-color: #1a62ec; color: #adb5bd;">
+					<button class="btn">Run</button>
+				</div>
+			</div>
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">Payload Script <p class="text-dark-emphasis" style="font-size: 15px;"><small>Upload and execute a payload file</small></p></h4>
+				<div class="input-group mb-3">
+					<input type="file" class="form-control" style="background-color: #202124; border-color: #1a62ec; color: #adb5bd;">
+				</div>
+				<button class="btn">Execute Payload</button>
+			</div>
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">Attack Mode <p class="text-dark-emphasis" style="font-size: 15px;"><small>Configure Ethernet, Storage, HID and Serial</small></p></h4>
+				<div class="input-group">
+					<select class="form-select" style="background-color: #202124; border-color: #1a62ec; color: #adb5bd;">
+						<option selected>None</option>
+					</select>
+					<button class="btn">Update</button>
+				</div>
+			</div>
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">LED <p class="text-dark-emphasis" style="font-size: 15px;"><small>Light up your Bush Bunny</small></p></h4>
+				<div class="input-group">
+					<select class="form-select" style="background-color: #202124; border-color: #1a62ec; color: #adb5bd;" name="query">
+						<option selected>Green</option>
+					</select>
+					<button class="btn">Update</button>
+				</div>
+			</div>
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">CPU <p class="text-dark-emphasis" style="font-size: 15px;"><small>Tune the CPU to your needs</small></p></h4>
+				<div class="input-group">
+					<select class="form-select" style="background-color: #202124; border-color: #1a62ec; color: #adb5bd;">
+						<option selected>Quad Core Ondemand (Default)</option>
+					</select>
+					<button class="btn">Update</button>
+					</div>
+			</div>
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">Power <p class="text-dark-emphasis" style="font-size: 15px;"><small>Take a break</small></p></h4>
+				<div class="input-group">
+					<select class="form-select" style="background-color: #202124; border-color: #EC1A24; color: #adb5bd;">
+						<option selected>Shutdown</option>
+					</select>
+					<button class="btn btn-imp">Initialize</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="position: absolute; width: 100%; height: 100%;">
+		<div style="display: flex; justify-content: center; align-items: center; margin-top: 25px;">
+			<div class="rounded shadow" style="border: solid; border-color: #1a62ec; border-width: 1px; background: #202124; max-width: 600px; height: fit-content; margin-left: 15px; margin-right: 15px; display: flex; justify-content: center;">
+				<div style="margin: 20px; width: 100%" id="action">
+					<h3 class="text-center" style="color: #ced4da; margin-bottom: 10px;">Connecting your Bash Bunny...</h3>
+					<div class="text-center" style="margin-top: 100px; margin-bottom: 100px;">
+						<img src="static/bb_icon.png" style="height: 5rem; width: 5rem; animation-name: spinner; animation-duration: 1s; animation-delay: 1s; animation-iteration-count: infinite;">
+					</div>
+					<p>This can take some time. Make sure your Bash Bunny is nearby and the BlueBunny payload is running successfully (Green LED).</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
