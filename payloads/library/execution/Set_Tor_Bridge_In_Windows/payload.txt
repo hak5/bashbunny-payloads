@@ -18,9 +18,9 @@ QUACK REM     - Payload tested using TorBrowser 13.0.8 based on Mozilla Firefoz 
 
 QUACK REM VARIABLES:
 QUACK REM Set your own bridge here replacing 'here'
-BRIDGE="here"
-QUACK REM BRIDGE1="Another one..."
-QUACK REM BRIDGEN="... and so on."
+BRIDGE='here'
+QUACK REM BRIDGE1='Another one...'
+QUACK REM BRIDGEN='... and so on.'
 
 QUACK DELAY 2000
 QUACK GUI
