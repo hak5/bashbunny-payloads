@@ -1,11 +1,11 @@
 ###############################################################
-#                                                             |
-# Title        : Create And Exfiltrate A Webhook Of Discord   |
-# Author       : Aleff                                        |
-# Version      : 1.0                                          |
-# Category     : Exfiltration                                 |
-# Target       : Windows 10-11                                |
-#                                                             |
+#                                                             #
+# Title        : Create And Exfiltrate A Webhook Of Discord   #
+# Author       : Aleff                                        #
+# Version      : 1.0                                          #
+# Category     : Exfiltration                                 #
+# Target       : Windows 10-11                                #
+#                                                             #
 ###############################################################
 
 ATTACKMODE HID
