@@ -1,11 +1,11 @@
 ####################################################################
-#                                                                  |
-# Title        : Export all saved certificates with Adobe Reader   |
-# Author       : Aleff                                             |
-# Version      : 1.0                                               |
-# Category     : Exfiltration                                      |
-# Target       : Windows 10-11                                     |
-#                                                                  |
+#                                                                  #
+# Title        : Export all saved certificates with Adobe Reader   #
+# Author       : Aleff                                             #
+# Version      : 1.0                                               #
+# Category     : Exfiltration                                      #
+# Target       : Windows 10-11                                     #
+#                                                                  #
 ####################################################################
 
 ATTACKMODE HID
