@@ -30,7 +30,7 @@ QUACK STRING explorer
 QUACK ENTER
 QUACK DELAY 1000
 
-# Goto search bar and open "Uninstall or change a program" page
+# Goto search bar and open 'Uninstall or change a program' page
 QUACK TAB
 QUACK DELAY 500
 QUACK TAB
