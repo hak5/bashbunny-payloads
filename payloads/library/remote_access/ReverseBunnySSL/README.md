@@ -1,6 +1,6 @@
 **Title: ReverseBunnySSL**
 
-<p>Author: 0iphor13<br>
+<p>Author: 0i41E<br>
 OS: Windows<br>
 Version: 1.2<br>
 For input and inspiration - Thanks to: Cribbit, sebkinne</p>
@@ -26,5 +26,5 @@ I recommend openssl itself or ncat - Example syntax for both:<br>
 
 **Disclaimer: Because of obfuscation, it may take some time until the shell is fully executed by powershell**
 
-![alt text](https://github.com/0iphor13/omg-payloads/blob/master/payloads/library/remote_access/ReverseCableSSL/CreateCert.png)
-![alt text](https://github.com/0iphor13/bashbunny-payloads/blob/master/payloads/library/remote_access/ReverseBunnySSL/Startscreen.png)
+![alt text](https://github.com/0i41E/omg-payloads/blob/master/payloads/library/remote_access/ReverseCableSSL/CreateCert.png)
+![alt text](https://github.com/0i41E/bashbunny-payloads/blob/master/payloads/library/remote_access/ReverseBunnySSL/Startscreen.png)

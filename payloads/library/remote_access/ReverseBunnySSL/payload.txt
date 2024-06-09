@@ -2,7 +2,7 @@
 #
 # Title:         ReverseBunnySSL
 # Description:   Get remote access, using an obfuscated powershell reverse shell.
-# Author:        0iphor13
+# Author:        0i41E
 # Version:       1.2
 # Category:      Remote_Access
 # Attackmodes:   HID, RNDIS_ETHERNET

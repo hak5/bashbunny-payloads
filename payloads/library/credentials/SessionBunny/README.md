@@ -1,6 +1,6 @@
 **Title: SessionBunny**
 
-Author: 0iphor13
+Author: 0i41E
 (Credit for SessionGopher: Brandon Arvanaghi)
 
 Version: 1.0
@@ -19,4 +19,4 @@ Place SessionBunny.ps1 in the same payload switch-folder as your payload.txt
 #
 Plug in BashBunny.
 Wait for the script to finish and decide what you wanna do with the information gathered
-![alt text](https://github.com/0iphor13/bashbunny-payloads/blob/master/payloads/library/credentials/SessionBunny/censorepic.png)
+![alt text](https://github.com/0i41E/bashbunny-payloads/blob/master/payloads/library/credentials/SessionBunny/censorepic.png)
