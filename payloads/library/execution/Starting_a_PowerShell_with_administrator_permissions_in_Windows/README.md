@@ -21,17 +21,20 @@ It is important to note that running PowerShell with administrator privileges in
 ## Example
 
 - `STRINGLN Get-ExecutionPolicy -List`
-![](docs/1.png)
+
+  ![](https://i.ibb.co/4jTzKQK/1.png)
 
 - `STRINGLN Set-ExecutionPolicy Bypass`
-![](docs/2.png)
+
+  ![](https://i.ibb.co/wJTttR6/2.png)
 
 - `STRINGLN Get-ExecutionPolicy -List`
-![](docs/3.png)
+
+  ![](https://i.ibb.co/XzBjKWP/3.png)
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -42,16 +45,10 @@ It is important to note that running PowerShell with administrator privileges in
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>

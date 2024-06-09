@@ -1,15 +1,17 @@
-* ####################################################################################
-* #                                                                                  |
-* # Title        : Starting a PowerShell with administrator permissions in Windows   |
-* # Author       : Aleff                                                             |
-* # Version      : 1.0                                                               |
-* # Category     : Execute                                                           |
-* # Target       : Windows 10-11                                                     |
-* #                                                                                  |
-* ####################################################################################
+####################################################################################
+#                                                                                  #
+# Title        : Starting a PowerShell with administrator permissions in Windows   #
+# Author       : Aleff                                                             #
+# Version      : 1.0                                                               #
+# Category     : Execute                                                           #
+# Target       : Windows 10-11                                                     #
+#                                                                                  #
+####################################################################################
 
-* Requirements:
-*     - Nothing
+ATTACKMODE HID
+
+# Requirements:
+#     - Nothing
 
 QUACK DELAY 1000
 QUACK GUI x
