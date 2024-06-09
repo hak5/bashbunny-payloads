@@ -1,11 +1,11 @@
 * REM ################################################
-* REM #                                              |
-* REM # Title        : Call Someone With An iPhone   |
-* REM # Author       : Aleff                         |
-* REM # Version      : 1.0                           |
-* REM # Category     : Prank                         |
-* REM # Target       : iPhone                        |
-* REM #                                              |
+* REM #                                              #
+* REM # Title        : Call Someone With An iPhone   #
+* REM # Author       : Aleff                         #
+* REM # Version      : 1.0                           #
+* REM # Category     : Prank                         #
+* REM # Target       : iPhone                        #
+* REM #                                              #
 * REM ################################################
 
 ATTACKMODE HID
