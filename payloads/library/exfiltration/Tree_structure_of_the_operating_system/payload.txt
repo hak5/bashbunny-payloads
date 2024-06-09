@@ -1,11 +1,11 @@
 ###########################################################
-#                                                         |
-# Title        : Tree Structure Of The Operating System   |
-# Author       : Aleff                                    |
-# Version      : 1.0                                      |
-# Category     : Exfiltration                             |
-# Target       : Windows 10-11                            |
-#                                                         |
+#                                                         #
+# Title        : Tree Structure Of The Operating System   #
+# Author       : Aleff                                    #
+# Version      : 1.0                                      #
+# Category     : Exfiltration                             #
+# Target       : Windows 10-11                            #
+#                                                         #
 ###########################################################
 
 ATTACKMODE HID
