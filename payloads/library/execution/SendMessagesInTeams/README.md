@@ -17,15 +17,38 @@ Open a PowerShell, stop Teams if is runned, run Teams, run new message function,
 * Internet Connection
 * Microsoft Teams installed and user logged-in
 * ExecutionPolicy Bypass
-* Python
 
 ### Settings
 
 - Setup the receiver
 
+  ```shell
+  #  - Name, email, id or what you want for contact the target
+  USER-ID='example'
+  ```
+
+- Setup the message
+
+  ```shell
+  # - Write the message replacing the example string
+  MESSAGE='example'
+  ```
+
+- Add more messages
+
+  ```plaintext
+  #### Messages ####
+  QUACK STRING $MESSAGE
+  QUACK ENTER
+  QUACK DELAY 1000
+  # ...
+  # STRING MESSAGEN
+  # ENTER
+  ```
+
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -36,16 +59,10 @@ Open a PowerShell, stop Teams if is runned, run Teams, run new message function,
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
