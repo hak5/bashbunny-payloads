@@ -1,16 +1,14 @@
 # Close All Applications
 
-A script used to close all target open applications.
-
-🟢 **Plug-And-Play** 🟢
+A script designed to close all target open applications.
 
 **Category**: Execution
 
 ## Description
 
-A script used to close all target open applications.
+A script designed to close all target open applications.
 
-Opens PowerShell hidden, download a Python script, execute it, remove Python script downloaded, delete powershell history.
+It performs the following actions: opens a hidden PowerShell session, downloads a Python script, executes the downloaded Python script, removes the Python script after execution, and deletes the PowerShell history to erase any traces of these operations.
 
 ## Getting Started
 
@@ -21,11 +19,21 @@ Opens PowerShell hidden, download a Python script, execute it, remove Python scr
 
 ### Settings
 
-- No settings - Plug-And-Play
+- Reply with your own link. The Payload should be close_all_app.ps1
+
+  ```shell
+  POWERSHEL_CODE='example'
+  ```
+
+- Reply $scriptUrl with YOUR LINK. The Payload should be script.py
+
+  ```powershell
+  $scriptUrl = "YOUR_END_USER_LINK_WITH_PAYLOAD"
+  ```
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -36,16 +44,10 @@ Opens PowerShell hidden, download a Python script, execute it, remove Python scr
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
