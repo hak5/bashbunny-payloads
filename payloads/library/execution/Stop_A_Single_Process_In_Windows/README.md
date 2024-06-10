@@ -18,7 +18,9 @@ This script open the Task Manager app, then go to search bar, then write the pro
 
 - Write the name of the process that you want to stop 
     
-    `DEFINE PROCESS_NAME example`
+  ```shell
+  PROCESS_NAME='example'
+  ```
 
 ## Credits
 
@@ -33,16 +35,10 @@ This script open the Task Manager app, then go to search bar, then write the pro
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
