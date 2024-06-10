@@ -6,7 +6,7 @@ This script is Plug-And-Play <3
 
 **Category**: Execution
 
-![](Make_Windows_performant_but_ugly_and_boring.gif)
+![](https://i.ibb.co/h9Vs1k1/Make-Windows-performant-but-ugly-and-boring.gif)
 
 ## Description
 
@@ -20,7 +20,7 @@ The script opens the Windows advanced settings via sysdm.cpl and accesses the ad
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -31,16 +31,10 @@ The script opens the Windows advanced settings via sysdm.cpl and accesses the ad
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
