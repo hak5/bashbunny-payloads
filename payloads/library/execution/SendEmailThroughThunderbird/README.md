@@ -14,26 +14,28 @@ This payload opens a shell (or powershell if running on windows), starts the Thu
 
 ### Windows 11
 
-```DuckyScript
-DELAY 1000
-GUI r
-DELAY 1000
-STRING powershell
-ENTER
-DELAY 2000
-STRINGLN Start-Process "thunderbird.exe"
-DELAY 4000
-```
+  ```plaintext
+  QUACK DELAY 1000
+  QUACK GUI r
+  QUACK DELAY 1000
+  QUACK STRING powershell
+  QUACK ENTER
+  QUACK DELAY 2000
+  QUACK STRING Start-Process 'thunderbird.exe'
+  QUACK ENTER
+  QUACK DELAY 4000
+  ```
 
 ### Ubuntu 23.04
 
-```DuckyScript
-DELAY 1000
-CTRL-ALT t
-DELAY 2000
-STRINGLN thunderbird
-DELAY 4000
-```
+  ```plaintext
+  QUACK DELAY 1000
+  QUACK CTRL-ALT t
+  QUACK DELAY 2000
+  QUACK STRING thunderbird
+  QUACK ENTER
+  QUACK DELAY 4000
+  ```
 
 ### Dependencies
 
@@ -44,12 +46,26 @@ DELAY 4000
 ### Settings
 
 - Receiver email address
+
+  ```shell
+  EMAIL-ADDRESS='example'
+  ```
+
 - Email Subject
+
+  ```shell
+  SUBJECT='example'
+  ```
+
 - Email Message
+
+  ```shell
+  MESSAGE='example'
+  ```
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -60,16 +76,10 @@ DELAY 4000
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
