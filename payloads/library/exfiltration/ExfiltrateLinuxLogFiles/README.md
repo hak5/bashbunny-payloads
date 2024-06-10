@@ -1,4 +1,4 @@
-# Exfiltrate Linux Log Files - BADUSB ✅
+# Exfiltrate Linux Log Files
 
 A script used to take linux logs.
 
@@ -22,12 +22,36 @@ Opens a shel, zip all zippable (R permission) content of the log folder, send th
 ### Settings
 
 * Set your dropbox access token
-* Change if needed the folder path interessed (i.e. /var/log)
+
+  ```shell
+  DROPBOX_ACCESS_TOKEN='example'
+  ```
+
+* Change, if you want, the folder path. Pay attention to the fact that this payload is set up to know the user name of the machines, which is identified via the variable $USER_NAME
+
+  ```shell
+  FOLDER_PATH='/home/$USER_NAME/tmp/'
+  ```
+
+* Change, if you want, the log path
+
+  ```shell
+  LOG_PATH='/var/log/'
+  ```
+
 * Change (if you think that it is necessary) the delay of the zipping operation
+
+  ```plaintext
+  # Delay of zipping operation - it depends
+  QUACK DELAY 10000
+  ...
+  # Send timing - it depends
+  QUACK DELAY 5000
+  ```
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -38,16 +62,10 @@ Opens a shel, zip all zippable (R permission) content of the log folder, send th
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
