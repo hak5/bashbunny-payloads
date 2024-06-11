@@ -26,7 +26,7 @@ QUACK DELAY 2000
 QUACK STRING Stop-Process -Name \"Signal\"
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING  Start-Process \"$env:LocalAppData\Programs\signal-desktop\Uninstall Signal.exe\"
+QUACK STRING  Start-Process \"\$env:LocalAppData\Programs\signal-desktop\Uninstall Signal.exe\"
 QUACK ENTER
 QUACK DELAY 1000
 # Popup 'Are you sure?'
