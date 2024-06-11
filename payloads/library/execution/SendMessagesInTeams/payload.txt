@@ -39,7 +39,7 @@ QUACK DELAY 2000
 QUACK STRING Stop-Process -Name 'Teams'
 QUACK ENTER
 QUACK DELAY 1000
-QUACK STRING Start-Process '$Env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school)'
+QUACK STRING Start-Process '\$Env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school)'
 QUACK ENTER
 # It depends by the computer power
 QUACK DELAY 10000
