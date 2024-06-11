@@ -1,0 +1,34 @@
+# Title:         Bunny Alerts
+# Description:   Sends a message to Slack channel, and writes message in notepad
+# Author:        Jesse Allen
+# Version:       1.0
+# Category:      General
+# Attackmodes:   HID
+# Target:        Windows 10, 11
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE
+
+LED STAGE1
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 1000
+
+LED STAGE2
+# run PowerShell script
+
+QUACK STRING powershell -NoP -NonI -W Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\alert.ps1')"
+QUACK ENTER
+QUACK DELAY 1000
+
+LED STAGE3
+# open notepad and write message
+
+RUN WIN Notepad.exe
+QUACK DELAY 1000
+QUACK STRING Friendly reminder to lock your computer!
+
+LED FINISH
