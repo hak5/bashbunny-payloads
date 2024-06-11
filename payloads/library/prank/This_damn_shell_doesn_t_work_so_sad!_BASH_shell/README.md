@@ -6,7 +6,7 @@ This payload can be used to prank your friends so that when they open their term
 
 *How it works on Kali Linux...*
 
-![](1.gif)
+![](https://i.ibb.co/6NdTm8H/1.gif)
 
 ## Dependencies
 
@@ -43,7 +43,7 @@ To restore proper shell operation, it will be necessary to edit via a text edito
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Linkedin
+      <br>LinkedIn
     </td>
   </tr>
 </table>

