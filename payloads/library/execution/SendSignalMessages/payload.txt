@@ -26,7 +26,7 @@ QUACK ENTER
 QUACK DELAY 500
 QUACK STRING Stop-Process -Name 'Signal'
 QUACK ENTER
-QUACK STRING Start-Process $Env:USERPROFILE\AppData\Local\Programs\signal-desktop\Signal.exe; exit
+QUACK STRING Start-Process \$Env:USERPROFILE\AppData\Local\Programs\signal-desktop\Signal.exe; exit
 QUACK ENTER
 QUACK DELAY 5000
 QUACK TAB
