@@ -21,13 +21,13 @@ QUACK REM - Payload tested on Debian 12_eng; Ubuntu 23.10_eng;
 QUACK REM VARIABLES
 QUACK REM 1) Activation of administrator permissions may vary from system to system. For example, for Debian it is necessary to use 'su' while for other systems such as Ubuntu it is necessary to use 'sudo su'. In general this can vary and is information that could be crucial in case the target has tampered with this functionality.
 QUACK REM i.e. sudo su
-ROOT_PERMISSION_COMMAND="sudo su"
+ROOT_PERMISSION_COMMAND='sudo su'
 QUACK REM 2) Edit this field only if you plan to use this script on Linux operating systems as you need administrator permissions and therefore you need to know the password.
-ROOT_PASSWORD="here"
+ROOT_PASSWORD='here'
 QUACK REM 3) Set the Fingerprints #EntryNode #MiddleNode #ExitNode
-ENTRY_NODE="here"
-MIDDLE_NODE="here"
-EXIT_NODE="here"
+ENTRY_NODE='here'
+MIDDLE_NODE='here'
+EXIT_NODE='here'
 
 QUACK DELAY 2000
 QUACK REM Opens a new terminal and login with administrator permissions.
