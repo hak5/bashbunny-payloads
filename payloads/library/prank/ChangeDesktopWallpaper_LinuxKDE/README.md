@@ -1,4 +1,4 @@
-# Change Desktop Wallpaper - Linux ✅
+# Change Desktop Wallpaper - Linux
 
 A script used to prank your friends changing their desktop wallpaper.
 
@@ -24,7 +24,7 @@ Opens a shell, download the image, define the local image path, run a command KD
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -35,16 +35,10 @@ Opens a shell, download the image, define the local image path, run a command KD
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
