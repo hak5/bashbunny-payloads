@@ -14,23 +14,22 @@ To make it easier to use below you can find the various tested configurations, a
 
 ## Payload.txt config - Windows 10/11 - Tested on Windows 11
 
-```DuckyScript
-    DELAY 1000
-    GUI r
-    DELAY 1000
-    STRING powershell
-    ENTER
-    DELAY 2000
-```
+  ```plaintext
+  QUACK DELAY 1000
+  QUACK GUI r
+  QUACK DELAY 1000
+  QUACK STRING powershell
+  QUACK ENTER
+  QUACK DELAY 2000
+  ```
 
 ## Payload.txt config - Linux (Debian based) - Tested on Ubuntu 23.04
 
-```DuckyScript
-    DELAY 1000
-    CTRL-ALT t
-    DELAY 2000
-```
-
+  ```plaintext
+  QUACK DELAY 1000
+  QUACK CTRL-ALT t
+  QUACK DELAY 2000
+  ```
 
 ## Dependencies
 
@@ -42,23 +41,26 @@ To make it easier to use below you can find the various tested configurations, a
 ## Settings
 
 - Full path of the local repository i.e. "C:\Users\User\Documents\Repository1"
-```DuckyScript
-    DEFINE #FULL-PATH example
-```
+
+  ```plaintext
+  FULL-PATH='example'
+  ```
 
 - Link from which updates are to be downloaded so the new repository the Repository2
-```DuckyScript
-    DEFINE #NEW-GIT-LINK example.git
-```
+
+  ```plaintext
+  NEW-GIT-LINK='example.git'
+  ```
 
 - REM Define the branch of the new repository Repository2, i.e. "main"
-```DuckyScript
-    DEFINE #BRANCH example
-```
+
+  ```plaintext
+  BRANCH='example'
+  ```
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -69,16 +71,10 @@ To make it easier to use below you can find the various tested configurations, a
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
