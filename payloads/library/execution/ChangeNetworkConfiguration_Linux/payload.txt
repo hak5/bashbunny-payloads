@@ -53,7 +53,7 @@ QUACK ENTER
 QUACK DELAY 500
 
 # Get the net interface name
-QUACK STRING INTERFACE=$(ip route get 8.8.8.8 # awk '{print $5}')
+QUACK STRING INTERFACE=\$(ip route get 8.8.8.8 # awk '{print \$5}')
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING ifconfig $INTERFACE $NEW_IP netmask $NEW_MASK up
