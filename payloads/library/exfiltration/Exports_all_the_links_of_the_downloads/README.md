@@ -50,7 +50,7 @@ This script open the Firefox app, then go to downloads page and copy all, then o
     
 ## Credits
 
-<h2 align="center"> Aleff :octocat: </h2>
+<h2 align="center">Aleff</h2>
 <div align=center>
 <table>
   <tr>
