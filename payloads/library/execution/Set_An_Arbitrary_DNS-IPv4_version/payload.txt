@@ -15,7 +15,7 @@ ATTACKMODE HID
 
 # VARIABLES
 # DNS IPv4 like Cloudflare DNS 1.1.1.1
-$NEW_DNS='example'
+NEW_DNS='example'
 
 # Open Settings
 QUACK DELAY 1500
