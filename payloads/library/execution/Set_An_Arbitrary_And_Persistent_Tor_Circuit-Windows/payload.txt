@@ -20,11 +20,11 @@ QUACK REM - Payload tested on Windows 11_eng;
 
 QUACK REM VARIABLES
 QUACK REM Set the Fingerprints #EntryNode #MiddleNode #ExitNode
-ENTRY_NODE="here"
-MIDDLE_NODE="here"
-EXIT_NODE="here"
+ENTRY_NODE='here'
+MIDDLE_NODE='here'
+EXIT_NODE='here'
 
-QUACK DELAY 2000
+QUACK DELAY 1500
 QUACK REM Open the TorBrowser path
 QUACK GUI
 QUACK DELAY 500
