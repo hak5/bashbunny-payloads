@@ -1,4 +1,9 @@
 .DS_Store
+version.txt
+loot/
+payloads-orig/
+System\ Volume\ Information/
+win7-win8-cdc-acm.inf
 /.project
 /payloads/library/DumpCreds_2.0/PS/Invoke-M1m1d0gz.ps1
 bunny_connecter_config.txt
