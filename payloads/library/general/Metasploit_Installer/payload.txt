@@ -1,0 +1,47 @@
+#!/bin/bash
+#
+# Title:         Metasploit_Installer
+# Author:        golem445
+# Version:       1.0
+# Dependencies:  Internet Connection Sharing enabled
+#
+# Sets up an Ethernet interface, then proceeds
+# to install Metasploit on the Bash Bunny using
+# a re-engineered Pentesters Framework script
+
+## Get setup
+LED SETUP 
+ATTACKMODE RNDIS_ETHERNET 
+GET SWITCH_POSITION
+
+# Install dependencies
+apt-get update -y
+apt-get install -y autoconf bison build-essential curl git-core libapr1 libaprutil1 libcurl4-openssl-dev libgmp3-dev libpcap-dev libpq-dev libreadline6-dev libsqlite3-dev libssl-dev libsvn1 libtool libxml2 libxml2-dev libxslt-dev libyaml-dev locate ncurses-dev openssl postgresql postgresql-contrib wget xsel zlib1g zlib1g-dev
+
+# Prep for and retrieve Metasploit files
+cd /root/
+date -s '20180518'
+wget -O - https://apt.metasploit.com/metasploit-framework.gpg.key | apt-key add -
+curl -k -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.112 Safari/534.30" https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb -o msfinstall
+chmod 755 msfinstall
+
+## Install Metasploit
+LED ATTACK
+./msfinstall
+update-rc.d postgresql enable
+cp /root/udisk/payloads/$SWITCH_POSITION/msfdb.sh /root/metasploit/
+chmod +x msfdb.sh
+sh msfdb.sh
+mkdir /root/.msf4
+cp /opt/database.yml /root/.msf4/
+
+# Cleanup 
+rm -rf /root/metasploit/
+rm -rf /usr/local/bin/msf*
+rm msfinstall
+
+# Sync the file system
+sync
+
+## Finished
+LED FINISH
