@@ -1,26 +1,49 @@
-#
-# Get_WiFiCreds.ps1
-#
-function Get-WiFiCreds {
+﻿
 
-    $WLAN = netsh wlan show profiles | Select-String ": (.*)" |% { $_.Matches.Groups[1].Value }
+ 
 
-    foreach ( $SSID in $WLAN ) {
-	    $Network = netsh wlan show profiles name=$SSID key=clear
-	    $AuthType = (($Network | Select-String "Authentifizierung") -split(": "))[1] # set according to you language
-        $Password = (($Network | select-string "sselinhalt") -split(": "))[1]	     # in us its Authentication
-	    echo "SSID`t`t`t:`t $SSID"
-        echo "AuthType`t`t:`t $AuthType"
-        echo "Password`t`t:`t $Password"
-        echo ""
-    }
+function get-WifiCreds
+{
+
+         # Run the Netsh command to determine all wifi profiles.
+         $Output = netsh wlan show profiles
+
+         $SSID = $Output | Select-String -Pattern "Profil f.r alle Benutzer :", "All User Profile" # ,"Value for All User Profile in other Languages"
+
+         Foreach ($sid in $SSID)
+         {
+              $out = ($sid -split ":")[-1].Trim() -replace '"'
+              $profile = netsh wlan show profiles name=$out key=clear
+              $pw = $profile | select-string -Pattern "Authentifizierung","Authentication"    # ,"Value for Authentication in other Languages"
+
+              if ($pw) 
+              {
+                  $pw2 = ($pw -split ":")[-1].Trim() -replace '"'
+                  if ($pw2 -eq "Open") 
+                  {
+                      Write-Output "$out, <open>"
+                  } else 
+                  {
+                      $key = $profile | select-string -Pattern "Schl.sselinhalt" ,"Key Content"   # ,"Value for Key Content in other Languages"
+                      if ($key) 
+                      {
+                          $key = ($key -split ":")[-1].Trim() -replace '"'
+                      }
+                      write-Output "SSID: $out"
+                      write-output "Auth: $pw2" 
+                      write-output "Key:  $key"
+                      Write-Output "`n"
+                  }
+              }
+         }
+     
 }
 
 ####################################
 
 echo "##Wifi Creds"
 echo "======================================================"
-echo ""
+echo " "
 
 # Update output buffer size to 500
 if( $Host -and $Host.UI -and $Host.UI.RawUI ) {
