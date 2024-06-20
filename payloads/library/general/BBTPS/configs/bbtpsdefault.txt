@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#Default configuration file for BBTPS.
+#You can use this file as a template, do not leave any settings out or
+#You will get errors.
+
+# Bunny root loot folder name.
+export ROOTFOLDERNAME="bbtps"
+
+# Folder where scripts live.
+export JOBFOLDER="$PAYLOADFOLDER/jobs/default"
+
+# Job runlist json file.
+export JOBLIST="$JOBFOLDER/default/joblist.json"
+
+# Do you want the stager to run as admin, 1 for yes, 0 for no.
+export GETADMIN=1
+
+# ATTACKMODE TYPES
+# 0 = SINGLE/ 1 = DUAL
+export ATMODE=0
+
+# Enable/Disable debug.  1 for on, 0 for off.
+export DEBUG=1
+
+# First Quack Delay, after running initial command from run prompt.
+export Q_DELAY1=8000
+
+# Second Quack Delay, if getting admin then this is ran after selecting Yes.
+export Q_DELAY2=8000

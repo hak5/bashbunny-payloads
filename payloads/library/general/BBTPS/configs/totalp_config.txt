@@ -1,0 +1,47 @@
+#!/bin/bash
+
+#Default configuration file for BBTPS.
+#You can use this file as a template, do not leave any settings out or
+#You will get errors.
+
+# Bunny root loot folder name.
+export ROOTFOLDERNAME="bbtps"
+
+# Folder where scripts live.
+export JOBFOLDER="$PAYLOADFOLDER/jobs/totalp0wn"
+#########################################################################
+# BELOW UNCOMMENT ONE OF THE JOBLIST YOU WANT TO RUN FROM THE TOTAL P0WN GROUP. DESCRIPTIONS ARE LISTED ABOVE EACH.
+# Job runlist json file.
+
+# Joblist1 runs Get-VaultCredentials, Invoke-Mimidogz, Invoke-PowerDump and Invoke-AddAdminUser.
+# If not ran as admin then only VaultCredentials will return anything if anything present.
+#export JOBLIST="$JOBFOLDER/joblist1.json"
+
+# Joblist2 will always Get-VaultCredentials and Invoke-SMBExfil.  It will run Invoke-AdminJobs to check for admin and if
+# it is running as UACbypassed Admin it will call back to the server to queue up to be delivered and ran: Mimidogz, PowerDump,
+# and AddAdminUser.
+export JOBLIST="$JOBFOLDER/joblist2.json"
+
+# Joblist3 is the signature Total P0wn job load.  When ran as non-admin the following scripts will run:
+# VaultCredentials, Powercat (Powershell Netcat, requires another machine running Powercat or NCat), SMBExfil.
+# If ran as admin then the AddAdminJobsTP will test true to UACBypassed admin and queue up the following jobs:
+# Mimidogz, PowerDump, AddAdminUser and SethcBD (Sets a local backdoor for even locked machines when you hit SHIFT
+# 5 times will get a UACBypassed System level cmd prompt from logon screen and even lock screen.)
+#export JOBLIST="$JOBFOLDER/joblist3.json"
+
+#########################################################################
+# Do you want the stager to run as admin, 1 for yes, 0 for no.
+export GETADMIN=1
+
+# ATTACKMODE TYPES
+# 0 = SINGLE/ 1 = DUAL
+export ATMODE=1
+
+# Enable/Disable debug.  1 for on, 0 for off.
+export DEBUG=0
+
+# First Quack Delay, after running initial command from run prompt.
+export Q_DELAY1=8000
+
+# Second Quack Delay, if getting admin then this is ran after selecting Yes.
+export Q_DELAY2=8000

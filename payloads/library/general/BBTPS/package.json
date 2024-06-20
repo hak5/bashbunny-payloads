@@ -1,0 +1,19 @@
+{
+  "name": "bbtps",
+  "version": "1.6.0",
+  "description": "BashBunny BBTPS MultiServe Server.  Serves multiple payloads from bash bunny.",
+  "main": "payserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "PoSHMagiC0de",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PoSHMagiC0de/BBTPS.git"
+  }
+}

