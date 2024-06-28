@@ -249,7 +249,7 @@
  VID_          Specifies the USB device vendor ID
  MAN_          Specifies the USB device manufacturer
  SN_           Specifies the USB device serial number
- OFF           Disables all USB emulaiton
+ OFF           Disables all USB emulation
 
  Example:
  ATTACKMODE HID STORAGE VID_0XF000 PID_0X1234 SN_12345678 MAN_HAK5
