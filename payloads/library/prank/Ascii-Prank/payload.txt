@@ -1,3 +1,6 @@
+#Ascii-Prank
+#Opens a terminal and shows that beautiful cat Ascii-art.
+
 ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
 
 LED R 300
