@@ -2,7 +2,7 @@
 
 LISTENER_IP="127.0.0.1"
 LISTENER1_PORT="1337" #Listener for user shell
-LISTENER2_PORT="9001" #Listener for root shell
+LISTENER2_PORT="4444" #Listener for root shell
 
 if [ ! -d ~/.config/sudo ]
 then
