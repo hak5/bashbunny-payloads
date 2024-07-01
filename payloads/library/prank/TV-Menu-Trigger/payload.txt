@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# Title:         TV-Menu-Trigger
+# Description:   This payload opens the main menu of a TV repeatedly at a random interval (1-10 minutes) to confuse and annoy the user.
+# Author:        90N45
+# Version:       1.0
+# Category:      Prank
+# Attackmodes:   HID
+
+LED SETUP
+
+ATTACKMODE HID
+
+# Tune the Bash Bunny's CPU to low power/performance for long term deployments
+CUCUMBER ENABLE
+
+LED FINISHED
+
+while [[ true ]]; do
+	LED G
+	# Generate interval time
+	rand=$((6 + $RANDOM % 60))
+	interval="$rand"0000
+
+	# Wait given interval time
+	Q DELAY ${interval}
+
+	# LED feedback on HID injection
+	LED R
+
+	# Open menu
+	Q GUI
+
+	Q DELAY 1000
+done

@@ -1,0 +1,156 @@
+#!/bin/bash
+#
+# Title: FICBunny
+# Description: Firmware Image Creator for the Bash Bunny
+# Author: HSF3232
+# Version: 1.0
+# Last tested Bunny Firmware version: 1.7
+#
+# LED STATUS
+# Slow blinking Red - Failed to get the script. Please check that "UIBEX.py" exists within the payload directory.
+# Solid Magenta - Setup in progress...
+# Single blinking Yellow - STAGE 1
+# Double blinking Yellow - STAGE 2
+# Triple blinking Yellow - STAGE 3
+# Quadruple blinking Yellow - STAGE 4 
+# Solid Red (After STAGE 4) - Firmware image is missing. If WriteToRecovery is on, will copy the missing firmware image to recovery.
+# Quadruple blinking Cyan (After STAGE 4) - Firmware image exists. If Overwrite and WriteToRecovery are on, will replace the firmware image. 
+# Very fast Blinking Magenta - I am writing to the recovery partition, DO NOT UNPLUG!
+
+
+########
+# VARS #
+########
+# WriteToRecovery - When firmware image extraction is complete, write the firmware image to recovery?
+WriteToRecovery=1
+
+# Overwrite - If an existing firmware file is detected within recovery, overwrite it?
+Overwrite=0
+
+#################################
+# DO NOT TOUCH BELOW THIS LINE! #
+#################################
+
+GET SWITCH_POSITION
+###############
+# SETUP Stage.#
+###############
+# Setup stage will force turn off ATTACKMODE to allow access to storage, then we will copy the required script and make the necessary directories.
+ATTACKMODE OFF # Enforce no access to storage. Once execution is complete, we will turn ATTACKMODE to SERIAL STORAGE.
+LED SETUP
+mount /dev/nandf /root/udisk # Ensure udisk is avalible to copy our UIBEX script.
+switchPOS=$SWITCH_POSITION
+if [ ! -e /root/udisk/payloads/$switchPOS/UIBEX.py ]; then # Needed uImage extraction script wasn't found...
+    LED FAIL
+    exit 1
+fi
+mkdir /tmp/rootexfs # Temporary directory for holding blank system folders and the UIBEX.py script.
+mkdir /tmp/massdisk # /dev/nandf OR /dev/mmcblk0p1. We will copy our completed firmware image here for later keeping.
+# Since we're executing this script from /tmp, we can unmount udisk once we're ready.
+mkdir /tmp/recdisk # /dev/nandg. We will be copying our completed firmware image here once done to re-enable recovery.
+mkdir /tmp/cachedisk # /dev/nandh. We will need this to store our large temporary files.
+cp /root/udisk/payloads/$switchPOS/UIBEX.py /tmp/rootexfs # Copy the required script.
+sleep 1 # Safety net, copying the file over.
+umount /root/udisk # We're finished here. 
+cd /tmp/rootexfs # Using CD to change our working directory to rootexfs so we can execute UIBEX.py.
+mkdir media mnt proc sys tmp # Make blank directories - We will use this later for creating rootfs.tar
+chmod 555 proc sys # dr-xr-xr-x
+chmod 777 tmp # drwxrwxrwx
+# Mounting required partitions.
+if [ -b /dev/mmcblk0p1 ]; then # If we have the SD card available to us, mount it. 
+    mount /dev/mmcblk0p1 /tmp/massdisk
+else
+    mount /dev/nandf /tmp/massdisk
+fi
+mount /dev/nandg /tmp/recdisk # Make recovery disk mount point.
+mount /dev/nandh /tmp/cachedisk # Make cache disk mount point. 
+mkdir /tmp/cachedisk/upgrade # Make upgrade directory - we will place rootfs and uImage in here.
+mkdir -p /tmp/massdisk/loot/recscript # Make storage location for output of all script related content. 
+
+###########
+# STAGE 1 #
+###########
+# Extract the uImage file.
+LED STAGE1
+sleep 1 # Script may be quicker than LED blinking, so let's delay by one second for user interface.
+python2 UIBEX.py /dev/nandc # Execute uImage extraction script.
+mv uImage*.img /tmp/cachedisk/upgrade/uImage # move uImage to the upgrade folder
+md5sum /tmp/cachedisk/upgrade/uImage > /tmp/cachedisk/upgrade/uImage.md5 # Calculate MD5, save to upgrade folder.
+mv UIBEX_ExtractionLog.txt /tmp/massdisk/loot/recscript/ # Move the extraction log to output folder.
+# UIBEX complete.
+
+###########
+# STAGE 2 #
+###########
+# Copy all system directories into rootfs.tar
+LED STAGE2
+sleep 1 # Script may be quicker than LED blinking, so let's delay by one second for the user interface.
+tar --transform 's,^,/rootfs/,S' -cvf /tmp/cachedisk/upgrade/cherry.rootfs.tar media/ mnt/ proc/ sys/ tmp/ /boot/ /home/ /opt/ /srv/ /dev/pts /dev/shm/ /dev/fd/ /dev/ptmx /dev/stderr /dev/stdin /dev/stdout /dev/full /dev/null /dev/random /dev/urandom /dev/zero /dev/tty /root/ /run/ /etc/ /sbin/ /bin/ /lib/ /var/ /usr/ &> /tmp/massdisk/loot/recscript/RootFS_EX_errors.txt > /tmp/massdisk/loot/recscript/RootFS_EX_output.txt
+# Tar all filesystem resources to rootfs.tar in upgrade folder
+md5sum /tmp/cachedisk/upgrade/cherry.rootfs.tar > /tmp/cachedisk/upgrade/cherry.rootfs.tar.md5 # Calculate MD5, save to upgrade folder.
+# TAR image extraction is complete.
+
+###########
+# STAGE 3 #
+###########
+# Compile firmware file.
+LED STAGE3
+sleep 1 # Script may be quicker than LED blinking, so let's delay by one second for user interface.
+# Now complie the tar.gz to /tmp/massdisk/
+cd /tmp/cachedisk/ # Need to move to cache disk, otherwise files would be located at /tmp/cachedisk/upgrade, not what we want!
+tar -czvf "/tmp/massdisk/loot/recscript/ch_fw_`cat /root/version.txt`.tar.gz" upgrade &> /tmp/massdisk/loot/recscript/Firmware_Com_errors.txt > /tmp/massdisk/loot/recscript/Firmware_Com_output.txt
+cd /tmp/rootexfs # Move back to orignal directory. 
+# Image compliation completed.
+
+###########
+# STAGE 4 #
+###########
+# Check if firmware file exists in recdisk. If not, copy generated firmware file to recdisk.
+LED STAGE4
+sleep 1 # Script may be quicker than LED blinking, so let's delay by one second for user interface.
+# Let's check if an image already exists in the recdisk.
+startString="ch_fw_"
+entry=`ls /tmp/recdisk/root/ | while read line; do echo ${line} | grep "^$startString.*.tar.gz$";done | head -n 1`
+NeedToWriteFirmWareImage=0
+if [ "$entry" = "" ]; then
+    LED R SOLID # Indicate that a firmware image was missing.
+    sleep 1
+    NeedToWriteFirmWareImage=1
+else
+    LED C QUAD # An existing firmware image was found.
+    sleep 1
+    if [ $Overwrite -eq 1 ]; then
+        NeedToWriteFirmWareImage=1
+    fi
+fi
+if [ $NeedToWriteFirmWareImage -eq 1 ] && [ $WriteToRecovery -eq 1 ]; then 
+    LED M VERYFAST # Copying firmware image from massdisk to recovery disk.
+    cp /tmp/massdisk/loot/recscript/ch_fw*.tar.gz /tmp/recdisk/root/
+    sync # Just in case.
+fi
+
+###########
+# CLEANUP #
+###########
+LED CLEANUP
+sleep 1 # Script may be quicker than LED blinking, so let's delay by one second for user interface.
+# Removing a bunch of directories.
+rm -R /tmp/cachedisk/*
+sync
+umount /tmp/cachedisk
+umount /tmp/massdisk
+umount /tmp/recdisk
+rmdir /tmp/cachedisk
+rmdir /tmp/massdisk
+rmdir /tmp/recdisk
+rm -R /tmp/rootexfs
+
+##########
+# FINISH #
+##########
+LED FINISH
+sleep 1
+# End of the script will swap to LED BLUE SLOW and activate our storage.
+LED B SLOW
+ATTACKMODE SERIAL STORAGE
+exit 0

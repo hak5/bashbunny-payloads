@@ -1,0 +1,76 @@
+[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing");
+
+$AsciiChars = @( 'M', '#', '@', '%', 'X', '=', '+', '*', ';', ':', '-', '.', ' ' )
+
+Function PS-AsciiArt
+{
+    [CmdletBinding()]
+    param(
+            [String] [parameter(mandatory=$true, Valuefrompipeline = $true)] $Path, [Switch] $Reverse
+    )
+    process
+    {
+        foreach($item in $Path)
+        {
+            if ($Reverse -eq $true)
+            {
+               [array]::Reverse($AsciiChars)
+            }
+			$sb = [System.Text.StringBuilder]::new()
+            # Convert path to BitMap     
+            $name = (Get-Item $Item).fullname;       
+            $Bitmap = [System.Drawing.Bitmap]::FromFile($name)
+            # Resize Image
+            $Bitmap = (Get-ReSizedImage $BitMap 100)
+            # draw every other line
+            $draw = $true;
+            # loop down the image
+            foreach($y in (0..($BitMap.Height-1)))
+            {                
+                if ($draw)
+                {
+                    foreach($x in (0..($BitMap.Width-1)))
+                    {
+                        # get pixal
+                        $Pixel = $Bitmap.GetPixel($X,$Y)
+
+                        $Grey = ($Pixel.R + $Pixel.G + $Pixel.B) / 3;  
+                        $grayColor = [System.Drawing.Color]::FromArgb($Grey,$Grey,$Grey);                           
+                        if (!$toggle)
+                        {
+                            $index = (($grayColor.R * ($AsciiChars.count-1)) / 255);                           
+                            [void]$sb.Append($AsciiChars[$index]);
+                        }
+                    }
+                    [void]$sb.AppendLine('') #Start the next row
+                }
+                # flip bool
+                $draw = !$draw;
+            }
+			$sb.ToString() | Out-File ([io.path]::ChangeExtension($name, "ascii.txt"))
+        }
+    }
+}
+
+Function Get-ReSizedImage
+{
+    param(
+            [System.Drawing.Bitmap] [parameter(mandatory=$true, Valuefrompipeline = $true)] $Image, [int] [parameter(mandatory=$true)] $Width
+    )
+    Process
+    {     
+        $asciiHeight=0;
+        #Calculate the new Height of the image from its width
+        $asciiHeight = [int][Math]::Ceiling([double]$Image.Height * $Width / $Image.Width);
+        #Create a new Bitmap and define its resolution
+        $result = New-Object System.Drawing.Bitmap($Width, $asciiHeight);
+        $g = [System.Drawing.Graphics]::FromImage([System.Drawing.Image]$result);
+        #The interpolation mode produces high quality images
+        $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic;
+        $g.DrawImage($Image, 0, 0, $Width, $asciiHeight);
+        $g.Dispose();
+        return $result;  
+    }
+}
+
+Get-ChildItem ([environment]::getfolderpath("MyPictures")) | ? {$_.extension -in ".jpg", ".jpeg", ".png", ".bmp"} |% {$_.FullName | PS-AsciiArt}

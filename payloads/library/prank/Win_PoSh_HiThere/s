@@ -1,0 +1,19 @@
+$path                      = "$([Environment]::GetFolderPath('Desktop'))\readme.lnk"
+$wshell                    = New-Object -ComObject Wscript.Shell
+$shortcut                  = $wshell.CreateShortcut($path)
+
+$shortcut.IconLocation     = "C:\Windows\System32\shell32.dll,70"
+
+$shortcut.TargetPath       = "C:\Windows\System32\oobe\FirstLogonAnim.exe"
+$shortcut.Arguments        = "/RunFirstLogonAnim"
+$shortcut.WorkingDirectory = "C:"
+$shortcut.HotKey           = "CTRL+C"
+$shortcut.Description      = "Contain very important information"
+
+$shortcut.WindowStyle      = 7
+                           # 7 = Minimized window
+                           # 3 = Maximized window
+                           # 1 = Normal    window
+$shortcut.Save()
+
+(Get-Item $path).Attributes += 'Hidden' # Optional if we want to make the link invisible (prevent user clicks)

