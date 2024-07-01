@@ -1,0 +1,20 @@
+# Title:        Excel QR Rickroll
+# Description:  Create a QR code in Excel that points to Rick Astley - Never Gonna Give You Up on YouTube
+# Author:       Cribbit
+# Version:      1.0
+# Category:     Pranks
+# Target:       Windows (Powershell 5.1+)
+# Attackmodes:	HID & STORAGE 
+# Extensions:   Run
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE
+
+LED ATTACK
+
+RUN WIN "powerShell -Noni -NoP -W h -EP Bypass .((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\QRcode.ps1')"
+
+LED FINNISH

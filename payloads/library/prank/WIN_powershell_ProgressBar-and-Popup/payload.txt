@@ -1,0 +1,22 @@
+# Title:        Progress bar and Popups
+# Description:  Opens PowerShell show a progress bar telling the user it's installing a virus. After that uses text-to-speech, then shows a few error messages.
+# Author:       Cribbit
+# Version:      1.0
+# Category:     Prank
+# Target:       Windows 10 (Powershell)
+# Attackmodes:	HID	
+
+LED SETUP
+
+ATTACKMODE HID VID_0X05AC PID_0X021E
+
+LED ATTACK
+
+Q DELAY 200
+RUN WIN "powershell"
+Q DELAY 100
+Q STRING "cls;Add-Type -AN PresentationFramework;\$t=101;\$i=0;for(\$i=0;\$i -lt \$t;\$i++){Write-Progress -A 'Installing Virus' -Status \"\$i% Complete\" -PercentComplete \$i;sleep -m 25;}\$s=New-Object -ComObject SAPI.SPVoice;\$s.Speak('Oh No what is happening to me');\$m=[System.Windows.MessageBox];\$e='Error';\$m::Show('Press any key to continue or any other key to quit',\$e, 'Ok', \$e);\$m::Show('Smash forehead on keyboard to continue',\$e, 'Ok', \$e);\$m::Show('Breakfast.sys halted - Cereal port not responding',\$e, 'Ok', \$e);\$m::Show('User error - Replace user',\$e, 'Ok', \$e);\$m::Show('Enter any 11 digit prime number to continue',\$e, 'Ok', \$e);\$m::Show('Close your eyes and press escape tree times',\$e, 'Ok', \$e);\$m::Show('Press Ctrl + Alt + Del for IQ test',\$e, 'Ok', \$e);\$m::Show('Press any key except.. no, No, NO, NOT THAT ONE!',\$e, 'Ok', \$e);\$m::Show('Runtime Error 399461 - Incompetent User',\$e, 'Ok', \$e);\$m::Show('Your hard drive has been scanned and all stolen software titles have been deleted. The police are on their way',\$e, 'Ok', \$e);\$m::Show('Bad command or file name - Go stand in the corner',\$e, 'Ok', \$e);\$m::Show('Problem caused by defective input device located in chair',\$e, 'Ok', \$e);\$s.Speak('Oh I''m ok');exit"
+Q DELAY 100
+Q ENTER
+
+LED FINISH

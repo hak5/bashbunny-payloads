@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+# Title:         Change windows wallpaper
+# Author:        xhico
+# Version:       1.0
+# Target:        Windows
+# 
+# Changes the users wallpaper from the ${SWITCH_POSITION} folder 
+# in the payloads library of the Bash Bunny USB Disk partition.
+#
+# Colors:
+# | Status     | Color                         | Description                                      |
+# | ---------- | ------------------------------| ------------------------------------------------ |
+# | SETUP      | Magenta solid                 | Setting attack mode, getting the switch position | 
+# | FAIL       | Red slow blink                | Could not find the wallpaper file                | 
+# | ATTACK     | Yellow single blink           | Running the Powershell Script                    | 
+# | FINISH     | Green blink followed by SOLID | Script is finished                               | 
+
+# Magenta solid
+LED SETUP
+
+# Get the switch position
+GET SWITCH_POSITION
+PAYLOAD_DIR=/root/udisk/payloads/$SWITCH_POSITION
+
+# Check for w.png s.ps1 files
+if [[ ! -f ${PAYLOAD_DIR}/w.png || ! -f ${PAYLOAD_DIR}/s.ps1 ]]; then
+	LED FAIL
+    exit 1
+fi
+
+# Set the attack mode to HID and STORAGE
+ATTACKMODE HID STORAGE
+
+# Yellow single blink
+LED ATTACK
+
+# Run the command to change the wallpaper
+RUN WIN powershell ".((gwmi win32_volume -f 'label=''BASHBUNNY''').Name+'payloads\\$SWITCH_POSITION\s.ps1') \"((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\w.png')\""
+
+
+# Green LED for finished
+LED FINISH

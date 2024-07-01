@@ -1,0 +1,11 @@
+REM TITLE DesktopBunny
+REM AUTHOR Cribbit
+REM DESCRIPTION Shows a Bunny that hops along the bottom of the screen
+ATTACKMODE HID STORAGE
+LED SETUP
+GET SWITCH_POSITION
+LED ATTACK
+QUACK DELAY 3000
+RUN WIN "powershell -Noni -NoP -W h -EP Bypass iex((Get-Volume -FileSystemLabel 'BashBunny').DriveLetter+':\payloads\\$SWITCH_POSITION\DesktopBunny.ps1')"
+QUACK ENTER
+LED FINISH

