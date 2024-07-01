@@ -36,7 +36,8 @@ Q DELAY 1000
 Q CTRL C
 
 # Executing bash script which is same for mac and linux
-Q STRING bash /Volumes/BashBunny/payloads/switch1/payload.sh
+GET SWITCH_POSITION
+Q STRING bash /Volumes/BashBunny/payloads/$SWITCH_POSITION/payload.sh
 
 # The cleanup process will done by bash script
 # Closing the xterm in linux

