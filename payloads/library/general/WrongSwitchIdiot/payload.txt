@@ -1,0 +1,16 @@
+#Title: Wrong-Switch-Idiot
+#Author: Reda-Redacted
+#Description: Enforces Imposter Syndrome via switch #2
+#Target: Windows 10, 11
+
+ATTACKMODE HID
+LED SETUP
+QUACK DELAY 3000
+QUACK GUI r
+QUACK DELAY 1000
+QUACK STRING notepad.exe
+QUACK ENTER
+QUACK DELAY 300
+LED ATTACK
+QUACK STRING Wrong Switch Idiot
+LED FINISH
