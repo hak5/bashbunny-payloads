@@ -1,7 +1,7 @@
-Title: Wrong-Switch-Idiot
-Author: Reda-Redacted
-Description: Enforces Imposter Syndrome via switch #2
-Target: Windows 10, 11
+#Title: Wrong-Switch-Idiot
+#Author: Reda-Redacted
+#Description: Enforces Imposter Syndrome via switch #2
+#Target: Windows 10, 11
 
 ATTACKMODE HID STORAGE
 LED SETUP
