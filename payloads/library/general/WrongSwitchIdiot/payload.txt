@@ -1,0 +1,12 @@
+Title: Wrong-Switch-Idiot
+Author: Reda-Redacted
+Description: Enforces Imposter Syndrome via switch #2
+Target: Windows 10, 11
+
+ATTACKMODE HID STORAGE
+LED SETUP
+RUN WIN notepad.exe
+Q DELAY 300
+LED ATTACK
+Q STRING Wrong Switch Idiot
+LED FINISH
