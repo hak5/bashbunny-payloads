@@ -43,7 +43,7 @@ QUACK ENTER
 QUACK DELAY 100
 
 # Bye Felicia!
-QUACK STRING umount '/media/$USER/BashBunny'
+QUACK STRING umount '/media/$USER/$DRIVE_LABEL'
 QUACK ENTER
 QUACK DELAY 25
 
