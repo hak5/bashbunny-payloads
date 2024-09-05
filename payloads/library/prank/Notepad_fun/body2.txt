@@ -1,0 +1,22 @@
+STRING L       OOO   CCC  K  K     Y   Y  OOO  U   U RRR    
+ENTER
+STRING L      O   O C     K K       Y Y  O   O U   U R  R 
+ENTER
+STRING L      O   O C     KKK        Y   O   O U   U RRR
+ENTER
+STRING L      O   O C     K  K       Y   O   O U   U R  R
+ENTER
+STRING LLLLL   OOO   CCC  K   K      Y    OOO   UUU  R   R
+ENTER
+ENTER
+STRING    CCC  OOO  M   M PPP  U   U TTTTT EEEEE RRR
+ENTER
+STRING   C    O   O MM MM P  P U   U   T   E     R  R
+ENTER
+STRING   C    O   O M M M PPP  U   U   T   EEEE  RRR
+ENTER
+STRING   C    O   O M   M P    U   U   T   E     R  R
+ENTER
+STRING    CCC  OOO  M   M P     UUU    T   EEEEE R   R
+ENTER
+ENTER
