@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "1.6.0",
+    "configurations": [
+
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceRoot}/payserver.js",
+            "env" :{
+                "JSDEBUG": "true",
+                "SERVERIP": "192.168.1.136",
+                "TARGET_HOSTNAME": "TestMachine",
+                "JOBFOLDER": "${workspaceRoot}/jobs/totalp0wn",
+                "JOBLIST": "${workspaceRoot}/jobs/totalp0wn/joblist2.json",
+                "LOOTDIR": "${workspaceRoot}/tmploot/TestMachine"
+            }
+        }
+    ]
+}

