@@ -20,7 +20,7 @@ Password grabber: [Also in this repo](https://github.com/hak5/bashbunny-payloads
 
 
 ## Info
-rafa-guillermo: added a whole bunch of stuff to disable Windows Defender file scanner, smart screen and RTP before running LaZagne, i was having issues where otherwise it would immediately be quarantined.
+rafa-guillermo: I've added a whole bunch of stuff to disable Windows Defender file scanner, smart screen and RTP before running LaZagne, I was having issues where otherwise it would immediately be quarantined. Defender will be enabled again after execution.
 
 jdebetaz: I remake this playload with the Payload Best Practice / Style Guide
 
