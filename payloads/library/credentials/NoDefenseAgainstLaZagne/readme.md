@@ -16,7 +16,8 @@ Password grabber: [Also in this repo](https://github.com/hak5/bashbunny-payloads
 ## Configuration
 1. You need to download LaZagne from the [LaZagne release page](https://github.com/AlessandroZ/LaZagne/releases). Tested with LaZagne 2.2 but might work with newer versions too.
 2. Unzip the exe file and place it in the folder called 'tooling' on the root of the Bash Bunny. The payload folder should contain payload.ps1 and payload.txt, LaZagne.exe needs to be in a folder called tooling.
-3. Plug your BashBunny and Enjoy
+3. Set up your Bash Bunny Drive Label (default is BashBunny, config is on line 22 of payload.txt and line 1 of payload.ps1)
+4. Plug your BashBunny and Enjoy
 
 
 ## Info
