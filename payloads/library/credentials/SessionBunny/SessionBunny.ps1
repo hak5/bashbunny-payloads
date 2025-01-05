@@ -43,7 +43,7 @@
           o
           o_       
          /  ".   SessionGopher
-       ,"  _-"      Bunny Edition (0iphor13)
+       ,"  _-"      Bunny Edition (0i41E)
      ,"   m m         
   ..+     )      Brandon Arvanaghi
      `m..m       @arvanaghi | arvanaghi.com

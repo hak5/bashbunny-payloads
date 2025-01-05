@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="SHORTCUT ICON" type="image/x-icon" href="static/bb_icon.png"/>
+	<link rel="icon" type="image/x-icon" href="static/bb_icon.png" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>BlueBunny</title>
+	<meta name="description" content="Remote control your Bash Bunny MKII">
+	<link href="static/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		.btn-imp {
+			--bs-btn-color: #EC1A24 !important;
+			--bs-btn-border-color: #EC1A24 !important;
+			--bs-btn-hover-border-color: #1a62ec !important;
+			--bs-btn-hover-bg: #1a62ec !important;
+			--bs-btn-hover-color: #ffffff !important;
+		}
+
+		.btn {
+			--bs-btn-color: #1a62ec;
+			--bs-btn-border-color: #1a62ec;
+			--bs-btn-hover-border-color: #1a62ec;
+			--bs-btn-hover-bg: #1a62ec;
+			--bs-btn-hover-color: #ffffff;
+		}
+
+		code {
+			color: #1a62ec;
+		}
+
+		.form-control::placeholder {
+			color: #adb5bd;
+			opacity: 0.5;
+		}
+	</style>
+	<script type="text/javascript">
+		function disableControl() {
+			forms = document.getElementsByClassName('form');
+
+			for (i = 0; i < forms.length; i++) {
+				forms[i].getElementsByTagName('form')[0].hidden = true;
+				forms[i].getElementsByTagName('h6')[0].hidden = false;
+			}
+		}
+
+		function enableControl() {
+			forms = document.getElementsByClassName('form');
+
+			for (i = 0; i < forms.length; i++) {
+				forms[i].getElementsByTagName('h6')[0].hidden = true;
+				forms[i].getElementsByTagName('form')[0].hidden = false;
+			}
+		}
+
+		function connectionCheck() {
+			fetch("/con-check").then(function(response) {
+				return response.json();
+			}).then(function(data) {
+				if (data.connected == 0 || data.connected == 2) {
+					document.getElementById("connectBtn").hidden = false;
+					disableControl();
+				} else if (data.connected == 1) {
+					document.getElementById("connectBtn").hidden = true;
+					enableControl();
+				}
+			})
+		}
+
+		function info(topic) {
+			window.scrollTo(0, 0);
+
+			document.getElementsByTagName("BODY")[0].style["overflow"] = "hidden";
+
+			document.getElementById("page").style["filter"] = "blur(2.5px)";
+			document.getElementById("page").style["position"] = "absolute";
+			document.getElementById("page").style["width"] = "100%";
+			document.getElementById("page").style["height"] = "100%";
+
+			document.getElementById(topic).hidden = false;
+		}
+
+		function infoClose(topic) {
+			document.getElementsByTagName("BODY")[0].style["overflow"] = null;
+
+			document.getElementById("page").style["filter"] = null;
+			document.getElementById("page").style["position"] = null;
+			document.getElementById("page").style["width"] = null;
+			document.getElementById("page").style["height"] = null;
+
+			document.getElementById(topic).hidden = true;
+		}
+
+		function execPayloadFile() {
+			const reader = new FileReader();
+
+			reader.readAsText(document.getElementById("payloadFile").files[0]);
+
+			reader.onloadend = () => {
+				query = reader.result;
+				document.getElementById("payloadContent").value = query;
+
+				document.getElementById("payloadForm").submit();
+			};
+		}
+
+		connectionCheck()
+		setInterval(connectionCheck, 10000);
+	</script>
+</head>
+<body style="background-color: #202124; color: #adb5bd; height: 100%">
+	<div id="page">
+		<div>
+			<nav class="navbar navbar-expand navbar-light fixed-top shadow-sm" style="border-bottom: solid; border-color: #1a62ec; border-width: 2px; background: #202124;">
+				<div class="container-fluid">
+					<a class="navbar-brand">
+						<img src="static/logo.png" onclick="info('info_cp')" style="cursor: pointer; height: 45px; padding-right: 15px; padding-bottom: 5px; filter: brightness(0) saturate(100%) invert(23%) sepia(75%) saturate(3313%) hue-rotate(217deg) brightness(99%) contrast(86%);" class="d-inline-block">
+					</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarToggler">
+						<ul class="nav ms-auto">
+							<li class="nav-item">
+								<a class="btn btn-imp" title="Connect" href="/connect" id="connectBtn" hidden>Connect to Bash Bunny</a>
+							</li>
+							<li class="nav-item" style="margin: auto; margin-right: 15px; margin-left: 20px;">
+								<a style="cursor: pointer; font-size: 1.25rem;" title="Copyright & Attribution" onclick="info('info_cp')">©</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<nav class="navbar navbar-expand-lg navbar-light" style="visibility: hidden;">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="#">
+						<img src="static/bb_icon.png" style="height: 45px; padding-right: 15px;" class="d-inline-block"><span style="vertical-align: middle;">BlueBunny</span>
+					</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse">
+						<ul class="nav">
+							<li class="nav-item">
+								<a class="btn">Connect to Bash Bunny</a>
+							</li>
+							<li class="nav-item" style="margin: auto; margin-right: 15px; margin-left: 20px;">
+								<a>©</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<br>
+		<br>
+		<div class="container" style="display: flex; flex-flow: wrap; justify-content: start;">
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">Payload One-Liner <p class="text-dark-emphasis" style="font-size: 15px;"><small>Run a single line of code</small></p></h4>
+				<div class="form">
+					<form action="" method="POST" hidden>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" placeholder="Q ALT F4" autocomplete="off" list="datalistOptions" name="query" style="background-color: #202124; border-color: #1a62ec; color: #adb5bd;">
+							<datalist id="datalistOptions">
+								<option value="Q STRING Hello World!"></option>
+								<option value="Q CAPSLOCK"></option>
+								<option value="Q ALT F4"></option>
+								<option value="Q COMMAND q"></option>
+								<option value="Q WIN r"></option>
+								<option value="Q COMMAND SPACE"></option>
+							</datalist>
+							<input type="hidden" name="mode" value="cmd">
+							<button class="btn" type="submit">Run</button>
+						</div>
+					</form>
+					<h6 hidden>Not available</h6>
+				</div>
+			</div>
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">Payload Script<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="-5 5 19 19" style="overflow: visible; cursor: pointer;" onclick="info('info_payload')"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg> <p class="text-dark-emphasis" style="font-size: 15px;"><small>Upload and execute a payload file</small></p></h4>
+				<div class="form">
+					<form hidden>
+						<div class="input-group mb-3">
+							<input type="file" accept=".txt" class="form-control" style="background-color: #202124; border-color: #1a62ec; color: #adb5bd;" id="payloadFile">
+						</div>
+						<button class="btn" title="Execute Payload" onclick="execPayloadFile()">Execute Payload</button>
+					</form>
+					<form action="" method="POST" id="payloadForm">
+						<input type="hidden" name="mode" value="cmd">
+						<input type="hidden" name="query" value="" id="payloadContent">
+					</form>
+					<h6 hidden>Not available</h6>
+				</div>
+			</div>
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">Attack Mode<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="-5 5 19 19" style="overflow: visible; cursor: pointer;" onclick="info('info_attackmode')"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg> <p class="text-dark-emphasis" style="font-size: 15px;"><small>Configure Ethernet, Storage, HID and Serial</small></p></h4>
+				<div class="form">
+					<form action="" method="POST" hidden>
+						<div class="input-group">
+							<select class="form-select" style="background-color: #202124; border-color: #1a62ec; color: #adb5bd;" name="query">
+								<option value="ATTACKMODE OFF" selected>None</option>
+								<option value="ATTACKMODE SERIAL">SERIAL</option>
+								<option value="ATTACKMODE ECM_ETHERNET">ECM ETHERNET</option>
+								<option value="ATTACKMODE RNDIS_ETHERNET">RNDIS ETHERNET</option>
+								<option value="ATTACKMODE AUTO_ETHERNET">AUTO ETHERNET</option>
+								<option value="ATTACKMODE STORAGE">STORAGE</option>
+								<option value="ATTACKMODE HID">HID</option>
+							</select>
+							<input type="hidden" name="mode" value="cmd">
+							<button class="btn" type="submit">Update</button>
+						</div>
+					</form>
+					<h6 hidden>Not available</h6>
+				</div>
+			</div>
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">LED <p class="text-dark-emphasis" style="font-size: 15px;"><small>Light up your Bush Bunny</small></p></h4>
+				<div class="form">
+					<form action="" method="POST" hidden>
+						<div class="input-group">
+							<select class="form-select" style="background-color: #202124; border-color: #1a62ec; color: #adb5bd;" name="query">
+								<option value="LED G" selected>Green</option>
+								<option value="LED B">Blue</option>
+								<option value="LED R">Red</option>
+								<option value="LED Y">Yellow</option>
+								<option value="LED C">Cyan</option>
+								<option value="LED M">Magenta</option>
+								<option value="LED W">White</option>
+							</select>
+							<input type="hidden" name="mode" value="cmd">
+							<button class="btn" type="submit">Update</button>
+						</div>
+					</form>
+					<h6 hidden>Not available</h6>
+				</div>
+			</div>
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">CPU Control <p class="text-dark-emphasis" style="font-size: 15px;"><small>Tune the CPU to your needs</small></p></h4>
+				<div class="form">
+					<form action="" method="POST" hidden>
+						<div class="input-group">
+							<select class="form-select" style="background-color: #202124; border-color: #1a62ec; color: #adb5bd;" name="query">
+								<option value="CUCUMBER ENABLE">Single Core Ondemand (Low Power)</option>
+								<option value="CUCUMBER DISABLE" selected>Quad Core Ondemand (Default)</option>
+								<option value="CUCUMBER PLAID">Quad Core Performance (High Performance)</option>
+							</select>
+							<input type="hidden" name="mode" value="cmd">
+							<button class="btn" type="submit">Update</button>
+						</div>
+					</form>
+					<h6 hidden>Not available</h6>
+				</div>
+			</div>
+			<div style="width: 20rem; margin-right: 50px; margin-bottom: 20px; min-height: 10rem;">
+				<h4 style="color: #ced4da;">Power Management<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="-5 5 19 19" style="overflow: visible; cursor: pointer;" onclick="info('info_power')"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg> <p class="text-dark-emphasis" style="font-size: 15px;"><small>Take a break</small></p></h4>
+				<div class="form">
+					<form action="" method="POST" hidden>
+						<div class="input-group">
+							<select class="form-select" style="background-color: #202124; border-color: #EC1A24; color: #adb5bd;" name="query">
+								<option value="shutdown -h now" selected>Shutdown</option>
+								<option value="reboot">Reboot</option>
+							</select>
+							<input type="hidden" name="mode" value="cmd">
+							<button class="btn btn-imp" type="submit">Initialize</button>
+						</div>
+					</form>
+					<h6 hidden>Not available</h6>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="position: absolute; width: 100%; height: 100%;" id="info_payload" hidden>
+		<div style="display: flex; justify-content: center; align-items: center; margin-top: 25px;">
+			<div class="rounded shadow" style="border: solid; border-color: #1a62ec; border-width: 1px; background: #202124; max-width: 600px; height: fit-content; margin-left: 15px; margin-right: 15px; display: flex; justify-content: center;">
+				<div style="margin: 20px; width: 100%" id="action">
+					<h3 class="text-center" style="color: #ced4da; margin-bottom: 10px;">Payload Script</h3>
+					<p>This section allows you to execute custom payload files.</p>
+					<p>The name of the uploaded file doesn't have to match <code>payload.txt</code>.</p>
+					<p>Uploaded payloads will be sent to your Bash Bunny and will be saved temporary. After finishing your payload, it gets removed automatically.
+					<div class="text-center" style="margin-top: 100px;">
+						<button class="btn" onclick="infoClose('info_payload')">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="position: absolute; width: 100%; height: 100%;" id="info_attackmode" hidden>
+		<div style="display: flex; justify-content: center; align-items: center; margin-top: 25px;">
+			<div class="rounded shadow" style="border: solid; border-color: #1a62ec; border-width: 1px; background: #202124; max-width: 600px; height: fit-content; margin-left: 15px; margin-right: 15px; display: flex; justify-content: center;">
+				<div style="margin: 20px; width: 100%" id="action">
+					<h3 class="text-center" style="color: #ced4da; margin-bottom: 10px;">Attack Mode</h3>
+					<p>This section allows you to change the Bash Bunny's attack mode like the <code>ATTACKMODE</code> payload command does.</p>
+					<p>Further and more complex attack mode combinations can always be set from the "Payload One-Liner" or a payload file.</p>
+					<p class="fw-bold">Important:</p>
+					<p>When setting the attack mode, you likely can't change it without a reboot (besides disabling it again). The target machine may not recognize the change, for example, from STORAGE to HID. It may no longer detect the storage but won't be able to recognize the HID. Keep in mind: This can differ between target devices.</p>
+					<div class="text-center" style="margin-top: 100px;">
+						<button class="btn" onclick="infoClose('info_attackmode')">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="position: absolute; width: 100%; height: 100%;" id="info_power" hidden>
+		<div style="display: flex; justify-content: center; align-items: center; margin-top: 25px;">
+			<div class="rounded shadow" style="border: solid; border-color: #1a62ec; border-width: 1px; background: #202124; max-width: 600px; height: fit-content; margin-left: 15px; margin-right: 15px; display: flex; justify-content: center;">
+				<div style="margin: 20px; width: 100%" id="action">
+					<h3 class="text-center" style="color: #ced4da; margin-bottom: 10px;">Power Management</h3>
+					<p>This section allows you to shutdown or reboot your Bash Bunny.</p>
+					<p>After reboot, your Bash Bunny will run the payload available at the current switch position.</p>
+					<p>Rebooting may help when you encouter execution issues. When the attacked device won't recognize attack mode changes, rebooting and then setting the new attack mode will fix it.</p>
+					<div class="text-center" style="margin-top: 100px;">
+						<button class="btn" onclick="infoClose('info_power')">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="position: absolute; width: 100%; height: 100%;" id="info_cp" hidden>
+		<div style="display: flex; justify-content: center; align-items: center; margin-top: 25px;">
+			<div class="rounded shadow" style="border: solid; border-color: #1a62ec; border-width: 1px; background: #202124; max-width: 600px; height: fit-content; margin-left: 15px; margin-right: 15px; display: flex; justify-content: center;">
+				<div style="margin: 20px; width: 100%" id="action">
+					<h3 class="text-center" style="color: #ced4da; margin-bottom: 10px;">Copyright & Attribution</h3>
+					<br>
+					<img src="static/logo.png" style="height: 45px; padding-right: 15px; padding-bottom: 5px;" class="d-inline-block">
+					<p>BlueBunny is an open source project from <code><a href="https://github.com/90N45-d3v">90N45</a></code>.<br>It is licensed under the MIT license and should be treated as such.</p>
+					<br>
+					<img src="static/bb_icon_original.png" style="height: 45px; padding-right: 15px; padding-bottom: 5px;" class="d-inline-block">
+					<p>Bash Bunny is a trademark of Hak5 LLC.<br>Visit <code><a href="https://hak5.org">hak5.org</a></code> for more.</p>
+					<div class="text-center" style="margin-top: 100px;">
+						<button class="btn" onclick="infoClose('info_cp')">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

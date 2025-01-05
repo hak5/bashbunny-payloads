@@ -1,6 +1,6 @@
 **Title: MiniDumpBunny**
 
-Author: 0iphor13
+Author: 0i41E
 
 Version: 1.0
 
@@ -14,4 +14,4 @@ What is MiniDumpBunny?
 Plug in your BashBunny equipped with the obfuscated MiniBunny.bat file, wait a few seconds, go away.
 #
 Exfiltrate the .dmp file and read it with Mimikatz.
-![alt text](https://github.com/0iphor13/bashbunny-payloads/blob/master/payloads/library/credentials/MiniDumpBunny/mimi.png)
+![alt text](https://github.com/0i41E/bashbunny-payloads/blob/master/payloads/library/credentials/MiniDumpBunny/mimi.png)
