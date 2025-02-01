@@ -1,11 +1,8 @@
 #!/bin/bash
 
 # Variables (defined by user in payload.txt)
-mountpt=$(mount | grep -i BashBunny | cut -d ' ' -f 3)
+mountpt=$(mount | grep -i $DRIVE_LABEL | cut -d ' ' -f 3)
 lootdir=$mountpt/loot/hss
-target_directory=$(grep -hi hss_target_directory $mountpt/HSS/payload.txt | cut -c 22-)
-target_extensions="$(grep -hi hss_target_extensions $mountpt/HSS/payload.txt | cut -c 23-)"
-find_file_size=$(grep -hi hss_find_file_size $mountpt/HSS/payload.txt | cut -c 20-)
 
 ###### Create loot directory and remove nosferatu if it already exists, which serves as the indicator whether or not the script has fully completed in the past ######
 
