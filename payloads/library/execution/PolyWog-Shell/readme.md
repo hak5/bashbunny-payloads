@@ -9,11 +9,17 @@ Poly shell is a reverse shell generator designed for the Bash Bunny. This payloa
 
 The python2 script uses a base powershell payload and randomizes/obfuscates parts of the powershell payload. Using methods such as variable and string Obfuscation and IP and Port Encoding
 
+## LED. 
+
+- Blue, payload has started and is running.
+- Red, Payload failed, most likely due to missing `shell.py`
+- Green, payload has completed. 
+
+
 ## Configuations. 
 
 This script requires minimal configuration. simply launch a nc listener `nc -lvnp PORT` and copy the IP and Port from your listener into the IP and Port variable on the payload. Then place the python2 script `shell.py` inside of the `tools` directory of the udisk.
  
-
 
 ### Shell + Payload configuation Example
 <div style="display: flex; justify-content: center; gap: 10px;">
