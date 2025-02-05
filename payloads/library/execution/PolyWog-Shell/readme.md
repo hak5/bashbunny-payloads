@@ -5,7 +5,7 @@
 
 ## PolyWog Shell Description. 
 
-Poly shell is a reverse shell generator designed for the Bash Bunny. This payload uses a python2 + bash script to generate a powershell payload with a unique signature. Every time the bash bunny is plugged into a computer, a unique powershell script will be injected into the target machine. 
+PolyWog shell is a reverse shell generator designed for the Bash Bunny. This payload uses a python2 + bash script to generate a powershell payload with a unique signature. Every time the Bash Bunny is plugged into a computer, a unique powershell script will be injected into the target machine. 
 
 The python2 script uses a base powershell payload and randomizes/obfuscates parts of the powershell payload. Using methods such as variable and string Obfuscation and IP and Port Encoding
 
@@ -34,7 +34,7 @@ This script requires minimal configuration. simply launch a nc listener `nc -lvn
 
 ## Requirements. 
 
-Ensure correct configuation as stated above. There is `no` other requirments or external packages that need to be install. 
+Ensure correct configuation as stated above. There are `no` other requirments or external packages that need to be install. 
 
 
 
