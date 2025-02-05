@@ -31,6 +31,13 @@ This script requires minimal configuration. simply launch a nc listener `nc -lvn
 
 ![image](https://github.com/user-attachments/assets/daf4b620-5d38-4ceb-86b0-95edafd0494d)
 
+### SD Card. 
+
+If you have a SD card inserted into your bunny, make sure to read these considerations. 
+
+https://docs.hak5.org/bash-bunny/getting-started/considerations-for-mark-ii#payload-considerations
+
+When loading this payload, please remove the SD card from your Bunny before inserting while in arming mode. Then place the `payload.txt` in the proper switch directory and shell.py inside of the /tools directory. 
 
 ## Requirements. 
 
