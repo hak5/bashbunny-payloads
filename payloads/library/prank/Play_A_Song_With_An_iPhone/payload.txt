@@ -1,0 +1,28 @@
+* REM ################################################
+* REM #                                              #
+* REM # Title        : Play A Song With An iPhone    #
+* REM # Author       : Aleff                         #
+* REM # Version      : 1.0                           #
+* REM # Category     : Prank                         #
+* REM # Target       : iPhone                        #
+* REM #                                              #
+* REM ################################################
+
+ATTACKMODE HID
+
+* REM Requirements:
+* REM     - The phone must be unlocked
+
+QUACK REM VARIABLES
+* REM You need to change the name of the application according to the language you have on your phone.
+MUSIC-APP-NAME='Musica'
+
+QUACK DELAY 1500
+QUACK GUI SPACE
+QUACK DELAY 300
+QUACK STRING $MUSIC-APP-NAME
+QUACK ENTER
+QUACK DELAY 1000
+QUACK SPACE
+QUACK DELAY 500
+QUACK GUI h
