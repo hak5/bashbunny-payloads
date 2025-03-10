@@ -1,0 +1,60 @@
+QUACK REM ###################################
+QUACK REM #                                 #
+QUACK REM # Title        : Set Tor Bridge   #
+QUACK REM # Author       : Aleff            #
+QUACK REM # Version      : 1.0              #
+QUACK REM # Category     : Execution        #
+QUACK REM # Target       : Windows 10/11    #
+QUACK REM #                                 #
+QUACK REM ###################################
+
+ATTACKMODE HID
+
+QUACK REM REQUIREMENTS:
+QUACK REM     - Tor installed
+
+QUACK REM NOTE:
+QUACK REM     - Payload tested using TorBrowser 13.0.8 based on Mozilla Firefoz 115.6.0esr ENG
+
+QUACK REM VARIABLES:
+QUACK REM Set your own bridge here replacing 'here'
+BRIDGE='here'
+QUACK REM BRIDGE1='Another one...'
+QUACK REM BRIDGEN='... and so on.'
+
+QUACK DELAY 2000
+QUACK GUI
+QUACK DELAY 500
+QUACK STRING tor browser
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ALT
+QUACK LEFTARROW
+QUACK LEFTARROW
+QUACK ENTER
+QUACK UPARROW
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING Add a new Bridge
+QUACK ALT TAB
+QUACK ALT TAB
+QUACK ALT TAB
+QUACK ALT TAB
+QUACK ALT TAB
+QUACK ALT TAB
+QUACK ALT TAB
+QUACK ALT TAB
+QUACK ALT TAB
+QUACK ALT TAB
+QUACK ALT TAB
+QUACK ALT TAB
+QUACK ENTER
+QUACK TAB
+QUACK STRING $BRIDGE
+QUACK ENTER
+QUACK REM STRING $BRIDGE-N
+QUACK REM ENTER
+QUACK TAB
+QUACK ENTER
+QUACK DELAY 500
+QUACK ALT F4
