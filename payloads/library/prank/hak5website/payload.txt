@@ -1,0 +1,80 @@
+LED SETUP
+ATTACKMODE HID
+CUCUMBER ENABLE
+LED YELLOW
+
+pages=(
+  ""
+  "pages/support"
+  "community"
+  "pages/wifi-pineapple-collection"
+  "products/wifi-pineapple"
+  "products/wifi-pineapple-enterprise"
+  "products/wifi-pineapple-pager"
+  "pages/pentest-software-collection"
+  "products/c2"
+  "products/payload-studio-pro"
+  "products/advanced-duckyscript-course"
+  "pages/hotplug-attack-collection"
+  "products/usb-rubber-ducky"
+  "products/bash-bunny"
+  "products/shark-jack"
+  "products/bug"
+  "products/omg-plug"
+  "pages/on-site-implant-collection"
+  "products/key-croc"
+  "products/packet-squirrel-mark-ii"
+  "products/screen-crab"
+  "products/lan-turtle"
+  "products/omg-cable"
+  "products/omg-adapter"
+  "products/omg-unblocker"
+  "pages/field-kit-collection"
+  "collections/mischief-gadgets/products/o-mg-field-kit"
+  "products/essential-hak5-field-kit"
+  "products/elite-hak5-field-kit"
+  "products/byofk"
+  "collections/workbench"
+  "collections/workbench/products/micro-ethernet-switch"
+  "collections/workbench/products/hackrf-pro"
+  "collections/workbench/products/cynthion"
+  "collections/workbench/products/glytch-crash-kit"
+  "collections/workbench/products/wifi-pineapple-enterprise-rack-mount"
+  "products/malicious-cable-detector-by-o-mg"
+  "pages/about"
+  "pages/support"
+  "pages/policy"
+  "pages/privacy"
+  "pages/terms-of-service"
+  "pages/brand-protection"
+  "blogs/payloads"
+  "blogs/guides"
+  "pages/media-inquiry"
+  "pages/authorized-resellers"
+  "pages/b2b-application"
+  "cart"
+)
+
+rand_page() {
+  idx=$(( RANDOM % ${#pages[@]} ))
+  echo "${pages[$idx]}"
+}
+
+while true; do
+  page=$(rand_page)
+  if [ -z "$page" ]; then
+    url="https://hak5.org/"
+  else
+    url="https://hak5.org/${page}"
+  fi
+
+  LED ATTACK
+  QUACK GUI r
+  QUACK DELAY 400
+  QUACK STRING "$url"
+  QUACK DELAY 100
+  QUACK ENTER
+
+  LED ACTIVITY
+  sleep 300
+done
