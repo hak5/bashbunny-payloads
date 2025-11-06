@@ -1,0 +1,12 @@
+This file was created only for the purpose of the pull request.
+
+Shouldn't the "incident response" folder have lowercase initials instead of capital letters?
+
+This can be seen from both the other repositories and the link that can be created from the Hak5 site -> Contribute section.
+
+Link: https://github.com/hak5/bashbunny-payloads/new/master/payloads/library/incident_response/example/?filename=payload.txt
+
+This difference does not allow users to upload payloads directly from the Hak5 site since the "incident_response" folder does not exist since "Incident_Response" exists.
+
+Doesn't work: https://github.com/hak5/bashbunny-payloads/new/master/payloads/library/incident_response/example/?filename=payload.txt
+Works: https://github.com/hak5/bashbunny-payloads/new/master/payloads/library/Incident_Response/example/?filename=payload.txt
