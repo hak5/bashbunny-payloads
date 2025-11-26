@@ -37,11 +37,14 @@ Requirements:
 BashBunny MK2 (probably works on MK1 just haven't tested myself)
 
   🧙‍♂️ How to Use 🧙‍♂️
+
+ ⚠️ **Important: If you have renamed your BashBunny's Device Name you need to change line 13 of payload.txt ---> label=''YourBashBunnyDeviceNameGoesHere'**⚠️
+ 
 -  Set BashBunny to Arming mode (Closest to the USB Dongle)
 
 -  Place payload.txt and collect.ps1 into switch 1 or 2 it really doesn't matter
 
--  BashBunnyDrive (E:\payloads\switch 1\payload.txt)
+-  Should look like this -> (E:\payloads\switch 1\payload.txt)
 
 -  Eject Bash Bunny
 
