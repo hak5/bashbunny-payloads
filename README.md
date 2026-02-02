@@ -216,6 +216,35 @@ Example:
 	QUACK STRING $MY_TARGET_URL
 	...
 ```
+## Payloads Updater
+
+This repository includes a PowerShell-based updater script to replace the existing payloads with the latest official versions.
+
+**`bunny-updater.ps1`**
+
+It is recommended to run this script when setting up a Bash Bunny for the first time.
+
+### What it does
+- Removes the existing `payloads/library` and `payloads/extensions` directories
+- Downloads the latest official payloads from this repository
+- Extracts and copies the updated payloads to the original paths
+- Provides minimal and clean console output
+
+> This script does NOT delete or modify any other file or folder except the ones mentioned above.
+
+### Requirements
+- Windows
+- PowerShell 5.1 or newer
+- Internet connection
+- Script must be run from the Bash Bunny root drive (e.g: `D:\`)
+
+> **Important:** If there is any payload or file you want to preserve, make sure to back it up before running this script.
+### Usage
+The script has a minimal user input:
+```powershell
+.\bunny-updater.ps1
+```
+
 
 ## Payload Documentation 
 Payloads should begin with `#` bash comments specifying the title of the payload, the author, the target, and a brief description.
