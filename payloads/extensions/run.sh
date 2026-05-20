@@ -23,6 +23,12 @@ function RUN() {
          QUACK STRING "$@"
          QUACK ENTER
          ;;
+      WIN_ADMIN)
+         QUACK GUI r
+         QUACK DELAY 500
+         QUACK STRING "$@"
+         QUACK CTRL-SHIFT ENTER
+         ;;
       OSX)
          QUACK GUI SPACE
          QUACK DELAY 500

