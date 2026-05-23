@@ -1,0 +1,18 @@
+{
+  "default_level": 0,
+  "default_vid": "A455",
+  "default_pid": "A455",
+  "default_manufacturer": "GingerBreadMan",
+  "default_product_name": "Device",
+  "default_serial_number": "123456789",
+  "defaultDriveLabel": null,
+  "default_mac": "DEADBEEFDEAD",
+  "database_file": {
+    "vid_pid_csv": "data/usb_vid_pid.csv",
+    "usb_storage_csv": "data/usb_storage_vid_pid.csv",
+    "mac_vendors_csv": "data/mac_vendors.csv",
+    "num_vendor_entries": 20076,
+    "num_storage_entries": 400,
+    "num_mac_entries": 18898
+  }
+}
