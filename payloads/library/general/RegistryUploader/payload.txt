@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Title:         Upload Registry Key
+# Author:        CoulsTech
+# Version:       1.0
+# Target:        Windows 10/11
+# Category:      Administrative
+
+# Setup
+LED SETUP
+ATTACKMODE HID
+
+# CONFIGURATION
+REG_PATH="HKCU:\\Software\\MyApp\\Settings"
+REG_VALUE="Version"
+REG_DATA="1.2.3"
+
+# PAYLOAD
+RUN WIN "powershell -WindowStyle Hidden -Command \"New-Item -Path '$REG_PATH' -Force | Out-Null; Set-ItemProperty -Path '$REG_PATH' -Name '$REG_VALUE' -Value '$REG_DATA'\""
+LED FINISH
+LED G
