@@ -25,7 +25,7 @@ $(bash ${ABSOLUTE_PATH}/riverwalker.sh)
 ```
 which returns valid `ATTACKMODE` parameters:
 ```
-VID_0XA455 PID_0XA455 MAN_GingerBreadMan PROD_Device SN_42069
+VID_0XA455 PID_0XA455 MAN_GingerBreadMan PROD_Device SN_123456
 ```
 This allows you to pass it inline with your payloads `ATTACKMODE` specification, whatever it may be.
 
