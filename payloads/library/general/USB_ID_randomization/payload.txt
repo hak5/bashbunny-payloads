@@ -1,0 +1,40 @@
+#
+# Author: BlackPropaganda
+# Description: Rick Roll enhanced with VID/PID Randomization.
+#
+# Author: BlackPropaganda
+# Target: Windows
+# Dependencies: python3
+LED SETUP
+
+# Exports variable $OPSEC_PARAMETERS
+GET SWITCH_POSITION
+
+# Payload Directory
+PAYLOAD_DIR="/root/udisk/payloads/${SWITCH_POSITION}"
+
+# Rick roll target URL
+TARGET_URL="https://www.youtube.com/watch?v=BBJa32lCaaY"
+
+function open_url() {
+    RUN WIN msedge $1
+    DELAY 1000
+    RUN WIN msedge $1
+    Q TAB TAB
+    Q ENTER
+}
+
+LED ATTACK
+if [ -f "${PAYLOAD_DIR}/riverwalker.sh" ]; then
+    # launch obfuscator
+    ATTACKMODE HID $(bash ${PAYLOAD_DIR}/riverwalker.sh)
+
+    open_url ${TARGET_URL}
+
+    LED FINISH
+else
+    LED FAIL
+    echo "Unable to find script in ${PAYLOAD_DIR}" >> /root/debuglog.txt
+    LED FAIL
+    exit 1
+fi
