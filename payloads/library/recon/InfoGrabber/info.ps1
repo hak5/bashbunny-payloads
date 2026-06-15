@@ -13,7 +13,7 @@ catch
 $computerPubIP="Error getting Public IP"
 }
 $computerIP = get-WmiObject Win32_NetworkAdapterConfiguration|Where {$_.Ipaddress.length -gt 1}
-$IsDHCPEnabled = $false
+#$IsDHCPEnabled = $false
 $Networks =  Get-WmiObject Win32_NetworkAdapterConfiguration -Filter "DHCPEnabled=$True" | ? {$_.IPEnabled}
 foreach ($Network in $Networks) {
 If($network.DHCPEnabled) {
