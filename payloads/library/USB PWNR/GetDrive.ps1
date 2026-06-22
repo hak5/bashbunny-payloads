@@ -1,0 +1,1 @@
+(gwmi -class win32_volume -filter "label='BashBunny'").Name | Clip

@@ -1,0 +1,9 @@
+You can find the payload files at:
+
+BPG: https://github.com/CIPH3R0/BashBunny/tree/master/BPG
+
+BHG: https://github.com/CIPH3R0/BashBunny/tree/master/BHG
+
+InfoGrabber: https://github.com/hak5/bashbunny-payloads/tree/master/payloads/library/recon/InfoGrabber
+
+Reverse-shell: https://github.com/CIPH3R0/BashBunny/tree/master/Reverse-Shell
