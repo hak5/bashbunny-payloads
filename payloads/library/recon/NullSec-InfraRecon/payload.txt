@@ -1,0 +1,113 @@
+#!/bin/bash
+#
+# Title:         NullSec Infrastructure Recon
+# Author:        NullSec (bad-antics)
+# Version:       1.0
+# Category:      Recon
+# Target:        Linux / macOS
+# Description:   Comprehensive network infrastructure reconnaissance
+#                using native tools. Collects network topology, services,
+#                and security configuration data.
+#
+# LED SETUP     : Magenta solid
+# LED ATTACK    : Yellow blink
+# LED FINISH    : Green blink
+# LED FAIL      : Red blink
+
+# Config
+LOOT_DIR=/root/udisk/loot/nullsec-infrarecon
+REPORT="$LOOT_DIR/infrarecon_$(date +%Y%m%d_%H%M%S).txt"
+
+# Setup
+LED SETUP
+mkdir -p "$LOOT_DIR"
+
+# Attack
+LED ATTACK
+
+{
+    echo "=== NULLSEC INFRASTRUCTURE RECON ==="
+    echo "Timestamp: $(date '+%Y-%m-%d %H:%M:%S')"
+    echo "Hostname: $(hostname)"
+    echo "User: $(whoami)"
+    echo ""
+
+    echo "=== SYSTEM INFO ==="
+    uname -a
+    cat /etc/os-release 2>/dev/null | head -5
+    echo ""
+
+    echo "=== NETWORK INTERFACES ==="
+    ip addr show 2>/dev/null || ifconfig 2>/dev/null
+    echo ""
+
+    echo "=== ROUTING TABLE ==="
+    ip route show 2>/dev/null || netstat -rn 2>/dev/null
+    echo ""
+
+    echo "=== ARP TABLE ==="
+    ip neigh show 2>/dev/null || arp -a 2>/dev/null
+    echo ""
+
+    echo "=== DNS CONFIGURATION ==="
+    cat /etc/resolv.conf 2>/dev/null
+    echo ""
+
+    echo "=== LISTENING SERVICES ==="
+    ss -tlnp 2>/dev/null || netstat -tlnp 2>/dev/null
+    echo ""
+
+    echo "=== ESTABLISHED CONNECTIONS ==="
+    ss -tnp state established 2>/dev/null || netstat -tnp 2>/dev/null | grep ESTABLISHED
+    echo ""
+
+    echo "=== FIREWALL RULES ==="
+    iptables -L -n 2>/dev/null || ufw status verbose 2>/dev/null || pfctl -sr 2>/dev/null
+    echo ""
+
+    echo "=== NETWORK SHARES ==="
+    smbclient -L localhost -N 2>/dev/null
+    showmount -e localhost 2>/dev/null
+    echo ""
+
+    echo "=== SSH CONFIGURATION ==="
+    if [ -f /etc/ssh/sshd_config ]; then
+        echo "SSH Config:"
+        grep -E '^(Port|PermitRootLogin|PasswordAuth|PubkeyAuth|AllowUsers|AllowGroups)' /etc/ssh/sshd_config 2>/dev/null
+        echo "Authorized Keys:"
+        cat ~/.ssh/authorized_keys 2>/dev/null | wc -l
+        echo "Known Hosts:"
+        cat ~/.ssh/known_hosts 2>/dev/null | wc -l
+    fi
+    echo ""
+
+    echo "=== SUBNET SCAN ==="
+    # Get default gateway subnet
+    GW=$(ip route show default 2>/dev/null | awk '{print $3}' | head -1)
+    if [ -n "$GW" ]; then
+        SUBNET=$(echo "$GW" | sed 's/\.[0-9]*$/.0/')
+        echo "Scanning $SUBNET/24..."
+        for i in $(seq 1 254); do
+            IP="${SUBNET%.*}.$i"
+            (ping -c 1 -W 1 "$IP" > /dev/null 2>&1 && echo "  [ALIVE] $IP") &
+        done
+        wait
+    fi
+    echo ""
+
+    echo "=== DOCKER / CONTAINERS ==="
+    docker ps -a 2>/dev/null
+    podman ps -a 2>/dev/null
+    echo ""
+
+    echo "=== CRON JOBS ==="
+    crontab -l 2>/dev/null
+    ls -la /etc/cron.d/ 2>/dev/null
+    echo ""
+
+    echo "=== END REPORT ==="
+} > "$REPORT" 2>&1
+
+# Finish
+sync
+LED FINISH
