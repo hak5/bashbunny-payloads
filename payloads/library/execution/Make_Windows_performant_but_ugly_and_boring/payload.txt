@@ -1,0 +1,76 @@
+##################################################################
+#                                                                #
+# Title        : Make Windows performant (but ugly and boring)   #
+# Author       : Aleff                                           #
+# Version      : 1.0                                             #
+# Category     : Execution                                       #
+# Target       : Windows 10/11                                   #
+#                                                                #
+##################################################################
+
+# Plug-And-Play <3
+
+# Requirements:
+#     - Nothing
+
+# Note:
+#     - Payload tested on Windows 11 Eng 
+
+ATTACKMODE HID
+
+QUACK DELAY 1500
+QUACK GUI r
+QUACK DELAY 2000
+
+# Open advanced settings
+QUACK STRING sysdm.cpl
+QUACK ENTER
+QUACK DELAY 2000
+
+# Goto nav bar
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+
+# Goto Advanced
+QUACK RIGHTARROW
+QUACK DELAY 500
+QUACK RIGHTARROW
+QUACK DELAY 500
+
+# Open Settings
+QUACK TAB
+QUACK DELAY 500
+# Invia il comando
+QUACK ENTER
+QUACK DELAY 1000
+
+# Adjust for best performance
+QUACK DOWNARROW
+QUACK DELAY 500
+QUACK DOWNARROW
+QUACK DELAY 500
+
+# Save it
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 3000
+
+# Close the windows (not the os lol)
+QUACK ALT F4
+QUACK DELAY 500
+QUACK ALT F4
+QUACK DELAY 500
+Update payload.txt
