@@ -18,13 +18,23 @@ function GET() {
       export SWITCH_POSITION="invalid"
       ;;
     "TARGET_OS")
-      TARGET_IP=$(cat /var/lib/dhcp/dhcpd.leases | grep ^lease | awk '{ print $2 }' | sort | uniq)
-      ScanForOS=$(nmap -Pn -O $TARGET_IP -p1 -v2)
-      [[ $ScanForOS == *"Too many fingerprints"* ]] && ScanForOS=$(nmap -Pn -O $TARGET_IP --osscan-guess -v2)
-      [[ "${ScanForOS,,}" == *"windows"* ]] && export TARGET_OS='WINDOWS' && return
-      [[ "${ScanForOS,,}" == *"apple"* ]] && export TARGET_OS='MACOS' && return
-      [[ "${ScanForOS,,}" == *"linux"* ]] && export TARGET_OS='LINUX' && return
-      export TARGET_OS='UNKNOWN'
+      DATABASE=/root/udisk/payloads/extensions/OSdatabase
+      FINGERPRINT=$(cat /var/log/syslog | grep FINGERPRINT | awk '{ print $9 " " $7 }' | awk '{ print $2 }' | awk 'END{print}')
+      [[ -f $DATABASE ]] || touch $DATABASE
+      sed -i "/$FINGERPRINT/d" /var/log/syslog
+      if [ -f $DATABASE ] ; then
+          TARGET_OS=$(cat $DATABASE | grep $FINGERPRINT | awk '{ print $2 }')
+          GET TARGET_IP
+          if [ -z $TARGET_OS ]; then
+              ScanForOS=$(nmap -Pn -O $TARGET_IP -p1 -v2)
+              [[ $ScanForOS == *"Too many fingerprints"* ]] && ScanForOS=$(nmap -Pn -O $TARGET_IP --osscan-guess -v2)
+              [[ "${ScanForOS,,}" == *"linux"* ]] && export TARGET_OS='LINUX'
+              [[ "${ScanForOS,,}" == *"apple"* ]] && export TARGET_OS='MACOS'
+              [[ "${ScanForOS,,}" == *"windows"* ]] && export TARGET_OS='WINDOWS'
+              [[ -z $TARGET_OS ]] && export TARGET_OS='UNKNOWN'
+              echo $FINGERPRINT $TARGET_OS >> $DATABASE
+          fi
+      fi
       ;;
       "BB_LABEL")
       export BB_LABEL=$(ls -l /dev/disk/by-label/ | awk '/nandf$/ { print $9 }')
