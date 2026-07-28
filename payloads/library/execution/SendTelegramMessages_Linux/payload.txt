@@ -1,0 +1,48 @@
+#########################################
+#                                       #
+# Title        : Send Telegram Messages #
+# Author       : Aleff                  #
+# Version      : 1.0                    #
+# Category     : Prank                  #
+# Target       : Linux                  #
+#                                       #
+#########################################
+
+ATTACKMODE HID
+
+# REQUIREMENTS
+#  - Internet Connection
+#  - telegram-desktop installed and activated
+
+# VARIABLES
+# - Define the message receiver username
+USERNAME='example'
+# - Define the message1, however remember to add more lines if you want to add more messages
+MESSAGE1='example'
+
+QUACK DELAY 1500
+QUACK CTRL-ALT t
+QUACK DELAY 2000
+QUACK STRING telegram-desktop
+QUACK ENTER
+
+# It depends by the computer...
+QUACK DELAY 3000
+QUACK STRING $USERNAME
+QUACK ENTER
+QUACK DELAY 500
+
+# Define the message(s)
+QUACK STRING MESSAGE1
+QUACK ENTER
+QUACK DELAY 500
+# other messages here...
+# ...
+# ...
+
+# Closing Telegram App and the Shell
+QUACK ALT F4
+QUACK DELAY 500
+QUACK CTRL c
+QUACK DELAY 500
+QUACK ALT F4
