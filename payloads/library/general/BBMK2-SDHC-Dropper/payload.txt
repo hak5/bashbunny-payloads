@@ -1,0 +1,88 @@
+
+#!/bin/bash
+
+# Initialize
+LED SETUP
+
+# Configuration
+
+# Methods: EMPTYFILE, COPYFILE
+METHOD="EMPTYFILE"
+
+SOURCE=""
+SDHC="/dev/mmcblk0p1"
+SDHC_MOUNT="/root/udisk"
+DEST="${SDHC_MOUNT}"
+FILENAME="ssh"
+CHMOD="0"
+CHMOD_VAL="644"
+
+# Validate Configuration
+
+if [ "$METHOD" != "EMPTYFILE" ] && [ "$METHOD" != "COPYFILE" ]; then
+    LED FAIL
+    exit 1
+fi
+
+# Mount
+
+LED G
+
+mount -o sync "$SDHC" "$SDHC_MOUNT" || {
+    LED FAIL
+    exit 1
+}
+
+# Operations
+
+if [ "$METHOD" = "EMPTYFILE" ]; then
+
+    LED ATTACK
+
+    touch "$DEST/$FILENAME" || {
+        sync
+        umount "$SDHC_MOUNT"
+        LED FAIL
+        exit 1
+    }
+
+elif [ "$METHOD" = "COPYFILE" ]; then
+
+    LED SPECIAL
+
+    if [ -z "$SOURCE" ] || [ ! -f "$SOURCE" ]; then
+        sync
+        umount "$SDHC_MOUNT"
+        LED FAIL
+        exit 1
+    fi
+
+    cp "$SOURCE" "$DEST/$FILENAME" || {
+        sync
+        umount "$SDHC_MOUNT"
+        LED FAIL
+        exit 1
+    }
+
+    if [ "$CHMOD" = "1" ]; then
+        chmod "$CHMOD_VAL" "$DEST/$FILENAME" || {
+            sync
+            umount "$SDHC_MOUNT"
+            LED FAIL
+            exit 1
+        }
+    fi
+
+fi
+
+# Cleanup
+
+sync
+
+umount "$SDHC_MOUNT" || {
+    LED FAIL
+    exit 1
+}
+
+LED FINISH
+exit 0
