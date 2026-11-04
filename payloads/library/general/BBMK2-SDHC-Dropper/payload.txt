@@ -1,77 +1,88 @@
+
 #!/bin/bash
-# Title: SDHC Dropper
-	# Author: [REDACTED]
-	# Description: Places a file in a specified directory on the SDHC
-	# Target: Rasberry Pi OS (Rasbian) (Default)
-	# Version: 1.0
-	# Category: General
 
 # Initialize
 LED SETUP
 
 # Configuration
 
-EMPTYFILE="1"
-COPYFILE="0"
+# Methods: EMPTYFILE, COPYFILE
+METHOD="EMPTYFILE"
+
 SOURCE=""
 SDHC="/dev/mmcblk0p1"
 SDHC_MOUNT="/root/udisk"
 DEST="${SDHC_MOUNT}"
 FILENAME="ssh"
+CHMOD="0"
+CHMOD_VAL="644"
+
+# Validate Configuration
+
+if [ "$METHOD" != "EMPTYFILE" ] && [ "$METHOD" != "COPYFILE" ]; then
+    LED FAIL
+    exit 1
+fi
 
 # Mount
 
 LED G
-mount -o sync "${SDHC}" "${SDHC_MOUNT}" || {
+
+mount -o sync "$SDHC" "$SDHC_MOUNT" || {
     LED FAIL
     exit 1
 }
 
-# Create Empty File
+# Operations
 
-if [ "$EMPTYFILE" = "1" ]; then
+if [ "$METHOD" = "EMPTYFILE" ]; then
+
     LED ATTACK
+
     touch "$DEST/$FILENAME" || {
         sync
         umount "$SDHC_MOUNT"
         LED FAIL
         exit 1
     }
-    sync
-    umount "$SDHC_MOUNT" || {
-        LED FAIL
-        exit 1
-    }
-    LED FINISH
-    exit 0
-fi
 
-# Copy Specified file
+elif [ "$METHOD" = "COPYFILE" ]; then
 
-if [ "$COPYFILE" = "1" ]; then
     LED SPECIAL
+
     if [ -z "$SOURCE" ] || [ ! -f "$SOURCE" ]; then
         sync
         umount "$SDHC_MOUNT"
         LED FAIL
         exit 1
     fi
+
     cp "$SOURCE" "$DEST/$FILENAME" || {
         sync
         umount "$SDHC_MOUNT"
         LED FAIL
         exit 1
     }
-    sync
-    umount "$SDHC_MOUNT" || {
-        LED FAIL
-        exit 1
-    }
-    LED FINISH
-    exit 0
-else
-    sync
-    umount "$SDHC_MOUNT"
+
+    if [ "$CHMOD" = "1" ]; then
+        chmod "$CHMOD_VAL" "$DEST/$FILENAME" || {
+            sync
+            umount "$SDHC_MOUNT"
+            LED FAIL
+            exit 1
+        }
+    fi
+
+fi
+
+# Cleanup
+
+sync
+
+umount "$SDHC_MOUNT" || {
     LED FAIL
     exit 1
-fi
+}
+
+LED FINISH
+exit 0
